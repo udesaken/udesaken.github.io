@@ -469,101 +469,144 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
     }
 }
 
-/* --- SEÇÃO PREMIUM (BOT PERSONALIZADO) --- */
+/* --- SEÇÃO PREMIUM (O BOTÃO DE OURO) --- */
 .premium-section {
-    padding: 100px 10%;
-    background: linear-gradient(to right, #050505, #1a1a00); /* Fundo sutilmente dourado escuro */
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+    padding: 80px 5%;
     position: relative;
-    overflow: hidden;
+    /* Um fundo levemente diferente para destacar a seção do resto do site */
+    background: radial-gradient(circle at center, #1a1a00 0%, #000000 100%);
+    display: flex;
+    justify-content: center;
 }
 
 .premium-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(255, 215, 0, 0.03); /* Vidro Dourado */
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    padding: 60px;
+    width: 100%;
+    max-width: 1100px;
+    background: #080808; /* Fundo quase preto sólido */
+    border: 2px solid #b8860b; /* Borda Dourada Escura */
     border-radius: 30px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    /* Sombra Dourada Poderosa */
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.15), inset 0 0 100px rgba(0,0,0,0.9);
+}
+
+/* Efeito de Grade no fundo do cartão (Tech Vibe) */
+.premium-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .premium-content {
-    flex: 1;
+    flex: 1.5; /* Ocupa mais espaço que a imagem */
     z-index: 2;
+    text-align: left;
 }
 
+/* O Selo VIP */
 .premium-badge {
-    display: inline-block;
-    background: linear-gradient(45deg, #FFD700, #FFA500);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #FFD700, #DAA520);
     color: #000;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: 800;
-    font-size: 0.8rem;
-    margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
+/* Título Metálico */
 .premium-content h2 {
-    font-size: 3rem;
-    line-height: 1.1;
+    font-size: 3.5rem; /* Bem grande */
+    line-height: 1;
     margin-bottom: 20px;
+    color: white;
+    font-weight: 800;
 }
 
 .gold-text {
-    background: linear-gradient(to bottom, #FFD700, #FDB931, #9f7928);
+    /* Efeito de texto cromado dourado */
+    background: linear-gradient(to bottom, #cfc09f 20%, #ffecb3 40%, #3a2c0f 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    display: block; /* Quebra linha para destaque */
 }
 
+.premium-content p {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 90%;
+}
+
+/* Lista de Benefícios */
 .premium-features {
-    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    gap: 15px;
+    margin-bottom: 40px;
 }
 
 .premium-features li {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #ddd;
+    gap: 12px;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #FFD700;
 }
 
 .premium-features li i {
     color: #FFD700;
+    font-size: 1.2rem;
 }
 
-/* Botão Premium Pulsante */
+/* Botão de Compra */
 .btn-premium {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 18px 40px;
-    background: linear-gradient(45deg, #FFD700, #FFA500);
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 50px;
+    background: linear-gradient(45deg, #FFD700, #B8860B);
     color: #000;
-    font-weight: 800;
+    font-weight: 900;
+    text-transform: uppercase;
     border-radius: 50px;
-    font-size: 1.1rem;
-    transition: 0.4s;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-    animation: pulseGold 2s infinite;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4);
+    text-decoration: none;
 }
 
 .btn-premium:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
-    background: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+    background: #fff;
 }
 
-/* Visual do Robô/Icone */
+/* Área Visual (Direita) */
 .premium-visual {
     flex: 1;
     display: flex;
@@ -573,54 +616,57 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
 }
 
 .bot-icon-3d {
-    font-size: 10rem;
-    color: #FFD700;
-    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+    font-size: 12rem;
+    /* Degradê no ícone também */
+    background: linear-gradient(to bottom, #FFD700, #B8860B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.3));
     animation: floatBot 4s ease-in-out infinite;
     z-index: 2;
 }
 
 .glowing-circle {
     position: absolute;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
-    animation: spinSlow 10s linear infinite;
+    width: 350px;
+    height: 350px;
+    border: 2px dashed rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    animation: spinSlow 20s linear infinite;
 }
 
-/* Animações */
-@keyframes pulseGold {
-    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-    70% { box-shadow: 0 0 0 20px rgba(255, 215, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-}
-
-@keyframes floatBot {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-@keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* Responsivo para Celular */
-@media(max-width: 768px) {
+/* RESPONSIVO */
+@media(max-width: 900px) {
     .premium-container {
-        flex-direction: column;
-        padding: 30px;
+        flex-direction: column-reverse; /* Imagem em cima, texto em baixo no celular */
+        padding: 40px 20px;
         text-align: center;
     }
-    .premium-features li {
-        justify-content: center;
+    
+    .premium-content {
+        width: 100%;
     }
-    .bot-icon-3d {
-        font-size: 6rem;
-        margin-top: 30px;
+
+    .premium-features {
+        grid-template-columns: 1fr; /* Uma coluna no celular */
+        text-align: left;
     }
+    
+    .premium-content h2 {
+        font-size: 2.5rem;
+    }
+    
     .btn-premium {
         width: 100%;
-        justify-content: center;
+    }
+    
+    .bot-icon-3d {
+        font-size: 8rem;
+        margin-bottom: 30px;
+    }
+    
+    .glowing-circle {
+        width: 250px;
+        height: 250px;
     }
 }
