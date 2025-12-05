@@ -726,3 +726,43 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
     transform: scale(1.1);
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
 }
+
+/* --- NOVA IMAGEM HERO (Substituindo o Cubo) --- */
+.hero-img-effect {
+    width: 100%;
+    max-width: 450px; /* Limita o tamanho para não ficar gigante no PC */
+    border-radius: 20px; /* Bordas arredondadas */
+    
+    /* Efeito de brilho e borda */
+    border: 2px solid rgba(138, 43, 226, 0.5);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+    
+    /* Animação de flutuar */
+    animation: floatImage 6s ease-in-out infinite;
+    
+    /* Filtro leve para misturar com o fundo escuro */
+    filter: brightness(0.9) contrast(1.1);
+    transition: 0.5s;
+}
+
+/* Efeito ao passar o mouse na imagem */
+.hero-img-effect:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 0 50px rgba(138, 43, 226, 0.6);
+}
+
+/* Animação de Flutuação */
+@keyframes floatImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); } /* Sobe um pouquinho */
+    100% { transform: translateY(0px); }
+}
+
+/* Ajuste para Celular */
+@media(max-width: 768px) {
+    .hero-img-effect {
+        max-width: 300px; /* Menor no celular */
+        margin-top: 30px;
+    }
+}
