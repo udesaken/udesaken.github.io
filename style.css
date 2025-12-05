@@ -727,8 +727,41 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
 }
 
-/* --- NOVA HERO ATUALIZADA --- */
+/* --- NOVA IMAGEM HERO (Correção de Tamanho) --- */
+.hero-img-effect {
+    /* Trava os tamanhos para não estourar */
+    width: auto;            /* Respeita a proporção da imagem */
+    max-width: 450px;       /* LARGURA MÁXIMA: Não deixa passar de 450px */
+    max-height: 550px;      /* ALTURA MÁXIMA: Não deixa ficar maior que a tela */
+    
+    display: block;
+    margin: 0 auto;         /* Centraliza */
+    border-radius: 20px;
+    
+    /* Estilos Visuais */
+    border: 2px solid rgba(138, 43, 226, 0.5);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+    
+    /* Animação */
+    animation: floatImage 6s ease-in-out infinite;
+    transition: 0.5s;
+}
 
+/* Efeito ao passar o mouse */
+.hero-img-effect:hover {
+    transform: scale(1.03); /* Zoom leve */
+    box-shadow: 0 0 50px rgba(138, 43, 226, 0.6);
+}
+
+/* --- AJUSTE PARA CELULAR (IMPORTANTE) --- */
+@media(max-width: 768px) {
+    .hero-img-effect {
+        width: 80%;       /* No celular ocupa 80% da largura */
+        max-width: 320px; /* Limite menor */
+        max-height: none; /* Altura livre no celular */
+        margin-top: 40px;
+    }
+}
 /* Badge de Novidade (Etiqueta acima do título) */
 .badge-news {
     display: inline-block;
