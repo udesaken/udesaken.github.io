@@ -1,7 +1,25 @@
-// --- IMPORTANDO O FIREBASE (Versão Web) ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+// --- FORÇAR ROLAGEM PARA O TOPO AO ATUALIZAR ---
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.onload = function() {
+    window.scrollTo(0, 0);
+}
+
+
 import { getFirestore, doc, getDoc, updateDoc, increment, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// --- FORÇAR ROLAGEM PARA O TOPO AO ATUALIZAR ---
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.onload = function() {
+    window.scrollTo(0, 0);
+}
+// ----------------------------------------------
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 // --- SUA CONFIGURAÇÃO (Copiada da imagem) ---
 const firebaseConfig = {
