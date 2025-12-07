@@ -1045,7 +1045,7 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
         bottom: auto;
         left: auto;
     }
-}
+} /* <--- ADICIONE ESSA CHAVE AQUI PARA FECHAR O MODO MOBILE */
 
 /* --- ESTILOS DO CLUBE VIP (DOURADO) --- */
 
