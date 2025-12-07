@@ -232,3 +232,23 @@ window.toggleMusic = function() {
         btn.title = "Ligar Som";
     }
 }
+
+// --- CORREÇÃO: PAUSAR MÚSICA AO SAIR DA ABA ---
+document.addEventListener("visibilitychange", function() {
+    const audio = document.getElementById('bg-audio');
+    const btn = document.querySelector('.music-btn');
+
+    // Se a aba ficou oculta (usuário saiu ou minimizou)
+    if (document.hidden) {
+        if (!audio.paused) {
+            audio.pause();
+        }
+    } 
+    // Se o usuário voltou para a aba
+    else {
+        // Só volta a tocar se o botão visualmente estiver como "tocando"
+        if (btn.classList.contains('playing')) {
+            audio.play().catch(e => console.log("Áudio não pôde retomar automaticamente"));
+        }
+    }
+});
