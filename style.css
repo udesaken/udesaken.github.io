@@ -1095,8 +1095,8 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
 .music-widget {
     position: fixed;
     bottom: 30px;
-    left: 30px; /* Fica na esquerda para não atrapalhar botões de chat na direita */
-    z-index: 9999;
+    left: 30px;
+    z-index: 20000; /* GANHA do cookie */
 }
 
 .music-btn {
