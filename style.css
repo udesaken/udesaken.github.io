@@ -1289,13 +1289,12 @@ footer { padding: 40px; text-align: center; background: rgba(0,0,0,0.8); border-
     transform: rotate(15deg); z-index: 20;
     animation: pulsePromo 2s infinite;
 }
-
+/* Correção: Animação RETA, apenas pulsando sem girar */
 @keyframes pulsePromo {
-    0% { transform: rotate(15deg) scale(1); }
-    50% { transform: rotate(15deg) scale(1.1); }
-    100% { transform: rotate(15deg) scale(1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
-
 /* Ajuste Natalino nos Botões e Destaques */
 .btn-price:hover, .btn-vip:hover {
     box-shadow: 0 0 20px #ff0000 !important; /* Brilho vermelho */
