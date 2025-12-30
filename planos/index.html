@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#8a2be2">
     
     <style>
-        /* --- CORREÇÃO DE ALINHAMENTO (Igual fizemos na VIP) --- */
+        /* --- CORREÇÃO DE ALINHAMENTO --- */
         .pricing-grid {
             align-items: stretch; 
             flex-wrap: wrap;
@@ -23,33 +23,30 @@
         .price-card {
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Empurra o botão para o final */
+            justify-content: space-between;
             height: auto;
-            min-height: 480px; /* Altura mínima igual para todos */
+            min-height: 480px;
             width: 320px;
         }
 
-        /* Ajustes específicos de Preço */
         .old-price {
             font-size: 1rem; color: #888; text-decoration: line-through;
             display: block; margin-bottom: -5px;
         }
         .discount-badge {
-            background: #2ecc71; /* Verde Neon para diferenciar do VIP */
+            background: #2ecc71;
             color: black; font-size: 0.7rem; padding: 2px 8px;
             border-radius: 4px; font-weight: bold; vertical-align: middle;
             margin-left: 5px; box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
         }
 
-        /* Destaque do Card Mensal (Roxo) */
         .price-card.popular {
             transform: scale(1.05);
             z-index: 2;
-            border-color: #8a2be2; /* Roxo */
+            border-color: #8a2be2;
             box-shadow: 0 0 30px rgba(138, 43, 226, 0.2);
         }
         
-        /* Botão Roxo Brilhante */
         .btn-glow-purple {
             background: linear-gradient(45deg, #8a2be2, #9b59b6);
             border: none; color: white !important;
@@ -270,6 +267,7 @@
             function closeMenu() { navLinks.classList.remove('active'); }
 
             if(hamburger) {
+                // Clonar para remover event listeners antigos e evitar duplicação
                 const newHamburger = hamburger.cloneNode(true);
                 hamburger.parentNode.replaceChild(newHamburger, hamburger);
                 newHamburger.addEventListener('click', toggleMenu);
@@ -277,17 +275,20 @@
             if(closeBtn) closeBtn.addEventListener('click', closeMenu);
             links.forEach(link => link.addEventListener('click', closeMenu));
 
-            // 2. COOKIES
+            // 2. COOKIES (Padronizado com 'cookiesAccepted')
             const cookieBanner = document.getElementById('cookieBanner');
             const btnAccept = document.getElementById('btnAccept');
 
-            if (!localStorage.getItem('udesaken_cookies')) {
-                setTimeout(() => { if(cookieBanner) cookieBanner.classList.add('active'); }, 2000);
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => { 
+                    if(cookieBanner) cookieBanner.classList.add('active'); // Sobe o banner
+                }, 2000);
             }
+
             if(btnAccept) {
                 btnAccept.addEventListener('click', () => {
-                    localStorage.setItem('udesaken_cookies', 'accepted');
-                    if(cookieBanner) cookieBanner.classList.remove('active');
+                    localStorage.setItem('cookiesAccepted', 'true'); // Salva a aceitação
+                    if(cookieBanner) cookieBanner.classList.remove('active'); // Desce o banner
                 });
             }
 
