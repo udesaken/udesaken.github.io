@@ -378,3 +378,91 @@ footer {
     box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
     transform: translateY(-5px) scale(1.1);
 }
+/* ==========================================================================
+   REVITALIZAÇÃO DOS CARDS DE PREÇO (FUTURISTA)
+   ========================================================================== */
+
+/* Estilo Base do Card Comum */
+.price-card {
+    /* Fundo gradiente escuro e sutil em vez de cor chapada */
+    background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid rgba(166, 77, 255, 0.2); /* Borda roxa sutil */
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Movimento elástico */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito Hover no Card Comum */
+.price-card:hover {
+    transform: translateY(-15px) scale(1.02); /* Flutua mais alto */
+    border-color: var(--purple, #a64dff);
+    /* Brilho roxo intenso atrás do card */
+    box-shadow: 0 20px 40px -10px rgba(166, 77, 255, 0.4);
+}
+
+/* Ícone do Card Comum */
+.price-card .card-icon i {
+    text-shadow: 0 0 15px rgba(166, 77, 255, 0.6); /* Brilho no ícone */
+    transition: transform 0.4s ease;
+}
+.price-card:hover .card-icon i {
+    transform: scale(1.2) rotate(-10deg); /* Ícone cresce e gira um pouco */
+}
+
+/* --- ESTILOS DO CARD VIP (PREMIUM GOLD) --- */
+
+.price-card.popular.gold-theme {
+    /* Gradiente Dourado Escuro Premium */
+    background: linear-gradient(135deg, #2a2a00 0%, #0a0a0a 60%, #1a1a00 100%);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 15px 35px -10px rgba(255, 215, 0, 0.15);
+}
+
+/* Efeito Hover no Card VIP */
+.price-card.popular.gold-theme:hover {
+    transform: translateY(-15px) scale(1.03);
+    border-color: #FFD700;
+    /* Brilho Dourado Intenso */
+    box-shadow: 0 25px 50px -12px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.1);
+}
+
+/* Ícone do Card VIP */
+.price-card.popular .card-icon i {
+    color: #FFD700 !important;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Brilho forte no ícone */
+}
+.price-card.popular:hover .card-icon i {
+    transform: scale(1.25) rotate(15deg);
+}
+
+/* Ajuste no Badge "Exclusivo" */
+.badge-gold {
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    color: #000;
+    font-weight: 800;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+/* Botões dentro dos cards */
+.btn-price {
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+.price-card:hover .btn-price {
+    letter-spacing: 1px; /* Espaça as letras ao passar o mouse */
+}
+/* Botão VIP específico */
+.btn-glow-gold {
+    background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+    color: black !important;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+.btn-glow-gold:hover {
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+    transform: scale(1.05);
+}

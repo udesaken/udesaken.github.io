@@ -17,7 +17,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, doc, getDoc, updateDoc, increment, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// --- SUA CONFIGURAÇÃO (NÃO ALTERADA) ---
+// --- SUA CONFIGURAÇÃO ---
 const firebaseConfig = {
   apiKey: "AIzaSyDwtSWC3I0XcfsvnAdzlsMVOiv6n5qkH0Q",
   authDomain: "udesaken-system.firebaseapp.com",
@@ -34,11 +34,10 @@ const auth = getAuth(app);
 
 // --- 1. CONTADOR DE VISUALIZAÇÕES (FIREBASE) ---
 async function carregarEstatisticas() {
-    // Tenta atualizar a view APENAS se estiver na página inicial para economizar leituras
-    // ou se tiver um elemento contador na tela
+    // Procura o elemento de visualização (se existir na página)
     const viewCounter = document.querySelector('.stat h3[data-target="1200000"]');
     
-    if(!viewCounter) return; // Se não tem contador na tela, não faz nada
+    if(!viewCounter) return; 
 
     const docRef = doc(db, "site_dados", "geral");
     
@@ -92,7 +91,7 @@ if(closeBtn) {
     });
 }
 
-// Fechar menu ao clicar num link
+// Fechar menu ao clicar num link (Melhor experiência mobile)
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -121,10 +120,10 @@ window.toggleMusic = function() {
         audio.play().then(() => {
             btn.classList.add('playing');
             btn.title = "Pausar";
-            if(icon) icon.className = ''; // Remove ícone se quiser, ou muda pra 'fa-pause'
+            if(icon) icon.className = ''; 
         }).catch(error => {
             console.log("Erro áudio:", error);
-            alert("Toque na tela para permitir o áudio!");
+            // alert("Toque na tela para permitir o áudio!"); // Removido para não incomodar
         });
     } else {
         audio.pause();
@@ -138,6 +137,9 @@ window.toggleMusic = function() {
 document.addEventListener("visibilitychange", function() {
     const audio = document.getElementById('bg-audio');
     const btn = document.querySelector('.music-btn');
+    
+    if(!audio) return;
+
     if (document.hidden && !audio.paused) {
         audio.pause();
     } else if (!document.hidden && btn && btn.classList.contains('playing')) {
@@ -146,46 +148,43 @@ document.addEventListener("visibilitychange", function() {
 });
 
 
-// --- 4. SISTEMA DE COOKIES ---
+// --- 4. SISTEMA DE COOKIES (ATUALIZADO) ---
+// Sincronizado com o novo Banner do HTML
 function checkCookies() {
     if (!localStorage.getItem('udesaken_cookies')) {
         setTimeout(() => {
-            const banner = document.getElementById('cookie-banner');
-            if(banner) banner.classList.add('show-cookie');
+            const banner = document.getElementById('cookieBanner');
+            if(banner) banner.classList.add('active');
         }, 2000);
     }
 }
 
-window.aceitarCookies = function() {
-    localStorage.setItem('udesaken_cookies', 'true');
-    const banner = document.getElementById('cookie-banner');
-    if(banner) banner.classList.remove('show-cookie');
+window.acceptCookies = function() {
+    localStorage.setItem('udesaken_cookies', 'accepted');
+    const banner = document.getElementById('cookieBanner');
+    if(banner) banner.classList.remove('active');
 }
 
 
 // --- 5. LÓGICA DE ABAS (TABS) ---
-// Usada na página principal antiga se ainda existir, ou em seções futuras
 window.switchTab = function(tabName) {
-    // Remove active de tudo
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
         content.style.display = 'none';
     });
 
-    // Ativa o clicado
-    event.currentTarget.classList.add('active');
+    if(event && event.currentTarget) event.currentTarget.classList.add('active');
     
     const target = document.getElementById('tab-' + tabName);
     if(target) {
         target.style.display = 'flex';
-        // Pequeno delay para o CSS transition pegar o opacity
         setTimeout(() => target.classList.add('active'), 10);
     }
 }
 
 
 // --- 6. PROTEÇÃO DE MARCA ---
-const estiloTitulo = "color: #8a2be2; font-size: 30px; font-weight: bold; text-shadow: 0 0 10px #8a2be2;";
+const estiloTitulo = "color: #FFD700; font-size: 30px; font-weight: bold; text-shadow: 0 0 10px #FFD700; background: #000; padding: 10px;";
 console.log("%c UDESAKEN 2026 ", estiloTitulo);
-console.log("Sistema carregado. Versão: 4.0 (Gold Edition)");
+console.log("Sistema carregado. Versão: 5.0 (Future Edition)");
