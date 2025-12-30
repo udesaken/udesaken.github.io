@@ -160,7 +160,7 @@
             <i class="fas fa-cookie-bite" style="color: #FFD700; margin-right: 10px;"></i>
             Utilizamos cookies para garantir a melhor experiência. Ao continuar, você concorda com nossos <a href="/termos">Termos</a>.
         </div>
-        <button class="btn-accept" onclick="acceptCookies()">Aceitar e Continuar</button>
+        <button id="btnAccept" class="btn-accept">Aceitar e Continuar</button>
     </div>
 
     <div class="music-widget">
@@ -176,8 +176,9 @@
     <script type="module" src="script.js"></script>
 
     <script>
-        // --- 1. MENU MOBILE (FIXO DEFINITIVO) ---
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. MENU MOBILE ---
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             const closeBtn = document.querySelector('.close-btn-mobile');
@@ -186,49 +187,50 @@
             function toggleMenu() {
                 navLinks.classList.toggle('active');
             }
-
             function closeMenu() {
                 navLinks.classList.remove('active');
             }
 
-            // Remove clones antigos para evitar bugs de clique duplo
             if(hamburger) {
+                // Remove clones para garantir clique único
                 const newHamburger = hamburger.cloneNode(true);
                 hamburger.parentNode.replaceChild(newHamburger, hamburger);
                 newHamburger.addEventListener('click', toggleMenu);
             }
+            if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+            links.forEach(link => link.addEventListener('click', closeMenu));
 
-            if(closeBtn) {
-                closeBtn.addEventListener('click', closeMenu);
-            }
 
-            // Fechar ao clicar em qualquer link
-            links.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-        });
+            // --- 2. COOKIES (CORRIGIDO E BLINDADO) ---
+            const cookieBanner = document.getElementById('cookieBanner');
+            const btnAccept = document.getElementById('btnAccept');
 
-        // --- 2. COOKIES (GLOBAL PARA O BOTÃO ENXERGAR) ---
-        function checkCookies() {
+            // Verifica se já aceitou
             if (!localStorage.getItem('udesaken_cookies')) {
                 setTimeout(() => {
-                    const banner = document.getElementById('cookieBanner');
-                    if(banner) banner.classList.add('active');
+                    if(cookieBanner) cookieBanner.classList.add('active');
                 }, 2000);
             }
-        }
 
-        // Definindo globalmente para o onclick="" do HTML funcionar
-        window.acceptCookies = function() {
-            localStorage.setItem('udesaken_cookies', 'accepted');
-            const banner = document.getElementById('cookieBanner');
-            if(banner) banner.classList.remove('active');
-        }
-        
-        // Inicia verificação
-        window.addEventListener('load', checkCookies);
+            // O botão agora "escuta" o clique direto no JS
+            if(btnAccept) {
+                btnAccept.addEventListener('click', () => {
+                    localStorage.setItem('udesaken_cookies', 'accepted');
+                    if(cookieBanner) cookieBanner.classList.remove('active');
+                });
+            }
 
-        // --- 3. MÚSICA ---
+
+            // --- 3. ANIMAÇÃO DE SCROLL ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) entry.target.classList.add('show');
+                });
+            });
+            document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+        });
+
+        // --- 4. MÚSICA (GLOBAL) ---
         window.toggleMusic = function() {
             const audio = document.getElementById('bg-audio');
             const btn = document.querySelector('.music-btn');
@@ -251,14 +253,6 @@
                 if(icon) icon.className = 'fas fa-volume-mute';
             }
         }
-
-        // --- 4. ANIMAÇÃO DE SCROLL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) entry.target.classList.add('show');
-            });
-        });
-        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
