@@ -306,7 +306,7 @@ footer {
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 
-/* --- RESPONSIVIDADE (CELULAR) --- */
+/* --- RESPONSIVIDADE (CELULAR) - FINAL DO ARQUIVO --- */
 @media (max-width: 768px) {
     body { overflow-x: hidden; }
     .section-padding { padding: 60px 5%; }
@@ -316,7 +316,7 @@ footer {
     .cta-buttons { flex-direction: column; width: 100%; }
     .hero-visual { margin-top: 50px; }
     
-    /* Menu Hambúrguer (Correção Fundo Preto) */
+    /* Menu Hambúrguer */
     .hamburger { display: block; z-index: 1001; }
     .nav-links {
         position: fixed; top: 0; right: 0; height: 100vh; width: 85%;
@@ -327,23 +327,29 @@ footer {
     .nav-links.active { transform: translateX(0); }
     .close-btn-mobile { display: block; position: absolute; top: 30px; right: 30px; font-size: 1.8rem; color: #FFD700; }
 
-    /* Cards no Mobile */
+    /* Cards e Footer */
     .pricing-grid { flex-direction: column; gap: 30px; }
     .price-card { width: 100%; max-width: 100%; margin-bottom: 20px; }
-
-    /* Footer Empilhado */
     .footer-container { flex-direction: column; gap: 40px; }
     .footer-col { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 20px; }
     .footer-col:last-child { border-bottom: none; }
     
-    /* Cookies Mobile (Ajustado para ocupar menos espaço) */
-    .cookie-consent { 
-        padding: 15px; 
-        flex-direction: column; text-align: center; gap: 15px; 
+    /* --- CORREÇÃO DO CONFLITO VISUAL --- */
+    
+    /* 1. MÚSICA: Sobe bastante para não bater no banner */
+    .music-widget { 
+        bottom: 180px; /* Altura segura para ficar livre do banner */
+        left: 20px; 
     }
-    .cookie-text { font-size: 0.8rem; margin-bottom: 0; }
-    .btn-accept { width: 100%; padding: 10px; }
 
-    /* Música Mobile */
-    .music-widget { bottom: 20px; left: 20px; }
+    /* 2. COOKIES: Ajuste para ficar bonito e legível no rodapé */
+    .cookie-consent { 
+        padding: 20px 25px; 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 15px; 
+        background: rgba(5, 5, 5, 0.98); /* Fundo bem escuro para ler o texto */
+    }
+    .cookie-text { font-size: 0.85rem; margin-bottom: 0; }
+    .btn-accept { width: 100%; padding: 12px; }
 }
