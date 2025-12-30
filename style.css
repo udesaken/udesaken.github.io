@@ -245,26 +245,76 @@ footer {
 /* --- BANNER COOKIES --- */
 /* No arquivo style.css */
 
+/* --- BANNER COOKIES (PC E GERAL) --- */
 .cookie-consent {
     position: fixed;
-    /* bottom: -100px;  <-- APAGUE ESSA LINHA */
-    bottom: 0;       /* <-- COLOQUE ESSA: Fixa ele na base da tela */
-    left: 0; 
+    bottom: 0;
+    left: 0;
     width: 100%;
-    /* ... mantenha o resto (background, border, etc) ... */
-    
-    /* ADICIONE ESSA LINHA ABAIXO: */
-    transform: translateY(100%); /* Isso empurra ele 100% para baixo (esconde totalmente) */
-    
-    transition: transform 0.5s ease; /* Mude 'bottom' para 'transform' na transição */
+    background: rgba(15, 15, 20, 0.95); /* Fundo escuro quase sólido */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    border-top: 1px solid var(--purple); /* Linha roxa no topo para combinar */
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between; /* Texto na esq, botão na dir */
+    align-items: center;
     z-index: 2000;
+    
+    /* Animação de entrada */
+    transform: translateY(100%);
+    transition: transform 0.5s ease-out;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
 }
 
 .cookie-consent.active {
-    /* bottom: 0; <-- APAGUE ESSA LINHA */
-    
-    /* ADICIONE ESSA LINHA ABAIXO: */
-    transform: translateY(0); /* Traz ele de volta para a posição visível */
+    transform: translateY(0); /* Faz aparecer */
+}
+
+.cookie-text {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    max-width: 70%;
+}
+
+.cookie-text a {
+    color: var(--gold);
+    font-weight: bold;
+    text-decoration: none;
+}
+.cookie-text a:hover {
+    text-decoration: underline;
+}
+
+.btn-accept {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.btn-accept:hover {
+    background: white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* --- AJUSTE MOBILE (Mantenha ou atualize o que está no final do arquivo) --- */
+/* Certifique-se que dentro do @media (max-width: 768px) tenha isso: */
+@media (max-width: 768px) {
+    .cookie-consent {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 20px;
+    }
+    .cookie-text { max-width: 100%; }
+    .btn-accept { width: 100%; }
 }
 
 /* --- WIDGET MÚSICA (RESTAURADO) --- */
