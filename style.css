@@ -454,3 +454,27 @@ footer {
     background: #20BA56 !important;
     box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
 }
+
+/* --- BOTÃO DESTAQUE EQUIPE --- */
+.btn-team {
+    color: var(--gold) !important; /* Texto Dourado */
+    border: 1px solid var(--gold); /* Borda Dourada */
+    padding: 8px 25px; /* Tamanho do botão */
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); /* Brilho leve */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-team:hover {
+    background: var(--gold); /* Fundo preenche de dourado */
+    color: #000 !important; /* Texto fica preto para contraste */
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5); /* Brilho forte */
+    transform: translateY(-3px); /* Sobe um pouquinho */
+}
