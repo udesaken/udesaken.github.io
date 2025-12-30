@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="../style.css">
 
     <meta name="theme-color" content="#FFD700">
+
+    <style>
+        .old-price {
+            font-size: 1.1rem;
+            color: #888;
+            text-decoration: line-through;
+            display: block;
+            margin-bottom: -15px; /* Cola no preço novo */
+        }
+        .discount-badge {
+            background: #FFD700; /* Dourado VIP */
+            color: black;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 10px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+    </style>
 </head>
 <body>
 
@@ -29,7 +50,6 @@
                 <li><a href="/">Início</a></li>
                 <li><a href="/planos">Planos Bot</a></li>
                 <li><a href="/vip" class="active" style="color: #FFD700;">Clube VIP</a></li>
-                <li><a href="/sites">Sites</a></li>
                 <li><a href="https://wa.me/447907210802" class="btn-header" style="border-color: #FFD700; color: #FFD700;"><i class="fab fa-whatsapp"></i> Suporte VIP</a></li>
             </ul>
             <div class="hamburger">
@@ -41,17 +61,17 @@
     <section class="hero" style="min-height: 60vh; padding-top: 100px;">
         <div class="hero-content" style="text-align: center; width: 100%;">
             <div class="badge-news" style="margin: 0 auto 20px auto; border-color: #FFD700; color: #FFD700;">
-                <i class="fas fa-crown"></i> Acesso Elite 2026
+                <i class="fas fa-crown"></i> Oferta Elite 2026
             </div>
             
             <h1 class="hidden delay-100">
-                O Poder da<br>
-                <span class="text-gold" style="font-size: 1.2em;">INTELIGÊNCIA ARTIFICIAL.</span>
+                O Poder da IA com<br>
+                <span class="text-gold" style="font-size: 1.2em;">40% DE DESCONTO.</span>
             </h1>
             
             <p class="hidden delay-200" style="margin: 0 auto 30px auto; color: #eee;">
-                Desbloqueie o ChatGPT no seu WhatsApp, transcrição de áudios e<br>
-                recursos exclusivos que colocam você no topo.
+                Desbloqueie o ChatGPT no seu WhatsApp e transcrição de áudios<br>
+                pelo menor preço da história da Udesaken.
             </p>
         </div>
     </section>
@@ -62,10 +82,11 @@
             
             <div class="price-card vip-style hidden delay-100">
                 <div class="price-header">
-                    <h4>Semanal</h4>
+                    <h4>Semanal <span class="discount-badge">-40%</span></h4>
                     <h2>7 Dias</h2>
                 </div>
                 <div class="price-value text-gold">
+                    <span class="old-price">R$ 2,00</span><br>
                     <span class="currency">R$</span>1,19
                 </div>
                 <ul class="price-features">
@@ -73,18 +94,19 @@
                     <li><i class="fas fa-microphone-alt text-gold"></i> Transcrever Áudios</li>
                     <li><i class="fas fa-image text-gold"></i> Criar Imagens (Simples)</li>
                 </ul>
-                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20ser%20VIP%20Semanal%20(7%20Dias)" target="_blank" class="btn-price btn-vip">
+                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20ser%20VIP%20Semanal%20com%2040%25%20OFF" target="_blank" class="btn-price btn-vip">
                     Virar VIP
                 </a>
             </div>
             
             <div class="price-card popular gold-theme hidden delay-200" style="transform: scale(1.05);">
-                <div class="badge badge-gold">Elite 2026</div>
+                <div class="badge badge-gold">Oferta Elite</div>
                 <div class="price-header">
-                    <h4>Mensal</h4>
+                    <h4>Mensal <span class="discount-badge">-40%</span></h4>
                     <h2>30 Dias</h2>
                 </div>
                 <div class="price-value text-gold">
+                    <span class="old-price">R$ 5,00</span><br>
                     <span class="currency">R$</span>3,00
                 </div>
                 <ul class="price-features">
@@ -93,7 +115,7 @@
                     <li><i class="fas fa-bolt text-gold"></i> Respostas Instantâneas</li>
                     <li><i class="fas fa-star text-gold"></i> Prioridade na Fila</li>
                 </ul>
-                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20ser%20VIP%20Mensal%20(30%20Dias)" target="_blank" class="btn-price btn-glow-gold" style="font-size: 1.1rem;">
+                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20ser%20VIP%20Mensal%20com%2040%25%20OFF" target="_blank" class="btn-price btn-glow-gold" style="font-size: 1.1rem;">
                     Virar VIP Agora
                 </a>
             </div>
