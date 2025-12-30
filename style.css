@@ -278,34 +278,6 @@ footer {
 /* --- RESPONSIVO (MOBILE) --- */
 .close-btn-mobile { display: none; }
 
-@media(max-width: 768px) {
-    .hamburger { display: block; }
-    .nav-links {
-        position: fixed; top: 0; right: 0; height: 100vh; width: 75%;
-        background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(20px);
-        flex-direction: column; justify-content: center;
-        transform: translateX(100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border-left: 1px solid var(--gold);
-    }
-    .nav-links.active { transform: translateX(0); }
-    .close-btn-mobile { 
-        display: block; position: absolute; top: 25px; right: 25px; 
-        font-size: 1.5rem; color: var(--gold); cursor: pointer; 
-    }
-    
-    .hero { flex-direction: column; text-align: center; padding-top: 130px; }
-    .cta-buttons { flex-direction: column; width: 100%; }
-    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-    
-    .hero-img-effect { width: 80%; max-width: 300px; margin-top: 40px; }
-    
-    .pricing-grid { flex-direction: column; }
-    .price-card { width: 100%; }
-    
-    /* Melhora o toque no celular */
-    .price-card:active, .btn-primary:active { transform: scale(0.98); }
-}
-
 /* --- SCROLLBAR --- */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #000; }
@@ -542,4 +514,143 @@ footer {
     text-align: center;
     color: #555;
     font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   CORREÇÃO DE EMERGÊNCIA - MOBILE (Adicione no final do style.css)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+
+    /* 1. AJUSTES GERAIS DE ESTRUTURA */
+    body {
+        overflow-x: hidden; /* Impede rolagem lateral indesejada */
+    }
+    
+    .section-padding {
+        padding: 60px 5%; /* Diminui margens laterais */
+    }
+
+    /* 2. HERO (TELA INICIAL) */
+    .hero {
+        flex-direction: column;
+        padding-top: 120px; /* Espaço para não ficar atrás do header */
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem; /* Diminui fonte gigante */
+    }
+
+    .cta-buttons {
+        flex-direction: column; /* Botões um embaixo do outro */
+        gap: 15px;
+        width: 100%;
+    }
+
+    .hero-visual {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .hero-img-effect {
+        width: 85%; /* Imagem um pouco menor */
+        max-width: 300px;
+    }
+
+    /* 3. MENU HAMBÚRGUER (NAVEGAÇÃO) */
+    .hamburger {
+        display: block; /* Garante que apareça */
+        z-index: 1001;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 80%; /* Menu ocupa 80% da tela */
+        background: #000; /* Fundo totalmente preto para leitura */
+        border-left: 1px solid #333;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transform: translateX(100%);
+        transition: 0.4s ease;
+        z-index: 1000;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    /* Botão X para fechar no mobile */
+    .close-btn-mobile {
+        display: block;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 1.8rem;
+        color: #FFD700;
+    }
+
+    /* 4. CARDS DE PREÇO */
+    .pricing-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .price-card {
+        width: 100%; /* Ocupa a largura disponível */
+        max-width: 100%; /* Remove trava de 340px */
+        margin-bottom: 20px;
+    }
+
+    /* 5. RODAPÉ (FOOTER) */
+    footer {
+        padding: 40px 20px;
+    }
+
+    .footer-container {
+        flex-direction: column; /* Empilha as colunas */
+        gap: 40px;
+    }
+
+    .footer-col {
+        width: 100%; /* Ocupa toda a largura */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 20px;
+    }
+    
+    .footer-col:last-child {
+        border-bottom: none;
+    }
+
+    /* Ajuste dos ícones sociais no mobile para ficarem maiores */
+    .social-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    /* 6. BANNER DE COOKIES */
+    .cookie-consent {
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    
+    .cookie-text {
+        margin-bottom: 15px;
+    }
+    
+    .btn-accept {
+        width: 100%; /* Botão fácil de clicar */
+        padding: 15px;
+    }
 }
