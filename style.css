@@ -311,3 +311,70 @@ footer {
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+/* ==========================================================================
+   ANIMAÇÕES DAS REDES SOCIAIS (ADD-ON)
+   ========================================================================== */
+
+/* Estilo Base do Botão (Movemos do HTML para cá para organizar) */
+.social-btn {
+    width: 45px; 
+    height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center;
+    color: #ccc; 
+    font-size: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
+    margin: 0 5px;
+}
+
+/* 1. INSTAGRAM (Gradiente Oficial) */
+.social-btn[href*="instagram"]:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 25px rgba(214, 36, 159, 0.6);
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* 2. TIKTOK (Efeito Glitch Futurista) */
+.social-btn[href*="tiktok"]:hover {
+    background: #000;
+    border-color: #FE2C55;
+    color: white;
+    /* Sombra Dupla (Ciano e Vermelho) típico do TikTok */
+    box-shadow: 3px 3px 0px #FE2C55, -3px -3px 0px #25F4EE; 
+    text-shadow: 2px 2px 0px #FE2C55;
+    transform: translateY(-5px) rotate(-10deg);
+}
+
+/* 3. WHATSAPP (Verde Neon) */
+.social-btn[href*="whatsapp"]:hover, 
+.social-btn[href*="wa.me"]:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.8);
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* 4. GITHUB (Branco/Cinza Tech) */
+.social-btn[href*="github"]:hover {
+    background: #fff;
+    border-color: white;
+    color: #333;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: translateY(-5px) rotate(360deg); /* Giro completo tech */
+}
+
+/* 5. DISCORD (Roxo Blurple - Caso adicione depois) */
+.social-btn[href*="discord"]:hover {
+    background: #5865F2;
+    border-color: #5865F2;
+    color: white;
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.6);
+    transform: translateY(-5px) scale(1.1);
+}

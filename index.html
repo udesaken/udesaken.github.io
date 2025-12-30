@@ -12,6 +12,115 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken - Bem-vindo a 2026">
     <meta name="theme-color" content="#FFD700">
+    
+    <style>
+        /* Estilo do Footer Expandido */
+        footer {
+            background-color: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .footer-col h4 {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-links li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+        .social-grid {
+            display: flex;
+            gap: 15px;
+        }
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            background: #FFD700;
+            color: #000;
+            border-color: #FFD700;
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Banner de Cookies */
+        .cookie-consent {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            border-top: 1px solid #FFD700;
+            padding: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+            transition: bottom 0.5s ease;
+            flex-wrap: wrap;
+        }
+        .cookie-consent.active {
+            bottom: 0;
+        }
+        .cookie-text {
+            color: #fff;
+            font-size: 0.9rem;
+            max-width: 800px;
+        }
+        .cookie-text a {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+        .btn-accept {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn-accept:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 
@@ -80,7 +189,7 @@
         <div class="pricing-grid">
             
             <div class="price-card hidden delay-100">
-                <div class="card-icon" style="font-size: 3rem; color: var(--purple); margin-bottom: 20px;">
+                <div class="card-icon" style="font-size: 3rem; color: var(--purple, #a64dff); margin-bottom: 20px;">
                     <i class="fas fa-robot"></i>
                 </div>
                 <h3 style="color: white; font-size: 1.5rem;">Automação Bot</h3>
@@ -90,15 +199,15 @@
 
             <div class="price-card popular gold-theme hidden delay-200">
                 <div class="badge badge-gold">Exclusivo</div>
-                <div class="card-icon" style="font-size: 3rem; color: var(--gold); margin-bottom: 20px;">
+                <div class="card-icon" style="font-size: 3rem; color: var(--gold, #FFD700); margin-bottom: 20px;">
                     <i class="fas fa-crown"></i>
                 </div>
-                <h3 style="color: var(--gold); font-size: 1.5rem;">Clube VIP</h3>
+                <h3 style="color: var(--gold, #FFD700); font-size: 1.5rem;">Clube VIP</h3>
                 <p style="margin-bottom: 20px;">IA Avançada (GPT), Transcrição de áudio e recursos de elite.</p>
                 <a href="/vip" class="btn-price btn-glow-gold" style="border: none;">Entrar no Clube</a>
             </div>
 
-            </div>
+        </div>
     </section>
             
     <section class="section-padding" style="background: rgba(0,0,0,0.3);">
@@ -116,19 +225,57 @@
     </section>
 
     <footer>
-        <div class="footer-content">
-            <p>Udesaken Group &copy; 2026. Todos os direitos reservados.</p>
-            <div class="social-links" style="justify-content: center; margin-top: 10px;">
-                <a href="#" style="color: #ccc;"><i class="fab fa-instagram"></i></a>
-                <a href="#" style="color: #ccc;"><i class="fab fa-github"></i></a>
-                <a href="#" style="color: #ccc;"><i class="fab fa-discord"></i></a>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
+                <p style="color: #888; line-height: 1.6;">
+                    Transformando comunidades no WhatsApp com tecnologia de ponta e inovação desde 2023. O futuro é agora.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal & Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="/termos"><i class="fas fa-file-contract"></i> Termos de Uso</a></li>
+                    <li><a href="/cookies"><i class="fas fa-cookie-bite"></i> Política de Cookies</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Siga a Udesaken</h4>
+                <div class="social-grid">
+                    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn" title="Canal WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://github.com/isloch" target="_blank" class="social-btn" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <p style="margin-top:15px; font-size: 0.8rem; color: #666;">@udesakenofc</p>
             </div>
         </div>
-        <br>
-        <a href="/" class="powered-badge">
-            <i class="fas fa-bolt"></i> Powered by <strong>Udesaken</strong>
-        </a>
+
+        <div class="copyright">
+            <p>Udesaken Group &copy; 2026. Todos os direitos reservados.</p>
+            <a href="/" class="powered-badge" style="margin-top: 10px; display: inline-block;">
+                <i class="fas fa-bolt"></i> Powered by <strong>Udesaken</strong>
+            </a>
+        </div>
     </footer>
+
+    <div id="cookieBanner" class="cookie-consent">
+        <div class="cookie-text">
+            <i class="fas fa-cookie-bite" style="color: #FFD700; margin-right: 10px;"></i>
+            Utilizamos cookies para garantir a melhor experiência em nosso site. Ao continuar navegando, você concorda com nossos <a href="/termos">Termos</a> e <a href="/cookies">Política de Cookies</a>.
+        </div>
+        <button class="btn-accept" onclick="acceptCookies()">Aceitar e Continuar</button>
+    </div>
 
     <div class="music-widget">
         <audio id="bg-audio" loop>
@@ -164,6 +311,21 @@
             });
         });
         document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+
+        // Script do Cookie Banner
+        function acceptCookies() {
+            document.getElementById('cookieBanner').classList.remove('active');
+            localStorage.setItem('udesaken_cookies', 'accepted');
+        }
+
+        // Verifica se já aceitou ao carregar
+        window.addEventListener('load', () => {
+            if (!localStorage.getItem('udesaken_cookies')) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('active');
+                }, 2000); // Aparece 2 segundos após carregar
+            }
+        });
     </script>
 </body>
 </html>
