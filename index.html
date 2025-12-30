@@ -12,115 +12,6 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken - Bem-vindo a 2026">
     <meta name="theme-color" content="#FFD700">
-    
-    <style>
-        /* Estilo do Footer Expandido */
-        footer {
-            background-color: #0a0a0a;
-            border-top: 1px solid #333;
-            padding: 40px 20px;
-            margin-top: 50px;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .footer-col h4 {
-            color: #FFD700;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        .footer-links li {
-            list-style: none;
-            margin-bottom: 10px;
-        }
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: #FFD700;
-        }
-        .social-grid {
-            display: flex;
-            gap: 15px;
-        }
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            background: #1a1a1a;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-decoration: none;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-        }
-        .social-btn:hover {
-            background: #FFD700;
-            color: #000;
-            border-color: #FFD700;
-            transform: translateY(-3px);
-        }
-        .copyright {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #222;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Banner de Cookies */
-        .cookie-consent {
-            position: fixed;
-            bottom: -100px;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            border-top: 1px solid #FFD700;
-            padding: 20px;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            backdrop-filter: blur(10px);
-            transition: bottom 0.5s ease;
-            flex-wrap: wrap;
-        }
-        .cookie-consent.active {
-            bottom: 0;
-        }
-        .cookie-text {
-            color: #fff;
-            font-size: 0.9rem;
-            max-width: 800px;
-        }
-        .cookie-text a {
-            color: #FFD700;
-            text-decoration: underline;
-        }
-        .btn-accept {
-            background: #FFD700;
-            color: #000;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-        .btn-accept:hover {
-            transform: scale(1.05);
-        }
-    </style>
 </head>
 <body>
 
@@ -229,8 +120,8 @@
             <div class="footer-col">
                 <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
                 <p style="color: #aaa; line-height: 1.6; font-weight: 300;">
-    Redefinindo a interação em comunidades digitais. Tecnologia avançada, design premium e o futuro da moderação na palma da sua mão.
-</p>
+                    Redefinindo a interação em comunidades digitais. Tecnologia avançada, design premium e o futuro da moderação na palma da sua mão.
+                </p>
             </div>
 
             <div class="footer-col">
@@ -244,16 +135,17 @@
             <div class="footer-col">
                 <h4>Siga a Udesaken</h4>
                 <div class="social-grid">
-    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn" title="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn" title="TikTok">
-        <i class="fab fa-tiktok"></i>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn" title="Canal WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    </div>
+                    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn" title="Canal WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="copyright">
@@ -284,7 +176,7 @@
 
     <script type="module" src="script.js"></script>
     <script>
-        // Script Visual para Mobile e Scroll
+        // Script Visual Básico para Mobile
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const closeBtn = document.querySelector('.close-btn-mobile');
@@ -306,21 +198,6 @@
             });
         });
         document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
-
-        // Script do Cookie Banner
-        function acceptCookies() {
-            document.getElementById('cookieBanner').classList.remove('active');
-            localStorage.setItem('udesaken_cookies', 'accepted');
-        }
-
-        // Verifica se já aceitou ao carregar
-        window.addEventListener('load', () => {
-            if (!localStorage.getItem('udesaken_cookies')) {
-                setTimeout(() => {
-                    document.getElementById('cookieBanner').classList.add('active');
-                }, 2000); // Aparece 2 segundos após carregar
-            }
-        });
     </script>
 </body>
 </html>
