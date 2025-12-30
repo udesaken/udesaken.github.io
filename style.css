@@ -382,49 +382,41 @@ footer {
    REVITALIZAÇÃO DOS CARDS DE PREÇO (FUTURISTA)
    ========================================================================== */
 
-/* Estilo Base do Card Comum */
+/* --- CORREÇÃO DOS CARDS (MAIS VISÍVEIS) --- */
+
+/* Card Padrão (Roxo) */
 .price-card {
-    /* Fundo gradiente escuro e sutil em vez de cor chapada */
-    background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-    border: 1px solid rgba(166, 77, 255, 0.2); /* Borda roxa sutil */
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Movimento elástico */
+    /* Fundo mais claro e com leve transparência para destacar do fundo preto */
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.9) 0%, rgba(15, 15, 20, 0.95) 100%);
+    border: 1px solid rgba(166, 77, 255, 0.3); /* Borda mais visível */
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8); /* Sombra forte para dar profundidade */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+    /* ... resto das propriedades de transição mantidas ... */
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
 }
 
-/* Efeito Hover no Card Comum */
-.price-card:hover {
-    transform: translateY(-15px) scale(1.02); /* Flutua mais alto */
-    border-color: var(--purple, #a64dff);
-    /* Brilho roxo intenso atrás do card */
-    box-shadow: 0 20px 40px -10px rgba(166, 77, 255, 0.4);
-}
-
-/* Ícone do Card Comum */
-.price-card .card-icon i {
-    text-shadow: 0 0 15px rgba(166, 77, 255, 0.6); /* Brilho no ícone */
-    transition: transform 0.4s ease;
-}
-.price-card:hover .card-icon i {
-    transform: scale(1.2) rotate(-10deg); /* Ícone cresce e gira um pouco */
-}
-
-/* --- ESTILOS DO CARD VIP (PREMIUM GOLD) --- */
-
+/* Card VIP (Dourado) */
 .price-card.popular.gold-theme {
-    /* Gradiente Dourado Escuro Premium */
-    background: linear-gradient(135deg, #2a2a00 0%, #0a0a0a 60%, #1a1a00 100%);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow: 0 15px 35px -10px rgba(255, 215, 0, 0.15);
+    /* Gradiente mais rico, puxando um pouco mais pro dourado escuro no topo */
+    background: linear-gradient(160deg, rgba(40, 35, 0, 0.9) 0%, rgba(10, 10, 0, 0.95) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.5); /* Borda dourada mais forte */
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.15); /* Glow externo natural */
 }
 
-/* Efeito Hover no Card VIP */
+/* Efeito Hover (Quando passa o mouse) */
+.price-card:hover {
+    transform: translateY(-10px);
+    background: linear-gradient(145deg, rgba(40, 40, 45, 0.95) 0%, rgba(20, 20, 25, 1) 100%);
+    border-color: #a64dff;
+    box-shadow: 0 15px 40px rgba(166, 77, 255, 0.25);
+}
+
 .price-card.popular.gold-theme:hover {
-    transform: translateY(-15px) scale(1.03);
+    background: linear-gradient(160deg, rgba(50, 45, 10, 0.95) 0%, rgba(20, 20, 0, 1) 100%);
     border-color: #FFD700;
-    /* Brilho Dourado Intenso */
-    box-shadow: 0 25px 50px -12px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3); /* Glow dourado forte */
 }
 
 /* Ícone do Card VIP */
@@ -465,4 +457,89 @@ footer {
 .btn-glow-gold:hover {
     box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
     transform: scale(1.05);
+}
+/* ==========================================================================
+   CORREÇÃO DO RODAPÉ (FOOTER) - ALINHADO E BONITO
+   ========================================================================== */
+
+footer {
+    background-color: #050505; /* Fundo quase preto para fundir com o site */
+    border-top: 1px solid rgba(255, 215, 0, 0.2); /* Linha sutil dourada no topo */
+    padding: 60px 20px 30px;
+    margin-top: 80px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 1000px; /* Limita a largura para não espalhar muito */
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribui bem os espaços */
+    gap: 40px;
+    text-align: center; /* Centraliza o texto de todas as colunas */
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Garante que tudo fique no centro da coluna */
+}
+
+/* Títulos do Rodapé */
+.footer-col h4 {
+    color: #FFD700;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Pequeno detalhe embaixo do título */
+.footer-col h4::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: #FFD700;
+    margin: 10px auto 0; /* Centralizado */
+    border-radius: 2px;
+}
+
+/* Links */
+.footer-links { padding: 0; }
+.footer-links li { list-style: none; margin-bottom: 15px; }
+.footer-links a {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.footer-links a:hover { color: #FFD700; transform: translateX(5px); }
+
+/* Redes Sociais - Centralizado e Bonito */
+.social-grid {
+    display: flex;
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Copyright */
+.copyright {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
 }
