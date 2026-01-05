@@ -8,22 +8,9 @@
     <meta property="og:title" content="Udesaken — O Futuro em 2026">
     <meta property="og:description" content="A Evolução da sua comunidade. Tecnologia avançada, design premium e o futuro da moderação.">
     
-    <meta property="og:url" content="https://udesaken.site/">
-    
-    <meta property="og:image" content="https://udesaken.site/hero-poster.png">
-    
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Udesaken — O Futuro em 2026">
-    <meta name="twitter:image" content="https://udesaken.site/hero-poster.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="icon" type="image/png" href="hero-poster.png">
-    
     <link rel="stylesheet" href="style.css">
 
     <meta name="theme-color" content="#FFD700">
@@ -57,35 +44,35 @@
     </header>
 
     <section class="hero">
-   <div class="hero-content">
-        <div class="badge-news">
-            <i class="fas fa-check-circle"></i> Sistema Atualizado v2026
-        </div>
+       <div class="hero-content">
+            <div class="badge-news">
+                <i class="fas fa-check-circle"></i> Sistema Atualizado v2026
+            </div>
 
-        <h1 class="hidden delay-100">
-            A Evolução da<br>
-            <span class="text-gold">SUA COMUNIDADE.</span>
-        </h1>
-        
-        <p class="hidden delay-200">
-            Mais rápido, mais inteligente e totalmente exclusivo.
-            O ecossistema Udesaken definitivo para a nova era digital.
-        </p>
+            <h1 class="hidden delay-100">
+                A Evolução da<br>
+                <span class="text-gold">SUA COMUNIDADE.</span>
+            </h1>
+            
+            <p class="hidden delay-200">
+                Mais rápido, mais inteligente e totalmente exclusivo.
+                O ecossistema Udesaken definitivo para a nova era digital.
+            </p>
 
-        <div class="cta-buttons hidden delay-300">
-            <a href="/planos" class="btn-primary btn-gold-glow">
-                <i class="fas fa-rocket"></i> Ver Planos
-            </a>
-            <a href="/vip" class="btn-secondary">
-                <i class="fas fa-crown"></i> Área VIP
-            </a>
+            <div class="cta-buttons hidden delay-300">
+                <a href="/planos" class="btn-primary btn-gold-glow">
+                    <i class="fas fa-rocket"></i> Ver Planos
+                </a>
+                <a href="/vip" class="btn-secondary">
+                    <i class="fas fa-crown"></i> Área VIP
+                </a>
+            </div> 
         </div> 
-    </div> 
-    
-    <div class="hero-visual hidden delay-300">
-        <img src="udesaken-main.png" alt="Udesaken 2026" class="hero-img-effect gold-border">
-   </div>
-</section>
+        
+        <div class="hero-visual hidden delay-300">
+            <img src="udesaken-main.png" alt="Udesaken 2026" class="hero-img-effect gold-border">
+       </div>
+    </section>
 
     <section class="section-padding">
         <div class="section-header hidden">
@@ -118,7 +105,6 @@
         </div>
     </section>
             
-
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -139,18 +125,16 @@
             <div class="footer-col">
                 <h4>Siga a Udesaken</h4>
                 <div class="social-grid">
-    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn insta" title="Instagram">
-        <i class="fab fa-instagram"></i>
-    </a>
-    
-    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn tiktok" title="TikTok">
-        <i class="fab fa-tiktok"></i>
-    </a>
-    
-    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn whats" title="Canal WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-</div>
+                    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn insta" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn tiktok" title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn whats" title="Canal WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -199,7 +183,6 @@
             }
 
             if(hamburger) {
-                // Remove clones para garantir clique único
                 const newHamburger = hamburger.cloneNode(true);
                 hamburger.parentNode.replaceChild(newHamburger, hamburger);
                 newHamburger.addEventListener('click', toggleMenu);
@@ -224,7 +207,6 @@
                     if(cookieBanner) cookieBanner.classList.remove('active');
                 });
             }
-
 
             // --- 3. ANIMAÇÃO DE SCROLL ---
             const observer = new IntersectionObserver((entries) => {
