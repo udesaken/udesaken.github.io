@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#8a2be2">
     
     <style>
-        /* --- CORREÇÃO DE ALINHAMENTO --- */
+        /* --- AJUSTES DE LAYOUT (Mantidos) --- */
         .pricing-grid {
             align-items: stretch; 
             flex-wrap: wrap;
@@ -29,16 +29,7 @@
             width: 320px;
         }
 
-        .old-price {
-            font-size: 1rem; color: #888; text-decoration: line-through;
-            display: block; margin-bottom: -5px;
-        }
-        .discount-badge {
-            background: #2ecc71;
-            color: black; font-size: 0.7rem; padding: 2px 8px;
-            border-radius: 4px; font-weight: bold; vertical-align: middle;
-            margin-left: 5px; box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
-        }
+        /* Badge removidos do CSS pois não são mais usados */
 
         .price-card.popular {
             transform: scale(1.05);
@@ -65,11 +56,6 @@
 </head>
 <body>
 
-    <div class="new-year-particles">
-        <span></span><span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span><span></span>
-    </div>
-
     <header>
         <div class="logo">
             <a href="/">Udesaken <span style="font-size:0.8rem; border:1px solid rgba(255,255,255,0.3); padding: 2px 5px; border-radius: 4px;">BOT</span></a>
@@ -91,16 +77,16 @@
     <section class="hero" style="min-height: 50vh; padding-top: 120px; padding-bottom: 40px;">
         <div class="hero-content" style="text-align: center; width: 100%; max-width: 800px; margin: 0 auto;">
             <div class="badge-news" style="margin: 0 auto 20px auto; border-color: #8a2be2; color: #d8b4fe;">
-                <i class="fas fa-tag"></i> Oferta de Ano Novo
+                <i class="fas fa-server"></i> Servidores Estáveis
             </div>
             
             <h1 class="hidden delay-100" style="font-size: 2.5rem;">
-                40% OFF em todo o<br>
-                <span style="color: #8a2be2; text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);">SISTEMA.</span>
+                Potencialize seu<br>
+                <span style="color: #8a2be2; text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);">GRUPO.</span>
             </h1>
             
             <p class="hidden delay-200" style="margin: 0 auto; color: #ccc; max-width: 600px;">
-                Aproveite os preços promocionais para começar 2026 com tudo. Moderação, diversão e segurança para seu grupo.
+                Moderação automática, jogos de RPG, economia global e a segurança que sua comunidade precisa para crescer.
             </p>
         </div>
     </section>
@@ -111,12 +97,11 @@
             <div class="price-card hidden delay-100">
                 <div>
                     <div class="price-header">
-                        <h4 style="color:#ccc;">Teste Rápido <span class="discount-badge">-40%</span></h4>
+                        <h4 style="color:#ccc;">Teste Rápido</h4>
                         <h2 style="font-size: 1.8rem; margin: 10px 0;">1 Dia</h2>
                     </div>
                     <div class="price-value" style="color: #fff; margin-bottom: 20px;">
-                        <span class="old-price">R$ 1,50</span>
-                        <span style="font-size: 2rem; font-weight: bold;">R$ 0,90</span>
+                        <span style="font-size: 2rem; font-weight: bold;">R$ 1,50</span>
                     </div>
                     <ul class="price-features" style="text-align: left; padding-left: 10px; color: #ddd;">
                         <li><i class="fas fa-check" style="color: #2ecc71;"></i> Acesso Total às funções</li>
@@ -124,21 +109,20 @@
                         <li><i class="fas fa-times" style="color:#555;"></i> Sem fidelidade</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2040%25%20OFF%20no%20Teste%20(1%20Dia)" target="_blank" class="btn-price">
+                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20contratar%20o%20Teste%20(1%20Dia)" target="_blank" class="btn-price">
                     Testar Agora
                 </a>
             </div>
             
             <div class="price-card popular hidden delay-200" style="background: linear-gradient(145deg, #1a0033, #0d001a);">
-                <div class="badge" style="background: #8a2be2; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 0 10px #8a2be2;">Oferta 2026</div>
+                <div class="badge" style="background: #8a2be2; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 20px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 0 10px #8a2be2;">Recomendado</div>
                 <div>
                     <div class="price-header">
-                        <h4 style="color: #d8b4fe;">Mensal <span class="discount-badge">-40%</span></h4>
+                        <h4 style="color: #d8b4fe;">Mensal</h4>
                         <h2 style="font-size: 1.8rem; margin: 10px 0;">30 Dias</h2>
                     </div>
                     <div class="price-value" style="color: #a64dff; margin-bottom: 20px;">
-                        <span class="old-price">R$ 7,50</span>
-                        <span style="font-size: 2rem; font-weight: bold;">R$ 4,50</span>
+                        <span style="font-size: 2rem; font-weight: bold;">R$ 7,50</span>
                     </div>
                     <ul class="price-features" style="text-align: left; padding-left: 10px;">
                         <li><i class="fas fa-star" style="color: #a64dff;"></i> <strong>Melhor Custo-Benefício</strong></li>
@@ -147,7 +131,7 @@
                         <li><i class="fas fa-headset" style="color: #a64dff;"></i> Suporte Prioritário</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2040%25%20OFF%20no%20Mensal" target="_blank" class="btn-price btn-glow-purple">
+                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20contratar%20o%20Plano%20Mensal" target="_blank" class="btn-price btn-glow-purple">
                     Garantir Mensal
                 </a>
             </div>
@@ -155,12 +139,11 @@
             <div class="price-card hidden delay-300">
                 <div>
                     <div class="price-header">
-                        <h4 style="color:#ccc;">Quinzenal <span class="discount-badge">-40%</span></h4>
+                        <h4 style="color:#ccc;">Quinzenal</h4>
                         <h2 style="font-size: 1.8rem; margin: 10px 0;">15 Dias</h2>
                     </div>
                     <div class="price-value" style="color: #fff; margin-bottom: 20px;">
-                        <span class="old-price">R$ 5,50</span>
-                        <span style="font-size: 2rem; font-weight: bold;">R$ 3,30</span>
+                        <span style="font-size: 2rem; font-weight: bold;">R$ 5,50</span>
                     </div>
                     <ul class="price-features" style="text-align: left; padding-left: 10px; color: #ddd;">
                         <li><i class="fas fa-check" style="color: #2ecc71;"></i> Diversão Garantida</li>
@@ -168,7 +151,7 @@
                         <li><i class="fas fa-clock" style="color: #2ecc71;"></i> Renovação Flexível</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2040%25%20OFF%20no%20Quinzenal" target="_blank" class="btn-price">
+                <a href="https://wa.me/447907210802?text=Ola%20Udesaken!%20Quero%20contratar%20o%20Plano%20Quinzenal" target="_blank" class="btn-price">
                     Assinar Quinzenal
                 </a>
             </div>
@@ -187,8 +170,8 @@
                 <p>Assim que o pagamento é confirmado, você recebe o acesso ao bot e o tutorial de ativação diretamente no seu WhatsApp. É instantâneo.</p>
             </div>
             <div class="faq-item hidden delay-100" style="margin-bottom: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);">
-                <h4 style="color: #d8b4fe; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> O desconto é vitalício?</h4>
-                <p>O desconto de 40% é válido para a contratação atual. Se você garantir o mensal agora, paga o preço promocional por esses 30 dias.</p>
+                <h4 style="color: #d8b4fe; margin-bottom: 10px;"><i class="fas fa-sync-alt"></i> Preciso reinstalar todo mês?</h4>
+                <p>Não! Se você renovar antes do vencimento, o bot continua no grupo sem interrupções e sem perder nenhuma configuração.</p>
             </div>
         </div>
     </section>
@@ -267,7 +250,6 @@
             function closeMenu() { navLinks.classList.remove('active'); }
 
             if(hamburger) {
-                // Clonar para remover event listeners antigos e evitar duplicação
                 const newHamburger = hamburger.cloneNode(true);
                 hamburger.parentNode.replaceChild(newHamburger, hamburger);
                 newHamburger.addEventListener('click', toggleMenu);
@@ -275,20 +257,21 @@
             if(closeBtn) closeBtn.addEventListener('click', closeMenu);
             links.forEach(link => link.addEventListener('click', closeMenu));
 
-            // 2. COOKIES (Padronizado com 'cookiesAccepted')
+            // 2. COOKIES (Padronizado)
             const cookieBanner = document.getElementById('cookieBanner');
             const btnAccept = document.getElementById('btnAccept');
 
-            if (!localStorage.getItem('cookiesAccepted')) {
+            // Verifica se já aceitou (pode ser 'udesaken_cookies' ou 'cookiesAccepted', mantendo o padrão do arquivo original para evitar bugs)
+            if (!localStorage.getItem('udesaken_cookies')) {
                 setTimeout(() => { 
-                    if(cookieBanner) cookieBanner.classList.add('active'); // Sobe o banner
+                    if(cookieBanner) cookieBanner.classList.add('active');
                 }, 2000);
             }
 
             if(btnAccept) {
                 btnAccept.addEventListener('click', () => {
-                    localStorage.setItem('cookiesAccepted', 'true'); // Salva a aceitação
-                    if(cookieBanner) cookieBanner.classList.remove('active'); // Desce o banner
+                    localStorage.setItem('udesaken_cookies', 'accepted');
+                    if(cookieBanner) cookieBanner.classList.remove('active');
                 });
             }
 
@@ -299,7 +282,7 @@
             document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
         });
 
-        // 4. MÚSICA (GLOBAL)
+        // 4. MÚSICA
         window.toggleMusic = function() {
             const audio = document.getElementById('bg-audio');
             const btn = document.querySelector('.music-btn');
