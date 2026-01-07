@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://udesaken.site/hero-poster.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="icon" type="image/png" href="../hero-poster.png">
     
@@ -32,6 +32,7 @@
             flex-direction: column;
             align-items: center;
             height: 100%;
+            width: 100%; /* O cartão ocupa a largura do container pai */
         }
         .glass-card:hover {
             border-color: var(--gold);
@@ -56,6 +57,27 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Container padrão para os membros */
+        .member-container {
+            width: 350px;
+            max-width: 100%;
+        }
+
+        /* Lógica para o Líder (Isloch) no topo centralizado em telas maiores */
+        @media (min-width: 900px) {
+            .member-container.leader {
+                flex: 0 0 100%; /* Força ocupar a linha inteira */
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px; /* Espaço extra antes dos outros */
+            }
+            
+            /* Garante que o cartão do líder não estique na tela toda, mantendo o tamanho padrão */
+            .member-container.leader .glass-card {
+                width: 350px; 
+            }
         }
 
         /* Estilo específico para o botão do X (Twitter) */
@@ -113,7 +135,7 @@
     <section class="section-padding" style="padding-top: 0; padding-bottom: 100px;">
         <div class="team-wrapper">
             
-            <div class="hidden delay-300" style="width: 350px;">
+            <div class="member-container leader hidden delay-300">
                 <div class="glass-card" style="padding: 40px 30px; text-align: center;">
                     <img src="../islo.jpg" alt="CEO Islo" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid var(--gold); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); object-fit: cover; border-radius: 50%;">
                     
@@ -136,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="hidden delay-400" style="width: 350px;">
+            <div class="member-container hidden delay-400">
                 <div class="glass-card" style="padding: 40px 30px; text-align: center;">
                     <img src="../gbr.jpg" alt="Head Manager Noxxz" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
                     
@@ -151,7 +173,7 @@
                 </div>
             </div>
 
-            <div class="hidden delay-500" style="width: 350px;">
+            <div class="member-container hidden delay-500">
                 <div class="glass-card" style="padding: 40px 30px; text-align: center;">
                     <img src="../hyuuzaki.jpg" alt="Manager Hyuuzaki" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
                     
