@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comandos — Udesaken 2026</title>
     
-    <link rel="icon" type="image/png" href="../uskcoroa.png">
+    <link rel="icon" type="image/png" href="../udesaken-main.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -17,7 +17,9 @@
 
     <header>
         <div class="logo">
-            Udesaken <span style="color:#FFD700; font-size:0.8rem; border:1px solid #FFD700; padding: 2px 5px; border-radius: 4px;">DOCS</span>
+            <a href="/" style="color: white; text-decoration: none;">
+                Udesaken <span style="color:#FFD700; font-size:0.8rem; border:1px solid #FFD700; padding: 2px 5px; border-radius: 4px;">DOCS</span>
+            </a>
         </div>
         <nav>
             <ul class="nav-links">
@@ -46,6 +48,12 @@
             <p style="color: #ccc; max-width: 600px; margin: 10px auto;">
                 Consulte a lista oficial de funcionalidades e sistemas.
             </p>
+            
+            <div style="margin-top: 20px;">
+                <span style="background: rgba(255, 85, 85, 0.1); color: #ff5555; border: 1px solid rgba(255, 85, 85, 0.3); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-info-circle"></i> Nota: Comandos exclusivos de <b>Dono/Dev</b> não estão listados.
+                </span>
+            </div>
         </div> 
     </section>
 
@@ -69,232 +77,210 @@
 
             <div class="cmd-card" data-category="adm">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>banimento
+                    <span class="cmd-prefix">7</span>banimento
                     <span class="badge-tag adm">PUNIÇÃO</span>
                 </div>
                 <p class="cmd-desc">Sistema completo de expulsão e gestão de banidos.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!ban, !unban, !kick, !listban, !banirgp, !desbanirgp</code>
+                    <i class="fas fa-terminal"></i> <code>7ban, 7unban, 7kick, 7listban, 7banirgp</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="adm">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>mutar
+                    <span class="cmd-prefix">7</span>mutar
                     <span class="badge-tag adm">SILÊNCIO</span>
                 </div>
                 <p class="cmd-desc">Impeça membros de enviar mensagens temporariamente.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!mute, !unmute</code>
+                    <i class="fas fa-terminal"></i> <code>7mute, 7unmute</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="adm">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>advertencias
+                    <span class="cmd-prefix">7</span>advertencias
                     <span class="badge-tag adm">WARN</span>
                 </div>
                 <p class="cmd-desc">Gerencie avisos aos membros antes do banimento.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!warn, !unwarn, !listwarns</code>
+                    <i class="fas fa-terminal"></i> <code>7warn, 7unwarn, 7listwarns</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="adm">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>grupo
+                    <span class="cmd-prefix">7</span>grupo
                     <span class="badge-tag adm">GERAL</span>
                 </div>
                 <p class="cmd-desc">Controle de chat, limpeza e anúncios oficiais.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!limpar, !anuncio, !setprefix, !soadm, !modolite</code>
+                    <i class="fas fa-terminal"></i> <code>7limpar, 7anuncio, 7setprefix, 7soadm</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="adm">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>staff
+                    <span class="cmd-prefix">7</span>staff
                     <span class="badge-tag adm">HIERARQUIA</span>
                 </div>
-                <p class="cmd-desc">Gerencie sub-donos, moderadores e cargos.</p>
+                <p class="cmd-desc">Gerencie sub-donos e permissões do grupo.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!promover, !rebaixar, !addmod, !delmod, !listmods, !donogp</code>
-                </div>
-            </div>
-
-             <div class="cmd-card" data-category="adm">
-                <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>admin_items
-                    <span class="badge-tag adm">ECO ADMIN</span>
-                </div>
-                <p class="cmd-desc">Manipulação manual de economia e itens.</p>
-                <div class="cmd-usage">
-                    <i class="fas fa-terminal"></i> <code>!addgold, !remgold, !daritem, !darmaterial, !setlevel</code>
+                    <i class="fas fa-terminal"></i> <code>7promover, 7rebaixar, 7donogp, 7donosgp</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>banco
+                    <span class="cmd-prefix">7</span>banco
                     <span class="badge-tag eco">FINANÇAS</span>
                 </div>
                 <p class="cmd-desc">Consulte saldo, rankings globais/locais e pague fiança.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-coins"></i> <code>!banco, !topgold, !toplocal, !pagarfianca</code>
+                    <i class="fas fa-coins"></i> <code>7banco, 7topgold, 7toplocal, 7pagarfianca</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>trabalho
+                    <span class="cmd-prefix">7</span>trabalho
                     <span class="badge-tag eco">EMPREGOS</span>
                 </div>
                 <p class="cmd-desc">Consiga um emprego, cumpra desafios e ganhe gold.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-briefcase"></i> <code>!vagas, !emprego, !demitir, !desafio, !coletar</code>
+                    <i class="fas fa-briefcase"></i> <code>7vagas, 7emprego, 7demitir, 7desafio</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>loja
+                    <span class="cmd-prefix">7</span>loja
                     <span class="badge-tag eco">COMÉRCIO</span>
                 </div>
                 <p class="cmd-desc">Compre itens, materiais e gerencie seu inventário.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-shopping-cart"></i> <code>!loja, !comprar, !vender, !inventario, !precos, !materiais</code>
+                    <i class="fas fa-shopping-cart"></i> <code>7loja, 7comprar, 7vender, 7inventario, 7precos</code>
                 </div>
             </div>
             
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>mercado
+                    <span class="cmd-prefix">7</span>mercado
                     <span class="badge-tag eco">PLAYER</span>
                 </div>
                 <p class="cmd-desc">Compra e venda direta entre jogadores (Marketplace).</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-exchange-alt"></i> <code>!mercado, !listar, !comprarmercado, !meusanuncios</code>
+                    <i class="fas fa-exchange-alt"></i> <code>7mercado, 7listar, 7comprarmercado</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>crimes
+                    <span class="cmd-prefix">7</span>crimes
                     <span class="badge-tag eco">ILEGAL</span>
                 </div>
                 <p class="cmd-desc">Atividades de alto risco: roubos, furtos e assaltos.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-mask"></i> <code>!roubar, !furtar, !assaltarcarro, !assaltarcarroforte, !topprocurados</code>
+                    <i class="fas fa-mask"></i> <code>7roubar, 7furtar, 7assaltarcarro, 7topprocurados</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="eco">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>propriedades
+                    <span class="cmd-prefix">7</span>propriedades
                     <span class="badge-tag eco">BENS</span>
                 </div>
                 <p class="cmd-desc">Adquira imóveis e colete renda passiva.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-home"></i> <code>!propriedades, !comprarpropriedade, !coletarpropriedades</code>
+                    <i class="fas fa-home"></i> <code>7propriedades, 7comprarpropriedade</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="fun">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>social
+                    <span class="cmd-prefix">7</span>social
                     <span class="badge-tag fun">PERFIL</span>
                 </div>
                 <p class="cmd-desc">Interações sociais, visualização de perfil e rankings.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-user"></i> <code>!perfil, !rank, !rankg, !membros, !ping, !regras</code>
+                    <i class="fas fa-user"></i> <code>7perfil, 7rank, 7rankg, 7membros, 7ping</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="fun">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>casamento
+                    <span class="cmd-prefix">7</span>casamento
                     <span class="badge-tag fun">AMOR</span>
                 </div>
                 <p class="cmd-desc">Sistema de relacionamento monogâmico.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-heart"></i> <code>!casar, !divorciar, !reatar, !aceitarpedido, !recusarpedido</code>
+                    <i class="fas fa-heart"></i> <code>7casar, 7divorciar, 7reatar, 7aceitarpedido</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="fun">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>poliamor
+                    <span class="cmd-prefix">7</span>poliamor
                     <span class="badge-tag fun">PREMIUM</span>
                 </div>
                 <p class="cmd-desc">Relacionamentos avançados (Quadrisal e Quintisal).</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-users"></i> <code>!quadrisal, !quintisal, !addquadri, !tirarquadri, !criarquadrisal</code>
+                    <i class="fas fa-users"></i> <code>7quadrisal, 7quintisal, 7addquadri</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="fun">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>apostas
+                    <span class="cmd-prefix">7</span>apostas
                     <span class="badge-tag fun">JOGOS</span>
                 </div>
                 <p class="cmd-desc">Jogos de azar para multiplicar (ou perder) gold.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-dice"></i> <code>!apostar, !roleta, !jogodobicho, !balãogold, !sorte</code>
+                    <i class="fas fa-dice"></i> <code>7apostar, 7roleta, 7jogodobicho, 7balãogold</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="sys">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>seguranca
+                    <span class="cmd-prefix">7</span>seguranca
                     <span class="badge-tag sys">PROTEÇÃO</span>
                 </div>
                 <p class="cmd-desc">Anti-link, Anti-fake, Anti-travas e Anti-pornografia.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-shield-virus"></i> <code>!antinuke, !antilinkgp, !antifake, !antiflood, !antiporn</code>
+                    <i class="fas fa-shield-virus"></i> <code>7antinuke, 7antilinkgp, 7antifake, 7antiporn</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="sys">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>boas_vindas
+                    <span class="cmd-prefix">7</span>boas_vindas
                     <span class="badge-tag sys">AUTO</span>
                 </div>
                 <p class="cmd-desc">Configuração automática de entrada e saída.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-door-open"></i> <code>!bemvindo, !saida, !fotobv, !legendabv</code>
+                    <i class="fas fa-door-open"></i> <code>7bemvindo, 7saida, 7fotobv, 7legendabv</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="sys">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>ia_bot
+                    <span class="cmd-prefix">7</span>ia_bot
                     <span class="badge-tag sys">AUTOMAÇÃO</span>
                 </div>
                 <p class="cmd-desc">Respostas automáticas, IA e downloaders.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-robot"></i> <code>!autorespostas, !assistente, !autosticker, !autodl</code>
+                    <i class="fas fa-robot"></i> <code>7autorespostas, 7assistente, 7autosticker</code>
                 </div>
             </div>
 
             <div class="cmd-card" data-category="sys">
                 <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>parcerias
+                    <span class="cmd-prefix">7</span>parcerias
                     <span class="badge-tag sys">FECHAMENTOS</span>
                 </div>
                 <p class="cmd-desc">Gerenciamento de parcerias com outros grupos.</p>
                 <div class="cmd-usage">
-                    <i class="fas fa-handshake"></i> <code>!parcerias, !addparceria, !delparceria, !modoparceria</code>
-                </div>
-            </div>
-
-            <div class="cmd-card" data-category="sys">
-                <div class="cmd-header">
-                    <span class="cmd-prefix">!</span>block
-                    <span class="badge-tag sys">CONFIG</span>
-                </div>
-                <p class="cmd-desc">Bloquear comandos específicos no grupo.</p>
-                <div class="cmd-usage">
-                    <i class="fas fa-ban"></i> <code>!blockcmd, !unblockcmd</code>
+                    <i class="fas fa-handshake"></i> <code>7parcerias, 7addparceria, 7delparceria</code>
                 </div>
             </div>
 
