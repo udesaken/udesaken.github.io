@@ -602,3 +602,24 @@ footer {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Adiciona transição suave para a imagem */
+.navigation ul li .icon img {
+    transition: filter 0.5s ease;
+}
+
+/* Aplica o contorno e brilho quando ativo */
+.navigation ul li.active .icon img {
+    /*
+      O truque aqui é usar múltiplos drop-shadows.
+      Os 4 primeiros criam uma borda sólida de 3px em todas as direções.
+      Os 2 últimos criam o efeito de brilho (glow).
+    */
+    filter:
+        drop-shadow(3px 0px 0px var(--clr))
+        drop-shadow(-3px 0px 0px var(--clr))
+        drop-shadow(0px 3px 0px var(--clr))
+        drop-shadow(0px -3px 0px var(--clr))
+        drop-shadow(0 0 5px var(--clr))  /* Brilho suave */
+        drop-shadow(0 0 10px var(--clr)); /* Brilho mais forte */
+}
