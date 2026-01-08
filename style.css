@@ -432,3 +432,173 @@ footer {
     color: #ff69b4; 
     border: 1px solid rgba(255, 105, 180, 0.3); 
 }
+/* ==========================================================================
+   CSS DA PÁGINA DE COMANDOS (FALTOU ESTA PARTE)
+   ========================================================================== */
+
+/* Ajuste do Hero para páginas internas */
+.hero-small {
+    min-height: 40vh;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Área de Busca */
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 0 5%;
+    margin-top: -20px;
+}
+
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(166, 77, 255, 0.3);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.search-wrapper input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+/* Filtros */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-filter {
+    padding: 8px 20px;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid #444;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-filter:hover, .btn-filter.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+}
+
+.btn-filter[data-filter="vip"]:hover, 
+.btn-filter[data-filter="vip"].active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: black;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Grid de Cards */
+.commands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cmd-card {
+    background: rgba(30, 30, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.cmd-card:hover {
+    transform: translateY(-5px);
+    background: rgba(40, 40, 45, 0.9);
+    border-color: var(--purple);
+}
+
+.cmd-card.gold-glow:hover {
+    border-color: var(--gold);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.1);
+}
+
+.cmd-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cmd-prefix { color: var(--purple); }
+.gold-glow .cmd-prefix { color: var(--gold); }
+
+/* Tags dos cards */
+.badge-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.badge-tag.adm { background: rgba(255, 50, 50, 0.2); color: #ff5555; border: 1px solid rgba(255, 50, 50, 0.3); }
+.badge-tag.vip { background: rgba(255, 215, 0, 0.15); color: var(--gold); border: 1px solid rgba(255, 215, 0, 0.3); }
+.badge-tag.util { background: rgba(138, 43, 226, 0.15); color: #c084fc; border: 1px solid rgba(138, 43, 226, 0.3); }
+
+.cmd-desc { color: #aaa; font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; }
+
+.cmd-usage {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    border-left: 2px solid var(--purple);
+    word-break: break-all;
+}
+
+.gold-glow .cmd-usage { border-left-color: var(--gold); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
