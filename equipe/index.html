@@ -7,12 +7,12 @@
     
     <meta property="og:title" content="Equipe Udesaken">
     <meta property="og:description" content="Conheça a liderança por trás da tecnologia.">
-    <meta property="og:image" content="https://udesaken.site/udesaken-main.png">
+    <meta property="og:image" content="https://udesaken.site/hero-poster.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-   <link rel="icon" type="image/png" href="/udesaken-main.png">
+    <link rel="icon" type="image/png" href="../hero-poster.png">
     
     <link rel="stylesheet" href="../style.css">
 
@@ -32,7 +32,7 @@
             flex-direction: column;
             align-items: center;
             height: 100%;
-            width: 100%; /* O cartão ocupa a largura do container pai */
+            width: 100%;
         }
         .glass-card:hover {
             border-color: var(--gold);
@@ -59,7 +59,6 @@
             padding: 0 20px;
         }
 
-        /* Container padrão para os membros */
         .member-container {
             width: 350px;
             max-width: 100%;
@@ -68,24 +67,20 @@
         /* Lógica para o Líder (Isloch) no topo centralizado em telas maiores */
         @media (min-width: 900px) {
             .member-container.leader {
-                flex: 0 0 100%; /* Força ocupar a linha inteira */
+                flex: 0 0 100%;
                 display: flex;
                 justify-content: center;
-                margin-bottom: 10px; /* Espaço extra antes dos outros */
+                margin-bottom: 10px;
             }
-            
-            /* Garante que o cartão do líder não estique na tela toda, mantendo o tamanho padrão */
             .member-container.leader .glass-card {
                 width: 350px; 
             }
         }
 
-        /* Estilo específico para o botão do X (Twitter) */
-        .social-btn.twitter:hover {
-            background: #000;
-            color: #fff;
-            border-color: #fff;
-        }
+        /* Estilos Sociais */
+        .social-btn.twitter:hover { background: #000; color: #fff; border-color: #fff; }
+        .social-btn.insta:hover { background: #E1306C; color: #fff; border-color: #E1306C; }
+        .social-btn.tiktok:hover { background: #000; color: #fff; border-color: #00f2ea; } /* Efeito neon tiktok */
     </style>
 </head>
 <body>
@@ -162,7 +157,7 @@
                 <div class="glass-card" style="padding: 40px 30px; text-align: center;">
                     <img src="../gbr.jpg" alt="Head Manager Noxxz" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
                     
-                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Noxzz</h2>
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Noxxz</h2>
                     <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
                         Head Manager
                     </p>
@@ -193,6 +188,94 @@
                             <i class="fa-brands fa-x-twitter"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+
+            <div class="member-container hidden delay-500">
+                <div class="glass-card" style="padding: 40px 30px; text-align: center;">
+                    <img src="../mz.jpg" alt="Manager Mz" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
+                    
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Mz</h2>
+                    <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
+                        Manager
+                    </p>
+                    
+                    <p class="member-desc">
+                        Responsável pela divulgação dos chats da Udesaken. Também auxilia na criação de figurinhas para o canal oficial no WhatsApp.
+                    </p>
+                </div>
+            </div>
+
+            <div class="member-container hidden delay-500">
+                <div class="glass-card" style="padding: 40px 30px; text-align: center;">
+                    <img src="../thaila.jpg" alt="Admin Thaila" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
+                    
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Thaila</h2>
+                    <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
+                        Admin & Content Creator
+                    </p>
+                    
+                    <p class="member-desc">
+                        Responsável pelos conteúdos das contas oficiais da Udesaken no Instagram e TikTok. Também atua como administradora dos chats.
+                    </p>
+
+                    <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 0 auto 20px;"></div>
+
+                    <div class="social-grid" style="gap: 15px;">
+                        <a href="https://instagram.com/thailapadilha" target="_blank" class="social-btn insta" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://tiktok.com/@thailapadilha_" target="_blank" class="social-btn tiktok" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-container hidden delay-500">
+                <div class="glass-card" style="padding: 40px 30px; text-align: center;">
+                    <img src="../ellen.jpg" alt="Admin Ellen" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
+                    
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Ellen</h2>
+                    <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
+                        Admin of Group
+                    </p>
+                    
+                    <p class="member-desc">
+                        Administradora do chat da Udesaken, auxiliando na organização e moderação da comunidade.
+                    </p>
+
+                    <div style="width: 50px; height: 2px; background: rgba(255,255,255,0.2); margin: 0 auto 20px;"></div>
+
+                    <div class="social-grid" style="gap: 15px;">
+                        <a href="https://instagram.com/Silvs_.xzz" target="_blank" class="social-btn insta" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-container hidden delay-500">
+                <div class="glass-card" style="padding: 40px 30px; text-align: center;">
+                    <img src="../vittoria.jpg" alt="Admin Vittória" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
+                    
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Vittória</h2>
+                    <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
+                        Admin of Group
+                    </p>
+                    
+                    <p class="member-desc">
+                        Administradora do chat da Udesaken, atuando na moderação e suporte aos membros.
+                    </p>
+                </div>
+            </div>
+
+            <div class="member-container hidden delay-500">
+                <div class="glass-card" style="padding: 40px 30px; text-align: center;">
+                    <img src="../victoria.jpg" alt="Admin Victoria" class="team-photo" style="width: 140px; height: 140px; margin-bottom: 20px; border: 3px solid rgba(255, 255, 255, 0.2); object-fit: cover; border-radius: 50%;">
+                    
+                    <h2 style="color: white; font-size: 1.8rem; margin-bottom: 5px;">Victoria</h2>
+                    <p class="text-gold" style="font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 15px; text-transform: uppercase;">
+                        Admin of Group
+                    </p>
+                    
+                    <p class="member-desc">
+                        Administradora do chat da Udesaken, responsável por manter a organização e o bom funcionamento da comunidade.
+                    </p>
                 </div>
             </div>
 
@@ -293,6 +376,4 @@
         }
     </script>
 </body>
-
 </html>
-
