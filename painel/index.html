@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Cupons</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .container { max-width: 800px; margin: 100px auto; padding: 20px; }
+        .header-painel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        
+        .cupom-card {
+            background: rgba(30, 30, 35, 0.8);
+            border: 1px solid #444;
+            padding: 20px; margin-bottom: 15px; border-radius: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .cupom-card.usado { opacity: 0.5; border-color: #333; }
+        
+        .info h3 { color: var(--gold); margin: 0; font-size: 1.2rem; }
+        .info p { color: #ccc; margin: 5px 0 0; font-size: 0.9rem; }
+
+        .btn-usar {
+            background: var(--purple); color: white; border: none;
+            padding: 8px 15px; border-radius: 8px; cursor: pointer;
+        }
+        .btn-usar:hover { background: #fff; color: #000; }
+        
+        .status-badge {
+            padding: 5px 10px; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; margin-left: 10px;
+        }
+        .st-ativo { background: rgba(0, 255, 0, 0.2); color: #0f0; }
+        .st-usado { background: rgba(255, 0, 0, 0.2); color: #f00; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-painel">
+            <h2 style="color: white;">📋 Controle de Cupons</h2>
+            <button onclick="carregarCupons()" class="btn-secondary" style="font-size: 0.9rem;">
+                <i class="fas fa-sync"></i> Atualizar
+            </button>
+        </div>
+
+        <div id="lista-cupons">
+            <p style="color: #888; text-align: center;">Carregando...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDwtSWC3I0XcfsvnAdzlsMVOiv6n5qkH0Q",
+            authDomain: "udesaken-system.firebaseapp.com",
+            projectId: "udesaken-system",
+            storageBucket: "udesaken-system.firebasestorage.app",
+            messagingSenderId: "85407769934",
+            appId: "1:85407769934:web:f5152f2785540733662a1f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Segurança simples: Pede senha ao abrir a página
+        const senha = prompt("Senha do Admin:");
+        if(senha !== "admin123") { // TROQUE "admin123" PELA SUA SENHA
+            document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:20%'>Acesso Negado</h1>";
+        } else {
+            carregarCupons();
+        }
+
+        window.carregarCupons = async function() {
+            const lista = document.getElementById('lista-cupons');
+            lista.innerHTML = "";
+
+            // Busca cupons ordenados pelos mais recentes
+            const q = query(collection(db, "cupons"), orderBy("data", "desc"));
+            const querySnapshot = await getDocs(q);
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+                const id = docSnap.id;
+                
+                // Formata se está ativo ou usado
+                const isAtivo = data.status === "ativo";
+                const badge = isAtivo 
+                    ? `<span class="status-badge st-ativo">ATIVO</span>` 
+                    : `<span class="status-badge st-usado">USADO</span>`;
+
+                const btnHtml = isAtivo 
+                    ? `<button onclick="marcarComoUsado('${id}')" class="btn-usar">Validar (Dar Baixa)</button>`
+                    : `<span style='color:#666; font-size:0.9rem;'>Já utilizado</span>`;
+
+                const html = `
+                    <div class="cupom-card ${!isAtivo ? 'usado' : ''}">
+                        <div class="info">
+                            <h3>${data.codigo} ${badge}</h3>
+                            <p><i class="fas fa-user"></i> ${data.nome}</p>
+                        </div>
+                        <div>
+                            ${btnHtml}
+                        </div>
+                    </div>
+                `;
+                lista.innerHTML += html;
+            });
+        }
+
+        window.marcarComoUsado = async function(id) {
+            if(!confirm("Confirmar entrada e invalidar este cupom?")) return;
+            
+            const cupomRef = doc(db, "cupons", id);
+            await updateDoc(cupomRef, {
+                status: "usado"
+            });
+            carregarCupons(); // Recarrega a lista
+        }
+    </script>
+</body>
+</html>
