@@ -311,3 +311,77 @@ button.btn-accept:hover { background-color: white; color: var(--hk-pink); transf
     transform: translateY(-50%); 
     color: #888;
 }
+/* =========================================
+   CORREÇÃO GLOBAL: SEARCH BAR & MOBILE
+   (Adicione isso ao final do arquivo style.css)
+   ========================================= */
+
+/* 1. CORREÇÃO DA LUPA (Centralização Perfeita) */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px; /* Altura fixa para garantir o centro */
+}
+
+.search-wrapper input {
+    height: 100%;
+    padding-left: 60px !important; /* Espaço maior para a lupa não ficar em cima do texto */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: normal; /* Reseta alinhamento de texto */
+}
+
+.search-icon {
+    left: 25px !important; /* Empurra a lupa um pouco mais pra direita */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.1rem !important; /* Tamanho ideal */
+    pointer-events: none; /* Permite clicar no input através da lupa */
+    z-index: 5;
+}
+
+/* 2. CORREÇÃO MOBILE (Cards menores e mais compactos) */
+@media (max-width: 768px) {
+    /* Ajuste da Grade */
+    .commands-grid {
+        grid-template-columns: 1fr !important; /* 1 coluna forçada */
+        gap: 15px !important; /* Menos espaço entre cards */
+        padding: 0 15px !important; /* Menos borda lateral */
+    }
+
+    /* Card mais compacto */
+    .cmd-card {
+        padding: 15px !important; /* Reduz o "inchaço" do card */
+        border-radius: 12px !important;
+    }
+
+    /* Título menor */
+    .cmd-header {
+        margin-bottom: 15px !important;
+        padding-bottom: 8px !important;
+    }
+    
+    .cmd-title {
+        font-size: 0.95rem !important;
+    }
+
+    /* Tags (botões) menores */
+    .cmd-tag {
+        padding: 4px 8px !important;
+        font-size: 0.75rem !important; /* Letra menor para caber mais */
+        border-radius: 4px !important;
+    }
+    
+    .cmd-list {
+        gap: 6px !important; /* Tags mais juntinhas */
+    }
+
+    /* Ajuste do Aviso de Prefixo no Mobile */
+    .search-wrapper + div {
+        font-size: 0.75rem !important;
+        margin-top: 10px !important;
+        padding: 0 20px;
+        text-align: center;
+    }
+}
