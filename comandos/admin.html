@@ -14,6 +14,27 @@
 
     <style>
         /* ESTILOS ESPECÍFICOS PARA ADMIN */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background: var(--hk-pink);
+            color: white;
+            transform: translateX(-5px);
+        }
+
         .search-wrapper {
             position: relative;
             width: 100%;
@@ -61,7 +82,7 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(5px);
-            border-top: 3px solid var(--hk-pink); /* Cor padrão ADM */
+            border-top: 3px solid var(--hk-pink); 
         }
 
         .cmd-card:hover {
@@ -97,18 +118,10 @@
             background: var(--hk-pink); color: white; border-color: var(--hk-pink); transform: scale(1.05);
         }
 
-        header { top: 45px !important; }
+        header { top: 0px !important; }
     </style>
 </head>
-<body style="padding-top: 45px;">
-
-    <div class="promo-bar">
-        <p>
-            <i class="fas fa-fire"></i> 
-            FEVEREIRO INSANO: <b>20% OFF</b> JÁ APLICADO! 
-            <span class="promo-tag">APROVEITE</span>
-        </p>
-    </div>
+<body>
 
     <header>
         <div class="logo">
@@ -131,6 +144,11 @@
 
     <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; align-items: flex-start; justify-content: center; flex-direction: column; text-align: center;">
         <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
+            
+            <a href="/comandos" class="btn-back reveal-fade">
+                <i class="fas fa-arrow-left"></i> Voltar para Comandos
+            </a>
+
             <div class="reveal-fade">
                 <div class="badge-news" style="margin-bottom: 20px;">
                     <i class="fas fa-shield-alt"></i> Módulo Sistema
@@ -154,7 +172,6 @@
 
     <section class="section-padding" style="padding-top: 0;">
         <div class="commands-grid">
-
             <div class="cmd-card reveal-left">
                 <div class="cmd-header">
                     <div class="cmd-title"><i class="fas fa-crown"></i> ADMINISTRAÇÃO</div>
@@ -185,193 +202,8 @@
                     <span class="cmd-tag">chuvapix</span>
                 </div>
             </div>
-
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-tasks"></i> GERENCIAMENTO</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">del</span>
-                    <span class="cmd-tag">limpar</span>
-                    <span class="cmd-tag">banghost</span>
-                    <span class="cmd-tag">hidetag</span>
-                    <span class="cmd-tag">marcar</span>
-                    <span class="cmd-tag">sorteio</span>
-                    <span class="cmd-tag">linkgp</span>
-                    <span class="cmd-tag">grupo</span>
-                    <span class="cmd-tag">fechargp</span>
-                    <span class="cmd-tag">abrirgp</span>
-                    <span class="cmd-tag">setname</span>
-                    <span class="cmd-tag">setdesc</span>
-                    <span class="cmd-tag">addregra</span>
-                    <span class="cmd-tag">delregra</span>
-                    <span class="cmd-tag">limitmessage</span>
-                    <span class="cmd-tag">dellimitmessage</span>
-                </div>
             </div>
-
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-ban"></i> COMANDOS BLOCK</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">blockcmd</span>
-                    <span class="cmd-tag">unblockcmd</span>
-                </div>
-            </div>
-
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-user-shield"></i> MODERADORES</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">addmod</span>
-                    <span class="cmd-tag">delmod</span>
-                    <span class="cmd-tag">listmods</span>
-                    <span class="cmd-tag">grantmodcmd</span>
-                    <span class="cmd-tag">revokemodcmd</span>
-                    <span class="cmd-tag">listmodcmds</span>
-                </div>
-            </div>
-
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-handshake"></i> PARCERIAS</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">parcerias</span>
-                    <span class="cmd-tag">addparceria</span>
-                    <span class="cmd-tag">delparceria</span>
-                </div>
-            </div>
-
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-robot"></i> AUTO RESPOSTA</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">addautoadm</span>
-                    <span class="cmd-tag">addautoadmidia</span>
-                    <span class="cmd-tag">listautoadm</span>
-                    <span class="cmd-tag">delautoadm</span>
-                    <span class="cmd-tag">autorespostas</span>
-                    <span class="cmd-tag">autorepo</span>
-                </div>
-            </div>
-
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-toggle-on"></i> ATIVAÇÕES</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">autodl</span>
-                    <span class="cmd-tag">minmessage</span>
-                    <span class="cmd-tag">assistente</span>
-                    <span class="cmd-tag">modobn</span>
-                    <span class="cmd-tag">modonsfw</span>
-                    <span class="cmd-tag">modoparceria</span>
-                    <span class="cmd-tag">modogold</span>
-                    <span class="cmd-tag">bemvindo</span>
-                    <span class="cmd-tag">saida</span>
-                    <span class="cmd-tag">autosticker</span>
-                    <span class="cmd-tag">soadm</span>
-                    <span class="cmd-tag">x9</span>
-                    <span class="cmd-tag">modolite</span>
-                    <span class="cmd-tag">cmdlimit</span>
-                    <span class="cmd-tag">antilinkgp</span>
-                    <span class="cmd-tag">antilinkhard</span>
-                    <span class="cmd-tag">antiporn</span>
-                    <span class="cmd-tag">antiflood</span>
-                    <span class="cmd-tag">antifake</span>
-                    <span class="cmd-tag">antipt</span>
-                    <span class="cmd-tag">antidoc</span>
-                    <span class="cmd-tag">antiloc</span>
-                    <span class="cmd-tag">antifig</span>
-                    <span class="cmd-tag">antibtn</span>
-                    <span class="cmd-tag">antistatus</span>
-                    <span class="cmd-tag">antipagamento</span>
-                </div>
-            </div>
-
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-cogs"></i> CONFIGURAÇÕES</div>
-                </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">legendasaiu</span>
-                    <span class="cmd-tag">legendabv</span>
-                    <span class="cmd-tag">fotobv</span>
-                    <span class="cmd-tag">rmfotobv</span>
-                    <span class="cmd-tag">fotosaiu</span>
-                    <span class="cmd-tag">rmfotosaiu</span>
-                    <span class="cmd-tag">setprefix</span>
-                </div>
-            </div>
-
-        </div>
     </section>
-            
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col reveal-bottom">
-                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
-                <p>Todos os direitos reservados &copy; 2026.</p>
-            </div>
-        </div>
-    </footer>
 
-    <div class="music-widget">
-        <audio id="bg-audio" loop>
-            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
-        </audio>
-        <div class="music-btn" onclick="toggleMusic()">
-            <div class="waves"><span></span><span></span><span></span><span></span></div>
-            <i class="fas fa-volume-mute" id="music-icon"></i>
-        </div>
-    </div>
-
-    <script type="module" src="../script.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            const searchInput = document.getElementById('cmdSearch');
-            const cards = document.querySelectorAll('.cmd-card');
-            const allTags = document.querySelectorAll('.cmd-tag');
-
-            searchInput.addEventListener('input', (e) => {
-                const text = e.target.value.toLowerCase();
-
-                if(text === "") {
-                    // Se vazio, mostra tudo e reseta opacidade das tags
-                    cards.forEach(card => card.style.display = 'block');
-                    allTags.forEach(tag => tag.style.opacity = '1');
-                    return;
-                }
-
-                cards.forEach(card => {
-                    let hasMatch = false;
-                    const tags = card.querySelectorAll('.cmd-tag');
-
-                    tags.forEach(tag => {
-                        if(tag.innerText.toLowerCase().includes(text)) {
-                            tag.style.opacity = '1';
-                            tag.style.background = 'var(--hk-pink)';
-                            hasMatch = true;
-                        } else {
-                            tag.style.opacity = '0.3';
-                            tag.style.background = 'rgba(255,255,255,0.05)';
-                        }
-                    });
-
-                    if(hasMatch) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
-</body>
+    </body>
 </html>
