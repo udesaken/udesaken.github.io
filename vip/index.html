@@ -26,7 +26,7 @@
             background: #0a0a0a;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 40px 20px 30px; /* Aumentei o padding topo para caber a badge */
+            padding: 40px 20px 30px;
             width: 300px;
             text-align: center;
             position: relative;
@@ -41,7 +41,6 @@
             border-color: rgba(255, 215, 0, 0.3);
         }
 
-        /* Card Central em Destaque */
         .plan-card.featured {
             border: 1px solid #FFD700;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
@@ -49,11 +48,8 @@
             transform: scale(1.05);
         }
         
-        .plan-card.featured:hover {
-            transform: scale(1.08);
-        }
+        .plan-card.featured:hover { transform: scale(1.08); }
 
-        /* Tag "Recomendado" flutuante */
         .badge-recommended {
             background: linear-gradient(90deg, #FFD700, #FDB931);
             color: #000;
@@ -71,11 +67,10 @@
             z-index: 10;
         }
 
-        /* Nova Badge de Desconto - Estilo Gold */
         .badge-promo-gold {
             position: absolute;
             top: -10px;
-            right: 10px; /* Canto superior direito */
+            right: 10px;
             background: #ff0000;
             color: white;
             font-size: 0.75rem;
@@ -100,7 +95,6 @@
             margin-bottom: 5px;
         }
 
-        /* Ajuste de Preço Antigo/Novo */
         .plan-price-container {
             margin-bottom: 25px;
             display: flex;
@@ -119,7 +113,7 @@
         .plan-price {
             font-size: 2.2rem;
             font-weight: 700;
-            color: #FFD700; /* Gold */
+            color: #FFD700;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
@@ -145,7 +139,6 @@
             font-size: 0.8rem;
         }
 
-        /* Botões */
         .btn-plan {
             width: 100%;
             padding: 12px;
@@ -181,14 +174,13 @@
             transform: scale(1.02);
         }
         
-        /* Ajuste do Header fixo para esta página */
-        header {
-            top: 45px !important; /* Força descer por causa da barra */
-        }
+        header { top: 45px !important; }
 
     </style>
 </head>
-<body style="padding-top: 45px;"> <div class="promo-bar">
+<body style="padding-top: 45px;">
+
+    <div class="promo-bar">
         <p>
             <i class="fas fa-crown"></i> 
             VIP WEEK: <b>20% OFF</b> EM TODOS OS PLANOS GOLD! 
@@ -227,7 +219,7 @@
             </h1>
             
             <p class="hidden delay-200" style="color: #999; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                Aproveite o desconto de Fevereiro e garanta sua imunidade e status no grupo agora.
+                Agora membros VIP têm acesso liberado ao <strong>Privado do Bot</strong>.
             </p>
         </div>
     </section>
@@ -246,9 +238,9 @@
             
             <ul class="plan-features">
                 <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong></li>
                 <li><i class="fas fa-check"></i> Comandos VIP</li>
                 <li><i class="fas fa-check"></i> Bônus de XP</li>
-                <li style="opacity: 0.5; text-decoration: line-through;"><i class="fas fa-times" style="color:#555;"></i> Modo "Só ADM"</li>
             </ul>
 
             <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20VIP%20Semanal%20(R$%201,60)" class="btn-plan btn-outline">
@@ -269,11 +261,11 @@
             </div>
             
             <ul class="plan-features">
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong> (Exclusivo)</li>
                 <li><i class="fas fa-check"></i> <strong>Imunidade Total</strong></li>
                 <li><i class="fas fa-check"></i> Burlar Modo "Só ADM"</li>
                 <li><i class="fas fa-check"></i> Mute Reduzido (5m)</li>
                 <li><i class="fas fa-check"></i> Limite Maior de ADV</li>
-                <li><i class="fas fa-check"></i> Bônus Máximo de XP</li>
             </ul>
 
             <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20VIP%20Mensal%20(R$%204,00)" class="btn-plan btn-fill">
@@ -293,8 +285,8 @@
             
             <ul class="plan-features">
                 <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong></li>
                 <li><i class="fas fa-check"></i> Comandos VIP</li>
-                <li><i class="fas fa-check"></i> Bônus de XP</li>
                 <li><i class="fas fa-check"></i> Prioridade Média</li>
             </ul>
 
@@ -314,6 +306,11 @@
         <div class="premium-features" style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
             
             <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-comments text-gold"></i> <strong>PV Liberado</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Converse com o bot no privado sem bloqueios.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
                 <i class="fas fa-shield-alt text-gold"></i> <strong>Imune a Vote Ban</strong><br>
                 <span style="font-size: 0.8rem; color: #aaa;">Blindagem total contra banimentos por votação.</span>
             </li>
@@ -331,11 +328,6 @@
             <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
                 <i class="fas fa-bolt text-gold"></i> <strong>Bônus de XP</strong><br>
                 <span style="font-size: 0.8rem; color: #aaa;">Upe de nível muito mais rápido no ranking.</span>
-            </li>
-
-            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
-                <i class="fas fa-exclamation-circle text-gold"></i> <strong>Limite Maior de ADV</strong><br>
-                <span style="font-size: 0.8rem; color: #aaa;">Maior tolerância antes de receber punições.</span>
             </li>
 
             <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
@@ -374,7 +366,6 @@
 
     <script type="module" src="../script.js"></script>
     <script>
-        // Scripts mantidos (Menu, Animação, Música)
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
         const closeBtn = document.querySelector('.close-btn-mobile');
