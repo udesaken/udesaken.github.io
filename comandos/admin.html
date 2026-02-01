@@ -120,6 +120,13 @@
 
         header { top: 0px !important; }
     </style>
+    
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            var newPath = window.location.pathname.replace('.html', '');
+            window.history.replaceState(null, '', newPath);
+        }
+    </script>
 </head>
 <body>
 
@@ -211,5 +218,68 @@
             </div>
     </section>
 
-    </body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col reveal-bottom">
+                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
+                <p>Todos os direitos reservados &copy; 2026.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="music-widget">
+        <audio id="bg-audio" loop>
+            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
+        </audio>
+        <div class="music-btn" onclick="toggleMusic()">
+            <div class="waves"><span></span><span></span><span></span><span></span></div>
+            <i class="fas fa-volume-mute" id="music-icon"></i>
+        </div>
+    </div>
+
+    <script type="module" src="../script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('cmdSearch');
+            const cards = document.querySelectorAll('.cmd-card');
+            const allTags = document.querySelectorAll('.cmd-tag');
+
+            searchInput.addEventListener('input', (e) => {
+                const text = e.target.value.toLowerCase();
+
+                if(text === "") {
+                    cards.forEach(card => card.style.display = 'block');
+                    allTags.forEach(tag => {
+                        tag.style.opacity = '1';
+                        tag.style.background = 'rgba(255,255,255,0.05)';
+                    });
+                    return;
+                }
+
+                cards.forEach(card => {
+                    let hasMatch = false;
+                    const tags = card.querySelectorAll('.cmd-tag');
+
+                    tags.forEach(tag => {
+                        if(tag.innerText.toLowerCase().includes(text)) {
+                            tag.style.opacity = '1';
+                            tag.style.background = 'var(--hk-pink)';
+                            hasMatch = true;
+                        } else {
+                            tag.style.opacity = '0.3';
+                            tag.style.background = 'rgba(255,255,255,0.05)';
+                        }
+                    });
+
+                    if(hasMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 </html>
