@@ -14,121 +14,31 @@
 
     <style>
         /* GRID DO HUB */
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 5%;
-        }
-
-        .hub-card {
-            background: rgba(15, 15, 15, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 220px;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
-
+        .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 20px 5%; }
+        .hub-card { background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px; cursor: pointer; backdrop-filter: blur(10px); }
         .hub-card:hover { transform: translateY(-5px); background: rgba(30, 30, 30, 0.9); }
-
-        .hub-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            transition: 0.3s;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
-        }
-
+        .hub-icon { font-size: 3rem; margin-bottom: 20px; transition: 0.3s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
         .hub-card:hover .hub-icon { transform: scale(1.15); }
+        .hub-title { font-size: 1.2rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .hub-desc { color: #888; font-size: 0.85rem; line-height: 1.5; }
 
-        .hub-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .hub-desc {
-            color: #888;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* ESTILOS ESPECÍFICOS POR CATEGORIA */
-
-        /* 1. Brincadeiras (BN) */
-        .card-bn { border-bottom: 3px solid #bc13fe; }
-        .card-bn .hub-icon { color: #bc13fe; text-shadow: 0 0 15px rgba(188, 19, 254, 0.4); }
-        .card-bn:hover { border-color: #bc13fe; box-shadow: 0 10px 30px rgba(188, 19, 254, 0.15); }
-
-        /* 2. Administração (ADM) */
-        .card-adm { border-bottom: 3px solid var(--hk-pink); }
-        .card-adm .hub-icon { color: var(--hk-pink); text-shadow: 0 0 15px var(--hk-neon); }
-        .card-adm:hover { border-color: var(--hk-pink); box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15); }
-
-        /* 3. Gold/Economia */
-        .card-gold { border-bottom: 3px solid #FFD700; }
-        .card-gold .hub-icon { color: #FFD700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-        .card-gold:hover { border-color: #FFD700; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15); }
-
-        /* 4. Membros */
-        .card-member { border-bottom: 3px solid #00e5ff; }
-        .card-member .hub-icon { color: #00e5ff; text-shadow: 0 0 15px rgba(0, 229, 255, 0.4); }
-        .card-member:hover { border-color: #00e5ff; box-shadow: 0 10px 30px rgba(0, 229, 255, 0.15); }
-
-        /* 5. Figurinhas */
-        .card-fig { border-bottom: 3px solid #2ecc71; }
-        .card-fig .hub-icon { color: #2ecc71; text-shadow: 0 0 15px rgba(46, 204, 113, 0.4); }
-        .card-fig:hover { border-color: #2ecc71; box-shadow: 0 10px 30px rgba(46, 204, 113, 0.15); }
-
-        /* 6. Premium */
-        .card-premium { border-bottom: 3px solid #fff; background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(0,0,0,1)); }
-        .card-premium .hub-icon { color: white; text-shadow: 0 0 15px white; }
-        .card-premium:hover { border-color: white; box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1); }
-
-        /* 7. Família */
-        .card-family { border-bottom: 3px solid #ff4757; }
-        .card-family .hub-icon { color: #ff4757; text-shadow: 0 0 15px rgba(255, 71, 87, 0.4); }
-        .card-family:hover { border-color: #ff4757; box-shadow: 0 10px 30px rgba(255, 71, 87, 0.15); }
-
-        /* 8. Pets */
-        .card-pet { border-bottom: 3px solid #e67e22; }
-        .card-pet .hub-icon { color: #e67e22; text-shadow: 0 0 15px rgba(230, 126, 34, 0.4); }
-        .card-pet:hover { border-color: #e67e22; box-shadow: 0 10px 30px rgba(230, 126, 34, 0.15); }
-
-        /* 9. Downloads */
-        .card-down { border-bottom: 3px solid #3498db; }
-        .card-down .hub-icon { color: #3498db; text-shadow: 0 0 15px rgba(52, 152, 219, 0.4); }
-        .card-down:hover { border-color: #3498db; box-shadow: 0 10px 30px rgba(52, 152, 219, 0.15); }
-
-        header { top: 45px !important; }
+        /* CORES */
+        .card-bn { border-bottom: 3px solid #bc13fe; } .card-bn .hub-icon { color: #bc13fe; }
+        .card-adm { border-bottom: 3px solid var(--hk-pink); } .card-adm .hub-icon { color: var(--hk-pink); }
+        .card-member { border-bottom: 3px solid #00e5ff; } .card-member .hub-icon { color: #00e5ff; }
+        .card-fig { border-bottom: 3px solid #2ecc71; } .card-fig .hub-icon { color: #2ecc71; }
+        .card-gold { border-bottom: 3px solid #FFD700; } .card-gold .hub-icon { color: #FFD700; }
+        .card-premium { border-bottom: 3px solid #fff; background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(0,0,0,1)); } .card-premium .hub-icon { color: white; }
+        .card-family { border-bottom: 3px solid #ff4757; } .card-family .hub-icon { color: #ff4757; }
+        .card-pet { border-bottom: 3px solid #e67e22; } .card-pet .hub-icon { color: #e67e22; }
+        .card-down { border-bottom: 3px solid #3498db; } .card-down .hub-icon { color: #3498db; }
+        
+        header { top: 0 !important; }
     </style>
 </head>
-<body style="padding-top: 45px;">
+<body class="no-promo">
 
-    <div class="promo-bar">
-        <p>
-            <i class="fas fa-fire"></i> 
-            FEVEREIRO INSANO: <b>20% OFF</b> JÁ APLICADO! 
-            <span class="promo-tag">APROVEITE</span>
-        </p>
-    </div>
-
-    <header>
+    <header class="no-promo">
         <div class="logo">
             Udesaken <span style="font-size:0.8rem; border:1px solid white; color: white; padding: 2px 5px; border-radius: 4px;">HUB</span>
         </div>
@@ -149,7 +59,12 @@
 
     <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align: center;">
         <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
-            <div class="reveal-fade">
+            
+            <a href="/" class="btn-back-float">
+                <i class="fas fa-arrow-left"></i> Voltar ao Início
+            </a>
+
+            <div class="reveal-fade" style="margin-top: 20px;">
                 <div class="badge-news" style="margin-bottom: 20px; border-color: white; color: white; box-shadow: 0 0 10px rgba(255,255,255,0.2);">
                     <i class="fas fa-layer-group"></i> Central Comandos
                 </div>
@@ -167,61 +82,15 @@
 
     <section class="section-padding" style="padding-top: 0;">
         <div class="hub-grid">
-
-            <a href="brincadeiras.html" class="hub-card card-bn reveal-left">
-                <div class="hub-icon"><i class="fas fa-gamepad"></i></div>
-                <div class="hub-title">Brincadeiras</div>
-                <div class="hub-desc">Jogos, interações, rankings e diversão (menubn).</div>
-            </a>
-
-            <a href="admin.html" class="hub-card card-adm reveal-right">
-                <div class="hub-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="hub-title">Administração</div>
-                <div class="hub-desc">Gestão de grupo, bans, sistema e segurança (menuadm).</div>
-            </a>
-
-            <a href="membros.html" class="hub-card card-member reveal-left delay-100">
-                <div class="hub-icon"><i class="fas fa-users"></i></div>
-                <div class="hub-title">Social & Membros</div>
-                <div class="hub-desc">Perfis, avatares e utilitários sociais (menumember).</div>
-            </a>
-
-            <a href="figurinhas.html" class="hub-card card-fig reveal-right delay-100">
-                <div class="hub-icon"><i class="fas fa-sticky-note"></i></div>
-                <div class="hub-title">Figurinhas</div>
-                <div class="hub-desc">Criação de stickers estáticos e animados (menufig).</div>
-            </a>
-
-            <a href="economia.html" class="hub-card card-gold reveal-left delay-200">
-                <div class="hub-icon"><i class="fas fa-coins"></i></div>
-                <div class="hub-title">Economia Gold</div>
-                <div class="hub-desc">Banco, loja, trabalho, assaltos e RPG (menugold).</div>
-            </a>
-
-            <a href="premium.html" class="hub-card card-premium reveal-right delay-200">
-                <div class="hub-icon"><i class="fas fa-crown"></i></div>
-                <div class="hub-title">Área Premium</div>
-                <div class="hub-desc">Funções exclusivas para usuários VIP (menupremium).</div>
-            </a>
-
-            <a href="familia.html" class="hub-card card-family reveal-left delay-300">
-                <div class="hub-icon"><i class="fas fa-heart"></i></div>
-                <div class="hub-title">Família</div>
-                <div class="hub-desc">Casamentos, relacionamentos e árvores (menufamily).</div>
-            </a>
-
-            <a href="pets.html" class="hub-card card-pet reveal-right delay-300">
-                <div class="hub-icon"><i class="fas fa-paw"></i></div>
-                <div class="hub-title">Sistema Pet</div>
-                <div class="hub-desc">Adote, cuide e evolua seus bichinhos virtuais (menupet).</div>
-            </a>
-
-            <a href="downloads.html" class="hub-card card-down reveal-left delay-400">
-                <div class="hub-icon"><i class="fas fa-download"></i></div>
-                <div class="hub-title">Downloads</div>
-                <div class="hub-desc">Baixe músicas, vídeos e mídias sociais (menudown).</div>
-            </a>
-
+            <a href="brincadeiras.html" class="hub-card card-bn reveal-left"><div class="hub-icon"><i class="fas fa-gamepad"></i></div><div class="hub-title">Brincadeiras</div><div class="hub-desc">Jogos e Diversão</div></a>
+            <a href="admin.html" class="hub-card card-adm reveal-right"><div class="hub-icon"><i class="fas fa-shield-alt"></i></div><div class="hub-title">Administração</div><div class="hub-desc">Gestão e Segurança</div></a>
+            <a href="membros.html" class="hub-card card-member reveal-left delay-100"><div class="hub-icon"><i class="fas fa-users"></i></div><div class="hub-title">Membros</div><div class="hub-desc">Social e Perfil</div></a>
+            <a href="figurinhas.html" class="hub-card card-fig reveal-right delay-100"><div class="hub-icon"><i class="fas fa-sticky-note"></i></div><div class="hub-title">Figurinhas</div><div class="hub-desc">Stickers e Memes</div></a>
+            <a href="economia.html" class="hub-card card-gold reveal-left delay-200"><div class="hub-icon"><i class="fas fa-coins"></i></div><div class="hub-title">Economia</div><div class="hub-desc">Banco e Crimes</div></a>
+            <a href="premium.html" class="hub-card card-premium reveal-right delay-200"><div class="hub-icon"><i class="fas fa-gem"></i></div><div class="hub-title">Premium</div><div class="hub-desc">Utilidades VIP</div></a>
+            <a href="familia.html" class="hub-card card-family reveal-left delay-300"><div class="hub-icon"><i class="fas fa-heart"></i></div><div class="hub-title">Família</div><div class="hub-desc">Relacionamentos</div></a>
+            <a href="pets.html" class="hub-card card-pet reveal-right delay-300"><div class="hub-icon"><i class="fas fa-paw"></i></div><div class="hub-title">Pets</div><div class="hub-desc">Bichinhos</div></a>
+            <a href="downloads.html" class="hub-card card-down reveal-left delay-400"><div class="hub-icon"><i class="fas fa-download"></i></div><div class="hub-title">Downloads</div><div class="hub-desc">Mídia e Pesquisa</div></a>
         </div>
     </section>
             
@@ -235,13 +104,8 @@
     </footer>
 
     <div class="music-widget">
-        <audio id="bg-audio" loop>
-            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
-        </audio>
-        <div class="music-btn" onclick="toggleMusic()">
-            <div class="waves"><span></span><span></span><span></span><span></span></div>
-            <i class="fas fa-volume-mute" id="music-icon"></i>
-        </div>
+        <audio id="bg-audio" loop><source src="../musicusk.mp3?v=2" type="audio/mpeg"></audio>
+        <div class="music-btn" onclick="toggleMusic()"><div class="waves"><span></span><span></span><span></span></div><i class="fas fa-volume-mute" id="music-icon"></i></div>
     </div>
 
     <script type="module" src="../script.js"></script>
