@@ -385,3 +385,25 @@ button.btn-accept:hover { background-color: white; color: var(--hk-pink); transf
         text-align: center;
     }
 }
+
+/* =========================================
+   CORREÇÃO DO "CLIQUE DUPLO" (MOBILE)
+   Adicione isso ao final do seu style.css
+   ========================================= */
+
+@media (hover: none), (max-width: 992px) {
+    /* Desativa a subidinha dos cards no celular */
+    .price-card:hover, 
+    .cmd-card:hover, 
+    .hub-card:hover,
+    .btn-primary:hover,
+    .social-btn:hover {
+        transform: none !important; /* O card não se mexe */
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5) !important; /* Mantém a sombra normal */
+    }
+
+    /* Força o botão a aceitar o toque rápido */
+    a, button, .btn-price, .hub-card {
+        touch-action: manipulation;
+    }
+}
