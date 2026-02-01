@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Premium — Udesaken</title>
+    
+    <meta property="og:image" content="https://udesaken.site/uskcoroa.png">
+    <link rel="icon" type="image/png" href="/uskcoroa.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* ESTILOS ESPECÍFICOS PARA PREMIUM (PLATINUM/WHITE) */
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 15px 50px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-wrapper input:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .search-icon {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #ccc;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cmd-card {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.8), rgba(0, 0, 0, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border-top: 3px solid #ffffff; /* Platinum */
+        }
+
+        .cmd-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.15);
+            border-color: #ffffff;
+        }
+
+        .cmd-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;
+        }
+
+        .cmd-title {
+            font-size: 1.1rem; font-weight: 700; color: white;
+            text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        
+        .cmd-title i { color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+
+        .cmd-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .cmd-tag {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;
+            color: #eee; border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s;
+            font-weight: 600;
+        }
+
+        .cmd-tag:hover {
+            background: #ffffff; color: black; border-color: #ffffff; transform: scale(1.05);
+        }
+
+        header { top: 45px !important; }
+    </style>
+</head>
+<body style="padding-top: 45px;">
+
+    <div class="promo-bar">
+        <p>
+            <i class="fas fa-fire"></i> 
+            FEVEREIRO INSANO: <b>20% OFF</b> JÁ APLICADO! 
+            <span class="promo-tag">APROVEITE</span>
+        </p>
+    </div>
+
+    <header>
+        <div class="logo">
+            Udesaken <span style="font-size:0.8rem; border:1px solid #ffffff; color: #ffffff; padding: 2px 5px; border-radius: 4px;">VIP</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
+                <li><a href="/">Início</a></li>
+                <li><a href="/planos">Planos</a></li>
+                <li><a href="/comandos" class="active" style="color: #ffffff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);">Comandos</a></li>
+                <li><a href="/vip">Clube VIP</a></li>
+                <li><a href="https://wa.me/447562847091" class="btn-header"><i class="fab fa-whatsapp"></i> Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; align-items: flex-start; justify-content: center; flex-direction: column; text-align: center;">
+        <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
+            <div class="reveal-fade">
+                <div class="badge-news" style="margin-bottom: 20px; border-color: #ffffff; color: #ffffff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);">
+                    <i class="fas fa-gem"></i> Módulo Premium
+                </div>
+            </div>
+            
+            <h1 class="reveal-bottom">
+                Menu <span style="color: #ffffff; text-shadow: 0 0 15px rgba(255,255,255,0.4);">PREMIUM.</span>
+            </h1>
+            
+            <p class="reveal-bottom delay-200" style="margin-top: 15px;">
+                Ferramentas exclusivas de utilidade e inteligência.
+            </p>
+        </div>
+    </section>
+
+    <div class="search-wrapper reveal-zoom delay-200">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="cmdSearch" placeholder="Pesquisar (ex: nick, calcular, qrcode)...">
+    </div>
+
+    <section class="section-padding" style="padding-top: 0;">
+        <div class="commands-grid">
+
+            <div class="cmd-card reveal-left">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-crown"></i> 💎 PREMIUM</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">rvisu</span>
+                    <span class="cmd-tag">transcrever</span>
+                    <span class="cmd-tag">nick</span>
+                    <span class="cmd-tag">calcular</span>
+                    <span class="cmd-tag">perguntar</span>
+                    <span class="cmd-tag">qrcode</span>
+                    <span class="cmd-tag">printsite</span>
+                    <span class="cmd-tag">letramusic</span>
+                    <span class="cmd-tag">figualeatoria</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+            
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col reveal-bottom">
+                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
+                <p>Todos os direitos reservados &copy; 2026.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="music-widget">
+        <audio id="bg-audio" loop>
+            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
+        </audio>
+        <div class="music-btn" onclick="toggleMusic()">
+            <div class="waves"><span></span><span></span><span></span><span></span></div>
+            <i class="fas fa-volume-mute" id="music-icon"></i>
+        </div>
+    </div>
+
+    <script type="module" src="../script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('cmdSearch');
+            const cards = document.querySelectorAll('.cmd-card');
+            const allTags = document.querySelectorAll('.cmd-tag');
+
+            searchInput.addEventListener('input', (e) => {
+                const text = e.target.value.toLowerCase();
+
+                if(text === "") {
+                    cards.forEach(card => card.style.display = 'block');
+                    allTags.forEach(tag => {
+                        tag.style.opacity = '1';
+                        tag.style.background = 'rgba(255,255,255,0.08)';
+                        tag.style.color = '#eee';
+                    });
+                    return;
+                }
+
+                cards.forEach(card => {
+                    let hasMatch = false;
+                    const tags = card.querySelectorAll('.cmd-tag');
+
+                    tags.forEach(tag => {
+                        if(tag.innerText.toLowerCase().includes(text)) {
+                            tag.style.opacity = '1';
+                            tag.style.background = '#ffffff';
+                            tag.style.color = 'black';
+                            hasMatch = true;
+                        } else {
+                            tag.style.opacity = '0.3';
+                            tag.style.background = 'rgba(255,255,255,0.05)';
+                        }
+                    });
+
+                    if(hasMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
