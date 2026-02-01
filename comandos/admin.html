@@ -12,123 +12,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
-    <style>
-        /* ESTILOS ESPECÍFICOS PARA ADMIN */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            margin-bottom: 20px;
-        }
-
-        .btn-back:hover {
-            background: var(--hk-pink);
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            padding: 15px 50px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-wrapper input:focus {
-            border-color: var(--hk-pink);
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .search-icon {
-            position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #888;
-        }
-
-        .commands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 0 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .cmd-card {
-            background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            border-top: 3px solid var(--hk-pink); 
-        }
-
-        .cmd-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.15);
-            border-color: var(--hk-neon);
-        }
-
-        .cmd-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;
-        }
-
-        .cmd-title {
-            font-size: 1.1rem; font-weight: 700; color: white;
-            text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 10px;
-        }
-        
-        .cmd-title i { color: var(--hk-pink); text-shadow: 0 0 10px var(--hk-neon); }
-
-        .cmd-list { display: flex; flex-wrap: wrap; gap: 8px; }
-
-        .cmd-tag {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 12px; border-radius: 6px; font-size: 0.85rem;
-            color: #ddd; border: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s;
-            font-weight: 600;
-        }
-
-        .cmd-tag:hover {
-            background: var(--hk-pink); color: white; border-color: var(--hk-pink); transform: scale(1.05);
-        }
-
-        header { top: 0px !important; }
-    </style>
-    
     <script>
         if (window.location.pathname.endsWith('.html')) {
             var newPath = window.location.pathname.replace('.html', '');
             window.history.replaceState(null, '', newPath);
         }
     </script>
+
+    <style>
+        /* FORÇA O HEADER A FICAR NO TOPO (IGNORANDO A BARRA PROMO) APENAS NESTA PÁGINA */
+        header { top: 0 !important; }
+        
+        /* ESTILOS ESPECÍFICOS DESTE MENU */
+        .btn-back {
+            display: inline-flex;
+            align-items: center; gap: 10px; padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px; color: #ddd; text-decoration: none; font-size: 0.9rem;
+            transition: 0.3s; margin-bottom: 20px;
+        }
+        .btn-back:hover { background: var(--hk-pink); color: white; transform: translateX(-5px); }
+
+        .search-wrapper {
+            position: relative; width: 100%; max-width: 600px; margin: 0 auto 40px;
+        }
+        .search-wrapper input {
+            width: 100%; padding: 15px 50px; border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; font-size: 1rem; outline: none; transition: 0.3s;
+        }
+        .search-wrapper input:focus {
+            border-color: var(--hk-pink); box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #888; }
+
+        .commands-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px; padding: 0 5%; max-width: 1200px; margin: 0 auto;
+        }
+
+        .cmd-card {
+            background: rgba(10, 10, 10, 0.6); border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px; padding: 25px; transition: all 0.3s ease;
+            position: relative; overflow: hidden; backdrop-filter: blur(5px);
+            border-top: 3px solid var(--hk-pink); 
+        }
+        .cmd-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(255, 105, 180, 0.15); border-color: var(--hk-neon); }
+
+        .cmd-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .cmd-title { font-size: 1.1rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; }
+        .cmd-title i { color: var(--hk-pink); text-shadow: 0 0 10px var(--hk-neon); }
+        .cmd-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .cmd-tag {
+            background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 6px;
+            font-size: 0.85rem; color: #ddd; border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s; font-weight: 600;
+        }
+        .cmd-tag:hover { background: var(--hk-pink); color: white; border-color: var(--hk-pink); transform: scale(1.05); }
+    </style>
 </head>
-<body>
+<body style="padding-top: 0;">
 
     <header>
         <div class="logo">
@@ -184,6 +129,7 @@
 
     <section class="section-padding" style="padding-top: 0;">
         <div class="commands-grid">
+            
             <div class="cmd-card reveal-left">
                 <div class="cmd-header">
                     <div class="cmd-title"><i class="fas fa-crown"></i> ADMINISTRAÇÃO</div>
@@ -214,8 +160,130 @@
                     <span class="cmd-tag">chuvapix</span>
                 </div>
             </div>
-            
+
+            <div class="cmd-card reveal-right">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-tasks"></i> GERENCIAMENTO</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">del</span>
+                    <span class="cmd-tag">limpar</span>
+                    <span class="cmd-tag">banghost</span>
+                    <span class="cmd-tag">hidetag</span>
+                    <span class="cmd-tag">marcar</span>
+                    <span class="cmd-tag">sorteio</span>
+                    <span class="cmd-tag">linkgp</span>
+                    <span class="cmd-tag">grupo</span>
+                    <span class="cmd-tag">fechargp</span>
+                    <span class="cmd-tag">abrirgp</span>
+                    <span class="cmd-tag">setname</span>
+                    <span class="cmd-tag">setdesc</span>
+                    <span class="cmd-tag">addregra</span>
+                    <span class="cmd-tag">delregra</span>
+                    <span class="cmd-tag">limitmessage</span>
+                    <span class="cmd-tag">dellimitmessage</span>
+                </div>
             </div>
+
+            <div class="cmd-card reveal-left">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-ban"></i> BLOQUEIOS</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">blockcmd</span>
+                    <span class="cmd-tag">unblockcmd</span>
+                </div>
+            </div>
+
+            <div class="cmd-card reveal-right">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-user-shield"></i> MODERADORES</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">addmod</span>
+                    <span class="cmd-tag">delmod</span>
+                    <span class="cmd-tag">listmods</span>
+                    <span class="cmd-tag">grantmodcmd</span>
+                    <span class="cmd-tag">revokemodcmd</span>
+                    <span class="cmd-tag">listmodcmds</span>
+                </div>
+            </div>
+
+            <div class="cmd-card reveal-left">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-handshake"></i> PARCERIAS</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">parcerias</span>
+                    <span class="cmd-tag">addparceria</span>
+                    <span class="cmd-tag">delparceria</span>
+                </div>
+            </div>
+
+            <div class="cmd-card reveal-right">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-robot"></i> AUTO RESPOSTA</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">addautoadm</span>
+                    <span class="cmd-tag">addautoadmidia</span>
+                    <span class="cmd-tag">listautoadm</span>
+                    <span class="cmd-tag">delautoadm</span>
+                    <span class="cmd-tag">autorespostas</span>
+                    <span class="cmd-tag">autorepo</span>
+                </div>
+            </div>
+
+            <div class="cmd-card reveal-left" style="grid-column: span 1 / -1;">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-toggle-on"></i> ATIVAÇÕES DE SEGURANÇA</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">autodl</span>
+                    <span class="cmd-tag">minmessage</span>
+                    <span class="cmd-tag">assistente</span>
+                    <span class="cmd-tag">modobn</span>
+                    <span class="cmd-tag">modonsfw</span>
+                    <span class="cmd-tag">modoparceria</span>
+                    <span class="cmd-tag">modogold</span>
+                    <span class="cmd-tag">bemvindo</span>
+                    <span class="cmd-tag">saida</span>
+                    <span class="cmd-tag">autosticker</span>
+                    <span class="cmd-tag">soadm</span>
+                    <span class="cmd-tag">x9</span>
+                    <span class="cmd-tag">modolite</span>
+                    <span class="cmd-tag">cmdlimit</span>
+                    <span class="cmd-tag">antilinkgp</span>
+                    <span class="cmd-tag">antilinkhard</span>
+                    <span class="cmd-tag">antiporn</span>
+                    <span class="cmd-tag">antiflood</span>
+                    <span class="cmd-tag">antifake</span>
+                    <span class="cmd-tag">antipt</span>
+                    <span class="cmd-tag">antidoc</span>
+                    <span class="cmd-tag">antiloc</span>
+                    <span class="cmd-tag">antifig</span>
+                    <span class="cmd-tag">antibtn</span>
+                    <span class="cmd-tag">antistatus</span>
+                    <span class="cmd-tag">antipagamento</span>
+                </div>
+            </div>
+
+            <div class="cmd-card reveal-right" style="grid-column: span 1 / -1;">
+                <div class="cmd-header">
+                    <div class="cmd-title"><i class="fas fa-cogs"></i> CONFIGURAÇÕES</div>
+                </div>
+                <div class="cmd-list">
+                    <span class="cmd-tag">legendasaiu</span>
+                    <span class="cmd-tag">legendabv</span>
+                    <span class="cmd-tag">fotobv</span>
+                    <span class="cmd-tag">rmfotobv</span>
+                    <span class="cmd-tag">fotosaiu</span>
+                    <span class="cmd-tag">rmfotosaiu</span>
+                    <span class="cmd-tag">setprefix</span>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <footer>
