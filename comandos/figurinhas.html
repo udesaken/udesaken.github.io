@@ -12,8 +12,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            var newPath = window.location.pathname.replace('.html', '');
+            window.history.replaceState(null, '', newPath);
+        }
+    </script>
+
     <style>
+        /* FORÇA O HEADER A FICAR NO TOPO (IGNORANDO A BARRA PROMO) APENAS NESTA PÁGINA */
+        header { top: 0 !important; }
+
         /* ESTILOS ESPECÍFICOS PARA FIGURINHAS (VERDE) */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .btn-back:hover {
+            background: #2ecc71;
+            color: white;
+            transform: translateX(-5px);
+        }
+
         .search-wrapper {
             position: relative;
             width: 100%;
@@ -96,19 +127,9 @@
         .cmd-tag:hover {
             background: #2ecc71; color: white; border-color: #2ecc71; transform: scale(1.05);
         }
-
-        header { top: 45px !important; }
     </style>
 </head>
-<body style="padding-top: 45px;">
-
-    <div class="promo-bar">
-        <p>
-            <i class="fas fa-fire"></i> 
-            FEVEREIRO INSANO: <b>20% OFF</b> JÁ APLICADO! 
-            <span class="promo-tag">APROVEITE</span>
-        </p>
-    </div>
+<body style="padding-top: 0;">
 
     <header>
         <div class="logo">
@@ -131,6 +152,11 @@
 
     <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; align-items: flex-start; justify-content: center; flex-direction: column; text-align: center;">
         <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
+            
+            <a href="/comandos" class="btn-back reveal-fade">
+                <i class="fas fa-arrow-left"></i> Voltar para Comandos
+            </a>
+
             <div class="reveal-fade">
                 <div class="badge-news" style="margin-bottom: 20px; border-color: #2ecc71; color: #2ecc71; box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);">
                     <i class="fas fa-sticky-note"></i> Módulo Stickers
@@ -150,6 +176,11 @@
     <div class="search-wrapper reveal-zoom delay-200">
         <i class="fas fa-search search-icon"></i>
         <input type="text" id="cmdSearch" placeholder="Pesquisar (ex: emojimix, s, take)...">
+        
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #888; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <i class="fas fa-terminal" style="color: #2ecc71; font-size: 0.7rem;"></i>
+            <span>Use os comandos com o prefixo padrão <b style="color: white;">7</b> ou o definido pelo seu grupo.</span>
+        </div>
     </div>
 
     <section class="section-padding" style="padding-top: 0;">

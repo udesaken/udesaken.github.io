@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
+    <script>
+        if (window.location.pathname.endsWith('.html')) {
+            var newPath = window.location.pathname.replace('.html', '');
+            window.history.replaceState(null, '', newPath);
+        }
+    </script>
+
     <style>
         /* GRID DO HUB */
         .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 20px 5%; }
@@ -21,6 +28,15 @@
         .hub-card:hover .hub-icon { transform: scale(1.15); }
         .hub-title { font-size: 1.2rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .hub-desc { color: #888; font-size: 0.85rem; line-height: 1.5; }
+
+        /* ESTILO DO BOTÃO VOLTAR */
+        .btn-back-float {
+            display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px; color: #ddd; text-decoration: none; font-size: 0.9rem;
+            transition: 0.3s; margin-bottom: 20px;
+        }
+        .btn-back-float:hover { background: white; color: black; transform: translateX(-5px); box-shadow: 0 0 15px rgba(255,255,255,0.3); }
 
         /* CORES */
         .card-bn { border-bottom: 3px solid #bc13fe; } .card-bn .hub-icon { color: #bc13fe; }
@@ -33,10 +49,11 @@
         .card-pet { border-bottom: 3px solid #e67e22; } .card-pet .hub-icon { color: #e67e22; }
         .card-down { border-bottom: 3px solid #3498db; } .card-down .hub-icon { color: #3498db; }
         
+        /* REMOVE ESPAÇO DA PROMOÇÃO APENAS AQUI */
         header { top: 0 !important; }
     </style>
 </head>
-<body class="no-promo">
+<body class="no-promo" style="padding-top: 0;">
 
     <header class="no-promo">
         <div class="logo">
