@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clube VIP — Udesaken 2026</title>
+    <title>Clube VIP (20% OFF) — Udesaken 2026</title>
     
     <meta property="og:image" content="https://udesaken.site/uskcoroa.png">
     <link rel="icon" type="image/png" href="/uskcoroa.png">
@@ -23,16 +23,17 @@
         }
 
         .plan-card {
-            background: #0a0a0a; /* Fundo bem escuro como no print */
+            background: #0a0a0a;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 30px 20px;
+            padding: 40px 20px 30px; /* Aumentei o padding topo para caber a badge */
             width: 300px;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
+            margin-top: 15px;
         }
 
         .plan-card:hover {
@@ -57,16 +58,32 @@
             background: linear-gradient(90deg, #FFD700, #FDB931);
             color: #000;
             font-weight: 700;
-            font-size: 0.8rem;
-            padding: 5px 20px;
+            font-size: 0.7rem;
+            padding: 4px 15px;
             border-radius: 20px;
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
             text-transform: uppercase;
             letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        /* Nova Badge de Desconto - Estilo Gold */
+        .badge-promo-gold {
+            position: absolute;
+            top: -10px;
+            right: 10px; /* Canto superior direito */
+            background: #ff0000;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            animation: pulseRed 2s infinite;
         }
 
         .plan-title {
@@ -80,14 +97,30 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+        }
+
+        /* Ajuste de Preço Antigo/Novo */
+        .plan-price-container {
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+
+        .old-price {
+            font-size: 0.9rem;
+            text-decoration: line-through;
+            color: #666;
+            margin-bottom: 2px;
         }
 
         .plan-price {
             font-size: 2.2rem;
             font-weight: 700;
             color: #FFD700; /* Gold */
-            margin-bottom: 25px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
         }
 
         .plan-features {
@@ -107,12 +140,12 @@
         }
 
         .plan-features li i {
-            color: #FFD700; /* Check verde do print vira Gold aqui */
+            color: #FFD700; 
             margin-right: 10px;
             font-size: 0.8rem;
         }
 
-        /* Botões Estilo Print */
+        /* Botões */
         .btn-plan {
             width: 100%;
             padding: 12px;
@@ -133,6 +166,7 @@
         .btn-outline:hover {
             border-color: #FFD700;
             color: #FFD700;
+            background: rgba(255, 215, 0, 0.05);
         }
 
         .btn-fill {
@@ -144,11 +178,23 @@
 
         .btn-fill:hover {
             box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            transform: scale(1.02);
+        }
+        
+        /* Ajuste do Header fixo para esta página */
+        header {
+            top: 45px !important; /* Força descer por causa da barra */
         }
 
     </style>
 </head>
-<body>
+<body style="padding-top: 45px;"> <div class="promo-bar">
+        <p>
+            <i class="fas fa-crown"></i> 
+            VIP WEEK: <b>20% OFF</b> EM TODOS OS PLANOS GOLD! 
+            <span class="promo-tag">APROVEITE</span>
+        </p>
+    </div>
 
     <header>
         <div class="logo">
@@ -159,29 +205,29 @@
                 <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
                 <li><a href="/">Início</a></li>
                 <li><a href="/planos">Planos Bot</a></li>
-                <li><a href="/vip" class="active" style="color: #FFD700;">Clube VIP</a></li>
+                <li><a href="/vip" class="active" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">Clube VIP</a></li>
                 <li><a href="https://wa.me/447562847091" class="btn-header" style="border-color: #FFD700; color: #FFD700;"><i class="fab fa-whatsapp"></i> Suporte</a></li>
             </ul>
-            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            <div class="hamburger" style="color: #FFD700;"><i class="fas fa-bars"></i></div>
         </nav>
     </header>
 
-   <section class="hero" style="min-height: 50vh; padding-top: 140px; padding-bottom: 40px; display: flex; justify-content: center; align-items: center; text-align: center;">
+   <section class="hero" style="min-height: 50vh; padding-top: 100px; padding-bottom: 20px; display: flex; justify-content: center; align-items: center; text-align: center;">
         <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
             
             <div style="display: flex; justify-content: center; width: 100%;">
-                <div class="badge-news" style="margin-bottom: 25px; border-color: #FFD700; color: #FFD700;">
-                    <i class="fas fa-crown"></i> Área Premium
+                <div class="badge-news" style="margin-bottom: 25px; border-color: #FFD700; color: #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);">
+                    <i class="fas fa-percent"></i> Preços Reduzidos
                 </div>
             </div>
 
             <h1 class="hidden delay-100" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px;">
-                Benefícios de <br>
-                <span class="text-gold" style="text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);">Outro Nível</span>
+                Elite Udesaken<br>
+                <span class="text-gold" style="text-shadow: 0 0 35px rgba(255, 215, 0, 0.6);">20% OFF</span>
             </h1>
             
             <p class="hidden delay-200" style="color: #999; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                Imunidade, XP Bônus e Comandos Exclusivos para membros de elite.
+                Aproveite o desconto de Fevereiro e garanta sua imunidade e status no grupo agora.
             </p>
         </div>
     </section>
@@ -189,9 +235,14 @@
     <section class="pricing-section">
         
         <div class="plan-card hidden delay-100">
+            <div class="badge-promo-gold">-20%</div>
             <div class="plan-title">Teste Rápido</div>
             <div class="plan-duration">7 Dias</div>
-            <div class="plan-price">R$ 2,00</div>
+            
+            <div class="plan-price-container">
+                <span class="old-price">R$ 2,00</span>
+                <span class="plan-price">R$ 1,60</span>
+            </div>
             
             <ul class="plan-features">
                 <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
@@ -200,17 +251,22 @@
                 <li style="opacity: 0.5; text-decoration: line-through;"><i class="fas fa-times" style="color:#555;"></i> Modo "Só ADM"</li>
             </ul>
 
-            <a href="https://wa.me/447562847091?text=Quero%20VIP%20Semanal" class="btn-plan btn-outline">
+            <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20VIP%20Semanal%20(R$%201,60)" class="btn-plan btn-outline">
                 Testar Agora
             </a>
         </div>
 
         <div class="plan-card featured hidden delay-200">
             <div class="badge-recommended">Recomendado</div>
+            <div class="badge-promo-gold" style="right: auto; left: 10px;">-20%</div>
             
-            <div class="plan-title">Mensal</div>
+            <div class="plan-title" style="color: #FFD700;">Mensal</div>
             <div class="plan-duration">30 Dias</div>
-            <div class="plan-price">R$ 5,00</div>
+            
+            <div class="plan-price-container">
+                <span class="old-price" style="color: #888;">R$ 5,00</span>
+                <span class="plan-price" style="font-size: 2.8rem;">R$ 4,00</span>
+            </div>
             
             <ul class="plan-features">
                 <li><i class="fas fa-check"></i> <strong>Imunidade Total</strong></li>
@@ -220,15 +276,20 @@
                 <li><i class="fas fa-check"></i> Bônus Máximo de XP</li>
             </ul>
 
-            <a href="https://wa.me/447562847091?text=Quero%20VIP%20Mensal" class="btn-plan btn-fill">
+            <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20VIP%20Mensal%20(R$%204,00)" class="btn-plan btn-fill">
                 Garantir Mensal
             </a>
         </div>
 
         <div class="plan-card hidden delay-300">
+            <div class="badge-promo-gold">-20%</div>
             <div class="plan-title">Quinzenal</div>
             <div class="plan-duration">15 Dias</div>
-            <div class="plan-price">R$ 3,50</div>
+            
+            <div class="plan-price-container">
+                <span class="old-price">R$ 3,50</span>
+                <span class="plan-price">R$ 2,80</span>
+            </div>
             
             <ul class="plan-features">
                 <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
@@ -237,7 +298,7 @@
                 <li><i class="fas fa-check"></i> Prioridade Média</li>
             </ul>
 
-            <a href="https://wa.me/447562847091?text=Quero%20VIP%20Quinzenal" class="btn-plan btn-outline">
+            <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20VIP%20Quinzenal%20(R$%202,80)" class="btn-plan btn-outline">
                 Assinar Quinzenal
             </a>
         </div>
@@ -246,7 +307,8 @@
 
     <section class="section-padding" style="background: rgba(0,0,0,0.4);">
         <div class="section-header hidden">
-            <h2 class="text-gold" style="font-size: 1.5rem;">Todas as Vantagens</h2>
+            <h2 class="text-gold" style="font-size: 1.5rem;">Vantagens Exclusivas</h2>
+            <div style="width: 50px; height: 3px; background: #FFD700; margin: 15px auto; box-shadow: 0 0 10px #FFD700;"></div>
         </div>
         
         <div class="premium-features" style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
@@ -297,14 +359,14 @@
         <div class="cookie-text">
             <i class="fas fa-cookie-bite" style="color: #FFD700;"></i> Cookies?
         </div>
-        <button id="btnAccept" class="btn-accept">OK</button>
+        <button id="btnAccept" class="btn-accept" style="background: #FFD700; color: black; box-shadow: 0 0 10px #FFD700;">OK</button>
     </div>
 
     <div class="music-widget">
         <audio id="bg-audio" loop>
             <source src="../musicusk.mp3?v=2" type="audio/mpeg">
         </audio>
-        <div class="music-btn" onclick="toggleMusic()">
+        <div class="music-btn" onclick="toggleMusic()" style="border-color: #FFD700; color: #FFD700; box-shadow: 0 0 10px #FFD700;">
             <div class="waves"><span></span><span></span><span></span></div>
             <i class="fas fa-volume-mute" id="music-icon"></i>
         </div>
@@ -323,7 +385,6 @@
             entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('show'); });
         });
         document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
-
     </script>
 </body>
 </html>
