@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Playlist: Suas músicas
     const playlist = [
-        { name: "Udesaken Theme", src: "musicusk.mp3" },
+        { name: "Udesaken Theme", src: "uskmusic.mp3" },
         { name: "Vibes Mode", src: "uskmusic2.mp3" }
     ];
     
