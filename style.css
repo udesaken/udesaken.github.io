@@ -1,409 +1,352 @@
 /* ==========================================================================
-    UDESAKEN - MODERN BLACK EDITION (Atualizado Fev/2026)
+    UDESAKEN — SYSTEM OS (Visual "Big Tech" 2026)
+    Estilo: Minimalismo Dark, Glassmorphism, Profissional
    ========================================================================== */
 
 :root {
-    --bg-dark: #000000;
-    --bg-card: #080808;
+    /* PALETA CORE (Fundo Profundo) */
+    --bg-body: #050505;       /* Preto quase absoluto (Estilo iPhone Pro) */
+    --bg-surface: #0f0f0f;    /* Cinza muito escuro para contraste */
     
-    /* CORES PRINCIPAIS */
-    --hk-pink: #ff69b4;       /* Rosa Principal (Planos) */
-    --hk-neon: #ff1493;       /* Rosa Neon */
+    /* ACENTOS (Marca Udesaken) */
+    --accent-primary: #ff69b4;       /* O Rosa Clássico */
+    --accent-glow: rgba(255, 105, 180, 0.4); /* Brilho suave */
+    --accent-gold: #ffd700;          /* Ouro VIP */
     
-    /* COR VIP (AMARELO OURO) */
-    --hk-gold: #ffd700;       /* Ouro Puro */
-    --hk-gold-neon: #ffcc00;  /* Ouro Brilhante */
+    /* ELEMENTOS DE UI (Vidro e Bordas) */
+    --glass-bg: rgba(255, 255, 255, 0.03);     /* Fundo de vidro */
+    --glass-border: rgba(255, 255, 255, 0.08); /* Borda sutil */
+    --glass-blur: blur(20px);                  /* Desfoque estilo Apple */
     
-    --text: #ffffff;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;    /* Cinza "SaaS" para textos longos */
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* --- RESET & BASE --- */
+* { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 
 body { 
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400; 
-    background-color: var(--bg-dark);
-    background-image: radial-gradient(circle at 50% 10%, #1a0510 0%, #000000 70%);
-    color: var(--text); 
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-body);
+    /* Gradiente de fundo muito sutil para não ficar chapado */
+    background-image: radial-gradient(circle at 50% -20%, #1a0510 0%, var(--bg-body) 60%);
+    color: var(--text-main);
     overflow-x: hidden;
-    /* AJUSTE PROMOÇÃO: Empurra o site para baixo para caber a barra */
-    padding-top: 45px; 
+    line-height: 1.6;
+    padding-top: 50px; /* Espaço para a barra fixa */
+    -webkit-font-smoothing: antialiased; /* Texto nítido estilo Mac */
 }
 
-a { text-decoration: none; color: white; transition: all 0.3s ease; }
+a { text-decoration: none; color: white; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
 ul { list-style: none; }
 
-h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.5px; }
-h1 { line-height: 1.1; }
-p { font-weight: 400; opacity: 0.8; line-height: 1.7; font-size: 1rem; }
+/* TIPOGRAFIA LIMPA */
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
+p { color: var(--text-muted); font-size: 1.05rem; font-weight: 400; }
 
-/* =========================================
-   NOVA PROMOÇÃO FEVEREIRO (ESTILOS)
-   ========================================= */
+/* --- PROMO BAR (Estilo Faixa Fina) --- */
 .promo-bar {
-    background: linear-gradient(90deg, #000 0%, var(--hk-pink) 50%, #000 100%);
-    color: white;
+    background: rgba(255, 105, 180, 0.1);
+    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+    backdrop-filter: blur(10px);
+    color: var(--accent-primary);
     text-align: center;
-    padding: 12px 5%;
-    font-size: 0.85rem;
+    padding: 10px;
+    font-size: 0.8rem;
     font-weight: 600;
-    position: fixed; /* Fixa no topo absoluto */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2000; /* Acima de tudo */
-    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+    letter-spacing: 0.5px;
 }
-
 .promo-tag {
-    background: white;
-    color: black;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 10px;
-    font-size: 0.75rem;
-    font-weight: 800;
+    background: var(--accent-primary); color: white;
+    padding: 2px 8px; border-radius: 4px; margin-left: 10px; font-size: 0.7rem;
 }
 
-/* Animação de Pulso para as Badges de Desconto */
-.pulse-animation {
-    animation: pulseRed 2s infinite;
+/* --- HEADER (Glassmorphism Puro) --- */
+header {
+    position: fixed; top: 40px; width: 100%; padding: 0 5%;
+    height: 80px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5, 5, 5, 0.6); 
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000; transition: all 0.3s ease;
 }
 
-@keyframes pulseRed {
-    0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 20, 147, 0.7); }
-    70% { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 0 10px rgba(255, 20, 147, 0); }
-    100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 20, 147, 0); }
+.logo { font-size: 1.4rem; font-weight: 700; letter-spacing: -1px; }
+.logo span { 
+    font-size: 0.8rem; color: var(--accent-primary); 
+    border: 1px solid rgba(255, 105, 180, 0.3); 
+    padding: 3px 8px; border-radius: 6px; vertical-align: middle; margin-left: 5px;
 }
 
-/* =========================================
-   ESTILOS GERAIS (MANTIDOS)
-   ========================================= */
+.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links a { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+.nav-links a:hover, .nav-links a.active { color: white; }
 
-/* --- EFEITOS DE CORES --- */
-.text-pink { color: var(--hk-pink); text-shadow: 0 0 20px var(--hk-neon); }
-.text-gradient-pink {
-    background: linear-gradient(90deg, #fff, var(--hk-pink), #fff);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 25px rgba(255, 20, 147, 0.4);
+.btn-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 24px; border-radius: 50px; color: white !important;
+    font-size: 0.85rem; border: 1px solid transparent;
 }
-.text-gold { color: var(--hk-gold); text-shadow: 0 0 15px var(--hk-gold-neon); }
+.btn-header:hover {
+    background: white; color: black !important; transform: translateY(-2px);
+}
 
-/* --- BOTÕES --- */
-.cta-buttons { display: flex; gap: 15px; }
+/* --- HERO SECTION (Layout SaaS) --- */
+.hero {
+    min-height: 90vh; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 10%; position: relative; z-index: 2;
+}
+
+.hero-content { max-width: 600px; }
+.hero-content h1 { font-size: 4.5rem; margin-bottom: 25px; background: linear-gradient(to right, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-pink { color: var(--accent-primary); -webkit-text-fill-color: var(--accent-primary); }
+
+/* BOTÕES MODERNOS (Estilo Stripe/Apple) */
+.cta-buttons { display: flex; gap: 15px; margin-top: 40px; }
 
 .btn-primary {
-    padding: 15px 40px; background: white; color: black; border: none;
-    border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer;
-    box-shadow: 0 0 20px rgba(255,255,255,0.1); display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 40px; background: white; color: black; border-radius: 14px;
+    font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
 }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 30px white; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
 
 .btn-secondary {
-    padding: 15px 40px; background: transparent; border: 1px solid white; color: white;
-    border-radius: 50px; font-size: 1rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 40px; background: rgba(255,255,255,0.05); color: white;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+    font-weight: 600; cursor: pointer; backdrop-filter: blur(10px);
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
 
-.btn-pink-glow { background: var(--hk-pink) !important; color: white !important; border: none; }
-.btn-pink-glow:hover { box-shadow: 0 0 50px var(--hk-neon); transform: scale(1.05); }
+/* Ajuste específico para o botão rosa */
+.btn-pink-glow {
+    background: var(--accent-primary) !important; color: white !important;
+    box-shadow: 0 5px 20px var(--accent-glow) !important;
+}
+.btn-pink-glow:hover { box-shadow: 0 10px 40px var(--accent-primary) !important; }
 
-.btn-gold-glow { background: linear-gradient(45deg, var(--hk-gold), #ffbf00) !important; color: black !important; border: none; font-weight: 700; }
-.btn-gold-glow:hover { box-shadow: 0 0 40px var(--hk-gold-neon); transform: scale(1.05); background: white !important; }
+/* --- CARDS (O Efeito Vidro Premium) --- */
+.section-padding { padding: 120px 10%; }
+.section-header { text-align: center; margin-bottom: 80px; }
+.section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
 
-/* --- CARDS & PRICING --- */
-.section-padding { padding: 100px 10%; position: relative; z-index: 2; }
-.section-header { text-align: center; margin-bottom: 60px; }
-.pink-line { width: 80px; height: 4px; background: var(--hk-pink); margin: 20px auto; border-radius: 2px; box-shadow: 0 0 10px var(--hk-neon); }
-
-.pricing-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; max-width: 1000px; margin: 0 auto;
+}
 
 .price-card {
-    background: var(--bg-card); border: 1px solid #222;
-    padding: 50px 30px; border-radius: 20px; text-align: center;
-    width: 350px; position: relative; transition: 0.4s;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(40px); /* O segredo do vidro fosco */
+    padding: 50px 30px; border-radius: 24px;
+    text-align: center; position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.price-card:hover { transform: translateY(-10px); }
-.card-icon { font-size: 3.5rem; margin-bottom: 25px; color: white; transition: 0.3s; }
 
-.btn-price { 
-    display: block; width: 100%; padding: 15px; border-radius: 12px; 
-    border: 1px solid #333; color: white; margin-top: 30px; font-size: 1rem; font-weight: 600;
+/* Efeito Hover: O card levanta e a borda brilha */
+.price-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
-.btn-price:hover { background: white; color: black; border-color: white; }
 
-/* TEMA ROSA */
-.price-card.pink-theme {
-    background: linear-gradient(160deg, #15000a, #000000);
-    border: 1px solid var(--hk-pink);
-    box-shadow: 0 0 30px rgba(255, 105, 180, 0.15);
+.card-icon {
+    font-size: 2rem; margin-bottom: 25px;
+    width: 70px; height: 70px; margin: 0 auto 25px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: rgba(255,255,255,0.05);
+    transition: 0.3s;
 }
-.price-card.pink-theme:hover { box-shadow: 0 0 60px rgba(255, 105, 180, 0.4); border-color: var(--hk-neon); }
 
-/* TEMA GOLD */
-.price-card.gold-theme {
-    background: linear-gradient(160deg, #1a1500, #000000);
-    border: 1px solid var(--hk-gold);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+.price-card:hover .card-icon { transform: scale(1.1) rotate(5deg); background: white; color: black !important; }
+
+.btn-price {
+    display: block; width: 100%; padding: 15px; border-radius: 12px;
+    background: rgba(255,255,255,0.1); color: white; margin-top: 30px;
+    font-weight: 600; border: none; transition: 0.3s;
 }
-.price-card.gold-theme:hover { box-shadow: 0 0 50px rgba(255, 215, 0, 0.3); border-color: #fff; }
+.btn-price:hover { background: white; color: black; }
 
+/* BADGES FLUTUANTES */
 .badge-pink, .badge-gold {
-    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-    padding: 5px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
+    position: absolute; top: 20px; right: 20px;
+    padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
 }
-.badge-pink { background: var(--hk-pink); color: white; box-shadow: 0 0 15px var(--hk-neon); }
-.badge-gold { background: var(--hk-gold); color: black; box-shadow: 0 0 15px var(--hk-gold-neon); }
+.badge-pink { background: rgba(255, 105, 180, 0.2); color: var(--accent-primary); border: 1px solid rgba(255, 105, 180, 0.3); }
+.badge-gold { background: rgba(255, 215, 0, 0.2); color: var(--accent-gold); border: 1px solid rgba(255, 215, 0, 0.3); }
 
-/* --- HEADER & ANIMAÇÕES --- */
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-.reveal-left { opacity: 0; transform: translateX(-40px); transition: 0.8s; }
-.reveal-right { opacity: 0; transform: translateX(40px); transition: 0.8s; }
-.reveal-bottom { opacity: 0; transform: translateY(40px); transition: 0.8s; }
-.reveal-zoom { opacity: 0; transform: scale(0.9); transition: 0.8s; }
-.reveal-fade { opacity: 0; transition: 0.8s; }
-.active-reveal { opacity: 1; transform: translate(0) scale(1); }
-.delay-200 { transition-delay: 0.2s; } .delay-400 { transition-delay: 0.4s; }
-
-header {
-    position: fixed; 
-    /* AJUSTE PROMOÇÃO: Menu desce 45px para não cobrir a barra */
-    top: 45px; 
-    width: 100%; padding: 20px 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(0,0,0,0.85); backdrop-filter: blur(15px);
-    z-index: 1000; border-bottom: 1px solid rgba(255, 105, 180, 0.1);
+/* --- FOOTER (Limpo) --- */
+footer {
+    border-top: 1px solid var(--glass-border);
+    padding: 80px 10% 40px; background: #020202;
+    margin-top: 100px;
 }
+.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+.footer-col h4 { color: white; margin-bottom: 25px; font-size: 1rem; }
+.social-btn {
+    width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.05);
+    display: inline-flex; align-items: center; justify-content: center; color: #888;
+    margin-right: 10px; transition: 0.3s;
+}
+.social-btn:hover { background: white; color: black; transform: translateY(-3px); }
+.copyright { border-top: 1px solid var(--glass-border); margin-top: 60px; padding-top: 30px; text-align: center; color: #555; font-size: 0.85rem; }
 
-.logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
-.logo span { color: var(--hk-pink); font-weight: 400; border: 1px solid var(--hk-pink); padding: 2px 6px; border-radius: 4px; font-size: 0.9rem;}
-.nav-links { display: flex; gap: 30px; align-items: center; }
-.nav-links a { font-size: 0.95rem; font-weight: 500; opacity: 0.8; }
-.nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--hk-pink); text-shadow: 0 0 10px var(--hk-pink); }
-.btn-header { border: 1px solid var(--hk-pink); padding: 8px 25px; border-radius: 50px; color: var(--hk-pink) !important; font-weight: 600; }
-.btn-header:hover { background: var(--hk-pink); color: white !important; box-shadow: 0 0 20px var(--hk-neon); }
-.hamburger { display: none; font-size: 1.5rem; color: var(--hk-pink); cursor: pointer; }
+/* --- MOBILE --- */
+.hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 .close-btn-mobile { display: none; }
 
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 10%; position: relative; z-index: 2; overflow: hidden; }
-.hero-content { z-index: 2; max-width: 650px; }
-.hero-content h1 { font-size: 4rem; margin-bottom: 25px; color: white; }
-.hero-img-effect { max-width: 450px; width: 100%; animation: float 5s ease-in-out infinite; filter: drop-shadow(0 0 15px var(--hk-neon)); }
-.badge-news { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; border-radius: 50px; background: rgba(255, 105, 180, 0.1); border: 1px solid var(--hk-pink); font-size: 0.85rem; margin-bottom: 25px; color: var(--hk-pink); font-weight: 600; box-shadow: 0 0 15px rgba(255, 105, 180, 0.1); }
-
-footer { background: #020202; border-top: 1px solid #222; padding: 80px 20px 40px; margin-top: 100px; box-shadow: 0 -10px 30px rgba(255, 105, 180, 0.02); }
-.footer-container { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 50px; justify-content: center; text-align: center; }
-.footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.2rem; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { color: #888; transition: 0.3s; }
-.footer-links a:hover { color: var(--hk-pink); margin-left: 5px; }
-.social-btn { width: 50px; height: 50px; background: #111; border: 1px solid #222; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin: 0 5px; font-size: 1.2rem; transition: 0.3s; }
-.social-btn:hover { background: var(--hk-pink); color: white; transform: translateY(-3px); box-shadow: 0 0 20px var(--hk-neon); }
-.copyright { margin-top: 60px; padding-top: 20px; border-top: 1px solid #222; text-align: center; }
-.powered-by { display: inline-flex; align-items: center; gap: 8px; color: #555; font-size: 0.85rem; text-transform: uppercase; padding: 6px 15px; border-radius: 50px; transition: 0.3s; }
-.powered-by span { color: var(--hk-pink); font-weight: 700; }
-.powered-by:hover { color: white; background: rgba(255,255,255,0.05); }
-
-/* WIDGETS */
-.cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #000; border-top: 1px solid var(--hk-pink); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 9999; box-shadow: 0 -5px 20px rgba(0,0,0,0.8); transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
-.cookie-consent.active { transform: translateY(0); }
-.cookie-text { color: white; font-size: 0.9rem; max-width: 70%; }
-.cookie-text i { color: var(--hk-pink); margin-right: 8px; }
-button.btn-accept { appearance: none; -webkit-appearance: none; background-color: var(--hk-pink); color: white; border: none; padding: 10px 30px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; box-shadow: 0 0 10px var(--hk-pink); transition: all 0.3s ease; }
-button.btn-accept:hover { background-color: white; color: var(--hk-pink); transform: scale(1.05); box-shadow: 0 0 20px white; }
-
-.music-widget { position: fixed; bottom: 30px; left: 30px; z-index: 9998; }
-.music-btn { width: 50px; height: 50px; background-color: #000; border: 2px solid var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--hk-pink); box-shadow: 0 0 15px var(--hk-pink); transition: 0.3s; }
-.music-btn:hover { transform: scale(1.1); box-shadow: 0 0 25px var(--hk-neon); background-color: var(--hk-pink); color: white; }
-.waves { display: none; align-items: flex-end; gap: 3px; height: 15px; }
-.music-btn.playing .waves { display: flex; } .music-btn.playing i { display: none; }
-.waves span { width: 3px; background-color: white; animation: wave 1s infinite; }
-@keyframes wave { 0%,100% {height: 3px;} 50% {height: 15px;} }
-
-/* RESPONSIVO */
 @media (max-width: 992px) {
-    .promo-bar { font-size: 0.7rem; padding: 10px 2px; }
-    
-    header { 
-        /* AJUSTE PROMOÇÃO MOBILE: Garante que o menu não cubra a barra */
-        top: 45px; 
+    .hamburger { display: block; }
+    .nav-links {
+        position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+        background: black; flex-direction: column; justify-content: center;
+        transition: 0.4s; z-index: 1001;
     }
-    
-    .hamburger { display: block; z-index: 1002; transition: 0.3s; }
-    .nav-links { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: rgba(0,0,0,0.95); flex-direction: column; justify-content: center; align-items: center; transition: right 0.4s ease; z-index: 1001; backdrop-filter: blur(10px); }
     .nav-links.active { right: 0; }
-    .nav-links a { font-size: 1.4rem; display: block; padding: 15px; color: white; }
-    .close-btn-mobile { display: block; position: absolute; top: 30px; right: 30px; font-size: 2.2rem; color: var(--hk-pink); cursor: pointer; }
-    .hero { padding: 130px 5% 60px; flex-direction: column; text-align: center; }
-    .hero-content h1 { font-size: 2.8rem; }
-    .hero-visual { margin-top: 40px; }
-    .cta-buttons { width: 100%; padding: 0 20px; flex-direction: column; }
-    .section-padding { padding: 60px 5%; }
-    .price-card { width: 100%; margin-bottom: 30px; }
-    .cookie-consent { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
-    .cookie-text { max-width: 100%; }
-    button.btn-accept { width: 100%; }
-    .music-widget { bottom: 150px; left: 20px; transform: scale(0.9); }
+    .close-btn-mobile { display: block; position: absolute; top: 30px; right: 30px; font-size: 2rem; color: white; }
+    
+    .hero { flex-direction: column; text-align: center; padding-top: 150px; }
+    .hero-content h1 { font-size: 3rem; }
+    .hero-visual { margin-top: 50px; width: 80%; }
+    .cta-buttons { flex-direction: column; }
+    .price-card { width: 100%; }
 }
+
+/* --- ANIMAÇÕES --- */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+.hero-img-effect { animation: float 6s ease-in-out infinite; width: 100%; filter: drop-shadow(0 0 30px rgba(255,105,180,0.2)); }
+
+/* PARTÍCULAS SUTIS */
+.hk-particle {
+    position: absolute; background: rgba(255, 255, 255, 0.1); /* Muito sutil */
+    border-radius: 50%; pointer-events: none; z-index: 0;
+}
+@keyframes floatUp { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
+
 /* =========================================
-   ELEMENTOS DE UI (BOTÕES E BUSCA)
+   CARDS INTELIGENTES (User vs Group)
    ========================================= */
 
-/* Botão de Voltar Padrão */
-.btn-back {
+/* Ajuste do Grid */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.price-card {
+    background: rgba(20, 20, 20, 0.6); /* Vidro Escuro */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 40px 30px;
+    width: 380px;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha tudo à esquerda (Pro Look) */
+    text-align: left;
+}
+
+.price-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* --- ETIQUETAS DE CATEGORIA (O Diferencial) --- */
+.card-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 25px;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    color: #ddd;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: 0.3s;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
-.btn-back:hover {
-    background: white;
-    color: black;
-    transform: translateX(-5px);
-    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+/* Estilo para Grupo (Azul ou Roxo Tech) */
+.category-group {
+    background: rgba(255, 105, 180, 0.1);
+    color: var(--hk-pink);
+    border: 1px solid rgba(255, 105, 180, 0.2);
 }
 
-/* Barra de Pesquisa Padrão */
-.search-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 40px;
+/* Estilo para User (Dourado VIP) */
+.category-user {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--hk-gold);
+    border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-.search-wrapper input {
-    width: 100%;
-    padding: 15px 50px;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* --- TEXTOS E CONTEÚDO --- */
+.price-card h3 {
+    font-size: 1.8rem;
     color: white;
-    font-size: 1rem;
-    outline: none;
-    transition: 0.3s;
+    margin-bottom: 10px;
 }
 
-.search-wrapper input:focus {
-    border-color: var(--hk-pink);
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
-    background: rgba(0, 0, 0, 0.5);
+.card-desc {
+    font-size: 0.95rem;
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    min-height: 60px; /* Mantém altura igual */
 }
 
-.search-icon {
-    position: absolute; 
-    left: 20px; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    color: #888;
+/* --- LISTA DE VANTAGENS (Bullet Points Clean) --- */
+.card-features {
+    margin-bottom: 30px;
+    width: 100%;
 }
-/* =========================================
-   CORREÇÃO GLOBAL: SEARCH BAR & MOBILE
-   (Adicione isso ao final do arquivo style.css)
-   ========================================= */
 
-/* 1. CORREÇÃO DA LUPA (Centralização Perfeita) */
-.search-wrapper {
+.card-features li {
+    color: #ddd;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 55px; /* Altura fixa para garantir o centro */
+    gap: 10px;
 }
 
-.search-wrapper input {
-    height: 100%;
-    padding-left: 60px !important; /* Espaço maior para a lupa não ficar em cima do texto */
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    line-height: normal; /* Reseta alinhamento de texto */
+.card-features i {
+    color: var(--hk-pink); /* Checkmark rosa */
+    font-size: 0.8rem;
 }
 
-.search-icon {
-    left: 25px !important; /* Empurra a lupa um pouco mais pra direita */
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 1.1rem !important; /* Tamanho ideal */
-    pointer-events: none; /* Permite clicar no input através da lupa */
-    z-index: 5;
+/* Badge de Desconto (Discreta no canto) */
+.badge-discount {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: black;
+    font-weight: 800;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 50px;
 }
 
-/* 2. CORREÇÃO MOBILE (Cards menores e mais compactos) */
-@media (max-width: 768px) {
-    /* Ajuste da Grade */
-    .commands-grid {
-        grid-template-columns: 1fr !important; /* 1 coluna forçada */
-        gap: 15px !important; /* Menos espaço entre cards */
-        padding: 0 15px !important; /* Menos borda lateral */
-    }
-
-    /* Card mais compacto */
-    .cmd-card {
-        padding: 15px !important; /* Reduz o "inchaço" do card */
-        border-radius: 12px !important;
-    }
-
-    /* Título menor */
-    .cmd-header {
-        margin-bottom: 15px !important;
-        padding-bottom: 8px !important;
-    }
-    
-    .cmd-title {
-        font-size: 0.95rem !important;
-    }
-
-    /* Tags (botões) menores */
-    .cmd-tag {
-        padding: 4px 8px !important;
-        font-size: 0.75rem !important; /* Letra menor para caber mais */
-        border-radius: 4px !important;
-    }
-    
-    .cmd-list {
-        gap: 6px !important; /* Tags mais juntinhas */
-    }
-
-    /* Ajuste do Aviso de Prefixo no Mobile */
-    .search-wrapper + div {
-        font-size: 0.75rem !important;
-        margin-top: 10px !important;
-        padding: 0 20px;
-        text-align: center;
-    }
+/* Ajuste do botão dentro do card */
+.price-card .btn-price {
+    margin-top: auto; /* Empurra botão para o final */
+    text-align: center;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* =========================================
-   CORREÇÃO DO "CLIQUE DUPLO" (MOBILE)
-   Adicione isso ao final do seu style.css
-   ========================================= */
-
-@media (hover: none), (max-width: 992px) {
-    /* Desativa a subidinha dos cards no celular */
-    .price-card:hover, 
-    .cmd-card:hover, 
-    .hub-card:hover,
-    .btn-primary:hover,
-    .social-btn:hover {
-        transform: none !important; /* O card não se mexe */
-        box-shadow: 0 5px 20px rgba(0,0,0,0.5) !important; /* Mantém a sombra normal */
-    }
-
-    /* Força o botão a aceitar o toque rápido */
-    a, button, .btn-price, .hub-card {
-        touch-action: manipulation;
-    }
+.price-card .btn-price:hover {
+    background: white;
+    color: black;
 }
