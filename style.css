@@ -1,352 +1,216 @@
 /* ==========================================================================
-    UDESAKEN — SYSTEM OS (Visual "Big Tech" 2026)
-    Estilo: Minimalismo Dark, Glassmorphism, Profissional
+    UDESAKEN — SYSTEM OS (Monochrome Edition)
    ========================================================================== */
 
 :root {
-    /* PALETA CORE (Fundo Profundo) */
-    --bg-body: #050505;       /* Preto quase absoluto (Estilo iPhone Pro) */
-    --bg-surface: #0f0f0f;    /* Cinza muito escuro para contraste */
+    /* PALETA CORE */
+    --bg-body: #050505;       
+    --bg-surface: #0a0a0a;    
     
-    /* ACENTOS (Marca Udesaken) */
-    --accent-primary: #ff69b4;       /* O Rosa Clássico */
-    --accent-glow: rgba(255, 105, 180, 0.4); /* Brilho suave */
-    --accent-gold: #ffd700;          /* Ouro VIP */
+    /* ACENTOS (Ice White Theme) */
+    --accent-primary: #ffffff;       /* Branco Puro */
+    --accent-secondary: #e0e0e0;     /* Branco Gelo */
+    --accent-glow: rgba(255, 255, 255, 0.25); /* Brilho Branco Suave */
     
-    /* ELEMENTOS DE UI (Vidro e Bordas) */
-    --glass-bg: rgba(255, 255, 255, 0.03);     /* Fundo de vidro */
-    --glass-border: rgba(255, 255, 255, 0.08); /* Borda sutil */
-    --glass-blur: blur(20px);                  /* Desfoque estilo Apple */
+    /* ELEMENTOS DE UI */
+    --glass-bg: rgba(20, 20, 20, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(20px);
     
     --text-main: #ffffff;
-    --text-muted: #a1a1aa;    /* Cinza "SaaS" para textos longos */
+    --text-muted: #999999;
 }
 
-/* --- RESET & BASE --- */
 * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 
 body { 
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Poppins', -apple-system, sans-serif;
     background-color: var(--bg-body);
-    /* Gradiente de fundo muito sutil para não ficar chapado */
-    background-image: radial-gradient(circle at 50% -20%, #1a0510 0%, var(--bg-body) 60%);
+    background-image: radial-gradient(circle at 50% -20%, #222 0%, var(--bg-body) 60%);
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
-    padding-top: 50px; /* Espaço para a barra fixa */
-    -webkit-font-smoothing: antialiased; /* Texto nítido estilo Mac */
+    padding-top: 50px;
+    -webkit-font-smoothing: antialiased;
 }
 
-a { text-decoration: none; color: white; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+a { text-decoration: none; color: white; transition: 0.3s; }
 ul { list-style: none; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; }
+p { color: var(--text-muted); font-size: 1.05rem; }
 
-/* TIPOGRAFIA LIMPA */
-h1, h2, h3 { font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; }
-p { color: var(--text-muted); font-size: 1.05rem; font-weight: 400; }
-
-/* --- PROMO BAR (Estilo Faixa Fina) --- */
+/* --- PROMO BAR --- */
 .promo-bar {
-    background: rgba(255, 105, 180, 0.1);
-    border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    color: var(--accent-primary);
+    color: white;
     text-align: center;
-    padding: 10px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
-    letter-spacing: 0.5px;
-}
-.promo-tag {
-    background: var(--accent-primary); color: white;
-    padding: 2px 8px; border-radius: 4px; margin-left: 10px; font-size: 0.7rem;
+    padding: 8px;
+    font-size: 0.75rem;
+    position: fixed; top: 0; width: 100%; z-index: 2000;
 }
 
-/* --- HEADER (Glassmorphism Puro) --- */
+/* --- HEADER --- */
 header {
     position: fixed; top: 40px; width: 100%; padding: 0 5%;
-    height: 80px; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5, 5, 5, 0.6); 
+    height: 70px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5, 5, 5, 0.8); 
     backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
-    z-index: 1000; transition: all 0.3s ease;
+    z-index: 1000;
 }
 
-.logo { font-size: 1.4rem; font-weight: 700; letter-spacing: -1px; }
+.logo { font-size: 1.3rem; font-weight: 700; letter-spacing: -1px; }
 .logo span { 
-    font-size: 0.8rem; color: var(--accent-primary); 
-    border: 1px solid rgba(255, 105, 180, 0.3); 
-    padding: 3px 8px; border-radius: 6px; vertical-align: middle; margin-left: 5px;
+    font-size: 0.7rem; color: var(--accent-primary); border: 1px solid rgba(255,255,255,0.3); 
+    padding: 2px 6px; border-radius: 4px; vertical-align: middle; margin-left: 5px;
 }
 
-.nav-links { display: flex; gap: 40px; align-items: center; }
-.nav-links a { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+.nav-links { display: flex; gap: 30px; align-items: center; }
+.nav-links a { font-size: 0.85rem; color: #888; font-weight: 500; }
 .nav-links a:hover, .nav-links a.active { color: white; }
 
 .btn-header {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px 24px; border-radius: 50px; color: white !important;
-    font-size: 0.85rem; border: 1px solid transparent;
+    background: white; color: black !important;
+    padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
 }
-.btn-header:hover {
-    background: white; color: black !important; transform: translateY(-2px);
-}
+.btn-header:hover { background: #ddd; transform: scale(1.05); }
 
-/* --- HERO SECTION (Layout SaaS) --- */
+/* --- HERO SECTION --- */
 .hero {
     min-height: 90vh; display: flex; align-items: center; justify-content: space-between;
     padding: 0 10%; position: relative; z-index: 2;
 }
 
 .hero-content { max-width: 600px; }
-.hero-content h1 { font-size: 4.5rem; margin-bottom: 25px; background: linear-gradient(to right, #fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.text-pink { color: var(--accent-primary); -webkit-text-fill-color: var(--accent-primary); }
-
-/* BOTÕES MODERNOS (Estilo Stripe/Apple) */
-.cta-buttons { display: flex; gap: 15px; margin-top: 40px; }
-
-.btn-primary {
-    padding: 18px 40px; background: white; color: black; border-radius: 14px;
-    font-weight: 600; font-size: 1rem; border: none; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+.hero-content h1 { 
+    font-size: 4rem; margin-bottom: 20px; 
+    background: linear-gradient(180deg, #fff 0%, #666 100%); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+
+/* Texto de Destaque (Agora Branco/Prata) */
+.text-highlight { 
+    color: white; 
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    -webkit-text-fill-color: white;
+}
+
+.cta-buttons { display: flex; gap: 15px; margin-top: 30px; }
+
+/* Botões Refinados */
+.btn-primary {
+    padding: 16px 32px; background: white; color: black; border-radius: 12px;
+    font-weight: 600; border: none; cursor: pointer; position: relative; overflow: hidden;
+    transition: all 0.3s ease;
+}
+.btn-primary:hover { box-shadow: 0 0 25px rgba(255,255,255,0.4); transform: translateY(-2px); }
 
 .btn-secondary {
-    padding: 18px 40px; background: rgba(255,255,255,0.05); color: white;
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
-    font-weight: 600; cursor: pointer; backdrop-filter: blur(10px);
+    padding: 16px 32px; background: transparent; color: white;
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer;
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
+.btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.05); }
 
-/* Ajuste específico para o botão rosa */
-.btn-pink-glow {
-    background: var(--accent-primary) !important; color: white !important;
-    box-shadow: 0 5px 20px var(--accent-glow) !important;
-}
-.btn-pink-glow:hover { box-shadow: 0 10px 40px var(--accent-primary) !important; }
-
-/* --- CARDS (O Efeito Vidro Premium) --- */
-.section-padding { padding: 120px 10%; }
-.section-header { text-align: center; margin-bottom: 80px; }
-.section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
-
+/* --- EFEITO SPOTLIGHT NOS CARDS --- */
 .pricing-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; max-width: 1000px; margin: 0 auto;
+    display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px;
 }
 
 .price-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(40px); /* O segredo do vidro fosco */
-    padding: 50px 30px; border-radius: 24px;
-    text-align: center; position: relative;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    backdrop-filter: blur(40px);
+    padding: 40px 30px; border-radius: 20px;
+    width: 100%; max-width: 380px; /* CRUCIAL PARA MOBILE */
+    position: relative; overflow: hidden; /* Para o efeito de luz não vazar */
+    text-align: left;
+    transition: transform 0.3s ease;
 }
 
-/* Efeito Hover: O card levanta e a borda brilha */
-.price-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255,255,255,0.3);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+/* O brilho que segue o mouse (controlado via JS) */
+.price-card::before {
+    content: '';
+    position: absolute;
+    top: var(--y, -50%); left: var(--x, -50%);
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 0;
 }
+.price-card:hover::before { opacity: 1; }
+.price-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.3); }
 
-.card-icon {
-    font-size: 2rem; margin-bottom: 25px;
-    width: 70px; height: 70px; margin: 0 auto 25px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%; background: rgba(255,255,255,0.05);
-    transition: 0.3s;
+/* Conteúdo do Card */
+.card-content { position: relative; z-index: 1; } /* Garante que texto fique acima do brilho */
+
+.card-category {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    padding: 6px 12px; border-radius: 6px; margin-bottom: 20px; display: inline-flex; gap: 8px;
 }
+.category-group { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+.category-user { background: rgba(255,255,255,0.15); color: white; border: 1px solid white; }
 
-.price-card:hover .card-icon { transform: scale(1.1) rotate(5deg); background: white; color: black !important; }
+.card-icon { font-size: 1.8rem; margin-bottom: 20px; color: white; }
+.price-card h3 { font-size: 1.6rem; color: white; margin-bottom: 10px; }
+.card-desc { font-size: 0.9rem; margin-bottom: 25px; min-height: 50px; }
+
+.card-features li { color: #ccc; font-size: 0.85rem; margin-bottom: 10px; display: flex; gap: 10px; }
+.card-features i { color: white; }
 
 .btn-price {
-    display: block; width: 100%; padding: 15px; border-radius: 12px;
-    background: rgba(255,255,255,0.1); color: white; margin-top: 30px;
-    font-weight: 600; border: none; transition: 0.3s;
+    display: block; width: 100%; padding: 14px; border-radius: 10px;
+    background: rgba(255,255,255,0.1); color: white; margin-top: 20px;
+    text-align: center; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;
 }
 .btn-price:hover { background: white; color: black; }
 
-/* BADGES FLUTUANTES */
-.badge-pink, .badge-gold {
-    position: absolute; top: 20px; right: 20px;
-    padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-}
-.badge-pink { background: rgba(255, 105, 180, 0.2); color: var(--accent-primary); border: 1px solid rgba(255, 105, 180, 0.3); }
-.badge-gold { background: rgba(255, 215, 0, 0.2); color: var(--accent-gold); border: 1px solid rgba(255, 215, 0, 0.3); }
+/* --- FOOTER --- */
+footer { border-top: 1px solid var(--glass-border); padding: 60px 10% 30px; margin-top: 100px; }
+.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
+.social-btn { width: 40px; height: 40px; background: rgba(255,255,255,0.05); color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 8px; }
+.social-btn:hover { background: white; color: black; }
+.copyright { border-top: 1px solid var(--glass-border); margin-top: 40px; padding-top: 20px; text-align: center; font-size: 0.8rem; color: #555; }
 
-/* --- FOOTER (Limpo) --- */
-footer {
-    border-top: 1px solid var(--glass-border);
-    padding: 80px 10% 40px; background: #020202;
-    margin-top: 100px;
-}
-.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
-.footer-col h4 { color: white; margin-bottom: 25px; font-size: 1rem; }
-.social-btn {
-    width: 45px; height: 45px; border-radius: 12px; background: rgba(255,255,255,0.05);
-    display: inline-flex; align-items: center; justify-content: center; color: #888;
-    margin-right: 10px; transition: 0.3s;
-}
-.social-btn:hover { background: white; color: black; transform: translateY(-3px); }
-.copyright { border-top: 1px solid var(--glass-border); margin-top: 60px; padding-top: 30px; text-align: center; color: #555; font-size: 0.85rem; }
-
-/* --- MOBILE --- */
+/* =========================================
+   MOBILE OPTIMIZATION (O Pulo do Gato)
+   ========================================= */
 .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 .close-btn-mobile { display: none; }
 
 @media (max-width: 992px) {
+    .section-padding { padding: 80px 5%; }
+    
     .hamburger { display: block; }
     .nav-links {
-        position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-        background: black; flex-direction: column; justify-content: center;
-        transition: 0.4s; z-index: 1001;
+        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+        background: #0a0a0a; flex-direction: column; justify-content: center;
+        border-left: 1px solid rgba(255,255,255,0.1);
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1001;
     }
-    .nav-links.active { right: 0; }
-    .close-btn-mobile { display: block; position: absolute; top: 30px; right: 30px; font-size: 2rem; color: white; }
+    .nav-links.active { right: 0; box-shadow: -50px 0 100px rgba(0,0,0,0.8); }
+    .close-btn-mobile { display: block; position: absolute; top: 25px; right: 25px; font-size: 1.5rem; color: white; }
     
-    .hero { flex-direction: column; text-align: center; padding-top: 150px; }
-    .hero-content h1 { font-size: 3rem; }
-    .hero-visual { margin-top: 50px; width: 80%; }
-    .cta-buttons { flex-direction: column; }
-    .price-card { width: 100%; }
+    .hero { flex-direction: column; padding-top: 120px; text-align: center; }
+    .hero-content h1 { font-size: 2.8rem; } /* Fonte menor no celular */
+    .hero-visual { margin-top: 40px; width: 90%; max-width: 300px; }
+    
+    .cta-buttons { flex-direction: column; width: 100%; }
+    .btn-primary, .btn-secondary { width: 100%; }
+    
+    .pricing-grid { gap: 20px; }
+    .price-card { max-width: 100%; } /* Card ocupa a tela toda no celular */
 }
 
-/* --- ANIMAÇÕES --- */
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-.hero-img-effect { animation: float 6s ease-in-out infinite; width: 100%; filter: drop-shadow(0 0 30px rgba(255,105,180,0.2)); }
-
-/* PARTÍCULAS SUTIS */
-.hk-particle {
-    position: absolute; background: rgba(255, 255, 255, 0.1); /* Muito sutil */
-    border-radius: 50%; pointer-events: none; z-index: 0;
-}
-@keyframes floatUp { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translateY(-100px) rotate(360deg); opacity: 0; } }
-
-/* =========================================
-   CARDS INTELIGENTES (User vs Group)
-   ========================================= */
-
-/* Ajuste do Grid */
-.pricing-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-top: 40px;
+/* Pequenos ajustes para telas MUITO pequenas (iPhone SE, etc) */
+@media (max-width: 400px) {
+    .hero-content h1 { font-size: 2.2rem; }
+    .card-category { font-size: 0.65rem; }
 }
 
-.price-card {
-    background: rgba(20, 20, 20, 0.6); /* Vidro Escuro */
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 40px 30px;
-    width: 380px;
-    position: relative;
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alinha tudo à esquerda (Pro Look) */
-    text-align: left;
-}
-
-.price-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* --- ETIQUETAS DE CATEGORIA (O Diferencial) --- */
-.card-category {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Estilo para Grupo (Azul ou Roxo Tech) */
-.category-group {
-    background: rgba(255, 105, 180, 0.1);
-    color: var(--hk-pink);
-    border: 1px solid rgba(255, 105, 180, 0.2);
-}
-
-/* Estilo para User (Dourado VIP) */
-.category-user {
-    background: rgba(255, 215, 0, 0.1);
-    color: var(--hk-gold);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-}
-
-/* --- TEXTOS E CONTEÚDO --- */
-.price-card h3 {
-    font-size: 1.8rem;
-    color: white;
-    margin-bottom: 10px;
-}
-
-.card-desc {
-    font-size: 0.95rem;
-    color: #aaa;
-    line-height: 1.6;
-    margin-bottom: 25px;
-    min-height: 60px; /* Mantém altura igual */
-}
-
-/* --- LISTA DE VANTAGENS (Bullet Points Clean) --- */
-.card-features {
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.card-features li {
-    color: #ddd;
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.card-features i {
-    color: var(--hk-pink); /* Checkmark rosa */
-    font-size: 0.8rem;
-}
-
-/* Badge de Desconto (Discreta no canto) */
-.badge-discount {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: white;
-    color: black;
-    font-weight: 800;
-    font-size: 0.7rem;
-    padding: 4px 10px;
-    border-radius: 50px;
-}
-
-/* Ajuste do botão dentro do card */
-.price-card .btn-price {
-    margin-top: auto; /* Empurra botão para o final */
-    text-align: center;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.price-card .btn-price:hover {
-    background: white;
-    color: black;
-}
+/* Partículas e Animações */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.hero-img-effect { animation: float 6s ease-in-out infinite; width: 100%; }

@@ -148,3 +148,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+/* ==========================================================================
+    UDESAKEN SYSTEM - Logic & Effects (White Edition)
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- 1. EFEITO SPOTLIGHT (Big Tech Style) ---
+    // Faz um brilho seguir o mouse dentro dos cards
+    const cards = document.querySelectorAll('.price-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Passa as coordenadas para o CSS
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
+
+    // --- 2. MENU MOBILE ---
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const closeBtn = document.querySelector('.close-btn-mobile');
+    const links = document.querySelectorAll('.nav-links a');
+
+    function toggleMenu() { if(navLinks) navLinks.classList.toggle('active'); }
+    function closeMenu() { if(navLinks) navLinks.classList.remove('active'); }
+
+    if(hamburger) hamburger.addEventListener('click', toggleMenu);
+    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+    links.forEach(link => link.addEventListener('click', closeMenu));
+
+
+    // --- 3. SCROLL REVEAL (Animação ao rolar) ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Aplica o estilo inicial e observa
+    document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+        observer.observe(el);
+    });
+
+    // --- 4. PLAYER DE MÚSICA (Preservado) ---
+    const audio = document.getElementById('bg-audio');
+    window.toggleMusic = function() {
+        if(!audio) return;
+        if (audio.paused) {
+            audio.play().catch(e => console.log(e));
+            document.querySelector('.music-btn').style.opacity = '1';
+        } else {
+            audio.pause();
+            document.querySelector('.music-btn').style.opacity = '0.5';
+        }
+    };
+});
