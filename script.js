@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIGURAÇÃO INICIAL DE VOLUME ---
     // Define o volume para 40% ao carregar para não assustar o usuário
     if(audio && volumeSlider) {
-        audio.volume = 0.4; 
-        volumeSlider.value = 0.4;
+        audio.volume = 0.2; 
+        volumeSlider.value = 0.2;
     }
 
     // Listener do Slider de Volume
