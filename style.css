@@ -1,5 +1,5 @@
 /* ==========================================================================
-    UDESAKEN — SYSTEM OS (White Aurora Edition)
+    UDESAKEN — SYSTEM OS (White Aurora Edition - Mobile Fixed)
    ========================================================================== */
 
 :root {
@@ -9,7 +9,7 @@
     /* ACENTOS (Ice White Theme) */
     --accent-primary: #ffffff;
     --accent-secondary: #e0e0e0;
-    --accent-glow: rgba(255, 255, 255, 0.4); /* Brilho mais forte */
+    --accent-glow: rgba(255, 255, 255, 0.4);
     
     /* ELEMENTOS DE UI */
     --glass-bg: rgba(20, 20, 20, 0.6);
@@ -26,16 +26,16 @@
 body { 
     font-family: 'Poppins', -apple-system, sans-serif;
     background-color: var(--bg-body);
-    /* Gradiente animado complexo */
     background: radial-gradient(circle at 0% 0%, #1a1a1a 0%, transparent 50%), 
                 radial-gradient(circle at 100% 100%, #1a1a1a 0%, transparent 50%),
                 linear-gradient(135deg, #050505 0%, #000000 100%);
     background-size: 200% 200%;
     animation: aurora 15s ease infinite;
     color: var(--text-main);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Crucial para mobile */
     line-height: 1.6;
     padding-top: 50px;
+    -webkit-font-smoothing: antialiased;
 }
 
 @keyframes aurora {
@@ -56,9 +56,12 @@ p { color: var(--text-muted); font-size: 1.05rem; }
     backdrop-filter: blur(10px);
     color: white;
     text-align: center;
-    padding: 8px;
+    padding: 8px 15px; /* Mais padding lateral */
     font-size: 0.75rem;
-    position: fixed; top: 0; width: 100%; z-index: 2000;
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 2000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* --- HEADER --- */
@@ -98,10 +101,10 @@ header {
     font-size: 4rem; margin-bottom: 20px; 
     background: linear-gradient(180deg, #fff 0%, #888 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); /* Glow no texto */
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
 }
 
-/* --- BOTÕES COM GLOW --- */
+/* --- BOTÕES --- */
 .cta-buttons { display: flex; gap: 15px; margin-top: 30px; }
 
 .btn-primary {
@@ -110,7 +113,7 @@ header {
     transition: all 0.3s ease;
 }
 .btn-primary:hover { 
-    box-shadow: 0 0 30px rgba(255,255,255,0.6); /* Super Glow */
+    box-shadow: 0 0 30px rgba(255,255,255,0.6); 
     transform: translateY(-2px); 
 }
 
@@ -120,7 +123,7 @@ header {
 }
 .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-/* --- CARDS COM SPOTLIGHT --- */
+/* --- CARDS --- */
 .pricing-grid {
     display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px;
 }
@@ -136,7 +139,6 @@ header {
     transition: transform 0.3s ease;
 }
 
-/* O brilho que segue o mouse */
 .price-card::before {
     content: '';
     position: absolute;
@@ -174,27 +176,22 @@ header {
 }
 .btn-price:hover { background: white; color: black; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
 
-/* --- NOVO PLAYER DE MÚSICA FLUTUANTE --- */
+/* --- PLAYER DE MÚSICA FLUTUANTE --- */
 .music-widget {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(20, 20, 20, 0.85); /* Mais opaco para leitura */
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 10px 20px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     gap: 15px;
     z-index: 9999;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     transition: all 0.3s ease;
-}
-
-.music-widget:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 40px rgba(255,255,255,0.1);
 }
 
 .music-info {
@@ -207,52 +204,35 @@ header {
     gap: 8px;
 }
 
-.music-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.music-controls { display: flex; align-items: center; gap: 10px; }
 
 .btn-control {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: 0.2s;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: none; border: none; color: white;
+    font-size: 0.9rem; cursor: pointer; transition: 0.2s;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
     border-radius: 50%;
 }
+.btn-control:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.1); }
 
-.btn-control:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+/* Volume */
+.volume-container { display: flex; align-items: center; gap: 8px; margin: 0 15px; }
+.volume-container i { font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); width: 15px; }
+#volumeSlider {
+    -webkit-appearance: none; width: 70px; height: 3px;
+    background: rgba(255, 255, 255, 0.2); border-radius: 2px; outline: none;
+}
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 10px; height: 10px;
+    border-radius: 50%; background: white; cursor: pointer; border: none;
 }
 
-/* Equalizador Animado (Barrinhas mexendo) */
-.equalizer {
-    display: flex;
-    gap: 2px;
-    height: 12px;
-    align-items: flex-end;
-}
-.bar {
-    width: 2px;
-    background: white;
-    animation: bounce 1s infinite ease-in-out;
-}
+/* Equalizador */
+.equalizer { display: flex; gap: 2px; height: 12px; align-items: flex-end; }
+.bar { width: 2px; background: white; animation: bounce 1s infinite ease-in-out; }
 .bar:nth-child(2) { animation-duration: 1.2s; }
 .bar:nth-child(3) { animation-duration: 0.8s; }
-
-@keyframes bounce {
-    0%, 100% { height: 2px; }
-    50% { height: 12px; }
-}
-
+@keyframes bounce { 0%, 100% { height: 2px; } 50% { height: 12px; } }
 .paused .bar { animation-play-state: paused; height: 2px; }
 
 /* --- FOOTER --- */
@@ -262,85 +242,92 @@ footer { border-top: 1px solid var(--glass-border); padding: 60px 10% 30px; marg
 .social-btn:hover { background: white; color: black; box-shadow: 0 0 15px white; }
 .copyright { border-top: 1px solid var(--glass-border); margin-top: 40px; padding-top: 20px; text-align: center; font-size: 0.8rem; color: #555; }
 
-/* --- MOBILE --- */
+
+/* =========================================
+   MOBILE OPTIMIZATION (CORREÇÃO TOTAL)
+   ========================================= */
 .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 .close-btn-mobile { display: none; }
 
 @media (max-width: 992px) {
-    .section-padding { padding: 80px 5%; }
+    /* Ajuste Geral */
+    .section-padding { padding: 60px 5%; }
+    
+    /* Menu Lateral */
     .hamburger { display: block; }
     .nav-links {
-        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+        position: fixed; top: 0; right: -100%; width: 85%; height: 100vh;
         background: #0a0a0a; flex-direction: column; justify-content: center;
         border-left: 1px solid rgba(255,255,255,0.1);
-        transition: 0.4s; z-index: 1001;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2001; /* Z-index maior que o promo bar */
+        box-shadow: -10px 0 50px rgba(0,0,0,0.8);
     }
-    .nav-links.active { right: 0; box-shadow: -50px 0 100px rgba(0,0,0,0.8); }
-    .close-btn-mobile { display: block; position: absolute; top: 25px; right: 25px; font-size: 1.5rem; color: white; }
+    .nav-links.active { right: 0; }
+    .close-btn-mobile { display: block; position: absolute; top: 25px; right: 25px; font-size: 1.5rem; color: white; opacity: 0.7; }
     
-    .hero { flex-direction: column; padding-top: 120px; text-align: center; }
-    .hero-content h1 { font-size: 2.8rem; }
-    .hero-visual { margin-top: 40px; width: 90%; max-width: 300px; }
-    .cta-buttons { flex-direction: column; width: 100%; }
-    .btn-primary, .btn-secondary { width: 100%; }
-    .music-widget { bottom: 20px; right: 20px; padding: 8px 15px; } /* Ajuste mobile do player */
-}
-/* --- VOLUME SLIDER CUSTOMIZADO --- */
-.volume-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 15px; /* Espaço entre o texto e os botões */
-}
-
-.volume-container i {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    width: 15px;
-}
-
-/* O Slider em si (A linha) */
-#volumeSlider {
-    -webkit-appearance: none; /* Remove estilo padrão */
-    width: 70px; /* Tamanho compacto */
-    height: 3px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    outline: none;
-    transition: 0.2s;
-}
-
-/* O "Pino" do slider (Thumb) */
-#volumeSlider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Glow no pino */
-    border: none;
-}
-
-/* Efeito Hover */
-#volumeSlider:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
-
-/* --- AJUSTE MOBILE PARA O VOLUME --- */
-@media (max-width: 992px) {
+    /* Hero Ajustado */
+    .hero { 
+        flex-direction: column; 
+        padding-top: 140px; /* Mais espaço para o header não cobrir */
+        text-align: center; 
+        min-height: auto; /* Remove altura forçada */
+        padding-bottom: 60px;
+    }
+    .hero-content h1 { font-size: 2.5rem; } /* Fonte menor para não quebrar */
+    .hero-content p { font-size: 0.95rem; padding: 0 10px; }
+    
+    /* Imagem Centralizada Corretamente */
+    .hero-visual { 
+        margin: 50px auto 0; /* Margem automática centraliza bloco */
+        width: 80%; 
+        max-width: 280px; 
+    }
+    
+    .cta-buttons { flex-direction: column; width: 100%; gap: 15px; }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; display: flex; align-items: center; gap: 10px; }
+    
+    /* Cards Ajustados */
+    .pricing-grid { gap: 20px; }
+    .price-card { 
+        width: 100%; 
+        max-width: 100%; 
+        padding: 30px 20px; /* Menos padding interno */
+    }
+    /* Remove efeito de hover complexo no mobile para performance */
+    .price-card:hover { transform: none; }
+    
+    /* Footer Centralizado */
+    .footer-container { flex-direction: column; text-align: center; gap: 40px; }
+    .footer-col { width: 100%; }
+    .social-grid { justify-content: center; display: flex; }
+    
+    /* --- WIDGET DE MÚSICA MOBILE (Estilo Dock) --- */
+    .music-widget {
+        bottom: 20px; 
+        left: 5%; right: 5%; /* Ocupa largura centralizada */
+        width: 90%;
+        justify-content: space-between;
+        padding: 10px 15px;
+    }
+    
     .music-info {
-        max-width: 80px; /* Limita tamanho do texto no celular */
+        max-width: 80px; /* Limita texto */
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        font-size: 0.7rem;
     }
     
-    #volumeSlider {
-        width: 50px; /* Menor no celular */
-    }
+    .volume-container { margin: 0 5px; gap: 5px; }
+    #volumeSlider { width: 40px; } /* Slider menor */
+    .volume-container i { display: none; } /* Esconde ícone de volume para ganhar espaço */
     
-    .volume-container {
-        margin: 0 8px;
-    }
+    .btn-control { width: 25px; height: 25px; font-size: 0.8rem; }
+}
+
+/* Ajustes para telas MUITO pequenas (iPhone SE / Galaxy Fold) */
+@media (max-width: 380px) {
+    .hero-content h1 { font-size: 2rem; }
+    .music-widget { padding: 8px 10px; bottom: 10px; }
+    #volumeSlider { display: none; } /* Esconde volume em telas minúsculas */
 }
