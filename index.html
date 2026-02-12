@@ -182,14 +182,31 @@
         <button id="btnAccept" class="btn-accept" style="background: var(--accent-primary); color: white; padding: 8px 20px; border-radius: 50px; border:none; cursor: pointer;">Confirmar</button>
     </div>
 
-    <div class="music-widget">
-        <audio id="bg-audio" loop>
-            <source src="musicusk.mp3?v=2" type="audio/mpeg">
-        </audio>
-        <div class="music-btn" onclick="toggleMusic()">
-            <div class="waves"><span></span><span></span><span></span><span></span></div>
-            <i class="fas fa-volume-mute" id="music-icon"></i>
+   <div class="music-widget paused" id="musicWidget">
+        
+        <div class="equalizer">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
+
+        <div class="music-info">
+            <span id="trackName">Udesaken Theme</span>
+        </div>
+
+        <div class="music-controls">
+            <button class="btn-control" id="playPauseBtn" onclick="toggleMusic()">
+                <i class="fas fa-play"></i>
+            </button>
+            
+            <button class="btn-control" onclick="nextTrack()">
+                <i class="fas fa-forward"></i>
+            </button>
+        </div>
+
+        <audio id="bg-audio">
+            <source src="musicusk.mp3" type="audio/mpeg">
+        </audio>
     </div>
     
     <script type="module" src="script.js"></script>

@@ -1,16 +1,15 @@
 /* ==========================================================================
-    UDESAKEN — SYSTEM OS (Monochrome Edition)
+    UDESAKEN — SYSTEM OS (White Aurora Edition)
    ========================================================================== */
 
 :root {
-    /* PALETA CORE */
     --bg-body: #050505;       
     --bg-surface: #0a0a0a;    
     
     /* ACENTOS (Ice White Theme) */
-    --accent-primary: #ffffff;       /* Branco Puro */
-    --accent-secondary: #e0e0e0;     /* Branco Gelo */
-    --accent-glow: rgba(255, 255, 255, 0.25); /* Brilho Branco Suave */
+    --accent-primary: #ffffff;
+    --accent-secondary: #e0e0e0;
+    --accent-glow: rgba(255, 255, 255, 0.4); /* Brilho mais forte */
     
     /* ELEMENTOS DE UI */
     --glass-bg: rgba(20, 20, 20, 0.6);
@@ -23,15 +22,26 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 
+/* --- FUNDO ANIMADO (AURORA EFFECT) --- */
 body { 
     font-family: 'Poppins', -apple-system, sans-serif;
     background-color: var(--bg-body);
-    background-image: radial-gradient(circle at 50% -20%, #222 0%, var(--bg-body) 60%);
+    /* Gradiente animado complexo */
+    background: radial-gradient(circle at 0% 0%, #1a1a1a 0%, transparent 50%), 
+                radial-gradient(circle at 100% 100%, #1a1a1a 0%, transparent 50%),
+                linear-gradient(135deg, #050505 0%, #000000 100%);
+    background-size: 200% 200%;
+    animation: aurora 15s ease infinite;
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
     padding-top: 50px;
-    -webkit-font-smoothing: antialiased;
+}
+
+@keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 a { text-decoration: none; color: white; transition: 0.3s; }
@@ -55,7 +65,7 @@ p { color: var(--text-muted); font-size: 1.05rem; }
 header {
     position: fixed; top: 40px; width: 100%; padding: 0 5%;
     height: 70px; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(5, 5, 5, 0.8); 
+    background: rgba(5, 5, 5, 0.7); 
     backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
     z-index: 1000;
@@ -75,7 +85,7 @@ header {
     background: white; color: black !important;
     padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
 }
-.btn-header:hover { background: #ddd; transform: scale(1.05); }
+.btn-header:hover { background: #ddd; transform: scale(1.05); box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
 /* --- HERO SECTION --- */
 .hero {
@@ -86,34 +96,31 @@ header {
 .hero-content { max-width: 600px; }
 .hero-content h1 { 
     font-size: 4rem; margin-bottom: 20px; 
-    background: linear-gradient(180deg, #fff 0%, #666 100%); 
+    background: linear-gradient(180deg, #fff 0%, #888 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); /* Glow no texto */
 }
 
-/* Texto de Destaque (Agora Branco/Prata) */
-.text-highlight { 
-    color: white; 
-    text-shadow: 0 0 20px rgba(255,255,255,0.3);
-    -webkit-text-fill-color: white;
-}
-
+/* --- BOTÕES COM GLOW --- */
 .cta-buttons { display: flex; gap: 15px; margin-top: 30px; }
 
-/* Botões Refinados */
 .btn-primary {
     padding: 16px 32px; background: white; color: black; border-radius: 12px;
     font-weight: 600; border: none; cursor: pointer; position: relative; overflow: hidden;
     transition: all 0.3s ease;
 }
-.btn-primary:hover { box-shadow: 0 0 25px rgba(255,255,255,0.4); transform: translateY(-2px); }
+.btn-primary:hover { 
+    box-shadow: 0 0 30px rgba(255,255,255,0.6); /* Super Glow */
+    transform: translateY(-2px); 
+}
 
 .btn-secondary {
     padding: 16px 32px; background: transparent; color: white;
     border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; cursor: pointer;
 }
-.btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.05); }
+.btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-/* --- EFEITO SPOTLIGHT NOS CARDS --- */
+/* --- CARDS COM SPOTLIGHT --- */
 .pricing-grid {
     display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 40px;
 }
@@ -123,36 +130,35 @@ header {
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(40px);
     padding: 40px 30px; border-radius: 20px;
-    width: 100%; max-width: 380px; /* CRUCIAL PARA MOBILE */
-    position: relative; overflow: hidden; /* Para o efeito de luz não vazar */
+    width: 100%; max-width: 380px; 
+    position: relative; overflow: hidden;
     text-align: left;
     transition: transform 0.3s ease;
 }
 
-/* O brilho que segue o mouse (controlado via JS) */
+/* O brilho que segue o mouse */
 .price-card::before {
     content: '';
     position: absolute;
     top: var(--y, -50%); left: var(--x, -50%);
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
     transform: translate(-50%, -50%);
     opacity: 0; transition: opacity 0.3s;
     pointer-events: none;
     z-index: 0;
 }
 .price-card:hover::before { opacity: 1; }
-.price-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.3); }
+.price-card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.4); }
 
-/* Conteúdo do Card */
-.card-content { position: relative; z-index: 1; } /* Garante que texto fique acima do brilho */
+.card-content { position: relative; z-index: 1; } 
 
 .card-category {
     font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
     padding: 6px 12px; border-radius: 6px; margin-bottom: 20px; display: inline-flex; gap: 8px;
 }
 .category-group { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
-.category-user { background: rgba(255,255,255,0.15); color: white; border: 1px solid white; }
+.category-user { background: rgba(255,255,255,0.15); color: white; border: 1px solid white; box-shadow: 0 0 10px rgba(255,255,255,0.1); }
 
 .card-icon { font-size: 1.8rem; margin-bottom: 20px; color: white; }
 .price-card h3 { font-size: 1.6rem; color: white; margin-bottom: 10px; }
@@ -164,53 +170,118 @@ header {
 .btn-price {
     display: block; width: 100%; padding: 14px; border-radius: 10px;
     background: rgba(255,255,255,0.1); color: white; margin-top: 20px;
-    text-align: center; border: 1px solid rgba(255,255,255,0.1); font-weight: 600;
+    text-align: center; border: 1px solid rgba(255,255,255,0.1); font-weight: 600; transition: 0.3s;
 }
-.btn-price:hover { background: white; color: black; }
+.btn-price:hover { background: white; color: black; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+
+/* --- NOVO PLAYER DE MÚSICA FLUTUANTE --- */
+.music-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 9999;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.music-widget:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(255,255,255,0.1);
+}
+
+.music-info {
+    font-size: 0.75rem;
+    color: #ccc;
+    font-weight: 500;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-control {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Equalizador Animado (Barrinhas mexendo) */
+.equalizer {
+    display: flex;
+    gap: 2px;
+    height: 12px;
+    align-items: flex-end;
+}
+.bar {
+    width: 2px;
+    background: white;
+    animation: bounce 1s infinite ease-in-out;
+}
+.bar:nth-child(2) { animation-duration: 1.2s; }
+.bar:nth-child(3) { animation-duration: 0.8s; }
+
+@keyframes bounce {
+    0%, 100% { height: 2px; }
+    50% { height: 12px; }
+}
+
+.paused .bar { animation-play-state: paused; height: 2px; }
 
 /* --- FOOTER --- */
 footer { border-top: 1px solid var(--glass-border); padding: 60px 10% 30px; margin-top: 100px; }
 .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; }
 .social-btn { width: 40px; height: 40px; background: rgba(255,255,255,0.05); color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; margin-right: 8px; }
-.social-btn:hover { background: white; color: black; }
+.social-btn:hover { background: white; color: black; box-shadow: 0 0 15px white; }
 .copyright { border-top: 1px solid var(--glass-border); margin-top: 40px; padding-top: 20px; text-align: center; font-size: 0.8rem; color: #555; }
 
-/* =========================================
-   MOBILE OPTIMIZATION (O Pulo do Gato)
-   ========================================= */
+/* --- MOBILE --- */
 .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 .close-btn-mobile { display: none; }
 
 @media (max-width: 992px) {
     .section-padding { padding: 80px 5%; }
-    
     .hamburger { display: block; }
     .nav-links {
         position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
         background: #0a0a0a; flex-direction: column; justify-content: center;
         border-left: 1px solid rgba(255,255,255,0.1);
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1001;
+        transition: 0.4s; z-index: 1001;
     }
     .nav-links.active { right: 0; box-shadow: -50px 0 100px rgba(0,0,0,0.8); }
     .close-btn-mobile { display: block; position: absolute; top: 25px; right: 25px; font-size: 1.5rem; color: white; }
     
     .hero { flex-direction: column; padding-top: 120px; text-align: center; }
-    .hero-content h1 { font-size: 2.8rem; } /* Fonte menor no celular */
+    .hero-content h1 { font-size: 2.8rem; }
     .hero-visual { margin-top: 40px; width: 90%; max-width: 300px; }
-    
     .cta-buttons { flex-direction: column; width: 100%; }
     .btn-primary, .btn-secondary { width: 100%; }
-    
-    .pricing-grid { gap: 20px; }
-    .price-card { max-width: 100%; } /* Card ocupa a tela toda no celular */
+    .music-widget { bottom: 20px; right: 20px; padding: 8px 15px; } /* Ajuste mobile do player */
 }
-
-/* Pequenos ajustes para telas MUITO pequenas (iPhone SE, etc) */
-@media (max-width: 400px) {
-    .hero-content h1 { font-size: 2.2rem; }
-    .card-category { font-size: 0.65rem; }
-}
-
-/* Partículas e Animações */
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-.hero-img-effect { animation: float 6s ease-in-out infinite; width: 100%; }
