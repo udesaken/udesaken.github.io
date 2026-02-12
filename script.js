@@ -4,13 +4,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. PLAYER DE MÚSICA AVANÇADO (Playlist & Widget) ---
+    // --- 1. PLAYER DE MÚSICA AVANÇADO (Playlist, Widget & Volume) ---
     const audio = document.getElementById('bg-audio');
     const widget = document.getElementById('musicWidget');
     const playBtnIcon = document.querySelector('#playPauseBtn i');
     const trackNameLabel = document.getElementById('trackName');
+    
+    // Elementos do Volume
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volIcon = document.getElementById('volIcon');
 
-    // Playlist: Adicione aqui suas músicas
+    // Playlist: Suas músicas
     const playlist = [
         { name: "Udesaken Theme", src: "musicusk.mp3" },
         { name: "Vibes Mode", src: "uskmusic2.mp3" }
@@ -19,33 +23,55 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTrackIndex = 0;
     let isPlaying = false;
 
-    // Função para atualizar a interface visual do player
+    // --- CONFIGURAÇÃO INICIAL DE VOLUME ---
+    // Define o volume para 40% ao carregar para não assustar o usuário
+    if(audio && volumeSlider) {
+        audio.volume = 0.4; 
+        volumeSlider.value = 0.4;
+    }
+
+    // Listener do Slider de Volume
+    if(volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            audio.volume = val;
+
+            // Muda o ícone conforme o volume
+            if(val == 0) {
+                volIcon.className = 'fas fa-volume-mute';
+            } else if (val < 0.5) {
+                volIcon.className = 'fas fa-volume-down';
+            } else {
+                volIcon.className = 'fas fa-volume-up';
+            }
+        });
+    }
+
+    // Função para atualizar a interface visual (Play/Pause)
     function updatePlayerUI() {
         if (!widget || !playBtnIcon) return;
 
         if (isPlaying) {
-            widget.classList.remove('paused'); // Ativa a animação das barrinhas
+            widget.classList.remove('paused'); // Barrinhas se mexem
             playBtnIcon.classList.remove('fa-play');
             playBtnIcon.classList.add('fa-pause');
         } else {
-            widget.classList.add('paused'); // Pausa a animação das barrinhas
+            widget.classList.add('paused'); // Barrinhas param
             playBtnIcon.classList.remove('fa-pause');
             playBtnIcon.classList.add('fa-play');
         }
     }
 
-    // Tocar/Pausar (Acessível globalmente pelo HTML)
+    // Tocar/Pausar (Global)
     window.toggleMusic = function() {
         if (!audio) return;
 
         if (audio.paused) {
-            // Tenta tocar
             audio.play().then(() => {
                 isPlaying = true;
                 updatePlayerUI();
             }).catch(e => {
-                console.log("Autoplay bloqueado ou erro:", e);
-                // Alguns navegadores exigem interação do usuário antes de tocar som
+                console.log("Autoplay bloqueado pelo navegador:", e);
             });
         } else {
             audio.pause();
@@ -54,21 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Próxima Música (Acessível globalmente)
+    // Próxima Música (Global)
     window.nextTrack = function() {
         if (!audio) return;
 
         currentTrackIndex++;
-        // Se chegar ao fim da lista, volta para o começo
+        // Loop da playlist
         if (currentTrackIndex >= playlist.length) {
             currentTrackIndex = 0;
         }
         
-        // Carrega a nova música
+        // Carrega nova faixa
         audio.src = playlist[currentTrackIndex].src;
         if(trackNameLabel) trackNameLabel.textContent = playlist[currentTrackIndex].name;
         
-        // Toca a nova música
+        // Mantém tocando se já estava
         audio.play().then(() => {
             isPlaying = true;
             updatePlayerUI();
@@ -76,17 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- 2. EFEITO SPOTLIGHT (Luz que segue o mouse nos cards) ---
+    // --- 2. EFEITO SPOTLIGHT (Luz do Mouse nos Cards) ---
     const cards = document.querySelectorAll('.price-card');
     
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            // Calcula a posição do mouse relativa ao card
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Envia as coordenadas para o CSS usar no radial-gradient
+            // Passa coordenadas para o CSS
             card.style.setProperty('--x', `${x}px`);
             card.style.setProperty('--y', `${y}px`);
         });
@@ -110,41 +135,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if(hamburger) hamburger.addEventListener('click', toggleMenu);
     if(closeBtn) closeBtn.addEventListener('click', closeMenu);
     
-    // Fecha o menu ao clicar em qualquer link
     links.forEach(link => link.addEventListener('click', closeMenu));
 
 
-    // --- 4. SCROLL REVEAL (Animação suave ao rolar a página) ---
+    // --- 4. SCROLL REVEAL (Animação ao rolar) ---
     const revealElements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom, .reveal-zoom, .reveal-fade');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Quando o elemento aparece na tela:
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0) scale(1)';
             }
         });
-    }, { threshold: 0.1 }); // Dispara quando 10% do elemento está visível
+    }, { threshold: 0.1 });
 
-    // Configura o estado inicial (invisível e deslocado)
     revealElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)'; // Move um pouco para baixo
-        el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)'; // Suavidade Apple/iOS
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
         observer.observe(el);
     });
 
 
-    // --- 5. BANNER DE COOKIES (Opcional - Se existir no HTML) ---
+    // --- 5. BANNER DE COOKIES ---
     const cookieBanner = document.getElementById('cookieBanner');
     const btnAccept = document.getElementById('btnAccept');
 
-    // Verifica se já aceitou antes
     if (!localStorage.getItem('udesaken_cookies_accepted')) {
         setTimeout(() => { 
             if(cookieBanner) cookieBanner.classList.add('active'); 
-        }, 2000); // Mostra após 2 segundos
+        }, 2000);
     }
 
     if(btnAccept) {

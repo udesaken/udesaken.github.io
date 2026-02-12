@@ -285,3 +285,62 @@ footer { border-top: 1px solid var(--glass-border); padding: 60px 10% 30px; marg
     .btn-primary, .btn-secondary { width: 100%; }
     .music-widget { bottom: 20px; right: 20px; padding: 8px 15px; } /* Ajuste mobile do player */
 }
+/* --- VOLUME SLIDER CUSTOMIZADO --- */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 15px; /* Espaço entre o texto e os botões */
+}
+
+.volume-container i {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    width: 15px;
+}
+
+/* O Slider em si (A linha) */
+#volumeSlider {
+    -webkit-appearance: none; /* Remove estilo padrão */
+    width: 70px; /* Tamanho compacto */
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    transition: 0.2s;
+}
+
+/* O "Pino" do slider (Thumb) */
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Glow no pino */
+    border: none;
+}
+
+/* Efeito Hover */
+#volumeSlider:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- AJUSTE MOBILE PARA O VOLUME --- */
+@media (max-width: 992px) {
+    .music-info {
+        max-width: 80px; /* Limita tamanho do texto no celular */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    
+    #volumeSlider {
+        width: 50px; /* Menor no celular */
+    }
+    
+    .volume-container {
+        margin: 0 8px;
+    }
+}
