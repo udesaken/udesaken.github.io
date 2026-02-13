@@ -1,10 +1,11 @@
 /* =========================================
-   UDESAKEN - APPLE DARK AESTHETIC
+   UDESAKEN - LIQUID GLASS AESTHETIC
    ========================================= */
 
 :root {
     --bg-dark: #050505;
     --gold: #C6A87C;
+    --gold-light: #E2D1B3;
 }
 
 html {
@@ -14,44 +15,119 @@ html {
 
 body {
     background-color: var(--bg-dark);
-    /* Noise texture sutil para evitar banding */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    overflow-x: hidden;
+    color: white;
 }
 
-/* Scrollbar Minimalista */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+/* Scrollbar Invisível */
+::-webkit-scrollbar { width: 0px; background: transparent; }
 
-/* Navbar Glass */
-.glass-nav {
-    background: rgba(5, 5, 5, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+/* --- FUNDO LÍQUIDO (ORBS) --- */
+.liquid-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: #050505;
 }
 
-/* Cards Glass */
-.glass-card {
+.liquid-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float-liquid 15s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, #C6A87C 0%, transparent 70%);
+    animation-duration: 20s;
+}
+
+.orb-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, #4a3b2a 0%, transparent 70%);
+    animation-duration: 25s;
+}
+
+.orb-3 {
+    top: 40%;
+    left: 40%;
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(circle, #2a2a2a 0%, transparent 70%);
+    animation-duration: 18s;
+}
+
+@keyframes float-liquid {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+/* --- GLASSMORPHISM PURO --- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de brilho ao passar o mouse */
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.5s;
+}
+
+.glass-panel:hover::before {
+    left: 100%;
+}
+
+.glass-panel:hover {
+    border-color: rgba(198, 168, 124, 0.3);
+    transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 30px rgba(198, 168, 124, 0.1);
 }
 
-.glass-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-4px);
+/* Navbar Transparente */
+.nav-liquid {
+    background: rgba(5, 5, 5, 0.2);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* Animações */
+/* Tipografia e Gradientes */
+.text-gradient-gold {
+    background: linear-gradient(135deg, #fff 30%, #C6A87C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animação de Entrada */
 .fade-up {
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
     transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Apple ease curve */
 }
 
-.fade-up.active {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
 }
