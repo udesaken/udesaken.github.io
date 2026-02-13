@@ -290,37 +290,59 @@ html, body {
 .playing #visualizer {
     opacity: 1;
 }
-/* Layout de Ilha Dividida (Split Island) */
+/* =========================================
+   UDESAKEN - APPLE SPLIT PLAYER CSS
+   ========================================= */
+
+/* Estilo das Pílulas (Pill e Circle) */
 .glass-pill {
-    background: rgba(20, 20, 20, 0.5);
+    background: rgba(20, 20, 20, 0.6);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 22px;
 }
 
-/* O botão circular (estilo a lupa da sua foto) */
 .glass-circle {
-    background: rgba(30, 30, 30, 0.4);
+    background: rgba(30, 30, 30, 0.5);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Garante que o container mestre seja invisível no início */
+/* Container Mestre */
 #audio-player-container {
     opacity: 0;
     pointer-events: none;
-    transition: all 0.7s ease-out;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translate(-50%, 20px); /* Começa um pouco abaixo no mobile */
+}
+
+/* Ajuste de posição Desktop */
+@media (min-width: 768px) {
+    #audio-player-container {
+        transform: translateY(20px);
+    }
 }
 
 #audio-player-container.visible {
     opacity: 1;
     pointer-events: auto;
+    transform: translate(-50%, 0);
 }
+
+@media (min-width: 768px) {
+    #audio-player-container.visible {
+        transform: translateY(0);
+    }
+}
+
+/* Efeito de Visualizer */
+.v-bar { width: 2px; background: var(--accent); height: 3px; border-radius: 1px; }
+.playing .v-bar { animation: v-dance 0.8s infinite ease-in-out alternate; }
+@keyframes v-dance { 0% { height: 3px; } 100% { height: 12px; } }
