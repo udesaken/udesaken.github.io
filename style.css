@@ -1,10 +1,11 @@
 /* =========================================
-   UDESAKEN GROUP - CLEAN STYLE
+   UDESAKEN GROUP - PREMIUM DARK
    ========================================= */
 
 :root {
     --bg-dark: #050505;
-    --gold: #C6A87C; /* Dourado Champagne - Elegante */
+    --gold: #C6A87C;
+    --gold-dim: rgba(198, 168, 124, 0.15);
 }
 
 html {
@@ -14,26 +15,73 @@ html {
 
 body {
     background-color: var(--bg-dark);
+    /* Adiciona uma textura sutil de ruído para evitar banding em gradientes escuros */
+    background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, var(--bg-dark) 40%);
+    background-attachment: fixed;
 }
 
-/* Scrollbar fina e discreta */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg-dark);
-}
-::-webkit-scrollbar-thumb {
-    background: #222;
-    border-radius: 3px;
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+/* --- EFEITOS DE LUZ --- */
+
+/* Luz ambiente dourada (usada atrás de textos/imagens) */
+.ambient-light {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--gold-dim) 0%, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: -1;
+    animation: pulse-glow 8s ease-in-out infinite;
 }
 
-/* Animações sutis apenas de entrada */
+/* Vidro Premium para Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(198, 168, 124, 0.3); /* Borda dourada sutil no hover */
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(198, 168, 124, 0.1);
+}
+
+/* Navbar Fosca */
+.nav-blur {
+    background: rgba(5, 5, 5, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animações */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-section {
-    animation: fadeIn 0.8s ease-out;
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+}
+
+.animate-enter {
+    animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Utilitário para texto gradiente dourado */
+.text-gold-gradient {
+    background: linear-gradient(135deg, #F9F1E6 0%, #C6A87C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

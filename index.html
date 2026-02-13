@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Udesaken Group — Infraestrutura para Comunidades.">
     <title>Udesaken Group</title>
     
     <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,30 +18,23 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        brand: { 
-                            gold: '#C6A87C', /* Dourado Champagne (Mais elegante, menos amarelo) */
-                            dark: '#050505',
-                            surface: '#0F0F0F'
-                        }
+                        brand: { gold: '#C6A87C', dark: '#050505' }
                     },
-                    letterSpacing: {
-                        tighter: '-0.03em',
-                    }
+                    letterSpacing: { tighter: '-0.03em' }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-brand-dark text-white antialiased selection:bg-brand-gold/30 selection:text-white">
+<body class="bg-brand-dark text-white antialiased selection:bg-brand-gold/30 selection:text-white overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 top-0 bg-brand-dark/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 top-0 nav-blur transition-all duration-300" id="navbar">
         <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            
-            <div class="flex items-center gap-3 cursor-pointer">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10">
-                     <img src="uskcoroa.png" alt="Udesaken" class="w-full h-full object-cover">
+            <div class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 group-hover:border-brand-gold/50 transition duration-500">
+                     <img src="uskcoroa.png" alt="Udesaken" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="text-lg font-bold tracking-tight text-white">
+                <span class="text-lg font-bold tracking-tight text-white group-hover:text-brand-gold transition">
                     Udesaken Group
                 </span>
             </div>
@@ -52,94 +43,97 @@
                 <a href="./comandos/" class="text-sm font-medium text-gray-400 hover:text-white transition">Comandos</a>
                 <a href="./equipe/" class="text-sm font-medium text-gray-400 hover:text-white transition">Equipe</a>
                 <a href="./planos/" class="text-sm font-medium text-white hover:text-brand-gold transition">Planos</a>
-                
-                <a href="./vip/" class="px-5 py-2 text-sm font-semibold bg-white text-black rounded-full hover:bg-gray-200 transition">
+                <a href="./vip/" class="px-5 py-2 text-sm font-semibold bg-white text-black rounded-full hover:bg-gray-200 transition shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                     Área VIP
                 </a>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden text-gray-300">
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-white/5 absolute w-full">
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0A0A0A] border-b border-white/5 absolute w-full">
             <div class="px-6 py-4 space-y-4">
                 <a href="./comandos/" class="block text-sm text-gray-300">Comandos</a>
-                <a href="./planos/" class="block text-sm text-white">Planos</a>
-                <a href="./vip/" class="block text-sm text-brand-gold">VIP</a>
+                <a href="./planos/" class="block text-sm text-white font-bold">Planos</a>
+                <a href="./vip/" class="block text-sm text-brand-gold font-bold">VIP</a>
             </div>
         </div>
     </nav>
 
-    <section class="pt-40 pb-24 text-center relative overflow-hidden">
+    <section class="pt-40 pb-24 text-center relative overflow-hidden animate-enter">
         
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/5 blur-[120px] -z-10 rounded-full"></div>
+        <div class="ambient-light top-[-200px] left-1/2 -translate-x-1/2"></div>
         
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
             
             <div class="inline-block mb-8 px-4 py-1.5 border border-white/10 rounded-full bg-white/5 backdrop-blur-sm">
-                <span class="text-xs font-medium text-gray-300 tracking-wide">Infraestrutura Profissional para WhatsApp</span>
+                <span class="text-xs font-medium text-gray-300 tracking-wide uppercase">Infraestrutura Profissional v2.6</span>
             </div>
 
             <h1 class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter leading-[1.1]">
                 Gerencie sua comunidade <br>
-                com <span class="text-brand-gold">autoridade.</span>
+                com <span class="text-gold-gradient">autoridade.</span>
             </h1>
             
             <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-                Proteção, automação e ferramentas exclusivas. A escolha número um de grandes administradores.
+                Proteção anti-travas, automação e ferramentas exclusivas. A escolha número um de grandes administradores.
             </p>
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-20">
-                <a href="./planos/" class="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition min-w-[200px]">
+                <a href="./planos/" class="w-full md:w-auto px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 hover:scale-[1.02] transition transform min-w-[200px] shadow-lg shadow-white/5">
                     Ver Planos
                 </a>
-                <a href="./vip/" class="w-full md:w-auto px-8 py-4 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/5 transition min-w-[200px]">
+                <a href="./vip/" class="w-full md:w-auto px-8 py-4 border border-white/10 text-white font-semibold rounded-lg hover:bg-white/5 hover:border-brand-gold/30 transition min-w-[200px]">
                     Membro VIP
                 </a>
             </div>
 
-            <div class="relative mx-auto max-w-[200px] md:max-w-[260px] opacity-90 grayscale-[30%] hover:grayscale-0 transition duration-700">
+            <div class="relative mx-auto max-w-[200px] md:max-w-[260px] hover:scale-105 transition duration-700 cursor-pointer">
+                <div class="absolute inset-0 bg-brand-gold/20 blur-[60px] rounded-full z-[-1]"></div>
                 <img src="uskcoroa.png" alt="Udesaken Emblem" class="w-full h-auto drop-shadow-2xl">
             </div>
 
         </div>
     </section>
 
-    <section class="py-20 border-t border-white/5 bg-brand-surface">
-        <div class="max-w-[1200px] mx-auto px-6">
-            
+    <section class="py-24 border-t border-white/5 bg-[#080808] relative">
+        
+        <div class="ambient-light bottom-0 left-[-200px] opacity-30"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
             <div class="flex items-center justify-between mb-12">
                 <h2 class="text-2xl font-bold text-white">Canais Oficiais</h2>
-                <a href="https://wa.me/447562847091" class="text-sm text-gray-500 hover:text-white transition">Suporte <i class="fas fa-arrow-right ml-1"></i></a>
+                <a href="https://wa.me/447562847091" class="text-sm text-gray-500 hover:text-white transition flex items-center gap-2">
+                    Suporte <i class="fas fa-arrow-right text-xs"></i>
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 
-                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="p-6 rounded-xl bg-brand-dark border border-white/5 hover:border-white/20 transition group">
-                    <div class="w-10 h-10 bg-[#25D366] rounded-lg flex items-center justify-center text-black mb-4 group-hover:scale-110 transition">
-                        <i class="fab fa-whatsapp text-xl"></i>
+                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-card p-6 rounded-xl group">
+                    <div class="w-12 h-12 bg-[#25D366]/10 border border-[#25D366]/20 rounded-lg flex items-center justify-center text-[#25D366] mb-5 group-hover:bg-[#25D366] group-hover:text-black transition duration-300">
+                        <i class="fab fa-whatsapp text-2xl"></i>
                     </div>
-                    <h3 class="font-bold text-white mb-1">Figurinhas</h3>
-                    <p class="text-sm text-gray-500">Atualizações diárias.</p>
+                    <h3 class="font-bold text-white mb-1 group-hover:text-[#25D366] transition">Figurinhas</h3>
+                    <p class="text-sm text-gray-500 group-hover:text-gray-300 transition">Atualizações diárias.</p>
                 </a>
 
-                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="p-6 rounded-xl bg-brand-dark border border-white/5 hover:border-white/20 transition group">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition">
+                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="glass-card p-6 rounded-xl group">
+                    <div class="w-12 h-12 bg-blue-600/10 border border-blue-600/20 rounded-lg flex items-center justify-center text-blue-500 mb-5 group-hover:bg-blue-600 group-hover:text-white transition duration-300">
                         <i class="fas fa-info"></i>
                     </div>
-                    <h3 class="font-bold text-white mb-1">Status</h3>
-                    <p class="text-sm text-gray-500">Infos do sistema.</p>
+                    <h3 class="font-bold text-white mb-1 group-hover:text-blue-500 transition">Status</h3>
+                    <p class="text-sm text-gray-500 group-hover:text-gray-300 transition">Infos do sistema.</p>
                 </a>
 
-                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="p-6 rounded-xl bg-brand-dark border border-white/5 hover:border-white/20 transition flex items-center gap-4">
-                    <i class="fab fa-tiktok text-2xl text-white"></i>
+                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="glass-card p-6 rounded-xl flex items-center gap-4 group hover:bg-[#ff0050]/5 hover:border-[#ff0050]/30 transition">
+                    <i class="fab fa-tiktok text-2xl text-white group-hover:text-[#ff0050] transition"></i>
                     <span class="font-bold text-white">TikTok</span>
                 </a>
 
-                <a href="https://instagram.com/udesakenofc" target="_blank" class="p-6 rounded-xl bg-brand-dark border border-white/5 hover:border-white/20 transition flex items-center gap-4">
-                    <i class="fab fa-instagram text-2xl text-white"></i>
+                <a href="https://instagram.com/udesakenofc" target="_blank" class="glass-card p-6 rounded-xl flex items-center gap-4 group hover:bg-purple-500/5 hover:border-purple-500/30 transition">
+                    <i class="fab fa-instagram text-2xl text-white group-hover:text-purple-400 transition"></i>
                     <span class="font-bold text-white">Instagram</span>
                 </a>
 
@@ -147,8 +141,8 @@
         </div>
     </section>
 
-    <footer class="py-12 border-t border-white/5 text-center">
-        <p class="text-sm text-gray-600 font-medium">© 2026 Udesaken Group.</p>
+    <footer class="py-12 border-t border-white/5 text-center relative z-10 bg-[#050505]">
+        <p class="text-sm text-gray-600 font-medium hover:text-gray-400 transition cursor-default">© 2026 Udesaken Group.</p>
     </footer>
 
     <script src="script.js"></script>
