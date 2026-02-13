@@ -142,25 +142,37 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
-    let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
     const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0;
+    let isPlaying = false; // Começa pausado por padrão do navegador
 
-    function loadTrack(index, startTime = 0) {
+    // --- FUNÇÃO DE FADE-IN (Entrada Suave) ---
+    function fadeInAudio() {
+        audio.volume = 0;
+        let vol = 0;
+        const interval = setInterval(() => {
+            if (vol < 0.1) { // Volume final 30%
+                vol += 0.01;
+                audio.volume = vol;
+            } else {
+                clearInterval(interval);
+            }
+        }, 50);
+    }
+
+    function loadTrack(index, startTime = 0, autoPlay = false) {
         audio.src = playlist[index].src;
         trackName.innerText = playlist[index].name;
         trackArtist.innerText = playlist[index].artist;
         localStorage.setItem('usk_track_index', index);
         
-        // Só define o tempo quando os metadados estiverem prontos
         audio.onloadedmetadata = () => {
             audio.currentTime = startTime;
-            if (isPlaying) {
-                // Tenta dar play, se falhar (autoplay block), ajusta UI
-                audio.play().catch(() => {
-                    console.log("Autoplay bloqueado pelo navegador.");
-                    isPlaying = false;
-                    updateUI(false);
-                });
+            if (autoPlay) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updateUI(true);
+                    fadeInAudio();
+                }).catch(err => console.log("Bloqueio de Autoplay"));
             }
         };
     }
@@ -177,38 +189,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializa com o tempo salvo
-    loadTrack(currentTrackIndex, savedTime);
-    audio.volume = 0.2;
+    // Inicializa carregando a posição salva
+    loadTrack(currentTrackIndex, savedTime, false);
 
+    // --- EVENTOS ---
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
                 isPlaying = true;
                 updateUI(true);
+                fadeInAudio();
             });
         } else {
             audio.pause();
             isPlaying = false;
             updateUI(false);
         }
-        localStorage.setItem('usk_is_playing', isPlaying);
     });
 
     nextBtn.addEventListener('click', () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         localStorage.setItem('usk_audio_time', 0);
-        isPlaying = true; // Sempre toca a próxima
-        loadTrack(currentTrackIndex, 0);
-        updateUI(true);
+        loadTrack(currentTrackIndex, 0, true); // True para dar play imediato
     });
 
-    // Salva o progresso
+    // Salva o tempo atual a cada segundo
     audio.addEventListener('timeupdate', () => {
         localStorage.setItem('usk_audio_time', audio.currentTime);
     });
 
+    // --- PAUSA AO SAIR DA ABA ---
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !audio.paused) {
+            audio.pause();
+            isPlaying = false;
+            updateUI(false);
+        }
+    });
+
     audio.addEventListener('ended', () => nextBtn.click());
-    
     setTimeout(() => playerContainer.classList.add('visible'), 500);
 });

@@ -230,46 +230,36 @@ html, body {
 
 .glass-pill, .glass-circle {
     position: relative;
-    background: rgba(255, 255, 255, 0.05); /* Mais transparente */
-    backdrop-filter: blur(40px) saturate(220%); /* Saturação pesada */
-    -webkit-backdrop-filter: blur(40px) saturate(220%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
+    background: rgba(15, 15, 15, 0.4) !important; /* Mais escuro para destacar o vidro */
+    backdrop-filter: blur(30px) saturate(250%) contrast(110%);
+    -webkit-backdrop-filter: blur(30px) saturate(250%) contrast(110%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
 }
 
-/* Efeito de brilho líquido que passa pelo player */
-.glass-pill::after, .glass-circle::after {
+/* Brilho que percorre o vidro */
+.glass-pill::after {
     content: '';
     position: absolute;
-    top: -50%;
+    top: -100%;
     left: -100%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        135deg,
-        transparent,
-        rgba(255, 255, 255, 0.08),
-        transparent
-    );
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.05), transparent);
     transform: rotate(25deg);
-    transition: 0.8s;
+    transition: 1s ease-in-out;
     pointer-events: none;
 }
 
-.glass-pill:hover::after, .glass-circle:hover::after {
+.glass-pill:hover::after {
     left: 100%;
 }
 
-/* Ajuste na capa da música */
-.glass-pill img {
-    filter: brightness(1.1) contrast(1.1);
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Visualizer mais "Ouro" */
+/* Visualizer Dourado */
 .v-bar { 
-    background: linear-gradient(to top, var(--orb-1), var(--accent)); 
-    box-shadow: 0 0 10px var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
 }
