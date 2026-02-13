@@ -141,16 +141,18 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Udesaken Lounge 02', artist: 'Udesaken Records', src: '/uskmusic2.mp3' }
     ];
 
+    // --- LOGICA DE PERSISTENCIA ---
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
     const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0;
-    let isPlaying = false;
+    
+    // Agora verificamos se o usuário já estava ouvindo música antes de trocar de página
+    let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
 
-    // --- FADE-IN EM 10% ---
     function fadeInAudio() {
         audio.volume = 0;
         let vol = 0;
         const interval = setInterval(() => {
-            if (vol < 0.1) { // Travado em 10%
+            if (vol < 0.1) {
                 vol += 0.01;
                 audio.volume = parseFloat(vol.toFixed(2));
             } else {
@@ -169,10 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.currentTime = startTime;
             if (autoPlay) {
                 audio.play().then(() => {
-                    isPlaying = true;
                     updateUI(true);
                     fadeInAudio();
-                }).catch(() => console.log("Autoplay bloqueado"));
+                }).catch(() => {
+                    // Se o navegador bloquear o autoplay, resetamos o estado
+                    console.log("Autoplay impedido pelo navegador.");
+                    localStorage.setItem('usk_is_playing', 'false');
+                    updateUI(false);
+                });
             }
         };
     }
@@ -189,18 +195,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadTrack(currentTrackIndex, savedTime, false);
+    // Inicializa carregando a posição salva e o autoplay baseado no estado anterior
+    loadTrack(currentTrackIndex, savedTime, isPlaying);
 
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
                 isPlaying = true;
+                localStorage.setItem('usk_is_playing', 'true');
                 updateUI(true);
                 fadeInAudio();
             });
         } else {
             audio.pause();
             isPlaying = false;
+            localStorage.setItem('usk_is_playing', 'false');
             updateUI(false);
         }
     });
@@ -208,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         localStorage.setItem('usk_audio_time', 0);
+        localStorage.setItem('usk_is_playing', 'true'); // Força tocar a próxima
         loadTrack(currentTrackIndex, 0, true);
     });
 
@@ -215,12 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('usk_audio_time', audio.currentTime);
     });
 
-    // --- PAUSA AO SAIR DA ABA ---
     document.addEventListener('visibilitychange', () => {
         if (document.hidden && !audio.paused) {
             audio.pause();
-            isPlaying = false;
             updateUI(false);
+            // Não alteramos o localStorage aqui para ele poder voltar a tocar quando recarregar
         }
     });
 
