@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
 /* ==========================================================================
-   UDESAKEN - PERSISTENT AUDIO ENGINE (APPLE FIDELITY)
+   UDESAKEN - PERSISTENT AUDIO ENGINE (READY)
    ========================================================================== */
 
 function injectUdesakenPlayer() {
@@ -94,7 +94,7 @@ function injectUdesakenPlayer() {
         <div class="flex items-center gap-2">
             <div class="flex items-center gap-3 glass-pill shadow-2xl">
                 <div class="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
-                    <img src="uskcoroa.png" alt="Capa" class="w-full h-full object-cover">
+                    <img src="/uskcoroa.png" alt="Capa" class="w-full h-full object-cover">
                     <div id="visualizer" class="absolute inset-0 bg-black/60 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
                         <span class="v-bar bar-1"></span>
                         <span class="v-bar bar-2"></span>
@@ -120,7 +120,7 @@ function injectUdesakenPlayer() {
 
     const container = document.createElement('div');
     container.id = 'audio-player-container';
-    container.className = 'fixed bottom-10 z-[100]'; // Posição controlada pelo CSS
+    container.className = 'fixed bottom-10 z-[100]';
     container.innerHTML = playerHTML;
     document.body.appendChild(container);
 }
@@ -137,22 +137,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerContainer = document.getElementById('audio-player-container');
 
     const playlist = [
-        { name: 'Udesaken Lounge 01', artist: 'Udesaken Records', src: 'uskmusic.mp3' },
-        { name: 'Udesaken Lounge 02', artist: 'Udesaken Records', src: 'uskmusic2.mp3' }
+        { name: 'Udesaken Lounge 01', artist: 'Udesaken Records', src: '/uskmusic.mp3' },
+        { name: 'Udesaken Lounge 02', artist: 'Udesaken Records', src: '/uskmusic2.mp3' }
     ];
 
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
     const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0;
-    let isPlaying = false; // Começa pausado por padrão do navegador
+    let isPlaying = false;
 
-    // --- FUNÇÃO DE FADE-IN (Entrada Suave) ---
+    // --- FADE-IN EM 10% ---
     function fadeInAudio() {
         audio.volume = 0;
         let vol = 0;
         const interval = setInterval(() => {
-            if (vol < 0.1) { // Volume final 30%
+            if (vol < 0.1) { // Travado em 10%
                 vol += 0.01;
-                audio.volume = vol;
+                audio.volume = parseFloat(vol.toFixed(2));
             } else {
                 clearInterval(interval);
             }
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     isPlaying = true;
                     updateUI(true);
                     fadeInAudio();
-                }).catch(err => console.log("Bloqueio de Autoplay"));
+                }).catch(() => console.log("Autoplay bloqueado"));
             }
         };
     }
@@ -189,10 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializa carregando a posição salva
     loadTrack(currentTrackIndex, savedTime, false);
 
-    // --- EVENTOS ---
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play().then(() => {
@@ -210,10 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         localStorage.setItem('usk_audio_time', 0);
-        loadTrack(currentTrackIndex, 0, true); // True para dar play imediato
+        loadTrack(currentTrackIndex, 0, true);
     });
 
-    // Salva o tempo atual a cada segundo
     audio.addEventListener('timeupdate', () => {
         localStorage.setItem('usk_audio_time', audio.currentTime);
     });
