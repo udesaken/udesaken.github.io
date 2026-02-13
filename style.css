@@ -1,67 +1,32 @@
 /* =========================================
-   UDESAKEN 2026 - Custom Styles
+   UDESAKEN - WHITE THEME 2026
    ========================================= */
 
-/* --- 1. CONFIGURAÇÕES GERAIS --- */
-body {
-    background-color: #020617; /* Slate 950 (Fundo base) */
-    color: #cbd5e1;            /* Slate 300 (Texto base) */
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;        /* Evita rolagem horizontal acidental */
-    -webkit-font-smoothing: antialiased;
+/* Rolagem Suave */
+html {
+    scroll-behavior: smooth;
 }
 
-/* --- 2. SCROLLBAR PERSONALIZADA --- */
-/* Funciona no Chrome, Edge e Safari */
+/* Scrollbar Bonita (Estilo Mac/Chrome moderno) */
 ::-webkit-scrollbar {
     width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-    background: #020617; /* Cor do trilho igual ao fundo */
+    background: #ffffff;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: #334155; /* Slate 700 */
+    background: #cbd5e1; /* Cinza claro */
     border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-    background: #475569; /* Slate 600 ao passar o mouse */
+    background: #94a3b8; /* Cinza médio */
 }
 
-/* --- 3. TEXTOS COM GRADIENTE --- */
-.text-gradient-brand {
-    background: linear-gradient(to right, #2dd4bf, #818cf8); /* Teal to Indigo */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-}
-
-/* --- 4. GLASSMORPHISM (EFEITO DE VIDRO) --- */
-.glass-card {
-    background: rgba(255, 255, 255, 0.03); /* Quase transparente */
-    backdrop-filter: blur(10px);           /* O desfoque mágico */
-    -webkit-backdrop-filter: blur(10px);   /* Suporte para Safari/iOS */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.glass-nav {
-    background: rgba(2, 6, 23, 0.7);       /* Mais escuro para leitura */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* --- 5. ANIMAÇÕES DE SCROLL (REVEAL) --- */
-/* O JavaScript adiciona a classe .active quando o elemento aparece */
+/* Animação Reveal (Fade Up) */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Curva suave "Apple-like" */
-    will-change: opacity, transform; /* Otimização de performance */
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .reveal.active {
@@ -69,28 +34,16 @@ body {
     transform: translateY(0);
 }
 
-/* Delay em cascata para elementos filhos (opcional, mas útil) */
+/* Delays para efeito cascata */
 .reveal.delay-100 { transition-delay: 0.1s; }
 .reveal.delay-200 { transition-delay: 0.2s; }
-.reveal.delay-300 { transition-delay: 0.3s; }
-.reveal.delay-500 { transition-delay: 0.5s; }
 
-/* --- 6. ANIMAÇÕES EXTRAS --- */
+/* Animação Flutuante (para badges/ícones) */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-10px); }
 }
 
 .animate-float {
-    animation: float 6s ease-in-out infinite;
-}
-
-/* Pulso lento para o background glow */
-@keyframes pulse-slow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.animate-pulse-slow {
-    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: float 4s ease-in-out infinite;
 }
