@@ -85,42 +85,42 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
 /* ==========================================================================
-   UDESAKEN - PERSISTENT ENGINE (NO ERRORS)
+   UDESAKEN - PERSISTENT AUDIO ENGINE (APPLE FIDELITY)
    ========================================================================== */
 
 function injectUdesakenPlayer() {
     const playerHTML = `
-        <audio id="main-audio" preload="auto"></audio>
-        <div class="flex items-center gap-3">
-            <div class="flex items-center gap-3 px-2.5 py-2 glass-pill shadow-2xl">
-                <div class="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+        <audio id="main-audio" preload="auto" loop></audio>
+        <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3 glass-pill shadow-2xl">
+                <div class="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
                     <img src="uskcoroa.png" alt="Capa" class="w-full h-full object-cover">
-                    <div id="visualizer" class="absolute inset-0 bg-black/40 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
+                    <div id="visualizer" class="absolute inset-0 bg-black/60 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
                         <span class="v-bar bar-1"></span>
                         <span class="v-bar bar-2"></span>
                         <span class="v-bar bar-3"></span>
                     </div>
                 </div>
-                <div class="flex flex-col min-w-[130px] max-w-[170px]">
-                    <span id="track-name" class="text-[10px] font-black text-white truncate tracking-tight uppercase leading-tight">Lounge 01</span>
-                    <span id="track-artist" class="text-[9px] text-zinc-400 font-bold opacity-70">Udesaken Records</span>
+
+                <div class="flex flex-col min-w-[120px] max-w-[160px] leading-tight">
+                    <span id="track-name" class="text-[11px] font-bold text-white truncate tracking-tight uppercase">Lounge 01</span>
+                    <span id="track-artist" class="text-[9px] text-zinc-400 font-semibold opacity-60">Udesaken Records</span>
                 </div>
-                <button id="play-pause-btn" class="w-8 h-8 flex items-center justify-center hover:scale-110 transition active:scale-90 bg-white/10 rounded-full">
+
+                <button id="play-pause-btn" class="w-8 h-8 flex items-center justify-center hover:scale-110 transition active:scale-90 bg-white/5 rounded-full">
                     <i class="fas fa-play text-[10px] text-white" id="play-icon"></i>
                 </button>
             </div>
+
             <button id="next-track-btn" class="glass-circle shadow-2xl hover:scale-110 transition active:scale-90">
-                <i class="fas fa-forward text-xs text-zinc-400"></i>
+                <i class="fas fa-forward text-[10px] text-zinc-400"></i>
             </button>
-        </div>
-        <div class="absolute bottom-0 left-5 w-[calc(100%-75px)] h-[1.5px] bg-white/5 overflow-hidden rounded-full">
-            <div id="progress-bar" class="h-full bg-amber-500 w-0 transition-all duration-300"></div>
         </div>
     `;
 
     const container = document.createElement('div');
     container.id = 'audio-player-container';
-    container.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 z-[100]';
+    container.className = 'fixed bottom-10 z-[100]'; // Posição controlada pelo CSS
     container.innerHTML = playerHTML;
     document.body.appendChild(container);
 }
@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('next-track-btn');
     const trackName = document.getElementById('track-name');
     const trackArtist = document.getElementById('track-artist');
-    const progressBar = document.getElementById('progress-bar');
     const playerContainer = document.getElementById('audio-player-container');
 
     const playlist = [
@@ -152,27 +151,19 @@ document.addEventListener('DOMContentLoaded', () => {
         trackArtist.innerText = playlist[index].artist;
         localStorage.setItem('usk_track_index', index);
         
-        // CORREÇÃO DA PERSISTÊNCIA: Só define o tempo quando o áudio carregar
-        audio.onloadedmetadata = () => {
+        // --- A MÁGICA DA PERSISTÊNCIA ---
+        audio.oncanplay = () => {
             const savedTime = localStorage.getItem('usk_audio_time');
             if (savedTime) audio.currentTime = parseFloat(savedTime);
-            if (isPlaying) fadeInAudio();
+            
+            if (isPlaying) {
+                audio.play().then(() => updateUI(true)).catch(() => {
+                    // Se o navegador bloquear o autoplay, resetamos o estado
+                    isPlaying = false;
+                    updateUI(false);
+                });
+            }
         };
-    }
-
-    function fadeInAudio() {
-        audio.volume = 0;
-        audio.play().then(() => {
-            updateUI(true);
-            let fade = setInterval(() => {
-                if (audio.volume < targetVolume) {
-                    audio.volume = Math.min(audio.volume + 0.01, targetVolume);
-                } else { clearInterval(fade); }
-            }, 100);
-        }).catch(() => {
-            isPlaying = false;
-            updateUI(false);
-        });
     }
 
     function updateUI(playing) {
@@ -188,12 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadTrack(currentTrackIndex);
-    setTimeout(() => playerContainer.classList.add('visible'), 600);
+    audio.volume = targetVolume;
+
+    setTimeout(() => playerContainer.classList.add('visible'), 500);
 
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             isPlaying = true;
-            fadeInAudio();
+            audio.play();
+            updateUI(true);
         } else {
             audio.pause();
             isPlaying = false;
@@ -209,11 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = true;
     });
 
-    audio.addEventListener('timeupdate', () => {
-        const progress = (audio.currentTime / audio.duration) * 100;
-        if (progressBar) progressBar.style.width = `${progress}%`;
-        localStorage.setItem('usk_audio_time', audio.currentTime);
-    });
+    // Salva o tempo a cada segundo
+    setInterval(() => {
+        if (!audio.paused) {
+            localStorage.setItem('usk_audio_time', audio.currentTime);
+        }
+    }, 1000);
 
     audio.addEventListener('ended', () => nextBtn.click());
 });
