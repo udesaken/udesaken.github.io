@@ -190,39 +190,5 @@
         </div>
     </footer>
     <script src="script.js"></script>
-
-    <div id="audio-player-container" class="fixed bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 z-[100] apple-island opacity-0 transition-all duration-700 ease-out">
-    <audio id="main-audio" preload="auto"></audio>
-    
-    <div class="flex items-center gap-4 px-3 py-2">
-        <div class="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg group flex-shrink-0">
-            <img src="uskcoroa.png" alt="Capa" class="w-full h-full object-cover">
-            <div id="visualizer" class="absolute inset-0 bg-black/40 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
-                <span class="v-bar bar-1"></span>
-                <span class="v-bar bar-2"></span>
-                <span class="v-bar bar-3"></span>
-            </div>
-        </div>
-
-        <div class="flex flex-col min-w-[100px] transition-all duration-500">
-            <span id="track-name" class="text-[10px] md:text-[11px] font-black text-main truncate tracking-widest uppercase">Udesaken Lounge</span>
-            <span id="track-status" class="text-[9px] text-muted font-bold italic">Pausado</span>
-        </div>
-
-        <div class="flex items-center gap-3 pr-2">
-            <button id="play-pause-btn" class="w-8 h-8 flex items-center justify-center hover:scale-110 transition active:scale-95">
-                <i class="fas fa-play text-sm text-main" id="play-icon"></i>
-            </button>
-            <button id="next-track-btn" class="text-muted hover:text-main transition text-xs">
-                <i class="fas fa-forward"></i>
-            </button>
-        </div>
-    </div>
-    
-    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-white/5 overflow-hidden rounded-b-2xl">
-        <div id="progress-bar" class="h-full bg-brand-gold w-0 transition-all duration-300"></div>
-    </div>
-</div>
-
 </body>
 </html>
