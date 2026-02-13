@@ -290,3 +290,37 @@ html, body {
 .playing #visualizer {
     opacity: 1;
 }
+/* Layout de Ilha Dividida (Split Island) */
+.glass-pill {
+    background: rgba(20, 20, 20, 0.5);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+/* O botão circular (estilo a lupa da sua foto) */
+.glass-circle {
+    background: rgba(30, 30, 30, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Garante que o container mestre seja invisível no início */
+#audio-player-container {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.7s ease-out;
+}
+
+#audio-player-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
