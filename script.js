@@ -143,22 +143,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
     let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
-    const targetVolume = 0.1;
+    const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0;
 
-    function loadTrack(index) {
+    function loadTrack(index, startTime = 0) {
         audio.src = playlist[index].src;
         trackName.innerText = playlist[index].name;
         trackArtist.innerText = playlist[index].artist;
         localStorage.setItem('usk_track_index', index);
         
-        // --- A MÁGICA DA PERSISTÊNCIA ---
-        audio.oncanplay = () => {
-            const savedTime = localStorage.getItem('usk_audio_time');
-            if (savedTime) audio.currentTime = parseFloat(savedTime);
-            
+        // Só define o tempo quando os metadados estiverem prontos
+        audio.onloadedmetadata = () => {
+            audio.currentTime = startTime;
             if (isPlaying) {
-                audio.play().then(() => updateUI(true)).catch(() => {
-                    // Se o navegador bloquear o autoplay, resetamos o estado
+                // Tenta dar play, se falhar (autoplay block), ajusta UI
+                audio.play().catch(() => {
+                    console.log("Autoplay bloqueado pelo navegador.");
                     isPlaying = false;
                     updateUI(false);
                 });
@@ -178,16 +177,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadTrack(currentTrackIndex);
-    audio.volume = targetVolume;
-
-    setTimeout(() => playerContainer.classList.add('visible'), 500);
+    // Inicializa com o tempo salvo
+    loadTrack(currentTrackIndex, savedTime);
+    audio.volume = 0.2;
 
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
-            isPlaying = true;
-            audio.play();
-            updateUI(true);
+            audio.play().then(() => {
+                isPlaying = true;
+                updateUI(true);
+            });
         } else {
             audio.pause();
             isPlaying = false;
@@ -199,16 +198,17 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         localStorage.setItem('usk_audio_time', 0);
-        loadTrack(currentTrackIndex);
-        isPlaying = true;
+        isPlaying = true; // Sempre toca a próxima
+        loadTrack(currentTrackIndex, 0);
+        updateUI(true);
     });
 
-    // Salva o tempo a cada segundo
-    setInterval(() => {
-        if (!audio.paused) {
-            localStorage.setItem('usk_audio_time', audio.currentTime);
-        }
-    }, 1000);
+    // Salva o progresso
+    audio.addEventListener('timeupdate', () => {
+        localStorage.setItem('usk_audio_time', audio.currentTime);
+    });
 
     audio.addEventListener('ended', () => nextBtn.click());
+    
+    setTimeout(() => playerContainer.classList.add('visible'), 500);
 });

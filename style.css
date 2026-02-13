@@ -226,29 +226,50 @@ html, body {
     }
 }
 
-/* Estilo das Pílulas */
-.glass-pill {
-    background: rgba(18, 18, 18, 0.7); /* Mais escuro como Apple */
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 0.5px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 6px 12px;
+/* --- PLAYER LIQUID GLASS REFINADO --- */
+
+.glass-pill, .glass-circle {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05); /* Mais transparente */
+    backdrop-filter: blur(40px) saturate(220%); /* Saturação pesada */
+    -webkit-backdrop-filter: blur(40px) saturate(220%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
 }
 
-.glass-circle {
-    background: rgba(30, 30, 30, 0.6);
-    backdrop-filter: blur(30px);
-    border: 0.5px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Efeito de brilho líquido que passa pelo player */
+.glass-pill::after, .glass-circle::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        135deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+    transform: rotate(25deg);
+    transition: 0.8s;
+    pointer-events: none;
 }
 
-/* Visualizer Bars */
-.v-bar { width: 2px; background: #C6A87C; height: 3px; border-radius: 1px; }
-.playing .v-bar { animation: v-dance 0.8s infinite ease-in-out alternate; }
-@keyframes v-dance { 0% { height: 3px; } 100% { height: 12px; } }
+.glass-pill:hover::after, .glass-circle:hover::after {
+    left: 100%;
+}
+
+/* Ajuste na capa da música */
+.glass-pill img {
+    filter: brightness(1.1) contrast(1.1);
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Visualizer mais "Ouro" */
+.v-bar { 
+    background: linear-gradient(to top, var(--orb-1), var(--accent)); 
+    box-shadow: 0 0 10px var(--accent);
+}
