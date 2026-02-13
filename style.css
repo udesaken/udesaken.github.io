@@ -1,5 +1,5 @@
 /* ==========================================================================
-    UDESAKEN — SYSTEM OS (Versão Final: Desktop e Mobile Corrigidos)
+    UDESAKEN — SYSTEM OS (Versão Final: Desktop Ajustado + Mobile Compacto)
    ========================================================================== */
 
 :root {
@@ -19,7 +19,7 @@
     --text-main: #ffffff;
     --text-muted: #999999;
     
-    /* VARIÁVEL NOVA: LIMITE DE LARGURA */
+    /* LIMITES */
     --max-width: 1300px; 
 }
 
@@ -34,7 +34,7 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     line-height: 1.6;
-    padding-top: 60px; /* Espaço para o header */
+    padding-top: 60px;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
 }
@@ -42,7 +42,7 @@ body {
 a { text-decoration: none; color: white; transition: 0.3s; }
 ul { list-style: none; }
 h1, h2, h3 { font-weight: 600; letter-spacing: -0.04em; line-height: 1.1; }
-p { color: var(--text-muted); font-size: 1.1rem; } /* Fonte um pouco maior */
+p { color: var(--text-muted); font-size: 1.1rem; }
 
 /* --- PROMO BAR --- */
 .promo-bar {
@@ -57,30 +57,21 @@ p { color: var(--text-muted); font-size: 1.1rem; } /* Fonte um pouco maior */
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* --- HEADER (Agora centralizado) --- */
+/* --- HEADER --- */
 header {
     position: fixed; top: 40px; left: 0; width: 100%;
     height: 80px; z-index: 1000;
     background: rgba(5, 5, 5, 0.85); 
     backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--glass-border);
-    display: flex; justify-content: center; /* Centraliza o conteúdo interno */
+    display: flex; justify-content: center;
 }
 
-/* Container interno do header para não esticar demais */
-header nav, header .logo {
-    /* Isso não precisa de classe extra, vamos usar o padding do header */
-}
-
-/* Ajuste direto no header para alinhar itens */
 header {
     padding: 0 5%;
     display: flex; justify-content: space-between; align-items: center;
-    /* Trava a largura máxima do CONTEÚDO do header */
     max-width: 100%; 
 }
-/* Truque: Um container fantasma dentro do header seria ideal, mas vamos usar max-width no body layout */
-
 
 .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -1px; }
 .logo span { 
@@ -98,22 +89,19 @@ header {
 }
 .btn-header:hover { background: #ddd; transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
 
-/* --- HERO SECTION (CORREÇÃO DO ABISMO) --- */
+/* --- HERO SECTION --- */
 .hero {
-    min-height: 85vh; /* Um pouco menos alto para caber em telas normais */
+    min-height: 85vh; 
     display: flex; 
     align-items: center; 
-    justify-content: space-between; /* Mantém separados */
-    
-    /* O SEGREDO: Limitar a largura e centralizar */
+    justify-content: space-between;
     max-width: var(--max-width); 
-    margin: 0 auto; /* Centraliza o bloco na tela */
-    padding: 0 20px; /* Margem de segurança nas laterais */
-    
+    margin: 0 auto; 
+    padding: 0 20px; 
     position: relative; z-index: 2;
 }
 
-.hero-content { flex: 1; max-width: 600px; } /* Ocupa espaço mas não tudo */
+.hero-content { flex: 1; max-width: 600px; }
 .hero-content h1 { 
     font-size: 4.5rem; margin-bottom: 25px; 
     background: linear-gradient(180deg, #fff 0%, #999 100%); 
@@ -123,10 +111,10 @@ header {
 
 .hero-visual {
     flex: 1;
-    display: flex; justify-content: flex-end; /* Joga imagem pra direita */
+    display: flex; justify-content: flex-end;
 }
 .hero-img-effect { 
-    max-width: 500px; width: 100%; /* Limita tamanho da imagem */
+    max-width: 500px; width: 100%;
     filter: drop-shadow(0 0 50px rgba(255,255,255,0.1));
     animation: float 6s ease-in-out infinite;
 }
@@ -150,11 +138,11 @@ header {
 }
 .btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); box-shadow: 0 0 20px rgba(255,255,255,0.1); }
 
-/* --- CARDS (Centralizados e Maiores) --- */
+/* --- CARDS --- */
 .section-padding { 
     padding: 100px 20px; 
-    max-width: var(--max-width); /* Limita largura */
-    margin: 0 auto; /* Centraliza */
+    max-width: var(--max-width); 
+    margin: 0 auto;
 }
 
 .pricing-grid {
@@ -165,16 +153,15 @@ header {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(40px);
-    padding: 50px 40px; /* Mais gordinho */
+    padding: 50px 40px;
     border-radius: 24px;
-    width: 100%; max-width: 450px; /* Card maior no desktop */
+    width: 100%; max-width: 450px;
     position: relative; overflow: hidden;
     text-align: left;
     transition: transform 0.3s ease;
 }
 
 .price-card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.4); }
-/* Spotlight Effect CSS */
 .price-card::before {
     content: ''; position: absolute;
     top: var(--y, -50%); left: var(--x, -50%);
@@ -216,7 +203,7 @@ footer {
 }
 .footer-container { 
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; 
-    max-width: var(--max-width); margin: 0 auto; /* Centralizado */
+    max-width: var(--max-width); margin: 0 auto;
 }
 .social-btn { width: 45px; height: 45px; background: rgba(255,255,255,0.05); color: white; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; margin-right: 10px; font-size: 1.2rem; }
 .social-btn:hover { background: white; color: black; box-shadow: 0 0 20px white; }
@@ -250,13 +237,13 @@ footer {
 .paused .bar { animation-play-state: paused; height: 3px; }
 
 /* =========================================
-   MOBILE FIX (Mantendo sua correção anterior)
+   MOBILE OPTIMIZATION (CORREÇÃO DE TAMANHO)
    ========================================= */
 .hamburger { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
 .close-btn-mobile { display: none; }
 
 @media (max-width: 992px) {
-    /* Menu */
+    /* Menu Lateral */
     .hamburger { display: block; }
     .nav-links {
         position: fixed; top: 0; right: -100%; width: 85%; height: 100vh;
@@ -268,25 +255,49 @@ footer {
     .nav-links.active { right: 0; }
     .close-btn-mobile { display: block; position: absolute; top: 25px; right: 25px; font-size: 1.5rem; color: white; opacity: 0.7; }
 
-    /* Hero Mobile */
+    /* --- HERO MOBILE AJUSTADO --- */
     .hero { 
         flex-direction: column; 
-        justify-content: center; /* Centraliza verticalmente também */
+        justify-content: center;
         text-align: center; 
-        padding-top: 140px; 
-        padding-bottom: 60px;
+        padding-top: 130px; /* Menos espaço em cima */
+        padding-bottom: 50px;
         min-height: auto;
     }
-    .hero-content h1 { font-size: 2.8rem; margin: 0 auto 20px; }
-    .hero-visual { margin-top: 40px; justify-content: center; } /* Centraliza imagem */
-    .hero-img-effect { max-width: 280px; }
     
-    .cta-buttons { flex-direction: column; width: 100%; }
-    .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    /* TÍTULO MENOR */
+    .hero-content h1 { 
+        font-size: 2.2rem; /* REDUZIDO de 2.8rem */
+        line-height: 1.2;
+        margin: 0 auto 15px; 
+    }
+    
+    .hero-content p {
+        font-size: 0.95rem;
+        padding: 0 15px; /* Espaço nas laterais do texto */
+    }
+    
+    /* IMAGEM DA COROA PEQUENA */
+    .hero-visual { 
+        margin-top: 30px; 
+        justify-content: center; 
+        order: 2; /* Garante que fique embaixo */
+    }
+    .hero-img-effect { 
+        max-width: 160px; /* REDUZIDO de 280px para 160px (Correção principal) */
+        width: 50%;
+    }
+    
+    .cta-buttons { 
+        flex-direction: column; width: 100%; gap: 15px; 
+        margin-top: 30px;
+    }
+    .btn-primary, .btn-secondary { width: 100%; justify-content: center; padding: 15px; }
 
     /* Cards Mobile */
-    .price-card { max-width: 100%; padding: 30px 20px; }
-    .price-card:hover { transform: none; } /* Desativa efeito hover complexo */
+    .pricing-grid { gap: 25px; }
+    .price-card { max-width: 100%; padding: 30px 25px; }
+    .price-card:hover { transform: none; }
     
     /* Footer Mobile */
     .footer-container { flex-direction: column; text-align: center; }
@@ -294,13 +305,13 @@ footer {
     
     /* Player Mobile */
     .music-widget {
-        bottom: 20px; width: 90%; left: 5%; right: 5%;
+        bottom: 20px; width: 92%; left: 4%; right: 4%;
         justify-content: space-between; padding: 10px 15px;
     }
-    .music-info { max-width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .music-info { max-width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.75rem; }
     #volumeSlider { width: 40px; }
     .volume-container i { display: none; }
 }
 
 /* Animação Flutuante */
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
