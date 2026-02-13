@@ -1,28 +1,36 @@
 /* =========================================
-   UDESAKEN - WHITE THEME 2026
+   UDESAKEN - DARK MODE PREMIUM
    ========================================= */
 
-/* Rolagem Suave */
 html {
     scroll-behavior: smooth;
+    background-color: #050505; /* Fundo base para evitar flash branco */
 }
 
-/* Scrollbar Bonita (Estilo Mac/Chrome moderno) */
+/* Scrollbar Dark e Minimalista */
 ::-webkit-scrollbar {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #ffffff;
+    background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1; /* Cinza claro */
+    background: #333;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8; /* Cinza médio */
+    background: #555;
 }
 
-/* Animação Reveal (Fade Up) */
+/* Efeito de Vidro Dark */
+.glass-nav {
+    background: rgba(5, 5, 5, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animações de Entrada */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -34,16 +42,7 @@ html {
     transform: translateY(0);
 }
 
-/* Delays para efeito cascata */
 .reveal.delay-100 { transition-delay: 0.1s; }
 .reveal.delay-200 { transition-delay: 0.2s; }
-
-/* Animação Flutuante (para badges/ícones) */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-    animation: float 4s ease-in-out infinite;
-}
+.reveal.delay-300 { transition-delay: 0.3s; }
+.reveal.delay-500 { transition-delay: 0.5s; }
