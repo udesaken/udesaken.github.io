@@ -158,4 +158,5 @@ document.addEventListener('DOMContentLoaded', () => {
             if(cookieBanner) cookieBanner.classList.remove('active');
         });
     }
+
 });
