@@ -1,130 +1,145 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Comandos — Udesaken</title>
+    <title>Central de Comandos | Udesaken Group</title>
     
-    <meta property="og:image" content="https://udesaken.site/uskcoroa.png">
-    <link rel="icon" type="image/png" href="/uskcoroa.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        if (window.location.pathname.endsWith('.html')) {
-            var newPath = window.location.pathname.replace('.html', '');
-            window.history.replaceState(null, '', newPath);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    },
+                    letterSpacing: { tight: '-0.02em' }
+                }
+            }
         }
     </script>
-
-    <style>
-        /* GRID DO HUB */
-        .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 20px 5%; }
-        .hub-card { background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px; cursor: pointer; backdrop-filter: blur(10px); }
-        .hub-card:hover { transform: translateY(-5px); background: rgba(30, 30, 30, 0.9); }
-        .hub-icon { font-size: 3rem; margin-bottom: 20px; transition: 0.3s; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); }
-        .hub-card:hover .hub-icon { transform: scale(1.15); }
-        .hub-title { font-size: 1.2rem; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-        .hub-desc { color: #888; font-size: 0.85rem; line-height: 1.5; }
-
-        /* ESTILO DO BOTÃO VOLTAR */
-        .btn-back-float {
-            display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px; color: #ddd; text-decoration: none; font-size: 0.9rem;
-            transition: 0.3s; margin-bottom: 20px;
-        }
-        .btn-back-float:hover { background: white; color: black; transform: translateX(-5px); box-shadow: 0 0 15px rgba(255,255,255,0.3); }
-
-        /* CORES */
-        .card-bn { border-bottom: 3px solid #bc13fe; } .card-bn .hub-icon { color: #bc13fe; }
-        .card-adm { border-bottom: 3px solid var(--hk-pink); } .card-adm .hub-icon { color: var(--hk-pink); }
-        .card-member { border-bottom: 3px solid #00e5ff; } .card-member .hub-icon { color: #00e5ff; }
-        .card-fig { border-bottom: 3px solid #2ecc71; } .card-fig .hub-icon { color: #2ecc71; }
-        .card-gold { border-bottom: 3px solid #FFD700; } .card-gold .hub-icon { color: #FFD700; }
-        .card-premium { border-bottom: 3px solid #fff; background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(0,0,0,1)); } .card-premium .hub-icon { color: white; }
-        .card-family { border-bottom: 3px solid #ff4757; } .card-family .hub-icon { color: #ff4757; }
-        .card-pet { border-bottom: 3px solid #e67e22; } .card-pet .hub-icon { color: #e67e22; }
-        .card-down { border-bottom: 3px solid #3498db; } .card-down .hub-icon { color: #3498db; }
-        
-        /* REMOVE ESPAÇO DA PROMOÇÃO APENAS AQUI */
-        header { top: 0 !important; }
-    </style>
 </head>
-<body class="no-promo" style="padding-top: 0;">
+<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
 
-    <header class="no-promo">
-        <div class="logo">
-            Udesaken <span style="font-size:0.8rem; border:1px solid white; color: white; padding: 2px 5px; border-radius: 4px;">HUB</span>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
-                <li><a href="/">Início</a></li>
-                <li><a href="/planos">Planos</a></li>
-                <li><a href="/comandos" class="active">Comandos</a></li>
-                <li><a href="/vip">Clube VIP</a></li>
-                <li><a href="https://wa.me/447562847091" class="btn-header"><i class="fab fa-whatsapp"></i> Contato</a></li>
-            </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+    <div class="liquid-container">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+        <div class="liquid-orb orb-3"></div>
+    </div>
 
-    <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align: center;">
-        <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
-            
-            <a href="/" class="btn-back-float">
-                <i class="fas fa-arrow-left"></i> Voltar ao Início
-            </a>
-
-            <div class="reveal-fade" style="margin-top: 20px;">
-                <div class="badge-news" style="margin-bottom: 20px; border-color: white; color: white; box-shadow: 0 0 10px rgba(255,255,255,0.2);">
-                    <i class="fas fa-layer-group"></i> Central Comandos
+    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
+                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-            </div>
+                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
+                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase font-black">HUB</span>
+                </span>
+            </a>
             
-            <h1 class="reveal-bottom">
-                Central de <span style="background: linear-gradient(90deg, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">COMANDOS.</span>
+            <div class="flex items-center gap-6">
+                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
+                    <i class="fas fa-moon text-sm"></i>
+                </button>
+                <a href="../" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-12 text-center relative">
+        <div class="max-w-4xl mx-auto px-6 fade-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
+                <i class="fas fa-layer-group text-gold text-[10px]"></i>
+                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Documentação Oficial</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-black text-main mb-6 tracking-tighter leading-tight">
+                Central de <br>
+                <span class="text-gradient-gold">COMANDOS.</span>
             </h1>
             
-            <p class="reveal-bottom delay-200" style="margin-top: 15px;">
-                Navegue pelas categorias oficiais do bot.
+            <p class="text-lg text-muted max-w-xl mx-auto font-medium">
+                Explore as categorias e domine todas as funções do bot.
             </p>
         </div>
     </section>
 
-    <section class="section-padding" style="padding-top: 0;">
-        <div class="hub-grid">
-            <a href="brincadeiras.html" class="hub-card card-bn reveal-left"><div class="hub-icon"><i class="fas fa-gamepad"></i></div><div class="hub-title">Brincadeiras</div><div class="hub-desc">Jogos e Diversão</div></a>
-            <a href="admin.html" class="hub-card card-adm reveal-right"><div class="hub-icon"><i class="fas fa-shield-alt"></i></div><div class="hub-title">Administração</div><div class="hub-desc">Gestão e Segurança</div></a>
-            <a href="membros.html" class="hub-card card-member reveal-left delay-100"><div class="hub-icon"><i class="fas fa-users"></i></div><div class="hub-title">Membros</div><div class="hub-desc">Social e Perfil</div></a>
-            <a href="figurinhas.html" class="hub-card card-fig reveal-right delay-100"><div class="hub-icon"><i class="fas fa-sticky-note"></i></div><div class="hub-title">Figurinhas</div><div class="hub-desc">Stickers e Memes</div></a>
-            <a href="economia.html" class="hub-card card-gold reveal-left delay-200"><div class="hub-icon"><i class="fas fa-coins"></i></div><div class="hub-title">Economia</div><div class="hub-desc">Banco e Crimes</div></a>
-            <a href="premium.html" class="hub-card card-premium reveal-right delay-200"><div class="hub-icon"><i class="fas fa-gem"></i></div><div class="hub-title">Premium</div><div class="hub-desc">Utilidades VIP</div></a>
-            <a href="familia.html" class="hub-card card-family reveal-left delay-300"><div class="hub-icon"><i class="fas fa-heart"></i></div><div class="hub-title">Família</div><div class="hub-desc">Relacionamentos</div></a>
-            <a href="pets.html" class="hub-card card-pet reveal-right delay-300"><div class="hub-icon"><i class="fas fa-paw"></i></div><div class="hub-title">Pets</div><div class="hub-desc">Bichinhos</div></a>
-            <a href="downloads.html" class="hub-card card-down reveal-left delay-400"><div class="hub-icon"><i class="fas fa-download"></i></div><div class="hub-title">Downloads</div><div class="hub-desc">Mídia e Pesquisa</div></a>
+    <section class="pb-32 relative z-10">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <a href="brincadeiras.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.1s; border-bottom: 3px solid #bc13fe;">
+                    <i class="fas fa-gamepad text-4xl mb-6 text-[#bc13fe] group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Brincadeiras</h3>
+                    <p class="text-xs text-muted font-medium">Jogos, diversão e interatividade.</p>
+                </a>
+
+                <a href="admin.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.2s; border-bottom: 3px solid #ff69b4;">
+                    <i class="fas fa-shield-alt text-4xl mb-6 text-[#ff69b4] group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Administração</h3>
+                    <p class="text-xs text-muted font-medium">Gestão avançada de grupos.</p>
+                </a>
+
+                <a href="economia.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.3s; border-bottom: 3px solid #FFD700;">
+                    <i class="fas fa-coins text-4xl mb-6 text-[#FFD700] group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Economia</h3>
+                    <p class="text-xs text-muted font-medium">Sistema de banco e ranking.</p>
+                </a>
+
+                <a href="premium.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.4s; border-bottom: 3px solid #fff;">
+                    <i class="fas fa-gem text-4xl mb-6 text-white group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Premium</h3>
+                    <p class="text-xs text-muted font-medium">Utilidades exclusivas VIP.</p>
+                </a>
+
+                <a href="downloads.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.5s; border-bottom: 3px solid #3498db;">
+                    <i class="fas fa-download text-4xl mb-6 text-[#3498db] group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Downloads</h3>
+                    <p class="text-xs text-muted font-medium">Mídia, vídeos e pesquisas.</p>
+                </a>
+
+                <a href="figurinhas.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="animation-delay: 0.6s; border-bottom: 3px solid #2ecc71;">
+                    <i class="fas fa-sticky-note text-4xl mb-6 text-[#2ecc71] group-hover:scale-110 transition duration-500"></i>
+                    <h3 class="text-lg font-bold text-main mb-2">Figurinhas</h3>
+                    <p class="text-xs text-muted font-medium">Criação de stickers e memes.</p>
+                </a>
+
+            </div>
         </div>
     </section>
-            
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col reveal-bottom">
-                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
-                <p>Todos os direitos reservados &copy; 2026.</p>
+
+    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
+        <div class="max-w-[1100px] mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+                <a href="../equipe/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
+                    <i class="fas fa-users text-gold group-hover:scale-110 transition"></i>
+                    <span class="text-sm font-bold text-main">Conhecer Equipe</span>
+                </a>
+                <a href="../termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <i class="fas fa-file-contract text-muted group-hover:text-white transition"></i>
+                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
+                </a>
+            </div>
+            <div class="text-center">
+                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
+                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
+                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+                </p>
             </div>
         </div>
     </footer>
 
-    <div class="music-widget">
-        <audio id="bg-audio" loop><source src="../musicusk.mp3?v=2" type="audio/mpeg"></audio>
-        <div class="music-btn" onclick="toggleMusic()"><div class="waves"><span></span><span></span><span></span></div><i class="fas fa-volume-mute" id="music-icon"></i></div>
-    </div>
-
-    <script type="module" src="../script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
