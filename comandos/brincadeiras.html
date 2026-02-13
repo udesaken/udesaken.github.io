@@ -1,558 +1,300 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Diversão — Udesaken</title>
+    <title>Menu Diversão | Udesaken Group</title>
     
-    <meta property="og:image" content="https://udesaken.site/uskcoroa.png">
-    <link rel="icon" type="image/png" href="/uskcoroa.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        if (window.location.pathname.endsWith('.html')) {
-            var newPath = window.location.pathname.replace('.html', '');
-            window.history.replaceState(null, '', newPath);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    }
+                }
+            }
         }
     </script>
 
     <style>
-        /* FORÇA O HEADER A FICAR NO TOPO (IGNORANDO A BARRA PROMO) APENAS NESTA PÁGINA */
-        header { top: 0 !important; }
-
-        /* ESTILO LIMPO PARA LISTAS LONGAS */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            color: #ddd;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            margin-bottom: 20px;
+        .search-input {
+            width: 100%; padding: 15px 50px; border-radius: 50px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-main); font-size: 1rem; outline: none; transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
-
-        .btn-back:hover {
-            background: #bc13fe;
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .search-wrapper input {
-            width: 100%;
-            padding: 15px 50px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .search-wrapper input:focus {
-            border-color: #bc13fe;
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .search-icon {
-            position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #888;
-        }
-
-        .commands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            padding: 0 5%;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .cmd-card {
-            background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
-            /* Borda superior temática */
-            border-top: 3px solid #bc13fe; 
-        }
-
-        .cmd-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-
-        .cmd-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;
-        }
-
-        .cmd-title {
-            font-size: 1.1rem; font-weight: 700; color: white;
-            text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 10px;
-        }
-
-        .cmd-title i { color: #bc13fe; text-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
-
-        .cmd-list { display: flex; flex-wrap: wrap; gap: 8px; }
-
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(198, 168, 124, 0.2); }
+        
         .cmd-tag {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 5px 10px; border-radius: 6px; font-size: 0.8rem;
-            color: #ccc; border: 1px solid rgba(255, 255, 255, 0.1);
-            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s;
+            background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 8px;
+            font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--glass-border);
+            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s; font-weight: 600;
         }
-
-        .cmd-tag:hover { background: #bc13fe; color: white; border-color: #bc13fe; transform: scale(1.05); }
-
-        /* Cores Específicas */
-        .card-hot { border-top-color: #ff4500; }
-        .card-hot .cmd-title i { color: #ff4500; text-shadow: 0 0 10px red; }
-        .card-hot .cmd-tag:hover { background: #ff4500; border-color: #ff4500; }
+        .cmd-tag.highlight { background: var(--accent) !important; color: black !important; border-color: var(--accent) !important; transform: scale(1.05); }
     </style>
 </head>
-<body style="padding-top: 0;">
+<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
 
-    <header>
-        <div class="logo">
-            Udesaken <span style="font-size:0.8rem; border:1px solid #bc13fe; color: #bc13fe; padding: 2px 5px; border-radius: 4px;">FUN</span>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
-                <li><a href="/">Início</a></li>
-                <li><a href="/planos">Planos</a></li>
-                <li><a href="/comandos" class="active" style="color: #bc13fe; text-shadow: 0 0 10px rgba(188, 19, 254, 0.5);">Comandos</a></li>
-                <li><a href="/vip">Clube VIP</a></li>
-                <li><a href="https://wa.me/447562847091" class="btn-header"><i class="fab fa-whatsapp"></i> Contato</a></li>
-            </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+    <div class="liquid-container">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+        <div class="liquid-orb orb-3"></div>
+    </div>
 
-    <section class="hero" style="min-height: 40vh; padding-top: 120px; padding-bottom: 20px; align-items: flex-start; justify-content: center; flex-direction: column; text-align: center;">
-        <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto;">
-            
-            <a href="/comandos" class="btn-back reveal-fade">
-                <i class="fas fa-arrow-left"></i> Voltar para Comandos
-            </a>
-
-            <div class="reveal-fade">
-                <div class="badge-news" style="margin-bottom: 20px; border-color: #bc13fe; color: #bc13fe;">
-                    <i class="fas fa-gamepad"></i> Módulo Diversão
+    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
+                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-            </div>
+                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
+                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase font-black">FUN</span>
+                </span>
+            </a>
             
-            <h1 class="reveal-bottom">
-                Menu <span style="color: #bc13fe;">BRINCADEIRAS.</span>
+            <div class="flex items-center gap-6">
+                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
+                    <i class="fas fa-moon text-sm"></i>
+                </button>
+                <a href="./" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Hub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-12 text-center relative">
+        <div class="max-w-4xl mx-auto px-6 fade-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
+                <i class="fas fa-gamepad text-gold text-[10px]"></i>
+                <span class="text-[10px] font-bold text-main tracking-widest uppercase text-gold">Módulo Diversão</span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-black text-main mb-6 tracking-tighter leading-tight">
+                Menu <span class="text-gradient-gold uppercase">BRINCADEIRAS.</span>
             </h1>
             
-            <p class="reveal-bottom delay-200" style="margin-top: 15px;">
-                Jogos, interações e rankings da comunidade.
-            </p>
+            <div class="relative max-w-xl mx-auto mt-10">
+                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-muted"></i>
+                <input type="text" id="cmdSearch" class="search-input" placeholder="Pesquisar (ex: gartic, beijo, corno)...">
+                <div class="mt-4 text-[11px] text-muted font-medium">
+                    <i class="fas fa-terminal text-gold mr-1"></i> Use os comandos com o prefixo <span class="text-main font-bold">7</span> ou o do seu grupo.
+                </div>
+            </div>
         </div>
     </section>
 
-    <div class="search-wrapper reveal-zoom delay-200">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="cmdSearch" placeholder="Pesquisar (ex: gartic, beijo, corno)...">
-        
-        <div style="margin-top: 15px; font-size: 0.85rem; color: #888; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <i class="fas fa-terminal" style="color: #bc13fe; font-size: 0.7rem;"></i>
-            <span>Use os comandos com o prefixo padrão <b style="color: white;">7</b> ou o definido pelo seu grupo.</span>
-        </div>
-    </div>
-
-    <section class="section-padding" style="padding-top: 0;">
-        <div class="commands-grid">
-
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-dice"></i> JOGOS</div>
+    <section class="pb-32 relative z-10">
+        <div class="max-w-[1300px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-dice text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Jogos</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">gartic</span>
-                    <span class="cmd-tag">stopgartic</span>
-                    <span class="cmd-tag">jogodavelha</span>
-                    <span class="cmd-tag">iniciarquiz</span>
-                    <span class="cmd-tag">pular</span>
-                    <span class="cmd-tag">stopquiz</span>
-                    <span class="cmd-tag">forca</span>
-                    <span class="cmd-tag">forca-fim</span>
-                    <span class="cmd-tag">eununca</span>
-                    <span class="cmd-tag">roletarussa</span>
-                    <span class="cmd-tag">vab</span>
-                    <span class="cmd-tag">chance</span>
-                    <span class="cmd-tag">quando</span>
-                    <span class="cmd-tag">casal</span>
-                    <span class="cmd-tag">shipo</span>
-                    <span class="cmd-tag">sn</span>
-                    <span class="cmd-tag">ppt</span>
-                    <span class="cmd-tag">suicidio</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">gartic</span><span class="cmd-tag">stopgartic</span><span class="cmd-tag">jogodavelha</span>
+                    <span class="cmd-tag">iniciarquiz</span><span class="cmd-tag">pular</span><span class="cmd-tag">stopquiz</span>
+                    <span class="cmd-tag">forca</span><span class="cmd-tag">forca-fim</span><span class="cmd-tag">eununca</span>
+                    <span class="cmd-tag">roletarussa</span><span class="cmd-tag">vab</span><span class="cmd-tag">chance</span>
+                    <span class="cmd-tag">quando</span><span class="cmd-tag">casal</span><span class="cmd-tag">shipo</span>
+                    <span class="cmd-tag">sn</span><span class="cmd-tag">ppt</span><span class="cmd-tag">suicidio</span>
                 </div>
             </div>
 
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-hand-sparkles"></i> INTERAÇÕES</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-hand-sparkles text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Interações</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">dance</span>
-                    <span class="cmd-tag">chorar</span>
-                    <span class="cmd-tag">chute</span>
-                    <span class="cmd-tag">chutar</span>
-                    <span class="cmd-tag">tapa</span>
-                    <span class="cmd-tag">soco</span>
-                    <span class="cmd-tag">socar</span>
-                    <span class="cmd-tag">explodir</span>
-                    <span class="cmd-tag">abraco</span>
-                    <span class="cmd-tag">abracar</span>
-                    <span class="cmd-tag">morder</span>
-                    <span class="cmd-tag">mordida</span>
-                    <span class="cmd-tag">lamber</span>
-                    <span class="cmd-tag">lambida</span>
-                    <span class="cmd-tag">beijo</span>
-                    <span class="cmd-tag">beijar</span>
-                    <span class="cmd-tag">mata</span>
-                    <span class="cmd-tag">matar</span>
-                    <span class="cmd-tag">cafune</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">dance</span><span class="cmd-tag">chorar</span><span class="cmd-tag">chute</span>
+                    <span class="cmd-tag">chutar</span><span class="cmd-tag">tapa</span><span class="cmd-tag">soco</span>
+                    <span class="cmd-tag">socar</span><span class="cmd-tag">explodir</span><span class="cmd-tag">abraco</span>
+                    <span class="cmd-tag">abracar</span><span class="cmd-tag">morder</span><span class="cmd-tag">mordida</span>
+                    <span class="cmd-tag">lamber</span><span class="cmd-tag">lambida</span><span class="cmd-tag">beijo</span>
+                    <span class="cmd-tag">beijar</span><span class="cmd-tag">mata</span><span class="cmd-tag">matar</span><span class="cmd-tag">cafune</span>
                 </div>
             </div>
 
-            <div class="cmd-card card-hot reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-fire"></i> INTERAÇÕES "HOT"</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card" style="border-top: 3px solid #ff4500;">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-fire text-[#ff4500]"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Interações "Hot"</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">surubao</span>
-                    <span class="cmd-tag">sexo</span>
-                    <span class="cmd-tag">beijob</span>
-                    <span class="cmd-tag">beijarb</span>
-                    <span class="cmd-tag">tapar</span>
-                    <span class="cmd-tag">goza</span>
-                    <span class="cmd-tag">gozar</span>
-                    <span class="cmd-tag">mamar</span>
-                    <span class="cmd-tag">mamada</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">surubao</span><span class="cmd-tag">sexo</span><span class="cmd-tag">beijob</span>
+                    <span class="cmd-tag">beijarb</span><span class="cmd-tag">tapar</span><span class="cmd-tag">goza</span>
+                    <span class="cmd-tag">gozar</span><span class="cmd-tag">mamar</span><span class="cmd-tag">mamada</span>
                 </div>
             </div>
 
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-mars"></i> BRINCADEIRAS - M</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-mars text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Zueira Masculina</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">gay</span>
-                    <span class="cmd-tag">burro</span>
-                    <span class="cmd-tag">inteligente</span>
-                    <span class="cmd-tag">otaku</span>
-                    <span class="cmd-tag">fiel</span>
-                    <span class="cmd-tag">infiel</span>
-                    <span class="cmd-tag">corno</span>
-                    <span class="cmd-tag">gado</span>
-                    <span class="cmd-tag">gostoso</span>
-                    <span class="cmd-tag">feio</span>
-                    <span class="cmd-tag">rico</span>
-                    <span class="cmd-tag">pobre</span>
-                    <span class="cmd-tag">pirocudo</span>
-                    <span class="cmd-tag">nazista</span>
-                    <span class="cmd-tag">ladrao</span>
-                    <span class="cmd-tag">safado</span>
-                    <span class="cmd-tag">vesgo</span>
-                    <span class="cmd-tag">bebado</span>
-                    <span class="cmd-tag">machista</span>
-                    <span class="cmd-tag">homofobico</span>
-                    <span class="cmd-tag">racista</span>
-                    <span class="cmd-tag">chato</span>
-                    <span class="cmd-tag">sortudo</span>
-                    <span class="cmd-tag">azarado</span>
-                    <span class="cmd-tag">forte</span>
-                    <span class="cmd-tag">fraco</span>
-                    <span class="cmd-tag">pegador</span>
-                    <span class="cmd-tag">otario</span>
-                    <span class="cmd-tag">macho</span>
-                    <span class="cmd-tag">bobo</span>
-                    <span class="cmd-tag">nerd</span>
-                    <span class="cmd-tag">preguicoso</span>
-                    <span class="cmd-tag">trabalhador</span>
-                    <span class="cmd-tag">brabo</span>
-                    <span class="cmd-tag">lindo</span>
-                    <span class="cmd-tag">malandro</span>
-                    <span class="cmd-tag">simpatico</span>
-                    <span class="cmd-tag">engracado</span>
-                    <span class="cmd-tag">charmoso</span>
-                    <span class="cmd-tag">misterioso</span>
-                    <span class="cmd-tag">carinhoso</span>
-                    <span class="cmd-tag">desumilde</span>
-                    <span class="cmd-tag">humilde</span>
-                    <span class="cmd-tag">ciumento</span>
-                    <span class="cmd-tag">corajoso</span>
-                    <span class="cmd-tag">covarde</span>
-                    <span class="cmd-tag">esperto</span>
-                    <span class="cmd-tag">talarico</span>
-                    <span class="cmd-tag">chorao</span>
-                    <span class="cmd-tag">brincalhao</span>
-                    <span class="cmd-tag">bolsonarista</span>
-                    <span class="cmd-tag">petista</span>
-                    <span class="cmd-tag">comunista</span>
-                    <span class="cmd-tag">lulista</span>
-                    <span class="cmd-tag">traidor</span>
-                    <span class="cmd-tag">bandido</span>
-                    <span class="cmd-tag">cachorro</span>
-                    <span class="cmd-tag">vagabundo</span>
-                    <span class="cmd-tag">pilantra</span>
-                    <span class="cmd-tag">mito</span>
-                    <span class="cmd-tag">padrao</span>
-                    <span class="cmd-tag">comedia</span>
-                    <span class="cmd-tag">psicopata</span>
-                    <span class="cmd-tag">fortao</span>
-                    <span class="cmd-tag">magrelo</span>
-                    <span class="cmd-tag">bombado</span>
-                    <span class="cmd-tag">chefe</span>
-                    <span class="cmd-tag">presidente</span>
-                    <span class="cmd-tag">rei</span>
-                    <span class="cmd-tag">patrao</span>
-                    <span class="cmd-tag">playboy</span>
-                    <span class="cmd-tag">zueiro</span>
-                    <span class="cmd-tag">gamer</span>
-                    <span class="cmd-tag">programador</span>
-                    <span class="cmd-tag">visionario</span>
-                    <span class="cmd-tag">billionario</span>
-                    <span class="cmd-tag">poderoso</span>
-                    <span class="cmd-tag">vencedor</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">gay</span><span class="cmd-tag">burro</span><span class="cmd-tag">inteligente</span>
+                    <span class="cmd-tag">otaku</span><span class="cmd-tag">fiel</span><span class="cmd-tag">infiel</span>
+                    <span class="cmd-tag">corno</span><span class="cmd-tag">gado</span><span class="cmd-tag">gostoso</span>
+                    <span class="cmd-tag">feio</span><span class="cmd-tag">rico</span><span class="cmd-tag">pobre</span>
+                    <span class="cmd-tag">pirocudo</span><span class="cmd-tag">nazista</span><span class="cmd-tag">ladrao</span>
+                    <span class="cmd-tag">safado</span><span class="cmd-tag">vesgo</span><span class="cmd-tag">bebado</span>
+                    <span class="cmd-tag">machista</span><span class="cmd-tag">homofobico</span><span class="cmd-tag">racista</span>
+                    <span class="cmd-tag">chato</span><span class="cmd-tag">sortudo</span><span class="cmd-tag">azarado</span>
+                    <span class="cmd-tag">forte</span><span class="cmd-tag">fraco</span><span class="cmd-tag">pegador</span>
+                    <span class="cmd-tag">otario</span><span class="cmd-tag">macho</span><span class="cmd-tag">bobo</span>
+                    <span class="cmd-tag">nerd</span><span class="cmd-tag">preguicoso</span><span class="cmd-tag">trabalhador</span>
+                    <span class="cmd-tag">brabo</span><span class="cmd-tag">lindo</span><span class="cmd-tag">malandro</span>
+                    <span class="cmd-tag">simpatico</span><span class="cmd-tag">engracado</span><span class="cmd-tag">charmoso</span>
+                    <span class="cmd-tag">misterioso</span><span class="cmd-tag">carinhoso</span><span class="cmd-tag">desumilde</span>
+                    <span class="cmd-tag">humilde</span><span class="cmd-tag">ciumento</span><span class="cmd-tag">corajoso</span>
+                    <span class="cmd-tag">covarde</span><span class="cmd-tag">esperto</span><span class="cmd-tag">talarico</span>
+                    <span class="cmd-tag">chorao</span><span class="cmd-tag">brincalhao</span><span class="cmd-tag">bolsonarista</span>
+                    <span class="cmd-tag">petista</span><span class="cmd-tag">comunista</span><span class="cmd-tag">lulista</span>
+                    <span class="cmd-tag">traidor</span><span class="cmd-tag">bandido</span><span class="cmd-tag">cachorro</span>
+                    <span class="cmd-tag">vagabundo</span><span class="cmd-tag">pilantra</span><span class="cmd-tag">mito</span>
+                    <span class="cmd-tag">padrao</span><span class="cmd-tag">comedia</span><span class="cmd-tag">psicopata</span>
+                    <span class="cmd-tag">fortao</span><span class="cmd-tag">magrelo</span><span class="cmd-tag">bombado</span>
+                    <span class="cmd-tag">chefe</span><span class="cmd-tag">presidente</span><span class="cmd-tag">rei</span>
+                    <span class="cmd-tag">patrao</span><span class="cmd-tag">playboy</span><span class="cmd-tag">zueiro</span>
+                    <span class="cmd-tag">gamer</span><span class="cmd-tag">programador</span><span class="cmd-tag">visionario</span>
+                    <span class="cmd-tag">billionario</span><span class="cmd-tag">poderoso</span><span class="cmd-tag">vencedor</span>
                     <span class="cmd-tag">senhor</span>
                 </div>
             </div>
 
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-venus"></i> BRINCADEIRAS - F</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-venus text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Zueira Feminina</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">lesbica</span>
-                    <span class="cmd-tag">burra</span>
-                    <span class="cmd-tag">inteligente</span>
-                    <span class="cmd-tag">otaku</span>
-                    <span class="cmd-tag">fiel</span>
-                    <span class="cmd-tag">infiel</span>
-                    <span class="cmd-tag">corna</span>
-                    <span class="cmd-tag">gada</span>
-                    <span class="cmd-tag">gostosa</span>
-                    <span class="cmd-tag">feia</span>
-                    <span class="cmd-tag">rica</span>
-                    <span class="cmd-tag">pobre</span>
-                    <span class="cmd-tag">bucetuda</span>
-                    <span class="cmd-tag">nazista</span>
-                    <span class="cmd-tag">ladra</span>
-                    <span class="cmd-tag">safada</span>
-                    <span class="cmd-tag">vesga</span>
-                    <span class="cmd-tag">bebada</span>
-                    <span class="cmd-tag">machista</span>
-                    <span class="cmd-tag">homofobica</span>
-                    <span class="cmd-tag">racista</span>
-                    <span class="cmd-tag">chata</span>
-                    <span class="cmd-tag">sortuda</span>
-                    <span class="cmd-tag">azarada</span>
-                    <span class="cmd-tag">forte</span>
-                    <span class="cmd-tag">fraca</span>
-                    <span class="cmd-tag">pegadora</span>
-                    <span class="cmd-tag">otaria</span>
-                    <span class="cmd-tag">boba</span>
-                    <span class="cmd-tag">nerd</span>
-                    <span class="cmd-tag">preguicosa</span>
-                    <span class="cmd-tag">trabalhadora</span>
-                    <span class="cmd-tag">braba</span>
-                    <span class="cmd-tag">linda</span>
-                    <span class="cmd-tag">malandra</span>
-                    <span class="cmd-tag">simpatica</span>
-                    <span class="cmd-tag">engracada</span>
-                    <span class="cmd-tag">charmosa</span>
-                    <span class="cmd-tag">misteriosa</span>
-                    <span class="cmd-tag">carinhosa</span>
-                    <span class="cmd-tag">desumilde</span>
-                    <span class="cmd-tag">humilde</span>
-                    <span class="cmd-tag">ciumenta</span>
-                    <span class="cmd-tag">corajosa</span>
-                    <span class="cmd-tag">covarde</span>
-                    <span class="cmd-tag">esperta</span>
-                    <span class="cmd-tag">talarica</span>
-                    <span class="cmd-tag">chorona</span>
-                    <span class="cmd-tag">brincalhona</span>
-                    <span class="cmd-tag">bolsonarista</span>
-                    <span class="cmd-tag">petista</span>
-                    <span class="cmd-tag">comunista</span>
-                    <span class="cmd-tag">lulista</span>
-                    <span class="cmd-tag">traidora</span>
-                    <span class="cmd-tag">bandida</span>
-                    <span class="cmd-tag">cachorra</span>
-                    <span class="cmd-tag">vagabunda</span>
-                    <span class="cmd-tag">pilantra</span>
-                    <span class="cmd-tag">mito</span>
-                    <span class="cmd-tag">padrao</span>
-                    <span class="cmd-tag">comedia</span>
-                    <span class="cmd-tag">psicopata</span>
-                    <span class="cmd-tag">fortona</span>
-                    <span class="cmd-tag">magrela</span>
-                    <span class="cmd-tag">bombada</span>
-                    <span class="cmd-tag">chefe</span>
-                    <span class="cmd-tag">presidenta</span>
-                    <span class="cmd-tag">rainha</span>
-                    <span class="cmd-tag">patroa</span>
-                    <span class="cmd-tag">playgirl</span>
-                    <span class="cmd-tag">zueira</span>
-                    <span class="cmd-tag">gamer</span>
-                    <span class="cmd-tag">programadora</span>
-                    <span class="cmd-tag">visionaria</span>
-                    <span class="cmd-tag">bilionaria</span>
-                    <span class="cmd-tag">poderosa</span>
-                    <span class="cmd-tag">vencedora</span>
-                    <span class="cmd-tag">senhora</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">lesbica</span><span class="cmd-tag">burra</span><span class="cmd-tag">inteligente</span>
+                    <span class="cmd-tag">otaku</span><span class="cmd-tag">fiel</span><span class="cmd-tag">infiel</span>
+                    <span class="cmd-tag">corna</span><span class="cmd-tag">gada</span><span class="cmd-tag">gostosa</span>
+                    <span class="cmd-tag">feia</span><span class="cmd-tag">rica</span><span class="cmd-tag">pobre</span>
+                    <span class="cmd-tag">bucetuda</span><span class="cmd-tag">nazista</span><span class="cmd-tag">ladra</span>
+                    <span class="cmd-tag">safada</span><span class="cmd-tag">vesga</span><span class="cmd-tag">bebada</span>
+                    <span class="cmd-tag">machista</span><span class="cmd-tag">homofobica</span><span class="cmd-tag">racista</span>
+                    <span class="cmd-tag">chata</span><span class="cmd-tag">sortuda</span><span class="cmd-tag">azarada</span>
+                    <span class="cmd-tag">forte</span><span class="cmd-tag">fraca</span><span class="cmd-tag">pegadora</span>
+                    <span class="cmd-tag">otaria</span><span class="cmd-tag">boba</span><span class="cmd-tag">nerd</span>
+                    <span class="cmd-tag">preguicosa</span><span class="cmd-tag">trabalhadora</span><span class="cmd-tag">braba</span>
+                    <span class="cmd-tag">linda</span><span class="cmd-tag">malandra</span><span class="cmd-tag">simpatica</span>
+                    <span class="cmd-tag">engracada</span><span class="cmd-tag">charmosa</span><span class="cmd-tag">misteriosa</span>
+                    <span class="cmd-tag">carinhosa</span><span class="cmd-tag">desumilde</span><span class="cmd-tag">humilde</span>
+                    <span class="cmd-tag">ciumenta</span><span class="cmd-tag">corajosa</span><span class="cmd-tag">covarde</span>
+                    <span class="cmd-tag">esperta</span><span class="cmd-tag">talarica</span><span class="cmd-tag">chorona</span>
+                    <span class="cmd-tag">brincalhona</span><span class="cmd-tag">bolsonarista</span><span class="cmd-tag">petista</span>
+                    <span class="cmd-tag">comunista</span><span class="cmd-tag">lulista</span><span class="cmd-tag">traidora</span>
+                    <span class="cmd-tag">bandida</span><span class="cmd-tag">cachorra</span><span class="cmd-tag">vagabunda</span>
+                    <span class="cmd-tag">pilantra</span><span class="cmd-tag">mito</span>
+                    <span class="cmd-tag">padrao</span><span class="cmd-tag">comedia</span><span class="cmd-tag">psicopata</span>
+                    <span class="cmd-tag">fortona</span><span class="cmd-tag">magrela</span><span class="cmd-tag">bombada</span>
+                    <span class="cmd-tag">chefe</span><span class="cmd-tag">presidenta</span><span class="cmd-tag">rainha</span>
+                    <span class="cmd-tag">patroa</span><span class="cmd-tag">playgirl</span><span class="cmd-tag">zueira</span>
+                    <span class="cmd-tag">gamer</span><span class="cmd-tag">programadora</span><span class="cmd-tag">visionaria</span>
+                    <span class="cmd-tag">bilionaria</span><span class="cmd-tag">poderosa</span>
+                    <span class="cmd-tag">vencedora</span><span class="cmd-tag">senhora</span>
                 </div>
             </div>
 
-            <div class="cmd-card reveal-right">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-trophy"></i> RANKS - M</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-trophy text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Ranks Masculinos</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">rankgay</span>
-                    <span class="cmd-tag">rankburro</span>
-                    <span class="cmd-tag">rankinteligente</span>
-                    <span class="cmd-tag">rankotaku</span>
-                    <span class="cmd-tag">rankfiel</span>
-                    <span class="cmd-tag">rankinfiel</span>
-                    <span class="cmd-tag">rankcorno</span>
-                    <span class="cmd-tag">rankgado</span>
-                    <span class="cmd-tag">rankgostoso</span>
-                    <span class="cmd-tag">rankrico</span>
-                    <span class="cmd-tag">rankpobre</span>
-                    <span class="cmd-tag">rankforte</span>
-                    <span class="cmd-tag">rankpegador</span>
-                    <span class="cmd-tag">rankmacho</span>
-                    <span class="cmd-tag">ranknerd</span>
-                    <span class="cmd-tag">ranktrabalhador</span>
-                    <span class="cmd-tag">rankbrabo</span>
-                    <span class="cmd-tag">ranklindo</span>
-                    <span class="cmd-tag">rankmalandro</span>
-                    <span class="cmd-tag">rankengracado</span>
-                    <span class="cmd-tag">rankcharmoso</span>
-                    <span class="cmd-tag">rankvisionario</span>
-                    <span class="cmd-tag">rankpoderoso</span>
-                    <span class="cmd-tag">rankvencedor</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">rankgay</span><span class="cmd-tag">rankburro</span><span class="cmd-tag">rankinteligente</span>
+                    <span class="cmd-tag">rankotaku</span><span class="cmd-tag">rankfiel</span><span class="cmd-tag">rankinfiel</span>
+                    <span class="cmd-tag">rankcorno</span><span class="cmd-tag">rankgado</span><span class="cmd-tag">rankgostoso</span>
+                    <span class="cmd-tag">rankrico</span><span class="cmd-tag">rankpobre</span><span class="cmd-tag">rankforte</span>
+                    <span class="cmd-tag">rankpegador</span><span class="cmd-tag">rankmacho</span><span class="cmd-tag">ranknerd</span>
+                    <span class="cmd-tag">ranktrabalhador</span><span class="cmd-tag">rankbrabo</span><span class="cmd-tag">ranklindo</span>
+                    <span class="cmd-tag">rankmalandro</span><span class="cmd-tag">rankengracado</span><span class="cmd-tag">rankcharmoso</span>
+                    <span class="cmd-tag">rankvisionario</span><span class="cmd-tag">rankpoderoso</span><span class="cmd-tag">rankvencedor</span>
                 </div>
             </div>
 
-            <div class="cmd-card reveal-left">
-                <div class="cmd-header">
-                    <div class="cmd-title"><i class="fas fa-trophy"></i> RANKS - F</div>
+            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+                    <i class="fas fa-trophy text-gold"></i>
+                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Ranks Femininos</h3>
                 </div>
-                <div class="cmd-list">
-                    <span class="cmd-tag">ranklesbica</span>
-                    <span class="cmd-tag">rankburra</span>
-                    <span class="cmd-tag">rankinteligente</span>
-                    <span class="cmd-tag">rankotaku</span>
-                    <span class="cmd-tag">rankfiel</span>
-                    <span class="cmd-tag">rankinfiel</span>
-                    <span class="cmd-tag">rankcorna</span>
-                    <span class="cmd-tag">rankgada</span>
-                    <span class="cmd-tag">rankgostosa</span>
-                    <span class="cmd-tag">rankrica</span>
-                    <span class="cmd-tag">rankpobre</span>
-                    <span class="cmd-tag">rankforte</span>
-                    <span class="cmd-tag">rankpegadora</span>
-                    <span class="cmd-tag">ranknerd</span>
-                    <span class="cmd-tag">ranktrabalhadora</span>
-                    <span class="cmd-tag">rankbraba</span>
-                    <span class="cmd-tag">ranklinda</span>
-                    <span class="cmd-tag">rankmalandra</span>
-                    <span class="cmd-tag">rankengracada</span>
-                    <span class="cmd-tag">rankcharmosa</span>
-                    <span class="cmd-tag">rankvisionaria</span>
-                    <span class="cmd-tag">rankpoderosa</span>
-                    <span class="cmd-tag">rankvencedora</span>
+                <div class="flex flex-wrap gap-2">
+                    <span class="cmd-tag">ranklesbica</span><span class="cmd-tag">rankburra</span><span class="cmd-tag">rankinteligente</span>
+                    <span class="cmd-tag">rankotaku</span><span class="cmd-tag">rankfiel</span><span class="cmd-tag">rankinfiel</span>
+                    <span class="cmd-tag">rankcorna</span><span class="cmd-tag">rankgada</span><span class="cmd-tag">rankgostosa</span>
+                    <span class="cmd-tag">rankrica</span><span class="cmd-tag">rankpobre</span><span class="cmd-tag">rankforte</span>
+                    <span class="cmd-tag">rankpegadora</span><span class="cmd-tag">ranknerd</span><span class="cmd-tag">ranktrabalhadora</span>
+                    <span class="cmd-tag">rankbraba</span><span class="cmd-tag">ranklinda</span><span class="cmd-tag">rankmalandra</span>
+                    <span class="cmd-tag">rankengracada</span><span class="cmd-tag">rankcharmosa</span><span class="cmd-tag">rankvisionaria</span>
+                    <span class="cmd-tag">rankpoderosa</span><span class="cmd-tag">rankvencedora</span>
                 </div>
             </div>
 
         </div>
     </section>
-            
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col reveal-bottom">
-                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
-                <p>Todos os direitos reservados &copy; 2026.</p>
+
+    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
+        <div class="max-w-[1100px] mx-auto px-6 text-center">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+                <a href="../equipe/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
+                    <i class="fas fa-users text-gold group-hover:scale-110 transition"></i>
+                    <span class="text-sm font-bold text-main">Conhecer Equipe</span>
+                </a>
+                <a href="../termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <i class="fas fa-file-contract text-muted group-hover:text-white transition"></i>
+                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
+                </a>
+            </div>
+            <div class="text-center">
+                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
+                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
+                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+                </p>
             </div>
         </div>
     </footer>
 
-    <div class="music-widget">
-        <audio id="bg-audio" loop>
-            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
-        </audio>
-        <div class="music-btn" onclick="toggleMusic()">
-            <div class="waves"><span></span><span></span><span></span><span></span></div>
-            <i class="fas fa-volume-mute" id="music-icon"></i>
-        </div>
-    </div>
-
-    <script type="module" src="../script.js"></script>
-    
+    <script src="../script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('cmdSearch');
+            const tags = document.querySelectorAll('.cmd-tag');
             const cards = document.querySelectorAll('.cmd-card');
-            const allTags = document.querySelectorAll('.cmd-tag');
 
             searchInput.addEventListener('input', (e) => {
                 const text = e.target.value.toLowerCase();
-
-                if(text === "") {
-                    cards.forEach(card => card.style.display = 'block');
-                    allTags.forEach(tag => {
-                        tag.style.opacity = '1';
-                        tag.style.background = 'rgba(255,255,255,0.05)';
-                    });
-                    return;
-                }
-
+                
                 cards.forEach(card => {
                     let hasMatch = false;
-                    const tags = card.querySelectorAll('.cmd-tag');
-
-                    tags.forEach(tag => {
-                        if(tag.innerText.toLowerCase().includes(text)) {
-                            tag.style.opacity = '1';
-                            tag.style.background = '#bc13fe';
+                    const cardTags = card.querySelectorAll('.cmd-tag');
+                    
+                    cardTags.forEach(tag => {
+                        const isMatch = tag.innerText.toLowerCase().includes(text);
+                        if(text !== "" && isMatch) {
+                            tag.classList.add('highlight');
                             hasMatch = true;
                         } else {
-                            tag.style.opacity = '0.3';
-                            tag.style.background = 'rgba(255,255,255,0.05)';
+                            tag.classList.remove('highlight');
+                            if(text === "") hasMatch = true;
                         }
                     });
-
-                    if(hasMatch) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    
+                    card.style.display = hasMatch ? 'block' : 'none';
                 });
             });
         });
