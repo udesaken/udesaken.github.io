@@ -1,86 +1,39 @@
 /* =========================================
-   UDESAKEN - GOLD EDITION
+   UDESAKEN GROUP - CLEAN STYLE
    ========================================= */
 
 :root {
-    /* Cores da Marca (Ouro/Realeza) */
-    --gold-primary: #FBBF24;  /* Amber 400 */
-    --gold-secondary: #D97706; /* Amber 600 */
-    --gold-glow: rgba(251, 191, 36, 0.4);
-    
-    --bg-deep: #000000;
-    --bg-surface: #0A0A0A;
+    --bg-dark: #050505;
+    --gold: #C6A87C; /* Dourado Champagne - Elegante */
 }
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--bg-deep);
-    font-feature-settings: "cv02", "cv03", "cv04", "ss01", "ss03";
-    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-dark);
 }
 
 body {
-    background-color: var(--bg-deep);
+    background-color: var(--bg-dark);
 }
 
+/* Scrollbar fina e discreta */
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 3px;
 }
 
-/* Painéis de Vidro */
-.glass-panel {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+/* Animações sutis apenas de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.glass-nav {
-    background: rgba(0, 0, 0, 0.7) !important;
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 215, 0, 0.1); /* Borda sutil dourada */
-}
-
-/* Iluminação Dourada */
-.spotlight-gold {
-    background: radial-gradient(circle at center, var(--gold-glow) 0%, transparent 70%);
-    filter: blur(90px);
-    opacity: 0.5;
-    mix-blend-mode: screen;
-}
-
-/* Animações */
-.reveal {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.delay-100 { transition-delay: 0.1s; }
-.delay-200 { transition-delay: 0.2s; }
-.delay-300 { transition-delay: 0.3s; }
-
-/* Coroa Flutuante com Sombra Dourada */
-@keyframes gentle-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-.floating-crown {
-    animation: gentle-float 5s ease-in-out infinite;
-    filter: drop-shadow(0 20px 40px var(--gold-glow));
-}
-
-/* Texto Gradiente Ouro */
-.text-gold-gradient {
-    background: linear-gradient(to right, #FDE68A, #F59E0B);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+section {
+    animation: fadeIn 0.8s ease-out;
 }
