@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
-// --- LÓGICA DO PLAYER PERSISTENTE UDESAKEN ---
+// --- LÓGICA DO PLAYER PERSISTENTE UDESAKEN (PREMIUM FADE) ---
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('main-audio');
     const playBtn = document.getElementById('play-pause-btn');
@@ -92,56 +92,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('next-track-btn');
     const trackName = document.getElementById('track-name');
     const trackStatus = document.getElementById('track-status');
+    const progressBar = document.getElementById('progress-bar');
     const playerContainer = document.getElementById('audio-player-container');
 
     const playlist = [
-        { name: 'Udesaken Theme 01', src: 'musicusk.mp3' },
-        { name: 'Udesaken Theme 02', src: 'uskmusic2.mp3' }
+        { name: 'Udesaken Lounge 01', src: 'uskmusic.mp3' },
+        { name: 'Udesaken Lounge 02', src: 'uskmusic2.mp3' }
     ];
 
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
     let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
+    const targetVolume = 0.1; // Volume 10% estilo mercado
 
-    // Inicializa o player
     function loadTrack(index) {
         audio.src = playlist[index].src;
         trackName.innerText = playlist[index].name;
         localStorage.setItem('usk_track_index', index);
-        
-        // Recupera o tempo salvo
         const savedTime = localStorage.getItem('usk_audio_time');
-        if (savedTime) {
-            audio.currentTime = parseFloat(savedTime);
-        }
+        if (savedTime) audio.currentTime = parseFloat(savedTime);
     }
 
-    loadTrack(currentTrackIndex);
-    playerContainer.classList.add('visible');
-
-    // Tentar dar play automaticamente (Navegadores bloqueiam se não houver interação)
-    if (isPlaying) {
-        audio.play().catch(() => {
-            console.log("Autoplay bloqueado. Aguardando interação do usuário.");
-            updateUI(false);
-        });
-        updateUI(true);
+    function fadeInAudio() {
+        audio.volume = 0;
+        audio.play().catch(() => { isPlaying = false; updateUI(false); });
+        let fade = setInterval(() => {
+            if (audio.volume < targetVolume) {
+                audio.volume = Math.min(audio.volume + 0.01, targetVolume);
+            } else { clearInterval(fade); }
+        }, 150);
     }
 
     function updateUI(playing) {
         if (playing) {
             playIcon.classList.replace('fa-play', 'fa-pause');
             trackStatus.innerText = 'Tocando agora';
-            playerContainer.classList.add('playing-glow');
+            playerContainer.classList.add('playing', 'playing-glow');
         } else {
             playIcon.classList.replace('fa-pause', 'fa-play');
             trackStatus.innerText = 'Pausado';
-            playerContainer.classList.remove('playing-glow');
+            playerContainer.classList.remove('playing', 'playing-glow');
         }
+    }
+
+    loadTrack(currentTrackIndex);
+    setTimeout(() => playerContainer.classList.add('visible'), 1000);
+
+    if (isPlaying) {
+        fadeInAudio();
+        updateUI(true);
     }
 
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
-            audio.play();
+            fadeInAudio();
             isPlaying = true;
         } else {
             audio.pause();
@@ -153,20 +156,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nextBtn.addEventListener('click', () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        localStorage.setItem('usk_audio_time', 0); // Reseta o tempo para a nova música
+        localStorage.setItem('usk_audio_time', 0);
         loadTrack(currentTrackIndex);
-        audio.play();
+        fadeInAudio();
         isPlaying = true;
         updateUI(true);
     });
 
-    // Salva o progresso da música a cada segundo
     audio.addEventListener('timeupdate', () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${progress}%`;
         localStorage.setItem('usk_audio_time', audio.currentTime);
     });
 
-    // Avança para a próxima se a música acabar
-    audio.addEventListener('ended', () => {
-        nextBtn.click();
-    });
+    audio.addEventListener('ended', () => nextBtn.click());
 });
