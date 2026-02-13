@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Udesaken Group</title>
+    <title>Udesaken Group | Automação Premium</title>
     
     <link rel="stylesheet" href="style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    },
+                    letterSpacing: { tight: '-0.02em' }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
 
     <div class="liquid-container">
         <div class="liquid-orb orb-1"></div>
@@ -22,17 +36,23 @@
     </div>
 
     <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between"> <div class="flex items-center gap-3 cursor-pointer group"> <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/20 shadow-xl group-hover:border-yellow-500/50 transition duration-500 bg-black"> <img src="uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black group-hover:border-brand-gold/50 transition duration-500">
+                     <img src="uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition"> Udesaken
+                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
+                    Udesaken
                 </span>
             </div>
             
-            <div class="hidden md:flex items-center gap-6"> <a href="./comandos/" class="text-sm font-semibold text-muted hover:text-main transition">Comandos</a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="./comandos/" class="text-sm font-semibold text-muted hover:text-main transition">Comandos</a>
                 <a href="./equipe/" class="text-sm font-semibold text-muted hover:text-main transition">Equipe</a>
                 <a href="./planos/" class="text-sm font-bold text-main hover:text-gold transition">Planos</a>
                 
-                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;"> <i class="fas fa-moon text-sm"></i>
+                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
+                    <i class="fas fa-moon text-sm"></i>
                 </button>
 
                 <a href="./vip/" class="px-5 py-2 text-sm font-bold bg-white/5 border border-white/20 text-main rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition backdrop-blur-md shadow-lg">
@@ -50,18 +70,20 @@
             </div>
         </div>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-xl border-b border-white/10 absolute w-full">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 absolute w-full">
             <div class="px-6 py-6 space-y-4">
-                <a href="./comandos/" class="block text-muted">Comandos</a>
-                <a href="./planos/" class="block text-main">Planos</a>
-                <a href="./vip/" class="block text-gold">VIP</a>
+                <a href="./comandos/" class="block text-muted font-medium">Comandos</a>
+                <a href="./planos/" class="block text-main font-bold">Planos</a>
+                <a href="./vip/" class="block text-gold font-bold">VIP</a>
             </div>
         </div>
     </nav>
 
-    <section class="pt-32 pb-20 text-center relative"> <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
+    <section class="pt-32 pb-20 text-center relative">
+        <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
             
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel"> <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]"></span>
+            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]"></span>
                 <span class="text-[10px] font-bold text-main tracking-widest uppercase">Sistema Operante</span>
             </div>
 
@@ -74,7 +96,8 @@
                 Segurança absoluta, vidro líquido e ferramentas exclusivas para quem lidera grandes comunidades.
             </p>
 
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16"> <a href="./planos/" class="w-full md:w-auto px-8 py-3 bg-yellow-600 text-white font-bold rounded-full hover:bg-yellow-500 hover:scale-105 transition shadow-[0_0_30px_rgba(202,138,4,0.4)]">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
+                <a href="./planos/" class="w-full md:w-auto px-8 py-3 bg-yellow-600 text-white font-bold rounded-full hover:bg-yellow-500 hover:scale-105 transition shadow-[0_0_30px_rgba(202,138,4,0.4)]">
                     Ver Planos
                 </a>
                 <a href="./vip/" class="w-full md:w-auto px-8 py-3 glass-panel text-main font-bold rounded-full transition">
@@ -82,20 +105,25 @@
                 </a>
             </div>
 
-            <div class="relative mx-auto max-w-[160px] md:max-w-[220px] hover:scale-110 transition duration-700 cursor-pointer"> <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-2xl animate-float">
+            <div class="relative mx-auto max-w-[160px] md:max-w-[220px] hover:scale-110 transition duration-700 cursor-pointer">
+                <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-2xl animate-float">
             </div>
-
         </div>
     </section>
 
-    <section class="py-20 relative"> <div class="max-w-[1100px] mx-auto px-6">
+    <section class="py-20 relative">
+        <div class="max-w-[1100px] mx-auto px-6">
             
             <div class="flex items-end justify-between mb-10 fade-up" style="animation-delay: 0.2s;">
-                <h2 class="text-3xl font-bold text-main">Ecossistema</h2> <div class="hidden md:block h-1 w-24 bg-yellow-500/50 rounded-full"></div>
+                <h2 class="text-3xl font-bold text-main">Ecossistema</h2>
+                <div class="hidden md:block h-1 w-24 bg-yellow-500/50 rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"> <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.3s;">
-                    <div class="flex justify-between items-start mb-10"> <i class="fab fa-whatsapp text-3xl text-muted group-hover:text-[#25D366] transition duration-300"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.3s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <i class="fab fa-whatsapp text-3xl text-muted group-hover:text-[#25D366] transition duration-300"></i>
                         <i class="fas fa-arrow-right text-muted group-hover:text-main transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                     </div>
                     <h3 class="text-lg font-bold text-main mb-1">Figurinhas</h3>
@@ -133,8 +161,34 @@
         </div>
     </section>
 
-    <footer class="py-8 text-center border-t border-white/5 relative z-10 glass-panel">
-        <p class="text-[10px] text-muted tracking-widest uppercase font-bold">Udesaken Group © 2026</p>
+    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
+        <div class="max-w-[1100px] mx-auto px-6">
+            
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+                
+                <a href="./equipe/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
+                    <i class="fas fa-users text-gold group-hover:scale-110 transition"></i>
+                    <span class="text-sm font-bold text-main">Conhecer Equipe</span>
+                </a>
+                
+                <a href="./termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
+                    <i class="fas fa-file-contract text-muted group-hover:text-white transition"></i>
+                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
+                </a>
+
+                <a href="https://wa.me/447562847091" target="_blank" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-green-500/50 transition-all duration-300">
+                    <i class="fab fa-whatsapp text-green-500 group-hover:scale-110 transition"></i>
+                    <span class="text-sm font-bold text-main">Suporte Direto</span>
+                </a>
+            </div>
+
+            <div class="text-center">
+                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
+                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
+                    Udesaken Group &copy; 2026 • Excelência em Automação
+                </p>
+            </div>
+        </div>
     </footer>
 
     <script src="script.js"></script>
