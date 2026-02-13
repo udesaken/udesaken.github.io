@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Udesaken — Tecnologia de ponta para comunidades no WhatsApp.">
-    <title>Udesaken | Marca Premium</title>
+    <meta name="description" content="Udesaken — A Realeza dos Bots de WhatsApp.">
+    <title>Udesaken | Gold Edition</title>
     
     <link rel="stylesheet" href="style.css">
 
@@ -21,10 +21,12 @@
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         dark: { surface: '#0A0A0A' },
-                        zap: { 
-                            400: '#4ADE80',
-                            500: '#25D366',
-                        }
+                        gold: { 
+                            400: '#FBBF24', /* Amarelo Rico */
+                            500: '#F59E0B', /* Laranja Ouro */
+                            600: '#D97706', /* Ouro Escuro */
+                        },
+                        zap: { 500: '#25D366' } /* Mantido apenas para o ícone do Zap */
                     },
                     letterSpacing: {
                         tighter: '-0.04em',
@@ -34,31 +36,34 @@
         }
     </script>
 </head>
-<body class="bg-black text-gray-200 antialiased selection:bg-zap-500/30 selection:text-white overflow-x-hidden">
+<body class="bg-black text-gray-200 antialiased selection:bg-gold-500/30 selection:text-white overflow-x-hidden">
 
     <nav class="fixed w-full z-50 top-0 transition-all duration-500 border-b border-transparent" id="navbar">
         <div class="max-w-[1100px] mx-auto px-6 sm:px-8">
             <div class="flex items-center justify-between h-20">
                 
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-                    <div class="relative w-10 h-10 rounded-xl bg-black border border-white/10 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-zap-400/50 shadow-[0_0_20px_rgba(37,211,102,0.1)]">
+                    <div class="relative w-10 h-10 rounded-xl bg-black border border-white/10 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-gold-500/50 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
                          <img src="uskcoroa.png" alt="Logo Udesaken" class="w-full h-full object-cover p-1">
                     </div>
-                    <span class="text-xl font-extrabold tracking-tighter text-white">
+                    <span class="text-xl font-extrabold tracking-tighter text-white group-hover:text-gold-400 transition">
                         Udesaken
                     </span>
                 </div>
                 
-                <div class="hidden md:flex space-x-1 items-center">
+                <div class="hidden md:flex space-x-2 items-center">
                     <a href="./comandos/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Comandos</a>
-                    <a href="./planos/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Planos</a>
                     <a href="./equipe/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Equipe</a>
                     
-                    <div class="pl-4">
-                        <a href="./vip/" class="px-6 py-2.5 text-[13px] font-bold bg-[#1A1A1A] text-white rounded-full border border-white/10 hover:border-zap-400/50 hover:bg-zap-500/10 transition-all duration-300 shadow-sm">
-                            Área VIP
-                        </a>
-                    </div>
+                    <div class="h-4 w-px bg-white/10 mx-2"></div>
+
+                    <a href="./planos/" class="px-4 py-2 text-[13px] font-bold text-white hover:text-gold-400 transition-colors">
+                        Para Grupos
+                    </a>
+                    
+                    <a href="./vip/" class="ml-2 px-6 py-2.5 text-[13px] font-bold bg-gradient-to-r from-gold-400 to-gold-600 text-black rounded-full hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-crown text-xs mr-1"></i> Área VIP
+                    </a>
                 </div>
 
                 <div class="md:hidden">
@@ -68,113 +73,122 @@
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-dark-surface/95 backdrop-blur-xl border-b border-white/10 absolute w-full">
-            <div class="px-6 py-4 space-y-3">
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-surface/95 backdrop-blur-xl border-b border-gold-500/10 absolute w-full">
+            <div class="px-6 py-4 space-y-4">
                 <a href="./comandos/" class="block text-sm font-medium text-gray-300">Comandos</a>
-                <a href="./planos/" class="block text-sm font-medium text-gray-300">Planos</a>
-                <a href="./vip/" class="block text-sm font-bold text-zap-400">Acessar VIP</a>
+                <a href="./planos/" class="block text-sm font-bold text-white border-l-2 border-white pl-3">Planos para Grupos</a>
+                <a href="./vip/" class="block text-sm font-bold text-gold-400 border-l-2 border-gold-400 pl-3">Sou Usuário VIP</a>
             </div>
         </div>
     </nav>
 
     <section class="relative pt-40 pb-24 lg:pt-52 lg:pb-32 overflow-hidden">
         
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spotlight-zap -z-10 animate-pulse-slow"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spotlight-gold -z-10 animate-pulse-slow"></div>
         
         <div class="max-w-[1100px] mx-auto px-6 sm:px-8 text-center relative z-10">
             
-            <div class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-md mb-10">
+            <div class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-gold-500/20 bg-gold-500/[0.05] backdrop-blur-md mb-10">
                 <span class="flex h-2.5 w-2.5 relative">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zap-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-zap-500"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold-500"></span>
                 </span>
-                <span class="text-[13px] font-bold text-gray-200 tracking-wide uppercase">Sistema Udesaken v2.6 Online</span>
+                <span class="text-[13px] font-bold text-gold-200 tracking-wide uppercase">Ouro Puro • v2.6 Online</span>
             </div>
 
             <h1 class="reveal delay-100 text-6xl sm:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.95]">
-                O poder da sua <br>
-                comunidade.
+                A Elite do <br>
+                <span class="text-gold-gradient">WhatsApp.</span>
             </h1>
             
             <p class="reveal delay-200 text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                Automação, segurança e inteligência artificial para WhatsApp em uma infraestrutura de classe mundial.
+                Segurança impenetrável para seu grupo e ferramentas exclusivas para você. Escolha seu poder.
             </p>
 
-            <div class="reveal delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-24">
-                <a href="https://wa.me/447562847091" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-extrabold text-[15px] rounded-full transition hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]">
-                    Adicionar ao WhatsApp
+            <div class="reveal delay-300 flex flex-col md:flex-row items-center justify-center gap-6 mb-20">
+                
+                <a href="./planos/" class="group relative w-full md:w-64 p-1 rounded-2xl bg-gradient-to-b from-white/10 to-white/5 hover:to-white/10 transition-all duration-300">
+                    <div class="absolute inset-0 bg-white/5 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative bg-black rounded-xl p-4 flex items-center justify-between border border-white/10 group-hover:border-white/30">
+                        <div class="text-left">
+                            <span class="block text-xs text-gray-500 font-bold uppercase tracking-wider">Para Grupos</span>
+                            <span class="block text-lg font-bold text-white">Ver Planos</span>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
                 </a>
-                <a href="./planos/" class="w-full sm:w-auto px-8 py-4 glass-panel text-white font-bold text-[15px] rounded-full transition hover:bg-white/10 flex items-center justify-center gap-2">
-                    Ver Planos
+
+                <a href="./vip/" class="group relative w-full md:w-64 p-1 rounded-2xl bg-gradient-to-b from-gold-400 to-gold-600 hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(245,158,11,0.3)]">
+                    <div class="relative bg-black rounded-xl p-4 flex items-center justify-between border border-gold-500/30 group-hover:bg-gold-900/20">
+                        <div class="text-left">
+                            <span class="block text-xs text-gold-400 font-bold uppercase tracking-wider">Para Você</span>
+                            <span class="block text-lg font-bold text-white">Ser VIP</span>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 text-black flex items-center justify-center shadow-lg">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                    </div>
                 </a>
+
             </div>
 
             <div class="reveal delay-300 relative mx-auto max-w-[280px] md:max-w-[340px]">
                 <img src="uskcoroa.png" alt="Udesaken Crown" class="w-full h-auto floating-crown relative z-10">
-                <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] h-24 bg-zap-500/30 blur-[50px] rounded-full opacity-60 z-0"></div>
+                <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] h-24 bg-gold-500/20 blur-[60px] rounded-full opacity-50 z-0"></div>
+                
+                <a href="https://wa.me/447562847091" class="inline-flex items-center gap-2 mt-12 text-sm text-gray-500 hover:text-white transition">
+                    <i class="fab fa-whatsapp text-zap-500"></i> Apenas adicionar ao WhatsApp
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="py-20 relative border-t border-white/5 bg-[#050505]">
+    <section class="py-20 relative border-t border-white/10 bg-[#050505]">
         <div class="max-w-[1100px] mx-auto px-6 sm:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">Conecte-se ao Ecossistema</h2>
-                <p class="text-gray-400 text-lg">Acompanhe atualizações, figurinhas e novidades em tempo real.</p>
+                <h2 class="text-2xl font-bold text-white mb-2">Comunidade Oficial</h2>
+                <div class="w-12 h-1 bg-gold-500 mx-auto rounded-full"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="reveal lg:col-span-2 glass-panel p-8 rounded-[32px] hover:border-zap-500/50 transition duration-500 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-zap-500/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                    <div class="flex items-start justify-between relative z-10">
-                        <div>
-                            <div class="w-12 h-12 bg-zap-500 rounded-full flex items-center justify-center mb-4 text-black text-xl">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2">Canal de Figurinhas</h3>
-                            <p class="text-gray-400 text-sm">Milhares de figurinhas diárias e memes exclusivos.</p>
+                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="reveal lg:col-span-2 glass-panel p-6 rounded-[24px] hover:border-zap-500/50 transition duration-500 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-zap-500 rounded-2xl flex items-center justify-center text-black text-xl shadow-lg shadow-zap-500/20">
+                            <i class="fab fa-whatsapp"></i>
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-zap-500 group-hover:text-black transition">
-                            <i class="fas fa-arrow-right"></i>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-white">Canal de Figurinhas</h3>
+                            <p class="text-gray-400 text-sm">Atualizações diárias.</p>
                         </div>
+                        <i class="fas fa-external-link-alt text-gray-600 group-hover:text-white transition"></i>
                     </div>
                 </a>
 
-                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="reveal lg:col-span-2 glass-panel p-8 rounded-[32px] hover:border-blue-500/50 transition duration-500 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                    <div class="flex items-start justify-between relative z-10">
-                        <div>
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-4 text-white text-xl">
-                                <i class="fas fa-info-circle"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white mb-2">Status do Sistema</h3>
-                            <p class="text-gray-400 text-sm">Fique por dentro das atualizações e logs do bot.</p>
+                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="reveal lg:col-span-2 glass-panel p-6 rounded-[24px] hover:border-blue-500/50 transition duration-500 group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-blue-600/20">
+                            <i class="fas fa-info"></i>
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition">
-                            <i class="fas fa-arrow-right"></i>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-white">Status do Bot</h3>
+                            <p class="text-gray-400 text-sm">Informações técnicas.</p>
                         </div>
+                        <i class="fas fa-external-link-alt text-gray-600 group-hover:text-white transition"></i>
                     </div>
                 </a>
 
-                <a href="https://instagram.com/udesakenofc" target="_blank" class="reveal delay-100 glass-panel p-6 rounded-[24px] hover:bg-white/5 transition flex flex-col items-center justify-center text-center gap-4 group">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-500 flex items-center justify-center text-white text-xl group-hover:scale-110 transition">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div>
-                        <span class="block text-white font-bold">Instagram</span>
-                        <span class="text-gray-500 text-xs">@udesakenofc</span>
-                    </div>
+                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="reveal delay-100 glass-panel p-4 rounded-2xl flex items-center justify-center gap-3 hover:bg-white/5 transition">
+                    <i class="fab fa-tiktok text-xl text-white"></i>
+                    <span class="text-sm font-bold text-gray-300">TikTok</span>
                 </a>
 
-                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="reveal delay-200 glass-panel p-6 rounded-[24px] hover:bg-white/5 transition flex flex-col items-center justify-center text-center gap-4 group">
-                    <div class="w-12 h-12 rounded-xl bg-gray-800 border border-white/10 flex items-center justify-center text-white text-xl group-hover:scale-110 transition text-shadow-tiktok">
-                        <i class="fab fa-tiktok"></i>
-                    </div>
-                    <div>
-                        <span class="block text-white font-bold">TikTok</span>
-                        <span class="text-gray-500 text-xs">@udesakenofc</span>
-                    </div>
+                <a href="https://instagram.com/udesakenofc" target="_blank" class="reveal delay-100 glass-panel p-4 rounded-2xl flex items-center justify-center gap-3 hover:bg-white/5 transition">
+                    <i class="fab fa-instagram text-xl text-white"></i>
+                    <span class="text-sm font-bold text-gray-300">Instagram</span>
                 </a>
 
             </div>
@@ -182,17 +196,9 @@
     </section>
 
     <footer class="py-12 border-t border-white/[0.08]">
-        <div class="max-w-[1100px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <span class="text-lg font-extrabold text-white tracking-tighter">Udesaken<span class="text-zap-500">.</span></span>
-                <p class="text-[13px] text-gray-500 mt-2 font-medium">© 2026 Udesaken Technologies.</p>
-            </div>
-            
-            <div class="flex gap-8">
-                <a href="./termos/" class="text-gray-500 hover:text-white transition text-[13px] font-medium">Termos</a>
-                <a href="./privacidade/" class="text-gray-500 hover:text-white transition text-[13px] font-medium">Privacidade</a>
-                <a href="https://wa.me/447562847091" class="text-gray-500 hover:text-zap-400 transition text-[13px] font-bold">Suporte WhatsApp</a>
-            </div>
+        <div class="max-w-[1100px] mx-auto px-6 sm:px-8 text-center">
+             <span class="text-lg font-extrabold text-white tracking-tighter">Udesaken<span class="text-gold-500">.</span></span>
+             <p class="text-xs text-gray-600 mt-2">© 2026 Udesaken Gold Edition.</p>
         </div>
     </footer>
 

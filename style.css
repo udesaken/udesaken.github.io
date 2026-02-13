@@ -1,18 +1,21 @@
 /* =========================================
-   UDESAKEN - "META DARK" AESTHETIC
+   UDESAKEN - GOLD EDITION
    ========================================= */
 
 :root {
-    --zap-primary: #25D366;
-    --zap-glow: rgba(37, 211, 102, 0.4);
-    --bg-deep: #000000; /* Preto absoluto para contraste máximo */
-    --bg-surface: #0A0A0A; /* Superfície ligeiramente mais clara */
+    /* Cores da Marca (Ouro/Realeza) */
+    --gold-primary: #FBBF24;  /* Amber 400 */
+    --gold-secondary: #D97706; /* Amber 600 */
+    --gold-glow: rgba(251, 191, 36, 0.4);
+    
+    --bg-deep: #000000;
+    --bg-surface: #0A0A0A;
 }
 
 html {
     scroll-behavior: smooth;
     background-color: var(--bg-deep);
-    font-feature-settings: "cv02", "cv03", "cv04", "ss01", "ss03"; /* Recursos de fonte premium */
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01", "ss03";
     -webkit-font-smoothing: antialiased;
 }
 
@@ -20,13 +23,12 @@ body {
     background-color: var(--bg-deep);
 }
 
-/* --- Scrollbar Invisível (Estilo iOS/Minimalista) --- */
 ::-webkit-scrollbar {
-    width: 0px; /* Remove a barra visualmente mas mantém a função */
+    width: 0px;
     background: transparent;
 }
 
-/* --- Utilitários de Vidro Premium --- */
+/* Painéis de Vidro */
 .glass-panel {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px) saturate(180%);
@@ -36,26 +38,25 @@ body {
 }
 
 .glass-nav {
-    background: rgba(0, 0, 0, 0.6) !important; /* Mais escuro para a navbar */
+    background: rgba(0, 0, 0, 0.7) !important;
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1); /* Borda sutil dourada */
 }
 
-/* --- Efeitos de Iluminação (Spots) --- */
-/* Cria pontos de luz sutis atrás dos elementos */
-.spotlight-zap {
-    background: radial-gradient(circle at center, var(--zap-glow) 0%, transparent 70%);
-    filter: blur(80px);
-    opacity: 0.6;
+/* Iluminação Dourada */
+.spotlight-gold {
+    background: radial-gradient(circle at center, var(--gold-glow) 0%, transparent 70%);
+    filter: blur(90px);
+    opacity: 0.5;
     mix-blend-mode: screen;
 }
 
-/* --- Animações Refinadas --- */
+/* Animações */
 .reveal {
     opacity: 0;
-    transform: translateY(20px) scale(0.98); /* Movimento mais sutil e escala */
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Curva "Apple ease" */
+    transform: translateY(20px) scale(0.98);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.active {
@@ -63,17 +64,23 @@ body {
     transform: translateY(0) scale(1);
 }
 
-/* Delays */
 .delay-100 { transition-delay: 0.1s; }
 .delay-200 { transition-delay: 0.2s; }
 .delay-300 { transition-delay: 0.3s; }
 
-/* Flutuação Suave para a Coroa */
+/* Coroa Flutuante com Sombra Dourada */
 @keyframes gentle-float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
 }
 .floating-crown {
     animation: gentle-float 5s ease-in-out infinite;
-    filter: drop-shadow(0 20px 30px var(--zap-glow)); /* Sombra brilhante na coroa */
+    filter: drop-shadow(0 20px 40px var(--gold-glow));
+}
+
+/* Texto Gradiente Ouro */
+.text-gold-gradient {
+    background: linear-gradient(to right, #FDE68A, #F59E0B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
