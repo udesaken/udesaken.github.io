@@ -1,137 +1,96 @@
 /* ==========================================================================
-    UDESAKEN SYSTEM - Logic Core
+   UDESAKEN 2026 - Logic Core
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- PLAYER DE MÚSICA ---
-    const audio = document.getElementById('bg-audio');
-    const widget = document.getElementById('musicWidget');
-    const playBtnIcon = document.querySelector('#playPauseBtn i');
-    const trackNameLabel = document.getElementById('trackName');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const volIcon = document.getElementById('volIcon');
-
-    // Playlist (Confirme se os nomes dos arquivos estão na mesma pasta)
-    const playlist = [
-        { name: "Udesaken Theme", src: "musicusk.mp3" },
-        { name: "Vibes Mode", src: "uskmusic2.mp3" }
-    ];
     
-    let currentTrackIndex = 0;
-    let isPlaying = false;
-
-    // Inicialização segura
-    if(audio) {
-        audio.src = playlist[0].src;
-        audio.volume = 0.1; // Começa bem baixinho (10%)
-        if(volumeSlider) volumeSlider.value = 0.1;
-    }
-
-    // Controle de Volume
-    if(volumeSlider) {
-        volumeSlider.addEventListener('input', (e) => {
-            const val = e.target.value;
-            audio.volume = val;
-            if(val == 0) volIcon.className = 'fas fa-volume-mute';
-            else if (val < 0.5) volIcon.className = 'fas fa-volume-down';
-            else volIcon.className = 'fas fa-volume-up';
-        });
-    }
-
-    // Atualiza Visual Play/Pause
-    function updatePlayerUI() {
-        if (!widget || !playBtnIcon) return;
-        if (isPlaying) {
-            widget.classList.remove('paused');
-            playBtnIcon.className = 'fas fa-pause';
+    // --- 1. NAVBAR DINÂMICA (EFEITO GLASS AO ROLAR) ---
+    const navbar = document.getElementById('navbar');
+    
+    function updateNavbar() {
+        if (window.scrollY > 20) {
+            // Quando rolar para baixo: fundo mais escuro e sombra
+            navbar.classList.add('bg-dark-900/90', 'shadow-lg', 'backdrop-blur-xl');
+            // Removemos a classe padrão para evitar conflito de opacidade
+            navbar.classList.remove('glass-nav'); 
         } else {
-            widget.classList.add('paused');
-            playBtnIcon.className = 'fas fa-play';
+            // No topo: volta ao estilo original translúcido
+            navbar.classList.remove('bg-dark-900/90', 'shadow-lg', 'backdrop-blur-xl');
+            navbar.classList.add('glass-nav');
         }
     }
 
-    // Função Tocar Global
-    window.toggleMusic = function() {
-        if (!audio) return;
-        if (audio.paused) {
-            audio.play().then(() => {
-                isPlaying = true;
-                updatePlayerUI();
-            }).catch(e => console.log("Bloqueio de autoplay do navegador:", e));
-        } else {
-            audio.pause();
-            isPlaying = false;
-            updatePlayerUI();
-        }
+    // Otimização: Executa no scroll e no carregamento (caso já esteja rolado)
+    window.addEventListener('scroll', updateNavbar);
+    updateNavbar();
+
+
+    // --- 2. MENU MOBILE ---
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    if (mobileBtn && mobileMenu) {
+        // Alternar menu ao clicar no botão
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fechar o menu automaticamente ao clicar em qualquer link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+
+    // --- 3. SCROLL REVEAL (ANIMAÇÃO DE ENTRADA) ---
+    // Configuração do Observador
+    const observerOptions = {
+        root: null,        // Observa em relação à viewport
+        threshold: 0.1,    // Ativa quando 10% do elemento estiver visível
+        rootMargin: "0px 0px -50px 0px" // Margem negativa para ativar um pouco antes do fim da tela
     };
 
-    // Função Próxima Faixa
-    window.nextTrack = function() {
-        if (!audio) return;
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        
-        audio.src = playlist[currentTrackIndex].src;
-        if(trackNameLabel) trackNameLabel.textContent = playlist[currentTrackIndex].name;
-        
-        audio.play().then(() => {
-            isPlaying = true;
-            updatePlayerUI();
-        });
-    };
-
-    // --- EFEITOS VISUAIS ---
-    
-    // Menu Mobile
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const closeBtn = document.querySelector('.close-btn-mobile');
-    const links = document.querySelectorAll('.nav-links a');
-
-    function toggleMenu() { if(navLinks) navLinks.classList.toggle('active'); }
-    function closeMenu() { if(navLinks) navLinks.classList.remove('active'); }
-
-    if(hamburger) hamburger.addEventListener('click', toggleMenu);
-    if(closeBtn) closeBtn.addEventListener('click', closeMenu);
-    links.forEach(link => link.addEventListener('click', closeMenu));
-
-    // Luz do Mouse (Spotlight)
-    const cards = document.querySelectorAll('.price-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-        });
-    });
-
-    // Scroll Reveal (Animação de entrada)
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0) scale(1)';
+                // Adiciona a classe .active que contém o transform: translateY(0) e opacity: 1
+                entry.target.classList.add('active');
+                
+                // (Opcional) Para de observar o elemento depois que animou uma vez
+                // observer.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom, .reveal-zoom, .reveal-fade').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    // Seleciona todos os elementos com a classe .reveal e começa a observar
+    document.querySelectorAll('.reveal').forEach(el => {
         observer.observe(el);
     });
 
-    // Cookies
-    const cookieBanner = document.getElementById('cookieBanner');
-    const btnAccept = document.getElementById('btnAccept');
-    if (!localStorage.getItem('udesaken_cookies_accepted')) {
-        setTimeout(() => { if(cookieBanner) cookieBanner.classList.add('active'); }, 2000);
-    }
-    if(btnAccept) {
-        btnAccept.addEventListener('click', () => {
-            localStorage.setItem('udesaken_cookies_accepted', 'true');
-            if(cookieBanner) cookieBanner.classList.remove('active');
+
+    // --- 4. SMOOTH SCROLL CORREÇÃO (PARA HEADER FIXO) ---
+    // O Tailwind 'scroll-smooth' funciona, mas isso garante o offset correto do menu fixo
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerOffset = 80; // Altura aproximada do header
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
         });
-    }
+    });
+
 });
