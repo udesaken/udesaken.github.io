@@ -84,3 +84,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
+// --- LÓGICA DO PLAYER PERSISTENTE UDESAKEN ---
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('main-audio');
+    const playBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const nextBtn = document.getElementById('next-track-btn');
+    const trackName = document.getElementById('track-name');
+    const trackStatus = document.getElementById('track-status');
+    const playerContainer = document.getElementById('audio-player-container');
+
+    const playlist = [
+        { name: 'Udesaken Theme 01', src: 'musicusk.mp3' },
+        { name: 'Udesaken Theme 02', src: 'uskmusic2.mp3' }
+    ];
+
+    let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
+    let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
+
+    // Inicializa o player
+    function loadTrack(index) {
+        audio.src = playlist[index].src;
+        trackName.innerText = playlist[index].name;
+        localStorage.setItem('usk_track_index', index);
+        
+        // Recupera o tempo salvo
+        const savedTime = localStorage.getItem('usk_audio_time');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+    }
+
+    loadTrack(currentTrackIndex);
+    playerContainer.classList.add('visible');
+
+    // Tentar dar play automaticamente (Navegadores bloqueiam se não houver interação)
+    if (isPlaying) {
+        audio.play().catch(() => {
+            console.log("Autoplay bloqueado. Aguardando interação do usuário.");
+            updateUI(false);
+        });
+        updateUI(true);
+    }
+
+    function updateUI(playing) {
+        if (playing) {
+            playIcon.classList.replace('fa-play', 'fa-pause');
+            trackStatus.innerText = 'Tocando agora';
+            playerContainer.classList.add('playing-glow');
+        } else {
+            playIcon.classList.replace('fa-pause', 'fa-play');
+            trackStatus.innerText = 'Pausado';
+            playerContainer.classList.remove('playing-glow');
+        }
+    }
+
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            isPlaying = true;
+        } else {
+            audio.pause();
+            isPlaying = false;
+        }
+        updateUI(isPlaying);
+        localStorage.setItem('usk_is_playing', isPlaying);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        localStorage.setItem('usk_audio_time', 0); // Reseta o tempo para a nova música
+        loadTrack(currentTrackIndex);
+        audio.play();
+        isPlaying = true;
+        updateUI(true);
+    });
+
+    // Salva o progresso da música a cada segundo
+    audio.addEventListener('timeupdate', () => {
+        localStorage.setItem('usk_audio_time', audio.currentTime);
+    });
+
+    // Avança para a próxima se a música acabar
+    audio.addEventListener('ended', () => {
+        nextBtn.click();
+    });
+});
