@@ -1,42 +1,49 @@
 /* ==========================================================================
-    UDESAKEN SYSTEM - Logic & Effects (Aurora Premium Edition)
+    UDESAKEN SYSTEM - Logic & Effects (Final Fix)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. PLAYER DE MÚSICA AVANÇADO (Playlist, Widget & Volume) ---
+    // --- 1. CONFIGURAÇÃO DO PLAYER ---
     const audio = document.getElementById('bg-audio');
     const widget = document.getElementById('musicWidget');
     const playBtnIcon = document.querySelector('#playPauseBtn i');
     const trackNameLabel = document.getElementById('trackName');
     
-    // Elementos do Volume
     const volumeSlider = document.getElementById('volumeSlider');
     const volIcon = document.getElementById('volIcon');
 
-    // Playlist: Suas músicas
+    // LISTA DE MÚSICAS (Verifique se os nomes dos arquivos estão exatos)
     const playlist = [
-        { name: "Udesaken Theme", src: "uskmusic.mp3" },
-        { name: "Vibes Mode", src: "uskmusic2.mp3" }
+        { name: "Udesaken Theme", src: "musicusk.mp3" }, // Música 1
+        { name: "Vibes Mode", src: "uskmusic2.mp3" }    // Música 2
     ];
     
     let currentTrackIndex = 0;
     let isPlaying = false;
 
-    // --- CONFIGURAÇÃO INICIAL DE VOLUME ---
-    // Define o volume para 40% ao carregar para não assustar o usuário
-    if(audio && volumeSlider) {
-        audio.volume = 0.2; 
-        volumeSlider.value = 0.2;
+    // --- INICIALIZAÇÃO OBRIGATÓRIA (Corrige o bug do Play) ---
+    function initPlayer() {
+        if(audio) {
+            // Carrega a primeira música imediatamente no sistema
+            audio.src = playlist[0].src;
+            audio.load();
+            
+            // Define volume bem baixo (Ambiente de Mercado)
+            audio.volume = 0.1; 
+            if(volumeSlider) volumeSlider.value = 0.1;
+        }
     }
+    
+    // Roda a configuração assim que abre o site
+    initPlayer();
 
-    // Listener do Slider de Volume
+    // --- CONTROLE DE VOLUME ---
     if(volumeSlider) {
         volumeSlider.addEventListener('input', (e) => {
             const val = e.target.value;
             audio.volume = val;
 
-            // Muda o ícone conforme o volume
             if(val == 0) {
                 volIcon.className = 'fas fa-volume-mute';
             } else if (val < 0.5) {
@@ -47,32 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função para atualizar a interface visual (Play/Pause)
+    // --- FUNÇÕES DE TOCAR ---
     function updatePlayerUI() {
         if (!widget || !playBtnIcon) return;
-
         if (isPlaying) {
-            widget.classList.remove('paused'); // Barrinhas se mexem
-            playBtnIcon.classList.remove('fa-play');
-            playBtnIcon.classList.add('fa-pause');
+            widget.classList.remove('paused');
+            playBtnIcon.className = 'fas fa-pause';
         } else {
-            widget.classList.add('paused'); // Barrinhas param
-            playBtnIcon.classList.remove('fa-pause');
-            playBtnIcon.classList.add('fa-play');
+            widget.classList.add('paused');
+            playBtnIcon.className = 'fas fa-play';
         }
     }
 
-    // Tocar/Pausar (Global)
     window.toggleMusic = function() {
         if (!audio) return;
 
         if (audio.paused) {
-            audio.play().then(() => {
-                isPlaying = true;
-                updatePlayerUI();
-            }).catch(e => {
-                console.log("Autoplay bloqueado pelo navegador:", e);
-            });
+            // Tenta tocar a música já carregada
+            let playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    isPlaying = true;
+                    updatePlayerUI();
+                })
+                .catch(error => {
+                    console.log("Play bloqueado (clique necessário):", error);
+                });
+            }
         } else {
             audio.pause();
             isPlaying = false;
@@ -80,67 +89,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Próxima Música (Global)
     window.nextTrack = function() {
         if (!audio) return;
-
         currentTrackIndex++;
-        // Loop da playlist
-        if (currentTrackIndex >= playlist.length) {
-            currentTrackIndex = 0;
-        }
+        if (currentTrackIndex >= playlist.length) currentTrackIndex = 0;
         
-        // Carrega nova faixa
+        // Troca e toca
         audio.src = playlist[currentTrackIndex].src;
         if(trackNameLabel) trackNameLabel.textContent = playlist[currentTrackIndex].name;
         
-        // Mantém tocando se já estava
         audio.play().then(() => {
             isPlaying = true;
             updatePlayerUI();
-        }).catch(e => console.log("Erro ao trocar faixa:", e));
+        });
     };
 
-
-    // --- 2. EFEITO SPOTLIGHT (Luz do Mouse nos Cards) ---
-    const cards = document.querySelectorAll('.price-card');
+    // --- 2. EFEITOS VISUAIS E MOBILE ---
     
+    // Spotlight (Luz do Mouse)
+    const cards = document.querySelectorAll('.price-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // Passa coordenadas para o CSS
-            card.style.setProperty('--x', `${x}px`);
-            card.style.setProperty('--y', `${y}px`);
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
     });
 
-
-    // --- 3. MENU MOBILE (Gaveta Lateral) ---
+    // Menu Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const closeBtn = document.querySelector('.close-btn-mobile');
     const links = document.querySelectorAll('.nav-links a');
 
-    function toggleMenu() { 
-        if(navLinks) navLinks.classList.toggle('active'); 
-    }
-    
-    function closeMenu() { 
-        if(navLinks) navLinks.classList.remove('active'); 
-    }
+    function toggleMenu() { if(navLinks) navLinks.classList.toggle('active'); }
+    function closeMenu() { if(navLinks) navLinks.classList.remove('active'); }
 
     if(hamburger) hamburger.addEventListener('click', toggleMenu);
     if(closeBtn) closeBtn.addEventListener('click', closeMenu);
-    
     links.forEach(link => link.addEventListener('click', closeMenu));
 
-
-    // --- 4. SCROLL REVEAL (Animação ao rolar) ---
-    const revealElements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom, .reveal-zoom, .reveal-fade');
-
+    // Scroll Reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -150,29 +139,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    revealElements.forEach(el => {
+    document.querySelectorAll('.reveal-left, .reveal-right, .reveal-bottom, .reveal-zoom, .reveal-fade').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
         observer.observe(el);
     });
 
-
-    // --- 5. BANNER DE COOKIES ---
+    // Cookies
     const cookieBanner = document.getElementById('cookieBanner');
     const btnAccept = document.getElementById('btnAccept');
-
     if (!localStorage.getItem('udesaken_cookies_accepted')) {
-        setTimeout(() => { 
-            if(cookieBanner) cookieBanner.classList.add('active'); 
-        }, 2000);
+        setTimeout(() => { if(cookieBanner) cookieBanner.classList.add('active'); }, 2000);
     }
-
     if(btnAccept) {
         btnAccept.addEventListener('click', () => {
             localStorage.setItem('udesaken_cookies_accepted', 'true');
             if(cookieBanner) cookieBanner.classList.remove('active');
         });
     }
-
 });
