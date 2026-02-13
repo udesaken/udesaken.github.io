@@ -1,11 +1,11 @@
 /* =========================================
-   UDESAKEN GROUP - PREMIUM DARK
+   UDESAKEN - LIQUID GLASS AESTHETIC
    ========================================= */
 
 :root {
     --bg-dark: #050505;
     --gold: #C6A87C;
-    --gold-dim: rgba(198, 168, 124, 0.15);
+    --gold-light: #E2D1B3;
 }
 
 html {
@@ -15,73 +15,119 @@ html {
 
 body {
     background-color: var(--bg-dark);
-    /* Adiciona uma textura sutil de ruído para evitar banding em gradientes escuros */
-    background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, var(--bg-dark) 40%);
-    background-attachment: fixed;
+    overflow-x: hidden;
+    color: white;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+/* Scrollbar Invisível */
+::-webkit-scrollbar { width: 0px; background: transparent; }
 
-/* --- EFEITOS DE LUZ --- */
-
-/* Luz ambiente dourada (usada atrás de textos/imagens) */
-.ambient-light {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--gold-dim) 0%, transparent 70%);
-    filter: blur(100px);
-    opacity: 0.6;
-    pointer-events: none;
+/* --- FUNDO LÍQUIDO (ORBS) --- */
+.liquid-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     z-index: -1;
-    animation: pulse-glow 8s ease-in-out infinite;
+    overflow: hidden;
+    background: #050505;
 }
 
-/* Vidro Premium para Cards */
-.glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+.liquid-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float-liquid 15s infinite ease-in-out alternate;
+}
+
+.orb-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, #C6A87C 0%, transparent 70%);
+    animation-duration: 20s;
+}
+
+.orb-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, #4a3b2a 0%, transparent 70%);
+    animation-duration: 25s;
+}
+
+.orb-3 {
+    top: 40%;
+    left: 40%;
+    width: 30vw;
+    height: 30vw;
+    background: radial-gradient(circle, #2a2a2a 0%, transparent 70%);
+    animation-duration: 18s;
+}
+
+@keyframes float-liquid {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 30px) scale(1.1); }
+}
+
+/* --- GLASSMORPHISM PURO --- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-.glass-card:hover {
-    border-color: rgba(198, 168, 124, 0.3); /* Borda dourada sutil no hover */
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(198, 168, 124, 0.1);
+/* Efeito de brilho ao passar o mouse */
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.5s;
 }
 
-/* Navbar Fosca */
-.nav-blur {
-    background: rgba(5, 5, 5, 0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.glass-panel:hover::before {
+    left: 100%;
 }
 
-/* Animações */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.glass-panel:hover {
+    border-color: rgba(198, 168, 124, 0.3);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 30px rgba(198, 168, 124, 0.1);
 }
 
-@keyframes pulse-glow {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.7; }
+/* Navbar Transparente */
+.nav-liquid {
+    background: rgba(5, 5, 5, 0.2);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.animate-enter {
-    animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-/* Utilitário para texto gradiente dourado */
-.text-gold-gradient {
-    background: linear-gradient(135deg, #F9F1E6 0%, #C6A87C 100%);
+/* Tipografia e Gradientes */
+.text-gradient-gold {
+    background: linear-gradient(135deg, #fff 30%, #C6A87C 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Animação de Entrada */
+.fade-up {
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
 }
