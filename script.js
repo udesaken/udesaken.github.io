@@ -84,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
-// --- LÓGICA DO PLAYER PERSISTENTE UDESAKEN (PREMIUM FADE) ---
+/* ==========================================================================
+   UDESAKEN - PERSISTENT LIQUID PLAYER (ENGINE)
+   ========================================================================== */
+
 document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('main-audio');
     const playBtn = document.getElementById('play-pause-btn');
@@ -95,33 +98,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const playerContainer = document.getElementById('audio-player-container');
 
+    // Playlist Premium
     const playlist = [
         { name: 'Udesaken Lounge 01', src: 'uskmusic.mp3' },
         { name: 'Udesaken Lounge 02', src: 'uskmusic2.mp3' }
     ];
 
+    // Estados e Preferências
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
     let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
-    const targetVolume = 0.1; // Volume 10% estilo mercado
+    const targetVolume = 0.1; // Volume 10% (Estilo Som de Ambiente)
 
+    // Inicialização da Faixa
     function loadTrack(index) {
         audio.src = playlist[index].src;
         trackName.innerText = playlist[index].name;
         localStorage.setItem('usk_track_index', index);
+        
         const savedTime = localStorage.getItem('usk_audio_time');
         if (savedTime) audio.currentTime = parseFloat(savedTime);
     }
 
+    // Efeito de Entrada Suave (Fade-In)
     function fadeInAudio() {
         audio.volume = 0;
-        audio.play().catch(() => { isPlaying = false; updateUI(false); });
+        audio.play().catch(() => { 
+            isPlaying = false; 
+            updateUI(false); 
+        });
+        
         let fade = setInterval(() => {
             if (audio.volume < targetVolume) {
                 audio.volume = Math.min(audio.volume + 0.01, targetVolume);
-            } else { clearInterval(fade); }
+            } else { 
+                clearInterval(fade); 
+            }
         }, 150);
     }
 
+    // Atualização da Interface
     function updateUI(playing) {
         if (playing) {
             playIcon.classList.replace('fa-play', 'fa-pause');
@@ -134,7 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Execução Inicial ---
     loadTrack(currentTrackIndex);
+    
+    // Delay para o player surgir elegantemente
     setTimeout(() => playerContainer.classList.add('visible'), 1000);
 
     if (isPlaying) {
@@ -142,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI(true);
     }
 
+    // --- Eventos de Controle ---
     playBtn.addEventListener('click', () => {
         if (audio.paused) {
             fadeInAudio();
@@ -163,11 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI(true);
     });
 
+    // Sincronização e Persistência de Tempo
     audio.addEventListener('timeupdate', () => {
         const progress = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = `${progress}%`;
+        if (progressBar) progressBar.style.width = `${progress}%`;
         localStorage.setItem('usk_audio_time', audio.currentTime);
     });
 
+    // Auto-play para a próxima música
     audio.addEventListener('ended', () => nextBtn.click());
 });

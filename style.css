@@ -170,65 +170,123 @@ html, body {
     box-shadow: 0 0 15px var(--accent);
 }
 
-/* Animação de Entrada */
+/* =========================================
+   UDESAKEN - EFEITOS DE INTERFACE PREMIUM
+========================================= */
+
+/* Animação de Entrada Geral */
 .fade-up {
-    opacity: 0; transform: translateY(40px);
+    opacity: 0;
+    transform: translateY(40px);
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-/* Estilização extra para o Player */
-#audio-player-container {
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
+/* Container Base do Player (Estética Dynamic Island) */
+#audio-player-container {
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(15, 15, 15, 0.6);
+    
+    /* Tamanho Inicial Compacto */
+    width: 200px;
+    height: 64px;
+    overflow: hidden;
+    
+    /* Efeito Elástico Apple */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 100;
+}
+
+/* Estado de Visibilidade Inicial */
 #audio-player-container.visible {
     opacity: 1;
 }
 
-/* Animação de "Pulso" quando a música toca */
+/* Expansão e Interação no Hover */
+#audio-player-container:hover {
+    width: 280px; /* Expande lateralmente */
+    background: rgba(20, 20, 20, 0.8);
+    border-color: var(--accent); /* Cor de destaque da Udesaken */
+    transform: translateX(-50%) translateY(-5px); /* Mantém o centro e sobe */
+}
+
+/* Ajuste para Desktop (onde não há translate-x-1/2) */
+@media (min-width: 768px) {
+    #audio-player-container:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Animação de Brilho (Glow) quando a música toca */
 .playing-glow {
-    box-shadow: 0 0 20px rgba(198, 168, 124, 0.3);
+    box-shadow: 0 0 25px rgba(198, 168, 124, 0.2);
     border-color: var(--accent) !important;
 }
-/* Estética Dynamic Island / Apple Music */
-.apple-island {
-    background: rgba(15, 15, 15, 0.4);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+/* Subtítulos e Status */
+#track-status {
+    transition: opacity 0.3s ease;
 }
 
-.apple-island.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-@media (min-width: 768px) {
-    .apple-island.visible { transform: translateY(0); }
+#audio-player-container:not(:hover) #track-status {
+    opacity: 0.5;
+    font-size: 8px;
 }
 
-/* Visualizer Bars */
+/* Brilho Radial Animado no Hover */
+#audio-player-container::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(198, 168, 124, 0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+#audio-player-container:hover::after {
+    opacity: 1;
+}
+
+/* BARRAS DO VISUALIZER (Para o efeito Liquid das barras) */
 .v-bar {
     width: 3px;
     background: var(--accent);
     border-radius: 2px;
     height: 4px;
+    transition: height 0.2s ease;
 }
 
-.playing .v-bar { animation: v-dance 0.8s infinite ease-in-out alternate; }
-.bar-1 { animation-delay: 0.1s !important; }
-.bar-2 { animation-delay: 0.3s !important; }
-.bar-3 { animation-delay: 0.2s !important; }
+.playing .v-bar {
+    animation: v-dance 0.8s infinite ease-in-out alternate;
+}
+
+.bar-1 { animation-delay: 0.1s; }
+.bar-2 { animation-delay: 0.3s; }
+.bar-3 { animation-delay: 0.2s; }
 
 @keyframes v-dance {
     0% { height: 4px; }
     100% { height: 16px; }
 }
 
-.playing #visualizer { opacity: 1; }
+#visualizer {
+    transition: opacity 0.4s ease;
+}
 
-/* Brilho do Player quando toca */
-.playing-glow {
-    border-color: rgba(198, 168, 124, 0.4) !important;
-    box-shadow: 0 10px 30px rgba(198, 168, 124, 0.15);
+.playing #visualizer {
+    opacity: 1;
 }

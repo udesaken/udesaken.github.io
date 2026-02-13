@@ -192,6 +192,8 @@
     <script src="script.js"></script>
 
     <div id="audio-player-container" class="fixed bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 z-[100] apple-island opacity-0 transition-all duration-700 ease-out">
+    <audio id="main-audio" preload="auto"></audio>
+    
     <div class="flex items-center gap-4 px-3 py-2">
         <div class="relative w-12 h-12 rounded-xl overflow-hidden shadow-lg group flex-shrink-0">
             <img src="uskcoroa.png" alt="Capa" class="w-full h-full object-cover">
@@ -202,9 +204,9 @@
             </div>
         </div>
 
-        <div class="flex flex-col min-w-[120px]">
-            <span id="track-name" class="text-[11px] font-bold text-main truncate tracking-wide uppercase">Udesaken Lounge</span>
-            <span id="track-status" class="text-[9px] text-muted font-medium opacity-70">Aguardando...</span>
+        <div class="flex flex-col min-w-[100px] transition-all duration-500">
+            <span id="track-name" class="text-[10px] md:text-[11px] font-black text-main truncate tracking-widest uppercase">Udesaken Lounge</span>
+            <span id="track-status" class="text-[9px] text-muted font-bold italic">Pausado</span>
         </div>
 
         <div class="flex items-center gap-3 pr-2">
