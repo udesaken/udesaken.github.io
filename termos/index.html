@@ -1,235 +1,204 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso — Udesaken</title>
+    <title>Termos de Uso | Udesaken Group</title>
     
     <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        /* Ajustes específicos para esta página ficar bonita */
-        .termos-container {
-            background: rgba(15, 15, 20, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            border-radius: 15px;
-            padding: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    },
+                    letterSpacing: { tight: '-0.02em' }
+                }
+            }
         }
-        
-        .section-title {
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
-            padding-bottom: 10px;
-        }
-
-        .termos-list {
-            list-style: none;
-            padding-left: 10px;
-        }
-
-        .termos-list li {
-            color: #ccc;
-            margin-bottom: 8px;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .termos-list strong { color: white; }
-
-        /* Grid para Taxas e Descontos */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed rgba(255,255,255,0.1);
-            padding-bottom: 5px;
-            color: #bbb;
-        }
-
-        .destaque-valor { color: #fff; font-weight: bold; }
-        .destaque-off { color: var(--gold); font-weight: bold; }
-
-        /* Alerta Vermelho */
-        .alert-box {
-            background: linear-gradient(45deg, rgba(50, 0, 0, 0.8), rgba(20, 0, 0, 0.9));
-            border: 1px solid #ff3333;
-            padding: 20px;
-            border-radius: 8px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-top: 15px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            .info-grid { grid-template-columns: 1fr; }
-            .termos-container { padding: 20px; }
-        }
-    </style>
+    </script>
 </head>
-<body>
+<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
 
-    <header style="position: relative; background: transparent; border: none; padding: 20px;">
-        <div class="logo">Udesaken <span style="font-size: 0.5em; color: var(--gold);">Legal</span></div>
-        <nav>
-            <a href="/" class="btn-primary" style="padding: 8px 20px; text-decoration: none; font-size: 0.85rem;">
-                <i class="fas fa-arrow-left"></i> Voltar
+    <div class="liquid-container">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+        <div class="liquid-orb orb-3"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
+                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
+                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase">Legal</span>
+                </span>
             </a>
-        </nav>
-    </header>
-
-    <section class="section-padding" style="padding-top: 20px;">
-        <div class="termos-container">
             
-            <div style="text-align: center; margin-bottom: 40px;">
-                <i class="fas fa-scroll" style="font-size: 3rem; color: var(--gold); margin-bottom: 15px; filter: drop-shadow(0 0 10px var(--gold));"></i>
-                <h1 style="color: white; margin-bottom: 10px;">Termos de Uso Oficiais</h1>
-                <p style="color: #888; font-size: 0.9rem;">
-                    Atualizado em: <span style="color: var(--gold);">15/01/2026</span> • Conforme CDC </p>
+            <div class="flex items-center gap-6">
+                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
+                    <i class="fas fa-moon text-sm"></i>
+                </button>
+                <a href="../" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
             </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-24 relative z-10">
+        <div class="max-w-4xl mx-auto px-6">
             
-            <div style="background: rgba(138, 43, 226, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--purple); margin-bottom: 30px;">
-                <p style="color: #ddd; font-size: 0.9rem; margin: 0; font-style: italic;">
-                    "Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o cliente declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo." </p>
-            </div>
-
-            <h3 class="section-title"><i class="fas fa-id-card"></i> 1. Licença, Acesso e Titularidade </h3>
-            <ul class="termos-list">
-                <li><strong>1.1.</strong> O acesso é concedido via licença de uso <strong>individual e intransferível</strong>. </li>
-                <li><strong>1.2.</strong> É estritamente proibida a revenda, cessão, aluguel ou compartilhamento de acesso sem autorização expressa. </li>
-                <li><strong>1.3.</strong> O uso fica limitado aos grupos ou números autorizados no ato da contratação. </li>
-            </ul>
-
-            <h3 class="section-title"><i class="fas fa-clock"></i> 2. Vigência do Plano </h3>
-            <ul class="termos-list">
-                <li><strong>2.1.</strong> A vigência inicia-se imediatamente após a confirmação do pagamento e ativação. </li>
-                <li><strong>2.2.</strong> A contagem é feita em dias corridos (calendário), não sendo pausada por ausência de uso. </li>
-            </ul>
-
-            <h3 class="section-title"><i class="fas fa-server"></i> 3. Disponibilidade e Garantia </h3>
-            <ul class="termos-list">
-                <li><strong>3.1.</strong> O serviço depende de terceiros (WhatsApp/Meta) e internet, sujeito a oscilações. </li>
-                <li><strong>3.2.</strong> Manutenções programadas ou instabilidades momentâneas não geram indenização. </li>
-            </ul>
-            <div style="margin-top: 15px; background: rgba(0, 255, 127, 0.05); padding: 15px; border-radius: 6px; border: 1px solid rgba(0, 255, 127, 0.2);">
-                <strong style="color: #00ff7f;">3.3. Garantia de Estabilidade:</strong><br>
-                <span style="color: #ccc; font-size: 0.9rem;">Caso o bot fique totalmente inoperante por <strong>mais de 24 horas consecutivas</strong> (falha técnica nossa), faremos a reposição automática desses dias ao final do plano. </span>
-            </div>
-
-            <h3 class="section-title"><i class="fas fa-hand-holding-usd"></i> 4. Política de Reembolso </h3>
-            <ul class="termos-list">
-                <li><strong>4.1. Direito de Arrependimento (7 Dias):</strong> Conforme Art. 49 do CDC, você tem 7 dias corridos para solicitar reembolso integral (100%), desde que não tenha violado regras. </li>
-                <li><strong>4.2. Sem Reembolso se:</strong> <ul style="padding-left: 20px; margin-top: 5px; list-style: circle;">
-                        <li>Bloqueio do seu número pessoal pelo WhatsApp. </li>
-                        <li>Desistência após 7 dias. </li>
-                        <li>Banimento por violação dos termos. </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h3 class="section-title"><i class="fab fa-whatsapp"></i> 5. Banimento do Número do Bot </h3>
-            <ul class="termos-list">
-                <li><strong>5.1.</strong> Caso o número oficial caia, migraremos para um novo o mais breve possível. </li>
-                <li><strong>5.2.</strong> O tempo de paralisação durante a troca será <strong>acrescido ao final do seu plano</strong> como compensação. </li>
-            </ul>
-
-            <div class="info-grid">
-                <div class="info-box">
-                    <h4 class="text-gold" style="margin-bottom: 15px;"><i class="fas fa-coins"></i> 6. Taxas Administrativas </h4>
-                    <div class="price-row">
-                        <span>Migração de Grupo/Retorno</span>
-                        <span class="destaque-valor">R$ 1,00</span> </div>
-                    <div class="price-row" style="border: none;">
-                        <span>Transferência de VIP</span>
-                        <span class="destaque-valor">R$ 1,00</span> </div>
-                </div>
-
-                <div class="info-box">
-                    <h4 class="text-gold" style="margin-bottom: 15px;"><i class="fas fa-tags"></i> 7. Descontos Progressivos </h4>
-                    <div class="price-row">
-                        <span>2 Grupos Simultâneos</span>
-                        <span class="destaque-off">5% OFF</span> </div>
-                    <div class="price-row" style="border: none;">
-                        <span>3 Grupos Simultâneos</span>
-                        <span class="destaque-off">10% OFF</span> </div>
-                    <p style="font-size: 0.75rem; color: #666; margin-top: 10px;">*Solicitar no ato da contratação. Sem descontos retroativos. </p>
-                </div>
-            </div>
-
-            <h3 class="section-title"><i class="fas fa-user-lock"></i> 8. Privacidade e Segurança </h3>
-            <p style="color: #ccc; font-size: 0.95rem; line-height: 1.6;">
-                O Udesaken Bot <strong>não armazena</strong> conversas, mídias ou dados sensíveis. Processamos apenas dados técnicos estritamente necessários para a execução de comandos. </p>
-
-            <h3 class="section-title" style="color: #ff5555; border-color: rgba(255, 85, 85, 0.2);">
-                <i class="fas fa-exclamation-triangle"></i> 9. Uso Indevido e Penalidades </h3>
-            <ul class="termos-list">
-                <li><strong>9.1. Proibições:</strong> Spam, travas, ataques, discursos de ódio, práticas ilegais ou engenharia reversa. </li>
-                <li><strong>9.2. Bug Abuse:</strong> É proibido explorar falhas do sistema para vantagem. Reporte bugs ao suporte. </li>
-                <li><strong>9.3.</strong> O descumprimento gera banimento permanente sem reembolso. </li>
-            </ul>
-            
-            <div class="alert-box">
-                <i class="fas fa-gavel" style="font-size: 2rem; color: #ff5555;"></i>
-                <div>
-                    <strong style="color: #ff5555; text-transform: uppercase; letter-spacing: 1px;">Penalidade Grave </strong>
-                    <p style="color: #e0e0e0; font-size: 0.9rem; margin: 5px 0 0 0;">
-                        Exploração maliciosa de bugs que cause prejuízo técnico/financeiro resultará em banimento e 
-                        <strong style="color: white; text-decoration: underline;">Multa de Reparação de até R$ 50,00</strong>. </p>
-                </div>
-            </div>
-
-            <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                <div class="info-grid" style="margin: 0; gap: 20px;">
-                    <div>
-                        <h5 style="color: white; margin-bottom: 10px;">10. Suporte Técnico </h5>
-                        <p style="color: #888; font-size: 0.85rem;">Oferecido durante a vigência para resolver dúvidas e problemas funcionais. </p>
+            <div class="glass-panel p-8 md:p-12 rounded-[30px] fade-up">
+                
+                <div class="text-center mb-12">
+                    <div class="w-16 h-16 bg-brand-gold/10 border border-brand-gold/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-scroll text-brand-gold text-2xl"></i>
                     </div>
+                    <h1 class="text-3xl md:text-5xl font-black text-main mb-4 tracking-tighter">Termos de Uso Oficiais</h1>
+                    <p class="text-sm text-muted uppercase tracking-[0.2em] font-bold">Atualizado em: 15/01/2026</p>
+                </div>
+
+                <div class="bg-brand-gold/5 border-l-4 border-brand-gold p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm leading-relaxed">
+                    "Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o cliente declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo."
+                </div>
+
+                <div class="space-y-12 text-gray-300 leading-relaxed">
+                    
                     <div>
-                        <h5 style="color: white; margin-bottom: 10px;">11. Atualizações </h5>
-                        <p style="color: #888; font-size: 0.85rem;">Termos podem mudar. Alterações grandes serão avisadas nos canais oficiais. </p>
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                            <i class="fas fa-id-card text-brand-gold text-sm"></i> 1. Licença, Acesso e Titularidade
+                        </h3>
+                        <ul class="space-y-2 text-sm md:text-base">
+                            <li><strong>1.1.</strong> O acesso é concedido via licença de uso <span class="text-white">individual e intransferível</span>.</li>
+                            <li><strong>1.2.</strong> É estritamente proibida a revenda, cessão, aluguel ou compartilhamento de acesso sem autorização expressa.</li>
+                            <li><strong>1.3.</strong> O uso fica limitado aos grupos ou números autorizados no ato da contratação.</li>
+                        </ul>
                     </div>
+
                     <div>
-                        <h5 style="color: white; margin-bottom: 10px;">12. Chaves de Acesso (Keys) </h5>
-                        <p style="color: #888; font-size: 0.85rem;">Responsabilidade do cliente. Não repomos keys perdidas ou roubadas. </p>
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                            <i class="fas fa-clock text-brand-gold text-sm"></i> 2. Vigência do Plano
+                        </h3>
+                        <ul class="space-y-2 text-sm md:text-base">
+                            <li><strong>2.1.</strong> A vigência inicia-se imediatamente após a confirmação do pagamento e ativação.</li>
+                            <li><strong>2.2.</strong> A contagem é feita em dias corridos (calendário), não sendo pausada por ausência de uso.</li>
+                        </ul>
                     </div>
+
+                    <div>
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                            <i class="fas fa-server text-brand-gold text-sm"></i> 3. Disponibilidade e Garantia
+                        </h3>
+                        <ul class="space-y-4 text-sm md:text-base">
+                            <li><strong>3.1.</strong> O serviço depende de terceiros (WhatsApp/Meta) e internet, sujeito a oscilações.</li>
+                            <li><strong>3.2.</strong> Manutenções programadas ou instabilidades momentâneas não geram indenização.</li>
+                            <li class="p-4 bg-green-500/5 border border-green-500/20 rounded-xl">
+                                <strong class="text-green-400 block mb-1">3.3. Garantia de Estabilidade:</strong>
+                                Caso o bot fique totalmente inoperante por mais de 24 horas consecutivas (falha técnica nossa), faremos a reposição automática desses dias ao final do plano.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                            <i class="fas fa-hand-holding-usd text-brand-gold text-sm"></i> 4. Política de Reembolso
+                        </h3>
+                        <ul class="space-y-2 text-sm md:text-base">
+                            <li><strong>4.1. Direito de Arrependimento (7 Dias):</strong> Conforme Art. 49 do CDC, você tem 7 dias corridos para solicitar reembolso integral (100%), desde que não tenha violado regras.</li>
+                            <li><strong>4.2. Sem Reembolso se:</strong>
+                                <ul class="pl-6 mt-2 space-y-1 list-disc text-gray-400">
+                                    <li>Bloqueio do seu número pessoal pelo WhatsApp.</li>
+                                    <li>Desistência após 7 dias.</li>
+                                    <li>Banimento por violação dos termos.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <h4 class="text-brand-gold font-bold mb-4 flex items-center gap-2">
+                                <i class="fas fa-coins"></i> 6. Taxas Administrativas
+                            </h4>
+                            <div class="flex justify-between border-b border-white/5 pb-2 mb-2 text-sm">
+                                <span>Migração de Grupo</span> <span class="text-white font-bold">R$ 1,00</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>Transferência de VIP</span> <span class="text-white font-bold">R$ 1,00</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                            <h4 class="text-brand-gold font-bold mb-4 flex items-center gap-2">
+                                <i class="fas fa-tags"></i> 7. Descontos Progressivos
+                            </h4>
+                            <div class="flex justify-between border-b border-white/5 pb-2 mb-2 text-sm">
+                                <span>2 Grupos Simultâneos</span> <span class="text-white font-bold">5% OFF</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span>3 Grupos Simultâneos</span> <span class="text-white font-bold">10% OFF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2 text-red-500">
+                            <i class="fas fa-exclamation-triangle text-red-500 text-sm"></i> 9. Uso Indevido e Penalidades
+                        </h3>
+                        <ul class="space-y-4 text-sm md:text-base">
+                            <li><strong>9.1. Proibições:</strong> Spam, travas, ataques, discursos de ódio, práticas ilegais ou engenharia reversa.</li>
+                            <li><strong>9.2. Bug Abuse:</strong> É proibido explorar falhas do sistema para vantagem. Reporte bugs ao suporte.</li>
+                            <li class="flex gap-4 p-5 bg-red-500/10 border border-red-500/30 rounded-xl items-center">
+                                <i class="fas fa-gavel text-red-500 text-2xl"></i>
+                                <div>
+                                    <strong class="text-red-500 block uppercase text-xs tracking-wider">Penalidade Grave</strong>
+                                    <p class="text-xs md:text-sm text-gray-200 mt-1">Exploração maliciosa resultará em banimento e Multa de Reparação de até R$ 50,00.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/5">
+                        <div>
+                            <h5 class="text-white font-bold mb-2">10. Suporte</h5>
+                            <p class="text-xs text-muted leading-relaxed">Oferecido durante a vigência para resolver dúvidas e problemas funcionais.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold mb-2">11. Atualizações</h5>
+                            <p class="text-xs text-muted leading-relaxed">Termos podem mudar. Alterações grandes serão avisadas nos canais oficiais.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-bold mb-2">12. Chaves (Keys)</h5>
+                            <p class="text-xs text-muted leading-relaxed">Responsabilidade do cliente. Não repomos keys perdidas ou roubadas.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px 20px; color: #666; font-size: 0.8rem;">
-        <p>Udesaken Group &copy; 2026. Todos os direitos reservados.</p>
-        <div style="margin-top: 10px;">
-            <a href="https://udesaken.site/planos" style="color: var(--gold); margin: 0 10px;">Planos</a> | 
-            <a href="https://udesaken.site/vip" style="color: var(--gold); margin: 0 10px;">VIP</a> </div>
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 glass-panel">
+        <p class="text-[10px] text-muted font-medium tracking-widest uppercase mb-4">Udesaken Group © 2026</p>
+        <div class="flex justify-center gap-6 text-xs font-bold">
+            <a href="../planos/" class="text-brand-gold hover:text-white transition">Planos</a>
+            <span class="text-white/10">|</span>
+            <a href="../vip/" class="text-brand-gold hover:text-white transition">VIP</a>
+        </div>
     </footer>
 
+    <script src="../script.js"></script>
 </body>
 </html>
