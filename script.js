@@ -1,29 +1,69 @@
 /* ==========================================================================
-   UDESAKEN - PREMIUM LOGIC
+   UDESAKEN - THEME LOGIC & CORE
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. NAVBAR PREMIUM (Transição suave de vidro) ---
-    const navbar = document.getElementById('navbar');
+    // --- 1. LÓGICA DE TEMAS (DARK/LIGHT) ---
+    const themeBtns = document.querySelectorAll('.theme-toggle');
+    const htmlElement = document.documentElement;
     
-    function updateNavbar() {
-        if (window.scrollY > 30) {
-            // Ao rolar: Adiciona a classe de vidro premium definida no CSS
-            navbar.classList.add('glass-nav');
-            navbar.classList.remove('border-transparent');
+    // Verifica preferência salva ou do sistema
+    const savedTheme = localStorage.getItem('udesaken_theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            htmlElement.setAttribute('data-theme', 'light');
+            updateIcons(true); // Ícone de Sol
         } else {
-            // No topo: Totalmente transparente
-            navbar.classList.remove('glass-nav');
-            navbar.classList.add('border-transparent');
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateIcons(false); // Ícone de Lua
         }
+        localStorage.setItem('udesaken_theme', theme);
     }
-    
-    // Listener de scroll otimizado
-    window.addEventListener('scroll', () => requestAnimationFrame(updateNavbar));
-    updateNavbar(); // Chama no início
 
-    // --- 2. MENU MOBILE ---
+    function updateIcons(isLight) {
+        themeBtns.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (isLight) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    }
+
+    // Inicialização
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        // Se não tiver salvo, segue o sistema
+        applyTheme(systemPrefersDark ? 'dark' : 'light');
+    }
+
+    // Evento de clique
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+        });
+    });
+
+    // --- 2. NAVBAR STICKY ---
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            navbar.classList.add('glass-nav'); // Classe visual se necessário
+        } else {
+            navbar.classList.remove('glass-nav');
+        }
+    });
+
+    // --- 3. MENU MOBILE ---
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -33,19 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. SCROLL REVEAL (Estilo Apple - Suave) ---
+    // --- 4. ANIMAÇÕES ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // Opcional: parar de observar após animar para performance
-                // observer.unobserve(entry.target); 
             }
         });
-    }, { 
-        threshold: 0.15, // Espera um pouco mais do elemento aparecer
-        rootMargin: "0px 0px -100px 0px" // Ativa a animação um pouco antes
-    });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
