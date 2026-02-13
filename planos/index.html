@@ -1,262 +1,243 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planos Bot (20% OFF) — Udesaken 2026</title>
+    <title>Planos Premium | Udesaken Group</title>
     
-    <meta property="og:image" content="https://udesaken.site/uskcoroa.png">
-    <link rel="icon" type="image/png" href="/uskcoroa.png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { 
+                            gold: '#C6A87C', 
+                            dark: '#050505',
+                            surface: '#0F0F0F'
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.03em',
+                    }
+                }
+            }
+        }
+    </script>
 
-    <meta name="theme-color" content="#000000">
-    
     <style>
-        /* Ajustes específicos para a página de Planos */
-        .price-features li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-        .price-features i { font-size: 0.9rem; }
-        
-        .price-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin: 15px 0;
-            text-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 1;
-        }
-        
-        .old-price {
-            font-size: 1rem;
-            text-decoration: line-through;
-            color: #666;
-            margin-bottom: 5px;
-            font-weight: 400;
+        :root {
+            --bg-dark: #050505;
+            --gold: #C6A87C;
         }
 
-        .price-header h4 { text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; opacity: 0.8; }
-        .price-header h2 { font-size: 2rem; color: var(--hk-pink); margin: 5px 0; }
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-dark);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+
+        /* Vidro/Glass Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Spotlight Dourado */
+        .spotlight-gold {
+            background: radial-gradient(circle at center, rgba(198, 168, 124, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            opacity: 1;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        /* Texto Gradiente Ouro */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #E2D1B3, #C6A87C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animações */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
         
-        /* Ajuste para o Badge brilhar mais nessa página */
-        .badge-discount {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            padding: 5px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 800;
-            background: var(--hk-pink); color: white; 
-            box-shadow: 0 0 15px var(--hk-neon);
-            white-space: nowrap;
+        /* Pulso Lento */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.8; transform: translate(-50%, 0) scale(1); }
+            50% { opacity: 0.4; transform: translate(-50%, 0) scale(1.1); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 6s ease-in-out infinite;
         }
     </style>
 </head>
-<body>
+<body class="bg-brand-dark text-white antialiased selection:bg-brand-gold/30 selection:text-white">
 
-    <div class="promo-bar">
-        <p>
-            <i class="fas fa-fire"></i> 
-            FEVEREIRO INSANO: <b>20% OFF</b> JÁ APLICADO! 
-            <span class="promo-tag">APROVEITE</span>
-        </p>
-    </div>
-
-    <header>
-        <div class="logo">
-            Udesaken <span style="font-size:0.8rem; border:1px solid var(--hk-pink); color: var(--hk-pink); padding: 2px 5px; border-radius: 4px;">BOT</span>
-        </div>
-        <nav>
-            <ul class="nav-links">
-                <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
-                <li><a href="/">Início</a></li>
-                <li><a href="/planos" class="active" style="color: var(--hk-pink); text-shadow: 0 0 10px var(--hk-neon);">Planos Bot</a></li>
-                <li><a href="/vip">Clube VIP</a></li>
-                <li><a href="https://wa.me/447562847091" class="btn-header"><i class="fab fa-whatsapp"></i> Suporte</a></li>
-            </ul>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
-
-    <section class="hero" style="min-height: 50vh; padding-top: 140px; padding-bottom: 40px; justify-content: center; text-align: center;">
-        <div class="hero-content" style="max-width: 800px;">
-            <div class="reveal-fade">
-                <div class="badge-news" style="animation: none; border-color: var(--hk-gold); color: var(--hk-gold);">
-                    <i class="fas fa-tag"></i> Ofertas Atualizadas
+    <nav class="fixed w-full z-50 top-0 glass-nav transition-all duration-300">
+        <div class="max-w-[1100px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded-lg overflow-hidden border border-white/10 bg-black">
+                    <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
+                <span class="font-bold text-white tracking-tight group-hover:text-brand-gold transition">Udesaken</span>
+            </a>
+            <a href="../index.html" class="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-wider transition flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </nav>
+
+    <section class="pt-40 pb-16 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] spotlight-gold -z-10 animate-pulse-slow"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-widest mb-6">
+                Oferta Limitada • Fevereiro
             </div>
-            
-            <h1 class="reveal-bottom">
-                Preços Derretidos<br>
-                <span class="text-pink">FEVEREIRO.</span>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter leading-tight">
+                Escolha seu <span class="text-gold-gradient">Poder.</span>
             </h1>
-            
-            <p class="reveal-bottom delay-200" style="margin: 0 auto 30px; max-width: 600px;">
-                Aproveite <strong>20% de desconto</strong> em todos os planos de moderação e diversão.
-                Preço baixo, qualidade Udesaken.
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+                Desbloqueie o potencial máximo do seu grupo com nossa infraestrutura de elite.
+                <strong class="text-white block mt-2 font-medium">20% OFF JÁ APLICADO.</strong>
             </p>
         </div>
     </section>
 
-    <section class="section-padding pricing-section" style="padding-top: 0;">
-        <div class="pricing-grid">
-            
-            <div class="price-card reveal-left delay-200">
-                <div class="badge-discount pulse-animation" style="background: #333; box-shadow: 0 0 10px rgba(255,255,255,0.2);">-20% OFF</div>
-                <div>
-                    <div class="price-header">
-                        <h4>Teste Rápido</h4>
-                        <h2>1 Dia</h2>
+    <section class="pb-32 relative z-10">
+        <div class="max-w-[1100px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                
+                <div class="reveal glass-panel p-8 rounded-2xl hover:border-white/20 transition duration-300 group">
+                    <h3 class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-4">Teste Rápido</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-4xl font-bold text-white tracking-tight">R$ 1,20</span>
+                        <span class="text-sm text-gray-600 line-through font-medium">R$ 1,50</span>
                     </div>
-                    <div class="price-value">
-                        <span class="old-price">R$ 1,50</span>
-                        R$ 1,20
-                    </div>
-                    <ul class="price-features">
-                        <li><i class="fas fa-check" style="color: var(--hk-pink);"></i> Acesso Total às funções</li>
-                        <li><i class="fas fa-bolt" style="color: var(--hk-pink);"></i> Entrega Imediata</li>
-                        <li><i class="fas fa-clock" style="color: #666;"></i> Duração de 24 horas</li>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-400 font-medium">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> Acesso Total (24h)</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> Entrega Imediata</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> Sem Fidelidade</li>
                     </ul>
+                    <a href="https://wa.me/447562847091?text=Quero%20testar%20o%20Udesaken%20por%201%20Dia" class="block w-full py-3 rounded-lg border border-white/10 text-center font-bold text-white hover:bg-white/5 transition">
+                        Testar Agora
+                    </a>
                 </div>
-                <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20Teste%20(1%20Dia)" target="_blank" class="btn-price">
-                    Testar Agora
-                </a>
-            </div>
-            
-            <div class="price-card popular pink-theme reveal-bottom delay-400">
-                <div class="badge-pink pulse-animation">-20% OFF</div>
-                <div>
-                    <div class="price-header">
-                        <h4 style="color: var(--hk-soft);">Mensal</h4>
-                        <h2 style="font-size: 2.2rem;">30 Dias</h2>
-                    </div>
-                    <div class="price-value" style="color: var(--hk-pink); text-shadow: 0 0 20px var(--hk-neon);">
-                        <span class="old-price" style="color: rgba(255, 105, 180, 0.4);">R$ 7,50</span>
-                        R$ 6,00
-                    </div>
-                    <ul class="price-features">
-                        <li><i class="fas fa-star text-pink"></i> <strong>Melhor Custo-Benefício</strong></li>
-                        <li><i class="fas fa-shield-alt text-pink"></i> Moderação 24/7</li>
-                        <li><i class="fas fa-gamepad text-pink"></i> RPG & Diversão Completa</li>
-                        <li><i class="fas fa-headset text-pink"></i> Suporte Prioritário</li>
-                    </ul>
-                </div>
-                <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20Plano%20Mensal" target="_blank" class="btn-price btn-pink-glow" style="border:none;">
-                    Garantir Mensal
-                </a>
-            </div>
 
-            <div class="price-card reveal-right delay-200">
-                <div class="badge-discount pulse-animation" style="background: #333; box-shadow: 0 0 10px rgba(255,255,255,0.2);">-20% OFF</div>
-                <div>
-                    <div class="price-header">
-                        <h4>Quinzenal</h4>
-                        <h2>15 Dias</h2>
+                <div class="reveal delay-100 relative glass-panel p-8 rounded-2xl border-brand-gold/30 bg-gradient-to-b from-brand-gold/5 to-transparent transform md:scale-105 z-20 shadow-2xl shadow-black/50">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-brand-gold text-black text-[10px] font-black uppercase tracking-wider rounded-full shadow-lg">
+                        Mais Vendido
                     </div>
-                    <div class="price-value">
-                        <span class="old-price">R$ 5,50</span>
-                        R$ 4,40
+                    
+                    <h3 class="text-brand-gold font-bold uppercase tracking-widest text-xs mb-4">Mensal • 30 Dias</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-bold text-white tracking-tight">R$ 6,00</span>
+                        <span class="text-lg text-gray-500 line-through font-medium">R$ 7,50</span>
                     </div>
-                    <ul class="price-features">
-                        <li><i class="fas fa-check" style="color: var(--hk-pink);"></i> Diversão Garantida</li>
-                        <li><i class="fas fa-coins" style="color: var(--hk-pink);"></i> Economia RPG</li>
-                        <li><i class="fas fa-sync" style="color: #666;"></i> Renovação Flexível</li>
+                    <p class="text-xs text-gray-400 mb-6 font-medium leading-relaxed">O plano definitivo para quem leva seu grupo a sério.</p>
+                    
+                    <ul class="space-y-3 mb-8 text-sm text-gray-200 font-medium">
+                        <li class="flex items-center gap-3"><i class="fas fa-star text-brand-gold"></i> Moderação 24/7</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-shield-alt text-brand-gold"></i> Anti-Link & Anti-Travas</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-gamepad text-brand-gold"></i> Sistema de RPG Completo</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-headset text-brand-gold"></i> Suporte Prioritário</li>
                     </ul>
+                    
+                    <a href="https://wa.me/447562847091?text=Quero%20o%20Plano%20Mensal%20com%20Desconto" class="block w-full py-4 rounded-lg bg-white text-black text-center font-bold uppercase tracking-wide hover:bg-brand-gold transition shadow-lg">
+                        Garantir Mensal
+                    </a>
                 </div>
-                <a href="https://wa.me/447562847091?text=Ola%20Udesaken!%20Quero%20aproveitar%20os%2020%25%20OFF%20no%20Plano%20Quinzenal" target="_blank" class="btn-price">
-                    Assinar Quinzenal
-                </a>
-            </div>
 
+                <div class="reveal delay-200 glass-panel p-8 rounded-2xl hover:border-white/20 transition duration-300">
+                    <h3 class="text-gray-500 font-bold uppercase tracking-widest text-xs mb-4">Quinzenal</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-4xl font-bold text-white tracking-tight">R$ 4,40</span>
+                        <span class="text-sm text-gray-600 line-through font-medium">R$ 5,50</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm text-gray-400 font-medium">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> 15 Dias de Acesso</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> Economia RPG</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-brand-gold"></i> Renovação Flexível</li>
+                    </ul>
+                    <a href="https://wa.me/447562847091?text=Quero%20o%20Plano%20Quinzenal" class="block w-full py-3 rounded-lg border border-white/10 text-center font-bold text-white hover:bg-white/5 transition">
+                        Assinar Quinzenal
+                    </a>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <section class="section-padding" style="margin-top: 50px;">
-        <div class="section-header reveal-bottom">
-            <h2>Dúvidas Comuns</h2>
-            <div class="pink-line"></div>
-        </div>
-        <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 20px;">
+    <section class="py-20 border-t border-white/5 bg-brand-surface relative z-10">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-xl font-bold text-white mb-10 text-center">Dúvidas Frequentes</h2>
             
-            <div class="faq-item reveal-left" style="padding: 25px; background: rgba(20,20,20,0.5); border-radius: 15px; border: 1px solid #222;">
-                <h4 style="color: var(--hk-pink); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-question-circle"></i> Como funciona a entrega?
-                </h4>
-                <p>Assim que o pagamento é confirmado, você recebe o acesso ao bot e o tutorial de ativação diretamente no seu WhatsApp. É instantâneo.</p>
-            </div>
-            
-            <div class="faq-item reveal-right delay-200" style="padding: 25px; background: rgba(20,20,20,0.5); border-radius: 15px; border: 1px solid #222;">
-                <h4 style="color: var(--hk-pink); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-sync-alt"></i> Preciso reinstalar todo mês?
-                </h4>
-                <p>Não! Se você renovar antes do vencimento, o bot continua no grupo sem interrupções e sem perder nenhuma configuração.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col reveal-bottom">
-                <div class="logo" style="margin-bottom: 15px;">Udesaken</div>
-                <p>Redefinindo a interação em comunidades digitais.</p>
-            </div>
-
-            <div class="footer-col reveal-bottom delay-200">
-                <h4>Legal & Suporte</h4>
-                <ul class="footer-links">
-                    <li><a href="/termos"><i class="fas fa-file-contract"></i> Termos de Uso</a></li>
-                    <li><a href="/cookies"><i class="fas fa-cookie-bite"></i> Política de Cookies</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col reveal-bottom delay-400">
-                <h4>Siga a Udesaken</h4>
-                <div class="social-grid">
-                    <a href="https://instagram.com/udesakenofc" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+            <div class="space-y-4">
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition">
+                    <h4 class="text-white font-bold mb-2 flex items-center gap-2 text-sm"><i class="fas fa-bolt text-brand-gold"></i> A entrega é automática?</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sim! Após o pagamento via Pix, você recebe o acesso e o tutorial de ativação imediatamente no seu WhatsApp.</p>
+                </div>
+                
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition">
+                    <h4 class="text-white font-bold mb-2 flex items-center gap-2 text-sm"><i class="fas fa-sync text-brand-gold"></i> O bot sai do grupo se eu não renovar?</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Ele avisa antes do vencimento. Se não renovar, ele sai automaticamente, mas suas configurações ficam salvas por 3 dias.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="copyright">
-            <p>Udesaken Group &copy; 2026. Todos os direitos reservados.</p>
-            <a href="/" class="powered-by">
-                <i class="fas fa-bolt"></i> Powered by <span>Udesaken</span>
-            </a>
-        </div>
+    <footer class="py-8 text-center border-t border-white/5">
+        <p class="text-xs text-gray-600 font-medium">© 2026 Udesaken Group.</p>
     </footer>
 
-    <div id="cookieBanner" class="cookie-consent">
-        <div class="cookie-text">
-            <i class="fas fa-cookie-bite" style="color: var(--hk-pink); margin-right: 10px;"></i>
-            Utilizamos cookies para melhorar a experiência.
-        </div>
-        <button id="btnAccept" class="btn-accept">Aceitar</button>
-    </div>
-
-    <div class="music-widget">
-        <audio id="bg-audio" loop>
-            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
-        </audio>
-        <div class="music-btn" onclick="toggleMusic()">
-            <div class="waves"><span></span><span></span><span></span><span></span></div>
-            <i class="fas fa-volume-mute" id="music-icon"></i>
-        </div>
-    </div>
-
-    <script type="module" src="../script.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
