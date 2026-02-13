@@ -1,60 +1,45 @@
 /* ==========================================================================
-    UDESAKEN SYSTEM - Logic & Effects (Final Fix)
+    UDESAKEN SYSTEM - Logic Core
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CONFIGURAÇÃO DO PLAYER ---
+    // --- PLAYER DE MÚSICA ---
     const audio = document.getElementById('bg-audio');
     const widget = document.getElementById('musicWidget');
     const playBtnIcon = document.querySelector('#playPauseBtn i');
     const trackNameLabel = document.getElementById('trackName');
-    
     const volumeSlider = document.getElementById('volumeSlider');
     const volIcon = document.getElementById('volIcon');
 
-    // LISTA DE MÚSICAS (Verifique se os nomes dos arquivos estão exatos)
+    // Playlist (Confirme se os nomes dos arquivos estão na mesma pasta)
     const playlist = [
-        { name: "Udesaken Theme", src: "musicusk.mp3" }, // Música 1
-        { name: "Vibes Mode", src: "uskmusic2.mp3" }    // Música 2
+        { name: "Udesaken Theme", src: "musicusk.mp3" },
+        { name: "Vibes Mode", src: "uskmusic2.mp3" }
     ];
     
     let currentTrackIndex = 0;
     let isPlaying = false;
 
-    // --- INICIALIZAÇÃO OBRIGATÓRIA (Corrige o bug do Play) ---
-    function initPlayer() {
-        if(audio) {
-            // Carrega a primeira música imediatamente no sistema
-            audio.src = playlist[0].src;
-            audio.load();
-            
-            // Define volume bem baixo (Ambiente de Mercado)
-            audio.volume = 0.1; 
-            if(volumeSlider) volumeSlider.value = 0.1;
-        }
+    // Inicialização segura
+    if(audio) {
+        audio.src = playlist[0].src;
+        audio.volume = 0.1; // Começa bem baixinho (10%)
+        if(volumeSlider) volumeSlider.value = 0.1;
     }
-    
-    // Roda a configuração assim que abre o site
-    initPlayer();
 
-    // --- CONTROLE DE VOLUME ---
+    // Controle de Volume
     if(volumeSlider) {
         volumeSlider.addEventListener('input', (e) => {
             const val = e.target.value;
             audio.volume = val;
-
-            if(val == 0) {
-                volIcon.className = 'fas fa-volume-mute';
-            } else if (val < 0.5) {
-                volIcon.className = 'fas fa-volume-down';
-            } else {
-                volIcon.className = 'fas fa-volume-up';
-            }
+            if(val == 0) volIcon.className = 'fas fa-volume-mute';
+            else if (val < 0.5) volIcon.className = 'fas fa-volume-down';
+            else volIcon.className = 'fas fa-volume-up';
         });
     }
 
-    // --- FUNÇÕES DE TOCAR ---
+    // Atualiza Visual Play/Pause
     function updatePlayerUI() {
         if (!widget || !playBtnIcon) return;
         if (isPlaying) {
@@ -66,22 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Função Tocar Global
     window.toggleMusic = function() {
         if (!audio) return;
-
         if (audio.paused) {
-            // Tenta tocar a música já carregada
-            let playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    isPlaying = true;
-                    updatePlayerUI();
-                })
-                .catch(error => {
-                    console.log("Play bloqueado (clique necessário):", error);
-                });
-            }
+            audio.play().then(() => {
+                isPlaying = true;
+                updatePlayerUI();
+            }).catch(e => console.log("Bloqueio de autoplay do navegador:", e));
         } else {
             audio.pause();
             isPlaying = false;
@@ -89,12 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Função Próxima Faixa
     window.nextTrack = function() {
         if (!audio) return;
-        currentTrackIndex++;
-        if (currentTrackIndex >= playlist.length) currentTrackIndex = 0;
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         
-        // Troca e toca
         audio.src = playlist[currentTrackIndex].src;
         if(trackNameLabel) trackNameLabel.textContent = playlist[currentTrackIndex].name;
         
@@ -104,18 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- 2. EFEITOS VISUAIS E MOBILE ---
+    // --- EFEITOS VISUAIS ---
     
-    // Spotlight (Luz do Mouse)
-    const cards = document.querySelectorAll('.price-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-        });
-    });
-
     // Menu Mobile
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -129,7 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closeBtn) closeBtn.addEventListener('click', closeMenu);
     links.forEach(link => link.addEventListener('click', closeMenu));
 
-    // Scroll Reveal
+    // Luz do Mouse (Spotlight)
+    const cards = document.querySelectorAll('.price-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+        });
+    });
+
+    // Scroll Reveal (Animação de entrada)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -158,5 +134,4 @@ document.addEventListener('DOMContentLoaded', () => {
             if(cookieBanner) cookieBanner.classList.remove('active');
         });
     }
-
 });
