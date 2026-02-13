@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,14 +20,14 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        dark: { surface: '#0A0A0A' }, /* Cor de fundo secundária */
+                        dark: { surface: '#0A0A0A' },
                         zap: { 
-                            400: '#4ADE80', /* Verde Neon */
-                            500: '#25D366', /* Verde Zap */
+                            400: '#4ADE80',
+                            500: '#25D366',
                         }
                     },
                     letterSpacing: {
-                        tighter: '-0.04em', /* Tracking estilo Apple */
+                        tighter: '-0.04em',
                     }
                 }
             }
@@ -40,8 +41,8 @@
             <div class="flex items-center justify-between h-20">
                 
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-                    <div class="relative w-8 h-8 rounded-xl bg-gradient-to-br from-zap-400/20 to-zap-500/5 border border-zap-400/20 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-zap-400/50 shadow-[0_0_20px_rgba(37,211,102,0.15)]">
-                         <span class="font-bold text-zap-400 text-lg">U</span>
+                    <div class="relative w-10 h-10 rounded-xl bg-black border border-white/10 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-zap-400/50 shadow-[0_0_20px_rgba(37,211,102,0.1)]">
+                         <img src="uskcoroa.png" alt="Logo Udesaken" class="w-full h-full object-cover p-1">
                     </div>
                     <span class="text-xl font-extrabold tracking-tighter text-white">
                         Udesaken
@@ -110,39 +111,72 @@
 
             <div class="reveal delay-300 relative mx-auto max-w-[280px] md:max-w-[340px]">
                 <img src="uskcoroa.png" alt="Udesaken Crown" class="w-full h-auto floating-crown relative z-10">
-                
                 <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] h-24 bg-zap-500/30 blur-[50px] rounded-full opacity-60 z-0"></div>
             </div>
         </div>
     </section>
 
-    <section class="py-32 relative">
+    <section class="py-20 relative border-t border-white/5 bg-[#050505]">
         <div class="max-w-[1100px] mx-auto px-6 sm:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">Conecte-se ao Ecossistema</h2>
+                <p class="text-gray-400 text-lg">Acompanhe atualizações, figurinhas e novidades em tempo real.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
-                <div class="reveal glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
-                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="reveal lg:col-span-2 glass-panel p-8 rounded-[32px] hover:border-zap-500/50 transition duration-500 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-zap-500/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="flex items-start justify-between relative z-10">
+                        <div>
+                            <div class="w-12 h-12 bg-zap-500 rounded-full flex items-center justify-center mb-4 text-black text-xl">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Canal de Figurinhas</h3>
+                            <p class="text-gray-400 text-sm">Milhares de figurinhas diárias e memes exclusivos.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-zap-500 group-hover:text-black transition">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Blindagem Ativa</h3>
-                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Proteção em tempo real contra travas, links maliciosos e spam. Seu grupo, suas regras.</p>
-                </div>
+                </a>
 
-                <div class="reveal delay-100 glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
-                     <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="reveal lg:col-span-2 glass-panel p-8 rounded-[32px] hover:border-blue-500/50 transition duration-500 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="flex items-start justify-between relative z-10">
+                        <div>
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-4 text-white text-xl">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Status do Sistema</h3>
+                            <p class="text-gray-400 text-sm">Fique por dentro das atualizações e logs do bot.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Ultra Performance</h3>
-                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Infraestrutura dedicada para garantir respostas instantâneas, sem delay ou quedas.</p>
-                </div>
+                </a>
 
-                <div class="reveal delay-200 glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
-                     <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
-                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                <a href="https://instagram.com/udesakenofc" target="_blank" class="reveal delay-100 glass-panel p-6 rounded-[24px] hover:bg-white/5 transition flex flex-col items-center justify-center text-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-500 flex items-center justify-center text-white text-xl group-hover:scale-110 transition">
+                        <i class="fab fa-instagram"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Inteligência VIP</h3>
-                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Acesso exclusivo a comandos avançados de IA, jogos e ferramentas premium.</p>
-                </div>
+                    <div>
+                        <span class="block text-white font-bold">Instagram</span>
+                        <span class="text-gray-500 text-xs">@udesakenofc</span>
+                    </div>
+                </a>
+
+                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="reveal delay-200 glass-panel p-6 rounded-[24px] hover:bg-white/5 transition flex flex-col items-center justify-center text-center gap-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-gray-800 border border-white/10 flex items-center justify-center text-white text-xl group-hover:scale-110 transition text-shadow-tiktok">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div>
+                        <span class="block text-white font-bold">TikTok</span>
+                        <span class="text-gray-500 text-xs">@udesakenofc</span>
+                    </div>
+                </a>
+
             </div>
         </div>
     </section>
