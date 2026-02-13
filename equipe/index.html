@@ -28,7 +28,11 @@
     </script>
 
     <style>
-        /* Estilos específicos para os acessórios das fotos */
+        /* Variáveis locais baseadas no tema principal */
+        :root {
+            --brand-gold: #C6A87C;
+        }
+
         .photo-wrapper {
             position: relative;
             width: 130px;
@@ -40,10 +44,10 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--glass-border);
+            /* Borda padrão (será sobrescrita pelas classes de tema abaixo) */
+            border: 3px solid var(--glass-border); 
             transition: 0.3s;
         }
-        /* Acessórios (Laço e Coroa) */
         .accessory {
             position: absolute;
             top: -10px;
@@ -57,7 +61,15 @@
         .glass-panel:hover .accessory {
             transform: scale(1.1) rotate(10deg);
         }
-        .pink-theme .team-photo { border-color: #ff69b4; }
+        
+        /* --- TEMAS DE COR PARA AS BORDAS --- */
+        /* Tema Dourado (Isloch) */
+        .gold-theme .team-photo { border-color: var(--brand-gold); box-shadow: 0 0 20px rgba(198, 168, 124, 0.3); }
+        /* Tema Rosa (Meninas) */
+        .pink-theme .team-photo { border-color: #ff69b4; box-shadow: 0 0 20px rgba(255, 105, 180, 0.3); }
+        /* Tema Azul (Outros) */
+        .blue-theme .team-photo { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+
     </style>
 </head>
 <body class="antialiased selection:bg-brand-gold/30 selection:text-white">
@@ -70,7 +82,7 @@
 
     <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300">
         <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-3 group">
+            <a href="../" class="flex items-center gap-4 cursor-pointer group">
                 <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
                      <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
@@ -101,7 +113,7 @@
         <div class="max-w-[1200px] mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up lg:col-span-3 lg:max-w-md lg:mx-auto">
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up gold-theme lg:col-span-3 lg:max-w-md lg:mx-auto">
                     <div class="photo-wrapper">
                         <img src="../islo.jpg" alt="CEO Islo" class="team-photo">
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C6A87C'%3E%3Cpath d='M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5ZM19 19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V18H19V19Z'%3E%3C/path%3E%3C/svg%3E" class="accessory">
@@ -111,28 +123,20 @@
                     <p class="text-sm text-muted leading-relaxed">Responsável por toda a Udesaken. Atua diretamente no desenvolvimento do site, do bot e dos sistemas.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up">
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up blue-theme">
                     <div class="photo-wrapper">
                         <img src="../gbr.jpg" alt="Head Manager Noxxz" class="team-photo">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%233b82f6' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%233b82f6' /%3E%3C/svg%3E" class="accessory">
                     </div>
                     <h2 class="text-xl font-bold text-main mb-1">Noxxz</h2>
                     <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Head Manager</p>
                     <p class="text-sm text-muted leading-relaxed">Gerente geral da Udesaken. Cuida da administração estratégica dos grupos oficiais.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up pink-theme">
-                    <div class="photo-wrapper">
-                        <img src="../victoria.jpg" alt="Victoria" class="team-photo">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%23ff69b4' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%23ff69b4' /%3E%3C/svg%3E" class="accessory">
-                    </div>
-                    <h2 class="text-xl font-bold text-main mb-1">Victoria</h2>
-                    <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Admin Geral</p>
-                    <p class="text-sm text-muted leading-relaxed">Responsável pela supervisão de todos os administradores e auxilia na criação de conteúdo estratégico.</p>
-                </div>
-
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up">
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up blue-theme">
                     <div class="photo-wrapper">
                         <img src="../hyuuzaki.jpg" alt="Hyuuzaki" class="team-photo">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%233b82f6' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%233b82f6' /%3E%3C/svg%3E" class="accessory">
                     </div>
                     <h2 class="text-xl font-bold text-main mb-1">Hyuuzaki</h2>
                     <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Manager</p>
@@ -149,26 +153,30 @@
                     <p class="text-sm text-muted leading-relaxed">Responsável pela divulgação dos chats e auxilia na expansão e engajamento da comunidade.</p>
                 </div>
 
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up pink-theme lg:col-span-1">
+                    <div class="photo-wrapper">
+                        <img src="../victoria.jpg" alt="Victoria" class="team-photo">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%23ff69b4' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%23ff69b4' /%3E%3C/svg%3E" class="accessory">
+                    </div>
+                    <h2 class="text-xl font-bold text-main mb-1">Victoria</h2>
+                    <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Admin Geral</p>
+                    <p class="text-sm text-muted leading-relaxed">Responsável pela supervisão de todos os administradores e auxilia na criação de conteúdo estratégico.</p>
+                </div>
+
             </div>
         </div>
     </section>
 
     <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
-                <a href="../planos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
-                    <span class="text-sm font-bold text-main">Ver Planos</span>
-                </a>
-                <a href="../termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
-                </a>
+        <div class="max-w-[1100px] mx-auto px-6 text-center">
+            <div class="flex flex-wrap justify-center gap-8 mb-12">
+                <a href="../planos/" class="text-sm font-bold text-main hover:text-gold transition">Ver Planos</a>
+                <a href="../termos/" class="text-sm font-bold text-muted hover:text-white transition">Termos de Uso</a>
             </div>
-            <div class="text-center">
-                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
-                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                    Udesaken Group &copy; 2026 • Todos os direitos reservados
-                </p>
-            </div>
+            <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
+            <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
+                Udesaken Group &copy; 2026 • Todos os direitos reservados
+            </p>
         </div>
     </footer>
 
