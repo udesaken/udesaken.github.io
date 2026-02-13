@@ -1,48 +1,79 @@
 /* =========================================
-   UDESAKEN - DARK MODE PREMIUM
+   UDESAKEN - "META DARK" AESTHETIC
    ========================================= */
+
+:root {
+    --zap-primary: #25D366;
+    --zap-glow: rgba(37, 211, 102, 0.4);
+    --bg-deep: #000000; /* Preto absoluto para contraste máximo */
+    --bg-surface: #0A0A0A; /* Superfície ligeiramente mais clara */
+}
 
 html {
     scroll-behavior: smooth;
-    background-color: #050505; /* Fundo base para evitar flash branco */
+    background-color: var(--bg-deep);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01", "ss03"; /* Recursos de fonte premium */
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar Dark e Minimalista */
+body {
+    background-color: var(--bg-deep);
+}
+
+/* --- Scrollbar Invisível (Estilo iOS/Minimalista) --- */
 ::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #050505;
-}
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    width: 0px; /* Remove a barra visualmente mas mantém a função */
+    background: transparent;
 }
 
-/* Efeito de Vidro Dark */
+/* --- Utilitários de Vidro Premium --- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
 .glass-nav {
-    background: rgba(5, 5, 5, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.6) !important; /* Mais escuro para a navbar */
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Animações de Entrada */
+/* --- Efeitos de Iluminação (Spots) --- */
+/* Cria pontos de luz sutis atrás dos elementos */
+.spotlight-zap {
+    background: radial-gradient(circle at center, var(--zap-glow) 0%, transparent 70%);
+    filter: blur(80px);
+    opacity: 0.6;
+    mix-blend-mode: screen;
+}
+
+/* --- Animações Refinadas --- */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    transform: translateY(20px) scale(0.98); /* Movimento mais sutil e escala */
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Curva "Apple ease" */
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
-.reveal.delay-100 { transition-delay: 0.1s; }
-.reveal.delay-200 { transition-delay: 0.2s; }
-.reveal.delay-300 { transition-delay: 0.3s; }
-.reveal.delay-500 { transition-delay: 0.5s; }
+/* Delays */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+
+/* Flutuação Suave para a Coroa */
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.floating-crown {
+    animation: gentle-float 5s ease-in-out infinite;
+    filter: drop-shadow(0 20px 30px var(--zap-glow)); /* Sombra brilhante na coroa */
+}

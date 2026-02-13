@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Udesaken — Sistema de Elite para Comunidades Digitais.">
-    <title>Udesaken — Automação Premium</title>
+    <meta name="description" content="Udesaken — Tecnologia de ponta para comunidades no WhatsApp.">
+    <title>Udesaken | Marca Premium</title>
     
     <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,152 +19,145 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        dark: {
-                            950: '#050505', /* Preto quase absoluto */
-                            900: '#0a0a0a',
-                            800: '#171717',
-                            card: 'rgba(23, 23, 23, 0.6)'
-                        },
+                        dark: { surface: '#0A0A0A' }, /* Cor de fundo secundária */
                         zap: { 
-                            500: '#25D366', /* Verde Zap Oficial */
-                            400: '#4ADE80', /* Verde Neon Brilhante */
+                            400: '#4ADE80', /* Verde Neon */
+                            500: '#25D366', /* Verde Zap */
                         }
                     },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    letterSpacing: {
+                        tighter: '-0.04em', /* Tracking estilo Apple */
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-dark-950 text-white antialiased selection:bg-zap-500 selection:text-black">
+<body class="bg-black text-gray-200 antialiased selection:bg-zap-500/30 selection:text-white overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 border-b border-white/5" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed w-full z-50 top-0 transition-all duration-500 border-b border-transparent" id="navbar">
+        <div class="max-w-[1100px] mx-auto px-6 sm:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-                    <div class="w-10 h-10 bg-gradient-to-br from-zap-400 to-zap-500 rounded-xl flex items-center justify-center text-black font-black text-xl shadow-[0_0_15px_rgba(37,211,102,0.5)]">
-                        U
+                
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                    <div class="relative w-8 h-8 rounded-xl bg-gradient-to-br from-zap-400/20 to-zap-500/5 border border-zap-400/20 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:border-zap-400/50 shadow-[0_0_20px_rgba(37,211,102,0.15)]">
+                         <span class="font-bold text-zap-400 text-lg">U</span>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-white">
-                        Udesaken<span class="text-zap-500">.</span>
+                    <span class="text-xl font-extrabold tracking-tighter text-white">
+                        Udesaken
                     </span>
                 </div>
                 
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="./comandos/index.html" class="text-sm font-medium text-gray-400 hover:text-white transition">Comandos</a>
-                    <a href="./planos/index.html" class="text-sm font-medium text-gray-400 hover:text-white transition">Planos</a>
-                    <a href="./equipe/index.html" class="text-sm font-medium text-gray-400 hover:text-white transition">Equipe</a>
-                    <a href="./vip/index.html" class="px-5 py-2 text-sm font-bold bg-white text-black rounded-full hover:bg-gray-200 transition shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                        Área VIP
-                    </a>
+                <div class="hidden md:flex space-x-1 items-center">
+                    <a href="./comandos/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Comandos</a>
+                    <a href="./planos/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Planos</a>
+                    <a href="./equipe/" class="px-4 py-2 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">Equipe</a>
+                    
+                    <div class="pl-4">
+                        <a href="./vip/" class="px-6 py-2.5 text-[13px] font-bold bg-[#1A1A1A] text-white rounded-full border border-white/10 hover:border-zap-400/50 hover:bg-zap-500/10 transition-all duration-300 shadow-sm">
+                            Área VIP
+                        </a>
+                    </div>
                 </div>
 
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
-                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
                 </div>
             </div>
         </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-dark-900 border-t border-white/10 absolute w-full left-0 shadow-2xl">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="./comandos/index.html" class="block px-3 py-3 text-base font-medium text-gray-300 hover:bg-white/5 rounded-lg">Comandos</a>
-                <a href="./planos/index.html" class="block px-3 py-3 text-base font-medium text-gray-300 hover:bg-white/5 rounded-lg">Planos</a>
-                <a href="./vip/index.html" class="block px-3 py-3 text-base font-bold text-zap-400 hover:bg-white/5 rounded-lg">Acessar VIP</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-surface/95 backdrop-blur-xl border-b border-white/10 absolute w-full">
+            <div class="px-6 py-4 space-y-3">
+                <a href="./comandos/" class="block text-sm font-medium text-gray-300">Comandos</a>
+                <a href="./planos/" class="block text-sm font-medium text-gray-300">Planos</a>
+                <a href="./vip/" class="block text-sm font-bold text-zap-400">Acessar VIP</a>
             </div>
         </div>
     </nav>
 
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section class="relative pt-40 pb-24 lg:pt-52 lg:pb-32 overflow-hidden">
         
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-zap-500/10 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] -z-10"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] spotlight-zap -z-10 animate-pulse-slow"></div>
+        
+        <div class="max-w-[1100px] mx-auto px-6 sm:px-8 text-center relative z-10">
             
-            <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8">
-                <span class="relative flex h-2 w-2">
+            <div class="reveal inline-flex items-center gap-3 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.02] backdrop-blur-md mb-10">
+                <span class="flex h-2.5 w-2.5 relative">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zap-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-zap-500"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-zap-500"></span>
                 </span>
-                <span class="text-xs font-semibold text-gray-300 tracking-wide uppercase">Sistema Online v2026</span>
+                <span class="text-[13px] font-bold text-gray-200 tracking-wide uppercase">Sistema Udesaken v2.6 Online</span>
             </div>
 
-            <h1 class="reveal delay-100 text-5xl sm:text-7xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-none">
-                Udesaken <span class="text-transparent bg-clip-text bg-gradient-to-r from-zap-400 to-white">Bot.</span>
+            <h1 class="reveal delay-100 text-6xl sm:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.95]">
+                O poder da sua <br>
+                comunidade.
             </h1>
             
-            <p class="reveal delay-200 text-lg md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-                A infraestrutura definitiva para seu grupo. <br class="hidden md:block">
-                <strong class="text-white">Proteção Anti-Travas</strong>, <strong class="text-white">IA Avançada</strong> e <strong class="text-white">Entretenimento</strong>.
+            <p class="reveal delay-200 text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
+                Automação, segurança e inteligência artificial para WhatsApp em uma infraestrutura de classe mundial.
             </p>
 
-            <div class="reveal delay-300 flex flex-col sm:flex-row items-center justify-center gap-5">
-                <a href="https://wa.me/447562847091" class="w-full sm:w-auto px-10 py-4 bg-zap-500 hover:bg-zap-400 text-black font-bold text-lg rounded-full transition hover:scale-105 shadow-[0_0_30px_rgba(37,211,102,0.3)]">
-                    Adicionar Agora
+            <div class="reveal delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-24">
+                <a href="https://wa.me/447562847091" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-extrabold text-[15px] rounded-full transition hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+                    Adicionar ao WhatsApp
                 </a>
-                <a href="./planos/index.html" class="w-full sm:w-auto px-10 py-4 border border-white/20 hover:bg-white/10 text-white font-semibold text-lg rounded-full transition flex items-center justify-center gap-2">
-                    Ver Preços
+                <a href="./planos/" class="w-full sm:w-auto px-8 py-4 glass-panel text-white font-bold text-[15px] rounded-full transition hover:bg-white/10 flex items-center justify-center gap-2">
+                    Ver Planos
                 </a>
             </div>
 
-            <div class="reveal delay-500 mt-20 relative mx-auto max-w-5xl group">
-                <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent z-10"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-dark-900/50 backdrop-blur-sm p-2">
-                    <img src="udesaken-main.png" alt="Dashboard Udesaken" class="w-full rounded-xl opacity-90 group-hover:opacity-100 transition duration-700">
-                </div>
+            <div class="reveal delay-300 relative mx-auto max-w-[280px] md:max-w-[340px]">
+                <img src="uskcoroa.png" alt="Udesaken Crown" class="w-full h-auto floating-crown relative z-10">
+                
+                <div class="absolute -bottom-12 left-1/2 -translate-x-1/2 w-[90%] h-24 bg-zap-500/30 blur-[50px] rounded-full opacity-60 z-0"></div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-dark-900 relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-32 relative">
+        <div class="max-w-[1100px] mx-auto px-6 sm:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="reveal p-8 rounded-3xl bg-dark-800 border border-white/5 hover:border-zap-500/50 transition duration-500 group">
-                    <div class="w-14 h-14 bg-dark-950 rounded-2xl flex items-center justify-center mb-6 border border-white/5 group-hover:border-zap-500/30">
-                        <svg class="w-7 h-7 text-zap-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div class="reveal glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
+                    <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
+                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Segurança Total</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Blindagem contra links maliciosos, travas de contato e flood. Seu grupo protegido 24/7.</p>
+                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Blindagem Ativa</h3>
+                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Proteção em tempo real contra travas, links maliciosos e spam. Seu grupo, suas regras.</p>
                 </div>
 
-                <div class="reveal delay-100 p-8 rounded-3xl bg-gradient-to-b from-dark-800 to-dark-950 border border-white/5 hover:border-white/20 transition duration-500">
-                    <div class="w-14 h-14 bg-dark-950 rounded-2xl flex items-center justify-center mb-6 border border-white/5">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <div class="reveal delay-100 glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
+                     <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
+                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Zero Delay</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Infraestrutura otimizada para respostas instantâneas, mesmo em grupos lotados.</p>
+                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Ultra Performance</h3>
+                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Infraestrutura dedicada para garantir respostas instantâneas, sem delay ou quedas.</p>
                 </div>
 
-                <div class="reveal delay-200 p-8 rounded-3xl bg-dark-800 border border-white/5 hover:border-zap-500/50 transition duration-500 group">
-                    <div class="w-14 h-14 bg-dark-950 rounded-2xl flex items-center justify-center mb-6 border border-white/5 group-hover:border-zap-500/30">
-                        <svg class="w-7 h-7 text-zap-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                <div class="reveal delay-200 glass-panel p-8 rounded-[32px] hover:border-zap-500/30 transition duration-500 group">
+                     <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-zap-500/10 transition">
+                        <svg class="w-6 h-6 text-gray-300 group-hover:text-zap-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Comandos VIP</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Acesso exclusivo a jogos, inteligência artificial avançada e downloads premium.</p>
+                    <h3 class="text-lg font-bold text-white mb-3 tracking-tight">Inteligência VIP</h3>
+                    <p class="text-gray-400 text-[15px] leading-relaxed font-medium">Acesso exclusivo a comandos avançados de IA, jogos e ferramentas premium.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <footer class="bg-black py-12 border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <footer class="py-12 border-t border-white/[0.08]">
+        <div class="max-w-[1100px] mx-auto px-6 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-center md:text-left">
-                <span class="text-2xl font-bold text-white tracking-tighter">Udesaken<span class="text-zap-500">.</span></span>
-                <p class="text-sm text-gray-500 mt-2">© 2026 Udesaken. Todos os direitos reservados.</p>
+                <span class="text-lg font-extrabold text-white tracking-tighter">Udesaken<span class="text-zap-500">.</span></span>
+                <p class="text-[13px] text-gray-500 mt-2 font-medium">© 2026 Udesaken Technologies.</p>
             </div>
             
             <div class="flex gap-8">
-                <a href="./termos/index.html" class="text-gray-500 hover:text-white transition text-sm">Termos</a>
-                <a href="https://github.com/usk0906" class="text-gray-500 hover:text-white transition text-sm">GitHub</a>
-                <a href="https://wa.me/447562847091" class="text-gray-500 hover:text-zap-500 transition text-sm">Suporte</a>
+                <a href="./termos/" class="text-gray-500 hover:text-white transition text-[13px] font-medium">Termos</a>
+                <a href="./privacidade/" class="text-gray-500 hover:text-white transition text-[13px] font-medium">Privacidade</a>
+                <a href="https://wa.me/447562847091" class="text-gray-500 hover:text-zap-400 transition text-[13px] font-bold">Suporte WhatsApp</a>
             </div>
         </div>
     </footer>

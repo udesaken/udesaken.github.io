@@ -1,26 +1,27 @@
 /* ==========================================================================
-   UDESAKEN 2026 - DARK LOGIC
+   UDESAKEN - PREMIUM LOGIC
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. NAVBAR DINÂMICA ---
+    // --- 1. NAVBAR PREMIUM (Transição suave de vidro) ---
     const navbar = document.getElementById('navbar');
     
     function updateNavbar() {
-        if (window.scrollY > 20) {
-            // Ao rolar: fundo preto sólido com blur
-            navbar.classList.add('bg-dark-950/90', 'shadow-lg', 'backdrop-blur-xl');
-            navbar.classList.remove('bg-transparent', 'border-transparent');
+        if (window.scrollY > 30) {
+            // Ao rolar: Adiciona a classe de vidro premium definida no CSS
+            navbar.classList.add('glass-nav');
+            navbar.classList.remove('border-transparent');
         } else {
-            // No topo: Transparente
-            navbar.classList.remove('bg-dark-950/90', 'shadow-lg', 'backdrop-blur-xl');
-            navbar.classList.add('bg-transparent', 'border-transparent');
+            // No topo: Totalmente transparente
+            navbar.classList.remove('glass-nav');
+            navbar.classList.add('border-transparent');
         }
     }
     
-    window.addEventListener('scroll', updateNavbar);
-    updateNavbar();
+    // Listener de scroll otimizado
+    window.addEventListener('scroll', () => requestAnimationFrame(updateNavbar));
+    updateNavbar(); // Chama no início
 
     // --- 2. MENU MOBILE ---
     const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -30,23 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
-        // Fecha ao clicar em links
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
     }
 
-    // --- 3. ANIMAÇÃO SCROLL REVEAL ---
+    // --- 3. SCROLL REVEAL (Estilo Apple - Suave) ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                // Opcional: parar de observar após animar para performance
+                // observer.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.1 });
+    }, { 
+        threshold: 0.15, // Espera um pouco mais do elemento aparecer
+        rootMargin: "0px 0px -100px 0px" // Ativa a animação um pouco antes
+    });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 });
