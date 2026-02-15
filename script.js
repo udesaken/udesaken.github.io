@@ -138,7 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playlist = [
         { name: 'Love Me', artist: 'JMSN', src: '/uskmusic.mp3' },
-        { name: 'A Little Death', artist: 'The Neighbourhood', src: '/uskmusic2.mp3' }
+        { name: 'A Little Death', artist: 'The Neighbourhood', src: '/uskmusic2.mp3' },
+        { name: 'MAKEUP', artist: 'Chris Grey', src: '/uskmusic3.mp3' }
     ];
 
     // --- LOGICA DE PERSISTENCIA ---
