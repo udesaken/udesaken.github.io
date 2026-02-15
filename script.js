@@ -152,13 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.volume = 0;
         let vol = 0;
         const interval = setInterval(() => {
-            if (vol < 0.1) {
-                vol += 0.01;
-                audio.volume = parseFloat(vol.toFixed(2));
+            // Mudei de 0.1 para 0.03 (apenas 3% de volume)
+            if (vol < 0.03) { 
+                // Mudei o passo de 0.01 para 0.001 para o fade ser bem lento e suave
+                vol += 0.001; 
+                audio.volume = vol;
             } else {
                 clearInterval(interval);
             }
-        }, 50);
+        }, 50); // A cada 50ms ele sobe 0.001 até chegar em 0.03
     }
 
     function loadTrack(index, startTime = 0, autoPlay = false) {
