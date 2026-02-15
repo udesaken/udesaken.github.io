@@ -148,19 +148,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Agora verificamos se o usuário já estava ouvindo música antes de trocar de página
     let isPlaying = localStorage.getItem('usk_is_playing') === 'true';
 
+    let fadeInterval; // 1. Variável fora para não acumular loops
+
     function fadeInAudio() {
+        // Limpa qualquer fade anterior para não encavalar
+        if (fadeInterval) clearInterval(fadeInterval); 
+        
         audio.volume = 0;
         let vol = 0;
-        const interval = setInterval(() => {
-            // Mudei de 0.1 para 0.03 (apenas 3% de volume)
-            if (vol < 0.03) { 
-                // Mudei o passo de 0.01 para 0.001 para o fade ser bem lento e suave
-                vol += 0.001; 
-                audio.volume = vol;
+        const maxVolume = 0.04; // 4% de volume (bem baixinho)
+
+        fadeInterval = setInterval(() => {
+            // Verifica se ainda não chegou no máximo
+            if (vol < maxVolume) {
+                vol += 0.0005; // Subindo bem devagar
+                
+                // 2. Proteção: Garante que nunca passe de 1 ou do máximo
+                // Math.min escolhe o menor número, travando o teto
+                audio.volume = Math.min(vol, maxVolume); 
             } else {
-                clearInterval(interval);
+                // 3. Garante que crava no volume certo ao terminar
+                audio.volume = maxVolume; 
+                clearInterval(fadeInterval);
             }
-        }, 50); // A cada 50ms ele sobe 0.001 até chegar em 0.03
+        }, 50);
     }
 
     function loadTrack(index, startTime = 0, autoPlay = false) {
