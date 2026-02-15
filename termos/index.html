@@ -26,31 +26,53 @@
             }
         }
     </script>
+    
+    <style>
+        /* CSS Extra para garantir o visual caso o style.css falhe ou para complementar */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .liquid-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4f46e5; }
+        .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: #C6A87C; animation-delay: -5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
+        }
+    </style>
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body class="antialiased bg-[#050505] text-gray-200 selection:bg-brand-gold/30 selection:text-white">
 
-    <div class="liquid-container">
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="liquid-orb orb-1"></div>
         <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-black/50 backdrop-blur-md border-b border-white/5" id="navbar">
         <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
             <a href="../" class="flex items-center gap-3 group">
                 <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
                      <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
+                <span class="text-lg font-bold tracking-tight text-white group-hover:text-brand-gold transition">
                     Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase">Legal</span>
                 </span>
             </a>
             
             <div class="flex items-center gap-6">
-                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-                <a href="../" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
+                <a href="../" class="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-widest transition flex items-center gap-2">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
@@ -60,32 +82,32 @@
     <section class="pt-32 pb-24 relative z-10">
         <div class="max-w-4xl mx-auto px-6">
             
-            <div class="glass-panel p-8 md:p-12 rounded-[30px] fade-up">
+            <div class="glass-panel p-8 md:p-12 rounded-[30px]">
                 
                 <div class="text-center mb-12">
                     <div class="w-16 h-16 bg-brand-gold/10 border border-brand-gold/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-scroll text-brand-gold text-2xl"></i>
+                        <i class="fas fa-file-contract text-brand-gold text-2xl"></i>
                     </div>
-                    <h1 class="text-3xl md:text-5xl font-black text-main mb-4 tracking-tighter">Termos de Uso Oficiais</h1>
-                    <p class="text-sm text-muted uppercase tracking-[0.2em] font-bold">Atualizado em: 15/02/2026</p>
+                    <h1 class="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">Termos de Uso Oficiais</h1>
+                    <p class="text-sm text-gray-400 uppercase tracking-[0.2em] font-bold">Udesaken Bot • Atualizado em: 15/02/2026</p>
                 </div>
 
                 <div class="bg-brand-gold/5 border-l-4 border-brand-gold p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm leading-relaxed">
                     "Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o cliente declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo."
                 </div>
 
-                <div class="space-y-12 text-gray-300 leading-relaxed">
+                <div class="space-y-12 text-gray-300 leading-relaxed text-justify">
                     
                     <div>
                         <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
                             <i class="fas fa-id-card text-brand-gold text-sm"></i> 1. Licença, Acesso e Titularidade
                         </h3>
-                        <ul class="space-y-2 text-sm md:text-base">
+                        <ul class="space-y-2 text-sm md:text-base list-disc pl-5 marker:text-brand-gold">
                             <li><strong>1.1.</strong> O acesso é concedido via licença de uso <span class="text-white">individual e intransferível</span>.</li>
-                            <li><strong>1.2.</strong> É estritamente proibida a revenda, cessão, aluguel ou compartilhamento de acesso sem autorização expressa.</li>
+                            <li><strong>1.2.</strong> É estritamente proibida a revenda, cessão, aluguel ou compartilhamento de acesso sem autorização expressa da Udesaken.</li>
                             <li><strong>1.3.</strong> O uso fica limitado aos grupos ou números autorizados no ato da contratação.</li>
-                            <li><strong>1.4. Responsabilidade:</strong> O cliente responde por tudo o que acontece com o bot no grupo. A Udesaken não se responsabiliza por conflitos internos.</li>
-                            <li><strong>1.5. Sublocação:</strong> Se outra pessoa usar/alugar o bot, a responsabilidade muda para ela. A Udesaken não interfere em acordos entre terceiros.</li>
+                            <li><strong>1.4.</strong> O cliente responde por tudo o que acontece com o bot no grupo. A Udesaken não se responsabiliza por conflitos internos.</li>
+                            <li><strong>1.5.</strong> Se outra pessoa usar/alugar o bot, a responsabilidade passa para ela. A Udesaken não interfere em acordos entre terceiros.</li>
                         </ul>
                     </div>
 
@@ -93,7 +115,7 @@
                         <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
                             <i class="fas fa-clock text-brand-gold text-sm"></i> 2. Vigência do Plano
                         </h3>
-                        <ul class="space-y-2 text-sm md:text-base">
+                        <ul class="space-y-2 text-sm md:text-base list-disc pl-5 marker:text-brand-gold">
                             <li><strong>2.1.</strong> A vigência inicia-se imediatamente após a confirmação do pagamento e ativação.</li>
                             <li><strong>2.2.</strong> A contagem é feita em dias corridos (calendário), não sendo pausada por ausência de uso.</li>
                         </ul>
@@ -104,33 +126,38 @@
                             <i class="fas fa-server text-brand-gold text-sm"></i> 3. Disponibilidade e Garantia
                         </h3>
                         <ul class="space-y-4 text-sm md:text-base">
-                            <li><strong>3.1.</strong> O serviço depende de terceiros (WhatsApp/Meta) e internet, sujeito a oscilações.</li>
+                            <li><strong>3.1.</strong> O serviço depende de terceiros (WhatsApp/Meta) e internet, sujeito a oscilações. A Udesaken não garante imunidade a banimentos pela Meta.</li>
                             <li><strong>3.2.</strong> Manutenções programadas ou instabilidades momentâneas não geram indenização.</li>
+                            
                             <li class="p-4 bg-white/5 border border-white/10 rounded-xl">
                                 <strong class="text-white block mb-1">3.3. Bloqueio ou Banimento:</strong>
                                 Caso o número oficial do bot seja banido pelo WhatsApp, o serviço será migrado rapidamente para um novo número e a contagem ficará congelada até o restabelecimento.
                             </li>
+                            
                             <li class="p-4 bg-green-500/5 border border-green-500/20 rounded-xl">
                                 <strong class="text-green-400 block mb-1">3.4. Garantia de Estabilidade:</strong>
                                 Caso o bot fique totalmente inoperante por mais de 24 horas consecutivas (falha técnica nossa), faremos a reposição automática desses dias ao final do plano.
                             </li>
-                            <li class="p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl mt-2">
+                            
+                            <li class="p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl">
                                 <strong class="text-blue-400 block mb-1">3.5. Canal de Info:</strong>
-                                É recomendado estar no canal oficial para atualizações e avisos. <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="text-blue-300 underline hover:text-white transition">Acessar Canal</a>
+                                É recomendado estar no canal oficial para atualizações e avisos. 
+                                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="text-blue-300 underline hover:text-white transition ml-1">Acessar Canal</a>
                             </li>
+                            
                             <li><strong>3.6. Novos Números:</strong> Avisamos no canal. Se o contratante não buscar o novo número, o plano <strong>NÃO</strong> será pausado.</li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
-                            <i class="fas fa-hand-holding-usd text-brand-gold text-sm"></i> 4. Política de Reembolso
+                            <i class="fas fa-hand-holding-dollar text-brand-gold text-sm"></i> 4. Política de Reembolso
                         </h3>
-                        <ul class="space-y-2 text-sm md:text-base">
+                        <ul class="space-y-2 text-sm md:text-base list-disc pl-5 marker:text-brand-gold">
                             <li><strong>4.1. Direito de Arrependimento (7 Dias):</strong> Conforme Art. 49 do CDC, você tem 7 dias corridos para solicitar reembolso integral (100%), desde que não tenha violado regras.</li>
-                            <li class="text-brand-gold"><strong>4.2. Exceção do Plano de 1 Dia:</strong> Não oferecemos reembolso para a aquisição de planos de 1 (um) dia sob nenhuma circunstância.</li>
+                            <li class="text-brand-gold font-semibold"><strong>4.2. Exceção do Plano de 1 Dia:</strong> Não oferecemos reembolso para a aquisição de planos de 1 (um) dia sob nenhuma circunstância.</li>
                             <li><strong>4.3. Sem Reembolso se:</strong>
-                                <ul class="pl-6 mt-2 space-y-1 list-disc text-gray-400">
+                                <ul class="pl-6 mt-2 space-y-1 list-circle text-gray-400">
                                     <li>Bloqueio do seu número pessoal pelo WhatsApp.</li>
                                     <li>Desistência após 7 dias.</li>
                                     <li>Banimento por violação dos termos.</li>
@@ -142,7 +169,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
                             <h4 class="text-brand-gold font-bold mb-4 flex items-center gap-2">
-                                <i class="fas fa-coins"></i> 6. Taxas Administrativas
+                                <i class="fas fa-coins"></i> 5. Taxas Administrativas
                             </h4>
                             <div class="flex justify-between border-b border-white/5 pb-2 mb-2 text-sm">
                                 <span>Migração de Grupo</span> <span class="text-white font-bold">R$ 1,00</span>
@@ -158,7 +185,7 @@
 
                         <div class="bg-white/5 border border-white/10 p-6 rounded-2xl">
                             <h4 class="text-brand-gold font-bold mb-4 flex items-center gap-2">
-                                <i class="fas fa-tags"></i> 7. Descontos Progressivos
+                                <i class="fas fa-tags"></i> 6. Descontos Progressivos
                             </h4>
                             <div class="flex justify-between border-b border-white/5 pb-2 mb-2 text-sm">
                                 <span>2 Grupos Simultâneos</span> <span class="text-white font-bold">5% OFF</span>
@@ -170,37 +197,68 @@
                     </div>
 
                     <div>
-                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2 text-red-500">
-                            <i class="fas fa-exclamation-triangle text-red-500 text-sm"></i> 9. Uso Indevido e Penalidades
+                        <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2 text-red-400">
+                            <i class="fas fa-ban text-red-500 text-sm"></i> 7. Uso Indevido e Penalidades
                         </h3>
-                        <ul class="space-y-4 text-sm md:text-base">
-                            <li><strong>9.1. Proibições:</strong> Spam, travas, ataques, discursos de ódio, práticas ilegais ou engenharia reversa.</li>
-                            <li><strong>9.2. Bug Abuse:</strong> É proibido explorar falhas do sistema para vantagem. Reporte bugs ao suporte.</li>
-                            <li><strong>9.3. Individualização da Pena:</strong> Em caso de ataques/travas, o banimento vai para o autor direto. O assinante só é punido se for comprovada conivência ou ajuda.</li>
+                        <ul class="space-y-4 text-sm md:text-base list-disc pl-5 marker:text-red-500">
+                            <li><strong>7.1. Proibições:</strong> Spam, travas, ataques, discursos de ódio, práticas ilegais ou engenharia reversa.</li>
+                            <li><strong>7.2. Bug Abuse:</strong> É proibido explorar falhas do sistema para vantagem. Reporte bugs ao suporte.</li>
+                            <li><strong>7.3. Individualização da Pena:</strong> Em caso de ataques/travas, o banimento vai para o autor direto. O assinante só é punido se for comprovada conivência ou ajuda.</li>
                             
-                            <li class="flex gap-4 p-5 bg-red-500/10 border border-red-500/30 rounded-xl items-center">
-                                <i class="fas fa-gavel text-red-500 text-2xl"></i>
-                                <div>
-                                    <strong class="text-red-500 block uppercase text-xs tracking-wider">9.4. Penalidade Grave</strong>
-                                    <p class="text-xs md:text-sm text-gray-200 mt-1">Exploração maliciosa resultará em banimento e Multa de Reparação de até R$ 50,00.</p>
+                            <li class="list-none pt-2">
+                                <div class="flex gap-4 p-5 bg-red-500/10 border border-red-500/30 rounded-xl items-center">
+                                    <i class="fas fa-gavel text-red-500 text-2xl"></i>
+                                    <div>
+                                        <strong class="text-red-500 block uppercase text-xs tracking-wider">7.4. Penalidade Grave</strong>
+                                        <p class="text-xs md:text-sm text-gray-200 mt-1">Exploração maliciosa resultará em banimento e <strong>Multa de Reparação de até R$ 50,00</strong>.</p>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="pt-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/5 pt-8">
                         <div>
-                            <h5 class="text-white font-bold mb-2">10. Suporte</h5>
-                            <p class="text-xs text-muted leading-relaxed">Oferecido durante a vigência para resolver dúvidas e problemas funcionais.</p>
+                            <h5 class="text-white font-bold mb-2 flex items-center gap-2"><i class="fas fa-headset text-brand-gold"></i> 8. Suporte</h5>
+                            <p class="text-xs text-gray-400 leading-relaxed">Oferecido durante a vigência para resolver dúvidas e problemas funcionais. Resposta em até 24h úteis via canal oficial.</p>
                         </div>
                         <div>
-                            <h5 class="text-white font-bold mb-2">11. Atualizações</h5>
-                            <p class="text-xs text-muted leading-relaxed">Termos podem mudar. Alterações grandes serão avisadas nos canais oficiais.</p>
+                            <h5 class="text-white font-bold mb-2 flex items-center gap-2"><i class="fas fa-sync text-brand-gold"></i> 9. Atualizações</h5>
+                            <p class="text-xs text-gray-400 leading-relaxed">Alterações substanciais serão avisadas com 7 dias de antecedência. Discordância significativa permite rescisão proporcional.</p>
                         </div>
                         <div>
-                            <h5 class="text-white font-bold mb-2">12. Chaves (Keys)</h5>
-                            <p class="text-xs text-muted leading-relaxed">Responsabilidade do cliente. Não repomos keys perdidas ou roubadas.</p>
+                            <h5 class="text-white font-bold mb-2 flex items-center gap-2"><i class="fas fa-key text-brand-gold"></i> 10. Chaves (Keys)</h5>
+                            <p class="text-xs text-gray-400 leading-relaxed">Responsabilidade exclusiva do cliente. Não repomos keys perdidas ou roubadas. Recuperação só em casos excepcionais.</p>
                         </div>
+                    </div>
+
+                    <div class="bg-indigo-500/5 border border-indigo-500/10 p-6 rounded-xl">
+                        <h3 class="text-indigo-400 font-bold text-lg mb-3 flex items-center gap-2">
+                            <i class="fas fa-scale-balanced"></i> 11. Lei Aplicável e Foro
+                        </h3>
+                        <p class="text-sm">Os presentes Termos de Uso são regidos exclusivamente pela legislação da República Federativa do Brasil. Fica eleito o foro da <strong>Comarca da Cidade do Rio de Janeiro/RJ</strong> para dirimir quaisquer controvérsias, com expressa renúncia a qualquer outro.</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                                <i class="fas fa-shield-halved text-brand-gold text-sm"></i> 12. Indenização e Isenção
+                            </h3>
+                            <p class="text-sm">O Cliente se compromete a indenizar e isentar a Udesaken Group, seus sócios e colaboradores de qualquer reivindicação, dano, perda ou multa decorrente de uso indevido. A Udesaken não responde por danos indiretos, lucros cessantes ou interrupções causadas por terceiros (Meta Platforms).</p>
+                        </div>
+
+                        <div>
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/5 pb-2">
+                                <i class="fas fa-copyright text-brand-gold text-sm"></i> 13. Propriedade Intelectual
+                            </h3>
+                            <p class="text-sm">Todo o software, algoritmos e figurinhas exclusivas são propriedade da Udesaken Group. É proibida a engenharia reversa ou cópia sem autorização. Figurinhas criadas sob demanda são licenciadas para uso não exclusivo no âmbito do serviço.</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-12 pt-8 border-t border-white/10">
+                        <a href="../privacidade/" class="inline-flex items-center gap-2 text-brand-gold hover:text-white transition font-medium">
+                            <i class="fas fa-user-shield"></i> Leia também nossa Política de Privacidade (LGPD)
+                        </a>
                     </div>
 
                 </div>
@@ -208,15 +266,14 @@
         </div>
     </section>
 
-    <footer class="py-12 text-center border-t border-white/5 relative z-10 glass-panel">
-        <p class="text-[10px] text-muted font-medium tracking-widest uppercase mb-4">Udesaken Group © 2026</p>
+    <footer class="py-12 text-center border-t border-white/5 relative z-10 glass-panel mt-12">
+        <p class="text-[10px] text-gray-500 font-medium tracking-widest uppercase mb-4">Udesaken Group © 2026</p>
         <div class="flex justify-center gap-6 text-xs font-bold">
-            <a href="../planos/" class="text-brand-gold hover:text-white transition">Planos</a>
+            <a href="../" class="text-brand-gold hover:text-white transition">Início</a>
             <span class="text-white/10">|</span>
-            <a href="../vip/" class="text-brand-gold hover:text-white transition">VIP</a>
+            <a href="../privacidade/" class="text-brand-gold hover:text-white transition">Privacidade</a>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
 </body>
 </html>
