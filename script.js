@@ -250,3 +250,17 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('ended', () => nextBtn.click());
     setTimeout(() => playerContainer.classList.add('visible'), 500);
 });
+/* ==========================================================================
+   UDESAKEN - DYNAMIC FAVICON ENGINE
+   ========================================================================== */
+(function() {
+    const link = document.createElement('link');
+    link.type = 'image/png';
+    link.rel = 'shortcut icon';
+    
+    // O caminho começa com / para garantir que funcione dentro de pastas
+    // (como /privacidade ou /termos) buscando sempre da raiz do site.
+    link.href = '/uskcoroa.png'; 
+    
+    document.getElementsByTagName('head')[0].appendChild(link);
+})();
