@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const playerContainer = document.getElementById('audio-player-container');
 
     const playlist = [
-        { name: 'Udesaken Lounge 01', artist: 'Udesaken Records', src: '/uskmusic.mp3' },
-        { name: 'Udesaken Lounge 02', artist: 'Udesaken Records', src: '/uskmusic2.mp3' }
+        { name: 'Love Me', artist: 'JMSN', src: '/uskmusic.mp3' },
+        { name: 'A Little Death', artist: 'The Neighbourhood', src: '/uskmusic2.mp3' }
     ];
 
     // --- LOGICA DE PERSISTENCIA ---
