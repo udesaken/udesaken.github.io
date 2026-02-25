@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. ANIMAÇÕES ---
+    // --- 4. ANIMAÇÕES FADE-UP ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -83,7 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // --- 5. EFEITO DE BRILHO SEGUINDO O MOUSE (SPOTLIGHT) ---
+    const glassPanels = document.querySelectorAll('.glass-panel');
+    
+    glassPanels.forEach(panel => {
+        panel.addEventListener('mousemove', (e) => {
+            const rect = panel.getBoundingClientRect();
+            // Calcula a posição do mouse relativa ao card
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Injeta as posições nas variáveis do CSS
+            panel.style.setProperty('--mouse-x', `${x}px`);
+            panel.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
 });
+
 /* ==========================================================================
    UDESAKEN - PERSISTENT AUDIO ENGINE (READY)
    ========================================================================== */
@@ -251,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('ended', () => nextBtn.click());
     setTimeout(() => playerContainer.classList.add('visible'), 500);
 });
+
 /* ==========================================================================
    UDESAKEN - DYNAMIC FAVICON ENGINE
    ========================================================================== */
