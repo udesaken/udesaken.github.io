@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // O caminho começa com / para garantir que funcione dentro de pastas
     // (como /privacidade ou /termos) buscando sempre da raiz do site.
-    link.href = '/uskcoroa.png'; 
+    link.href = '/logousk.png'; 
     
     document.getElementsByTagName('head')[0].appendChild(link);
 })();
