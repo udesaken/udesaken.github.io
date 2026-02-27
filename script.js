@@ -111,7 +111,7 @@ function injectUdesakenPlayer() {
         <div class="flex items-center gap-2">
             <div class="flex items-center gap-3 glass-pill shadow-2xl">
                 <div class="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
-                    <img src="/logousk.png" alt="Capa" class="w-full h-full object-cover">
+                    <img src="/logousk1.png" alt="Capa" class="w-full h-full object-cover">
                     <div id="visualizer" class="absolute inset-0 bg-black/60 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
                         <span class="v-bar bar-1"></span>
                         <span class="v-bar bar-2"></span>
