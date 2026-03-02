@@ -1,152 +1,339 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clube VIP | Udesaken Group</title>
+    <title>Clube VIP — UDESAKEN 2026</title>
     
+    <meta property="og:image" content="https://udesaken.site/udesaken-main.png">
+    <link rel="icon" type="image/png" href="/uskcoroa.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' }
-                    },
-                    letterSpacing: { tighter: '-0.03em' }
-                }
-            }
+    <style>
+        /* ESTILO ESPECÍFICO BASEADO NO PRINT (ADAPTADO PARA GOLD) */
+        .pricing-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 40px 20px;
         }
-    </script>
+
+        .plan-card {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 20px 30px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .plan-card.featured {
+            border: 1px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+            z-index: 2;
+            transform: scale(1.05);
+        }
+        
+        .plan-card.featured:hover { transform: scale(1.08); }
+
+        .badge-recommended {
+            background: linear-gradient(90deg, #FFD700, #FDB931);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 4px 15px;
+            border-radius: 20px;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .plan-title {
+            color: #ccc;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .plan-duration {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .plan-price-container {
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
+
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .plan-features {
+            text-align: left;
+            margin-bottom: 30px;
+            flex-grow: 1;
+            padding-left: 10px;
+        }
+
+        .plan-features li {
+            list-style: none;
+            color: #ccc;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-features li i {
+            color: #FFD700; 
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .btn-plan {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: #FFD700;
+            color: #FFD700;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .btn-fill {
+            background: linear-gradient(90deg, #FFD700, #FDB931);
+            border: none;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-fill:hover {
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            transform: scale(1.02);
+        }
+        
+        header { top: 45px !important; }
+
+    </style>
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body style="padding-top: 45px;">
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
-    </div>
-
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300">
-        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
-                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
-                </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken <span class="text-[10px] border border-brand-gold px-1.5 py-0.5 rounded text-gold ml-1 uppercase">VIP</span>
-                </span>
-            </a>
-            
-            <div class="flex items-center gap-6">
-                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-
-                <a href="../" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Voltar
-                </a>
-            </div>
+    <header>
+        <div class="logo">
+            <a href="/">UDESAKEN <span style="font-size:0.8rem; border:1px solid #FFD700; color: #FFD700; padding: 2px 5px; border-radius: 4px;">VIP</span></a>
         </div>
-    </nav>
+        <nav>
+            <ul class="nav-links">
+                <div class="close-btn-mobile"><i class="fas fa-times"></i></div>
+                <li><a href="/">Início</a></li>
+                <li><a href="/planos">Planos Bot</a></li>
+                <li><a href="/vip" class="active" style="color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">Clube VIP</a></li>
+                <li><a href="https://wa.me/447562847091" class="btn-header" style="border-color: #FFD700; color: #FFD700;"><i class="fab fa-whatsapp"></i> Suporte</a></li>
+            </ul>
+            <div class="hamburger" style="color: #FFD700;"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
 
-    <section class="pt-32 pb-16 text-center relative">
-        <div class="max-w-4xl mx-auto px-6 fade-up">
-            
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
-                <i class="fas fa-crown text-gold text-[10px]"></i>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Clube VIP de Elite</span>
-            </div>
-
-            <h1 class="text-4xl md:text-7xl font-black text-main mb-6 tracking-tighter leading-tight">
-                Seja um Membro <br>
-                <span class="text-gradient-gold">Diferenciado.</span>
+   <section class="hero" style="min-height: 50vh; padding-top: 100px; padding-bottom: 20px; display: flex; justify-content: center; align-items: center; text-align: center;">
+        <div class="hero-content" style="width: 100%; max-width: 800px; margin: 0 auto; text-align: center;">
+            <h1 class="hidden delay-100" style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px;">
+                Elite UDESAKEN<br>
+                <span class="text-gold" style="text-shadow: 0 0 35px rgba(255, 215, 0, 0.6);">Clube VIP</span>
             </h1>
             
-            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed">
-                Acesso total ao privado do bot e imunidade garantida.
-                <strong class="text-gold block mt-4 text-lg">⚡ 20% OFF APLICADO EM TODOS OS PLANOS VIP.</strong>
+            <p class="hidden delay-200" style="color: #999; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                Agora membros VIP têm acesso liberado ao <strong>Privado do Bot</strong>.
             </p>
         </div>
     </section>
 
-    <section class="pb-32 pt-10 relative z-10">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-                
-                <div class="glass-panel p-8 rounded-[30px] group fade-up" style="animation-delay: 0.1s;">
-                    <h3 class="text-muted font-bold uppercase tracking-widest text-xs mb-4">Teste VIP</h3>
-                    <div class="text-white font-bold text-2xl mb-4 tracking-tighter">7 Dias</div>
-                    <div class="flex items-baseline gap-2 mb-6">
-                        <span class="text-4xl font-bold text-main tracking-tight">R$ 1,60</span>
-                        <span class="text-sm text-muted line-through opacity-70">R$ 2,00</span>
-                    </div>
-                    <ul class="space-y-4 mb-8 text-sm text-muted font-medium border-t border-white/5 pt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold text-xs"></i> Imune a Vote Ban</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-comments text-gold text-xs"></i> <strong>PV Liberado</strong></li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold text-xs"></i> Comandos VIP</li>
-                    </ul>
-                    <a href="https://wa.me/447562847091?text=Quero%20aproveitar%20o%20VIP%20Semanal" class="block w-full py-3 rounded-xl border border-white/10 text-center font-bold text-main hover:bg-white/5 transition">
-                        Assinar 7 Dias
-                    </a>
-                </div>
-
-                <div class="relative glass-panel p-8 rounded-[30px] border-yellow-500/30 transform md:scale-110 z-20 fade-up shadow-2xl shadow-yellow-500/10" style="animation-delay: 0.2s;">
-                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 px-5 py-2 bg-yellow-500 text-black text-[11px] font-black uppercase tracking-wider rounded-full shadow-lg border-4 border-[#050505]">
-                        Recomendado
-                    </div>
-                    
-                    <h3 class="text-gold font-bold uppercase tracking-widest text-xs mb-4 mt-2">Mensal • 30 Dias</h3>
-                    <div class="flex items-baseline gap-2 mb-6">
-                        <span class="text-5xl font-black text-main tracking-tight">R$ 4,00</span>
-                        <span class="text-lg text-muted line-through opacity-70">R$ 5,00</span>
-                    </div>
-                    
-                    <ul class="space-y-4 mb-8 text-sm text-main font-medium border-t border-white/10 pt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-crown text-gold text-xs"></i> <strong>Imunidade Total</strong></li>
-                        <li class="flex items-center gap-3"><i class="fas fa-unlock text-gold text-xs"></i> Burlar Modo ADM</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-clock text-gold text-xs"></i> Mute Reduzido</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-comments text-gold text-xs"></i> PV 100% Liberado</li>
-                    </ul>
-                    
-                    <a href="https://wa.me/447562847091?text=Quero%20aproveitar%20o%20VIP%20Mensal" class="block w-full py-4 rounded-xl bg-yellow-500 text-black text-center font-black uppercase tracking-wide hover:bg-yellow-400 transition shadow-[0_0_20px_rgba(234,179,8,0.4)]">
-                        Garantir Mensal
-                    </a>
-                </div>
-
-                <div class="glass-panel p-8 rounded-[30px] group fade-up" style="animation-delay: 0.3s;">
-                    <h3 class="text-muted font-bold uppercase tracking-widest text-xs mb-4">Quinzenal</h3>
-                    <div class="text-white font-bold text-2xl mb-4 tracking-tighter">15 Dias</div>
-                    <div class="flex items-baseline gap-2 mb-6">
-                        <span class="text-4xl font-bold text-main tracking-tight">R$ 2,80</span>
-                        <span class="text-sm text-muted line-through opacity-70">R$ 3,50</span>
-                    </div>
-                    <ul class="space-y-4 mb-8 text-sm text-muted font-medium border-t border-white/5 pt-6">
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold text-xs"></i> PV Liberado</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-check text-gold text-xs"></i> Imune a Vote Ban</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-star text-gold text-xs"></i> Suporte Prioritário</li>
-                    </ul>
-                    <a href="https://wa.me/447562847091?text=Quero%20aproveitar%20o%20VIP%20Quinzenal" class="block w-full py-3 rounded-xl border border-white/10 text-center font-bold text-main hover:bg-white/5 transition">
-                        Assinar 15 Dias
-                    </a>
-                </div>
-
+    <section class="pricing-section">
+        
+        <div class="plan-card hidden delay-100">
+            <div class="plan-title">Teste Rápido</div>
+            <div class="plan-duration">7 Dias</div>
+            
+            <div class="plan-price-container">
+                <span class="plan-price">R$ 2,00</span>
             </div>
+            
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong></li>
+                <li><i class="fas fa-check"></i> Comandos VIP</li>
+                <li><i class="fas fa-check"></i> Bônus de XP</li>
+            </ul>
+
+            <a href="https://wa.me/447562847091?text=Ola%20UDESAKEN!%20Quero%20o%20VIP%20Semanal%20(R$%202,00)" class="btn-plan btn-outline">
+                Testar Agora
+            </a>
+        </div>
+
+        <div class="plan-card featured hidden delay-200">
+            <div class="badge-recommended">Recomendado</div>
+            
+            <div class="plan-title" style="color: #FFD700;">Mensal</div>
+            <div class="plan-duration">30 Dias</div>
+            
+            <div class="plan-price-container">
+                <span class="plan-price" style="font-size: 2.8rem;">R$ 5,00</span>
+            </div>
+            
+            <ul class="plan-features">
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong> (Exclusivo)</li>
+                <li><i class="fas fa-check"></i> <strong>Imunidade Total</strong></li>
+                <li><i class="fas fa-check"></i> Burlar Modo "Só ADM"</li>
+                <li><i class="fas fa-check"></i> Mute Reduzido (5m)</li>
+                <li><i class="fas fa-check"></i> Limite Maior de ADV</li>
+            </ul>
+
+            <a href="https://wa.me/447562847091?text=Ola%20UDESAKEN!%20Quero%20o%20VIP%20Mensal%20(R$%205,00)" class="btn-plan btn-fill">
+                Garantir Mensal
+            </a>
+        </div>
+
+        <div class="plan-card hidden delay-300">
+            <div class="plan-title">Quinzenal</div>
+            <div class="plan-duration">15 Dias</div>
+            
+            <div class="plan-price-container">
+                <span class="plan-price">R$ 3,50</span>
+            </div>
+            
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Imune a Vote Ban</li>
+                <li><i class="fas fa-comments"></i> <strong>PV Liberado</strong></li>
+                <li><i class="fas fa-check"></i> Comandos VIP</li>
+                <li><i class="fas fa-check"></i> Prioridade Média</li>
+            </ul>
+
+            <a href="https://wa.me/447562847091?text=Ola%20UDESAKEN!%20Quero%20o%20VIP%20Quinzenal%20(R$%203,50)" class="btn-plan btn-outline">
+                Assinar Quinzenal
+            </a>
+        </div>
+
+    </section>
+
+    <section class="section-padding" style="background: rgba(0,0,0,0.4);">
+        <div class="section-header hidden">
+            <h2 class="text-gold" style="font-size: 1.5rem;">Vantagens Exclusivas</h2>
+            <div style="width: 50px; height: 3px; background: #FFD700; margin: 15px auto; box-shadow: 0 0 10px #FFD700;"></div>
+        </div>
+        
+        <div class="premium-features" style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-comments text-gold"></i> <strong>PV Liberado</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Converse com o bot no privado sem bloqueios.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-shield-alt text-gold"></i> <strong>Imune a Vote Ban</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Blindagem total contra banimentos por votação.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-hourglass-half text-gold"></i> <strong>Mute Reduzido</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Seu tempo de mute nunca passa de 5 minutos.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-lock-open text-gold"></i> <strong>Modo "Só ADM"</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Pode falar no grupo mesmo quando fechado.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-bolt text-gold"></i> <strong>Bônus de XP</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Upe de nível muito mais rápido no ranking.</span>
+            </li>
+
+            <li style="border-left: 3px solid #FFD700; padding: 15px; background: #0f0f0f; list-style: none; border-radius: 8px;">
+                <i class="fas fa-terminal text-gold"></i> <strong>Comandos VIP</strong><br>
+                <span style="font-size: 0.8rem; color: #aaa;">Menu exclusivo de comandos premium.</span>
+            </li>
+
         </div>
     </section>
 
-    <footer class="py-10 text-center border-t border-white/5 relative z-10 glass-panel">
-        <p class="text-[10px] text-muted font-medium tracking-widest uppercase">Udesaken Group © 2026</p>
+    <footer>
+        <div style="margin-bottom: 20px; color: #555;">
+            <p>UDESAKEN Group &copy; 2026.</p>
+        </div>
+        <a href="/" class="powered-badge">
+            <i class="fas fa-chevron-left"></i> Voltar
+        </a>
     </footer>
 
-    <script src="../script.js"></script>
+    <div id="cookieBanner" class="cookie-consent">
+        <div class="cookie-text">
+            <i class="fas fa-cookie-bite" style="color: #FFD700;"></i> Cookies?
+        </div>
+        <button id="btnAccept" class="btn-accept" style="background: #FFD700; color: black; box-shadow: 0 0 10px #FFD700;">OK</button>
+    </div>
+
+    <div class="music-widget">
+        <audio id="bg-audio" loop>
+            <source src="../musicusk.mp3?v=2" type="audio/mpeg">
+        </audio>
+        <div class="music-btn" onclick="toggleMusic()" style="border-color: #FFD700; color: #FFD700; box-shadow: 0 0 10px #FFD700;">
+            <div class="waves"><span></span><span></span><span></span></div>
+            <i class="fas fa-volume-mute" id="music-icon"></i>
+        </div>
+    </div>
+
+    <script type="module" src="../script.js"></script>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const closeBtn = document.querySelector('.close-btn-mobile');
+        if(hamburger) hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        if(closeBtn) closeBtn.addEventListener('click', () => navLinks.classList.remove('active'));
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('show'); });
+        });
+        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+    </script>
 </body>
 </html>
