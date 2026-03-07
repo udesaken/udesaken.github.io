@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos PV | UDESAKEN Group</title>
+    
+    <link rel="stylesheet" href="../style.css">
+    
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
+    
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    },
+                    letterSpacing: { tighter: '-0.03em' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-brand-gold/30 selection:text-black">
+
+    <div class="liquid-container">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+        <div class="liquid-orb orb-3"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300">
+        <div class="max-w-[1200px] mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-4 cursor-pointer group">
+                <div class="w-10 h-10 rounded-xl overflow-hidden border border-white/20 shadow-xl bg-black">
+                     <img src="../logousk1.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="text-xl font-bold tracking-tight text-main group-hover:text-gold transition">
+                    UDESAKEN
+                </span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <a href="../" class="text-sm font-bold text-muted hover:text-main uppercase tracking-wider transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-40 pb-24 text-center relative">
+        <div class="max-w-4xl mx-auto px-6 fade-up">
+            
+            <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-panel">
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                <span class="text-xs font-bold text-main tracking-widest uppercase">Uso Exclusivo & Privado</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-black text-main mb-6 tracking-tighter leading-tight">
+                O bot direto no seu <br>
+                <span class="text-gradient-gold">Privado (PV).</span>
+            </h1>
+            
+            <p class="text-xl text-muted max-w-2xl mx-auto font-medium leading-relaxed">
+                Respostas rápidas, total privacidade e ferramentas liberadas sem depender de grupos.
+            </p>
+        </div>
+    </section>
+
+  <section class="pb-32 pt-10 relative z-10">
+    <div class="max-w-[1100px] mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+            
+            <div class="relative glass-panel p-8 rounded-[30px] fade-up" style="animation-delay: 0.1s;">
+                <h3 class="text-muted font-bold uppercase tracking-widest text-xs mb-4">1 Dia</h3>
+                <div class="flex items-baseline gap-2 mb-6">
+                    <span class="text-4xl font-bold text-main tracking-tight">R$ 1,50</span>
+                </div>
+                <ul class="space-y-4 mb-8 text-sm text-muted font-medium">
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Acesso Total no PV (24h)</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Sem limites de grupos</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Teste rápido</li>
+                </ul>
+                <a href="https://wa.me/447562847091?text=Opa,%20quero%20testar%20o%20bot%20no%20meu%20PV%20(1%20Dia)" class="block w-full py-3 rounded-xl border border-white/10 text-center font-bold text-main hover:bg-white/5 transition">
+                    Testar Agora
+                </a>
+            </div>
+
+            <div class="relative transform md:scale-110 z-20 fade-up" style="animation-delay: 0.2s;">
+    
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 px-5 py-2 bg-yellow-500 text-black text-[12px] font-black uppercase tracking-wider rounded-full shadow-lg border-4 border-[#050505] z-30">
+                    Mais Popular
+                </div>
+                
+                <div class="glass-panel p-8 rounded-[30px] border-yellow-500/30 shadow-2xl shadow-yellow-500/10 overflow-hidden h-full relative">
+                    
+                    <h3 class="text-gold font-bold uppercase tracking-widest text-xs mb-4 mt-2">Mensal • 30 Dias</h3>
+                    <div class="flex items-baseline gap-2 mb-6">
+                        <span class="text-5xl font-black text-main tracking-tight">R$ 3,50</span>
+                    </div>
+                    <p class="text-xs text-muted mb-6 font-medium leading-relaxed">O melhor custo-benefício para ter seu assistente pessoal o mês todo.</p>
+                    
+                    <ul class="space-y-4 mb-8 text-sm text-main font-medium">
+                        <li class="flex items-center gap-3"><i class="fas fa-star text-gold"></i> <strong>Alta Performance</strong></li>
+                        <li class="flex items-center gap-3"><i class="fas fa-comment-dots text-gold"></i> Respostas Exclusivas</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-user-shield text-gold"></i> Privacidade Total</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-bolt text-gold"></i> Sem restrição de uso</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/447562847091?text=Opa,%20quero%20o%20Plano%20MENSAL%20para%20o%20PV" class="block w-full py-4 rounded-xl bg-yellow-500 text-black text-center font-black uppercase tracking-wide hover:bg-yellow-400 transition shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                        Garantir Mensal
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative glass-panel p-8 rounded-[30px] fade-up" style="animation-delay: 0.3s;">
+                <h3 class="text-muted font-bold uppercase tracking-widest text-xs mb-4">Quinzenal</h3>
+                <div class="flex items-baseline gap-2 mb-6">
+                    <span class="text-4xl font-bold text-main tracking-tight">R$ 2,50</span>
+                </div>
+                <ul class="space-y-4 mb-8 text-sm text-muted font-medium">
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> 15 Dias de Acesso</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Comandos liberados</li>
+                    <li class="flex items-center gap-3"><i class="fas fa-check text-gold"></i> Renovação Flexível</li>
+                </ul>
+                <a href="https://wa.me/447562847091?text=Opa,%20quero%20o%20Plano%20QUINZENAL%20para%20o%20PV" class="block w-full py-3 rounded-xl border border-white/10 text-center font-bold text-main hover:bg-white/5 transition">
+                    Assinar Quinzenal
+                </a>
+            </div>
+
+        </div>
+
+        <div class="mt-16 fade-up" style="animation-delay: 0.4s;">
+            <div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10 bg-black/40">
+                <div class="flex items-center gap-4 text-center md:text-left">
+                    <div class="w-12 h-12 rounded-full bg-white/5 hidden md:flex items-center justify-center flex-shrink-0 border border-white/10">
+                        <i class="fas fa-users text-xl text-muted"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-main">Procurando proteção para sua comunidade?</h4>
+                        <p class="text-sm text-muted font-medium mt-1">Se você precisa de anti-spam e gestão automática, conheça nosso Plano de Grupo.</p>
+                    </div>
+                </div>
+                <a href="../planos/" class="whitespace-nowrap px-8 py-3 rounded-full border border-white/20 text-sm font-bold text-main hover:bg-white/10 transition duration-300">
+                    Ver Plano de Grupo
+                </a>
+            </div>
+        </div>
+        </div>
+  </section>
+
+    <section class="py-20 border-t border-white/5 bg-black/20 relative z-10">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-xl font-bold text-main mb-10 text-center">Dúvidas Frequentes</h2>
+            
+            <div class="space-y-4">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <h4 class="text-main font-bold mb-2 flex items-center gap-2 text-sm"><i class="fas fa-bolt text-gold"></i> Como funciona no PV?</h4>
+                    <p class="text-muted text-sm leading-relaxed">Você vai mandar mensagem diretamente para o número do bot no privado. Sem precisar colocar ele em grupos ou dividir a atenção dele com outros usuários.</p>
+                </div>
+                
+                <div class="glass-panel p-6 rounded-2xl">
+                    <h4 class="text-main font-bold mb-2 flex items-center gap-2 text-sm"><i class="fas fa-sync text-gold"></i> Tem alguma regra de uso?</h4>
+                    <p class="text-muted text-sm leading-relaxed">Diferente dos grupos, no PV você não esbarra nas regras de anti-spam, permitindo um uso muito mais dinâmico dos comandos de diversão, downloads e utilidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center border-t border-white/5 relative z-10">
+        <p class="text-xs text-muted font-medium tracking-widest uppercase">UDESAKEN Group © 2026</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
