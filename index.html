@@ -61,13 +61,13 @@
             <div class="hidden md:flex items-center gap-6">
                 <a href="./comandos/" class="text-sm font-semibold text-muted hover:text-main transition">Comandos</a>
                 <a href="./equipe/" class="text-sm font-semibold text-muted hover:text-main transition">Equipe</a>
-                <a href="./planos/" class="text-sm font-bold text-main hover:text-gold transition">Planos</a>
+                <a href="#planos" class="text-sm font-bold text-main hover:text-gold transition">Planos</a>
                 
                 <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
                     <i class="fas fa-moon text-sm"></i>
                 </button>
 
-                <a href="./vip/" class="px-5 py-2 text-sm font-bold bg-white/5 border border-white/20 text-main rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition backdrop-blur-md shadow-lg">
+                <a href="#planos" class="px-5 py-2 text-sm font-bold bg-white/5 border border-white/20 text-main rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition backdrop-blur-md shadow-lg">
                     Acesso VIP
                 </a>
             </div>
@@ -85,8 +85,8 @@
         <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 absolute w-full">
             <div class="px-6 py-6 space-y-4">
                 <a href="./comandos/" class="block text-muted font-medium">Comandos</a>
-                <a href="./planos/" class="block text-main font-bold">Planos</a>
-                <a href="./vip/" class="block text-gold font-bold">VIP</a>
+                <a href="#planos" class="block text-main font-bold">Planos</a>
+                <a href="#planos" class="block text-gold font-bold">VIP</a>
             </div>
         </div>
     </nav>
@@ -109,16 +109,98 @@
 </p>
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16">
-                <a href="./planos/" class="w-full md:w-auto px-8 py-3 bg-yellow-600 text-white font-bold rounded-full hover:bg-yellow-500 hover:scale-105 transition shadow-[0_0_30px_rgba(202,138,4,0.4)]">
+                <a href="#planos" class="w-full md:w-auto px-8 py-3 bg-yellow-600 text-white font-bold rounded-full hover:bg-yellow-500 hover:scale-105 transition shadow-[0_0_30px_rgba(202,138,4,0.4)]">
                     Ver Planos
                 </a>
-                <a href="./vip/" class="w-full md:w-auto px-8 py-3 glass-panel text-main font-bold rounded-full transition">
+                <a href="#planos" class="w-full md:w-auto px-8 py-3 glass-panel text-main font-bold rounded-full transition">
                     Membro VIP
                 </a>
             </div>
 
             <div class="relative mx-auto max-w-[260px] md:max-w-[320px] hover:scale-110 transition duration-700 cursor-pointer">
                 <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-2xl animate-float">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative" id="planos">
+        <div class="max-w-[1200px] mx-auto px-6">
+            
+            <div class="text-center mb-16 fade-up">
+                <h2 class="text-4xl md:text-5xl font-black text-main mb-4 tracking-tighter">Escolha seu <span class="text-gradient-gold">Plano</span></h2>
+                <p class="text-lg text-muted max-w-2xl mx-auto font-medium">
+                    Soluções ideais para o seu uso, seja em grupos, no privado ou com benefícios exclusivos VIP.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                
+                <div class="glass-panel p-8 rounded-[24px] flex flex-col relative fade-up border border-white/5 hover:border-white/20 transition-all duration-300">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                            <i class="fas fa-users text-xl text-muted"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-main mb-2">Plano de Grupo</h3>
+                        <p class="text-sm text-muted font-medium">Automação e segurança para sua comunidade no WhatsApp.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-green-500"></i> Gestão completa de grupo</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-green-500"></i> Anti-spam e proteção</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-green-500"></i> Comandos de diversão e jogos</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/447562847091" class="w-full py-3 rounded-full border border-white/10 text-center font-bold text-main hover:bg-white/5 transition duration-300">
+                        Assinar Grupo
+                    </a>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[24px] flex flex-col relative fade-up border border-brand-gold/40 hover:border-brand-gold shadow-[0_0_30px_rgba(198,168,124,0.15)] transition-all duration-300 transform md:-translate-y-4 z-10" style="animation-delay: 0.1s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-gradient-to-r from-yellow-600 to-yellow-400 text-black text-[10px] font-black tracking-widest uppercase rounded-full shadow-lg">
+                        Mais Popular
+                    </div>
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center mb-4 border border-yellow-500/20">
+                            <i class="fas fa-crown text-xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gradient-gold mb-2">Membro VIP</h3>
+                        <p class="text-sm text-muted font-medium">Benefícios exclusivos e prioridade máxima no sistema Udesaken.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-star text-yellow-500"></i> Destaque no perfil</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-star text-yellow-500"></i> Comandos exclusivos VIP</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-star text-yellow-500"></i> Flexibilidade de tempo</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/447562847091" class="w-full py-3 rounded-full bg-yellow-600 text-white text-center font-bold hover:bg-yellow-500 shadow-[0_0_20px_rgba(202,138,4,0.4)] hover:shadow-[0_0_30px_rgba(202,138,4,0.6)] hover:scale-105 transition duration-300">
+                        Membro VIP
+                    </a>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[24px] flex flex-col relative fade-up border border-blue-500/30 hover:border-blue-500/60 shadow-[0_0_30px_rgba(59,130,246,0.1)] transition-all duration-300" style="animation-delay: 0.2s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-5 py-1.5 bg-blue-600 text-white text-[10px] font-black tracking-widest uppercase rounded-full flex items-center gap-2 animate-pulse shadow-[0_0_15px_rgba(37,99,235,0.6)]">
+                        <i class="fas fa-bolt"></i> Novidade
+                    </div>
+                    <div class="mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 border border-blue-500/20">
+                            <i class="fas fa-comment-dots text-xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-main mb-2">Plano PV</h3>
+                        <p class="text-sm text-muted font-medium">O bot funcionando exclusivamente para você no privado.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-blue-500"></i> Respostas exclusivas no PV</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-blue-500"></i> Sem limites de grupos</li>
+                        <li class="flex items-center gap-3 text-sm text-main font-medium"><i class="fas fa-check text-blue-500"></i> Alta performance</li>
+                    </ul>
+                    
+                    <a href="https://wa.me/447562847091" class="w-full py-3 rounded-full border border-blue-500/50 text-center font-bold text-main hover:bg-blue-600 hover:border-blue-600 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition duration-300">
+                        Assinar PV
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
