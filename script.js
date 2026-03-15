@@ -337,3 +337,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+/* ==========================================================================
+   UDESAKEN - CLEAN URL SYSTEM (Remove index.html dos links)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a');
+    
+    links.forEach(link => {
+        const href = link.getAttribute('href');
+        // Se o link tiver "index.html", ele substitui por vazio
+        if (href && href.includes('index.html')) {
+            link.setAttribute('href', href.replace('index.html', ''));
+        }
+    });
+});
