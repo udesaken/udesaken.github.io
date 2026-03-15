@@ -105,7 +105,7 @@ function injectUdesakenPlayer() {
         <div class="flex items-center gap-2">
             <div class="flex items-center gap-3 glass-pill shadow-2xl">
                 <div class="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 shadow-lg">
-                    <img src="./logousk1.png" alt="Capa" class="w-full h-full object-cover">
+                    <img src="/logousk1.png" alt="Capa" class="w-full h-full object-cover">
                     <div id="visualizer" class="absolute inset-0 bg-black/60 flex items-center justify-center gap-[2px] opacity-0 transition-opacity">
                         <span class="v-bar bar-1"></span>
                         <span class="v-bar bar-2"></span>
@@ -147,11 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackArtist = document.getElementById('track-artist');
     const playerContainer = document.getElementById('audio-player-container');
 
+    // Caminhos absolutos para as músicas
     const playlist = [
-        { name: 'Love Me', artist: 'JMSN', src: './uskmusic.mp3' },
-        { name: 'A Little Death', artist: 'The Neighbourhood', src: './uskmusic2.mp3' },
-        { name: 'MAKEUP', artist: 'Chris Grey', src: './uskmusic3.mp3' },
-        { name: 'Can"t Feel My Face', artist: 'The Weeknd', src: './uskmusic4.mp3' }
+        { name: 'Love Me', artist: 'JMSN', src: '/uskmusic.mp3' },
+        { name: 'A Little Death', artist: 'The Neighbourhood', src: '/uskmusic2.mp3' },
+        { name: 'MAKEUP', artist: 'Chris Grey', src: '/uskmusic3.mp3' },
+        { name: 'Can"t Feel My Face', artist: 'The Weeknd', src: '/uskmusic4.mp3' }
     ];
 
     let currentTrackIndex = parseInt(localStorage.getItem('usk_track_index')) || 0;
@@ -256,7 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const link = document.createElement('link');
     link.type = 'image/png';
     link.rel = 'shortcut icon';
-    link.href = './logousk.png'; 
+    // Caminho absoluto para o favicon
+    link.href = '/logousk.png'; 
     document.getElementsByTagName('head')[0].appendChild(link);
 })();
 
