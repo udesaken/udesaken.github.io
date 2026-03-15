@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Não Encontrada | Udesaken Group</title>
+
+    <link rel="stylesheet" href="./style.css?v=4.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' },
+                        main: 'var(--text-main)',
+                        muted: 'var(--text-muted)',
+                        gold: 'var(--accent)'
+                    },
+                    letterSpacing: { tight: '-0.02em' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-brand-gold/30 selection:text-white h-screen flex flex-col">
+
+    <div class="liquid-container">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+        <div class="liquid-orb orb-3"></div>
+    </div>
+
+    <main class="flex-grow flex items-center justify-center p-6 relative z-10">
+        <div class="max-w-lg w-full text-center fade-up">
+            
+            <div class="glass-panel p-10 md:p-14 rounded-[32px] shadow-2xl border border-white/10 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-red-500/5 blur-[80px] group-hover:bg-red-500/10 transition duration-700"></div>
+                
+                <h1 class="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-white/20 mb-2 drop-shadow-lg">
+                    404
+                </h1>
+                
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-xs animate-pulse"></i>
+                    <span class="text-[10px] font-bold text-red-400 tracking-widest uppercase">Falha na Rota</span>
+                </div>
+
+                <h2 class="text-2xl font-bold text-main mb-4">Página não encontrada</h2>
+                <p class="text-muted text-sm md:text-base mb-10 font-medium">
+                    O link que você tentou acessar não existe ou foi movido. Verifique o endereço ou volte para a base do sistema.
+                </p>
+
+                <a href="./index.html" class="inline-flex items-center justify-center gap-3 w-full py-4 bg-white/5 hover:bg-yellow-600 text-main hover:text-white font-bold rounded-xl transition duration-300 border border-white/10 hover:border-yellow-500 hover:shadow-[0_0_30px_rgba(202,138,4,0.4)]">
+                    <i class="fas fa-home"></i> Voltar para o Início
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('udesaken_theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const htmlElement = document.documentElement;
+            
+            if (savedTheme === 'light') {
+                htmlElement.setAttribute('data-theme', 'light');
+            } else if (!savedTheme && !systemPrefersDark) {
+                htmlElement.setAttribute('data-theme', 'light');
+            } else {
+                htmlElement.setAttribute('data-theme', 'dark');
+            }
+
+            // Ativa o brilho no mouse
+            const glassPanels = document.querySelectorAll('.glass-panel');
+            glassPanels.forEach(panel => {
+                panel.addEventListener('mousemove', (e) => {
+                    const rect = panel.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    panel.style.setProperty('--mouse-x', `${x}px`);
+                    panel.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
