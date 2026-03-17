@@ -267,21 +267,58 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const formParceria = document.getElementById('form-parceria');
+    // URL da sua API e link de redirecionamento
+    const webhookURL = 'https://api-udesaken.squareweb.app/api/parceria';
+    const linkGrupoEspera = "https://chat.whatsapp.com/HqRNjrQzRJ87K112xJcOvm?mode=gi_t";
 
-    if (formParceria) {
-        formParceria.addEventListener('submit', async (e) => {
+    // --- FUNÇÃO GLOBAL DE ENVIO ---
+    async function enviarParaSquareCloud(form, payload) {
+        const btnSubmit = form.querySelector('button[type="submit"]');
+        const textoOriginal = btnSubmit.innerHTML;
+        btnSubmit.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
+        btnSubmit.disabled = true;
+
+        try {
+            const response = await fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                window.location.href = linkGrupoEspera;
+            } else {
+                throw new Error('Falha de comunicação com a API');
+            }
+
+        } catch (error) {
+            console.error("Erro ao enviar webhook:", error);
+            alert("Ocorreu um erro ao enviar sua solicitação. Verifique sua conexão e tente novamente.");
+            btnSubmit.innerHTML = textoOriginal;
+            btnSubmit.disabled = false;
+        }
+    }
+
+    // --- 1. ENVIO DO FORMULÁRIO DE COMUNIDADE (GRUPOS) ---
+    const formComunidade = document.getElementById('form-parceria-comunidade');
+    if (formComunidade) {
+        formComunidade.addEventListener('submit', (e) => {
             e.preventDefault(); 
 
-            const inputs = formParceria.querySelectorAll('input');
+            // Pega apenas os inputs de texto/numero do form de comunidade
+            const inputs = formComunidade.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])');
+            const selectCategoria = formComunidade.querySelector('select');
+            
             const dados = {
                 nomeGrupo: inputs[0].value,
                 linkGrupo: inputs[1].value,
                 membros: inputs[2].value,
                 responsavel: inputs[3].value,
                 contato: inputs[4].value,
-                ativo: document.querySelector('input[name="ativo"]:checked').value,
-                tipoParceria: document.querySelector('input[name="tipo_parceria"]:checked').value
+                mensagens: inputs[5].value,
+                categoria: selectCategoria.options[selectCategoria.selectedIndex].text,
+                ativo: document.querySelector('#container-comunidade input[name="ativo"]:checked').value,
+                tipoParceria: document.querySelector('#container-comunidade input[name="tipo_parceria"]:checked').value
             };
 
             const isOficial = dados.tipoParceria === 'oficial';
@@ -292,48 +329,67 @@ document.addEventListener('DOMContentLoaded', () => {
                     fields: [
                         { name: "👑 Nome do Grupo", value: dados.nomeGrupo, inline: true },
                         { name: "👥 Membros", value: dados.membros, inline: true },
-                        { name: "📈 Grupo Ativo?", value: dados.ativo === 'sim' ? 'Sim ✅' : 'Não ❌', inline: true },
+                        { name: "📂 Categoria", value: dados.categoria, inline: true },
+                        { name: "📈 Grupo Ativo?", value: dados.ativo === 'sim' ? `Sim ✅ (${dados.mensagens} msg/dia)` : 'Não ❌', inline: true },
                         { name: "👤 Responsável", value: dados.responsavel, inline: true },
                         { name: "📱 Contato", value: dados.contato, inline: true },
                         { name: "🔗 Link do WhatsApp", value: dados.linkGrupo, inline: false }
                     ],
                     thumbnail: {
-                        url: isOficial ? "https://udesaken.site/uskcoroa.png" : ""
+                        url: isOficial ? "https://udesaken.site/uskcoroa.png" : "https://udesaken.site/logousk.png"
                     },
                     footer: { text: "Udesaken Group | Sistema Operante" },
                     timestamp: new Date().toISOString()
                 }]
             };
 
-            const btnSubmit = formParceria.querySelector('button[type="submit"]');
-            const textoOriginal = btnSubmit.innerHTML;
-            btnSubmit.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
-            btnSubmit.disabled = true;
+            enviarParaSquareCloud(formComunidade, payload);
+        });
+    }
 
-            try {
-                // ROTA BLINDADA APONTANDO PARA SUA SQUARE CLOUD
-                const webhookURL = 'https://api-udesaken.squareweb.app/api/parceria';
-                
-                const response = await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+    // --- 2. ENVIO DO FORMULÁRIO DE EMPRESAS (B2B) ---
+    const formEmpresa = document.getElementById('form-parceria-empresa');
+    if (formEmpresa) {
+        formEmpresa.addEventListener('submit', (e) => {
+            e.preventDefault(); 
 
-                if (response.ok) {
-                    const linkGrupoEspera = "https://chat.whatsapp.com/HqRNjrQzRJ87K112xJcOvm?mode=gi_t"; 
-                    window.location.href = linkGrupoEspera;
-                } else {
-                    throw new Error('Falha de comunicação com a API');
-                }
+            const inputs = formEmpresa.querySelectorAll('input');
+            const textarea = formEmpresa.querySelector('textarea');
+            
+            const dados = {
+                nomeEmpresa: inputs[0].value,
+                linkEmpresa: inputs[1].value,
+                segmento: inputs[2].value,
+                representante: inputs[3].value,
+                cargo: inputs[4].value,
+                email: inputs[5].value,
+                wpp: inputs[6].value,
+                proposta: textarea.value
+            };
 
-            } catch (error) {
-                console.error("Erro ao enviar webhook:", error);
-                alert("Ocorreu um erro ao enviar sua solicitação. Verifique sua conexão e tente novamente.");
-                
-                btnSubmit.innerHTML = textoOriginal;
-                btnSubmit.disabled = false;
-            }
+            const payload = {
+                embeds: [{
+                    title: "💼 NOVA PROPOSTA COMERCIAL (MARCA/EMPRESA)",
+                    color: 16753920, // Laranja Dourado
+                    fields: [
+                        { name: "🏢 Empresa / Marca", value: dados.nomeEmpresa, inline: true },
+                        { name: "🏷️ Segmento", value: dados.segmento, inline: true },
+                        { name: "🔗 Site / Instagram", value: dados.linkEmpresa, inline: true },
+                        { name: "👤 Representante", value: dados.representante, inline: true },
+                        { name: "👔 Cargo", value: dados.cargo, inline: true },
+                        { name: "📱 Contato (Wpp)", value: dados.wpp, inline: true },
+                        { name: "✉️ E-mail Corporativo", value: dados.email, inline: true },
+                        { name: "📝 Proposta de Colaboração", value: dados.proposta, inline: false }
+                    ],
+                    thumbnail: {
+                        url: "https://udesaken.site/logousk.png" 
+                    },
+                    footer: { text: "Udesaken Group | Comercial & Negócios" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            enviarParaSquareCloud(formEmpresa, payload);
         });
     }
 });
