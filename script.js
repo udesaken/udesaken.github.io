@@ -351,3 +351,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+/* ==========================================================================
+   UDESAKEN - DYNAMIC OPEN GRAPH & LINK PREVIEW ENGINE
+   ========================================================================== */
+(function injectOpenGraphTags() {
+    // Função utilitária para criar ou atualizar as tags meta
+    function setMetaTag(property, content, isName = false) {
+        const attr = isName ? 'name' : 'property';
+        let meta = document.querySelector(`meta[${attr}="${property}"]`);
+        
+        if (!meta) {
+            meta = document.createElement('meta');
+            meta.setAttribute(attr, property);
+            document.head.appendChild(meta);
+        }
+        meta.setAttribute('content', content);
+    }
+
+    // Pega o título atual da página dinamicamente (ou usa um padrão)
+    const pageTitle = document.title || "Udesaken Group";
+    
+    // Pega a URL atual da página, já limpando o index.html (graças ao seu Clean URL System)
+    const currentUrl = window.location.href.replace('index.html', '');
+    
+    // Caminho absoluto e obrigatório da imagem para o WhatsApp aceitar
+    const imageUrl = 'https://udesaken.site/logousk1.png';
+    const siteDescription = 'A marca oficial Udesaken. Sistema Operante.';
+
+    // --- TAGS OPEN GRAPH (WhatsApp, Facebook, Telegram, Discord) ---
+    setMetaTag('og:type', 'website');
+    setMetaTag('og:url', currentUrl);
+    setMetaTag('og:title', pageTitle);
+    setMetaTag('og:description', siteDescription);
+    setMetaTag('og:image', imageUrl);
+    setMetaTag('og:image:width', '1200');
+    setMetaTag('og:image:height', '630');
+
+    // --- TAGS TWITTER CARDS (Twitter/X e otimização de Discord) ---
+    setMetaTag('twitter:card', 'summary_large_image', true);
+    setMetaTag('twitter:url', currentUrl, true);
+    setMetaTag('twitter:title', pageTitle, true);
+    setMetaTag('twitter:description', siteDescription, true);
+    setMetaTag('twitter:image', imageUrl, true);
+})();
