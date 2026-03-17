@@ -147,7 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackArtist = document.getElementById('track-artist');
     const playerContainer = document.getElementById('audio-player-container');
 
-    // Caminhos absolutos para as músicas
     const playlist = [
         { name: 'Love Me', artist: 'JMSN', src: '/uskmusic.mp3' },
         { name: 'A Little Death', artist: 'The Neighbourhood', src: '/uskmusic2.mp3' },
@@ -257,7 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const link = document.createElement('link');
     link.type = 'image/png';
     link.rel = 'shortcut icon';
-    // Caminho absoluto para o favicon
     link.href = '/logousk.png'; 
     document.getElementsByTagName('head')[0].appendChild(link);
 })();
@@ -267,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // URL da sua API e link de redirecionamento
     const webhookURL = 'https://api-udesaken.squareweb.app/api/parceria';
     const linkGrupoEspera = "https://chat.whatsapp.com/HqRNjrQzRJ87K112xJcOvm?mode=gi_t";
 
@@ -305,7 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
         formComunidade.addEventListener('submit', (e) => {
             e.preventDefault(); 
 
-            // Pega apenas os inputs de texto/numero do form de comunidade
             const inputs = formComunidade.querySelectorAll('input:not([type="radio"]):not([type="checkbox"])');
             const selectCategoria = formComunidade.querySelector('select');
             
@@ -370,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const payload = {
                 embeds: [{
                     title: "💼 NOVA PROPOSTA COMERCIAL (MARCA/EMPRESA)",
-                    color: 16753920, // Laranja Dourado
+                    color: 16753920, 
                     fields: [
                         { name: "🏢 Empresa / Marca", value: dados.nomeEmpresa, inline: true },
                         { name: "🏷️ Segmento", value: dados.segmento, inline: true },
@@ -393,6 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 /* ==========================================================================
    UDESAKEN - CLEAN URL SYSTEM (Remove index.html dos links)
    ========================================================================== */
@@ -401,17 +398,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     links.forEach(link => {
         const href = link.getAttribute('href');
-        // Se o link tiver "index.html", ele substitui por vazio
         if (href && href.includes('index.html')) {
             link.setAttribute('href', href.replace('index.html', ''));
         }
     });
 });
+
 /* ==========================================================================
    UDESAKEN - DYNAMIC OPEN GRAPH & LINK PREVIEW ENGINE
    ========================================================================== */
 (function injectOpenGraphTags() {
-    // Função utilitária para criar ou atualizar as tags meta
     function setMetaTag(property, content, isName = false) {
         const attr = isName ? 'name' : 'property';
         let meta = document.querySelector(`meta[${attr}="${property}"]`);
@@ -424,17 +420,11 @@ document.addEventListener('DOMContentLoaded', () => {
         meta.setAttribute('content', content);
     }
 
-    // Pega o título atual da página dinamicamente (ou usa um padrão)
     const pageTitle = document.title || "Udesaken Group";
-    
-    // Pega a URL atual da página, já limpando o index.html (graças ao seu Clean URL System)
     const currentUrl = window.location.href.replace('index.html', '');
-    
-    // Caminho absoluto e obrigatório da imagem para o WhatsApp aceitar
     const imageUrl = 'https://udesaken.site/logousk1.png';
     const siteDescription = 'A marca oficial Udesaken. Sistema Operante.';
 
-    // --- TAGS OPEN GRAPH (WhatsApp, Facebook, Telegram, Discord) ---
     setMetaTag('og:type', 'website');
     setMetaTag('og:url', currentUrl);
     setMetaTag('og:title', pageTitle);
@@ -443,7 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setMetaTag('og:image:width', '1200');
     setMetaTag('og:image:height', '630');
 
-    // --- TAGS TWITTER CARDS (Twitter/X e otimização de Discord) ---
     setMetaTag('twitter:card', 'summary_large_image', true);
     setMetaTag('twitter:url', currentUrl, true);
     setMetaTag('twitter:title', pageTitle, true);
