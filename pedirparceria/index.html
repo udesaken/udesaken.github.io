@@ -24,7 +24,6 @@
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
                         brand: { gold: '#C6A87C', dark: '#050505' },
-                        // CORES ADICIONADAS PARA O VISUAL FUNCIONAR
                         main: 'var(--text-main)',
                         muted: 'var(--text-muted)',
                         gold: 'var(--accent)'
@@ -85,9 +84,16 @@
                 Cresça com a <br>
                 <span class="text-gradient-gold">Udesaken.</span>
             </h1>
-            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed">
+            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed mb-8">
                 Garanta visibilidade para o seu grupo e ganhe descontos exclusivos no nosso sistema operante.
             </p>
+            
+            <div class="flex justify-center">
+                <a href="../parcerias/" class="px-6 py-3 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl font-semibold transition-all hover:bg-white/10 flex items-center gap-3 shadow-lg backdrop-blur-sm group">
+                    <i class="fas fa-eye text-yellow-500 group-hover:scale-110 transition-transform"></i>
+                    Ver onde seu grupo vai aparecer
+                </a>
+            </div>
         </div>
     </section>
 
@@ -118,9 +124,23 @@
                                 <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                             </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Contato do responsável (WhatsApp ou Discord)</label>
-                            <input type="text" required placeholder="Número com DDD ou Usuário do Discord" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Contato do responsável</label>
+                                <input type="text" required placeholder="WhatsApp ou Discord" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Categoria principal</label>
+                                <select required class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer">
+                                    <option value="" disabled selected class="text-black">Selecione uma categoria...</option>
+                                    <option value="chat" class="text-black">Chat / Resenha</option>
+                                    <option value="jogos" class="text-black">Jogos</option>
+                                    <option value="esportes" class="text-black">Esportes</option>
+                                    <option value="vendas" class="text-black">Vendas / Negócios</option>
+                                    <option value="outros" class="text-black">Outros</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -131,16 +151,29 @@
                     <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
                         <i class="fas fa-chart-line text-green-500"></i> Atividade do Grupo
                     </h3>
-                    <label class="block text-sm font-semibold text-muted mb-3">Seu grupo é ativo diariamente? (Requisito obrigatório)</label>
-                    <div class="flex gap-6">
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-yellow-500" checked>
-                            <span class="text-main group-hover:text-yellow-500 transition font-medium">Sim</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer group">
-                            <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-yellow-500">
-                            <span class="text-main group-hover:text-yellow-500 transition font-medium">Não</span>
-                        </label>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                        <div>
+                            <label class="block text-sm font-semibold text-muted mb-3">Seu grupo é ativo diariamente?</label>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-yellow-500" checked>
+                                    <span class="text-main group-hover:text-yellow-500 transition font-medium">Sim</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-yellow-500">
+                                    <span class="text-main group-hover:text-yellow-500 transition font-medium">Não</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia</label>
+                            <div class="relative">
+                                <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
