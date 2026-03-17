@@ -107,39 +107,58 @@
                     </h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo</label>
-                            <input type="text" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo <span class="text-yellow-500">*</span></label>
+                            <div class="relative">
+                                <i class="fas fa-users-cog absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                <input type="text" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Link do grupo do WhatsApp</label>
-                            <input type="url" required placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            <label class="block text-sm font-semibold text-muted mb-1">Link do grupo do WhatsApp <span class="text-yellow-500">*</span></label>
+                            <div class="relative">
+                                <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                <input type="url" required placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Quantidade de membros</label>
-                                <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                <label class="block text-sm font-semibold text-muted mb-1">Quantidade de membros <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-user-plus absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome do responsável</label>
-                                <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                <label class="block text-sm font-semibold text-muted mb-1">Nome do responsável <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
                             </div>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Contato do responsável</label>
-                                <input type="text" required placeholder="WhatsApp ou Discord" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                <label class="block text-sm font-semibold text-muted mb-1">Contato (Número ou Discord) <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-address-book absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" required placeholder="Ex: +55 21 9... ou @seu.nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Categoria principal</label>
-                                <select required class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer">
-                                    <option value="" disabled selected class="text-black">Selecione uma categoria...</option>
-                                    <option value="chat" class="text-black">Chat / Resenha</option>
-                                    <option value="jogos" class="text-black">Jogos</option>
-                                    <option value="esportes" class="text-black">Esportes</option>
-                                    <option value="vendas" class="text-black">Vendas / Negócios</option>
-                                    <option value="outros" class="text-black">Outros</option>
-                                </select>
+                                <label class="block text-sm font-semibold text-muted mb-1">Categoria principal <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-layer-group absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 z-10"></i>
+                                    <select required class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer relative z-0">
+                                        <option value="" disabled selected class="bg-[#050505] text-muted">Selecione uma categoria...</option>
+                                        <option value="chat" class="bg-[#050505] text-white">Chat / Resenha</option>
+                                        <option value="jogos" class="bg-[#050505] text-white">Jogos</option>
+                                        <option value="esportes" class="bg-[#050505] text-white">Esportes</option>
+                                        <option value="vendas" class="bg-[#050505] text-white">Vendas / Negócios</option>
+                                        <option value="outros" class="bg-[#050505] text-white">Outros</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 pointer-events-none"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,7 +187,7 @@
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia</label>
+                            <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia <span class="text-yellow-500">*</span></label>
                             <div class="relative">
                                 <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
                                 <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
@@ -253,7 +272,7 @@
                 </div>
 
                 <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2 mt-2">
-                    Enviar Solicitação e Avaliar <i class="fas fa-paper-plane text-sm"></i>
+                    Enviar Solicitação <i class="fas fa-paper-plane text-sm"></i>
                 </button>
             </form>
         </div>
