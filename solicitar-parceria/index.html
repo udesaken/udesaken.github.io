@@ -3,7 +3,7 @@
 <head>
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Solicitar Parceria">
-    <meta property="og:description" content="Junte-se ao ecossistema Udesaken. Solicite uma parceria oficial para o seu grupo e ganhe descontos no bot.">
+    <meta property="og:description" content="Junte-se ao ecossistema Udesaken. Solicite uma parceria para o seu grupo ou envie uma proposta comercial para sua marca.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
     
     <meta charset="UTF-8">
@@ -33,6 +33,16 @@
             }
         }
     </script>
+    <style>
+        /* Animação suave de transição entre os formulários */
+        .fade-in-form {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body class="antialiased selection:bg-brand-gold/30 selection:text-white">
 
@@ -54,29 +64,28 @@
             </a>
             
             <div class="hidden md:flex items-center gap-6">
-                <a href="../comandos/" class="text-sm font-semibold text-muted hover:text-main transition">Comandos</a>
-                <a href="../equipe/" class="text-sm font-semibold text-muted hover:text-main transition">Equipe</a>
-                <a href="../planos/" class="text-sm font-bold text-main hover:text-gold transition">Planos</a>
-                
+                <a href="/" class="px-5 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl text-sm font-semibold transition-all hover:bg-white/10 flex items-center gap-2 shadow-sm backdrop-blur-sm">
+                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar ao Site
+                </a>
                 <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
                     <i class="fas fa-moon text-sm"></i>
                 </button>
             </div>
 
             <div class="flex items-center gap-4 md:hidden">
+                <a href="/" class="px-3 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-lg text-xs font-semibold transition-all flex items-center gap-2">
+                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar
+                </a>
                 <button id="theme-btn-mobile" class="theme-toggle" style="padding: 8px;">
                     <i class="fas fa-moon text-sm"></i>
-                </button>
-                <button id="mobile-menu-btn" class="text-main">
-                    <i class="fas fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <section class="pt-32 pb-10 text-center relative">
+    <section class="pt-32 pb-6 text-center relative z-10">
         <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
+            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel border border-yellow-500/30">
                 <i class="fas fa-handshake text-yellow-500 text-xs"></i>
                 <span class="text-[10px] font-bold text-main tracking-widest uppercase">Portal de Parcerias</span>
             </div>
@@ -84,220 +93,308 @@
                 Cresça com a <br>
                 <span class="text-gradient-gold">Udesaken.</span>
             </h1>
-            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed mb-8">
-                Garanta visibilidade para o seu grupo e ganhe descontos exclusivos no nosso sistema operante.
+            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed mb-6">
+                Selecione o seu perfil abaixo e faça parte do nosso ecossistema.
             </p>
-            
-            <div class="flex justify-center">
-                <a href="../parcerias/" class="px-6 py-3 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl font-semibold transition-all hover:bg-white/10 flex items-center gap-3 shadow-lg backdrop-blur-sm group">
-                    <i class="fas fa-eye text-yellow-500 group-hover:scale-110 transition-transform"></i>
-                    Ver onde seu grupo vai aparecer
-                </a>
-            </div>
         </div>
     </section>
 
-    <section class="py-10 relative mb-20">
+    <section class="py-4 relative mb-20 z-10">
         <div class="max-w-[750px] mx-auto px-6 fade-up" style="animation-delay: 0.3s;">
-            <form id="form-parceria" class="glass-panel p-8 md:p-10 rounded-[24px] shadow-2xl space-y-8 border border-white/10">
-                
-                <div>
-                    <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                        <i class="fas fa-users text-yellow-500"></i> Informações do Grupo
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo <span class="text-yellow-500">*</span></label>
-                            <div class="relative">
-                                <i class="fas fa-users-cog absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                <input type="text" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Link do grupo do WhatsApp <span class="text-yellow-500">*</span></label>
-                            <div class="relative">
-                                <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                <input type="url" required placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Quantidade de membros <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-user-plus absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome do responsável <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Contato (Número ou Discord) <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-address-book absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" required placeholder="Ex: +55 21 9... ou @seu.nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Categoria principal <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-layer-group absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 z-10"></i>
-                                    <select required class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer relative z-0">
-                                        <option value="" disabled selected class="bg-[#050505] text-muted">Selecione uma categoria...</option>
-                                        <option value="chat" class="bg-[#050505] text-white">Chat / Resenha</option>
-                                        <option value="jogos" class="bg-[#050505] text-white">Jogos</option>
-                                        <option value="esportes" class="bg-[#050505] text-white">Esportes</option>
-                                        <option value="vendas" class="bg-[#050505] text-white">Vendas / Negócios</option>
-                                        <option value="outros" class="bg-[#050505] text-white">Outros</option>
-                                    </select>
-                                    <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 pointer-events-none"></i>
-                                </div>
-                            </div>
-                        </div>
+            
+            <div class="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 mb-8 max-w-md mx-auto relative glass-panel shadow-lg">
+                <label class="flex-1 text-center cursor-pointer relative z-10">
+                    <input type="radio" name="form_selector" value="comunidade" class="peer sr-only" checked>
+                    <div class="py-3 rounded-xl text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
+                        <i class="fas fa-users mr-2"></i> Para Grupos
                     </div>
-                </div>
+                </label>
+                <label class="flex-1 text-center cursor-pointer relative z-10">
+                    <input type="radio" name="form_selector" value="empresa" class="peer sr-only">
+                    <div class="py-3 rounded-xl text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
+                        <i class="fas fa-building mr-2"></i> Para Marcas
+                    </div>
+                </label>
+            </div>
 
-                <hr class="border-white/10">
-
-                <div>
-                    <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                        <i class="fas fa-chart-line text-green-500"></i> Atividade do Grupo
-                    </h3>
+            <div id="container-comunidade" class="fade-in-form block">
+                <form id="form-parceria-comunidade" class="glass-panel p-8 md:p-10 rounded-[24px] shadow-2xl space-y-8 border border-white/10">
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-3">Seu grupo é ativo diariamente?</label>
-                            <div class="flex gap-6">
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-yellow-500" checked>
-                                    <span class="text-main group-hover:text-yellow-500 transition font-medium">Sim</span>
-                                </label>
-                                <label class="flex items-center gap-2 cursor-pointer group">
-                                    <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-yellow-500">
-                                    <span class="text-main group-hover:text-yellow-500 transition font-medium">Não</span>
-                                </label>
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-users text-yellow-500"></i> Informações do Grupo
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-users-cog absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia <span class="text-yellow-500">*</span></label>
-                            <div class="relative">
-                                <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Link do grupo do WhatsApp <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="url" required placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="border-white/10">
-
-                <div>
-                    <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                        <i class="fas fa-crown text-yellow-500"></i> Tipo de Parceria
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                        
-                        <label class="cursor-pointer relative flex">
-                            <input type="radio" name="tipo_parceria" value="basica" class="peer sr-only" checked>
-                            <div class="p-5 rounded-xl border border-white/10 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full flex flex-col justify-between">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <div class="font-bold text-main mb-3 text-lg">Parceria Básica</div>
-                                    <ul class="text-xs text-muted space-y-2 mb-4">
-                                        <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 100 membros</li>
-                                        <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
-                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
-                                    </ul>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Quantidade de membros <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-user-plus absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                        <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    </div>
                                 </div>
-                                <div class="bg-black/30 p-2 rounded-lg border border-white/5">
-                                    <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">🎁 Benefícios</div>
-                                    <div class="text-xs text-main">Desconto de R$ 1,00 no Bot (Fica R$ 6,50) + Grupo listado no site.</div>
-                                </div>
-                                <div class="absolute top-4 right-4 text-yellow-500 opacity-0 peer-checked:opacity-100 transition">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                            </div>
-                        </label>
-
-                        <label class="cursor-pointer relative flex">
-                            <input type="radio" name="tipo_parceria" value="oficial" class="peer sr-only">
-                            <div class="p-5 rounded-xl border border-yellow-500/30 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full relative overflow-hidden flex flex-col justify-between">
-                                <div class="absolute -right-6 top-3 bg-yellow-600 text-[9px] font-black text-white uppercase tracking-wider py-1 px-8 rotate-45 shadow-lg">VIP</div>
                                 <div>
-                                    <div class="font-bold text-yellow-500 mb-3 text-lg">Parceria Oficial</div>
-                                    <ul class="text-xs text-muted space-y-2 mb-4">
-                                        <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 250 membros</li>
-                                        <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
-                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>4 Divulgações semanais</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20 mt-2">
-                                    <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">👑 Benefícios VIP</div>
-                                    <div class="text-xs text-main">Desconto de R$ 2,00 (Fica R$ 5,50), Destaque no topo do site, Suporte VIP e canal de ideias.</div>
-                                </div>
-                                <div class="absolute top-4 right-5 text-yellow-500 opacity-0 peer-checked:opacity-100 transition z-10">
-                                    <i class="fas fa-check-circle"></i>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Nome do responsável <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                        <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    </div>
                                 </div>
                             </div>
-                        </label>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Contato (Número ou Discord) <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-address-book absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                        <input type="text" required placeholder="Ex: +55 21 9... ou @seu.nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Categoria principal <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-layer-group absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 z-10"></i>
+                                        <select required class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer relative z-0">
+                                            <option value="" disabled selected class="bg-[#050505] text-muted">Selecione uma categoria...</option>
+                                            <option value="chat" class="bg-[#050505] text-white">Chat / Resenha</option>
+                                            <option value="jogos" class="bg-[#050505] text-white">Jogos</option>
+                                            <option value="esportes" class="bg-[#050505] text-white">Esportes</option>
+                                            <option value="vendas" class="bg-[#050505] text-white">Vendas / Negócios</option>
+                                            <option value="outros" class="bg-[#050505] text-white">Outros</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 pointer-events-none"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
-                        <div class="bg-yellow-500/20 p-2 rounded-lg">
-                            <i class="fas fa-level-up-alt text-yellow-500"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
-                            <p class="text-xs text-muted leading-relaxed">Grupos com <strong class="text-yellow-500">Parceria Básica</strong> que atingirem 250 membros podem solicitar o upgrade para Oficial entrando em contato com a equipe. Avaliaremos o cumprimento das regras e a atividade do grupo.</p>
+                    <hr class="border-white/10">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-chart-line text-green-500"></i> Atividade do Grupo
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-3">Seu grupo é ativo diariamente?</label>
+                                <div class="flex gap-6">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-yellow-500" checked>
+                                        <span class="text-main group-hover:text-yellow-500 transition font-medium">Sim</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-yellow-500">
+                                        <span class="text-main group-hover:text-yellow-500 transition font-medium">Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <hr class="border-white/10">
+                    <hr class="border-white/10">
 
-                <div>
-                    <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                        <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais Obrigatórias
-                    </h3>
-                    <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
-                        <p class="text-xs text-muted mb-4 font-semibold">Para manter qualquer uma das parcerias ativas, o grupo deve seguir rigorosamente:</p>
-                        
-                        <ul class="text-sm text-main space-y-3 mb-6">
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir conteúdo +18 (NSFW).</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir preconceito, discriminação, racismo, homofobia ou discurso de ódio.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não ser um grupo de spam, flood ou autopromoção excessiva.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não divulgar casas de apostas, cassinos, jogos de azar ou scams.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> <span>Manter o grupo ativo e bem administrado.</span></li>
-                            <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do Discord da Udesaken não pode ser removido da descrição.</span></li>
-                        </ul>
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-crown text-yellow-500"></i> Tipo de Parceria
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                            
+                            <label class="cursor-pointer relative flex">
+                                <input type="radio" name="tipo_parceria" value="basica" class="peer sr-only" checked>
+                                <div class="p-5 rounded-xl border border-white/10 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full flex flex-col justify-between">
+                                    <div>
+                                        <div class="font-bold text-main mb-3 text-lg">Parceria Básica</div>
+                                        <ul class="text-xs text-muted space-y-2 mb-4">
+                                            <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 100 membros</li>
+                                            <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
+                                            <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-black/30 p-2 rounded-lg border border-white/5">
+                                        <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">🎁 Benefícios</div>
+                                        <div class="text-xs text-main">Desconto de R$ 1,00 no Bot (Fica R$ 6,50) + Grupo listado no site.</div>
+                                    </div>
+                                </div>
+                            </label>
 
-                        <div class="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                            <h4 class="text-[11px] font-bold text-red-500 mb-2 uppercase tracking-wider flex items-center gap-2">
-                                <i class="fas fa-gavel"></i> Consequências do descumprimento
-                            </h4>
-                            <ul class="text-xs text-red-200/70 space-y-2">
-                                <li><strong class="text-red-400">1ª Infração:</strong> Aviso + suspensão dos benefícios por 7 dias.</li>
-                                <li><strong class="text-red-400">2ª Infração:</strong> Cancelamento imediato da parceria.</li>
+                            <label class="cursor-pointer relative flex">
+                                <input type="radio" name="tipo_parceria" value="oficial" class="peer sr-only">
+                                <div class="p-5 rounded-xl border border-yellow-500/30 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full relative overflow-hidden flex flex-col justify-between">
+                                    <div class="absolute -right-6 top-3 bg-yellow-600 text-[9px] font-black text-white uppercase tracking-wider py-1 px-8 rotate-45 shadow-lg">VIP</div>
+                                    <div>
+                                        <div class="font-bold text-yellow-500 mb-3 text-lg">Parceria Oficial</div>
+                                        <ul class="text-xs text-muted space-y-2 mb-4">
+                                            <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 250 membros</li>
+                                            <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
+                                            <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>4 Divulgações semanais</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20 mt-2">
+                                        <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">👑 Benefícios VIP</div>
+                                        <div class="text-xs text-main">Desconto de R$ 2,00 (Fica R$ 5,50), Destaque no site e suporte VIP.</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
+                            <div class="bg-yellow-500/20 p-2 rounded-lg">
+                                <i class="fas fa-level-up-alt text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
+                                <p class="text-xs text-muted leading-relaxed">Grupos Básicos que atingirem 250 membros podem solicitar upgrade para Oficial entrando em contato conosco.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-white/10">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais
+                        </h3>
+                        <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
+                            <ul class="text-sm text-main space-y-3 mb-6">
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Sem conteúdo +18 (NSFW).</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Zero tolerância a preconceito, racismo ou homofobia.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Proibido divulgar apostas, cassinos ou scams.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do nosso Discord é obrigatório na descrição.</span></li>
                             </ul>
                         </div>
+                        
+                        <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
+                            <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
+                            <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Li as regras e concordo em cumpri-las.</span>
+                        </label>
                     </div>
-                    
-                    <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
-                        <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
-                        <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Eu li as regras, entendo as consequências e concordo em cumpri-las.</span>
-                    </label>
-                </div>
 
-                <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2 mt-2">
-                    Enviar Solicitação <i class="fas fa-paper-plane text-sm"></i>
-                </button>
-            </form>
+                    <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
+                        Solicitar Parceria de Grupo <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="container-empresa" class="hidden fade-in-form">
+                <form id="form-parceria-empresa" class="glass-panel p-8 md:p-10 rounded-[24px] shadow-2xl space-y-8 border border-yellow-500/20 bg-gradient-to-br from-black/80 to-yellow-900/10">
+                    
+                    <div class="bg-yellow-500/10 border border-yellow-500/20 p-5 rounded-xl mb-6 flex items-start gap-4">
+                        <i class="fas fa-briefcase text-2xl text-yellow-500 mt-1"></i>
+                        <div>
+                            <h4 class="text-lg font-bold text-main mb-1">Proposta Comercial</h4>
+                            <p class="text-sm text-muted">A Udesaken está aberta para patrocínios, permutas e negócios estratégicos. Preencha os dados e nosso time comercial entrará em contato.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-building text-yellow-500"></i> Dados da Marca
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Nome da Empresa / Marca <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" placeholder="Sua Empresa" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Site ou Instagram Oficial <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-globe absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                        <input type="url" placeholder="https://" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Segmento / Nicho <span class="text-yellow-500">*</span></label>
+                                    <div class="relative">
+                                        <i class="fas fa-store absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                        <input type="text" placeholder="Ex: Tecnologia, E-sports, Vestuário" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-white/10">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-id-badge text-yellow-500"></i> Seu Contato
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Nome do Representante <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-user-tie absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" placeholder="Seu nome completo" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">Cargo <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-sitemap absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="text" placeholder="Ex: CEO, Gerente, Marketing" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">E-mail Corporativo <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="email" placeholder="contato@empresa.com" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-muted mb-1">WhatsApp para Contato <span class="text-yellow-500">*</span></label>
+                                <div class="relative">
+                                    <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="tel" placeholder="+55 (  ) " class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-white/10">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-handshake text-yellow-500"></i> Sobre a Parceria
+                        </h3>
+                        <div>
+                            <label class="block text-sm font-semibold text-muted mb-1">Qual a sua proposta de colaboração? <span class="text-yellow-500">*</span></label>
+                            <textarea rows="4" placeholder="Conte-nos como podemos trabalhar juntos, o que a sua marca oferece e o que espera da Udesaken..." class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm resize-none"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
+                        Enviar Proposta Comercial <i class="fas fa-rocket text-sm"></i>
+                    </button>
+                </form>
+            </div>
+
         </div>
     </section>
 
@@ -313,7 +410,8 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const radiosParceria = document.querySelectorAll('input[name="tipo_parceria"]');
+            // Lógica para mudar o limite de membros no formulário da Comunidade
+            const radiosParceria = document.querySelectorAll('#container-comunidade input[name="tipo_parceria"]');
             const inputMembros = document.getElementById('input-membros');
 
             radiosParceria.forEach(radio => {
@@ -327,6 +425,60 @@
                     }
                 });
             });
+
+            // Lógica do Toggle entre Comunidade e Empresa
+            const formSelector = document.querySelectorAll('input[name="form_selector"]');
+            const containerComunidade = document.getElementById('container-comunidade');
+            const containerEmpresa = document.getElementById('container-empresa');
+            
+            // Pega todos os inputs/selects/textareas de ambos os formulários
+            const inputsComunidade = containerComunidade.querySelectorAll('input, select, textarea');
+            const inputsEmpresa = containerEmpresa.querySelectorAll('input, select, textarea');
+
+            // Função para alternar a exibição e os campos "required"
+            function toggleForms(selected) {
+                if (selected === 'comunidade') {
+                    // Mostra Comunidade
+                    containerComunidade.classList.remove('hidden');
+                    containerComunidade.classList.add('block');
+                    
+                    // Esconde Empresa
+                    containerEmpresa.classList.add('hidden');
+                    containerEmpresa.classList.remove('block');
+
+                    // Habilita obrigatoriedade no que está visível e tira do que está invisível
+                    inputsComunidade.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
+                    inputsEmpresa.forEach(el => { el.required = false; });
+                    
+                } else if (selected === 'empresa') {
+                    // Mostra Empresa
+                    containerEmpresa.classList.remove('hidden');
+                    containerEmpresa.classList.add('block');
+                    
+                    // Esconde Comunidade
+                    containerComunidade.classList.add('hidden');
+                    containerComunidade.classList.remove('block');
+
+                    // Habilita obrigatoriedade no que está visível e tira do que está invisível
+                    inputsEmpresa.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
+                    inputsComunidade.forEach(el => { el.required = false; });
+                }
+            }
+
+            // Marca os campos originais que tem required com um atributo auxiliar 'data-req'
+            // Isso evita erro do navegador tentar validar um formulário que está invisível.
+            inputsComunidade.forEach(el => { if(el.required) el.setAttribute('data-req', 'true'); });
+            inputsEmpresa.forEach(el => { if(el.hasAttribute('required')) el.setAttribute('data-req', 'true'); });
+
+            // Event listener pros botões superiores
+            formSelector.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    toggleForms(e.target.value);
+                });
+            });
+
+            // Chama a função uma vez no load para garantir que as obrigatoriedades do form oculto sumam
+            toggleForms('comunidade');
         });
     </script>
 </body>
