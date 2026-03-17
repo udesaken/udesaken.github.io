@@ -265,12 +265,52 @@
                                 </div>
                             </label>
                         </div>
+                        
+                        <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
+                            <div class="bg-yellow-500/20 p-2 rounded-lg">
+                                <i class="fas fa-level-up-alt text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
+                                <p class="text-xs text-muted leading-relaxed">Grupos com <strong class="text-yellow-500">Parceria Básica</strong> que atingirem 250 membros podem solicitar o upgrade para Oficial entrando em contato com a equipe. Avaliaremos o cumprimento das regras e a atividade do grupo.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
-                        <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
-                        <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Li as regras do site e concordo em manter o grupo limpo.</span>
-                    </label>
+                    <hr class="border-white/10">
+
+                    <div>
+                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
+                            <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais Obrigatórias
+                        </h3>
+                        <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
+                            <p class="text-xs text-muted mb-4 font-semibold">Para manter a parceria ativa, o grupo deve seguir rigorosamente:</p>
+                            
+                            <ul class="text-sm text-main space-y-3 mb-6">
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir conteúdo +18 (NSFW).</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir preconceito, discriminação, racismo, homofobia ou discurso de ódio.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não ser um grupo de spam, flood ou autopromoção excessiva.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não divulgar casas de apostas, cassinos, jogos de azar ou scams.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> <span>Manter o grupo ativo e bem administrado.</span></li>
+                                <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do Discord da Udesaken não pode ser removido da descrição.</span></li>
+                            </ul>
+
+                            <div class="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                                <h4 class="text-[11px] font-bold text-red-500 mb-2 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fas fa-gavel"></i> Consequências do descumprimento
+                                </h4>
+                                <ul class="text-xs text-red-200/70 space-y-2">
+                                    <li><strong class="text-red-400">1ª Infração:</strong> Aviso + suspensão dos benefícios por 7 dias.</li>
+                                    <li><strong class="text-red-400">2ª Infração:</strong> Cancelamento imediato da parceria.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
+                            <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
+                            <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Eu li as regras, entendo as consequências e concordo em cumpri-las.</span>
+                        </label>
+                    </div>
 
                     <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
                         Solicitar Parceria de Grupo <i class="fas fa-paper-plane text-sm"></i>
