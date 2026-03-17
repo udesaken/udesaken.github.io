@@ -202,7 +202,7 @@
                     <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
                         <i class="fas fa-crown text-yellow-500"></i> Tipo de Parceria
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                         
                         <label class="cursor-pointer relative flex">
                             <input type="radio" name="tipo_parceria" value="basica" class="peer sr-only" checked>
@@ -212,12 +212,12 @@
                                     <ul class="text-xs text-muted space-y-2 mb-4">
                                         <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 100 membros</li>
                                         <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
-                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>1 Divulgação semanal</li>
+                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
                                     </ul>
                                 </div>
                                 <div class="bg-black/30 p-2 rounded-lg border border-white/5">
                                     <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">🎁 Benefícios</div>
-                                    <div class="text-xs text-main">Desconto de R$1 no plano do Bot (Fica R$6,50) + Grupo listado no site.</div>
+                                    <div class="text-xs text-main">Desconto de R$ 1,00 no Bot (Fica R$ 6,50) + Grupo listado no site.</div>
                                 </div>
                                 <div class="absolute top-4 right-4 text-yellow-500 opacity-0 peer-checked:opacity-100 transition">
                                     <i class="fas fa-check-circle"></i>
@@ -232,14 +232,14 @@
                                 <div>
                                     <div class="font-bold text-yellow-500 mb-3 text-lg">Parceria Oficial</div>
                                     <ul class="text-xs text-muted space-y-2 mb-4">
-                                        <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 200 membros</li>
+                                        <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 250 membros</li>
                                         <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
-                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
+                                        <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>4 Divulgações semanais</li>
                                     </ul>
                                 </div>
-                                <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20">
+                                <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20 mt-2">
                                     <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">👑 Benefícios VIP</div>
-                                    <div class="text-xs text-main">Desconto de R$2 no Bot (Fica R$5,50), Destaque no site, Suporte VIP e ideias diretas.</div>
+                                    <div class="text-xs text-main">Desconto de R$ 2,00 (Fica R$ 5,50), Destaque no topo do site, Suporte VIP e canal de ideias.</div>
                                 </div>
                                 <div class="absolute top-4 right-5 text-yellow-500 opacity-0 peer-checked:opacity-100 transition z-10">
                                     <i class="fas fa-check-circle"></i>
@@ -247,27 +247,50 @@
                             </div>
                         </label>
                     </div>
+
+                    <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
+                        <div class="bg-yellow-500/20 p-2 rounded-lg">
+                            <i class="fas fa-level-up-alt text-yellow-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
+                            <p class="text-xs text-muted leading-relaxed">Grupos com <strong class="text-yellow-500">Parceria Básica</strong> que atingirem 250 membros podem solicitar o upgrade para Oficial entrando em contato com a equipe. Avaliaremos o cumprimento das regras e a atividade do grupo.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <hr class="border-white/10">
 
                 <div>
                     <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                        <i class="fas fa-scroll text-yellow-500"></i> Regras da Parceria
+                        <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais Obrigatórias
                     </h3>
                     <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
-                        <p class="text-xs text-muted mb-3 font-semibold">Para manter a parceria ativa, o grupo deve seguir rigorosamente as regras abaixo:</p>
-                        <ul class="text-sm text-main space-y-3">
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> Não permitir conteúdo +18.</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> Não permitir preconceito ou discriminação.</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> Não ser grupo de spam ou divulgar casas de aposta/cassino.</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> O link do Discord da Udesaken não pode ser removido da descrição.</li>
+                        <p class="text-xs text-muted mb-4 font-semibold">Para manter qualquer uma das parcerias ativas, o grupo deve seguir rigorosamente:</p>
+                        
+                        <ul class="text-sm text-main space-y-3 mb-6">
+                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir conteúdo +18 (NSFW).</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir preconceito, discriminação, racismo, homofobia ou discurso de ódio.</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não ser um grupo de spam, flood ou autopromoção excessiva.</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não divulgar casas de apostas, cassinos, jogos de azar ou scams.</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> <span>Manter o grupo ativo e bem administrado.</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do Discord da Udesaken não pode ser removido da descrição.</span></li>
                         </ul>
+
+                        <div class="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+                            <h4 class="text-[11px] font-bold text-red-500 mb-2 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fas fa-gavel"></i> Consequências do descumprimento
+                            </h4>
+                            <ul class="text-xs text-red-200/70 space-y-2">
+                                <li><strong class="text-red-400">1ª Infração:</strong> Aviso + suspensão dos benefícios por 7 dias.</li>
+                                <li><strong class="text-red-400">2ª Infração:</strong> Cancelamento imediato da parceria.</li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition">
-                        <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer">
-                        <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Eu li as regras e concordo em cumpri-las para manter a parceria.</span>
+                    <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
+                        <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
+                        <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Eu li as regras, entendo as consequências e concordo em cumpri-las.</span>
                     </label>
                 </div>
 
@@ -296,8 +319,8 @@
             radiosParceria.forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     if (e.target.value === 'oficial') {
-                        inputMembros.min = "200";
-                        inputMembros.placeholder = "Ex: Mínimo 200";
+                        inputMembros.min = "250";
+                        inputMembros.placeholder = "Ex: Mínimo 250";
                     } else {
                         inputMembros.min = "100";
                         inputMembros.placeholder = "Ex: Mínimo 100";
