@@ -268,8 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const webhookURL = 'https://api-udesaken.squareweb.app/api/parceria';
     const linkGrupoEspera = "https://chat.whatsapp.com/HqRNjrQzRJ87K112xJcOvm?mode=gi_t";
 
-    // --- FUNÇÃO GLOBAL DE ENVIO ---
-    async function enviarParaSquareCloud(form, payload) {
+    // --- FUNÇÃO GLOBAL DE ENVIO (Agora com parâmetro para Empresa) ---
+    async function enviarParaSquareCloud(form, payload, isEmpresa = false) {
         const btnSubmit = form.querySelector('button[type="submit"]');
         const textoOriginal = btnSubmit.innerHTML;
         btnSubmit.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
@@ -283,7 +283,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                window.location.href = linkGrupoEspera;
+                // VERIFICAÇÃO: Se for empresa, dá um aviso amigável. Se for grupo, manda pro zap.
+                if (isEmpresa) {
+                    alert("✅ Proposta enviada com sucesso! Nossa equipe comercial avaliará os dados e entrará em contato em breve.");
+                    window.location.href = "/"; // Redireciona de volta para a home
+                } else {
+                    window.location.href = linkGrupoEspera; // Redireciona pro zap
+                }
             } else {
                 throw new Error('Falha de comunicação com a API');
             }
@@ -339,7 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             };
 
-            enviarParaSquareCloud(formComunidade, payload);
+            // Envia passando "false" para isEmpresa (Comportamento de Grupo)
+            enviarParaSquareCloud(formComunidade, payload, false);
         });
     }
 
@@ -385,7 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             };
 
-            enviarParaSquareCloud(formEmpresa, payload);
+            // Envia passando "true" para isEmpresa (Mostra alerta e não manda pro grupo do zap)
+            enviarParaSquareCloud(formEmpresa, payload, true);
         });
     }
 });
