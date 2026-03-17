@@ -283,12 +283,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                // VERIFICAÇÃO: Se for empresa, dá um aviso amigável. Se for grupo, manda pro zap.
+                // Se for empresa, abre a tela de aviso bonita de 24h
                 if (isEmpresa) {
-                    alert("✅ Proposta enviada com sucesso! Nossa equipe comercial avaliará os dados e entrará em contato em breve.");
-                    window.location.href = "/"; // Redireciona de volta para a home
+                    const modal = document.getElementById('modal-sucesso-empresa');
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                        setTimeout(() => {
+                            modal.classList.remove('opacity-0');
+                            modal.querySelector('#modal-content').classList.remove('scale-95');
+                        }, 10);
+                    }
                 } else {
-                    window.location.href = linkGrupoEspera; // Redireciona pro zap
+                    // Se for Grupo, manda pro Zap
+                    window.location.href = linkGrupoEspera;
                 }
             } else {
                 throw new Error('Falha de comunicação com a API');
@@ -392,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             };
 
-            // Envia passando "true" para isEmpresa (Mostra alerta e não manda pro grupo do zap)
+            // Envia passando "true" para isEmpresa (Mostra alerta chique e não manda pro grupo do zap)
             enviarParaSquareCloud(formEmpresa, payload, true);
         });
     }
