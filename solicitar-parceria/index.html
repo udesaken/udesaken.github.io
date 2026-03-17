@@ -3,7 +3,7 @@
 <head>
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Solicitar Parceria">
-    <meta property="og:description" content="Junte-se ao ecossistema Udesaken. Solicite uma parceria para o seu grupo ou envie uma proposta comercial para sua marca.">
+    <meta property="og:description" content="Junte-se ao ecossistema Udesaken. Solicite parceria para o seu grupo, servidor ou envie uma proposta comercial.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
     
     <meta charset="UTF-8">
@@ -34,13 +34,17 @@
         }
     </script>
     <style>
-        /* Animação suave de transição entre os formulários */
         .fade-in-form {
             animation: fadeIn 0.4s ease-in-out forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Estiliza o placeholder do input quando inválido (opcional para feedback visual) */
+        input:not(:placeholder-shown):invalid {
+            border-color: rgba(239, 68, 68, 0.5); /* Borda vermelha suave */
         }
     </style>
 </head>
@@ -102,17 +106,23 @@
     <section class="py-4 relative mb-20 z-10">
         <div class="max-w-[750px] mx-auto px-6 fade-up" style="animation-delay: 0.3s;">
             
-            <div class="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 mb-8 max-w-md mx-auto relative glass-panel shadow-lg">
-                <label class="flex-1 text-center cursor-pointer relative z-10">
+            <div class="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 mb-8 max-w-lg mx-auto relative glass-panel shadow-lg flex-wrap sm:flex-nowrap gap-1 sm:gap-0">
+                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
                     <input type="radio" name="form_selector" value="comunidade" class="peer sr-only" checked>
-                    <div class="py-3 rounded-xl text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
-                        <i class="fas fa-users mr-2"></i> Para Grupos
+                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
+                        <i class="fab fa-whatsapp mr-1"></i> Grupos
                     </div>
                 </label>
-                <label class="flex-1 text-center cursor-pointer relative z-10">
+                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
+                    <input type="radio" name="form_selector" value="discord" class="peer sr-only">
+                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-[#5865F2] peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(88,101,242,0.4)]">
+                        <i class="fab fa-discord mr-1"></i> Discord
+                    </div>
+                </label>
+                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
                     <input type="radio" name="form_selector" value="empresa" class="peer sr-only">
-                    <div class="py-3 rounded-xl text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
-                        <i class="fas fa-building mr-2"></i> Para Marcas
+                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
+                        <i class="fas fa-building mr-1"></i> Marcas
                     </div>
                 </label>
             </div>
@@ -122,54 +132,54 @@
                     
                     <div>
                         <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-users text-yellow-500"></i> Informações do Grupo
+                            <i class="fab fa-whatsapp text-green-500"></i> Informações do Grupo
                         </h3>
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-users-cog absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="text" minlength="3" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Link do grupo do WhatsApp <span class="text-yellow-500">*</span></label>
+                                <label class="block text-sm font-semibold text-muted mb-1">Link do grupo <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
-                                    <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="url" required placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <i class="fas fa-link absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
+                                    <input type="url" required pattern=".*(whatsapp\.com|wa\.me).*" title="Insira um link válido de convite do WhatsApp" placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Quantidade de membros <span class="text-yellow-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Qtd. de membros <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-user-plus absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
                                         <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Nome do responsável <span class="text-yellow-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Responsável <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" required placeholder="Seu nome ou Nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                        <input type="text" minlength="3" required placeholder="Seu nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Contato (Número ou Discord) <span class="text-yellow-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Contato Pessoal <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-address-book absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" required placeholder="Ex: +55 21 9... ou @seu.nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                        <input type="text" required pattern="^(\+?[0-9\s\-\(\)]{10,20}|@?[a-zA-Z0-9_\.]{2,32})$" title="Insira um número válido (ex: 21999999999) ou um @usuario de Discord" placeholder="Número BR ou @discord" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Categoria principal <span class="text-yellow-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Categoria <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-layer-group absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 z-10"></i>
                                         <select required class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer relative z-0">
-                                            <option value="" disabled selected class="bg-[#050505] text-muted">Selecione uma categoria...</option>
+                                            <option value="" disabled selected class="bg-[#050505] text-muted">Selecione...</option>
                                             <option value="chat" class="bg-[#050505] text-white">Chat / Resenha</option>
                                             <option value="jogos" class="bg-[#050505] text-white">Jogos</option>
                                             <option value="esportes" class="bg-[#050505] text-white">Esportes</option>
@@ -204,7 +214,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Média de mensagens por dia <span class="text-yellow-500">*</span></label>
+                                <label class="block text-sm font-semibold text-muted mb-1">Média de msgs/dia <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
                                     <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
@@ -220,21 +230,19 @@
                             <i class="fas fa-crown text-yellow-500"></i> Tipo de Parceria
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                            
                             <label class="cursor-pointer relative flex">
                                 <input type="radio" name="tipo_parceria" value="basica" class="peer sr-only" checked>
                                 <div class="p-5 rounded-xl border border-white/10 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full flex flex-col justify-between">
                                     <div>
-                                        <div class="font-bold text-main mb-3 text-lg">Parceria Básica</div>
+                                        <div class="font-bold text-main mb-3 text-lg">Básica</div>
                                         <ul class="text-xs text-muted space-y-2 mb-4">
                                             <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 100 membros</li>
-                                            <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
                                             <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
                                         </ul>
                                     </div>
                                     <div class="bg-black/30 p-2 rounded-lg border border-white/5">
                                         <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">🎁 Benefícios</div>
-                                        <div class="text-xs text-main">Desconto de R$ 1,00 no Bot (Fica R$ 6,50) + Grupo listado no site.</div>
+                                        <div class="text-xs text-main">Desconto no Bot e Lista no site.</div>
                                     </div>
                                 </div>
                             </label>
@@ -244,57 +252,46 @@
                                 <div class="p-5 rounded-xl border border-yellow-500/30 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full relative overflow-hidden flex flex-col justify-between">
                                     <div class="absolute -right-6 top-3 bg-yellow-600 text-[9px] font-black text-white uppercase tracking-wider py-1 px-8 rotate-45 shadow-lg">VIP</div>
                                     <div>
-                                        <div class="font-bold text-yellow-500 mb-3 text-lg">Parceria Oficial</div>
+                                        <div class="font-bold text-yellow-500 mb-3 text-lg">Oficial</div>
                                         <ul class="text-xs text-muted space-y-2 mb-4">
                                             <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 250 membros</li>
-                                            <li><i class="fas fa-link text-yellow-500/70 mr-2"></i>Link do Discord na descrição</li>
                                             <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>4 Divulgações semanais</li>
                                         </ul>
                                     </div>
                                     <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20 mt-2">
                                         <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">👑 Benefícios VIP</div>
-                                        <div class="text-xs text-main">Desconto de R$ 2,00 (Fica R$ 5,50), Destaque no site e suporte VIP.</div>
+                                        <div class="text-xs text-main">Desconto Máximo, Destaque no topo.</div>
                                     </div>
                                 </div>
                             </label>
                         </div>
-
-                        <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
-                            <div class="bg-yellow-500/20 p-2 rounded-lg">
-                                <i class="fas fa-level-up-alt text-yellow-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
-                                <p class="text-xs text-muted leading-relaxed">Grupos Básicos que atingirem 250 membros podem solicitar upgrade para Oficial entrando em contato conosco.</p>
-                            </div>
-                        </div>
                     </div>
 
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais
-                        </h3>
-                        <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
-                            <ul class="text-sm text-main space-y-3 mb-6">
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Sem conteúdo +18 (NSFW).</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Zero tolerância a preconceito, racismo ou homofobia.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Proibido divulgar apostas, cassinos ou scams.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do nosso Discord é obrigatório na descrição.</span></li>
-                            </ul>
-                        </div>
-                        
-                        <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
-                            <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
-                            <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Li as regras e concordo em cumpri-las.</span>
-                        </label>
-                    </div>
+                    <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
+                        <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
+                        <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Li as regras do site e concordo em manter o grupo limpo.</span>
+                    </label>
 
                     <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
                         Solicitar Parceria de Grupo <i class="fas fa-paper-plane text-sm"></i>
                     </button>
                 </form>
+            </div>
+
+            <div id="container-discord" class="hidden fade-in-form text-center py-6">
+                <div class="glass-panel p-10 md:p-14 rounded-[24px] border border-[#5865F2]/30 bg-gradient-to-br from-black/80 to-[#5865F2]/10 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#5865F2]/20 blur-[60px] rounded-full"></div>
+                    
+                    <i class="fab fa-discord text-6xl text-[#5865F2] mb-6 drop-shadow-[0_0_15px_rgba(88,101,242,0.5)] relative z-10"></i>
+                    <h3 class="text-2xl font-bold text-main mb-3 relative z-10">Parceria de Servidores</h3>
+                    <p class="text-muted text-sm mb-8 leading-relaxed max-w-md mx-auto relative z-10">
+                        As solicitações de parceria para servidores do Discord são tratadas com exclusividade <strong>dentro do nosso próprio servidor</strong>. Acesse a comunidade, leia as diretrizes e abra um ticket!
+                    </p>
+                    
+                    <a href="https://discord.gg/udesaken" target="_blank" class="w-full sm:w-auto inline-flex py-4 px-8 bg-[#5865F2] text-white font-bold rounded-xl hover:bg-[#4752C4] transition shadow-[0_0_20px_rgba(88,101,242,0.3)] hover:shadow-[0_0_30px_rgba(88,101,242,0.5)] items-center justify-center gap-2 relative z-10">
+                        <i class="fab fa-discord text-lg"></i> Abrir Ticket no Discord
+                    </a>
+                </div>
             </div>
 
             <div id="container-empresa" class="hidden fade-in-form">
@@ -304,7 +301,7 @@
                         <i class="fas fa-briefcase text-2xl text-yellow-500 mt-1"></i>
                         <div>
                             <h4 class="text-lg font-bold text-main mb-1">Proposta Comercial</h4>
-                            <p class="text-sm text-muted">A Udesaken está aberta para patrocínios, permutas e negócios estratégicos. Preencha os dados e nosso time comercial entrará em contato.</p>
+                            <p class="text-sm text-muted">A Udesaken está aberta para patrocínios, permutas e negócios estratégicos.</p>
                         </div>
                     </div>
 
@@ -314,25 +311,25 @@
                         </h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome da Empresa / Marca <span class="text-yellow-500">*</span></label>
+                                <label class="block text-sm font-semibold text-muted mb-1">Nome da Empresa <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" placeholder="Sua Empresa" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="text" minlength="2" placeholder="Sua Empresa" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Site ou Instagram Oficial <span class="text-yellow-500">*</span></label>
+                                    <label class="block text-sm font-semibold text-muted mb-1">Site ou Instagram <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-globe absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="url" placeholder="https://" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                        <input type="url" title="A URL deve começar com http:// ou https://" placeholder="https://" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                     </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-muted mb-1">Segmento / Nicho <span class="text-yellow-500">*</span></label>
                                     <div class="relative">
                                         <i class="fas fa-store absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" placeholder="Ex: Tecnologia, E-sports, Vestuário" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                        <input type="text" minlength="3" placeholder="Ex: Tecnologia" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                     </div>
                                 </div>
                             </div>
@@ -347,31 +344,31 @@
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome do Representante <span class="text-yellow-500">*</span></label>
+                                <label class="block text-sm font-semibold text-muted mb-1">Representante <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-user-tie absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" placeholder="Seu nome completo" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="text" minlength="3" placeholder="Nome completo" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-muted mb-1">Cargo <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-sitemap absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" placeholder="Ex: CEO, Gerente, Marketing" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="text" minlength="2" placeholder="Ex: Marketing" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-muted mb-1">E-mail Corporativo <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="email" placeholder="contato@empresa.com" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="email" title="Insira um e-mail válido contendo @" placeholder="contato@empresa.com" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">WhatsApp para Contato <span class="text-yellow-500">*</span></label>
+                                <label class="block text-sm font-semibold text-muted mb-1">WhatsApp <span class="text-yellow-500">*</span></label>
                                 <div class="relative">
                                     <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="tel" placeholder="+55 (  ) " class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                    <input type="tel" pattern="^\+?[0-9\s\-\(\)]{10,20}$" title="Insira um número de telefone válido (ex: +55 21 99999-9999)" placeholder="+55 ( )" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
                                 </div>
                             </div>
                         </div>
@@ -384,8 +381,8 @@
                             <i class="fas fa-handshake text-yellow-500"></i> Sobre a Parceria
                         </h3>
                         <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Qual a sua proposta de colaboração? <span class="text-yellow-500">*</span></label>
-                            <textarea rows="4" placeholder="Conte-nos como podemos trabalhar juntos, o que a sua marca oferece e o que espera da Udesaken..." class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm resize-none"></textarea>
+                            <label class="block text-sm font-semibold text-muted mb-1">Sua proposta <span class="text-yellow-500">*</span></label>
+                            <textarea minlength="20" rows="4" placeholder="Conte-nos como podemos trabalhar juntos..." class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm resize-none"></textarea>
                         </div>
                     </div>
 
@@ -397,6 +394,19 @@
 
         </div>
     </section>
+
+    <div id="modal-sucesso-empresa" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-6 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel p-8 md:p-12 rounded-[24px] border border-yellow-500/30 text-center max-w-md w-full scale-95 transition-transform duration-300 shadow-2xl" id="modal-content">
+            <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+                <i class="fas fa-check text-4xl text-green-500"></i>
+            </div>
+            <h3 class="text-2xl font-black text-main mb-3">Proposta Enviada!</h3>
+            <p class="text-muted text-sm leading-relaxed mb-8">Recebemos os dados da sua marca com sucesso. Nossa equipe comercial avaliará a proposta e entrará em contato com você em até <strong class="text-yellow-500">24 horas</strong>.</p>
+            <a href="/" class="w-full py-4 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl font-bold transition-all hover:bg-white/10 flex items-center justify-center gap-2 shadow-sm">
+                Voltar ao Início
+            </a>
+        </div>
+    </div>
 
     <footer class="py-10 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
         <div class="max-w-[1100px] mx-auto px-6 text-center">
@@ -410,74 +420,66 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Lógica para mudar o limite de membros no formulário da Comunidade
-            const radiosParceria = document.querySelectorAll('#container-comunidade input[name="tipo_parceria"]');
+            const radiosParceria = document.querySelectorAll('input[name="tipo_parceria"]');
             const inputMembros = document.getElementById('input-membros');
 
-            radiosParceria.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    if (e.target.value === 'oficial') {
-                        inputMembros.min = "250";
-                        inputMembros.placeholder = "Ex: Mínimo 250";
-                    } else {
-                        inputMembros.min = "100";
-                        inputMembros.placeholder = "Ex: Mínimo 100";
-                    }
+            if(radiosParceria && inputMembros) {
+                radiosParceria.forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        if (e.target.value === 'oficial') {
+                            inputMembros.min = "250";
+                            inputMembros.placeholder = "Ex: Mínimo 250";
+                        } else {
+                            inputMembros.min = "100";
+                            inputMembros.placeholder = "Ex: Mínimo 100";
+                        }
+                    });
                 });
-            });
+            }
 
-            // Lógica do Toggle entre Comunidade e Empresa
             const formSelector = document.querySelectorAll('input[name="form_selector"]');
             const containerComunidade = document.getElementById('container-comunidade');
+            const containerDiscord = document.getElementById('container-discord');
             const containerEmpresa = document.getElementById('container-empresa');
             
-            // Pega todos os inputs/selects/textareas de ambos os formulários
             const inputsComunidade = containerComunidade.querySelectorAll('input, select, textarea');
             const inputsEmpresa = containerEmpresa.querySelectorAll('input, select, textarea');
 
-            // Função para alternar a exibição e os campos "required"
             function toggleForms(selected) {
+                // Esconde tudo primeiro
+                [containerComunidade, containerDiscord, containerEmpresa].forEach(el => {
+                    el.classList.add('hidden');
+                    el.classList.remove('block');
+                });
+                
+                // Desobriga todo mundo
+                inputsComunidade.forEach(el => { el.required = false; });
+                inputsEmpresa.forEach(el => { el.required = false; });
+
+                // Mostra só o que foi clicado
                 if (selected === 'comunidade') {
-                    // Mostra Comunidade
                     containerComunidade.classList.remove('hidden');
                     containerComunidade.classList.add('block');
-                    
-                    // Esconde Empresa
-                    containerEmpresa.classList.add('hidden');
-                    containerEmpresa.classList.remove('block');
-
-                    // Habilita obrigatoriedade no que está visível e tira do que está invisível
                     inputsComunidade.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
-                    inputsEmpresa.forEach(el => { el.required = false; });
-                    
-                } else if (selected === 'empresa') {
-                    // Mostra Empresa
+                } 
+                else if (selected === 'discord') {
+                    containerDiscord.classList.remove('hidden');
+                    containerDiscord.classList.add('block');
+                }
+                else if (selected === 'empresa') {
                     containerEmpresa.classList.remove('hidden');
                     containerEmpresa.classList.add('block');
-                    
-                    // Esconde Comunidade
-                    containerComunidade.classList.add('hidden');
-                    containerComunidade.classList.remove('block');
-
-                    // Habilita obrigatoriedade no que está visível e tira do que está invisível
                     inputsEmpresa.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
-                    inputsComunidade.forEach(el => { el.required = false; });
                 }
             }
 
-            // Marca os campos originais que tem required com um atributo auxiliar 'data-req'
-            // Isso evita erro do navegador tentar validar um formulário que está invisível.
             inputsComunidade.forEach(el => { if(el.required) el.setAttribute('data-req', 'true'); });
             inputsEmpresa.forEach(el => { if(el.hasAttribute('required')) el.setAttribute('data-req', 'true'); });
 
-            // Event listener pros botões superiores
             formSelector.forEach(radio => {
-                radio.addEventListener('change', (e) => {
-                    toggleForms(e.target.value);
-                });
+                radio.addEventListener('change', (e) => { toggleForms(e.target.value); });
             });
 
-            // Chama a função uma vez no load para garantir que as obrigatoriedades do form oculto sumam
             toggleForms('comunidade');
         });
     </script>
