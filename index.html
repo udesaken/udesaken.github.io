@@ -199,34 +199,71 @@
         </div>
     </section>
     
-    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
-        <div class="max-w-[1100px] mx-auto px-6">
+    <footer class="pt-16 pb-8 border-t border-white/5 bg-black/40 relative z-10 backdrop-blur-xl">
+    <div class="max-w-[1100px] mx-auto px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
-                <a href="./equipe/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
-                    <i class="fas fa-users text-gold group-hover:scale-110 transition"></i>
-                    <span class="text-sm font-bold text-main">Conhecer Equipe</span>
-                </a>
-                
-                <a href="./termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <i class="fas fa-file-contract text-muted group-hover:text-white transition"></i>
-                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
-                </a>
-
-                <a href="https://wa.me/447562847091" target="_blank" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-green-500/50 transition-all duration-300">
-                    <i class="fab fa-whatsapp text-green-500 group-hover:scale-110 transition"></i>
-                    <span class="text-sm font-bold text-main">Suporte Direto</span>
-                </a>
-            </div>
-
-            <div class="text-center">
-                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
-                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <div class="flex items-center gap-3 mb-4">
+                    <img src="logousk1.png" alt="Udesaken Logo" class="w-10 h-10 rounded-lg border border-brand-gold/30">
+                    <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
+                </div>
+                <p class="text-sm text-gray-400 font-medium max-w-xs">
+                    O futuro da sua comunidade. Segurança blindada, alta performance e ferramentas exclusivas.
                 </p>
             </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-white font-bold mb-5 tracking-wide">Navegação</h3>
+                <div class="flex flex-col gap-4">
+                    <a href="./equipe/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fas fa-users text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
+                        Conhecer Equipe
+                    </a>
+                    <a href="./termos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
+                        Termos de Uso
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center md:items-start">
+                <h3 class="text-white font-bold mb-5 tracking-wide">Fale Conosco</h3>
+                <div class="flex flex-col gap-4 mb-6">
+                    <a href="mailto:contato.udesaken@gmail.com" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fas fa-envelope text-red-500/70 group-hover:text-red-500 transition w-4 text-center"></i> 
+                        contato@udesaken.site
+                    </a>
+                    <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fab fa-whatsapp text-green-500/70 group-hover:text-green-500 transition w-4 text-center"></i> 
+                        Suporte Direto
+                    </a>
+                </div>
+
+                <div class="flex gap-3">
+                    <a href="https://instagram.com/udesakenofc" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-purple-500 hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com/@udesakenofc" target="_blank" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/10 transition-all duration-300">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="./discord/" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#5865F2] hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
-    </footer>
+
+        <div class="text-center pt-8 border-t border-white/5 relative">
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">
+                Udesaken Group &copy; 2026 • Todos os direitos reservados
+            </p>
+        </div>
+        
+    </div>
+</footer>
     <script src="script.js"></script>
 </body>
 </html>
