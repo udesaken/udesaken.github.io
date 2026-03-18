@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
     
     const savedTheme = localStorage.getItem('udesaken_theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     function applyTheme(theme) {
         if (theme === 'light') {
@@ -38,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
         applyTheme(savedTheme);
     } else {
-        applyTheme(systemPrefersDark ? 'dark' : 'light');
+        // Força o tema escuro como padrão absoluto para novos visitantes
+        applyTheme('dark');
     }
 
     themeBtns.forEach(btn => {

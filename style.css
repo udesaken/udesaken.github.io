@@ -22,23 +22,24 @@
     --accent: #F59E0B;
 }
 
-/* --- TEMA CLARO (Platinum/Mix Cinza) --- */
+/* --- TEMA CLARO (Premium Clean) --- */
 [data-theme="light"] {
-    --bg-color: #e4e4e7; /* Cinza Platina (Não é branco!) */
-    --text-main: #18181b; /* Preto Carvão */
-    --text-muted: #52525b;
+    --bg-color: #f8fafc; /* Quase branco com um toque super sutil de frescor */
+    --text-main: #0f172a; /* Azul muito escuro (quase preto, mais elegante e suave para os olhos) */
+    --text-muted: #64748b; /* Cinza azulado para textos secundários */
     
-    /* Vidro no Claro: Branco leitoso com borda nítida */
-    --glass-bg: rgba(255, 255, 255, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.9);
-    --glass-shine: rgba(255, 255, 255, 0.8);
+    /* Vidro no Claro: Mais cristalino e transparente para ver o fundo líquido */
+    --glass-bg: rgba(255, 255, 255, 0.45); 
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shine: rgba(255, 255, 255, 1);
     
+    /* Cores das Bolhas (Orbs) - Tons pastéis vibrantes para destacar no fundo claro */
     --orb-opacity: 0.6;
     --orb-1: #fbbf24;   /* Amarelo Ouro */
-    --orb-2: #9ca3af;   /* Cinza Aço */
-    --orb-3: #ffffff;   /* Branco Puro */
+    --orb-2: #fca5a5;   /* Coral/Rosado suave para aquecer o design */
+    --orb-3: #93c5fd;   /* Azul claro tech (fica incrível misturado com o vidro) */
     
-    --accent: #b45309; /* Ouro Queimado para leitura */
+    --accent: #d97706; /* Ouro âmbar: forte e legível no fundo claro */
 }
 
 html, body {
