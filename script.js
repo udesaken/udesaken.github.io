@@ -247,8 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     audio.addEventListener('ended', () => nextBtn.click());
     setTimeout(() => playerContainer.classList.add('visible'), 500);
-});
-// --- LÓGICA DE SCROLL PARA O PLAYER (APPLE STYLE) ---
+
+    // --- LÓGICA DE SCROLL PARA O PLAYER (APPLE STYLE) ---
     let lastScrollY = window.scrollY;
     
     window.addEventListener('scroll', () => {
@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lastScrollY = currentScrollY;
         }
     }, { passive: true });
-
+});
 /* ==========================================================================
    UDESAKEN - DYNAMIC FAVICON ENGINE
    ========================================================================== */
