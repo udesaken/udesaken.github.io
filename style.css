@@ -281,3 +281,57 @@ html, body {
     background: var(--accent);
     box-shadow: 0 0 8px var(--accent);
 }
+/* =========================================
+   UDESAKEN - APPLE MINIMIZE ANIMATION (MOBILE)
+   ========================================= */
+
+/* Prepara os elementos para a transição suave */
+#audio-player-container .glass-pill,
+#audio-player-container .flex-col,
+#audio-player-container #next-track-btn,
+#audio-player-container #play-pause-btn {
+    transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Esconde o que vazar quando encolher */
+#audio-player-container .flex-col {
+    overflow: hidden;
+}
+
+/* A Mágica do Estado Minimizado (Apenas Celular) */
+@media (max-width: 767px) {
+    #audio-player-container.minimized {
+        /* Desce ele um pouquinho e deixa levemente transparente */
+        transform: translate(-50%, 15px) scale(0.95);
+        opacity: 0.85;
+    }
+    
+    #audio-player-container.minimized .glass-pill {
+        padding: 6px; /* Fica mais apertadinho */
+        gap: 0;
+    }
+    
+    /* Some com o texto da música */
+    #audio-player-container.minimized .flex-col {
+        max-width: 0 !important;
+        min-width: 0 !important;
+        opacity: 0;
+        margin: 0;
+    }
+    
+    /* Some com o botão de avançar */
+    #audio-player-container.minimized #next-track-btn {
+        width: 0;
+        height: 0;
+        opacity: 0;
+        margin-left: -10px;
+        transform: scale(0.5);
+        border: none;
+    }
+    
+    /* Ajusta o botão de play para não ficar colado na foto */
+    #audio-player-container.minimized #play-pause-btn {
+        margin-left: 10px;
+        margin-right: 4px;
+    }
+}

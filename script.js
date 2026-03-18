@@ -248,6 +248,26 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('ended', () => nextBtn.click());
     setTimeout(() => playerContainer.classList.add('visible'), 500);
 });
+// --- LÓGICA DE SCROLL PARA O PLAYER (APPLE STYLE) ---
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        // Aplica o efeito apenas em telas de celular (mobile)
+        if (window.innerWidth < 768) {
+            const currentScrollY = window.scrollY;
+            
+            // Se rolou para baixo e já passou do topo (100px)
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                playerContainer.classList.add('minimized');
+            } 
+            // Se rolou para cima
+            else if (currentScrollY < lastScrollY) {
+                playerContainer.classList.remove('minimized');
+            }
+            
+            lastScrollY = currentScrollY;
+        }
+    }, { passive: true });
 
 /* ==========================================================================
    UDESAKEN - DYNAMIC FAVICON ENGINE
