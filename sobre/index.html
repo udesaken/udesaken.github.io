@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | Udesaken Group</title>
+    
+    <link rel="stylesheet" href="../style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: { gold: '#C6A87C', dark: '#050505' }
+                    },
+                    letterSpacing: { tight: '-0.02em' }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .liquid-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite ease-in-out;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #4f46e5; }
+        .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: #C6A87C; animation-delay: -5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
+        }
+
+        /* Efeito de hover na linha do tempo */
+        .timeline-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .timeline-card:hover {
+            border-left-color: var(--brand-gold, #C6A87C);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#050505] text-gray-200 selection:bg-brand-gold/30 selection:text-white">
+
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="liquid-orb orb-1"></div>
+        <div class="liquid-orb orb-2"></div>
+    </div>
+
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-black/50 backdrop-blur-md border-b border-white/5" id="navbar">
+        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="../" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
+                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="text-lg font-bold tracking-tight text-white group-hover:text-brand-gold transition">
+                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase">Institucional</span>
+                </span>
+            </a>
+            
+            <div class="flex items-center gap-6">
+                <a href="../" class="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-widest transition flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-32 pb-12 relative z-10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12 fade-up">
+                <div class="w-16 h-16 bg-brand-gold/10 border border-brand-gold/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-rocket text-brand-gold text-2xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">A Nossa História</h1>
+                <p class="text-sm text-brand-gold uppercase tracking-[0.2em] font-bold">Inovação, Segurança e Comunidade desde 2022</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-24 relative z-10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="glass-panel p-8 md:p-12 rounded-[30px]">
+                
+                <div class="bg-brand-gold/5 border-l-4 border-brand-gold p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm md:text-base leading-relaxed">
+                    "Em 2026, a Udesaken Group celebra 4 anos de existência. O que começou como um simples ponto de encontro para amigos evoluiu para um dos ecossistemas de automação mais acessíveis e poderosos do mercado."
+                </div>
+
+                <div class="space-y-8">
+                    
+                    <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
+                            <i class="fas fa-seedling text-green-400"></i> Junho de 2022: As Raízes
+                        </h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+                            Nossa fundação oficial ocorreu em <strong>09/06/2022</strong>. No início, a Udesaken não era uma empresa de tecnologia, mas sim um chat, um grupo focado em amizade e resenha. Foi ali que a semente da nossa comunidade foi plantada.
+                        </p>
+                    </div>
+
+                    <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
+                            <i class="fas fa-robot text-brand-gold"></i> Setembro de 2022: O Primeiro Grande Salto
+                        </h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
+                            Em 10/09/2022, lançamos nosso primeiro bot para WhatsApp, batizado em homenagem ao nosso fundador: <strong>"Isloch Bot"</strong>.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-300 list-disc pl-5 marker:text-brand-gold">
+                            <li>O projeto era 100% gratuito.</li>
+                            <li>Atingimos mais de <strong>300 grupos</strong> simultaneamente.</li>
+                            <li>Ultrapassamos a marca de <strong>10.000 usuários</strong> operando nossa automação.</li>
+                        </ul>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mt-4">
+                            Nessa mesma época, nos tornamos especialistas em segurança no WhatsApp, desenvolvendo painéis exclusivos para gestão de restrições e banimentos de números. O Isloch Bot cumpriu sua missão e foi desativado com honras em novembro daquele ano.
+                        </p>
+                    </div>
+
+                    <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
+                            <i class="fas fa-user-secret text-indigo-400"></i> 2023 a 2024: A Era do Aperfeiçoamento
+                        </h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+                            No final de 2022, a Udesaken fechou suas portas para o público geral, tornando-se "privada" e exclusiva apenas para a alta cúpula. Durante os anos seguintes, mergulhamos nos bastidores. Focamos nosso aprendizado e desenvolvimento no ecossistema do Discord, criando projetos próprios e aprimorando nossa arquitetura de software longe dos holofotes.
+                        </p>
+                    </div>
+
+                    <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
+                            <i class="fas fa-fire text-orange-500"></i> 2025: O Renascimento e a Explosão Viral
+                        </h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
+                            No nosso aniversário de 3 anos, a Udesaken decidiu reabrir. Desta vez, apenas o nosso fundador estava na equipe. Recomeçamos do zero, lançando um bot básico e gratuito no WhatsApp, mas com uma nova estratégia: o <strong>conteúdo digital</strong>.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-white/5 p-4 rounded-lg text-center border border-white/10">
+                                <i class="fab fa-instagram text-2xl text-pink-500 mb-2"></i>
+                                <h4 class="text-white font-bold text-lg">7 Milhões+</h4>
+                                <p class="text-xs text-gray-400">Visualizações em 7 meses (Média de 1M/mês)</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg text-center border border-white/10">
+                                <i class="fab fa-whatsapp text-2xl text-green-500 mb-2"></i>
+                                <h4 class="text-white font-bold text-lg">9.600+</h4>
+                                <p class="text-xs text-gray-400">Seguidores no Canal de Figurinhas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
+                            <i class="fas fa-crown text-brand-gold"></i> 2026: A Udesaken Hoje
+                        </h3>
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
+                            Chegamos à nossa poderosa <strong>Versão 6.0</strong> (atualmente com a temática exclusiva da Hello Kitty). Operamos ativamente no WhatsApp e Discord, entregando alta tecnologia para diversos clientes satisfeitos.
+                        </p>
+                        <div class="p-4 bg-brand-gold/10 border border-brand-gold/30 rounded-xl text-center">
+                            <p class="text-brand-gold font-medium">Somos um dos únicos projetos do mercado a entregar mais de <strong class="text-white">1.000 comandos premium</strong> por um valor de investimento abaixo de 10 reais.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/10 text-center">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
+                            <i class="fas fa-heart text-red-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Muito mais que uma empresa</h3>
+                        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                            A Udesaken Group é, acima de tudo, uma <strong>família</strong>. Continuamos aprendendo, melhorando e inovando todos os dias. Nosso mais profundo agradecimento a cada usuário, administrador e parceiro que ajudou a construir essa história ao nosso lado.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pt-16 pb-8 border-t border-white/5 bg-black/40 relative z-10 backdrop-blur-xl mt-10">
+        <div class="max-w-[1100px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
+                             <img src="../logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-medium max-w-xs">
+                        O futuro da sua comunidade. Segurança blindada, alta performance e ferramentas exclusivas.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-white font-bold mb-5 tracking-wide">Navegação</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="../equipe/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-users text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
+                            Conhecer Equipe
+                        </a>
+                        <a href="../termos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
+                            Termos de Uso
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-white font-bold mb-5 tracking-wide">Fale Conosco</h3>
+                    <div class="flex flex-col gap-4 mb-6">
+                        <a href="mailto:contato.udesaken@gmail.com" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-envelope text-red-500/70 group-hover:text-red-500 transition w-4 text-center"></i> 
+                            contato.udesaken@gmail.com
+                        </a>
+                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fab fa-whatsapp text-green-500/70 group-hover:text-green-500 transition w-4 text-center"></i> 
+                            Suporte Direto
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center pt-8 border-t border-white/5 relative">
+                <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">
+                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+                </p>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
