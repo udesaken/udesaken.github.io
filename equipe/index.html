@@ -28,42 +28,50 @@
     </script>
 
     <style>
-        :root {
-            --brand-gold: #C6A87C;
-        }
-
         .photo-wrapper {
             position: relative;
-            width: 130px;
-            height: 130px;
-            margin-bottom: 20px;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 24px;
+            border-radius: 50%;
+            padding: 4px; /* Espaço para o gradiente de fundo respirar */
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            transition: all 0.4s ease;
         }
+        
         .team-photo {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--glass-border); 
-            transition: 0.3s;
+            border: 2px solid var(--glass-border);
+            transition: transform 0.4s ease;
         }
-        .accessory {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 50px;
-            height: auto;
-            z-index: 10;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
-            transition: 0.3s;
+
+        .glass-panel:hover .photo-wrapper {
+            background: linear-gradient(135deg, var(--accent), transparent);
+            box-shadow: 0 0 30px rgba(198, 168, 124, 0.2);
+            transform: translateY(-5px);
         }
-        .glass-panel:hover .accessory {
-            transform: scale(1.1) rotate(10deg);
+
+        .glass-panel:hover .team-photo {
+            transform: scale(1.05);
+            border-color: transparent;
         }
         
-        /* TEMAS DE COR (BORDAS E SOMBRAS) */
-        .gold-theme .team-photo { border-color: var(--brand-gold); box-shadow: 0 0 20px rgba(198, 168, 124, 0.3); }
-        .pink-theme .team-photo { border-color: #ff69b4; box-shadow: 0 0 20px rgba(255, 105, 180, 0.3); }
-        .blue-theme .team-photo { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        /* Tag de cargo */
+        .role-badge {
+            background: rgba(198, 168, 124, 0.1);
+            border: 1px solid rgba(198, 168, 124, 0.3);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-gold/30 selection:text-white">
@@ -77,7 +85,7 @@
     <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300">
         <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
             <a href="../" class="flex items-center gap-4 cursor-pointer group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
                      <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
                 <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
@@ -96,61 +104,104 @@
         </div>
     </nav>
 
-    <section class="pt-32 pb-16 text-center relative">
+    <section class="pt-32 pb-12 text-center relative z-10">
         <div class="max-w-4xl mx-auto px-6 fade-up">
-            <h1 class="text-4xl md:text-6xl font-black text-main mb-4 tracking-tighter">Liderança <span class="text-gradient-gold uppercase">Udesaken</span></h1>
-            <p class="text-muted font-medium">A estrutura organizacional que move a nossa inovação.</p>
+            <h1 class="text-4xl md:text-6xl font-black text-main mb-4 tracking-tighter">Quem Faz Acontecer</h1>
+            <p class="text-muted font-medium max-w-xl mx-auto">As mentes por trás do ecossistema Udesaken. Focados em entregar segurança blindada e alta performance.</p>
         </div>
     </section>
 
     <section class="pb-32 relative z-10">
-        <div class="max-w-[1000px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
-                
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up gold-theme md:col-span-2 lg:col-span-2 w-full max-w-md">
+        <div class="max-w-[1100px] mx-auto px-6">
+            
+            <div class="flex justify-center mb-8">
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full max-w-lg">
                     <div class="photo-wrapper">
                         <img src="../islo.jpg" alt="CEO Islo" class="team-photo">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C6A87C'%3E%3Cpath d='M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5ZM19 19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V18H19V19Z'%3E%3C/path%3E%3C/svg%3E" class="accessory">
                     </div>
-                    <h2 class="text-2xl font-bold text-main mb-1">Isloch</h2>
-                    <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">CEO, Fundador & Developer</p>
-                    <p class="text-sm text-muted leading-relaxed">Responsável por toda a Udesaken. Atua diretamente no desenvolvimento do site, do bot e dos sistemas.</p>
+                    <h2 class="text-3xl font-bold text-main mb-3 tracking-tight">Isloch</h2>
+                    <span class="role-badge">CEO, Fundador & Developer</span>
+                    <p class="text-sm text-muted leading-relaxed px-4">Responsável por toda a diretriz da Udesaken. Atua diretamente na arquitetura e no desenvolvimento do site, dos bots e dos sistemas operacionais do grupo.</p>
                 </div>
+            </div>
 
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up blue-theme w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto">
+                
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.1s;">
                     <div class="photo-wrapper">
                         <img src="../hyuuzaki.jpg" alt="Hyuuzaki" class="team-photo">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%233b82f6' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%233b82f6' /%3E%3C/svg%3E" class="accessory">
                     </div>
-                    <h2 class="text-xl font-bold text-main mb-1">Hyuuzaki</h2>
-                    <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Manager</p>
-                    <p class="text-sm text-muted leading-relaxed">Criador oficial de figurinhas e contribui ativamente com ideias inovadoras para novos comandos.</p>
+                    <h2 class="text-2xl font-bold text-main mb-3 tracking-tight">Hyuuzaki</h2>
+                    <span class="role-badge border-blue-500/30 text-blue-500 bg-blue-500/10">Manager</span>
+                    <p class="text-sm text-muted leading-relaxed">Criador oficial de figurinhas, engajamento criativo e contribui ativamente com ideias inovadoras para o ecossistema.</p>
                 </div>
 
-                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up pink-theme w-full">
+                <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.2s;">
                     <div class="photo-wrapper">
                         <img src="../mz.jpg" alt="Mz" class="team-photo">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100'%3E%3Cpath fill='%23ff69b4' d='M60 50 C55 40 65 40 60 50 M20 50 Q5 20 40 35 Q50 40 60 50 Q70 40 80 35 Q115 20 100 50 Q110 80 80 65 Q70 60 60 50 Q50 60 40 65 Q10 80 20 50 Z' /%3E%3Ccircle cx='60' cy='50' r='12' fill='%23ff69b4' /%3E%3C/svg%3E" class="accessory">
                     </div>
-                    <h2 class="text-xl font-bold text-main mb-1">Mz</h2>
-                    <p class="text-gold font-black text-[10px] uppercase tracking-widest mb-4">Manager</p>
-                    <p class="text-sm text-muted leading-relaxed">Responsável pela divulgação dos chats e auxilia na expansão e engajamento da comunidade.</p>
+                    <h2 class="text-2xl font-bold text-main mb-3 tracking-tight">Mz</h2>
+                    <span class="role-badge border-pink-500/30 text-pink-500 bg-pink-500/10">Manager</span>
+                    <p class="text-sm text-muted leading-relaxed">Responsável pela moderação e divulgação dos chats, focando na expansão e saúde da nossa comunidade.</p>
                 </div>
 
             </div>
+
         </div>
     </section>
 
-    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
-        <div class="max-w-[1100px] mx-auto px-6 text-center">
-            <div class="flex flex-wrap justify-center gap-8 mb-12">
-                <a href="../planos/" class="text-sm font-bold text-main hover:text-gold transition">Ver Planos</a>
-                <a href="../termos/" class="text-sm font-bold text-muted hover:text-white transition">Termos de Uso</a>
+    <footer class="pt-16 pb-8 border-t border-white/5 bg-black/20 relative z-10 backdrop-blur-xl mt-10">
+        <div class="max-w-[1100px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
+                             <img src="../logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-main">Udesaken</span>
+                    </div>
+                    <p class="text-sm text-muted font-medium max-w-xs">
+                        O futuro da sua comunidade. Segurança blindada, alta performance e ferramentas exclusivas.
+                    </p>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-main font-bold mb-5 tracking-wide">Navegação</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="../planos/" class="text-sm text-muted hover:text-main transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-box-open text-gold/70 group-hover:text-gold transition w-4 text-center"></i> 
+                            Nossos Planos
+                        </a>
+                        <a href="../termos/" class="text-sm text-muted hover:text-main transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
+                            Termos de Uso
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-main font-bold mb-5 tracking-wide">Fale Conosco</h3>
+                    <div class="flex flex-col gap-4 mb-6">
+                        <a href="mailto:contato.udesaken@gmail.com" class="text-sm text-muted hover:text-main transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fas fa-envelope text-red-500/70 group-hover:text-red-500 transition w-4 text-center"></i> 
+                            contato.udesaken@gmail.com
+                        </a>
+                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-muted hover:text-main transition-colors duration-300 flex items-center gap-2 group">
+                            <i class="fab fa-whatsapp text-green-500/70 group-hover:text-green-500 transition w-4 text-center"></i> 
+                            Suporte Direto
+                        </a>
+                    </div>
+                </div>
+
             </div>
-            <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
-            <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                Udesaken Group &copy; 2026 • Todos os direitos reservados
-            </p>
+
+            <div class="text-center pt-8 border-t border-white/5 relative">
+                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
+                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+                </p>
+            </div>
+            
         </div>
     </footer>
 
