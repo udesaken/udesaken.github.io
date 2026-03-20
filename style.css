@@ -20,6 +20,8 @@
     --orb-3: #2c2c2c;   /* Chumbo */
     
     --accent: #F59E0B;
+    --accent-dim: rgba(245, 158, 11, 0.12);
+    --accent-glow: rgba(245, 158, 11, 0.25);
 }
 
 /* --- TEMA CLARO (Premium Clean) --- */
@@ -40,6 +42,8 @@
     --orb-3: #93c5fd;   /* Azul claro tech (fica incrível misturado com o vidro) */
     
     --accent: #d97706; /* Ouro âmbar: forte e legível no fundo claro */
+    --accent-dim: rgba(217, 119, 6, 0.1);
+    --accent-glow: rgba(217, 119, 6, 0.2);
 }
 
 html, body {
@@ -141,13 +145,6 @@ html, body {
     z-index: 1;
 }
 
-/* Navbar Translucida */
-.nav-liquid {
-    background: rgba(0,0,0,0.2);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--glass-border);
-}
-
 /* Utilitários de Cor */
 .text-main { color: var(--text-main); }
 .text-muted { color: var(--text-muted); }
@@ -161,21 +158,6 @@ html, body {
     font-weight: 800;
 }
 
-/* Botão Tema */
-.theme-toggle {
-    cursor: pointer;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: var(--text-main);
-    padding: 10px;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-.theme-toggle:hover {
-    background: var(--accent);
-    color: white;
-    box-shadow: 0 0 15px var(--accent);
-}
 
 /* =========================================
    UDESAKEN - EFEITOS DE INTERFACE PREMIUM
@@ -205,25 +187,25 @@ html, body {
     pointer-events: none;
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 100;
-    display: flex;             /* Adicionado para centralizar o conteúdo interno no mobile */
-    justify-content: center;   /* Adicionado para centralizar o conteúdo interno no mobile */
+    display: flex;             
+    justify-content: center;   
 }
 
-/* Posicionamento Mobile (Centralizado de forma absoluta) */
+/* Posicionamento Mobile */
 @media (max-width: 767px) {
     #audio-player-container {
-        left: 0 !important;      /* Mudou de 50% para 0 */
-        width: 100%;             /* Ocupa a tela toda */
-        transform: translateY(20px); /* Tira o translate-x */
+        left: 0 !important;      
+        width: 100%;             
+        transform: translateY(20px); 
     }
     #audio-player-container.visible {
         opacity: 1;
         pointer-events: auto;
-        transform: translateY(0);    /* Tira o translate-x */
+        transform: translateY(0);    
     }
 }
 
-/* Posicionamento PC (Canto Esquerdo) */
+/* Posicionamento PC */
 @media (min-width: 768px) {
     #audio-player-container {
         left: 40px !important;
@@ -236,12 +218,10 @@ html, body {
     }
 }
 
-/* --- PLAYER LIQUID GLASS FINAL --- */
-
 .glass-pill {
     position: relative;
     padding: 6px 16px;
-    border-radius: 999px !important; /* Totalmente redondo nas pontas */
+    border-radius: 999px !important; 
     background: rgba(15, 15, 15, 0.4) !important;
     backdrop-filter: blur(30px) saturate(250%) contrast(110%);
     -webkit-backdrop-filter: blur(30px) saturate(250%) contrast(110%);
@@ -256,7 +236,7 @@ html, body {
     position: relative;
     width: 38px;
     height: 38px;
-    border-radius: 50% !important; /* Círculo perfeito */
+    border-radius: 50% !important; 
     background: rgba(15, 15, 15, 0.4) !important;
     backdrop-filter: blur(30px) saturate(250%);
     -webkit-backdrop-filter: blur(30px) saturate(250%);
@@ -285,10 +265,6 @@ html, body {
     box-shadow: 0 0 8px var(--accent);
 }
 
-/* =========================================
-   UDESAKEN - APPLE MINIMIZE ANIMATION (MOBILE)
-   ========================================= */
-
 /* Prepara os elementos para a transição suave */
 #audio-player-container .glass-pill,
 #audio-player-container .flex-col,
@@ -297,45 +273,208 @@ html, body {
     transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Esconde o que vazar quando encolher */
-#audio-player-container .flex-col {
-    overflow: hidden;
-}
+#audio-player-container .flex-col { overflow: hidden; }
 
 /* A Mágica do Estado Minimizado (Apenas Celular) */
 @media (max-width: 767px) {
     #audio-player-container.minimized {
-        /* Desce ele um pouquinho, mantém o centro sem puxar pro lado e deixa levemente transparente */
         transform: translateY(15px) scale(0.95);
         opacity: 0.85;
     }
-    
-    #audio-player-container.minimized .glass-pill {
-        padding: 6px; /* Fica mais apertadinho */
-        gap: 0;
-    }
-    
-    /* Some com o texto da música */
-    #audio-player-container.minimized .flex-col {
-        max-width: 0 !important;
-        min-width: 0 !important;
-        opacity: 0;
-        margin: 0;
-    }
-    
-    /* Some com o botão de avançar */
-    #audio-player-container.minimized #next-track-btn {
-        width: 0;
-        height: 0;
-        opacity: 0;
-        margin-left: -10px;
-        transform: scale(0.5);
-        border: none;
-    }
-    
-    /* Ajusta o botão de play para não ficar colado na foto */
-    #audio-player-container.minimized #play-pause-btn {
-        margin-left: 10px;
-        margin-right: 4px;
-    }
+    #audio-player-container.minimized .glass-pill { padding: 6px; gap: 0; }
+    #audio-player-container.minimized .flex-col { max-width: 0 !important; min-width: 0 !important; opacity: 0; margin: 0; }
+    #audio-player-container.minimized #next-track-btn { width: 0; height: 0; opacity: 0; margin-left: -10px; transform: scale(0.5); border: none; }
+    #audio-player-container.minimized #play-pause-btn { margin-left: 10px; margin-right: 4px; }
+}
+
+/* =========================================
+   UDESAKEN - BADGES PREMIUM (RODAPÉ/MOBILE)
+   ========================================= */
+.badge-novo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245, 158, 11, 0.15); 
+    color: var(--accent); 
+    border: 1px solid rgba(245, 158, 11, 0.3); 
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: pulse-badge 2.4s ease-in-out infinite;
+    transition: all 0.3s ease;
+    margin-left: 4px;
+}
+
+.group:hover .badge-novo {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); 
+    transform: scale(1.05);
+}
+
+/* =========================================
+   NAVBAR REDESENHADA (PREMIUM CLAUDE + MOBILE)
+   ========================================= */
+.nav-wrapper {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    padding: 12px 24px;
+}
+
+.nav-wrapper nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 10px 20px 10px 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-wrapper nav::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25) 40%, rgba(245,158,11,0.3) 60%, transparent);
+    pointer-events: none;
+}
+
+.nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; flex-shrink: 0;
+}
+
+.nav-logo-icon {
+    width: 34px; height: 34px;
+    background: black;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 14px var(--accent-glow);
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; font-size: 18px; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--text-main) 30%, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+    display: flex; align-items: center; gap: 2px;
+    flex: 1; justify-content: center;
+}
+
+.nav-link {
+    position: relative; display: flex; align-items: center; gap: 5px;
+    padding: 7px 14px; border-radius: 10px;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--text-muted); text-decoration: none;
+    letter-spacing: 0.01em; transition: color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--text-main); background: rgba(255,255,255,0.06);
+}
+
+.nav-link-highlight {
+    color: var(--text-main); font-weight: 600;
+}
+.nav-link-highlight:hover {
+    color: var(--accent); background: var(--accent-dim);
+}
+
+.nav-badge {
+    display: inline-flex; align-items: center;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    padding: 1px 6px; border-radius: 5px;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    animation: pulse-badge 2.4s ease-in-out infinite;
+}
+
+.nav-link:hover .nav-badge {
+    background: var(--accent); color: #000; border-color: var(--accent);
+}
+
+@keyframes pulse-badge {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+    50% { opacity: 0.6; box-shadow: 0 0 8px rgba(245, 158, 11, 0.2); }
+}
+
+.nav-divider {
+    width: 1px; height: 20px;
+    background: var(--glass-border); flex-shrink: 0; margin: 0 4px;
+}
+
+.nav-actions {
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+
+.theme-toggle {
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    background: transparent; color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; cursor: pointer; transition: all 0.25s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent); color: var(--accent);
+    background: var(--accent-dim); box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.nav-cta {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 20px; border-radius: 12px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.02em; text-decoration: none;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #92400e 100%);
+    color: #000; border: none;
+    box-shadow: 0 0 18px rgba(245,158,11,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+
+.nav-cta::before {
+    content: ''; position: absolute;
+    top: 0; left: -60%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-cta:hover::before { left: 130%; }
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(245,158,11,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* Ajuste no mobile menu para encaixar com a nova navbar flutuante */
+#mobile-menu {
+    top: 75px;
+    left: 24px;
+    width: calc(100% - 48px);
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
 }

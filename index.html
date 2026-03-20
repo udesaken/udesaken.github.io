@@ -47,51 +47,65 @@
         <div class="liquid-orb orb-3"></div>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1190px] mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black group-hover:border-brand-gold/50 transition duration-500">
-                     <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+    <div class="nav-wrapper transition-all duration-300" id="navbar">
+        <nav>
+            <a href="#" class="nav-logo group">
+                <div class="nav-logo-icon group-hover:border-yellow-500/50 transition duration-500">
+                    <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken
-                </span>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-6">
-                <a href="./comandos/" class="text-sm font-semibold text-muted hover:text-main transition">Comandos</a>
-                <a href="./equipe/" class="text-sm font-semibold text-muted hover:text-main transition">Equipe</a>
-                <a href="./planos/" class="text-sm font-bold text-main hover:text-gold transition">Planos</a>
-                <a href="./planopv/" class="text-sm font-bold text-main hover:text-gold transition">Planos PV</a>
-                
-                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
+                <span class="nav-logo-text group-hover:text-yellow-500 transition">Udesaken</span>
+            </a>
 
-                <a href="./vip/" class="px-5 py-2 text-sm font-bold bg-white/5 border border-white/20 text-main rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition backdrop-blur-md shadow-lg">
-                    Acesso VIP
+            <div class="nav-links hidden md:flex">
+                <a href="./comandos/" class="nav-link">
+                    <i class="fas fa-terminal" style="font-size:11px; opacity:0.7;"></i> Comandos
+                </a>
+                <a href="./equipe/" class="nav-link">
+                    <i class="fas fa-users" style="font-size:11px; opacity:0.7;"></i> Equipe
+                </a>
+                <a href="./parcerias/" class="nav-link group">
+                    Parcerias <span class="badge-novo">Novo</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="./planos/" class="nav-link nav-link-highlight">Planos</a>
+                <a href="./planopv/" class="nav-link nav-link-highlight">Planos PV</a>
+            </div>
+
+            <div class="nav-actions hidden md:flex">
+                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="./vip/" class="nav-cta">
+                    <i class="fas fa-crown"></i> Acesso VIP
                 </a>
             </div>
 
-            <div class="flex items-center gap-4 md:hidden">
-                <button id="theme-btn-mobile" class="theme-toggle" style="padding: 8px;">
+            <div class="flex items-center gap-3 md:hidden">
+                <button id="theme-btn-mobile" class="theme-toggle" aria-label="Alternar Tema">
                     <i class="fas fa-moon text-sm"></i>
                 </button>
-                <button id="mobile-menu-btn" class="text-main">
-                    <i class="fas fa-bars text-lg"></i>
+                <button id="mobile-menu-btn" class="text-main p-2">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
-        </div>
+        </nav>
         
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 absolute w-full">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute shadow-2xl">
             <div class="px-6 py-6 space-y-4">
-                <a href="./comandos/" class="block text-muted font-medium">Comandos</a>
-                <a href="./planos/" class="block text-main font-bold">Planos</a>
-                <a href="./planopv/" class="block text-main font-bold">Planos PV</a>
-                <a href="./vip/" class="block text-gold font-bold">VIP</a>
+                <a href="./comandos/" class="block text-muted font-medium hover:text-white transition">Comandos</a>
+                <a href="./equipe/" class="block text-muted font-medium hover:text-white transition">Equipe</a>
+                <a href="./parcerias/" class="block text-muted font-medium flex items-center gap-2 group">
+                    Parcerias <span class="badge-novo">Novo</span>
+                </a>
+                <div class="w-full h-[1px] bg-white/10 my-2"></div>
+                <a href="./planos/" class="block text-main font-bold hover:text-yellow-500 transition">Planos</a>
+                <a href="./planopv/" class="block text-main font-bold hover:text-yellow-500 transition">Planos PV</a>
+                <a href="./vip/" class="block text-yellow-500 font-bold mt-2">Acesso VIP</a>
             </div>
         </div>
-    </nav>
+    </div>
 
     <section class="pt-32 pb-20 text-center relative">
         <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
@@ -226,6 +240,15 @@
                     <a href="./equipe/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
                         <i class="fas fa-users text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
                         Conhecer Equipe
+                    </a>
+                    
+                    <a href="./parcerias/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fas fa-handshake text-yellow-500/70 group-hover:text-yellow-500 transition w-4 text-center"></i> 
+                        Nossas Parcerias <span class="badge-novo">Novo</span>
+                    </a>
+                    <a href="./solicitar-parceria/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
+                        <i class="fas fa-paper-plane text-yellow-500/70 group-hover:text-yellow-500 transition w-4 text-center"></i> 
+                        Solicitar Parceria
                     </a>
                     <a href="./termos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
                         <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
