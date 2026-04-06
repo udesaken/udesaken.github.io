@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#f0f4ff" />
+  <title>Missão Kamy 💜💙</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Pacifico&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --purple-100: #f5f0ff; --purple-200: #e9dcff; --purple-300: #d6c0ff;
+      --purple-400: #b98eff; --purple-500: #9b5de5; --purple-600: #7b2cbf;
+      --blue-100: #e6f0ff;   --blue-400: #66b0ff;   --blue-500: #3b82f6;
+      --green-400: #4ade80;  --green-600: #16a34a;  --red-400: #f87171; --red-600: #dc2626;
+      --neutral-0: #ffffff;  --neutral-200: #e5e7eb; --neutral-500: #6b7280; --neutral-700: #374151; --neutral-900: #111827;
+      --gradient-bg: linear-gradient(135deg, #f5f0ff 0%, #e6f0ff 100%);
+      --gradient-primary: linear-gradient(135deg, var(--purple-500), var(--blue-500));
+      --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.14);
+      --shadow-purple: 0 8px 32px rgba(155, 93, 229, .35);
+      --radius-md: 1.2rem; --radius-lg: 2rem; --radius-pill: 9999px;
+      --dur-fast: 180ms; --dur-base: 320ms;
+      --font-display: 'Pacifico', cursive; --font-body: 'Nunito', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100dvh; overflow: hidden; touch-action: manipulation; }
+    body { display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--font-body); color: var(--neutral-700); background: var(--gradient-bg); }
+
+    .screen {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      padding: 1rem; z-index: 10; pointer-events: none; opacity: 0;
+      transition: opacity var(--dur-base), transform var(--dur-base);
+      transform: translateY(24px) scale(.97);
+    }
+    .screen.active { pointer-events: auto; opacity: 1; transform: none; }
+    .screen.exit { pointer-events: none; opacity: 0; transform: translateY(-20px) scale(.97); }
+
+    .card {
+      background: var(--gradient-card); border: 1.5px solid rgba(255,255,255,.9);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+      padding: clamp(1.2rem, 4vw, 2.2rem) clamp(1rem, 4vw, 2rem);
+      width: 100%; max-width: 420px; text-align: center;
+      max-height: 95vh; overflow-y: auto;
+    }
+
+    .display-title { font-family: var(--font-display); font-size: clamp(1.6rem, 6vw, 2.4rem); background: var(--gradient-primary); -webkit-background-clip: text; color: transparent; line-height: 1.2; margin-bottom: .5rem; }
+    .display-sub { font-size: .95rem; color: var(--neutral-500); margin-bottom: 1.5rem; font-weight: 700; }
+
+    /* UI Compartilhada */
+    .progress-wrap { margin-bottom: 1.4rem; }
+    .progress-meta { display: flex; justify-content: space-between; font-size: .75rem; font-weight: 800; margin-bottom: .5rem; text-transform: uppercase; background: var(--gradient-primary); -webkit-background-clip: text; color: transparent; }
+    .progress-track { height: 8px; background: var(--purple-200); border-radius: var(--radius-pill); overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--gradient-primary); transition: width .3s; }
+
+    .input-game { width: 100%; padding: 1rem; font-size: 1.2rem; border: 2px solid var(--purple-300); border-radius: var(--radius-md); text-align: center; margin-bottom: 1rem; font-family: var(--font-body); font-weight: 700; outline: none; transition: border-color .2s; }
+    .input-game:focus { border-color: var(--purple-500); }
+    .btn-action { width: 100%; background: var(--gradient-primary); color: white; border: none; padding: 1rem; font-size: 1.1rem; border-radius: var(--radius-md); font-weight: 800; cursor: pointer; transition: transform .1s; }
+    .btn-action:active { transform: scale(.95); }
+
+    /* Fase 1: Quiz */
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: .6rem; }
+    .opt-btn { background: var(--neutral-0); border: 2px solid var(--purple-200); border-radius: var(--radius-md); padding: .9rem 1rem; font-family: var(--font-body); font-size: 1rem; font-weight: 700; color: var(--neutral-700); cursor: pointer; }
+    .opt-btn.correct { background: #f0fdf4; border-color: var(--green-400); color: var(--green-600); transform: scale(1.04); }
+    .opt-btn.wrong { background: #fef2f2; border-color: var(--red-400); color: var(--red-600); animation: shake .4s; }
+
+    /* Fase 2: Memória */
+    .memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; }
+    .memory-card { aspect-ratio: 1; perspective: 1000px; cursor: pointer; }
+    .memory-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.4s; transform-style: preserve-3d; }
+    .memory-card.flipped .memory-card-inner { transform: rotateY(180deg); }
+    .memory-card.matched .memory-card-inner { transform: rotateY(180deg) scale(0.9); opacity: 0.5; }
+    .memory-card-front, .memory-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); font-size: 1.6rem; }
+    .memory-card-front { background: var(--purple-100); border: 2px solid var(--purple-200); color: var(--purple-400); }
+    .memory-card-back { background: var(--neutral-0); border: 2px solid var(--purple-500); transform: rotateY(180deg); }
+
+    /* Fase 3: Intruso */
+    .intruder-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.4rem; margin-top: 1rem; }
+    .intruder-cell { font-size: 1.6rem; background: none; border: none; cursor: pointer; transition: transform .1s; padding: 0; }
+    .intruder-cell:active { transform: scale(0.8); }
+
+    /* Fase 4 e 7: Área de Jogo Livre (Mira e Pega-Pega) */
+    .free-area { position: relative; height: 220px; width: 100%; background: rgba(155, 93, 229, 0.05); border: 2px dashed var(--purple-300); border-radius: var(--radius-md); overflow: hidden; }
+    .free-target { position: absolute; font-size: 2.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; user-select: none; }
+    #catch-target { transition: transform 0.25s linear; font-size: 2.2rem; }
+    
+    /* Fase 8: Clicker */
+    .clicker-btn { font-size: 5.5rem; background: none; border: none; cursor: pointer; user-select: none; transition: transform 0.05s; margin: 1rem 0; animation: heartPulse 1s infinite alternate; }
+    .clicker-btn:active { transform: scale(0.85); animation: none; }
+    @keyframes heartPulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+    /* Chefão Final */
+    .answer-row { display: flex; gap: 1rem; justify-content: center; align-items: center; min-height: 80px; }
+    .btn-yes, .btn-no { border: none; border-radius: var(--radius-pill); font-family: var(--font-body); font-weight: 800; cursor: pointer; transition: transform var(--dur-fast); }
+    .btn-yes { background: var(--gradient-primary); color: var(--neutral-0); padding: 1rem 2.5rem; font-size: 1.3rem; box-shadow: var(--shadow-purple); animation: pulseYes 1.1s ease-in-out infinite; }
+    .btn-no { background: var(--neutral-200); color: var(--neutral-500); padding: .8rem 1.8rem; font-size: 1rem; }
+    @keyframes pulseYes { 0%, 100% { box-shadow: var(--shadow-purple); } 50% { box-shadow: 0 8px 36px rgba(155,93,229,.75); transform: scale(1.07); } }
+
+    /* Toasts */
+    .toast { position: fixed; top: 1.2rem; left: 50%; transform: translateX(-50%) translateY(-120%); background: var(--purple-600); color: var(--neutral-0); padding: .6rem 1.2rem; border-radius: var(--radius-pill); font-size: .85rem; font-weight: 700; z-index: 999; transition: transform var(--dur-base); white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+  </style>
+</head>
+<body>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="screen active" id="screen-login">
+    <div class="card">
+      <p class="display-title">Acesso Restrito 🔐</p>
+      <p class="display-sub">Digite a senha para iniciar sua missão especial.</p>
+      <input type="text" id="login-input" class="input-game" placeholder="Senha secreta..." autocomplete="off">
+      <button class="btn-action" id="login-btn">Entrar</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-quiz">
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-meta"><span>Fase 1/8: O Quiz 🧠</span><span id="progress-count">1/8</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+      <p style="font-size:1.1rem; font-weight:800; margin-bottom:1.2rem; min-height:3em;" id="question-text"></p>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-memory">
+    <div class="card">
+      <p class="display-title">Fase 2/8: Memória 🧩</p>
+      <p class="display-sub">Modo Difícil: Ache os 8 pares!</p>
+      <div class="memory-grid" id="memory-grid"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-intruder">
+    <div class="card">
+      <p class="display-title">Fase 3/8: O Intruso 🕵️‍♀️</p>
+      <p class="display-sub">Ache o coração azul (💙) escondido no meio dos outros.</p>
+      <div class="intruder-grid" id="intruder-grid"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-aim">
+    <div class="card">
+      <p class="display-title">Fase 4/8: Mira 🎯</p>
+      <p class="display-sub">Acerte <span id="aim-count">10</span> corações minúsculos! <br>Tempo restante: <span id="aim-timer" style="color: var(--red-600);">7</span>s</p>
+      <div class="free-area" id="aim-area">
+        <div class="free-target" id="aim-target">💜</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-gartic">
+    <div class="card">
+      <p class="display-title">Fase 5/8: Mini-Gartic 🎨</p>
+      <p class="display-sub">Dica: O time do meu coração.</p>
+      <input type="text" id="gartic-input" class="input-game" placeholder="Digite a palavra..." autocomplete="off">
+      <button class="btn-action" id="gartic-btn">Enviar Resposta</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-vault">
+    <div class="card">
+      <p class="display-title">Fase 6/8: O Cofre 🔒</p>
+      <p class="display-sub">Descubra a senha de 4 dígitos para passar.</p>
+      <input type="number" id="vault-input" class="input-game" placeholder="****" inputmode="numeric">
+      <button class="btn-action" id="vault-btn">Desbloquear</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-catch">
+    <div class="card">
+      <p class="display-title">Fase 7/8: Pega-Pega 🏃‍♀️</p>
+      <p class="display-sub">Tá muito rápido! Dê 3 tapas nele: <span id="catch-count">0</span>/3</p>
+      <div class="free-area" id="catch-area">
+        <div class="free-target" id="catch-target">🏃‍♂️💨</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-clicker">
+    <div class="card">
+      <p class="display-title">Fase 8/8: Energia ⚡</p>
+      <p class="display-sub">Clique muito e MUITO rápido ou a barra cai!</p>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="clicker-fill" style="width:0%; background: var(--red-400);"></div></div></div>
+      <button class="clicker-btn" id="clicker-btn">❤️‍🔥</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-pre-pedido">
+    <div class="card">
+      <p class="display-title" style="font-size: 1.8rem;">Quase lá... 🥺</p>
+      <p style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--purple-600);">
+      </p>
+      <p class="display-sub">Última senha: Nome da pessoa que mais te ama.</p>
+      <input type="text" id="pre-input" class="input-game" placeholder="Digite o nome..." autocomplete="off">
+      <button class="btn-action" id="pre-btn">Confirmar</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-pedido">
+    <div class="card">
+      <p class="display-title">Você sobreviveu! ✨</p>
+      <p class="display-sub">Agora só falta a fase mais difícil de todas...</p>
+      <p style="font-size:1.5rem; font-weight:800; margin: 1.5rem 0;">Quer namorar comigo? 🥺💜💙</p>
+      <div class="answer-row">
+        <button class="btn-yes" id="btn-yes">SIM! ❤️</button>
+        <button class="btn-no" id="btn-no">Não 🥺</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-success">
+    <div class="card">
+      <span style="font-size: 4rem; display:block; margin-bottom:1rem;">💍💜</span>
+      <p class="display-title">GGWP!</p>
+      <p class="display-sub">Conquista desbloqueada: Namorando o islo</p>
+    </div>
+  </div>
+
+  <audio id="sfx-win" src="https://www.myinstants.com/media/sounds/windows-98-startup.mp3" preload="auto"></audio>
+
+  <script>
+    const screens = {
+      login: document.getElementById('screen-login'), quiz: document.getElementById('screen-quiz'), 
+      memory: document.getElementById('screen-memory'), intruder: document.getElementById('screen-intruder'), 
+      aim: document.getElementById('screen-aim'), gartic: document.getElementById('screen-gartic'), 
+      vault: document.getElementById('screen-vault'), catch: document.getElementById('screen-catch'), 
+      clicker: document.getElementById('screen-clicker'), prePedido: document.getElementById('screen-pre-pedido'),
+      pedido: document.getElementById('screen-pedido'), success: document.getElementById('screen-success')
+    };
+
+    function goNext(current, nextScreen) {
+      current.classList.add('exit');
+      setTimeout(() => { current.classList.remove('active', 'exit'); nextScreen.classList.add('active'); }, 320);
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      clearTimeout(toastTimer); const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+    }
+    const vib = (ms) => { if(navigator.vibrate) navigator.vibrate(ms); };
+
+    /* --- LOGIN INICIAL --- */
+    document.getElementById('login-btn').onclick = () => {
+      const val = document.getElementById('login-input').value.toLowerCase().trim();
+      if(val === 'kamy') {
+        vib(50);
+        renderQuiz(); // <--- CORREÇÃO: Disparando a montagem do quiz aqui!
+        goNext(screens.login, screens.quiz);
+      } else {
+        showToast("Senha incorreta! 🤨"); vib(100);
+      }
+    };
+
+    /* --- FASE 1: QUIZ --- */
+    const QUESTIONS = [
+      { q: "Qual foi a data em que a gente se conheceu e quase saiu no soco?", opts: ["25/12/2025", "28/12/2025", "01/01/2026", "Não lembro"], ans: 1 },
+      { q: "Qual jogo costuma me fazer passar mais raiva enquanto você assiste?", opts: ["Free Fire", "Valorant", "Roblox", "FiveM"], ans: 0 },
+      { q: "Quem ama mais?", opts: ["Islo", "Kamy", "Os dois", "Nenhum"], ans: 2 },
+      { q: "Qual é a minha cor favorita (do islo)?", opts: ["Roxo", "Azul escuro", "Preto", "Branco"], ans: 2 },
+      { q: "Qual é a data exata do meu aniversário?", opts: ["25/06/07", "25/05/07", "05/05/07", "27/05/07"], ans: 1 }
+    ];
+    let currQ = 0, lockedQ = false;
+    function renderQuiz() {
+      const q = QUESTIONS[currQ];
+      document.getElementById('progress-count').textContent = `${currQ + 1}/${QUESTIONS.length}`;
+      document.getElementById('progress-fill').style.width = `${((currQ) / QUESTIONS.length) * 100}%`;
+      document.getElementById('question-text').textContent = q.q;
+      const grid = document.getElementById('options-grid'); grid.innerHTML = '';
+      q.opts.forEach((opt, i) => {
+        const b = document.createElement('button'); b.className = 'opt-btn'; b.textContent = opt;
+        b.onclick = () => {
+          if(lockedQ) return; lockedQ = true;
+          if(i === q.ans) {
+            b.classList.add('correct');
+            setTimeout(() => {
+              currQ++; lockedQ = false;
+              if(currQ < QUESTIONS.length) renderQuiz();
+              else {
+                document.getElementById('progress-fill').style.width = '100%';
+                setTimeout(() => { initMemory(); goNext(screens.quiz, screens.memory); }, 400);
+              }
+            }, 500);
+          } else {
+            b.classList.add('wrong'); showToast("Errou! 😜"); vib(100);
+            setTimeout(() => { b.classList.remove('wrong'); lockedQ = false; }, 500);
+          }
+        };
+        grid.appendChild(b);
+      });
+    }
+
+    /* --- FASE 2: MEMÓRIA --- */
+    const emojisMem = ['💜', '💙', '🦋', '🌙', '⭐', '🧩', '🖤', '🤍'];
+    let flipped = [], matched = 0;
+    function initMemory() {
+      const grid = document.getElementById('memory-grid');
+      let cards = [...emojisMem, ...emojisMem].sort(() => Math.random() - 0.5);
+      cards.forEach(e => {
+        const c = document.createElement('div'); c.className = 'memory-card';
+        c.innerHTML = `<div class="memory-card-inner"><div class="memory-card-front">?</div><div class="memory-card-back">${e}</div></div>`;
+        c.onclick = () => {
+          if (flipped.length >= 2 || c.classList.contains('flipped') || c.classList.contains('matched')) return;
+          c.classList.add('flipped'); flipped.push({ c, e });
+          if (flipped.length === 2) {
+            setTimeout(() => {
+              if (flipped[0].e === flipped[1].e) {
+                flipped.forEach(f => f.c.classList.add('matched')); matched++;
+                if (matched === emojisMem.length) setTimeout(() => { initIntruder(); goNext(screens.memory, screens.intruder); }, 600);
+              } else flipped.forEach(f => f.c.classList.remove('flipped'));
+              flipped = [];
+            }, 500);
+          }
+        };
+        grid.appendChild(c);
+      });
+    }
+
+    /* --- FASE 3: O INTRUSO (Mais Difícil) --- */
+    function initIntruder() {
+      const grid = document.getElementById('intruder-grid');
+      const total = 42; // 6x7 grid
+      const intruderIndex = Math.floor(Math.random() * total);
+      for(let i=0; i<total; i++){
+        const btn = document.createElement('button');
+        btn.className = 'intruder-cell';
+        btn.textContent = i === intruderIndex ? '💙' : '💜';
+        btn.onclick = () => {
+          if(i === intruderIndex) {
+            btn.style.transform = 'scale(1.5)'; vib(50);
+            setTimeout(() => { initAim(); goNext(screens.intruder, screens.aim); }, 500);
+          } else {
+            showToast("Esse não! Tenta de novo 😜"); vib(100);
+          }
+        };
+        grid.appendChild(btn);
+      }
+    }
+
+    /* --- FASE 4: MIRA RANQUEADA COM TEMPO --- */
+    let aimHits = 0, aimMax = 10, aimInterval;
+    function initAim() {
+      const tg = document.getElementById('aim-target');
+      const area = document.getElementById('aim-area');
+      const counter = document.getElementById('aim-count');
+      const timerDisplay = document.getElementById('aim-timer');
+      
+      let timeLeft = 7;
+      aimHits = 0;
+      counter.textContent = aimMax;
+      timerDisplay.textContent = timeLeft;
+      tg.style.display = 'flex';
+
+      clearInterval(aimInterval);
+      aimInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if(timeLeft <= 0) {
+          clearInterval(aimInterval);
+          showToast("Tempo esgotado! Recomeçando... ⏳");
+          vib(200);
+          initAim(); // Reinicia
+        }
+      }, 1000);
+
+      function move() {
+        tg.style.left = Math.random() * (area.clientWidth - 40) + 'px';
+        tg.style.top = Math.random() * (area.clientHeight - 40) + 'px';
+      }
+
+      tg.onclick = () => {
+        aimHits++; vib(30); counter.textContent = aimMax - aimHits;
+        if(aimHits >= aimMax) { 
+          clearInterval(aimInterval);
+          tg.style.display = 'none'; 
+          setTimeout(() => { goNext(screens.aim, screens.gartic); }, 300); 
+        } else {
+          move();
+        }
+      };
+      move();
+    }
+
+    /* --- FASE 5: GARTIC --- */
+    document.getElementById('gartic-btn').onclick = () => {
+      const val = document.getElementById('gartic-input').value.toLowerCase().trim();
+      if(val.includes('flamengo') || val.includes('mengo')) {
+        vib(50); document.getElementById('gartic-input').style.borderColor = 'var(--green-400)';
+        setTimeout(() => { goNext(screens.gartic, screens.vault); }, 500);
+      } else {
+        showToast("Errou! Pensa direito... 😡"); vib(100);
+      }
+    };
+
+    /* --- FASE 6: COFRE --- */
+    document.getElementById('vault-btn').onclick = () => {
+      const val = document.getElementById('vault-input').value.trim();
+      if(val === '2514') {
+        vib(50); document.getElementById('vault-input').style.borderColor = 'var(--green-400)';
+        setTimeout(() => { initCatch(); goNext(screens.vault, screens.catch); }, 500);
+      } else {
+        showToast("Acesso Negado! Tente outra senha 🚫"); vib(100);
+      }
+    };
+
+    /* --- FASE 7: PEGA PEGA (Mais Difícil) --- */
+    let catchHits = 0, catchTimer;
+    function initCatch() {
+      const tg = document.getElementById('catch-target');
+      const area = document.getElementById('catch-area');
+      const counter = document.getElementById('catch-count');
+      
+      function runAway() {
+        tg.style.transform = `translate(${Math.random()*(area.clientWidth-60)}px, ${Math.random()*(area.clientHeight-60)}px)`;
+      }
+      
+      clearInterval(catchTimer);
+      catchTimer = setInterval(runAway, 400); // Bem mais rápido
+      runAway();
+
+      tg.onclick = () => {
+        catchHits++; vib(40); counter.textContent = catchHits;
+        if(catchHits >= 3) {
+          clearInterval(catchTimer); tg.style.display = 'none';
+          setTimeout(() => { initClicker(); goNext(screens.catch, screens.clicker); }, 400);
+        } else {
+          runAway(); 
+        }
+      };
+    }
+
+    /* --- FASE 8: CLICKER HARDCORE --- */
+    let clicks = 0, clickMax = 180, isClickerActive = false; // Exige muitos cliques rápidos
+    function initClicker() {
+      isClickerActive = true;
+      const btn = document.getElementById('clicker-btn');
+      const fill = document.getElementById('clicker-fill');
+      
+      const drainInterval = setInterval(() => {
+        if(isClickerActive && clicks > 0) {
+          clicks = Math.max(0, clicks - 4); // Cai muito rápido
+          fill.style.width = Math.min((clicks / clickMax) * 100, 100) + '%';
+        }
+      }, 150);
+
+      btn.onclick = () => {
+        clicks += 6; vib(20);
+        const pct = Math.min((clicks / clickMax) * 100, 100);
+        fill.style.width = pct + '%';
+        if(pct > 50) fill.style.background = "var(--purple-500)";
+        if(pct > 80) fill.style.background = "var(--blue-500)";
+        if (clicks >= clickMax) {
+          isClickerActive = false; btn.onclick = null; clearInterval(drainInterval);
+          setTimeout(() => { goNext(screens.clicker, screens.prePedido); }, 500);
+        }
+      };
+    }
+
+    /* --- TELA PRÉ-PEDIDO (Fofura & Senha) --- */
+    document.getElementById('pre-btn').onclick = () => {
+      const val = document.getElementById('pre-input').value.toLowerCase().trim();
+      if(val === 'luiz') {
+        vib(50);
+        startRunaway(); 
+        goNext(screens.prePedido, screens.pedido);
+      } else {
+        showToast("Errou feio! Quem te ama mais? 🤔"); vib(100);
+      }
+    };
+
+    /* --- CHEFÃO FINAL: BOTÃO FUJÃO --- */
+    function startRunaway() {
+      const no = document.getElementById('btn-no'), yes = document.getElementById('btn-yes');
+      no.onclick = (e) => {
+        e.preventDefault(); vib(50); no.style.position = 'fixed';
+        no.style.left = Math.max(10, Math.random() * (window.innerWidth - no.offsetWidth - 20)) + 'px';
+        no.style.top = Math.max(10, Math.random() * (window.innerHeight - no.offsetHeight - 20)) + 'px';
+        no.textContent = ["Tá maluca?!", "Clica no SIM", "Fujo mesmo🥷", "Te amo bobona"][Math.floor(Math.random()*4)];
+      };
+      yes.onclick = () => {
+        document.getElementById('sfx-win').volume = 0.4; document.getElementById('sfx-win').play().catch(()=>{});
+        goNext(screens.pedido, screens.success);
+        const end = Date.now() + 3500;
+        (function frame() {
+          confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0 }, colors: ['#9b5de5', '#3b82f6', '#ffffff'] });
+          confetti({ particleCount: 6, angle: 120, spread: 60, origin: { x: 1 }, colors: ['#9b5de5', '#3b82f6', '#ffffff'] });
+          if (Date.now() < end) requestAnimationFrame(frame);
+        }());
+      };
+    }
+  </script>
+</body>
+</html>
