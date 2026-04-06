@@ -68,18 +68,17 @@
                 </a>
 
                 <div class="nav-divider"></div>
-
-                <a href="./planos/" class="nav-link nav-link-highlight">Planos</a>
-                <a href="./planopv/" class="nav-link nav-link-highlight">Planos PV</a>
             </div>
 
             <div class="nav-actions hidden md:flex">
                 <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema">
                     <i class="fas fa-moon"></i>
                 </button>
-                <a href="./vip/" class="nav-cta">
-                    <i class="fas fa-crown"></i> Acesso VIP
-                </a>
+                <div class="nav-cta opacity-70 cursor-not-allowed border-yellow-500/30" title="Loja em manutenção">
+                    <i class="fas fa-store text-yellow-500/70"></i> 
+                    <span class="text-yellow-500/70">Loja</span>
+                    <span class="ml-2 bg-red-500/80 text-white px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-bold">Manutenção</span>
+                </div>
             </div>
 
             <div class="flex items-center gap-3 md:hidden">
@@ -100,9 +99,10 @@
                     Parcerias <span class="badge-novo">Novo</span>
                 </a>
                 <div class="w-full h-[1px] bg-white/10 my-2"></div>
-                <a href="./planos/" class="block text-main font-bold hover:text-yellow-500 transition">Planos</a>
-                <a href="./planopv/" class="block text-main font-bold hover:text-yellow-500 transition">Planos PV</a>
-                <a href="./vip/" class="block text-yellow-500 font-bold mt-2">Acesso VIP</a>
+                <div class="block text-yellow-500/50 font-bold mt-2 cursor-not-allowed flex items-center gap-2">
+                    <i class="fas fa-store"></i> Loja 
+                    <span class="bg-red-500 text-white px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-bold">Em Manutenção</span>
+                </div>
             </div>
         </div>
     </div>
@@ -126,17 +126,10 @@
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16 mt-4">
                 
-                <a href="./planos/" class="w-full md:w-auto px-8 py-3 glass-panel text-main font-bold rounded-full hover:scale-105 transition text-center">
-                    Plano Grupo
-                </a>
-                
-                <a href="./planopv/" class="w-full md:w-auto px-8 py-3 bg-yellow-600 text-white font-bold rounded-full hover:bg-yellow-500 hover:scale-105 transition shadow-[0_0_30px_rgba(202,138,4,0.4)] flex items-center justify-center gap-2">
-                    Plano PV <span class="bg-black/80 text-yellow-500 px-2 py-[2px] rounded-full text-[9px] uppercase tracking-widest animate-pulse font-black shadow-sm">Novo</span>
-                </a>
-
-                <a href="./vip/" class="w-full md:w-auto px-8 py-3 glass-panel text-main font-bold rounded-full hover:scale-105 transition text-center">
-                    Membro VIP
-                </a>
+                <div class="w-full md:w-auto px-8 py-3 bg-yellow-600/30 text-white/60 font-bold rounded-full flex items-center justify-center gap-3 cursor-not-allowed border border-yellow-500/20 backdrop-blur-sm">
+                    <i class="fas fa-store text-lg"></i> Acessar Loja 
+                    <span class="bg-red-500 text-white px-2 py-[2px] rounded-full text-[10px] uppercase tracking-widest font-black shadow-sm animate-pulse">Em Manutenção</span>
+                </div>
 
             </div>
 
@@ -254,10 +247,10 @@
                         <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
                         Termos de Uso
                     </a>
-                    <a href="./planos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-box-open text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
-                        Nossos Planos
-                    </a>
+                    <div class="text-sm text-gray-600 cursor-not-allowed flex items-center gap-2" title="Em Manutenção">
+                        <i class="fas fa-store text-gray-700 w-4 text-center"></i> 
+                        Loja (Em Manutenção)
+                    </div>
                 </div>
             </div>
 
