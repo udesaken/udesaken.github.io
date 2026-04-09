@@ -1,527 +1,683 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="scroll-smooth">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Solicite parceria para seu grupo WhatsApp e cresça com o ecossistema Udesaken.">
+    <meta name="theme-color" content="#000000">
+    
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Udesaken Group | Solicitar Parceria">
-    <meta property="og:description" content="Junte-se ao ecossistema Udesaken. Solicite parceria para o seu grupo, servidor ou envie uma proposta comercial.">
+    <meta property="og:title" content="Udesaken Group | Solicitar Parceria WhatsApp">
+    <meta property="og:description" content="Parceria oficial para grupos WhatsApp. Visibilidade, benefícios e crescimento.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitar Parceria | Udesaken Group</title>
-
-    <link rel="stylesheet" href="../style.css?v=4.0"> 
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' },
-                        main: 'var(--text-main)',
-                        muted: 'var(--text-muted)',
-                        gold: 'var(--accent)'
-                    },
-                    letterSpacing: { tight: '-0.02em' }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
+    
     <style>
-        .fade-in-form {
-            animation: fadeIn 0.4s ease-in-out forwards;
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(8, 8, 12, 0.85);
+            --border-glow: rgba(255, 255, 255, 0.06);
+            --border-glow-hover: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --accent-white: #ffffff;
+            --accent-dim: rgba(255, 255, 255, 0.1);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000000; 
+            color: var(--text-primary); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
         }
         
-        /* Estiliza o placeholder do input quando inválido (opcional para feedback visual) */
-        input:not(:placeholder-shown):invalid {
-            border-color: rgba(239, 68, 68, 0.5); /* Borda vermelha suave */
+        /* Canvas Universo Estrelado */
+        #universe-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
+        }
+
+        /* Glass Panel refinado */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .glass-panel:hover {
+            border-color: var(--border-glow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navbar refinada */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 24px;
+            transition: all 0.3s ease;
+        }
+        .nav-wrapper nav {
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 8px 20px;
+        }
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .nav-cta { 
+            background: rgba(255,255,255,0.08); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 100px; 
+            font-weight: 600; 
+            font-size: 13px;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-cta:hover { 
+            background: white; 
+            color: black; 
+            border-color: white;
+        }
+        .theme-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+        
+        /* Animações */
+        .fade-up { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+        }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+        
+        /* Inputs e Formulários */
+        input, select, textarea {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: white !important;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        input:hover, select:hover, textarea:hover {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: white !important;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.8) !important;
+        }
+        
+        /* Cards de seleção de parceria */
+        .parceria-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .parceria-card input:checked + div {
+            background: white !important;
+            color: black !important;
+            border-color: white !important;
+            box-shadow: 0 0 25px rgba(255,255,255,0.2);
+        }
+        .parceria-card input:checked + div .card-badge {
+            background: black !important;
+            color: white !important;
+        }
+        .parceria-card input:checked + div .benefits {
+            border-color: rgba(0,0,0,0.1) !important;
+            background: rgba(0,0,0,0.05) !important;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        
+        /* Badge */
+        .badge-vip {
+            background: white;
+            color: black;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+        
+        /* Botão principal */
+        .btn-primary {
+            background: white;
+            color: black;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        }
+        
+        /* Footer links */
+        .footer-link {
+            color: #4a4a4a;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
+            color: white;
         }
     </style>
+    <link rel="icon" type="image/png" href="../logousk.png">
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body>
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
+    <canvas id="universe-canvas"></canvas>
+
+    <!-- Navbar -->
+    <div class="nav-wrapper transition-all duration-300" id="navbar">
+        <nav>
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+            </a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
+                <button id="theme-btn" class="theme-toggle" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
+                <a href="../parcerias/" class="nav-cta"><i class="fas fa-handshake mr-2"></i> Nossos Parceiros</a>
+            </div>
+            <div class="flex md:hidden gap-3">
+                <button id="theme-btn-mobile" class="theme-toggle"><i class="fas fa-moon text-sm"></i></button>
+                <a href="../parcerias/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-handshake"></i></a>
+            </div>
+        </nav>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1190px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 cursor-pointer group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black group-hover:border-brand-gold/50 transition duration-500">
-                     <img src="../logousk1.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+    <main class="relative z-10 pt-32 pb-20">
+        <!-- Hero Section -->
+        <section class="text-center relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Parcerias Oficiais</span>
                 </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken
-                </span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-6">
-                <a href="/" class="px-5 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl text-sm font-semibold transition-all hover:bg-white/10 flex items-center gap-2 shadow-sm backdrop-blur-sm">
-                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar ao Site
-                </a>
-                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
+                    Parceria <span class="text-gradient">WhatsApp.</span>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+                    Faça parte do ecossistema Udesaken. Cresça com a gente, ganhe visibilidade e benefícios exclusivos para seu grupo.
+                </p>
             </div>
+        </section>
 
-            <div class="flex items-center gap-4 md:hidden">
-                <a href="/" class="px-3 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-lg text-xs font-semibold transition-all flex items-center gap-2">
-                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar
-                </a>
-                <button id="theme-btn-mobile" class="theme-toggle" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <section class="pt-32 pb-6 text-center relative z-10">
-        <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel border border-yellow-500/30">
-                <i class="fas fa-handshake text-yellow-500 text-xs"></i>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Portal de Parcerias</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black text-main mb-4 tracking-tighter leading-[1.1] drop-shadow-2xl">
-                Cresça com a <br>
-                <span class="text-gradient-gold">Udesaken.</span>
-            </h1>
-            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed mb-6">
-                Selecione o seu perfil abaixo e faça parte do nosso ecossistema.
-            </p>
-        </div>
-    </section>
-
-    <section class="py-4 relative mb-20 z-10">
-        <div class="max-w-[750px] mx-auto px-6 fade-up" style="animation-delay: 0.3s;">
-            
-            <div class="flex bg-black/40 p-1.5 rounded-2xl border border-white/10 mb-8 max-w-lg mx-auto relative glass-panel shadow-lg flex-wrap sm:flex-nowrap gap-1 sm:gap-0">
-                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
-                    <input type="radio" name="form_selector" value="comunidade" class="peer sr-only" checked>
-                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
-                        <i class="fab fa-whatsapp mr-1"></i> Grupos
+        <!-- Formulário Principal -->
+        <section class="py-12 relative">
+            <div class="max-w-[820px] mx-auto px-6 fade-up">
+                
+                <!-- Card Formulário WhatsApp -->
+                <div class="glass-panel rounded-3xl shadow-2xl border border-white/10 mb-8 overflow-hidden">
+                    <div class="p-6 md:p-8 border-b border-white/10 bg-gradient-to-r from-white/5 to-transparent">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-3xl text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl md:text-3xl font-black text-white">Solicitar Parceria</h2>
+                                <p class="text-gray-400 text-sm mt-1">Preencha os dados abaixo para iniciar sua parceria</p>
+                            </div>
+                        </div>
                     </div>
-                </label>
-                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
-                    <input type="radio" name="form_selector" value="discord" class="peer sr-only">
-                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-[#5865F2] peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(88,101,242,0.4)]">
-                        <i class="fab fa-discord mr-1"></i> Discord
-                    </div>
-                </label>
-                <label class="flex-1 text-center cursor-pointer relative z-10 min-w-[110px]">
-                    <input type="radio" name="form_selector" value="empresa" class="peer sr-only">
-                    <div class="py-3 rounded-xl text-xs sm:text-sm font-bold text-muted peer-checked:bg-yellow-600 peer-checked:text-white transition-all duration-300 peer-checked:shadow-[0_0_15px_rgba(202,138,4,0.4)]">
-                        <i class="fas fa-building mr-1"></i> Marcas
-                    </div>
-                </label>
-            </div>
-
-            <div id="container-comunidade" class="fade-in-form block">
-                <form id="form-parceria-comunidade" class="glass-panel p-8 md:p-10 rounded-[24px] shadow-2xl space-y-8 border border-white/10">
                     
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fab fa-whatsapp text-green-500"></i> Informações do Grupo
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome do grupo <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-users-cog absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" minlength="3" required placeholder="Ex: Resenha Elite" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Link do grupo <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-link absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="url" required pattern=".*(whatsapp\.com|wa\.me).*" title="Insira um link válido de convite do WhatsApp" placeholder="https://chat.whatsapp.com/..." class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <form id="form-parceria-comunidade" class="p-6 md:p-8 space-y-7">
+                        <!-- Dados do Grupo -->
+                        <div>
+                            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fas fa-users text-white/60 text-sm"></i> Informações do Grupo
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Qtd. de membros <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-user-plus absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="number" id="input-membros" required placeholder="Ex: Mínimo 100" min="100" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                    </div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Nome do grupo <span class="text-white">*</span></label>
+                                    <input type="text" name="nomeGrupo" required minlength="3" placeholder="Ex: Resenha Elite" class="w-full px-4 py-3">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Responsável <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" minlength="3" required placeholder="Seu nick" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Contato Pessoal <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-address-book absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" required pattern="^(\+?[0-9\s\-\(\)]{10,20}|@?[a-zA-Z0-9_\.]{2,32})$" title="Insira um número válido (ex: 21999999999) ou um @usuario de Discord" placeholder="Número BR ou @discord" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                    </div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Link de convite <span class="text-white">*</span></label>
+                                    <input type="url" name="linkGrupo" required pattern=".*(whatsapp\.com|wa\.me).*" placeholder="https://chat.whatsapp.com/..." class="w-full px-4 py-3">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Categoria <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-layer-group absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30 z-10"></i>
-                                        <select required class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-10 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm appearance-none cursor-pointer relative z-0">
-                                            <option value="" disabled selected class="bg-[#050505] text-muted">Selecione...</option>
-                                            <option value="chat" class="bg-[#050505] text-white">Chat / Resenha</option>
-                                            <option value="jogos" class="bg-[#050505] text-white">Jogos</option>
-                                            <option value="esportes" class="bg-[#050505] text-white">Esportes</option>
-                                            <option value="vendas" class="bg-[#050505] text-white">Vendas / Negócios</option>
-                                            <option value="outros" class="bg-[#050505] text-white">Outros</option>
-                                        </select>
-                                        <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 pointer-events-none"></i>
-                                    </div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Quantidade de membros <span class="text-white">*</span></label>
+                                    <input type="number" name="membros" id="input-membros" required min="100" placeholder="Mínimo 100" class="w-full px-4 py-3">
+                                    <p class="text-[10px] text-gray-500 mt-1.5" id="membros-hint">🔹 Mínimo: 100 membros</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-chart-line text-green-500"></i> Atividade do Grupo
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-3">Seu grupo é ativo diariamente?</label>
-                                <div class="flex gap-6">
-                                    <label class="flex items-center gap-2 cursor-pointer group">
-                                        <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-yellow-500" checked>
-                                        <span class="text-main group-hover:text-yellow-500 transition font-medium">Sim</span>
-                                    </label>
-                                    <label class="flex items-center gap-2 cursor-pointer group">
-                                        <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-yellow-500">
-                                        <span class="text-main group-hover:text-yellow-500 transition font-medium">Não</span>
-                                    </label>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Responsável (seu nome) <span class="text-white">*</span></label>
+                                    <input type="text" name="responsavel" required placeholder="Seu nick ou nome" class="w-full px-4 py-3">
                                 </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Média de msgs/dia <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-comment-dots absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="number" required placeholder="Ex: 800" min="0" class="w-full bg-black/20 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Contato (WhatsApp/Discord) <span class="text-white">*</span></label>
+                                    <input type="text" name="contato" required placeholder="Número com DDD ou @user" class="w-full px-4 py-3">
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-crown text-yellow-500"></i> Tipo de Parceria
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                            <label class="cursor-pointer relative flex">
-                                <input type="radio" name="tipo_parceria" value="basica" class="peer sr-only" checked>
-                                <div class="p-5 rounded-xl border border-white/10 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full flex flex-col justify-between">
-                                    <div>
-                                        <div class="font-bold text-main mb-3 text-lg">Básica</div>
-                                        <ul class="text-xs text-muted space-y-2 mb-4">
-                                            <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 100 membros</li>
-                                            <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>2 Divulgações semanais</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-black/30 p-2 rounded-lg border border-white/5">
-                                        <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">🎁 Benefícios</div>
-                                        <div class="text-xs text-main">Desconto no Bot e Lista no site.</div>
-                                    </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Categoria <span class="text-white">*</span></label>
+                                    <select name="categoria" required class="w-full px-4 py-3">
+                                        <option value="" disabled selected>Selecione uma categoria</option>
+                                        <option value="chat">💬 Chat / Resenha</option>
+                                        <option value="jogos">🎮 Jogos</option>
+                                        <option value="esportes">⚽ Esportes</option>
+                                        <option value="vendas">💰 Vendas / Negócios</option>
+                                        <option value="outros">🌟 Outros</option>
+                                    </select>
                                 </div>
-                            </label>
-
-                            <label class="cursor-pointer relative flex">
-                                <input type="radio" name="tipo_parceria" value="oficial" class="peer sr-only">
-                                <div class="p-5 rounded-xl border border-yellow-500/30 bg-black/20 peer-checked:border-yellow-500 peer-checked:bg-yellow-500/10 transition-all hover:bg-white/5 w-full relative overflow-hidden flex flex-col justify-between">
-                                    <div class="absolute -right-6 top-3 bg-yellow-600 text-[9px] font-black text-white uppercase tracking-wider py-1 px-8 rotate-45 shadow-lg">VIP</div>
-                                    <div>
-                                        <div class="font-bold text-yellow-500 mb-3 text-lg">Oficial</div>
-                                        <ul class="text-xs text-muted space-y-2 mb-4">
-                                            <li><i class="fas fa-user-friends text-yellow-500/70 mr-2"></i>Mínimo de 250 membros</li>
-                                            <li><i class="fas fa-bullhorn text-yellow-500/70 mr-2"></i>4 Divulgações semanais</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20 mt-2">
-                                        <div class="text-[10px] font-bold text-yellow-500 uppercase tracking-wider mb-1">👑 Benefícios VIP</div>
-                                        <div class="text-xs text-main">Desconto Máximo, Destaque no topo.</div>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        
-                        <div class="bg-black/40 border border-white/5 rounded-xl p-4 flex items-start gap-4">
-                            <div class="bg-yellow-500/20 p-2 rounded-lg">
-                                <i class="fas fa-level-up-alt text-yellow-500"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-bold text-main mb-1">Deseja fazer um Upgrade?</h4>
-                                <p class="text-xs text-muted leading-relaxed">Grupos com <strong class="text-yellow-500">Parceria Básica</strong> que atingirem 250 membros podem solicitar o upgrade para Oficial entrando em contato com a equipe. Avaliaremos o cumprimento das regras e a atividade do grupo.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-scroll text-yellow-500"></i> Regras Gerais Obrigatórias
-                        </h3>
-                        <div class="bg-black/30 border border-white/10 rounded-xl p-5 mb-5">
-                            <p class="text-xs text-muted mb-4 font-semibold">Para manter a parceria ativa, o grupo deve seguir rigorosamente:</p>
-                            
-                            <ul class="text-sm text-main space-y-3 mb-6">
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir conteúdo +18 (NSFW).</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não permitir preconceito, discriminação, racismo, homofobia ou discurso de ódio.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não ser um grupo de spam, flood ou autopromoção excessiva.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-ban text-red-500 mt-1"></i> <span>Não divulgar casas de apostas, cassinos, jogos de azar ou scams.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> <span>Manter o grupo ativo e bem administrado.</span></li>
-                                <li class="flex items-start gap-3"><i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i> <span>O link do Discord da Udesaken não pode ser removido da descrição.</span></li>
-                            </ul>
-
-                            <div class="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
-                                <h4 class="text-[11px] font-bold text-red-500 mb-2 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-gavel"></i> Consequências do descumprimento
-                                </h4>
-                                <ul class="text-xs text-red-200/70 space-y-2">
-                                    <li><strong class="text-red-400">1ª Infração:</strong> Aviso + suspensão dos benefícios por 7 dias.</li>
-                                    <li><strong class="text-red-400">2ª Infração:</strong> Cancelamento imediato da parceria.</li>
-                                </ul>
                             </div>
                         </div>
                         
-                        <label class="flex items-center gap-3 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/5 hover:border-yellow-500/50 transition mt-4">
-                            <input type="checkbox" required class="w-5 h-5 accent-yellow-500 rounded cursor-pointer flex-shrink-0">
-                            <span class="text-sm text-main group-hover:text-yellow-500 transition font-medium">Eu li as regras, entendo as consequências e concordo em cumpri-las.</span>
-                        </label>
+                        <div class="border-t border-white/10 my-2"></div>
+                        
+                        <!-- Engajamento -->
+                        <div>
+                            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fas fa-chart-line text-white/60 text-sm"></i> Atividade do Grupo
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-2">Grupo ativo diariamente?</label>
+                                    <div class="flex gap-8">
+                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                            <input type="radio" name="ativo" value="sim" class="w-4 h-4 accent-white" checked>
+                                            <span class="text-white/80 group-hover:text-white transition text-sm">Sim</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                            <input type="radio" name="ativo" value="nao" class="w-4 h-4 accent-white">
+                                            <span class="text-white/80 group-hover:text-white transition text-sm">Não</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-gray-400 mb-1.5">Média de mensagens por dia <span class="text-white">*</span></label>
+                                    <input type="number" name="mensagens" required placeholder="Ex: 500" class="w-full px-4 py-3">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-white/10 my-2"></div>
+                        
+                        <!-- Tipo de Parceria -->
+                        <div>
+                            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fas fa-crown text-white/60 text-sm"></i> Tipo de Parceria
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <label class="parceria-card cursor-pointer">
+                                    <input type="radio" name="tipo_parceria" value="basica" class="sr-only" checked>
+                                    <div class="p-5 rounded-2xl border border-white/10 bg-black/40 transition-all h-full">
+                                        <div class="font-black text-white text-xl mb-3">Básica</div>
+                                        <ul class="text-sm text-gray-300 space-y-2 mb-4">
+                                            <li class="flex items-center gap-2"><i class="fas fa-user-friends text-white/40 w-4"></i> Mínimo 100 membros</li>
+                                            <li class="flex items-center gap-2"><i class="fas fa-bullhorn text-white/40 w-4"></i> 2 divulgações/semana</li>
+                                        </ul>
+                                        <div class="benefits bg-white/5 p-3 rounded-xl border border-white/5 mt-2">
+                                            <div class="text-[11px] font-bold text-white/70 uppercase tracking-wide mb-1">🎁 Benefícios</div>
+                                            <div class="text-xs text-gray-300">Desconto no Bot + Lista no site</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                
+                                <label class="parceria-card cursor-pointer">
+                                    <input type="radio" name="tipo_parceria" value="oficial" class="sr-only">
+                                    <div class="p-5 rounded-2xl border border-white/20 bg-black/40 transition-all h-full relative overflow-hidden">
+                                        <div class="absolute top-3 right-3"><span class="badge-vip">VIP</span></div>
+                                        <div class="font-black text-white text-xl mb-3">Oficial</div>
+                                        <ul class="text-sm text-gray-300 space-y-2 mb-4">
+                                            <li class="flex items-center gap-2"><i class="fas fa-gem text-white/40 w-4"></i> Mínimo 250 membros</li>
+                                            <li class="flex items-center gap-2"><i class="fas fa-bullhorn text-white/40 w-4"></i> 4 divulgações/semana</li>
+                                        </ul>
+                                        <div class="benefits bg-white/10 p-3 rounded-xl border border-white/10 mt-2">
+                                            <div class="text-[11px] font-bold text-white uppercase tracking-wide mb-1">👑 Benefícios VIP</div>
+                                            <div class="text-xs text-gray-200">Destaque no site + Desconto Máximo</div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="mt-5 bg-white/5 rounded-xl p-4 text-xs text-gray-400 border border-white/5 flex items-start gap-3">
+                                <i class="fas fa-info-circle text-white/40 mt-0.5"></i>
+                                <span>Grupos com parceria Básica que atingirem 250 membros podem solicitar upgrade para Oficial.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-white/10 my-2"></div>
+                        
+                        <!-- Regras -->
+                        <div>
+                            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="fas fa-shield-alt text-white/60 text-sm"></i> Regras da Parceria
+                            </h3>
+                            <div class="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-2.5 text-sm text-gray-300">
+                                <p class="flex items-start gap-2.5"><i class="fas fa-ban text-white/40 mt-0.5 text-xs"></i> Proibido conteúdo +18 (NSFW)</p>
+                                <p class="flex items-start gap-2.5"><i class="fas fa-ban text-white/40 mt-0.5 text-xs"></i> Sem preconceito, racismo, homofobia ou discurso de ódio</p>
+                                <p class="flex items-start gap-2.5"><i class="fas fa-ban text-white/40 mt-0.5 text-xs"></i> Nada de spam, flood ou autopromoção excessiva</p>
+                                <p class="flex items-start gap-2.5"><i class="fas fa-ban text-white/40 mt-0.5 text-xs"></i> Proibido divulgar cassinos, apostas ou scams</p>
+                                <p class="flex items-start gap-2.5"><i class="fas fa-check-circle text-white/40 mt-0.5 text-xs"></i> Manter o grupo ativo e bem administrado</p>
+                                <p class="flex items-start gap-2.5"><i class="fas fa-link text-white/40 mt-0.5 text-xs"></i> Link do site Udesaken deve estar na descrição</p>
+                            </div>
+                            <div class="bg-red-500/5 border border-red-500/15 rounded-xl p-4 mt-4">
+                                <p class="text-[11px] font-bold text-red-400 uppercase tracking-wide flex items-center gap-2"><i class="fas fa-gavel"></i> Consequências</p>
+                                <p class="text-xs text-gray-400 mt-1.5">1ª infração: Aviso + suspensão dos benefícios por 7 dias. 2ª infração: Cancelamento imediato da parceria.</p>
+                            </div>
+                            <label class="flex items-center gap-3 mt-6 cursor-pointer group bg-white/5 p-4 rounded-xl border border-white/10 hover:border-white/30 transition-all">
+                                <input type="checkbox" required class="w-5 h-5 accent-white rounded cursor-pointer">
+                                <span class="text-sm text-white/80 group-hover:text-white transition">Li e concordo com todas as regras e consequências.</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full py-4 rounded-xl flex items-center justify-center gap-3 text-lg font-black">
+                            Solicitar Parceria WhatsApp <i class="fab fa-whatsapp text-xl"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Card informativo Discord (apenas redirecionamento) -->
+                <div class="glass-panel rounded-2xl p-7 text-center border border-white/10 bg-gradient-to-br from-black/60 to-white/5">
+                    <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4">
+                        <i class="fab fa-discord text-2xl text-white/70"></i>
                     </div>
-
-                    <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
-                        Solicitar Parceria de Grupo <i class="fas fa-paper-plane text-sm"></i>
-                    </button>
-                </form>
-            </div>
-
-            <div id="container-discord" class="hidden fade-in-form text-center py-6">
-                <div class="glass-panel p-10 md:p-14 rounded-[24px] border border-[#5865F2]/30 bg-gradient-to-br from-black/80 to-[#5865F2]/10 shadow-2xl relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#5865F2]/20 blur-[60px] rounded-full"></div>
-                    
-                    <i class="fab fa-discord text-6xl text-[#5865F2] mb-6 drop-shadow-[0_0_15px_rgba(88,101,242,0.5)] relative z-10"></i>
-                    <h3 class="text-2xl font-bold text-main mb-3 relative z-10">Parceria de Servidores</h3>
-                    <p class="text-muted text-sm mb-8 leading-relaxed max-w-md mx-auto relative z-10">
-                        As solicitações de parceria para servidores do Discord são tratadas com exclusividade <strong>dentro do nosso próprio servidor</strong>. Acesse a comunidade, leia as diretrizes e abra um ticket!
+                    <h3 class="text-lg font-bold text-white mb-2">Servidor Discord</h3>
+                    <p class="text-gray-400 text-sm mb-5 max-w-md mx-auto leading-relaxed">
+                        Parcerias para servidores Discord são realizadas exclusivamente dentro da nossa comunidade. Acesse e abra um ticket na área #parcerias.
                     </p>
-                    
-                    <a href="https://discord.gg/udesaken" target="_blank" class="w-full sm:w-auto inline-flex py-4 px-8 bg-[#5865F2] text-white font-bold rounded-xl hover:bg-[#4752C4] transition shadow-[0_0_20px_rgba(88,101,242,0.3)] hover:shadow-[0_0_30px_rgba(88,101,242,0.5)] items-center justify-center gap-2 relative z-10">
-                        <i class="fab fa-discord text-lg"></i> Abrir Ticket no Discord
+                    <a href="https://discord.gg/udesaken" target="_blank" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white/10 border border-white/20 text-white rounded-xl font-semibold hover:bg-white hover:text-black transition-all duration-300">
+                        <i class="fab fa-discord"></i> Acessar Discord
                     </a>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <div id="container-empresa" class="hidden fade-in-form">
-                <form id="form-parceria-empresa" class="glass-panel p-8 md:p-10 rounded-[24px] shadow-2xl space-y-8 border border-yellow-500/20 bg-gradient-to-br from-black/80 to-yellow-900/10">
-                    
-                    <div class="bg-yellow-500/10 border border-yellow-500/20 p-5 rounded-xl mb-6 flex items-start gap-4">
-                        <i class="fas fa-briefcase text-2xl text-yellow-500 mt-1"></i>
-                        <div>
-                            <h4 class="text-lg font-bold text-main mb-1">Proposta Comercial</h4>
-                            <p class="text-sm text-muted">A Udesaken está aberta para patrocínios, permutas e negócios estratégicos.</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-building text-yellow-500"></i> Dados da Marca
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Nome da Empresa <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-tag absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" minlength="2" placeholder="Sua Empresa" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Site ou Instagram <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-globe absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="url" title="A URL deve começar com http:// ou https://" placeholder="https://" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-semibold text-muted mb-1">Segmento / Nicho <span class="text-yellow-500">*</span></label>
-                                    <div class="relative">
-                                        <i class="fas fa-store absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                        <input type="text" minlength="3" placeholder="Ex: Tecnologia" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-id-badge text-yellow-500"></i> Seu Contato
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Representante <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-user-tie absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" minlength="3" placeholder="Nome completo" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">Cargo <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-sitemap absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="text" minlength="2" placeholder="Ex: Marketing" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">E-mail Corporativo <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fas fa-envelope absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="email" title="Insira um e-mail válido contendo @" placeholder="contato@empresa.com" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-muted mb-1">WhatsApp <span class="text-yellow-500">*</span></label>
-                                <div class="relative">
-                                    <i class="fab fa-whatsapp absolute left-4 top-1/2 transform -translate-y-1/2 text-white/30"></i>
-                                    <input type="tel" pattern="^\+?[0-9\s\-\(\)]{10,20}$" title="Insira um número de telefone válido (ex: +55 21 99999-9999)" placeholder="+55 ( )" class="w-full bg-black/40 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <div>
-                        <h3 class="text-xl font-bold text-main mb-4 flex items-center gap-2">
-                            <i class="fas fa-handshake text-yellow-500"></i> Sobre a Parceria
-                        </h3>
-                        <div>
-                            <label class="block text-sm font-semibold text-muted mb-1">Sua proposta <span class="text-yellow-500">*</span></label>
-                            <textarea minlength="20" rows="4" placeholder="Conte-nos como podemos trabalhar juntos..." class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-main focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 outline-none transition backdrop-blur-sm resize-none"></textarea>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="w-full py-4 bg-yellow-600 text-white font-bold rounded-xl hover:bg-yellow-500 transition shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)] flex items-center justify-center gap-2">
-                        Enviar Proposta Comercial <i class="fas fa-rocket text-sm"></i>
-                    </button>
-                </form>
+    <!-- Modal de Sucesso -->
+    <div id="modal-sucesso" class="fixed inset-0 z-[1000] bg-black/90 backdrop-blur-md hidden items-center justify-center p-6 transition-all duration-300">
+        <div class="glass-panel max-w-md w-full p-8 rounded-2xl text-center border border-white/20">
+            <div class="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-5">
+                <i class="fas fa-check text-4xl text-white"></i>
             </div>
-
-        </div>
-    </section>
-
-    <div id="modal-sucesso-empresa" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-6 opacity-0 transition-opacity duration-300">
-        <div class="glass-panel p-8 md:p-12 rounded-[24px] border border-yellow-500/30 text-center max-w-md w-full scale-95 transition-transform duration-300 shadow-2xl" id="modal-content">
-            <div class="w-20 h-20 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                <i class="fas fa-check text-4xl text-green-500"></i>
-            </div>
-            <h3 class="text-2xl font-black text-main mb-3">Proposta Enviada!</h3>
-            <p class="text-muted text-sm leading-relaxed mb-8">Recebemos os dados da sua marca com sucesso. Nossa equipe comercial avaliará a proposta e entrará em contato com você em até <strong class="text-yellow-500">24 horas</strong>.</p>
-            <a href="/" class="w-full py-4 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl font-bold transition-all hover:bg-white/10 flex items-center justify-center gap-2 shadow-sm">
-                Voltar ao Início
-            </a>
+            <h3 class="text-2xl font-black text-white mb-3">Solicitação Enviada!</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">Recebemos sua solicitação com sucesso. Nossa equipe analisará e entrará em contato em breve. Bem-vindo ao ecossistema Udesaken!</p>
+            <button id="close-modal-btn" class="mt-6 w-full py-3 bg-white text-black rounded-xl font-bold hover:bg-gray-200 transition">Fechar</button>
         </div>
     </div>
 
-    <footer class="py-10 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
+    <!-- Footer -->
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10 mt-10">
         <div class="max-w-[1100px] mx-auto px-6 text-center">
-            <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                Udesaken Group &copy; 2026 • Todos os direitos reservados
-            </p>
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="/" class="footer-link text-xs font-medium">Início</a>
+                <a href="../planos/" class="footer-link text-xs font-medium">Planos</a>
+                <a href="../parcerias/" class="footer-link text-xs font-medium">Parceiros</a>
+                <a href="../termos/" class="footer-link text-xs font-medium">Termos</a>
+            </div>
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
         </div>
     </footer>
 
-    <script src="../script.js?v=4.0"></script>
-    
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const radiosParceria = document.querySelectorAll('input[name="tipo_parceria"]');
-            const inputMembros = document.getElementById('input-membros');
-
-            if(radiosParceria && inputMembros) {
-                radiosParceria.forEach(radio => {
-                    radio.addEventListener('change', (e) => {
-                        if (e.target.value === 'oficial') {
-                            inputMembros.min = "250";
-                            inputMembros.placeholder = "Ex: Mínimo 250";
-                        } else {
-                            inputMembros.min = "100";
-                            inputMembros.placeholder = "Ex: Mínimo 100";
-                        }
-                    });
+        // ==================== CANVAS UNIVERSO ESTRELADO ====================
+        const canvas = document.getElementById('universe-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars;
+        
+        function initStars() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+            for(let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
             }
-
-            const formSelector = document.querySelectorAll('input[name="form_selector"]');
-            const containerComunidade = document.getElementById('container-comunidade');
-            const containerDiscord = document.getElementById('container-discord');
-            const containerEmpresa = document.getElementById('container-empresa');
+        }
+        
+        function drawStars() {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, width, height);
             
-            const inputsComunidade = containerComunidade.querySelectorAll('input, select, textarea');
-            const inputsEmpresa = containerEmpresa.querySelectorAll('input, select, textarea');
+            for(let i = 0; i < stars.length; i++) {
+                let s = stars[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                
+                if(s.x < 0) s.x = width;
+                if(s.x > width) s.x = 0;
+                if(s.y < 0) s.y = height;
+                if(s.y > height) s.y = 0;
+                
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
+                ctx.fill();
+                
+                for(let j = i + 1; j < stars.length; j++) {
+                    let s2 = stars[j];
+                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
+                    if(dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
+                        ctx.lineWidth = 0.4;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { initStars(); });
+        initStars();
+        drawStars();
 
-            function toggleForms(selected) {
-                // Esconde tudo primeiro
-                [containerComunidade, containerDiscord, containerEmpresa].forEach(el => {
-                    el.classList.add('hidden');
-                    el.classList.remove('block');
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            else navbar.classList.remove('glass-nav');
+        });
+
+        // ==================== FADE-UP OBSERVER ====================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ==================== TEMA CLARO/ESCURO ====================
+        const themeBtns = document.querySelectorAll('#theme-btn, #theme-btn-mobile');
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('udesaken_theme', theme);
+            if(theme === 'light') {
+                document.body.style.backgroundColor = '#f0f0f0';
+                document.body.style.color = '#000';
+            } else {
+                document.body.style.backgroundColor = '#000';
+                document.body.style.color = '#fff';
+            }
+        }
+        const savedTheme = localStorage.getItem('udesaken_theme');
+        if(savedTheme) applyTheme(savedTheme);
+        else applyTheme('dark');
+        
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                applyTheme(current === 'light' ? 'dark' : 'light');
+            });
+        });
+
+        // ==================== WEBHOOK E ENVIO ====================
+        const form = document.getElementById('form-parceria-comunidade');
+        const modal = document.getElementById('modal-sucesso');
+        const closeModal = document.getElementById('close-modal-btn');
+        const webhookURL = atob('aHR0cHM6Ly9hcGktdWRlc2FrZW4u' + 'c3F1YXJld2ViLmFwcC9hcGkvcGFyY2VyaWE=');
+        
+        async function enviarSolicitacao(formElement, payload) {
+            const btn = formElement.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Enviando... <i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
                 });
                 
-                // Desobriga todo mundo
-                inputsComunidade.forEach(el => { el.required = false; });
-                inputsEmpresa.forEach(el => { el.required = false; });
-
-                // Mostra só o que foi clicado
-                if (selected === 'comunidade') {
-                    containerComunidade.classList.remove('hidden');
-                    containerComunidade.classList.add('block');
-                    inputsComunidade.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
-                } 
-                else if (selected === 'discord') {
-                    containerDiscord.classList.remove('hidden');
-                    containerDiscord.classList.add('block');
+                if(response.ok) {
+                    modal.classList.remove('hidden');
+                    modal.style.display = 'flex';
+                    formElement.reset();
+                    setTimeout(() => {
+                        modal.style.opacity = '1';
+                    }, 10);
+                } else {
+                    throw new Error('Erro na API');
                 }
-                else if (selected === 'empresa') {
-                    containerEmpresa.classList.remove('hidden');
-                    containerEmpresa.classList.add('block');
-                    inputsEmpresa.forEach(el => { if(el.hasAttribute('data-req')) el.required = true; });
+            } catch(error) {
+                console.error('Erro:', error);
+                alert('❌ Ocorreu um erro ao enviar sua solicitação. Tente novamente mais tarde.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nomeGrupo = form.querySelector('[name="nomeGrupo"]').value;
+            const linkGrupo = form.querySelector('[name="linkGrupo"]').value;
+            const membros = form.querySelector('[name="membros"]').value;
+            const responsavel = form.querySelector('[name="responsavel"]').value;
+            const contato = form.querySelector('[name="contato"]').value;
+            const mensagens = form.querySelector('[name="mensagens"]').value;
+            const categoriaSelect = form.querySelector('[name="categoria"]');
+            const categoria = categoriaSelect.options[categoriaSelect.selectedIndex]?.text || 'Outros';
+            const ativo = form.querySelector('[name="ativo"]:checked').value;
+            const tipoParceria = form.querySelector('[name="tipo_parceria"]:checked').value;
+            const isOficial = tipoParceria === 'oficial';
+            
+            const payload = {
+                embeds: [{
+                    title: isOficial ? "👑 NOVA PARCERIA OFICIAL - WhatsApp" : "🤝 NOVA PARCERIA BÁSICA - WhatsApp",
+                    color: isOficial ? 0xFFFFFF : 0xAAAAAA,
+                    fields: [
+                        { name: "📛 Nome do Grupo", value: nomeGrupo, inline: true },
+                        { name: "👥 Membros", value: membros, inline: true },
+                        { name: "📂 Categoria", value: categoria, inline: true },
+                        { name: "📈 Atividade", value: `${ativo === 'sim' ? '✅ Ativo' : '❌ Inativo'} (${mensagens} msgs/dia)`, inline: true },
+                        { name: "👤 Responsável", value: responsavel, inline: true },
+                        { name: "📱 Contato", value: contato, inline: true },
+                        { name: "🔗 Link do Grupo", value: linkGrupo, inline: false }
+                    ],
+                    thumbnail: {
+                        url: isOficial ? "https://udesaken.site/uskcoroa.png" : "https://udesaken.site/logousk.png"
+                    },
+                    footer: { text: "Udesaken Group • Sistema de Parcerias WhatsApp" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            
+            enviarSolicitacao(form, payload);
+        });
+        
+        closeModal?.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        });
+        
+        // ==================== MÍNIMO DE MEMBROS DINÂMICO ====================
+        const tipoRadios = document.querySelectorAll('input[name="tipo_parceria"]');
+        const inputMembros = document.getElementById('input-membros');
+        const membrosHint = document.getElementById('membros-hint');
+        
+        function updateMembrosMin() {
+            const selected = document.querySelector('input[name="tipo_parceria"]:checked');
+            if(selected && selected.value === 'oficial') {
+                inputMembros.min = "250";
+                membrosHint.innerHTML = '🔹 Mínimo: 250 membros (parceria oficial)';
+                if(parseInt(inputMembros.value) < 250 && inputMembros.value !== '') {
+                    inputMembros.value = '';
+                }
+            } else {
+                inputMembros.min = "100";
+                membrosHint.innerHTML = '🔹 Mínimo: 100 membros';
+                if(parseInt(inputMembros.value) < 100 && inputMembros.value !== '') {
+                    inputMembros.value = '';
                 }
             }
-
-            inputsComunidade.forEach(el => { if(el.required) el.setAttribute('data-req', 'true'); });
-            inputsEmpresa.forEach(el => { if(el.hasAttribute('required')) el.setAttribute('data-req', 'true'); });
-
-            formSelector.forEach(radio => {
-                radio.addEventListener('change', (e) => { toggleForms(e.target.value); });
-            });
-
-            toggleForms('comunidade');
-        });
+        }
+        
+        tipoRadios.forEach(radio => radio.addEventListener('change', updateMembrosMin));
+        updateMembrosMin();
     </script>
 </body>
 </html>
