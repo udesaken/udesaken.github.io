@@ -4,280 +4,491 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Automação Premium">
     <meta property="og:description" content="O futuro da sua comunidade. alta performance e ferramentas exclusivas.">
-    
     <meta property="og:image" content="https://udesaken.site/logousk.png">
-    
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Udesaken Group | Automação Premium</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5404251974095223" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' }
-                    },
-                    letterSpacing: { tight: '-0.02em' }
+                    colors: { brand: { black: '#000000', white: '#ffffff', gray: '#111111' } },
+                    letterSpacing: { tight: '-0.02em', widest: '0.15em' }
                 }
             }
         }
     </script>
+
+    <style>
+        html, body {
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Canvas sempre atrás */
+        #universe-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: #000000;
+        }
+
+        /* TODO conteúdo acima do canvas */
+        #navbar, section, footer, #audio-player-container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* fade-up: visível por padrão — JS adiciona animação depois */
+        .fade-up {
+            opacity: 1;
+            transform: none;
+        }
+
+        .glass-panel {
+            background: rgba(10,10,10,0.6);
+            backdrop-filter: blur(24px) saturate(120%);
+            -webkit-backdrop-filter: blur(24px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .glass-panel:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.03);
+        }
+
+        .text-gradient-mono {
+            background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navbar */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 999;
+            padding: 12px 24px;
+        }
+        .nav-wrapper nav {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 24px;
+            background: rgba(10,10,10,0.6);
+            backdrop-filter: blur(28px) saturate(120%);
+            -webkit-backdrop-filter: blur(28px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 10px 20px 10px 16px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
+        }
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0,0,0,0.9);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        #mobile-menu {
+            position: absolute;
+            top: 70px; left: 24px; width: calc(100% - 48px);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(5,5,5,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .grayscale-hover { filter: grayscale(100%); opacity: 0.8; transition: all 0.5s; }
+        .grayscale-hover:hover { opacity: 1; filter: grayscale(0%) brightness(150%); }
+
+        ::-webkit-scrollbar { width: 6px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+    </style>
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body class="antialiased selection:bg-white/20 selection:text-white">
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
-    </div>
+    <!-- ── CANVAS GARGÂNTUA ── -->
+    <canvas id="universe-canvas"></canvas>
 
+    <!-- ── NAVBAR ── -->
     <div class="nav-wrapper transition-all duration-300" id="navbar">
         <nav>
-            <a href="#" class="nav-logo group">
-                <div class="nav-logo-icon group-hover:border-yellow-500/50 transition duration-500">
-                    <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+            <a href="#" class="group flex items-center gap-3">
+                <div class="w-8 h-8 rounded border border-white/10 overflow-hidden group-hover:border-white/50 transition duration-500 bg-black">
+                    <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover filter grayscale opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="nav-logo-text group-hover:text-yellow-500 transition">Udesaken</span>
+                <span class="font-bold text-white group-hover:text-gray-300 transition tracking-tight">Udesaken</span>
             </a>
 
-            <div class="nav-links hidden md:flex">
-                <a href="./comandos/" class="nav-link">
-                    <i class="fas fa-terminal" style="font-size:11px; opacity:0.7;"></i> Comandos
+            <div class="hidden md:flex gap-6">
+                <a href="./comandos/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fas fa-terminal text-[11px] opacity-70"></i> Comandos
                 </a>
-                <a href="./equipe/" class="nav-link">
-                    <i class="fas fa-users" style="font-size:11px; opacity:0.7;"></i> Equipe
+                <a href="./equipe/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fas fa-users text-[11px] opacity-70"></i> Equipe
                 </a>
-                <a href="./parcerias/" class="nav-link group">
-                    Parcerias <span class="badge-novo">Novo</span>
+                <a href="./parcerias/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2 group">
+                    Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[9px] uppercase tracking-widest font-bold group-hover:bg-white group-hover:text-black transition">Novo</span>
                 </a>
-
-                <div class="nav-divider"></div>
             </div>
 
-            <div class="nav-actions hidden md:flex">
-                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <div class="nav-cta opacity-70 cursor-not-allowed border-yellow-500/30" title="Loja em manutenção">
-                    <i class="fas fa-store text-yellow-500/70"></i> 
-                    <span class="text-yellow-500/70">Loja</span>
-                    <span class="ml-2 bg-red-500/80 text-white px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-bold">Manutenção</span>
+            <div class="hidden md:flex items-center gap-4">
+                <div class="flex items-center gap-2 px-3 py-1.5 bg-white text-black font-bold rounded cursor-not-allowed shadow-[0_0_15px_rgba(255,255,255,0.2)]" title="Loja em manutenção">
+                    <i class="fas fa-store"></i>
+                    <span class="text-xs">Loja</span>
+                    <span class="ml-1 border border-black text-black px-1 py-0.5 text-[8px] uppercase tracking-widest font-black">Manutenção</span>
                 </div>
             </div>
 
             <div class="flex items-center gap-3 md:hidden">
-                <button id="theme-btn-mobile" class="theme-toggle" aria-label="Alternar Tema">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-                <button id="mobile-menu-btn" class="text-main p-2">
+                <button id="mobile-menu-btn" class="text-white p-2">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </nav>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute shadow-2xl">
+
+        <div id="mobile-menu" class="hidden">
             <div class="px-6 py-6 space-y-4">
-                <a href="./comandos/" class="block text-muted font-medium hover:text-white transition">Comandos</a>
-                <a href="./equipe/" class="block text-muted font-medium hover:text-white transition">Equipe</a>
-                <a href="./parcerias/" class="block text-muted font-medium flex items-center gap-2 group">
-                    Parcerias <span class="badge-novo">Novo</span>
+                <a href="./comandos/" class="block text-gray-400 font-medium hover:text-white transition">Comandos</a>
+                <a href="./equipe/" class="block text-gray-400 font-medium hover:text-white transition">Equipe</a>
+                <a href="./parcerias/" class="block text-gray-400 font-medium flex items-center gap-2">
+                    Parcerias <span class="bg-white/10 text-white px-1.5 py-0.5 rounded text-[9px] uppercase font-bold">Novo</span>
                 </a>
-                <div class="w-full h-[1px] bg-white/10 my-2"></div>
-                <div class="block text-yellow-500/50 font-bold mt-2 cursor-not-allowed flex items-center gap-2">
-                    <i class="fas fa-store"></i> Loja 
-                    <span class="bg-red-500 text-white px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-bold">Em Manutenção</span>
+                <div class="w-full h-[1px] bg-white/10"></div>
+                <div class="bg-white text-black p-2 rounded text-center font-bold cursor-not-allowed flex items-center justify-center gap-2">
+                    <i class="fas fa-store"></i> Loja
+                    <span class="border border-black px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-black">Em Manutenção</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <section class="pt-32 pb-20 text-center relative">
-        <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
-            
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]"></span>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Sistema Operante</span>
+    <!-- ── HERO ── -->
+    <section class="pt-40 pb-20 text-center">
+        <div class="max-w-4xl mx-auto px-6 fade-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-[0_0_10px_#ffffff]"></span>
+                <span class="text-[10px] font-bold text-white tracking-widest uppercase">Sistema Operante</span>
             </div>
 
-           <h1 class="text-4xl md:text-7xl font-black text-main mb-6 tracking-tighter leading-[1.1] drop-shadow-2xl">
-    O futuro da <br>
-    <span class="text-gradient-gold">sua comunidade.</span>
-</h1>
-            
-          <p class="text-lg md:text-xl text-muted mb-10 max-w-2xl mx-auto font-medium leading-relaxed">
-    alta performance e ferramentas exclusivas para quem lidera grandes comunidades.
-</p>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter leading-[1.05] drop-shadow-2xl">
+                O futuro da <br>
+                <span class="text-gradient-mono">sua comunidade.</span>
+            </h1>
 
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-16 mt-4">
-                
-                <div class="w-full md:w-auto px-8 py-3 bg-yellow-600/30 text-white/60 font-bold rounded-full flex items-center justify-center gap-3 cursor-not-allowed border border-yellow-500/20 backdrop-blur-sm">
-                    <i class="fas fa-store text-lg"></i> Acessar Loja 
-                    <span class="bg-red-500 text-white px-2 py-[2px] rounded-full text-[10px] uppercase tracking-widest font-black shadow-sm animate-pulse">Em Manutenção</span>
+            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
+                alta performance e ferramentas exclusivas para quem lidera grandes comunidades.
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
+                <div class="relative group cursor-not-allowed w-full md:w-auto">
+                    <div class="absolute -inset-1 bg-white blur-md opacity-30 group-hover:opacity-70 transition duration-500 rounded-lg"></div>
+                    <div class="relative w-full px-10 py-4 bg-white text-black font-black rounded-sm flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+                        <i class="fas fa-store text-xl"></i> ACESSAR LOJA
+                        <span class="border border-black px-2 py-0.5 text-[10px] uppercase tracking-widest font-black animate-pulse">Em Manutenção</span>
+                    </div>
                 </div>
-
             </div>
 
-            <div class="relative mx-auto max-w-[260px] md:max-w-[320px] hover:scale-110 transition duration-700 cursor-pointer">
-                <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-2xl animate-float">
+            <div class="relative mx-auto max-w-[260px] md:max-w-[320px] grayscale-hover cursor-pointer">
+                <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] animate-float">
             </div>
         </div>
     </section>
 
-    <section class="py-20 relative">
+    <!-- ── ECOSSISTEMA ── -->
+    <section class="py-20">
         <div class="max-w-[1100px] mx-auto px-6">
-            
-            <div class="flex items-end justify-between mb-10 fade-up" style="animation-delay: 0.2s;">
-                <h2 class="text-3xl font-bold text-main">Ecossistema</h2>
-                <div class="hidden md:block h-1 w-24 bg-yellow-500/50 rounded-full"></div>
+            <div class="flex items-end justify-between mb-10">
+                <h2 class="text-3xl font-black text-white">Ecossistema</h2>
+                <div class="hidden md:block h-[1px] flex-1 ml-8 bg-gradient-to-r from-white/20 to-transparent"></div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-    
-                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.3s;">
+                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[16px] group">
                     <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-whatsapp text-3xl text-muted group-hover:text-[#25D366] transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-muted group-hover:text-main transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
+                        <i class="fab fa-whatsapp text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
+                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Canal de Figurinhas</h3>
-                    <p class="text-xs text-muted font-medium">As melhores da internet. Novas figurinhas todo dia.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">Canal de Figurinhas</h3>
+                    <p class="text-xs text-gray-400 font-medium">As melhores da internet. Novas figurinhas todo dia.</p>
                 </a>
-
-                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.4s;">
+                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="glass-panel p-6 rounded-[16px] group">
                     <div class="flex justify-between items-start mb-10">
-                        <i class="fas fa-bullhorn text-3xl text-muted group-hover:text-blue-500 transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-muted group-hover:text-main transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
+                        <i class="fas fa-bullhorn text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
+                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Canal de Info</h3>
-                    <p class="text-xs text-muted font-medium">Descontos exclusivos e todas as atualizações (att) do sistema.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">Canal de Info</h3>
+                    <p class="text-xs text-gray-400 font-medium">Descontos exclusivos e todas as atualizações do sistema.</p>
                 </a>
-
-                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.5s;">
+                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group">
                     <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-tiktok text-3xl text-muted group-hover:text-pink-500 transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-muted group-hover:text-main transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
+                        <i class="fab fa-tiktok text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
+                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-main mb-1">TikTok</h3>
-                    <p class="text-xs text-muted font-medium">Conteúdo original Udesaken. Vídeos rápidos e novidades.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">TikTok</h3>
+                    <p class="text-xs text-gray-400 font-medium">Conteúdo original Udesaken. Vídeos rápidos e novidades.</p>
                 </a>
-
-                <a href="https://instagram.com/udesakenofc" target="_blank" class="glass-panel p-6 rounded-[24px] group fade-up" style="animation-delay: 0.6s;">
+                <a href="https://instagram.com/udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group">
                     <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-instagram text-3xl text-muted group-hover:text-purple-500 transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-muted group-hover:text-main transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
+                        <i class="fab fa-instagram text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
+                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-main mb-1">Instagram</h3>
-                    <p class="text-xs text-muted font-medium">Conteúdo oficial Udesaken. Acompanhe tudo em tempo real.</p>
+                    <h3 class="text-lg font-bold text-white mb-1">Instagram</h3>
+                    <p class="text-xs text-gray-400 font-medium">Conteúdo oficial Udesaken. Acompanhe tudo em tempo real.</p>
                 </a>
-
             </div>
         </div>
     </section>
 
-    <section class="py-10 relative">
+    <!-- ── COMUNIDADE ── -->
+    <section class="py-10">
         <div class="max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center">
-            
-            <div class="glass-panel p-8 rounded-[24px] fade-up w-full md:w-2/3 group hover:scale-105 transition duration-500 border border-[#5865F2]/20 hover:border-[#5865F2]/50 shadow-[0_0_30px_rgba(88,101,242,0.1)]">
-                <i class="fab fa-discord text-5xl text-[#5865F2] mb-5 group-hover:scale-110 transition duration-300"></i>
-                <h2 class="text-3xl font-bold text-main mb-3">Nossa Comunidade</h2>
-                <p class="text-sm text-muted mb-8 font-medium max-w-md mx-auto">
+            <div class="glass-panel p-10 rounded-[24px] w-full md:w-2/3 group hover:scale-[1.02] transition duration-500 border border-white/10 hover:border-white/30">
+                <i class="fab fa-discord text-5xl text-white mb-5 group-hover:scale-110 transition duration-300"></i>
+                <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Nossa Comunidade</h2>
+                <p class="text-sm text-gray-400 mb-10 font-medium max-w-md mx-auto">
                     Junte-se a nós no Discord para tirar dúvidas, acompanhar novidades e interagir com a galera da UDESAKEN.
                 </p>
-                <a href="./discord/" class="inline-block px-8 py-3 bg-[#5865F2] text-white font-bold rounded-full hover:bg-[#4752C4] hover:shadow-[0_0_20px_rgba(88,101,242,0.4)] transition duration-300">
+                <a href="./discord/" class="inline-block px-10 py-3 border border-white text-white font-bold rounded-sm hover:bg-white hover:text-black transition duration-300">
                     Acessar Servidor
                 </a>
             </div>
-
         </div>
     </section>
-    
-   <footer class="pt-16 pb-8 border-t border-white/5 bg-black/40 relative z-10 backdrop-blur-xl">
-    <div class="max-w-[1100px] mx-auto px-6">
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            
-            <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
-                         <img src="logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover">
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
-                </div>
-                <p class="text-sm text-gray-400 font-medium max-w-xs">
-                    O futuro da sua comunidade. Segurança blindada, alta performance e ferramentas exclusivas.
-                </p>
-            </div>
 
-            <div class="flex flex-col items-center md:items-start">
-                <h3 class="text-white font-bold mb-5 tracking-wide">Navegação</h3>
-                <div class="flex flex-col gap-4">
-                    <a href="./sobre/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-rocket text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
-                        Sobre Nós
-                    </a>
-                    <a href="./equipe/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-users text-brand-gold/70 group-hover:text-brand-gold transition w-4 text-center"></i> 
-                        Conhecer Equipe
-                    </a>
-                    
-                    <a href="./parcerias/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-handshake text-yellow-500/70 group-hover:text-yellow-500 transition w-4 text-center"></i> 
-                        Nossas Parcerias <span class="badge-novo">Novo</span>
-                    </a>
-                    <a href="./solicitar-parceria/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-paper-plane text-yellow-500/70 group-hover:text-yellow-500 transition w-4 text-center"></i> 
-                        Solicitar Parceria
-                    </a>
-                    <a href="./termos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
-                        Termos de Uso
-                    </a>
-                    <div class="text-sm text-gray-600 cursor-not-allowed flex items-center gap-2" title="Em Manutenção">
-                        <i class="fas fa-store text-gray-700 w-4 text-center"></i> 
-                        Loja (Em Manutenção)
+    <!-- ── FOOTER ── -->
+    <footer class="pt-16 pb-8 border-t border-white/10 bg-black/80 backdrop-blur-xl mt-10">
+        <div class="max-w-[1100px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded bg-black border border-white/20 overflow-hidden flex-shrink-0">
+                            <img src="logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover filter grayscale">
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
+                    </div>
+                    <p class="text-sm text-gray-500 font-medium max-w-xs">O futuro da sua comunidade. alta performance e ferramentas exclusivas.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Navegação</h3>
+                    <div class="flex flex-col gap-4">
+                        <a href="./sobre/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-rocket w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Sobre Nós</a>
+                        <a href="./equipe/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-users w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Conhecer Equipe</a>
+                        <a href="./parcerias/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-handshake w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Nossas Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[8px] uppercase font-bold">Novo</span></a>
+                        <a href="./solicitar-parceria/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-paper-plane w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Solicitar Parceria</a>
+                        <a href="./termos/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-file-contract w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Termos de Uso</a>
+                        <div class="text-sm text-gray-600 cursor-not-allowed flex items-center gap-3" title="Em Manutenção"><i class="fas fa-store w-4 text-center"></i> Loja (Em Manutenção)</div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center md:items-start">
+                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Fale Conosco</h3>
+                    <div class="flex flex-col gap-4 mb-6">
+                        <a href="mailto:contato@udesaken.site" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-envelope w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> contato@udesaken.site</a>
+                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fab fa-whatsapp w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Suporte Direto</a>
                     </div>
                 </div>
             </div>
-
-            <div class="flex flex-col items-center md:items-start">
-                <h3 class="text-white font-bold mb-5 tracking-wide">Fale Conosco</h3>
-                <div class="flex flex-col gap-4 mb-6">
-                    <a href="mailto:contato.udesaken@gmail.com" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fas fa-envelope text-red-500/70 group-hover:text-red-500 transition w-4 text-center"></i> 
-                        contato.udesaken@gmail.com
-                    </a>
-                    <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                        <i class="fab fa-whatsapp text-green-500/70 group-hover:text-green-500 transition w-4 text-center"></i> 
-                        Suporte Direto
-                    </a>
-                </div>
+            <div class="text-center pt-8 border-t border-white/10">
+                <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
             </div>
-
         </div>
+    </footer>
 
-        <div class="text-center pt-8 border-t border-white/5 relative">
-            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">
-                Udesaken Group &copy; 2026 • Todos os direitos reservados
-            </p>
-        </div>
-        
-    </div>
-</footer>
+    <!-- ── GARGÂNTUA ── -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+    (function() {
+        const canvas = document.getElementById('universe-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        const BH = {
+            get x() { return width * 0.5; },
+            get y() { return height * 0.82; },
+            get r() { return Math.min(width, height) * 0.10; },
+            diskInner: 1.5,
+            diskOuter: 3.8,
+            angle: 0
+        };
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            const n = Math.min(Math.floor(window.innerWidth / 15), 100);
+            for (let i = 0; i < n; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: Math.random() * 1.2 + 0.3
+                });
+            }
+        }
+
+        function drawAccretionDisk(bx, by, R, angle) {
+            const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+            ctx.save();
+            ctx.translate(bx, by);
+            ctx.rotate(angle);
+            ctx.scale(1, 0.28);
+            const grad = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
+            grad.addColorStop(0,    'rgba(255,140,0,0)');
+            grad.addColorStop(0.15, 'rgba(255,200,80,0.55)');
+            grad.addColorStop(0.38, 'rgba(255,255,220,0.85)');
+            grad.addColorStop(0.55, 'rgba(255,160,40,0.65)');
+            grad.addColorStop(0.78, 'rgba(200,60,0,0.4)');
+            grad.addColorStop(1,    'rgba(100,20,0,0)');
+            ctx.beginPath();
+            ctx.arc(0, 0, outer, 0, Math.PI * 2);
+            ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
+            ctx.fillStyle = grad;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawBackDisk(bx, by, R) {
+            const outer = R * BH.diskOuter;
+            ctx.save();
+            ctx.translate(bx, by);
+            const arcGrad = ctx.createRadialGradient(0, -R*0.18, R*BH.diskInner*0.5, 0, 0, outer*0.85);
+            arcGrad.addColorStop(0,   'rgba(255,220,100,0.5)');
+            arcGrad.addColorStop(0.4, 'rgba(255,140,20,0.3)');
+            arcGrad.addColorStop(1,   'rgba(200,60,0,0)');
+            ctx.beginPath();
+            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.22, 0, Math.PI, 0);
+            ctx.fillStyle = arcGrad;
+            ctx.fill();
+            const eGrad = ctx.createLinearGradient(-outer, -R*0.22, outer, -R*0.22);
+            eGrad.addColorStop(0,   'rgba(255,200,80,0)');
+            eGrad.addColorStop(0.3, 'rgba(255,230,150,0.7)');
+            eGrad.addColorStop(0.5, 'rgba(255,255,220,0.9)');
+            eGrad.addColorStop(0.7, 'rgba(255,230,150,0.7)');
+            eGrad.addColorStop(1,   'rgba(255,200,80,0)');
+            ctx.beginPath();
+            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.09, 0, 0, Math.PI*2);
+            ctx.strokeStyle = eGrad;
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function drawBlackHole(bx, by, R) {
+            const glow = ctx.createRadialGradient(bx, by, R*0.6, bx, by, R*2.2);
+            glow.addColorStop(0,   'rgba(255,120,0,0.18)');
+            glow.addColorStop(0.4, 'rgba(180,60,0,0.08)');
+            glow.addColorStop(1,   'rgba(0,0,0,0)');
+            ctx.beginPath();
+            ctx.arc(bx, by, R*2.2, 0, Math.PI*2);
+            ctx.fillStyle = glow;
+            ctx.fill();
+
+            const photon = ctx.createRadialGradient(bx, by, R*0.9, bx, by, R*1.25);
+            photon.addColorStop(0,   'rgba(255,200,100,0.55)');
+            photon.addColorStop(0.5, 'rgba(255,160,40,0.2)');
+            photon.addColorStop(1,   'rgba(0,0,0,0)');
+            ctx.beginPath();
+            ctx.arc(bx, by, R*1.25, 0, Math.PI*2);
+            ctx.fillStyle = photon;
+            ctx.fill();
+
+            const shadow = ctx.createRadialGradient(bx, by*0.999, R*0.1, bx, by, R);
+            shadow.addColorStop(0,    '#000000');
+            shadow.addColorStop(0.85, '#000000');
+            shadow.addColorStop(1,    'rgba(0,0,0,0.85)');
+            ctx.beginPath();
+            ctx.arc(bx, by, R, 0, Math.PI*2);
+            ctx.fillStyle = shadow;
+            ctx.fill();
+        }
+
+        function applyGravity(p) {
+            const bx = BH.x, by = BH.y, R = BH.r;
+            const dx = bx - p.x, dy = by - p.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < R*5 && dist > R*1.2) {
+                const force = 0.00012 * (R*5 / dist);
+                p.vx += (dx/dist) * force;
+                p.vy += (dy/dist) * force;
+            }
+            if (dist < R*1.15) {
+                p.x = Math.random() * width;
+                p.y = Math.random() * height * 0.6;
+                p.vx = (Math.random()-0.5)*0.4;
+                p.vy = (Math.random()-0.5)*0.4;
+            }
+        }
+
+        let animT = 0;
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            animT += 16;
+            BH.angle = animT * 0.00018;
+            drawBackDisk(BH.x, BH.y, BH.r);
+            drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
+            drawBlackHole(BH.x, BH.y, BH.r);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.65)';
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                applyGravity(p);
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+                ctx.fill();
+                for (let j = i+1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const d = Math.hypot(p.x-p2.x, p.y-p2.y);
+                    if (d < 140) {
+                        ctx.strokeStyle = `rgba(255,255,255,${0.1 - d/1400})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        draw();
+    })();
+    </script>
+
+    <!-- ── SCRIPTS ── -->
     <script src="script.js"></script>
+
 </body>
 </html>
