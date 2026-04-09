@@ -2,65 +2,121 @@
 <html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipe | Udesaken Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Conheça a equipe oficial da Udesaken Group. Os administradores que fazem o ecossistema funcionar.">
+    <meta name="theme-color" content="#000000">
     
-    <link rel="stylesheet" href="../style.css">
-
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Equipe Oficial | Udesaken Group">
+    <meta property="og:description" content="Conheça a equipe oficial da Udesaken Group. Os administradores que fazem o ecossistema funcionar.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
+    
+    <title>Equipe Oficial | Udesaken Group</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' }
-                    },
-                    letterSpacing: { tight: '-0.02em' }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
-
+    
     <style>
         :root {
-            --accent: #C6A87C;
-            --glass-border: rgba(255,255,255,0.08);
+            --bg-deep: #000000;
+            --bg-card: rgba(8, 8, 12, 0.85);
+            --border-glow: rgba(255, 255, 255, 0.06);
+            --border-glow-hover: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
         }
 
-        /* EFEITO 3D NOS CARTÕES */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000000; 
+            color: var(--text-primary); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Canvas Universo */
+        #universe-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
+        }
+
+        /* Glass Panel refinado */
         .glass-panel {
-            background: linear-gradient(145deg, rgba(25, 25, 30, 0.6), rgba(10, 10, 15, 0.8));
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 1;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-
         .glass-panel:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.3), 0 0 25px rgba(198, 168, 124, 0.15);
-            border-color: rgba(198, 168, 124, 0.4);
-            z-index: 10;
+            border-color: var(--border-glow-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
         }
 
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navbar refinada */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 24px;
+            transition: all 0.3s ease;
+        }
+        .nav-wrapper nav {
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 8px 20px;
+        }
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Animações */
+        .fade-up { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+        }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+        
+        /* Photo Wrapper */
         .photo-wrapper {
             position: relative;
             width: 140px;
             height: 140px;
             margin-bottom: 24px;
             border-radius: 50%;
-            padding: 4px;
+            padding: 3px;
             background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(0,0,0,0.8));
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.2);
             transition: all 0.4s ease;
         }
         
@@ -69,31 +125,29 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--glass-border);
+            border: 2px solid rgba(255,255,255,0.1);
             transition: transform 0.4s ease;
             background: #1a1a1a;
         }
 
         .glass-panel:hover .photo-wrapper {
-            background: linear-gradient(135deg, var(--accent), transparent);
-            box-shadow: 0 15px 30px rgba(198, 168, 124, 0.3), inset 0 2px 5px rgba(255,255,255,0.4);
-            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(0,0,0,0.9));
+            transform: translateY(-5px);
         }
 
         .glass-panel:hover .team-photo {
-            transform: scale(1.08);
-            border-color: transparent;
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.3);
         }
         
         .role-badge {
-            background: rgba(198, 168, 124, 0.1);
-            border: 1px solid rgba(198, 168, 124, 0.3);
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);
-            color: var(--accent);
-            padding: 4px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255,255,255,0.9);
+            padding: 4px 14px;
             border-radius: 999px;
             font-size: 0.65rem;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 16px;
@@ -109,7 +163,6 @@
             font-weight: 800;
             letter-spacing: -0.02em;
             margin-bottom: 2rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
         .section-title:after {
@@ -119,248 +172,260 @@
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
             border-radius: 3px;
-            box-shadow: 0 2px 5px rgba(198, 168, 124, 0.5);
         }
 
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        
+        /* Footer */
+        .footer-link {
+            color: #4a4a4a;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            height: 1px;
+            width: 100%;
+        }
+        
         @media (max-width: 768px) {
             .photo-wrapper {
-                width: 120px;
-                height: 120px;
+                width: 110px;
+                height: 110px;
             }
             .section-title {
                 font-size: 1.5rem;
             }
         }
-
-        /* LIQUID BACKGROUND */
-        body { background-color: #050505; color: #fff; }
-        .liquid-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
-        .liquid-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; animation: float 20s infinite ease-in-out; }
-        .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(198,168,124,0.4), transparent); top: -100px; left: -100px; }
-        .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(100,80,200,0.25), transparent); bottom: -150px; right: -150px; animation-delay: -5s; }
-        .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(198,168,124,0.2), transparent); top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, 20px) scale(1.05); } 100% { transform: translate(0, 0) scale(1); } }
-        .nav-liquid { background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.05); }
     </style>
+    <link rel="icon" type="image/png" href="../logousk.png">
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white bg-black">
+<body>
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
+    <canvas id="universe-canvas"></canvas>
+
+    <div class="nav-wrapper transition-all duration-300" id="navbar">
+        <nav>
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+            </a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
+                <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
+            </div>
+            <div class="flex md:hidden gap-3">
+                <a href="/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
+            </div>
+        </nav>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300 bg-black/40 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-4 cursor-pointer group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
-                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+    <main class="relative z-10 pt-32 pb-20">
+        <section class="text-center relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Equipe Oficial</span>
                 </div>
-                <span class="text-lg font-bold tracking-tight text-white group-hover:text-[#C6A87C] transition">
-                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase">Equipe</span>
-                </span>
-            </a>
-            
-            <div class="flex items-center gap-6">
-                <button id="theme-btn" class="theme-toggle hover:bg-white/10 rounded-full p-2 transition" aria-label="Mudar Tema">
-                    <i class="fas fa-moon text-sm text-white"></i>
-                </button>
-                <a href="../" class="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-widest transition flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Voltar
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="pt-32 pb-12 text-center relative z-10">
-        <div class="max-w-4xl mx-auto px-6 fade-up">
-            <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8);">Quem Faz Acontecer</h1>
-            <p class="text-gray-400 font-medium max-w-xl mx-auto">As mentes por trás do ecossistema Udesaken. Focados em entregar segurança blindada e alta performance.</p>
-        </div>
-    </section>
-
-    <section class="pb-32 relative z-10">
-        <div class="max-w-[1200px] mx-auto px-6">
-            
-            <div class="mb-24">
-                <div class="text-center block mb-12">
-                    <h2 class="section-title text-white">
-                        <img src="https://img.icons8.com/3d-fluency/94/lightning-bolt.png" alt="Raio 3D" class="w-10 h-10 drop-shadow-[0_0_15px_rgba(255,200,0,0.5)]">
-                        Equipe Oficial
-                    </h2>
-                    <p class="text-gray-400 text-sm mt-4">Liderança e gestão do ecossistema Udesaken</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto">
-                    
-                    <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full">
-                        <div class="photo-wrapper">
-                            <img src="../islo.jpg" alt="CEO Islo" class="team-photo" onerror="this.src='https://via.placeholder.com/140?text=ISLO'">
-                        </div>
-                        <h2 class="text-3xl font-bold text-white mb-3 tracking-tight">Isloch</h2>
-                        <span class="role-badge shadow-sm">CEO, Fundador & Dev</span>
-                        <p class="text-sm text-gray-300 leading-relaxed px-2">Responsável por toda a diretriz da Udesaken. Atua diretamente na arquitetura e no desenvolvimento do site, dos bots e dos sistemas do grupo.</p>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.1s;">
-                        <div class="photo-wrapper">
-                            <img src="../hyuuzaki.jpg" alt="Hyuuzaki" class="team-photo" onerror="this.src='https://via.placeholder.com/140?text=HYUUZAKI'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-3 tracking-tight mt-1">Hyuuzaki</h2>
-                        <span class="role-badge border-blue-500/40 text-blue-400 bg-blue-500/10 shadow-sm">Head Manager</span>
-                        <p class="text-sm text-gray-300 leading-relaxed px-2">Criador oficial de figurinhas e engajamento criativo. Contribui ativamente com ideias inovadoras e gestão executiva do ecossistema.</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="mt-16">
-                <div class="text-center block mb-12">
-                    <h2 class="section-title text-white">
-                        <img src="https://img.icons8.com/3d-fluency/94/game-controller.png" alt="Controle 3D" class="w-10 h-10 drop-shadow-[0_0_15px_rgba(100,100,255,0.5)]">
-                        Equipe Discord
-                    </h2>
-                    <p class="text-gray-400 text-sm mt-4">Moderação e controle da nossa comunidade</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-                    
-                    <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.1s;">
-                        <div class="photo-wrapper">
-                            <img src="../pisa.png" alt="PsaX" class="team-photo">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-3 tracking-tight">PsaX</h2>
-                        <span class="role-badge border-purple-500/40 text-purple-400 bg-purple-500/10 shadow-sm">Moderador</span>
-                        <p class="text-sm text-gray-300 leading-relaxed px-2">Guardião ativo das diretrizes da comunidade. Garante que as regras sejam seguidas com rigor, mantendo a ordem e oferecendo um ambiente blindado e organizado para todos.</p>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.2s;">
-                        <div class="photo-wrapper">
-                            <img src="../piazza.jpg" alt="Piazza" class="team-photo">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-3 tracking-tight">Piazza</h2>
-                        <span class="role-badge border-teal-500/40 text-teal-400 bg-teal-500/10 shadow-sm">Suporte & Mod</span>
-                        <p class="text-sm text-gray-300 leading-relaxed px-2">Focado na moderação ativa e rigorosa da comunidade. Monitora os canais de perto, resolve conflitos internos e garante que o ambiente permaneça completamente blindado contra interações indesejadas.</p>
-                    </div>
-
-                    <div class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center fade-up w-full" style="animation-delay: 0.3s;">
-                        <div class="photo-wrapper">
-                            <img src="../dn.jpg" alt="Dn" class="team-photo">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-3 tracking-tight">Dn</h2>
-                        <span class="role-badge border-teal-500/40 text-teal-400 bg-teal-500/10 shadow-sm">Suporte & Mod</span>
-                        <p class="text-sm text-gray-300 leading-relaxed px-2">Atua diretamente no controle e na disciplina do servidor. Supervisiona o comportamento dos membros e aplica com firmeza as diretrizes da Udesaken para manter a ordem e a limpeza do chat.</p>
-                    </div>
-
-                </div>
-
-                <div class="text-center mt-12">
-                    <p class="text-xs text-gray-500 flex items-center justify-center gap-2 bg-white/5 inline-flex px-4 py-2 rounded-full border border-white/5 backdrop-blur-sm">
-                        <i class="fab fa-discord text-indigo-400"></i> 
-                        Moderação Oficial Udesaken
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <footer class="pt-16 pb-8 border-t border-white/5 bg-black/60 relative z-10 backdrop-blur-xl mt-10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black flex-shrink-0">
-                             <img src="../logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover">
-                        </div>
-                        <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
-                    </div>
-                    <p class="text-sm text-gray-400 font-medium max-w-xs">
-                        O futuro da sua comunidade. Segurança blindada, alta performance e ferramentas exclusivas.
-                    </p>
-                </div>
-
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide">Navegação</h3>
-                    <div class="flex flex-col gap-4">
-                        <a href="../planos/" class="text-sm text-gray-400 hover:text-[#C6A87C] transition-colors duration-300 flex items-center gap-2 group">
-                            <i class="fas fa-box-open text-[#C6A87C]/70 group-hover:text-[#C6A87C] transition w-4 text-center"></i> 
-                            Nossos Planos
-                        </a>
-                        <a href="../termos/" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                            <i class="fas fa-file-contract text-gray-500 group-hover:text-gray-300 transition w-4 text-center"></i> 
-                            Termos de Uso
-                        </a>
-                    </div>
-                </div>
-
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide">Fale Conosco</h3>
-                    <div class="flex flex-col gap-4 mb-6">
-                        <a href="mailto:contato.udesaken@gmail.com" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                            <i class="fas fa-envelope text-red-500/70 group-hover:text-red-500 transition w-4 text-center"></i> 
-                            contato.udesaken@gmail.com
-                        </a>
-                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group">
-                            <i class="fab fa-whatsapp text-green-500/70 group-hover:text-green-500 transition w-4 text-center"></i> 
-                            Suporte Direto
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="text-center pt-8 border-t border-white/5 relative">
-                <p class="text-[10px] text-gray-500 font-black tracking-[0.2em] uppercase">
-                    Udesaken Group &copy; 2026 • Todos os direitos reservados
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
+                    Quem Faz <span class="text-gradient">Acontecer</span>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-xl mx-auto font-medium leading-relaxed">
+                    As mentes por trás do ecossistema Udesaken. Focados em entregar segurança blindada e alta performance.
                 </p>
             </div>
-            
+        </section>
+
+        <section class="py-12 relative">
+            <div class="max-w-[1200px] mx-auto px-6 fade-up">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-white">
+                        <i class="fas fa-crown text-white/60 text-2xl"></i>
+                        Administradores
+                    </h2>
+                    <p class="text-gray-500 text-sm mt-4">Liderança e gestão do ecossistema Udesaken</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../islo.jpg" alt="Isloch" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=ISLOCH'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Isloch</h2>
+                        <span class="role-badge">CEO, Fundador & Dev</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Responsável por toda a diretriz da Udesaken. Atua diretamente na arquitetura e no desenvolvimento do site, dos bots e dos sistemas do grupo.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../hyuuzaki.jpg" alt="Hyuuzaki" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=HYUUZAKI'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Hyuuzaki</h2>
+                        <span class="role-badge">Head Manager</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Criador oficial de figurinhas e engajamento criativo. Contribui ativamente com ideias inovadoras e gestão executiva do ecossistema.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../pisa.jpg" alt="PsaX" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=PSAX'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">PsaX</h2>
+                        <span class="role-badge">Admin Geral</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na administração geral do ecossistema, coordenando equipes e garantindo a excelência das operações do grupo.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../mz.jpg" alt="Mz" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=MZ'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Mz</h2>
+                        <span class="role-badge">Admin Channel</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Gerencia os canais oficiais da Udesaken, garantindo que todo o conteúdo seja distribuído com qualidade e pontualidade.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../kamys.jpg" alt="Kamys" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=KAMYS'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Kamys</h2>
+                        <span class="role-badge">Administrador</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na administração geral do ecossistema, garantindo que tudo funcione dentro das diretrizes estabelecidas.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../pedim.jpg" alt="Pedim" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=PEDIM'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Pedim</h2>
+                        <span class="role-badge">Administrador</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Responsável pela moderação e manutenção da ordem dentro do ecossistema Udesaken.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../atena.jpg" alt="Atena" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=ATENA'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Atena</h2>
+                        <span class="role-badge">Administradora</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na gestão e organização das atividades, garantindo que a comunidade se mantenha ativa e engajada.</p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
+                        <div class="photo-wrapper">
+                            <img src="../dn.jpg" alt="Dn" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=DN'">
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Dn</h2>
+                        <span class="role-badge">Administrador</span>
+                        <p class="text-sm text-gray-400 leading-relaxed px-2">Auxilia diretamente na moderação e no suporte contínuo, mantendo a organização da comunidade.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10">
+        <div class="max-w-[1100px] mx-auto px-6 text-center">
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="/" class="footer-link text-xs font-medium">Início</a>
+                <a href="../planos/" class="footer-link text-xs font-medium">Planos</a>
+                <a href="../termos/" class="footer-link text-xs font-medium">Termos</a>
+            </div>
+            <div class="section-divider my-6"></div>
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
         </div>
     </footer>
 
     <script>
-        (function() {
-            const themeBtn = document.getElementById('theme-btn');
-            if (themeBtn) {
-                themeBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('light-mode');
-                    const icon = themeBtn.querySelector('i');
-                    if (icon) {
-                        if (document.body.classList.contains('light-mode')) {
-                            icon.classList.remove('fa-moon');
-                            icon.classList.add('fa-sun');
-                        } else {
-                            icon.classList.remove('fa-sun');
-                            icon.classList.add('fa-moon');
-                        }
-                    }
+        // ==================== CANVAS UNIVERSO ESTRELADO ====================
+        const canvas = document.getElementById('universe-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars;
+        
+        function initStars() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+            for(let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
             }
-
-            const fadeElements = document.querySelectorAll('.fade-up');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
+        }
+        
+        function drawStars() {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, width, height);
             
-            fadeElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                observer.observe(el);
+            for(let i = 0; i < stars.length; i++) {
+                let s = stars[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                
+                if(s.x < 0) s.x = width;
+                if(s.x > width) s.x = 0;
+                if(s.y < 0) s.y = height;
+                if(s.y > height) s.y = 0;
+                
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
+                ctx.fill();
+                
+                for(let j = i + 1; j < stars.length; j++) {
+                    let s2 = stars[j];
+                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
+                    if(dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
+                        ctx.lineWidth = 0.4;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { initStars(); });
+        initStars();
+        drawStars();
+
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            else navbar.classList.remove('glass-nav');
+        });
+
+        // ==================== FADE-UP OBSERVER ====================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active');
             });
-        })();
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
