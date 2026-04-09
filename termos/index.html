@@ -1,522 +1,496 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="scroll-smooth">
 <head>
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Udesaken Group | Automação Premium">
-    <meta property="og:description" content="O futuro da sua comunidade. alta performance e ferramentas exclusivas.">
-    <meta property="og:image" content="https://udesaken.site/logousk.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="300">
-    <meta property="og:image:height" content="300">
-    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Udesaken Group | Automação Premium</title>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5404251974095223" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Termos de Uso Oficiais do Udesaken Bot. Leia atentamente antes de contratar nossos serviços.">
+    <meta name="theme-color" content="#000000">
     
-    <link rel="stylesheet" href="style.css">
-
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Termos de Uso | Udesaken Group">
+    <meta property="og:description" content="Termos de Uso Oficiais do Udesaken Bot. Leia atentamente antes de contratar nossos serviços.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
+    
+    <title>Termos de Uso | Udesaken Group</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { black: '#000000', white: '#ffffff', gray: '#111111' }
-                    },
-                    letterSpacing: { tight: '-0.02em', widest: '0.15em' }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
-
+    
     <style>
         :root {
-            --bg-color: #000000 !important;
-            --text-main: #ffffff !important;
-            --text-muted: #888888 !important;
-            --accent: #ffffff !important;
+            --bg-deep: #000000;
+            --bg-card: rgba(8, 8, 12, 0.85);
+            --border-glow: rgba(255, 255, 255, 0.06);
+            --border-glow-hover: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
         }
 
-        body {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000000; 
+            color: var(--text-primary); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
         }
-
-        .liquid-container { display: none !important; }
-
+        
+        /* Canvas Universo */
         #universe-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
             pointer-events: none;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
         }
 
+        /* Glass Panel refinado */
         .glass-panel {
-            background: rgba(10, 10, 10, 0.6) !important;
-            backdrop-filter: blur(24px) saturate(120%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
-            transition: all 0.4s ease !important;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-
         .glass-panel:hover {
-            transform: translateY(-4px) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255,255,255,0.05) !important;
+            border-color: var(--border-glow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
         }
 
-        .text-gradient-mono {
-            background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        /* Navbar refinada */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 24px;
+            transition: all 0.3s ease;
+        }
         .nav-wrapper nav {
-            background: rgba(5, 5, 5, 0.6) !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 8px 20px;
         }
         .nav-wrapper.glass-nav nav {
-            background: rgba(0, 0, 0, 0.9) !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-
-        .grayscale-hover { filter: grayscale(100%); opacity: 0.8; transition: all 0.5s; }
-        .grayscale-hover:hover { opacity: 1; filter: grayscale(0%) brightness(200%); }
+        
+        /* Animações */
+        .fade-up { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+        }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        
+        /* Seções de Termos */
+        .term-section {
+            transition: all 0.3s ease;
+        }
+        .term-section:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .warning-box {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .critical-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        /* Botão Aceitar */
+        .btn-accept {
+            background: white;
+            color: black;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            border-radius: 100px;
+        }
+        .btn-accept:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        }
+        
+        /* Footer links */
+        .footer-link {
+            color: #4a4a4a;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            height: 1px;
+            width: 100%;
+        }
+        
+        /* List styling */
+        .legal-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .legal-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .legal-list li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+        }
     </style>
+    <link rel="icon" type="image/png" href="../logousk.png">
 </head>
-<body class="antialiased selection:bg-white/20 selection:text-white">
+<body>
 
-    <!-- ========================================= -->
-    <!-- TELA DE BOAS-VINDAS - PORTAL INTERSTELLAR -->
-    <!-- ========================================= -->
-    <div id="welcome-portal" class="welcome-portal">
-        <canvas id="wormhole-bg" class="wormhole-bg"></canvas>
-        <div class="portal-vignette"></div>
-        <div class="welcome-content">
-            <div class="space-dust" id="space-dust"></div>
-            <div class="welcome-text">
-                <span class="greeting">✦ BEM-VINDO AO ✦</span>
-                <h1 class="portal-logo">UDESAKEN</h1>
-                <div class="portal-divider">
-                    <span class="line"></span>
-                    <i class="fas fa-circle-notch"></i>
-                    <span class="line"></span>
-                </div>
-                <p class="portal-sub">SISTEMA OPERANTE • REALIDADE EXPANDIDA</p>
-            </div>
-            <button id="start-experience" class="portal-action-btn">
-                <span class="btn-border"></span>
-                <span class="btn-content">
-                    <i class="fas fa-rocket"></i>
-                    INICIAR EXPERIÊNCIA
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-            </button>
-            <div class="portal-hint">o tempo é relativo • o espaço é infinito</div>
-        </div>
-    </div>
-
-    <!-- CANVAS UNIVERSE BACKGROUND -->
     <canvas id="universe-canvas"></canvas>
 
-    <!-- NAVBAR (mesmo conteúdo que você já tinha) -->
+    <!-- Navbar -->
     <div class="nav-wrapper transition-all duration-300" id="navbar">
         <nav>
-            <a href="#" class="nav-logo group flex items-center gap-3">
-                <div class="w-8 h-8 rounded border border-white/10 overflow-hidden group-hover:border-white/50 transition duration-500 bg-black">
-                    <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover filter grayscale opacity-90 group-hover:opacity-100 transition">
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="font-bold text-white group-hover:text-gray-300 transition tracking-tight">Udesaken</span>
+                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
             </a>
-
-            <div class="nav-links hidden md:flex gap-6">
-                <a href="./comandos/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fas fa-terminal text-[11px] opacity-70"></i> Comandos
-                </a>
-                <a href="./equipe/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fas fa-users text-[11px] opacity-70"></i> Equipe
-                </a>
-                <a href="./parcerias/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2 group">
-                    Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[9px] uppercase tracking-widest font-bold group-hover:bg-white group-hover:text-black transition">Novo</span>
-                </a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
+                <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
             </div>
-
-            <div class="nav-actions hidden md:flex items-center gap-4">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-white text-black font-bold rounded cursor-not-allowed shadow-[0_0_15px_rgba(255,255,255,0.2)]" title="Loja em manutenção">
-                    <i class="fas fa-store"></i> 
-                    <span class="text-xs">Loja</span>
-                    <span class="ml-1 border border-black text-black px-1 py-0.5 text-[8px] uppercase tracking-widest font-black">Manutenção</span>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-3 md:hidden">
-                <button id="mobile-menu-btn" class="text-white p-2">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+            <div class="flex md:hidden gap-3">
+                <a href="/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
             </div>
         </nav>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute shadow-2xl border border-white/10 rounded-lg mt-2 left-4 right-4">
-            <div class="px-6 py-6 space-y-4">
-                <a href="./comandos/" class="block text-gray-400 font-medium hover:text-white transition">Comandos</a>
-                <a href="./equipe/" class="block text-gray-400 font-medium hover:text-white transition">Equipe</a>
-                <a href="./parcerias/" class="block text-gray-400 font-medium flex items-center gap-2 group">
-                    Parcerias <span class="bg-white/10 text-white px-1.5 py-0.5 rounded text-[9px] uppercase font-bold">Novo</span>
-                </a>
-                <div class="w-full h-[1px] bg-white/10 my-2"></div>
-                <div class="block bg-white text-black p-2 rounded text-center font-bold cursor-not-allowed flex items-center justify-center gap-2">
-                    <i class="fas fa-store"></i> Loja 
-                    <span class="border border-black text-black px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-black">Em Manutenção</span>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- HERO SECTION (restante do seu conteúdo permanece igual) -->
-    <section class="pt-40 pb-20 text-center relative z-10">
-        <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
-            
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-[0_0_10px_#ffffff]"></span>
-                <span class="text-[10px] font-bold text-white tracking-widest uppercase">Sistema Operante</span>
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter leading-[1.05] drop-shadow-2xl">
-                O futuro da <br>
-                <span class="text-gradient-mono">sua comunidade.</span>
-            </h1>
-            
-            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                alta performance e ferramentas exclusivas para quem lidera grandes comunidades.
-            </p>
-
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
-                <div class="relative group cursor-not-allowed w-full md:w-auto">
-                    <div class="absolute -inset-1 bg-white blur-md opacity-30 group-hover:opacity-70 transition duration-500 rounded-lg"></div>
-                    <div class="relative w-full px-10 py-4 bg-white text-black font-black rounded-sm flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-                        <i class="fas fa-store text-xl"></i> ACESSAR LOJA 
-                        <span class="border border-black px-2 py-0.5 text-[10px] uppercase tracking-widest font-black animate-pulse">Em Manutenção</span>
-                    </div>
+    <main class="relative z-10 pt-32 pb-20">
+        <section class="text-center relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Documento Oficial</span>
                 </div>
+                <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-file-contract text-white/70 text-2xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter leading-[1.1]">
+                    Termos de <span class="text-gradient">Uso</span>
+                </h1>
+                <p class="text-sm text-white/40 uppercase tracking-[0.2em] font-bold">Udesaken Bot • Atualizado em: 31/03/2026</p>
             </div>
+        </section>
 
-            <div class="relative mx-auto max-w-[260px] md:max-w-[320px] grayscale-hover cursor-pointer">
-                <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] animate-float">
-            </div>
-        </div>
-    </section>
+        <section class="py-8 relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="glass-panel rounded-3xl p-8 md:p-12">
+                    
+                    <!-- Citação de Aceitação -->
+                    <div class="warning-box p-6 rounded-r-xl mb-10 italic text-gray-300 text-sm md:text-base leading-relaxed">
+                        <i class="fas fa-quote-left text-white/20 mr-2"></i>
+                        Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o cliente declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo.
+                    </div>
 
-    <!-- ECOSSISTEMA SECTION (seu conteúdo original) -->
-    <section class="py-20 relative z-10">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="flex items-end justify-between mb-10 fade-up" style="animation-delay: 0.2s;">
-                <h2 class="text-3xl font-black text-white">Ecossistema</h2>
-                <div class="hidden md:block h-[1px] flex-1 ml-8 bg-gradient-to-r from-white/20 to-transparent"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[16px] group fade-up" style="animation-delay: 0.3s;">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-whatsapp text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Canal de Figurinhas</h3>
-                    <p class="text-xs text-gray-400 font-medium">As melhores da internet. Novas figurinhas todo dia.</p>
-                </a>
-                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="glass-panel p-6 rounded-[16px] group fade-up" style="animation-delay: 0.4s;">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fas fa-bullhorn text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Canal de Info</h3>
-                    <p class="text-xs text-gray-400 font-medium">Descontos exclusivos e todas as atualizações do sistema.</p>
-                </a>
-                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group fade-up" style="animation-delay: 0.5s;">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-tiktok text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">TikTok</h3>
-                    <p class="text-xs text-gray-400 font-medium">Conteúdo original Udesaken. Vídeos rápidos e novidades.</p>
-                </a>
-                <a href="https://instagram.com/udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group fade-up" style="animation-delay: 0.6s;">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-instagram text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Instagram</h3>
-                    <p class="text-xs text-gray-400 font-medium">Conteúdo oficial Udesaken. Acompanhe tudo em tempo real.</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMUNITY SECTION -->
-    <section class="py-10 relative z-10">
-        <div class="max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center">
-            <div class="glass-panel p-10 rounded-[24px] fade-up w-full md:w-2/3 group hover:scale-[1.02] transition duration-500 border border-white/10 hover:border-white/30">
-                <i class="fab fa-discord text-5xl text-white mb-5 group-hover:scale-110 transition duration-300"></i>
-                <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Nossa Comunidade</h2>
-                <p class="text-sm text-gray-400 mb-10 font-medium max-w-md mx-auto">
-                    Junte-se a nós no Discord para tirar dúvidas, acompanhar novidades e interagir com a galera da UDESAKEN.
-                </p>
-                <a href="./discord/" class="inline-block px-10 py-3 border border-white text-white font-bold rounded-sm hover:bg-white hover:text-black transition duration-300">
-                    Acessar Servidor
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FOOTER -->
-    <footer class="pt-16 pb-8 border-t border-white/10 bg-black/80 relative z-10 backdrop-blur-xl mt-10">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded bg-black border border-white/20 overflow-hidden flex-shrink-0">
-                             <img src="logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover filter grayscale">
+                    <!-- Conteúdo dos Termos -->
+                    <div class="space-y-10">
+                        
+                        <!-- 1. Aceitação -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-check-circle text-white/60 text-sm"></i> 1. Aceitação dos Termos
+                            </h3>
+                            <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+                                Ao realizar o pagamento, ativar o plano ou utilizar o Udesaken Bot, o usuário declara ter lido, compreendido e aceitado integralmente estes Termos de Uso. Caso não concorde com qualquer disposição, deverá interromper imediatamente o uso do serviço.
+                            </p>
                         </div>
-                        <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
-                    </div>
-                    <p class="text-sm text-gray-500 font-medium max-w-xs">O futuro da sua comunidade. alta performance e ferramentas exclusivas.</p>
-                </div>
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Navegação</h3>
-                    <div class="flex flex-col gap-4">
-                        <a href="./sobre/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-rocket w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Sobre Nós</a>
-                        <a href="./equipe/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-users w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Conhecer Equipe</a>
-                        <a href="./parcerias/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-handshake w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Nossas Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[8px] uppercase font-bold">Novo</span></a>
-                        <a href="./solicitar-parceria/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-paper-plane w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Solicitar Parceria</a>
-                        <a href="./termos/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-file-contract w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Termos de Uso</a>
-                        <div class="text-sm text-gray-600 cursor-not-allowed flex items-center gap-3" title="Em Manutenção"><i class="fas fa-store w-4 text-center"></i> Loja (Em Manutenção)</div>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Fale Conosco</h3>
-                    <div class="flex flex-col gap-4 mb-6">
-                        <a href="/cdn-cgi/l/email-protection#a1c2cecfd5c0d5ce8fd4c5c4d2c0cac4cfe1c6ccc0c8cd8fc2cecc" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-envelope w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> <span class="__cf_email__" data-cfemail="84e7ebeaf0e5f0ebaaf1e0e1f7e5efe1eac4e3e9e5ede8aae7ebe9">[email&#160;protected]</span></a>
-                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fab fa-whatsapp w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Suporte Direto</a>
+
+                        <!-- 2. Licença -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-id-card text-white/60 text-sm"></i> 2. Licença de Uso e Responsabilidade do Usuário
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">2.1.</strong> A licença concedida é individual, intransferível, temporária e limitada ao período pago.</li>
+                                <li><strong class="text-white">2.2.</strong> O usuário é única e exclusivamente responsável por todas as atividades realizadas com o bot em seus grupos, incluindo ações de terceiros (admins ou membros).</li>
+                                <li><strong class="text-white">2.3.</strong> A Udesaken Group não se responsabiliza por conflitos internos nos grupos, decisões de outros administradores ou qualquer prejuízo decorrente do uso do serviço.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. Conteúdo Adulto - Destaque -->
+                        <div class="critical-box p-6 rounded-xl border border-white/15 bg-white/5">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/15 pb-2">
+                                <i class="fas fa-exclamation-triangle text-white/70 text-sm"></i> 3. Comandos de Conteúdo Adulto (NSFW/Hot)
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">3.1.</strong> O bot possui comandos que podem gerar conteúdo adulto ou NSFW.</li>
+                                <li><strong class="text-white">3.2.</strong> O usuário assume total e exclusiva responsabilidade pelo uso desses comandos, inclusive por eventual exposição a menores de idade ou outros usuários.</li>
+                                <li><strong class="text-white">3.3.</strong> A Udesaken Group não realiza verificação de idade e não possui qualquer responsabilidade civil, penal ou administrativa por violações relacionadas a conteúdo adulto.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 4. Vigência -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-clock text-white/60 text-sm"></i> 4. Vigência do Plano
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">4.1.</strong> O plano inicia imediatamente após a confirmação de pagamento e ativação do acesso.</li>
+                                <li><strong class="text-white">4.2.</strong> A contagem é realizada em dias corridos, sem pausa ou suspensão por inatividade do usuário.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 5. Disponibilidade -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-server text-white/60 text-sm"></i> 5. Disponibilidade, Riscos e Limitações do Serviço
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-3">
+                                <li><strong class="text-white">5.1.</strong> O serviço depende integralmente da plataforma WhatsApp/Meta e pode sofrer interrupções, oscilações ou banimentos. A Udesaken Group não garante imunidade contra bloqueios ou banimentos.</li>
+                                <li class="p-4 bg-white/5 rounded-xl mt-2">
+                                    <strong class="text-white block mb-1">5.2. Banimento ou Bloqueio:</strong>
+                                    Em caso de banimento do número do bot por motivos alheios à Udesaken, será realizada migração do plano com contagem de dias congelada, quando tecnicamente possível.
+                                </li>
+                                <li class="p-4 bg-white/5 rounded-xl">
+                                    <strong class="text-white block mb-1">5.3. Falha Técnica:</strong>
+                                    Falhas exclusivas da Udesaken superiores a 24 (vinte e quatro) horas consecutivas poderão gerar reposição proporcional dos dias, a critério exclusivo da empresa.
+                                </li>
+                                <li><strong class="text-white">5.4.</strong> O serviço é fornecido "no estado em que se encontra" ("AS IS"), sem qualquer garantia expressa ou implícita de disponibilidade, performance ou adequação a um propósito específico.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 6 e 7: Suporte e Reembolso - Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="term-section p-5 rounded-xl border border-white/5">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-base mb-3">
+                                    <i class="fas fa-headset text-white/60 text-sm"></i> 6. Suporte
+                                </h3>
+                                <ul class="legal-list text-sm text-gray-300">
+                                    <li><strong class="text-white">6.1.</strong> Suporte apenas durante a vigência do plano.</li>
+                                    <li><strong class="text-white">6.2.</strong> Prazo médio de resposta: até 24 horas úteis.</li>
+                                </ul>
+                            </div>
+                            <div class="term-section p-5 rounded-xl border border-white/5">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-base mb-3">
+                                    <i class="fas fa-hand-holding-dollar text-white/60 text-sm"></i> 7. Reembolso
+                                </h3>
+                                <ul class="legal-list text-sm text-gray-300">
+                                    <li><strong class="text-white">7.1.</strong> Prazo de arrependimento: 7 dias (CDC art. 49).</li>
+                                    <li><strong class="text-white">7.2.</strong> Planos de 1 dia: sem reembolso após ativação.</li>
+                                    <li><strong class="text-white">7.3.</strong> Após 7 dias ou por violação: sem reembolso.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 8. Uso Indevido -->
+                        <div class="critical-box p-6 rounded-xl border border-white/15">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/15 pb-2">
+                                <i class="fas fa-ban text-white/70 text-sm"></i> 8. Uso Indevido, Proibições e Penalidades
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">8.1.</strong> É terminantemente proibido: spam, travas, ataques, envio de mensagens em massa não solicitadas, discursos de ódio, conteúdo ilegal, exploração de bugs, violação das Políticas do WhatsApp/Meta ou qualquer prática que possa gerar risco de banimento.</li>
+                                <li><strong class="text-white">8.2.</strong> A Udesaken Group poderá suspender ou encerrar o acesso imediatamente e sem aviso prévio em caso de violação ou risco identificado.</li>
+                            </ul>
+                            <div class="mt-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                                <div class="flex gap-3 items-start">
+                                    <i class="fas fa-gavel text-white/50 text-xl mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-white block uppercase text-xs tracking-wider">8.3. Penalidade por Violação Grave</strong>
+                                        <p class="text-xs md:text-sm text-gray-400 mt-1">Violações graves poderão resultar em banimento permanente do plano, sem direito a reembolso, e cobrança de multa compensatória de até R$ 30,00 por infração, além de indenização por eventuais danos causados.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9 e 10 -->
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="term-section p-5 rounded-xl border border-white/5">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                    <i class="fas fa-user-shield text-white/60 text-sm"></i> 9. Indenização e Isenção
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed">O usuário obriga-se a indenizar e isentar integralmente a Udesaken Group de qualquer prejuízo, ação judicial, multa, dano ou reclamação decorrente de uso inadequado, violação das Políticas do WhatsApp, exposição de menores a conteúdo adulto, banimento de número pessoal ou conflitos internos nos grupos.</p>
+                            </div>
+                            <div class="term-section p-5 rounded-xl border border-white/5">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                    <i class="fas fa-shield-halved text-white/60 text-sm"></i> 10. Limitação de Responsabilidade
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed">Em nenhuma hipótese a Udesaken Group será responsável por danos indiretos, lucros cessantes, perda de dados, banimentos de contas do usuário ou qualquer prejuízo causado pela plataforma WhatsApp/Meta. A responsabilidade total fica limitada ao valor efetivamente pago pelo usuário nos últimos 12 meses.</p>
+                            </div>
+                        </div>
+
+                        <!-- 11. Propriedade Intelectual -->
+                        <div class="term-section p-5 rounded-xl border border-white/5">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                <i class="fas fa-copyright text-white/60 text-sm"></i> 11. Propriedade Intelectual
+                            </h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Todo o software, comandos, figurinhas e funcionalidades são de propriedade exclusiva da Udesaken Group. É expressamente proibida qualquer forma de engenharia reversa, cópia, modificação, distribuição ou uso não autorizado.</p>
+                        </div>
+
+                        <!-- 12. Alterações e Foro -->
+                        <div class="critical-box p-6 rounded-xl border border-white/15 bg-white/5">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                <i class="fas fa-scale-balanced text-white/70 text-sm"></i> 12. Alterações nos Termos e Foro Competente
+                            </h3>
+                            <ul class="legal-list text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-white">12.1.</strong> A Udesaken Group poderá alterar estes Termos a qualquer momento. Alterações substanciais serão comunicadas com antecedência razoável através dos canais oficiais.</li>
+                                <li><strong class="text-white">12.2.</strong> Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca do Rio de Janeiro/RJ para dirimir quaisquer controvérsias, ressalvada a competência especial do consumidor prevista em lei.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Aceite Final -->
+                        <div class="mt-10 pt-6 border-t border-white/10 text-center">
+                            <p class="text-sm text-gray-400 mb-6">Ao continuar utilizando o serviço, você confirma que leu, compreendeu e concorda integralmente com todos os termos acima.</p>
+                            
+                            <a href="https://wa.me/447562847091?text=Ol%C3%A1%2C%20li%20e%20aceito%20integralmente%20os%20Termos%20de%20Uso%20do%20Udesaken%20Bot." target="_blank" 
+                               class="btn-accept inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full w-full md:w-auto text-lg">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                LI E ACEITO OS TERMOS
+                            </a>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <a href="../privacidade/" class="inline-flex items-center gap-2 text-white/50 hover:text-white transition font-medium text-sm">
+                                <i class="fas fa-user-shield"></i>
+                                Leia também nossa Política de Privacidade (LGPD)
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="text-center pt-8 border-t border-white/10 relative">
-                <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10">
+        <div class="max-w-[1100px] mx-auto px-6 text-center">
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="/" class="footer-link text-xs font-medium">Início</a>
+                <a href="../privacidade/" class="footer-link text-xs font-medium">Privacidade</a>
+                <a href="../equipe/" class="footer-link text-xs font-medium">Equipe</a>
             </div>
+            <div class="section-divider my-6"></div>
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
         </div>
     </footer>
 
-    <!-- SCRIPT DO CANVAS "AURA" -->
-    <!-- SCRIPT DO CANVAS "AURA" + GARGÂNTUA -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        // ==================== CANVAS UNIVERSO ESTRELADO ====================
         const canvas = document.getElementById('universe-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles;
-
-        // ── GARGÂNTUA CONFIG ──
-        const BH = {
-            get x() { return width * 0.5; },
-            get y() { return height * 0.82; },
-            get r() { return Math.min(width, height) * 0.10; },
-            diskInner: 1.5,
-            diskOuter: 3.8,
-            angle: 0
-        };
-
-        function initCanvas() {
+        let width, height, stars;
+        
+        function initStars() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            particles = [];
-            const numParticles = Math.min(Math.floor(window.innerWidth / 15), 100);
-            for(let i = 0; i < numParticles; i++) {
-                particles.push({
+            stars = [];
+            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+            for(let i = 0; i < starCount; i++) {
+                stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 1.2 + 0.3
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
             }
         }
-
-        // ── DISCO DE ACREÇÃO FRONTAL ──
-        function drawAccretionDisk(bx, by, R, angle) {
-            const inner = R * BH.diskInner;
-            const outer = R * BH.diskOuter;
-            ctx.save();
-            ctx.translate(bx, by);
-            ctx.rotate(angle);
-            ctx.scale(1, 0.28);
-            const grad = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
-            grad.addColorStop(0,    'rgba(255,140,0,0)');
-            grad.addColorStop(0.15, 'rgba(255,200,80,0.55)');
-            grad.addColorStop(0.38, 'rgba(255,255,220,0.85)');
-            grad.addColorStop(0.55, 'rgba(255,160,40,0.65)');
-            grad.addColorStop(0.78, 'rgba(200,60,0,0.4)');
-            grad.addColorStop(1,    'rgba(100,20,0,0)');
-            ctx.beginPath();
-            ctx.arc(0, 0, outer, 0, Math.PI * 2);
-            ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
-            ctx.fillStyle = grad;
-            ctx.fill();
-            for (let i = 0; i < 7; i++) {
-                const a = (i / 7) * Math.PI * 2;
-                const rx = Math.cos(a), ry = Math.sin(a);
-                const rg = ctx.createLinearGradient(rx*inner, ry*inner, rx*outer, ry*outer);
-                rg.addColorStop(0, 'rgba(255,240,180,0.3)');
-                rg.addColorStop(0.5, 'rgba(255,220,100,0.12)');
-                rg.addColorStop(1, 'rgba(255,120,0,0)');
-                ctx.beginPath();
-                ctx.moveTo(rx*inner, ry*inner);
-                ctx.lineTo(rx*outer, ry*outer);
-                ctx.strokeStyle = rg;
-                ctx.lineWidth = R * 0.18;
-                ctx.stroke();
-            }
-            ctx.restore();
-        }
-
-        // ── DISCO TRASEIRO (lente gravitacional) ──
-        function drawBackDisk(bx, by, R) {
-            const outer = R * BH.diskOuter;
-            ctx.save();
-            ctx.translate(bx, by);
-            const arcGrad = ctx.createRadialGradient(0, -R*0.18, R*BH.diskInner*0.5, 0, 0, outer*0.85);
-            arcGrad.addColorStop(0, 'rgba(255,220,100,0.5)');
-            arcGrad.addColorStop(0.4, 'rgba(255,140,20,0.3)');
-            arcGrad.addColorStop(1, 'rgba(200,60,0,0)');
-            ctx.beginPath();
-            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.22, 0, Math.PI, 0);
-            ctx.fillStyle = arcGrad;
-            ctx.fill();
-            const eGrad = ctx.createLinearGradient(-outer, -R*0.22, outer, -R*0.22);
-            eGrad.addColorStop(0,   'rgba(255,200,80,0)');
-            eGrad.addColorStop(0.3, 'rgba(255,230,150,0.7)');
-            eGrad.addColorStop(0.5, 'rgba(255,255,220,0.9)');
-            eGrad.addColorStop(0.7, 'rgba(255,230,150,0.7)');
-            eGrad.addColorStop(1,   'rgba(255,200,80,0)');
-            ctx.beginPath();
-            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.09, 0, 0, Math.PI*2);
-            ctx.strokeStyle = eGrad;
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
-            ctx.restore();
-        }
-
-        // ── EVENT HORIZON ──
-        function drawBlackHole(bx, by, R) {
-            const glow = ctx.createRadialGradient(bx, by, R*0.6, bx, by, R*2.2);
-            glow.addColorStop(0,   'rgba(255,120,0,0.18)');
-            glow.addColorStop(0.4, 'rgba(180,60,0,0.08)');
-            glow.addColorStop(1,   'rgba(0,0,0,0)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R*2.2, 0, Math.PI*2);
-            ctx.fillStyle = glow;
-            ctx.fill();
-            const photon = ctx.createRadialGradient(bx, by, R*0.9, bx, by, R*1.25);
-            photon.addColorStop(0,   'rgba(255,200,100,0.55)');
-            photon.addColorStop(0.5, 'rgba(255,160,40,0.2)');
-            photon.addColorStop(1,   'rgba(0,0,0,0)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R*1.25, 0, Math.PI*2);
-            ctx.fillStyle = photon;
-            ctx.fill();
-            const shadow = ctx.createRadialGradient(bx, by*0.999, R*0.1, bx, by, R);
-            shadow.addColorStop(0,    '#000000');
-            shadow.addColorStop(0.85, '#000000');
-            shadow.addColorStop(1,    'rgba(0,0,0,0.85)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R, 0, Math.PI*2);
-            ctx.fillStyle = shadow;
-            ctx.fill();
-        }
-
-        function drawGargantua(t) {
-            const bx = BH.x, by = BH.y, R = BH.r;
-            BH.angle = t * 0.00018;
-            drawBackDisk(bx, by, R);
-            drawAccretionDisk(bx, by, R, BH.angle);
-            drawBlackHole(bx, by, R);
-        }
-
-        // ── GRAVIDADE NAS PARTÍCULAS ──
-        function applyGravity(p) {
-            const bx = BH.x, by = BH.y, R = BH.r;
-            const dx = bx - p.x, dy = by - p.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < R*5 && dist > R*1.2) {
-                const force = 0.00012 * (R*5 / dist);
-                p.vx += (dx/dist) * force;
-                p.vy += (dy/dist) * force;
-            }
-            if (dist < R*1.15) {
-                p.x = Math.random() * width;
-                p.y = Math.random() * height * 0.6;
-                p.vx = (Math.random()-0.5)*0.4;
-                p.vy = (Math.random()-0.5)*0.4;
-            }
-        }
-
-        let animT = 0;
-        function drawUniverse() {
+        
+        function drawStars() {
+            if(!ctx) return;
             ctx.clearRect(0, 0, width, height);
-            animT += 16;
-            drawGargantua(animT);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-            for(let i = 0; i < particles.length; i++) {
-                let p = particles[i];
-                applyGravity(p);
-                p.x += p.vx;
-                p.y += p.vy;
-                if(p.x < 0 || p.x > width) p.vx *= -1;
-                if(p.y < 0 || p.y > height) p.vy *= -1;
+            
+            for(let i = 0; i < stars.length; i++) {
+                let s = stars[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                
+                if(s.x < 0) s.x = width;
+                if(s.x > width) s.x = 0;
+                if(s.y < 0) s.y = height;
+                if(s.y > height) s.y = 0;
+                
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
                 ctx.fill();
-                for(let j = i + 1; j < particles.length; j++) {
-                    let p2 = particles[j];
-                    let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                    if(dist < 140) {
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - dist/1400})`;
-                        ctx.lineWidth = 0.5;
+                
+                for(let j = i + 1; j < stars.length; j++) {
+                    let s2 = stars[j];
+                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
+                    if(dist < 130) {
                         ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
+                        ctx.lineWidth = 0.4;
                         ctx.stroke();
                     }
                 }
             }
-            requestAnimationFrame(drawUniverse);
+            requestAnimationFrame(drawStars);
         }
+        
+        window.addEventListener('resize', () => { initStars(); });
+        initStars();
+        drawStars();
 
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        drawUniverse();
-    </script>
-
-
-    <script>
-        // Fallback: garante que fade-up ficam visíveis mesmo sem IntersectionObserver
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.querySelectorAll('.fade-up').forEach(function(el) {
-                    el.classList.add('active');
-                });
-            }, 100);
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            else navbar.classList.remove('glass-nav');
         });
-    </script>
-    <script src="script.js"></script>
-    <!-- PORTAL INTERSTELLAR SCRIPTS -->
-    <script src="portal.js"></script>
 
+        // ==================== FADE-UP OBSERVER ====================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
