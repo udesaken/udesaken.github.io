@@ -1,146 +1,469 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="scroll-smooth">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Conheça as marcas e grupos oficiais que fazem parte do ecossistema Udesaken.">
+    <meta name="theme-color" content="#000000">
+    
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Nossos Parceiros">
     <meta property="og:description" content="Conheça as marcas e grupos oficiais que fazem parte do ecossistema Udesaken.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parceiros | Udesaken Group</title>
-
-    <link rel="stylesheet" href="../style.css?v=4.0"> 
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' },
-                        main: 'var(--text-main)',
-                        muted: 'var(--text-muted)',
-                        gold: 'var(--accent)'
-                    },
-                    letterSpacing: { tight: '-0.02em' }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
-</head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+    
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(8, 8, 12, 0.85);
+            --border-glow: rgba(255, 255, 255, 0.06);
+            --border-glow-hover: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --accent-white: #ffffff;
+            --accent-dim: rgba(255, 255, 255, 0.1);
+        }
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000000; 
+            color: var(--text-primary); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Canvas Universo */
+        #universe-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
+        }
+
+        /* Glass Panel refinado */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .glass-panel:hover {
+            border-color: var(--border-glow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navbar refinada */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 24px;
+            transition: all 0.3s ease;
+        }
+        .nav-wrapper nav {
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 8px 20px;
+        }
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .nav-cta { 
+            background: rgba(255,255,255,0.08); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 100px; 
+            font-weight: 600; 
+            font-size: 13px;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-cta:hover { 
+            background: white; 
+            color: black; 
+            border-color: white;
+        }
+        .theme-toggle {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.05);
+        }
+        
+        /* Animações */
+        .fade-up { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+        }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        
+        /* Botão principal */
+        .btn-primary {
+            background: white;
+            color: black;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            border-radius: 100px;
+        }
+        .btn-primary:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        }
+        
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            transition: all 0.3s ease;
+            border-radius: 100px;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+        
+        /* Footer links */
+        .footer-link {
+            color: #4a4a4a;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
+            color: white;
+        }
+        
+        /* Categoria badges */
+        .category-badge {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Linha decorativa */
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            height: 1px;
+            width: 100%;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="../logousk.png">
+</head>
+<body>
+
+    <canvas id="universe-canvas"></canvas>
+
+    <!-- Navbar -->
+    <div class="nav-wrapper transition-all duration-300" id="navbar">
+        <nav>
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
+                </div>
+                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+            </a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
+                <button id="theme-btn" class="theme-toggle" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
+                <a href="../solicitar-parceria/" class="nav-cta"><i class="fas fa-handshake mr-2"></i> Seja Parceiro</a>
+            </div>
+            <div class="flex md:hidden gap-3">
+                <button id="theme-btn-mobile" class="theme-toggle"><i class="fas fa-moon text-sm"></i></button>
+                <a href="../solicitar-parceria/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-handshake"></i></a>
+            </div>
+        </nav>
     </div>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1190px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3 cursor-pointer group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black group-hover:border-brand-gold/50 transition duration-500">
-                     <img src="../logousk1.png" alt="Logo Udesaken" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
+    <main class="relative z-10 pt-32 pb-20">
+        <!-- Hero Section -->
+        <section class="text-center relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Ecossistema Udesaken</span>
                 </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken
-                </span>
-            </a>
-            
-            <div class="hidden md:flex items-center gap-6">
-                <a href="/" class="px-5 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-xl text-sm font-semibold transition-all hover:bg-white/10 flex items-center gap-2 shadow-sm backdrop-blur-sm">
-                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar ao Site
-                </a>
-                <button id="theme-btn" class="theme-toggle" aria-label="Alternar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-            </div>
-
-            <div class="flex items-center gap-4 md:hidden">
-                <a href="/" class="px-3 py-2 bg-white/5 border border-white/10 hover:border-yellow-500/50 text-main rounded-lg text-xs font-semibold transition-all flex items-center gap-2">
-                    <i class="fas fa-arrow-left text-yellow-500"></i> Voltar
-                </a>
-                <button id="theme-btn-mobile" class="theme-toggle" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <section class="pt-32 pb-12 text-center relative z-10">
-        <div class="max-w-4xl mx-auto px-6 fade-up" style="animation-delay: 0.1s;">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel border border-yellow-500/30">
-                <i class="fas fa-globe text-yellow-500 text-xs"></i>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Ecossistema Udesaken</span>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-black text-main mb-4 tracking-tighter leading-[1.1]">
-                Nossos <span class="text-gradient-gold">Parceiros</span>
-            </h1>
-            <p class="text-lg text-muted max-w-2xl mx-auto font-medium leading-relaxed mb-8">
-                Conheça as marcas que confiam em nosso sistema e as melhores comunidades aprovadas pela nossa equipe.
-            </p>
-            
-            <div class="flex justify-center">
-                <a href="../solicitar-parceria/" class="px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white rounded-xl font-bold transition-all flex items-center gap-3 shadow-[0_0_20px_rgba(202,138,4,0.3)] hover:shadow-[0_0_30px_rgba(202,138,4,0.5)]">
-                    <i class="fas fa-handshake"></i> Seja um Parceiro
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-10 relative z-10">
-        <div class="max-w-[1100px] mx-auto px-6 fade-up" style="animation-delay: 0.2s;">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fas fa-building text-2xl text-yellow-500"></i>
-                <h2 class="text-2xl font-bold text-main">Marcas e Empresas</h2>
-                <div class="h-px bg-gradient-to-r from-yellow-500/50 to-transparent flex-1 ml-4"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
+                    Nossos <span class="text-gradient">Parceiros</span>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed mb-8">
+                    Conheça as marcas e comunidades que confiam em nosso sistema e fazem parte do nosso ecossistema.
+                </p>
+                <div class="flex justify-center">
+                    <a href="../solicitar-parceria/" class="btn-primary inline-flex items-center gap-3 px-8 py-3 text-base">
+                        <i class="fas fa-handshake"></i>
+                        Seja um Parceiro
+                    </a>
                 </div>
-        </div>
-    </section>
-
-    <section class="py-10 relative z-10">
-        <div class="max-w-[1100px] mx-auto px-6 fade-up" style="animation-delay: 0.3s;">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fas fa-crown text-2xl text-yellow-500"></i>
-                <h2 class="text-2xl font-bold text-main">Comunidades Oficiais</h2>
-                <div class="h-px bg-gradient-to-r from-yellow-500/50 to-transparent flex-1 ml-4"></div>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Marcas e Empresas -->
+        <section class="py-16 relative">
+            <div class="max-w-[1100px] mx-auto px-6 fade-up">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                        <i class="fas fa-building text-white/70 text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Marcas e Empresas</h2>
+                    <div class="section-divider flex-1 ml-4"></div>
                 </div>
-        </div>
-    </section>
-
-    <section class="py-10 relative z-10 mb-20">
-        <div class="max-w-[1100px] mx-auto px-6 fade-up" style="animation-delay: 0.4s;">
-            <div class="flex items-center gap-3 mb-8">
-                <i class="fas fa-users text-xl text-white/50"></i>
-                <h2 class="text-xl font-bold text-main">Comunidades Aprovadas</h2>
-                <div class="h-px bg-gradient-to-r from-white/10 to-transparent flex-1 ml-4"></div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-panel rounded-2xl p-10 text-center col-span-full">
+                        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-2xl text-white/40"></i>
+                        </div>
+                        <p class="text-gray-400 text-sm font-medium leading-relaxed">
+                            Em breve teremos nossos parceiros divulgados aqui.
+                        </p>
+                        <span class="text-white/30 text-xs mt-3 inline-block">✨ Fique ligado nas novidades</span>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Comunidades Oficiais -->
+        <section class="py-8 relative">
+            <div class="max-w-[1100px] mx-auto px-6 fade-up">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                        <i class="fas fa-crown text-white/70 text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Comunidades Oficiais</h2>
+                    <div class="section-divider flex-1 ml-4"></div>
                 </div>
-        </div>
-    </section>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-panel rounded-2xl p-10 text-center col-span-full">
+                        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-2xl text-white/40"></i>
+                        </div>
+                        <p class="text-gray-400 text-sm font-medium leading-relaxed">
+                            Em breve teremos comunidades oficiais parceiras.
+                        </p>
+                        <span class="text-white/30 text-xs mt-3 inline-block">🌟 Quer ser um? Solicite sua parceria</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer class="py-10 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
+        <!-- Comunidades Aprovadas -->
+        <section class="py-8 relative mb-16">
+            <div class="max-w-[1100px] mx-auto px-6 fade-up">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                        <i class="fas fa-check-circle text-white/70 text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white">Comunidades Aprovadas</h2>
+                    <div class="section-divider flex-1 ml-4"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-panel rounded-xl p-8 text-center col-span-full">
+                        <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-clock text-xl text-white/30"></i>
+                        </div>
+                        <p class="text-gray-500 text-xs font-medium">
+                            Nenhuma comunidade aprovada no momento.
+                        </p>
+                        <span class="text-white/20 text-[10px] mt-2 inline-block">As aprovações são analisadas pela nossa equipe</span>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="mt-12 text-center glass-panel rounded-2xl p-8 border border-white/10">
+                    <i class="fas fa-plus-circle text-white/50 text-2xl mb-3"></i>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Quer ver sua comunidade ou marca aqui?
+                    </p>
+                    <a href="../solicitar-parceria/" class="btn-outline inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold">
+                        <i class="fas fa-handshake"></i>
+                        Solicitar Parceria
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10">
         <div class="max-w-[1100px] mx-auto px-6 text-center">
-            <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                Udesaken Group &copy; 2026 • Todos os direitos reservados
-            </p>
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="/" class="footer-link text-xs font-medium">Início</a>
+                <a href="../planos/" class="footer-link text-xs font-medium">Planos</a>
+                <a href="../equipe/" class="footer-link text-xs font-medium">Equipe</a>
+                <a href="../termos/" class="footer-link text-xs font-medium">Termos</a>
+            </div>
+            <div class="section-divider my-6"></div>
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
         </div>
     </footer>
 
-    <script src="../script.js?v=4.0"></script>
+    <script>
+        // ==================== CANVAS UNIVERSO ESTRELADO ====================
+        const canvas = document.getElementById('universe-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars;
+        
+        function initStars() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+            for(let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.5 + 0.3
+                });
+            }
+        }
+        
+        function drawStars() {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            
+            for(let i = 0; i < stars.length; i++) {
+                let s = stars[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                
+                if(s.x < 0) s.x = width;
+                if(s.x > width) s.x = 0;
+                if(s.y < 0) s.y = height;
+                if(s.y > height) s.y = 0;
+                
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
+                ctx.fill();
+                
+                for(let j = i + 1; j < stars.length; j++) {
+                    let s2 = stars[j];
+                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
+                    if(dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
+                        ctx.lineWidth = 0.4;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { initStars(); });
+        initStars();
+        drawStars();
+
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            else navbar.classList.remove('glass-nav');
+        });
+
+        // ==================== FADE-UP OBSERVER ====================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ==================== TEMA CLARO/ESCURO ====================
+        const themeBtns = document.querySelectorAll('#theme-btn, #theme-btn-mobile');
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('udesaken_theme', theme);
+            if(theme === 'light') {
+                document.body.style.backgroundColor = '#f0f0f0';
+                document.body.style.color = '#000';
+                // Ajuste para tema claro (opcional)
+                const panels = document.querySelectorAll('.glass-panel');
+                panels.forEach(panel => {
+                    panel.style.background = 'rgba(255,255,255,0.8)';
+                });
+            } else {
+                document.body.style.backgroundColor = '#000';
+                document.body.style.color = '#fff';
+                const panels = document.querySelectorAll('.glass-panel');
+                panels.forEach(panel => {
+                    panel.style.background = 'rgba(8,8,12,0.85)';
+                });
+            }
+        }
+        
+        const savedTheme = localStorage.getItem('udesaken_theme');
+        if(savedTheme) applyTheme(savedTheme);
+        else applyTheme('dark');
+        
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                applyTheme(current === 'light' ? 'dark' : 'light');
+            });
+        });
+    </script>
 </body>
 </html>
