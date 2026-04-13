@@ -1,494 +1,1282 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Udesaken Group | Automação Premium</title>
+    <meta name="description" content="O futuro da sua comunidade. Alta performance e ferramentas exclusivas.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Automação Premium">
-    <meta property="og:description" content="O futuro da sua comunidade. alta performance e ferramentas exclusivas.">
+    <meta property="og:description" content="O futuro da sua comunidade. Alta performance e ferramentas exclusivas.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="300">
-    <meta property="og:image:height" content="300">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Udesaken Group | Automação Premium</title>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5404251974095223" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { brand: { black: '#000000', white: '#ffffff', gray: '#111111' } },
-                    letterSpacing: { tight: '-0.02em', widest: '0.15em' }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        html, body {
-            background-color: #000000;
-            color: #ffffff;
-            overflow-x: hidden;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Canvas sempre atrás */
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --text-dim: #444444;
+            --amber: #ff8c00;
+            --glass-bg: rgba(12,12,12,0.62);
+            --glass-border: rgba(255,255,255,0.07);
+            --glass-border-hover: rgba(255,255,255,0.22);
+            --glass-blur: 28px;
+            --glass-shadow: 0 8px 40px rgba(0,0,0,0.85);
+            --z-canvas: 0;
+            --z-base: 10;
+            --z-nav: 999;
+            --z-player: 1000;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a1a00;
+            border-radius: 3px;
+        }
+        ::selection {
+            background: rgba(255,140,0,0.2);
+            color: #fff;
+        }
+
+        /* Canvas */
         #universe-canvas {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: var(--z-canvas);
             pointer-events: none;
-            background: #000000;
+            background: #000;
         }
 
-        /* TODO conteúdo acima do canvas */
-        #navbar, section, footer, #audio-player-container {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* fade-up: visível por padrão — JS adiciona animação depois */
-        .fade-up {
-            opacity: 1;
-            transform: none;
-        }
-
-        .glass-panel {
-            background: rgba(10,10,10,0.6);
-            backdrop-filter: blur(24px) saturate(120%);
-            -webkit-backdrop-filter: blur(24px) saturate(120%);
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-        }
-        .glass-panel:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.25);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.9), 0 0 15px rgba(255,255,255,0.03);
-        }
-
-        .text-gradient-mono {
-            background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
+        /* Tipografia */
+        .text-gradient {
+            background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* Navbar */
-        .nav-wrapper {
-            position: fixed; top: 0; left: 0; right: 0;
-            z-index: 999;
-            padding: 12px 24px;
+        /* Glass effect */
+        .glass {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease;
         }
-        .nav-wrapper nav {
-            max-width: 1200px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between; gap: 24px;
-            background: rgba(10,10,10,0.6);
-            backdrop-filter: blur(28px) saturate(120%);
-            -webkit-backdrop-filter: blur(28px) saturate(120%);
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.055), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glass:hover::before {
+            opacity: 1;
+        }
+        .glass:hover {
+            transform: translateY(-3px);
+            border-color: var(--glass-border-hover);
+        }
+        .glass > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navbar */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-nav);
+            padding: 12px 20px;
+        }
+
+        #navbar nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: rgba(8,8,8,0.75);
+            backdrop-filter: blur(30px) saturate(120%);
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 10px 20px 10px 16px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.8);
+            border-radius: 14px;
+            padding: 8px 16px;
             transition: all 0.3s ease;
         }
-        .nav-wrapper.glass-nav nav {
-            background: rgba(0,0,0,0.9);
-            border-color: rgba(255,255,255,0.15);
+
+        #navbar.scrolled nav {
+            background: rgba(0,0,0,0.92);
+            border-color: rgba(255,255,255,0.13);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            background: #000;
+        }
+
+        .nav-logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-logo span {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.25s, background 0.25s;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .badge-novo {
+            display: inline-flex;
+            background: rgba(255,140,0,0.12);
+            border: 1px solid rgba(255,140,0,0.3);
+            color: var(--amber);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .nav-store-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: #fff;
+            color: #000;
+            border-radius: 9px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: box-shadow 0.3s;
+        }
+
+        #menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 6px;
         }
 
         #mobile-menu {
             position: absolute;
-            top: 70px; left: 24px; width: calc(100% - 48px);
-            border-radius: 12px;
+            top: 68px;
+            left: 20px;
+            width: calc(100% - 40px);
+            border-radius: 14px;
             border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(5,5,5,0.95);
+            background: rgba(4,4,4,0.97);
             backdrop-filter: blur(20px);
-            z-index: 999;
+            z-index: var(--z-nav);
+            transform: translateY(-12px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mob-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .mob-link:hover {
+            color: #fff;
+        }
+
+        .mob-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+            margin: 0 16px;
+        }
+
+        /* Hero */
+        #hero {
+            position: relative;
+            z-index: var(--z-base);
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                padding: 100px 20px 60px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(12px);
+            margin-bottom: 24px;
+        }
+
+        .hero-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: dot-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes dot-pulse {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-badge span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-sub {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: #fff;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .hero-cta:hover {
+            box-shadow: 0 0 40px rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .hero-emblem {
+            margin: 48px auto 0;
+            max-width: 180px;
+            display: block;
+            filter: grayscale(100%);
+            opacity: 0.75;
+            animation: float 7s ease-in-out infinite;
+            transition: filter 0.6s, opacity 0.6s;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .grayscale-hover { filter: grayscale(100%); opacity: 0.8; transition: all 0.5s; }
-        .grayscale-hover:hover { opacity: 1; filter: grayscale(0%) brightness(150%); }
 
-        ::-webkit-scrollbar { width: 6px; background: #000; }
-        ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        /* Seções */
+        section {
+            position: relative;
+            z-index: var(--z-base);
+        }
+
+        .section-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .section-line {
+            display: none;
+            height: 1px;
+            flex: 1;
+            margin-left: 24px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.15), transparent);
+        }
+
+        @media (min-width: 768px) {
+            .section-line {
+                display: block;
+            }
+        }
+
+        /* Ecossistema */
+        #ecossistema {
+            padding: 60px 0;
+        }
+
+        .eco-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .eco-card {
+            display: block;
+            text-decoration: none;
+            padding: 24px;
+            border-radius: 20px;
+        }
+
+        .eco-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 28px;
+        }
+
+        .eco-icon {
+            font-size: 1.6rem;
+            color: var(--text-dim);
+            transition: color 0.35s;
+        }
+
+        .eco-arrow {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .eco-card:hover .eco-icon {
+            color: #fff;
+        }
+        .eco-card:hover .eco-arrow {
+            color: #fff;
+            transform: translate(3px, -3px);
+        }
+
+        .eco-card h3 {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .eco-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Comunidade */
+        #comunidade {
+            padding: 0 0 60px;
+        }
+
+        .community-card {
+            padding: 40px 32px;
+            border-radius: 28px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .community-card {
+                padding: 32px 24px;
+            }
+        }
+
+        .community-icon {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 16px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .community-card:hover .community-icon {
+            transform: scale(1.05) rotate(-3deg);
+        }
+
+        .community-card h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .community-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 380px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            border-radius: 9px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: var(--z-base);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.95) 70%);
+            backdrop-filter: blur(10px);
+            padding: 48px 20px 32px;
+            margin-top: 20px;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,140,0,0.22), transparent);
+        }
+
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-brand p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            max-width: 260px;
+            margin-top: 12px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 32px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* Audio Player */
+        #player-wrap {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: var(--z-player);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        #player-wrap.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        #player-wrap.hide {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(16px);
+        }
+
+        .player-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px 6px 6px;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(28px) saturate(150%);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 100px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+        }
+
+        .player-thumb {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .player-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-viz {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .player-viz.on {
+            opacity: 1;
+        }
+
+        .vbar {
+            width: 2px;
+            border-radius: 1px;
+            background: #fff;
+            animation: vbar 0.8s ease-in-out infinite alternate;
+        }
+
+        .vbar:nth-child(1) { height: 6px; animation-delay: 0s; }
+        .vbar:nth-child(2) { height: 10px; animation-delay: 0.2s; }
+        .vbar:nth-child(3) { height: 7px; animation-delay: 0.4s; }
+
+        @keyframes vbar {
+            from { transform: scaleY(0.5); opacity: 0.5; }
+            to { transform: scaleY(1); opacity: 1; }
+        }
+
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 85px;
+            max-width: 120px;
+        }
+
+        .player-track {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .player-artist {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 600;
+        }
+
+        #play-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.25s;
+        }
+
+        #play-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        /* WhatsApp Float */
+        #wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: var(--z-player);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #25D366;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            animation: wa-pop 0.5s 1.5s both;
+        }
+
+        @keyframes wa-pop {
+            from { opacity: 0; transform: scale(0.6); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Fade Up */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links, .nav-store-btn {
+                display: none;
+            }
+            #menu-toggle {
+                display: flex;
+                align-items: center;
+            }
+            .eco-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .eco-grid {
+                grid-template-columns: 1fr;
+            }
+            .player-info {
+                display: none;
+            }
+            .player-pill {
+                padding: 6px;
+            }
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-white/20 selection:text-white">
+<body>
 
-    <!-- ── CANVAS GARGÂNTUA ── -->
-    <canvas id="universe-canvas"></canvas>
+<canvas id="universe-canvas"></canvas>
 
-    <!-- ── NAVBAR ── -->
-    <div class="nav-wrapper transition-all duration-300" id="navbar">
-        <nav>
-            <a href="#" class="group flex items-center gap-3">
-                <div class="w-8 h-8 rounded border border-white/10 overflow-hidden group-hover:border-white/50 transition duration-500 bg-black">
-                    <img src="logousk1.png" alt="Logo" class="w-full h-full object-cover filter grayscale opacity-90 group-hover:opacity-100 transition">
-                </div>
-                <span class="font-bold text-white group-hover:text-gray-300 transition tracking-tight">Udesaken</span>
+<div id="navbar">
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-img"><img src="logousk1.png" alt="Logo Udesaken"></div>
+            <span>Udesaken</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="./comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
+            <a href="./equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
+            <a href="./parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="./store/" class="nav-store-btn">
+                <i class="fas fa-store"></i>
+                <span>Loja</span>
             </a>
+            <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
 
-            <div class="hidden md:flex gap-6">
-                <a href="./comandos/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fas fa-terminal text-[11px] opacity-70"></i> Comandos
-                </a>
-                <a href="./equipe/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fas fa-users text-[11px] opacity-70"></i> Equipe
-                </a>
-                <a href="./parcerias/" class="text-sm font-medium text-gray-400 hover:text-white transition flex items-center gap-2 group">
-                    Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[9px] uppercase tracking-widest font-bold group-hover:bg-white group-hover:text-black transition">Novo</span>
-                </a>
-            </div>
+    <div id="mobile-menu">
+        <a href="./comandos/" class="mob-link"><i class="fas fa-terminal"></i> Comandos</a>
+        <div class="mob-divider"></div>
+        <a href="./equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
+        <div class="mob-divider"></div>
+        <a href="./parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
+        <div class="mob-divider"></div>
+        <a href="./store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
+    </div>
+</div>
 
-            <div class="hidden md:flex items-center gap-4">
-                <div class="flex items-center gap-2 px-3 py-1.5 bg-white text-black font-bold rounded cursor-not-allowed shadow-[0_0_15px_rgba(255,255,255,0.2)]" title="Loja em manutenção">
-                    <i class="fas fa-store"></i>
-                    <span class="text-xs">Loja</span>
-                    <span class="ml-1 border border-black text-black px-1 py-0.5 text-[8px] uppercase tracking-widest font-black">Manutenção</span>
+<section id="hero">
+    <div class="fade-up">
+        <div class="hero-badge">
+            <div class="hero-dot"></div>
+            <span>Sistema Operante</span>
+        </div>
+        <h1 class="hero-title">
+            O futuro da<br>
+            <span class="text-gradient">sua comunidade.</span>
+        </h1>
+        <p class="hero-sub">
+            Alta performance e ferramentas exclusivas para quem lidera grandes comunidades.
+        </p>
+        <a href="./store/" class="hero-cta">
+            <i class="fas fa-store"></i>
+            ACESSAR LOJA
+        </a>
+        <img src="uskcoroa.png" alt="Emblema Udesaken" class="hero-emblem">
+    </div>
+</section>
+
+<section id="ecossistema">
+    <div class="section-wrap">
+        <div class="section-header">
+            <h2 class="section-title fade-up">Ecossistema</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="eco-grid">
+            <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" rel="noopener" class="eco-card glass fade-up">
+                <div class="eco-top">
+                    <i class="fab fa-whatsapp eco-icon"></i>
+                    <i class="fas fa-arrow-right eco-arrow"></i>
                 </div>
-            </div>
-
-            <div class="flex items-center gap-3 md:hidden">
-                <button id="mobile-menu-btn" class="text-white p-2">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </nav>
-
-        <div id="mobile-menu" class="hidden">
-            <div class="px-6 py-6 space-y-4">
-                <a href="./comandos/" class="block text-gray-400 font-medium hover:text-white transition">Comandos</a>
-                <a href="./equipe/" class="block text-gray-400 font-medium hover:text-white transition">Equipe</a>
-                <a href="./parcerias/" class="block text-gray-400 font-medium flex items-center gap-2">
-                    Parcerias <span class="bg-white/10 text-white px-1.5 py-0.5 rounded text-[9px] uppercase font-bold">Novo</span>
-                </a>
-                <div class="w-full h-[1px] bg-white/10"></div>
-                <div class="bg-white text-black p-2 rounded text-center font-bold cursor-not-allowed flex items-center justify-center gap-2">
-                    <i class="fas fa-store"></i> Loja
-                    <span class="border border-black px-1.5 py-0.5 rounded text-[8px] uppercase tracking-widest font-black">Em Manutenção</span>
+                <h3>Canal de Figurinhas</h3>
+                <p>As melhores da internet. Novas figurinhas todo dia.</p>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" rel="noopener" class="eco-card glass fade-up">
+                <div class="eco-top">
+                    <i class="fas fa-bullhorn eco-icon"></i>
+                    <i class="fas fa-arrow-right eco-arrow"></i>
                 </div>
+                <h3>Canal de Info</h3>
+                <p>Descontos exclusivos e atualizações do sistema.</p>
+            </a>
+            <a href="https://tiktok.com/@udesakenofc" target="_blank" rel="noopener" class="eco-card glass fade-up">
+                <div class="eco-top">
+                    <i class="fab fa-tiktok eco-icon"></i>
+                    <i class="fas fa-arrow-right eco-arrow"></i>
+                </div>
+                <h3>TikTok</h3>
+                <p>Conteúdo original. Vídeos rápidos e novidades.</p>
+            </a>
+            <a href="https://instagram.com/udesakenofc" target="_blank" rel="noopener" class="eco-card glass fade-up">
+                <div class="eco-top">
+                    <i class="fab fa-instagram eco-icon"></i>
+                    <i class="fas fa-arrow-right eco-arrow"></i>
+                </div>
+                <h3>Instagram</h3>
+                <p>Conteúdo oficial. Acompanhe tudo em tempo real.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="comunidade">
+    <div class="section-wrap">
+        <div class="community-card glass fade-up">
+            <i class="fab fa-discord community-icon"></i>
+            <h2>Nossa Comunidade</h2>
+            <p>Junte-se a nós no Discord para tirar dúvidas, acompanhar novidades e interagir com a galera da UDESAKEN.</p>
+            <a href="./discord/" class="btn-outline">
+                <i class="fas fa-arrow-right"></i>
+                Acessar Servidor
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-img"><img src="logousk1.png" alt="Logo"></div>
+                <span>Udesaken</span>
+            </a>
+            <p>O futuro da sua comunidade. Alta performance e ferramentas exclusivas.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Navegação</h4>
+            <div class="footer-links">
+                <a href="./sobre/"><i class="fas fa-rocket"></i> Sobre Nós</a>
+                <a href="./equipe/"><i class="fas fa-users"></i> Conhecer Equipe</a>
+                <a href="./parcerias/"><i class="fas fa-handshake"></i> Nossas Parcerias</a>
+                <a href="./solicitar-parceria/"><i class="fas fa-paper-plane"></i> Solicitar Parceria</a>
+                <a href="./store/"><i class="fas fa-store"></i> Loja</a>
+                <a href="./termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Fale Conosco</h4>
+            <div class="footer-links">
+                <a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a>
+                <a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
             </div>
         </div>
     </div>
+    <div class="footer-bottom">
+        <p>Udesaken Group &copy; 2026 &bull; Todos os direitos reservados</p>
+    </div>
+</footer>
 
-    <!-- ── HERO ── -->
-    <section class="pt-40 pb-20 text-center">
-        <div class="max-w-4xl mx-auto px-6 fade-up">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse shadow-[0_0_10px_#ffffff]"></span>
-                <span class="text-[10px] font-bold text-white tracking-widest uppercase">Sistema Operante</span>
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tighter leading-[1.05] drop-shadow-2xl">
-                O futuro da <br>
-                <span class="text-gradient-mono">sua comunidade.</span>
-            </h1>
-
-            <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                alta performance e ferramentas exclusivas para quem lidera grandes comunidades.
-            </p>
-
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
-                <div class="relative group cursor-not-allowed w-full md:w-auto">
-                    <div class="absolute -inset-1 bg-white blur-md opacity-30 group-hover:opacity-70 transition duration-500 rounded-lg"></div>
-                    <div class="relative w-full px-10 py-4 bg-white text-black font-black rounded-sm flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-                        <i class="fas fa-store text-xl"></i> ACESSAR LOJA
-                        <span class="border border-black px-2 py-0.5 text-[10px] uppercase tracking-widest font-black animate-pulse">Em Manutenção</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative mx-auto max-w-[260px] md:max-w-[320px] grayscale-hover cursor-pointer">
-                <img src="uskcoroa.png" alt="Emblem" class="w-full h-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] animate-float">
+<div id="player-wrap">
+    <audio id="main-audio" preload="auto" loop></audio>
+    <div class="player-pill">
+        <div class="player-thumb">
+            <img src="logousk1.png" alt="Capa">
+            <div class="player-viz" id="player-viz">
+                <div class="vbar"></div>
+                <div class="vbar"></div>
+                <div class="vbar"></div>
             </div>
         </div>
-    </section>
-
-    <!-- ── ECOSSISTEMA ── -->
-    <section class="py-20">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="flex items-end justify-between mb-10">
-                <h2 class="text-3xl font-black text-white">Ecossistema</h2>
-                <div class="hidden md:block h-[1px] flex-1 ml-8 bg-gradient-to-r from-white/20 to-transparent"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="glass-panel p-6 rounded-[16px] group">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-whatsapp text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Canal de Figurinhas</h3>
-                    <p class="text-xs text-gray-400 font-medium">As melhores da internet. Novas figurinhas todo dia.</p>
-                </a>
-                <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="glass-panel p-6 rounded-[16px] group">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fas fa-bullhorn text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Canal de Info</h3>
-                    <p class="text-xs text-gray-400 font-medium">Descontos exclusivos e todas as atualizações do sistema.</p>
-                </a>
-                <a href="https://tiktok.com/@udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-tiktok text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">TikTok</h3>
-                    <p class="text-xs text-gray-400 font-medium">Conteúdo original Udesaken. Vídeos rápidos e novidades.</p>
-                </a>
-                <a href="https://instagram.com/udesakenofc" target="_blank" class="glass-panel p-6 rounded-[16px] group">
-                    <div class="flex justify-between items-start mb-10">
-                        <i class="fab fa-instagram text-3xl text-gray-500 group-hover:text-white transition duration-300"></i>
-                        <i class="fas fa-arrow-right text-gray-600 group-hover:text-white transition transform group-hover:-translate-y-1 group-hover:translate-x-1"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-1">Instagram</h3>
-                    <p class="text-xs text-gray-400 font-medium">Conteúdo oficial Udesaken. Acompanhe tudo em tempo real.</p>
-                </a>
-            </div>
+        <div class="player-info">
+            <div class="player-track" id="track-name">Interestelar</div>
+            <div class="player-artist" id="track-artist">UdesakenMusic</div>
         </div>
-    </section>
+        <button id="play-btn" aria-label="Play/Pause">
+            <i id="play-icon" class="fas fa-play"></i>
+        </button>
+    </div>
+</div>
 
-    <!-- ── COMUNIDADE ── -->
-    <section class="py-10">
-        <div class="max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center">
-            <div class="glass-panel p-10 rounded-[24px] w-full md:w-2/3 group hover:scale-[1.02] transition duration-500 border border-white/10 hover:border-white/30">
-                <i class="fab fa-discord text-5xl text-white mb-5 group-hover:scale-110 transition duration-300"></i>
-                <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Nossa Comunidade</h2>
-                <p class="text-sm text-gray-400 mb-10 font-medium max-w-md mx-auto">
-                    Junte-se a nós no Discord para tirar dúvidas, acompanhar novidades e interagir com a galera da UDESAKEN.
-                </p>
-                <a href="./discord/" class="inline-block px-10 py-3 border border-white text-white font-bold rounded-sm hover:bg-white hover:text-black transition duration-300">
-                    Acessar Servidor
-                </a>
-            </div>
-        </div>
-    </section>
+<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
 
-    <!-- ── FOOTER ── -->
-    <footer class="pt-16 pb-8 border-t border-white/10 bg-black/80 backdrop-blur-xl mt-10">
-        <div class="max-w-[1100px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded bg-black border border-white/20 overflow-hidden flex-shrink-0">
-                            <img src="logousk1.png" alt="Udesaken Logo" class="w-full h-full object-cover filter grayscale">
-                        </div>
-                        <span class="text-xl font-bold tracking-tight text-white">Udesaken</span>
-                    </div>
-                    <p class="text-sm text-gray-500 font-medium max-w-xs">O futuro da sua comunidade. alta performance e ferramentas exclusivas.</p>
-                </div>
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Navegação</h3>
-                    <div class="flex flex-col gap-4">
-                        <a href="./sobre/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-rocket w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Sobre Nós</a>
-                        <a href="./equipe/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-users w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Conhecer Equipe</a>
-                        <a href="./parcerias/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-handshake w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Nossas Parcerias <span class="bg-white/10 border border-white/20 text-white px-1.5 py-0.5 rounded text-[8px] uppercase font-bold">Novo</span></a>
-                        <a href="./solicitar-parceria/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-paper-plane w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Solicitar Parceria</a>
-                        <a href="./termos/" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-file-contract w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Termos de Uso</a>
-                        <div class="text-sm text-gray-600 cursor-not-allowed flex items-center gap-3" title="Em Manutenção"><i class="fas fa-store w-4 text-center"></i> Loja (Em Manutenção)</div>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center md:items-start">
-                    <h3 class="text-white font-bold mb-5 tracking-wide text-xs uppercase">Fale Conosco</h3>
-                    <div class="flex flex-col gap-4 mb-6">
-                        <a href="mailto:contato@udesaken.site" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fas fa-envelope w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> contato@udesaken.site</a>
-                        <a href="https://wa.me/447562847091" target="_blank" class="text-sm text-gray-500 hover:text-white transition-colors duration-300 flex items-center gap-3 group"><i class="fab fa-whatsapp w-4 text-center opacity-50 group-hover:opacity-100 transition"></i> Suporte Direto</a>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center pt-8 border-t border-white/10">
-                <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
-            </div>
-        </div>
-    </footer>
+<script>
+const AUDIO_TRACK = {
+    src: "/interestelar.mp3",
+    name: "Interestelar",
+    artist: "UdesakenMusic"
+};
 
-    <!-- ── GARGÂNTUA ── -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script>
-    (function() {
-        const canvas = document.getElementById('universe-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, particles;
+// Canvas
+(function() {
+    const canvas = document.getElementById('universe-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles;
 
-        const BH = {
-            get x() { return width * 0.5; },
-            get y() { return height * 0.82; },
-            get r() { return Math.min(width, height) * 0.10; },
-            diskInner: 1.5,
-            diskOuter: 3.8,
-            angle: 0
-        };
+    const BH = {
+        get x() { return W * 0.5; },
+        get y() { return H * 0.82; },
+        get r() { return Math.min(W, H) * 0.10; },
+        diskInner: 1.5,
+        diskOuter: 3.8,
+        angle: 0
+    };
 
-        function initCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            particles = [];
-            const n = Math.min(Math.floor(window.innerWidth / 15), 100);
-            for (let i = 0; i < n; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 1.2 + 0.3
-                });
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        particles = [];
+        const n = Math.min(Math.floor(W / 20), 80);
+        for (let i = 0; i < n; i++) {
+            particles.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1 + 0.3
+            });
+        }
+    }
+
+    function drawBackDisk(bx, by, R) {
+        const outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
+        ag.addColorStop(0, 'rgba(255,220,100,0.4)');
+        ag.addColorStop(0.4, 'rgba(255,140,20,0.2)');
+        ag.addColorStop(1, 'rgba(200,60,0,0)');
+        ctx.beginPath();
+        ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
+        ctx.fillStyle = ag;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawAccretionDisk(bx, by, R, angle) {
+        const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        ctx.rotate(angle);
+        ctx.scale(1, 0.28);
+        const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
+        g.addColorStop(0, 'rgba(255,140,0,0)');
+        g.addColorStop(0.2, 'rgba(255,200,80,0.4)');
+        g.addColorStop(0.5, 'rgba(255,255,220,0.7)');
+        g.addColorStop(0.8, 'rgba(200,60,0,0.3)');
+        g.addColorStop(1, 'rgba(100,20,0,0)');
+        ctx.beginPath();
+        ctx.arc(0,0,outer,0,Math.PI*2);
+        ctx.arc(0,0,inner,Math.PI*2,0,true);
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawBlackHole(bx, by, R) {
+        const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
+        glow.addColorStop(0,'rgba(255,120,0,0.12)');
+        glow.addColorStop(0.4,'rgba(180,60,0,0.05)');
+        glow.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(bx,by,R*2,0,Math.PI*2);
+        ctx.fillStyle=glow;
+        ctx.fill();
+        
+        const sh = ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);
+        sh.addColorStop(0,'#000');
+        sh.addColorStop(0.85,'#000');
+        sh.addColorStop(1,'rgba(0,0,0,0.85)');
+        ctx.beginPath();
+        ctx.arc(bx,by,R,0,Math.PI*2);
+        ctx.fillStyle=sh;
+        ctx.fill();
+    }
+
+    function gravity(p) {
+        const dx=BH.x-p.x, dy=BH.y-p.y, d=Math.hypot(dx,dy);
+        if (d < BH.r*5 && d > BH.r*1.2) {
+            const f=0.0001*(BH.r*5/d);
+            p.vx+=(dx/d)*f;
+            p.vy+=(dy/d)*f;
+        }
+        if (d < BH.r*1.15) {
+            p.x=Math.random()*W;
+            p.y=Math.random()*H*.6;
+            p.vx=(Math.random()-.5)*.3;
+            p.vy=(Math.random()-.5)*.3;
+        }
+    }
+
+    let t = 0;
+    function draw() {
+        ctx.clearRect(0,0,W,H);
+        t += 16;
+        BH.angle = t * 0.00015;
+        drawBackDisk(BH.x,BH.y,BH.r);
+        drawAccretionDisk(BH.x,BH.y,BH.r,BH.angle);
+        drawBlackHole(BH.x,BH.y,BH.r);
+        ctx.fillStyle='rgba(255,255,255,0.5)';
+        for (let i=0; i<particles.length; i++) {
+            const p=particles[i];
+            gravity(p);
+            p.x+=p.vx;
+            p.y+=p.vy;
+            if(p.x<0||p.x>W) p.vx*=-1;
+            if(p.y<0||p.y>H) p.vy*=-1;
+            ctx.beginPath();
+            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+})();
+
+// Navbar
+(function() {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = menu.classList.toggle('open');
+        toggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target)) menu.classList.remove('open');
+    });
+})();
+
+// Glass shimmer
+document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.glass').forEach(el => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+});
+
+// Fade up
+(function() {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                obs.unobserve(e.target);
             }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+})();
+
+// Audio Player
+(function() {
+    const audio = document.getElementById('main-audio');
+    const btn = document.getElementById('play-btn');
+    const icon = document.getElementById('play-icon');
+    const viz = document.getElementById('player-viz');
+    const wrap = document.getElementById('player-wrap');
+
+    document.getElementById('track-name').textContent = AUDIO_TRACK.name;
+    document.getElementById('track-artist').textContent = AUDIO_TRACK.artist;
+    audio.src = AUDIO_TRACK.src;
+
+    const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0;
+    const wasPlaying = localStorage.getItem('usk_is_playing') === 'true';
+
+    audio.addEventListener('loadedmetadata', () => {
+        audio.currentTime = savedTime;
+        if (wasPlaying) {
+            audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
         }
+    });
 
-        function drawAccretionDisk(bx, by, R, angle) {
-            const inner = R * BH.diskInner, outer = R * BH.diskOuter;
-            ctx.save();
-            ctx.translate(bx, by);
-            ctx.rotate(angle);
-            ctx.scale(1, 0.28);
-            const grad = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
-            grad.addColorStop(0,    'rgba(255,140,0,0)');
-            grad.addColorStop(0.15, 'rgba(255,200,80,0.55)');
-            grad.addColorStop(0.38, 'rgba(255,255,220,0.85)');
-            grad.addColorStop(0.55, 'rgba(255,160,40,0.65)');
-            grad.addColorStop(0.78, 'rgba(200,60,0,0.4)');
-            grad.addColorStop(1,    'rgba(100,20,0,0)');
-            ctx.beginPath();
-            ctx.arc(0, 0, outer, 0, Math.PI * 2);
-            ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
-            ctx.fillStyle = grad;
-            ctx.fill();
-            ctx.restore();
+    function setPlaying(state) {
+        icon.className = state ? 'fas fa-pause' : 'fas fa-play';
+        viz.classList.toggle('on', state);
+        localStorage.setItem('usk_is_playing', state);
+    }
+
+    function fadeIn() {
+        let vol = 0;
+        audio.volume = 0;
+        const iv = setInterval(() => {
+            vol = Math.min(vol + 0.002, 0.05);
+            audio.volume = vol;
+            if (vol >= 0.05) clearInterval(iv);
+        }, 50);
+    }
+
+    btn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().then(() => {
+                setPlaying(true);
+                fadeIn();
+            });
+        } else {
+            audio.pause();
+            setPlaying(false);
         }
+    });
 
-        function drawBackDisk(bx, by, R) {
-            const outer = R * BH.diskOuter;
-            ctx.save();
-            ctx.translate(bx, by);
-            const arcGrad = ctx.createRadialGradient(0, -R*0.18, R*BH.diskInner*0.5, 0, 0, outer*0.85);
-            arcGrad.addColorStop(0,   'rgba(255,220,100,0.5)');
-            arcGrad.addColorStop(0.4, 'rgba(255,140,20,0.3)');
-            arcGrad.addColorStop(1,   'rgba(200,60,0,0)');
-            ctx.beginPath();
-            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.22, 0, Math.PI, 0);
-            ctx.fillStyle = arcGrad;
-            ctx.fill();
-            const eGrad = ctx.createLinearGradient(-outer, -R*0.22, outer, -R*0.22);
-            eGrad.addColorStop(0,   'rgba(255,200,80,0)');
-            eGrad.addColorStop(0.3, 'rgba(255,230,150,0.7)');
-            eGrad.addColorStop(0.5, 'rgba(255,255,220,0.9)');
-            eGrad.addColorStop(0.7, 'rgba(255,230,150,0.7)');
-            eGrad.addColorStop(1,   'rgba(255,200,80,0)');
-            ctx.beginPath();
-            ctx.ellipse(0, -R*0.22, outer*0.88, R*0.09, 0, 0, Math.PI*2);
-            ctx.strokeStyle = eGrad;
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
-            ctx.restore();
+    audio.addEventListener('timeupdate', () => localStorage.setItem('usk_audio_time', audio.currentTime));
+    
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !audio.paused) {
+            audio.pause();
+            setPlaying(false);
         }
+    });
 
-        function drawBlackHole(bx, by, R) {
-            const glow = ctx.createRadialGradient(bx, by, R*0.6, bx, by, R*2.2);
-            glow.addColorStop(0,   'rgba(255,120,0,0.18)');
-            glow.addColorStop(0.4, 'rgba(180,60,0,0.08)');
-            glow.addColorStop(1,   'rgba(0,0,0,0)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R*2.2, 0, Math.PI*2);
-            ctx.fillStyle = glow;
-            ctx.fill();
+    setTimeout(() => wrap.classList.add('visible'), 800);
 
-            const photon = ctx.createRadialGradient(bx, by, R*0.9, bx, by, R*1.25);
-            photon.addColorStop(0,   'rgba(255,200,100,0.55)');
-            photon.addColorStop(0.5, 'rgba(255,160,40,0.2)');
-            photon.addColorStop(1,   'rgba(0,0,0,0)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R*1.25, 0, Math.PI*2);
-            ctx.fillStyle = photon;
-            ctx.fill();
-
-            const shadow = ctx.createRadialGradient(bx, by*0.999, R*0.1, bx, by, R);
-            shadow.addColorStop(0,    '#000000');
-            shadow.addColorStop(0.85, '#000000');
-            shadow.addColorStop(1,    'rgba(0,0,0,0.85)');
-            ctx.beginPath();
-            ctx.arc(bx, by, R, 0, Math.PI*2);
-            ctx.fillStyle = shadow;
-            ctx.fill();
+    let lastY = 0;
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y > lastY + 5 && y > 120) {
+            wrap.classList.add('hide');
+            wrap.classList.remove('visible');
+        } else if (y < lastY - 5 || y <= 120) {
+            wrap.classList.remove('hide');
+            wrap.classList.add('visible');
         }
+        lastY = y;
+    });
+})();
 
-        function applyGravity(p) {
-            const bx = BH.x, by = BH.y, R = BH.r;
-            const dx = bx - p.x, dy = by - p.y;
-            const dist = Math.hypot(dx, dy);
-            if (dist < R*5 && dist > R*1.2) {
-                const force = 0.00012 * (R*5 / dist);
-                p.vx += (dx/dist) * force;
-                p.vy += (dy/dist) * force;
-            }
-            if (dist < R*1.15) {
-                p.x = Math.random() * width;
-                p.y = Math.random() * height * 0.6;
-                p.vx = (Math.random()-0.5)*0.4;
-                p.vy = (Math.random()-0.5)*0.4;
-            }
-        }
-
-        let animT = 0;
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            animT += 16;
-            BH.angle = animT * 0.00018;
-            drawBackDisk(BH.x, BH.y, BH.r);
-            drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
-            drawBlackHole(BH.x, BH.y, BH.r);
-
-            ctx.fillStyle = 'rgba(255,255,255,0.65)';
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                applyGravity(p);
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > width) p.vx *= -1;
-                if (p.y < 0 || p.y > height) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
-                ctx.fill();
-                for (let j = i+1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const d = Math.hypot(p.x-p2.x, p.y-p2.y);
-                    if (d < 140) {
-                        ctx.strokeStyle = `rgba(255,255,255,${0.1 - d/1400})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        draw();
-    })();
-    </script>
-
-    <!-- ── SCRIPTS ── -->
-    <script src="script.js"></script>
-
+// Favicon
+(function() {
+    const l = document.createElement('link');
+    l.type = 'image/png';
+    l.rel = 'shortcut icon';
+    l.href = '/logousk.png';
+    document.head.appendChild(l);
+})();
+</script>
 </body>
 </html>
