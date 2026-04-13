@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Conheça a equipe oficial da Udesaken Group. Os administradores que fazem o ecossistema funcionar.">
     <meta name="theme-color" content="#000000">
-    
     <meta property="og:type" content="website">
     <meta property="og:title" content="Equipe Oficial | Udesaken Group">
     <meta property="og:description" content="Conheça a equipe oficial da Udesaken Group. Os administradores que fazem o ecossistema funcionar.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
-    
     <title>Equipe Oficial | Udesaken Group</title>
     
+    <!-- Fontes da Marca Udesaken -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                    fontFamily: { 
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            accent: '#ff8c00', // Laranja Udesaken
+                            card: 'rgba(12, 12, 12, 0.62)',
+                        }
+                    }
                 }
             }
         }
@@ -31,12 +40,10 @@
     <style>
         :root {
             --bg-deep: #000000;
-            --bg-card: rgba(8, 8, 12, 0.85);
-            --border-glow: rgba(255, 255, 255, 0.06);
-            --border-glow-hover: rgba(255, 255, 255, 0.2);
+            --border-glow: rgba(255, 255, 255, 0.07);
+            --border-glow-hover: rgba(255, 140, 0, 0.3);
             --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --text-muted: #6b6b6b;
+            --accent: #ff8c00;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,169 +51,164 @@
         body { 
             background: #000000; 
             color: var(--text-primary); 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Space Grotesk', sans-serif; 
             overflow-x: hidden;
             min-height: 100vh;
         }
         
-        /* Canvas Universo */
+        /* Canvas Buraco Negro */
         #universe-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
             pointer-events: none;
-            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
+            background: #000;
         }
 
-        /* Glass Panel refinado */
-        .glass-panel {
-            background: var(--bg-card);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid var(--border-glow);
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        /* Navbar Glass (Estilo Home) */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
         }
-        .glass-panel:hover {
-            border-color: var(--border-glow-hover);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+        .nav-wrapper nav {
+            max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(8, 8, 8, 0.75);
+            backdrop-filter: blur(30px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 8px 16px;
         }
-
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0, 0, 0, 0.92);
+            border-color: rgba(255,255,255,0.13);
+        }
+        
+        /* Textos e Animações */
         .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* Navbar refinada */
-        .nav-wrapper {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-            padding: 16px 24px;
-            transition: all 0.3s ease;
-        }
-        .nav-wrapper nav {
-            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
-            background: rgba(5, 5, 8, 0.7);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 100px;
-            padding: 8px 20px;
-        }
-        .nav-wrapper.glass-nav nav {
-            background: rgba(0, 0, 0, 0.95);
-            border-color: rgba(255,255,255,0.12);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-        
-        /* Animações */
         .fade-up { 
             opacity: 0; 
-            transform: translateY(35px); 
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+            transform: translateY(20px); 
+            transition: opacity 0.6s ease, transform 0.6s ease; 
         }
         .fade-up.active { opacity: 1; transform: translateY(0); }
-        
-        /* Photo Wrapper */
-        .photo-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin-bottom: 24px;
-            border-radius: 50%;
-            padding: 3px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(0,0,0,0.8));
-            transition: all 0.4s ease;
-        }
-        
-        .team-photo {
+
+        /* ================= CARDS DA EQUIPE (Glass + Print Style) ================= */
+        .dev-card {
+            background: var(--brand-card);
+            backdrop-filter: blur(28px) saturate(130%);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(.16,1,.3,1);
+            display: flex;
+            flex-direction: column;
             width: 100%;
+            max-width: 340px;
             height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255,255,255,0.1);
-            transition: transform 0.4s ease;
-            background: #1a1a1a;
-        }
-
-        .glass-panel:hover .photo-wrapper {
-            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(0,0,0,0.9));
-            transform: translateY(-5px);
-        }
-
-        .glass-panel:hover .team-photo {
-            transform: scale(1.05);
-            border-color: rgba(255,255,255,0.3);
-        }
-        
-        .role-badge {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: rgba(255,255,255,0.9);
-            padding: 4px 14px;
-            border-radius: 999px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
+            box-shadow: 0 8px 40px rgba(0,0,0,0.85);
             position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
         }
-        
-        .section-title:after {
+
+        .dev-card::before {
             content: '';
             position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-            border-radius: 3px;
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.055), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .dev-card:hover::before { opacity: 1; }
+
+        .dev-card:hover {
+            border-color: var(--border-glow-hover);
+            transform: translateY(-4px);
+        }
+
+        .dev-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .dev-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.5s ease, transform 0.5s ease;
+        }
+
+        .dev-card:hover .dev-img-wrapper img {
+            filter: grayscale(20%) contrast(1.1);
+            transform: scale(1.03);
+        }
+
+        .dev-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, rgba(12,12,12,0.95) 0%, transparent 100%);
+        }
+
+        .dev-content {
+            padding: 0 24px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .skill-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #9ca3af;
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .dev-card:hover .icon-box:hover {
+            color: var(--accent);
+            background: rgba(255, 140, 0, 0.1);
+            border-color: rgba(255, 140, 0, 0.3);
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
-        
-        /* Footer */
-        .footer-link {
-            color: #4a4a4a;
-            transition: color 0.3s;
-        }
-        .footer-link:hover {
-            color: white;
-        }
-        
-        .section-divider {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            height: 1px;
-            width: 100%;
-        }
-        
-        @media (max-width: 768px) {
-            .photo-wrapper {
-                width: 110px;
-                height: 110px;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-        }
+        ::-webkit-scrollbar { width: 5px; background: #000; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
+        ::selection { background: rgba(255,140,0,0.2); color: #fff; }
     </style>
     <link rel="icon" type="image/png" href="../logousk.png">
 </head>
@@ -216,18 +218,17 @@
 
     <div class="nav-wrapper transition-all duration-300" id="navbar">
         <nav>
-            <a href="/" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
-                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
+            <a href="/" class="flex items-center gap-3 group text-white no-underline">
+                <div class="w-7 h-7 rounded-lg border border-white/10 overflow-hidden bg-black flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/36x36'">
                 </div>
-                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+                <span class="font-syne font-extrabold tracking-tight text-base">Udesaken</span>
             </a>
             <div class="hidden md:flex items-center gap-4">
-                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
-                <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
+                <a href="/" class="text-gray-400 hover:text-white text-sm font-medium transition flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5"><i class="fas fa-arrow-left text-xs"></i> Início</a>
             </div>
             <div class="flex md:hidden gap-3">
-                <a href="/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
+                <a href="/" class="px-4 py-2 bg-white/5 text-white rounded-lg text-xs font-bold border border-white/10"><i class="fas fa-arrow-left"></i></a>
             </div>
         </nav>
     </div>
@@ -235,190 +236,146 @@
     <main class="relative z-10 pt-32 pb-20">
         <section class="text-center relative">
             <div class="max-w-4xl mx-auto px-6 fade-up">
-                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Equipe Oficial</span>
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent shadow-[0_0_8px_#ff8c00] animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-white/70 tracking-[0.15em] uppercase">Staff Oficial</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
+                <h1 class="font-syne text-5xl md:text-7xl font-extrabold text-white mb-5 tracking-tighter leading-[1.1]">
                     Quem Faz <span class="text-gradient">Acontecer</span>
                 </h1>
-                <p class="text-lg text-gray-400 max-w-xl mx-auto font-medium leading-relaxed">
+                <p class="text-[0.95rem] text-gray-400 max-w-xl mx-auto font-medium leading-relaxed">
                     As mentes por trás do ecossistema Udesaken. Focados em entregar segurança blindada e alta performance.
                 </p>
             </div>
         </section>
 
-        <section class="py-12 relative">
-            <div class="max-w-[1200px] mx-auto px-6 fade-up">
-                <div class="text-center mb-12">
-                    <h2 class="section-title text-white">
-                        <i class="fas fa-crown text-white/60 text-2xl"></i>
-                        Administradores
-                    </h2>
-                    <p class="text-gray-500 text-sm mt-4">Liderança e gestão do ecossistema Udesaken</p>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-                    
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../islo.jpg" alt="Isloch" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=ISLOCH'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Isloch</h2>
-                        <span class="role-badge">CEO, Fundador & Dev</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Responsável por toda a diretriz da Udesaken. Atua diretamente na arquitetura e no desenvolvimento do site, dos bots e dos sistemas do grupo.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../hyuuzaki.jpg" alt="Hyuuzaki" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=HYUUZAKI'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Hyuuzaki</h2>
-                        <span class="role-badge">Head Manager</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Criador oficial de figurinhas e engajamento criativo. Contribui ativamente com ideias inovadoras e gestão executiva do ecossistema.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../pisa.jpg" alt="PsaX" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=PSAX'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">PsaX</h2>
-                        <span class="role-badge">Admin Geral</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na administração geral do ecossistema, coordenando equipes e garantindo a excelência das operações do grupo.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../mz.jpg" alt="Mz" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=MZ'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Mz</h2>
-                        <span class="role-badge">Admin Channel</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Gerencia os canais oficiais da Udesaken, garantindo que todo o conteúdo seja distribuído com qualidade e pontualidade.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../kamys.jpg" alt="Kamys" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=KAMYS'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Kamys</h2>
-                        <span class="role-badge">Administrador</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na administração geral do ecossistema, garantindo que tudo funcione dentro das diretrizes estabelecidas.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../pedim.jpg" alt="Pedim" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=PEDIM'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Pedim</h2>
-                        <span class="role-badge">Administrador</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Responsável pela moderação e manutenção da ordem dentro do ecossistema Udesaken.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../atena.jpg" alt="Atena" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=ATENA'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Atena</h2>
-                        <span class="role-badge">Administradora</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Atua na gestão e organização das atividades, garantindo que a comunidade se mantenha ativa e engajada.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../dn.jpg" alt="Dn" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=DN'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Dn</h2>
-                        <span class="role-badge">Administrador</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Auxilia diretamente na moderação e no suporte contínuo, mantendo a organização da comunidade.</p>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl flex flex-col items-center text-center w-full">
-                        <div class="photo-wrapper">
-                            <img src="../piazza.jpg" alt="Piazza" class="team-photo" onerror="this.src='https://placehold.co/140x140/1a1a1a/ffffff?text=PIAZZA'">
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-2 tracking-tight">Piazza</h2>
-                        <span class="role-badge">Administrador</span>
-                        <p class="text-sm text-gray-400 leading-relaxed px-2">Auxilia diretamente na moderação e no suporte contínuo, mantendo a organização da comunidade.</p>
-                    </div>
-
+        <section class="py-16 relative">
+            <div class="max-w-[1400px] mx-auto px-6 fade-up">
+                <div id="team-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center items-stretch">
+                    <!-- Os cards são injetados aqui -->
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10">
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-gradient-to-b from-transparent to-black/90 backdrop-blur-sm relative z-10 mt-5">
         <div class="max-w-[1100px] mx-auto px-6 text-center">
             <div class="flex justify-center gap-8 mb-6">
-                <a href="/" class="footer-link text-xs font-medium">Início</a>
-                <a href="../planos/" class="footer-link text-xs font-medium">Planos</a>
-                <a href="../termos/" class="footer-link text-xs font-medium">Termos</a>
+                <a href="/" class="text-gray-500 hover:text-white transition text-xs font-semibold">Início</a>
+                <a href="../planos/" class="text-gray-500 hover:text-white transition text-xs font-semibold">Planos</a>
+                <a href="../termos/" class="text-gray-500 hover:text-white transition text-xs font-semibold">Termos</a>
             </div>
-            <div class="section-divider my-6"></div>
-            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-6"></div>
+            <p class="text-[0.7rem] text-gray-500 font-bold tracking-[0.12em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
         </div>
     </footer>
 
     <script>
-        // ==================== CANVAS UNIVERSO ESTRELADO ====================
-        const canvas = document.getElementById('universe-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, stars;
-        
-        function initStars() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            stars = [];
-            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
-            for(let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.25,
-                    vy: (Math.random() - 0.5) * 0.25,
-                    radius: Math.random() * 1.5 + 0.3,
-                    alpha: Math.random() * 0.5 + 0.3
-                });
-            }
-        }
-        
-        function drawStars() {
-            if(!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            
-            for(let i = 0; i < stars.length; i++) {
-                let s = stars[i];
-                s.x += s.vx;
-                s.y += s.vy;
-                
-                if(s.x < 0) s.x = width;
-                if(s.x > width) s.x = 0;
-                if(s.y < 0) s.y = height;
-                if(s.y > height) s.y = 0;
-                
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
-                ctx.fill();
-                
-                for(let j = i + 1; j < stars.length; j++) {
-                    let s2 = stars[j];
-                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
-                    if(dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(s.x, s.y);
-                        ctx.lineTo(s2.x, s2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
-                        ctx.lineWidth = 0.4;
-                        ctx.stroke();
-                    }
+        // ==================== CANVAS BURACO NEGRO ====================
+        (function() {
+            const canvas = document.getElementById('universe-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+
+            const BH = {
+                get x() { return W * 0.5; },
+                get y() { return H * 0.82; },
+                get r() { return Math.min(W, H) * 0.10; },
+                diskInner: 1.5,
+                diskOuter: 3.8,
+                angle: 0
+            };
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+                particles = [];
+                const n = Math.min(Math.floor(W / 20), 80);
+                for (let i = 0; i < n; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+                        r: Math.random() * 1 + 0.3
+                    });
                 }
             }
-            requestAnimationFrame(drawStars);
-        }
-        
-        window.addEventListener('resize', () => { initStars(); });
-        initStars();
-        drawStars();
+
+            function drawBackDisk(bx, by, R) {
+                const outer = R * BH.diskOuter;
+                ctx.save();
+                ctx.translate(bx, by);
+                const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
+                ag.addColorStop(0, 'rgba(255,220,100,0.4)');
+                ag.addColorStop(0.4, 'rgba(255,140,20,0.2)');
+                ag.addColorStop(1, 'rgba(200,60,0,0)');
+                ctx.beginPath();
+                ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
+                ctx.fillStyle = ag;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawAccretionDisk(bx, by, R, angle) {
+                const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+                ctx.save();
+                ctx.translate(bx, by); ctx.rotate(angle); ctx.scale(1, 0.28);
+                const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
+                g.addColorStop(0, 'rgba(255,140,0,0)');
+                g.addColorStop(0.2, 'rgba(255,200,80,0.4)');
+                g.addColorStop(0.5, 'rgba(255,255,220,0.7)');
+                g.addColorStop(0.8, 'rgba(200,60,0,0.3)');
+                g.addColorStop(1, 'rgba(100,20,0,0)');
+                ctx.beginPath();
+                ctx.arc(0,0,outer,0,Math.PI*2);
+                ctx.arc(0,0,inner,Math.PI*2,0,true);
+                ctx.fillStyle = g;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawBlackHole(bx, by, R) {
+                const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
+                glow.addColorStop(0,'rgba(255,120,0,0.12)');
+                glow.addColorStop(0.4,'rgba(180,60,0,0.05)');
+                glow.addColorStop(1,'rgba(0,0,0,0)');
+                ctx.beginPath(); ctx.arc(bx,by,R*2,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
+                
+                const sh = ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);
+                sh.addColorStop(0,'#000'); sh.addColorStop(0.85,'#000'); sh.addColorStop(1,'rgba(0,0,0,0.85)');
+                ctx.beginPath(); ctx.arc(bx,by,R,0,Math.PI*2); ctx.fillStyle=sh; ctx.fill();
+            }
+
+            function gravity(p) {
+                const dx=BH.x-p.x, dy=BH.y-p.y, d=Math.hypot(dx,dy);
+                if (d < BH.r*5 && d > BH.r*1.2) {
+                    const f=0.0001*(BH.r*5/d);
+                    p.vx+=(dx/d)*f; p.vy+=(dy/d)*f;
+                }
+                if (d < BH.r*1.15) {
+                    p.x=Math.random()*W; p.y=Math.random()*H*.6;
+                    p.vx=(Math.random()-.5)*.3; p.vy=(Math.random()-.5)*.3;
+                }
+            }
+
+            let t = 0;
+            function draw() {
+                ctx.clearRect(0,0,W,H);
+                t += 16; BH.angle = t * 0.00015;
+                drawBackDisk(BH.x,BH.y,BH.r);
+                drawAccretionDisk(BH.x,BH.y,BH.r,BH.angle);
+                drawBlackHole(BH.x,BH.y,BH.r);
+                ctx.fillStyle='rgba(255,255,255,0.5)';
+                for (let i=0; i<particles.length; i++) {
+                    const p=particles[i];
+                    gravity(p); p.x+=p.vx; p.y+=p.vy;
+                    if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1;
+                    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+
+            resize(); window.addEventListener('resize', resize); draw();
+        })();
 
         // ==================== NAVBAR SCROLL ====================
         const navbar = document.getElementById('navbar');
@@ -427,14 +384,143 @@
             else navbar.classList.remove('glass-nav');
         });
 
-        // ==================== FADE-UP OBSERVER ====================
+        // ==================== EFEITO GLASS MOUSEMOVE ====================
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.dev-card').forEach(el => {
+                const r = el.getBoundingClientRect();
+                el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                el.style.setProperty('--my', `${e.clientY - r.top}px`);
+            });
+        });
+
+        // ==================== DADOS DA EQUIPE ====================
+        const profilesData = {
+            isloch: {
+                id: "isloch",
+                name: "Isloch",
+                role: "Founder, CEO & Dev",
+                fullDescription: "Criador e desenvolvedor focado em JavaScript e Python. Supervisiona todo o ecossistema da Udesaken.",
+                image: "../islo.jpg",
+                skills: ["JavaScript", "Python", "Node.js", "Arquitetura"],
+                socials: [
+                    { name: 'instagram', url: 'https://instagram.com/isloch_' },
+                    { name: 'tiktok', url: 'https://tiktok.com/@isloch_' }
+                ]
+            },
+            hyuuzaki: {
+                id: "hyuuzaki",
+                name: "Hyuuzaki",
+                role: "Head Manager",
+                fullDescription: "Cuida da nossa staff e é responsável por criar as figurinhas exclusivas para o canal.",
+                image: "../hyuuzaki.jpg",
+                skills: ["Gestão", "Design", "Estratégia", "Stickers"],
+                socials: []
+            },
+            psax: {
+                id: "psax",
+                name: "PsaX",
+                role: "Admin Geral",
+                fullDescription: "Trabalha diretamente na organização e bem-estar de toda a equipe.",
+                image: "../pisa.jpg",
+                skills: ["Coordenação", "Liderança", "Operações"],
+                socials: []
+            },
+            mz: {
+                id: "mz",
+                name: "Mz",
+                role: "Admin Channel",
+                fullDescription: "Foca na criação de figurinhas em parceria com a gestão e mantém nossos canais ativos.",
+                image: "../mz.jpg",
+                skills: ["Conteúdo", "Mídia", "Comunicação"],
+                socials: []
+            },
+            kamys: {
+                id: "kamys",
+                name: "Kamys",
+                role: "Administradora",
+                fullDescription: "Sempre atenta para auxiliar em tudo que a comunidade precisa para crescer de forma organizada.",
+                image: "../kamys.jpg",
+                skills: ["Suporte", "Moderação", "Empatia"],
+                socials: []
+            },
+            pedim: {
+                id: "pedim",
+                name: "Pedim",
+                role: "Administrador",
+                fullDescription: "Garante que tudo flua perfeitamente no dia a dia, mantendo a ordem no grupo.",
+                image: "../pedim.jpg",
+                skills: ["Regras", "Moderação", "Segurança"],
+                socials: []
+            },
+            dn: {
+                id: "dn",
+                name: "Dn",
+                role: "Jovem Aprendiz & Mascote",
+                fullDescription: "O coração fofinho da equipe, sempre presente para espalhar alegria e aprender com todos.",
+                image: "../dn.jpg",
+                skills: ["Carisma", "Positividade", "Aprendizado"],
+                socials: []
+            }
+        };
+
+        // ==================== GERAR CARDS NA TELA ====================
+        const gridContainer = document.getElementById('team-grid');
+        const iconMap = {
+            'github': 'fab fa-github', 
+            'instagram': 'fab fa-instagram',
+            'envelope': 'far fa-envelope', 
+            'discord': 'fab fa-discord', 
+            'twitter': 'fab fa-twitter',
+            'tiktok': 'fab fa-tiktok'
+        };
+
+        Object.values(profilesData).forEach(profile => {
+            const skillsHtml = profile.skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('');
+            
+            // Renderiza seção de redes sociais apenas se existirem
+            const socialsHtml = profile.socials && profile.socials.length > 0 ? `
+                <div class="mt-auto pt-4 border-t border-white/5">
+                    <div class="flex gap-2">
+                        ${profile.socials.map(social => `<a href="${social.url}" target="_blank" class="icon-box"><i class="${iconMap[social.name] || 'fas fa-link'}"></i></a>`).join('')}
+                    </div>
+                </div>
+            ` : '<div class="mt-auto"></div>';
+
+            const cardHtml = `
+                <div class="dev-card">
+                    <div class="dev-img-wrapper">
+                        <img src="${profile.image}" alt="${profile.name}" onerror="this.src='https://placehold.co/400x400/121212/ffffff?text=${profile.name}'">
+                        <div class="dev-img-overlay"></div>
+                    </div>
+                    <div class="dev-content">
+                        <h2 class="font-syne text-xl font-extrabold text-white tracking-tight">${profile.name}</h2>
+                        <div class="text-brand-accent text-sm font-semibold mt-1 mb-4">${profile.role}</div>
+                        
+                        <!-- Texto descritivo completo -->
+                        <p class="text-gray-300 text-[0.85rem] leading-relaxed mb-6">
+                            ${profile.fullDescription}
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            ${skillsHtml}
+                        </div>
+
+                        ${socialsHtml}
+                    </div>
+                </div>
+            `;
+            gridContainer.insertAdjacentHTML('beforeend', cardHtml);
+        });
+
+        // ==================== ANIMAÇÃO FADE-UP ====================
         const fadeElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.1 });
         fadeElements.forEach(el => observer.observe(el));
+
     </script>
 </body>
 </html>
