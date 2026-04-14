@@ -447,7 +447,7 @@
             background: rgba(255,255,255,0.06);
         }
 
-        /* Grid produtos - CORRIGIDO */
+        /* Grid produtos */
         #products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1353,7 +1353,11 @@ window.checkoutWhatsApp = function() {
     cart = []; saveCart(); toggleCart();
 };
 
-window.openModal = function(product) {
+// FIX 1: Alterado para receber o ID ao invés do objeto stringificado. Evita quebra de aspas no HTML.
+window.openModal = function(productId) {
+    const product = PRODUCTS.find(p => p.id === productId);
+    if (!product) return;
+
     const modal = document.getElementById('product-modal');
     const content = document.getElementById('modal-content');
     content.innerHTML = `
@@ -1400,8 +1404,9 @@ function renderProducts() {
     }
     if (noRes) noRes.style.display = 'none';
     if (grid) {
+        // FIX 1: Removido JSON.stringify dentro do HTML, agora enviamos apenas o ID: onclick='openModal(${p.id})'
         grid.innerHTML = filtered.map(p => `
-            <div class="product-card glass" onclick='openModal(${JSON.stringify(p).replace(/'/g, "&#39;")})'>
+            <div class="product-card glass" onclick="openModal(${p.id})">
                 <div class="pc-top">
                     <img src="${p.image}" class="pc-img" alt="${p.name}">
                     ${p.badge ? `<span class="pc-badge">${p.badge}</span>` : ''}
@@ -1431,7 +1436,11 @@ document.getElementById('search-input')?.addEventListener('input', e => {
     renderProducts();
 });
 
+// FIX 3: Otimizado o toast para não empilhar infinitamente e quebrar layout se clicado rápido demais
 function showToast(msg) {
+    const existingToasts = document.querySelectorAll('.toast');
+    existingToasts.forEach(t => t.remove()); // Remove toasts antigos se clicar muito rápido
+
     const t = document.createElement('div');
     t.className = 'toast';
     t.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
@@ -1506,11 +1515,27 @@ function showToast(msg) {
 })();
 
 // Glass shimmer
-document.addEventListener('mousemove',(e)=>{document.querySelectorAll('.glass').forEach(el=>{const r=el.getBoundingClientRect(); el.style.setProperty('--mx',`${e.clientX-r.left}px`); el.style.setProperty('--my',`${e.clientY-r.top}px`);});});
+document.addEventListener('mousemove',(e)=>{
+    document.querySelectorAll('.glass').forEach(el=>{
+        const r=el.getBoundingClientRect(); 
+        el.style.setProperty('--mx',`${e.clientX-r.left}px`); 
+        el.style.setProperty('--my',`${e.clientY-r.top}px`);
+    });
+});
 
-// Fade-up
-new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:0.1}).observeAll=function(els){els.forEach(el=>this.observe(el));}; document.querySelectorAll('.fade-up').forEach(el=>new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:0.1}).observe(el));
+// FIX 2: Correção e Otimização do código do IntersectionObserver (Animação Fade-up limpa e correta)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target); // Para de observar após aparecer para economizar processamento
+        }
+    });
+}, { threshold: 0.1 });
 
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Inicialização
 renderProducts();
 renderCart();
 </script>
