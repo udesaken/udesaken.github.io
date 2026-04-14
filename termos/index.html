@@ -22,7 +22,13 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        amber: {
+                            500: '#ff8c00',
+                            600: '#e07b00',
+                        }
+                    }
                 }
             }
         }
@@ -33,10 +39,11 @@
             --bg-deep: #000000;
             --bg-card: rgba(8, 8, 12, 0.85);
             --border-glow: rgba(255, 255, 255, 0.06);
-            --border-glow-hover: rgba(255, 255, 255, 0.15);
+            --border-glow-hover: rgba(255, 140, 0, 0.22);
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
             --text-muted: #6b6b6b;
+            --amber: #ff8c00;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -59,7 +66,7 @@
             background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
         }
 
-        /* Glass Panel refinado */
+        /* Glass Panel refinado com hover colorido */
         .glass-panel {
             background: var(--bg-card);
             backdrop-filter: blur(20px) saturate(180%);
@@ -70,11 +77,18 @@
         .glass-panel:hover {
             border-color: var(--border-glow-hover);
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 15px rgba(255,140,0,0.05);
         }
 
         .text-gradient {
             background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #ffd080 0%, #ff8c00 60%, #e05500 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -96,55 +110,59 @@
         }
         .nav-wrapper.glass-nav nav {
             background: rgba(0, 0, 0, 0.95);
-            border-color: rgba(255,255,255,0.12);
+            border-color: rgba(255,140,0,0.15);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         
-        /* Animações */
+        /* Animações (Corrigido para evitar bugs de não aparecer) */
         .fade-up { 
             opacity: 0; 
             transform: translateY(35px); 
             transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+            will-change: opacity, transform;
         }
         .fade-up.active { opacity: 1; transform: translateY(0); }
         
         /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 10px; } /* Thumb mais ambarado */
+        ::-webkit-scrollbar-thumb:hover { background: #ff8c00; }
         
         /* Seções de Termos */
         .term-section {
             transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
         .term-section:hover {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255,140,0,0.02);
+            border-color: rgba(255,140,0,0.08);
         }
         
+        /* Caixas de Aviso Coloridas */
         .warning-box {
-            background: rgba(255,255,255,0.03);
-            border-left: 3px solid rgba(255,255,255,0.3);
+            background: rgba(255, 140, 0, 0.05);
+            border-left: 3px solid var(--amber);
         }
         
         .critical-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 60, 60, 0.04);
+            border: 1px solid rgba(255, 60, 60, 0.2);
         }
         
-        /* Botão Aceitar */
+        /* Botão Aceitar Colorido */
         .btn-accept {
-            background: white;
-            color: black;
+            background: var(--amber);
+            color: #ffffff;
             font-weight: 800;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            box-shadow: 0 0 15px rgba(255,140,0,0.2);
             border-radius: 100px;
         }
         .btn-accept:hover {
-            background: #e0e0e0;
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+            background: #e07b00;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255,140,0,0.4);
         }
         
         /* Footer links */
@@ -153,11 +171,11 @@
             transition: color 0.3s;
         }
         .footer-link:hover {
-            color: white;
+            color: var(--amber);
         }
         
         .section-divider {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
             height: 1px;
             width: 100%;
         }
@@ -176,7 +194,7 @@
             content: "▹";
             position: absolute;
             left: 0;
-            color: rgba(255,255,255,0.4);
+            color: var(--amber);
             font-size: 0.8rem;
         }
     </style>
@@ -200,7 +218,7 @@
                 <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
             </div>
             <div class="flex md:hidden gap-3">
-                <a href="/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
+                <a href="/" class="px-4 py-2 bg-white/10 hover:bg-amber-500/20 text-white hover:text-amber-500 transition-colors rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
             </div>
         </nav>
     </div>
@@ -208,15 +226,15 @@
     <main class="relative z-10 pt-32 pb-20">
         <section class="text-center relative">
             <div class="max-w-4xl mx-auto px-6 fade-up">
-                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Documento Oficial</span>
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-amber-500/90 tracking-[0.15em] uppercase">Documento Oficial</span>
                 </div>
                 <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-file-contract text-white/70 text-2xl"></i>
+                    <i class="fas fa-file-contract text-amber-500 text-2xl"></i>
                 </div>
                 <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter leading-[1.1]">
-                    Termos de <span class="text-gradient">Uso</span>
+                    Termos de <span class="text-gradient-amber">Uso</span>
                 </h1>
                 <p class="text-sm text-white/40 uppercase tracking-[0.2em] font-bold">Udesaken Bot • Atualizado em: 31/03/2026</p>
             </div>
@@ -228,7 +246,7 @@
                     
                     <!-- Citação de Aceitação -->
                     <div class="warning-box p-6 rounded-r-xl mb-10 italic text-gray-300 text-sm md:text-base leading-relaxed">
-                        <i class="fas fa-quote-left text-white/20 mr-2"></i>
+                        <i class="fas fa-quote-left text-amber-500/40 mr-2"></i>
                         Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o cliente declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo.
                     </div>
 
@@ -238,7 +256,7 @@
                         <!-- 1. Aceitação -->
                         <div class="term-section p-5 rounded-xl">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
-                                <i class="fas fa-check-circle text-white/60 text-sm"></i> 1. Aceitação dos Termos
+                                <i class="fas fa-check-circle text-amber-500 text-sm"></i> 1. Aceitação dos Termos
                             </h3>
                             <p class="text-sm md:text-base text-gray-300 leading-relaxed">
                                 Ao realizar o pagamento, ativar o plano ou utilizar o Udesaken Bot, o usuário declara ter lido, compreendido e aceitado integralmente estes Termos de Uso. Caso não concorde com qualquer disposição, deverá interromper imediatamente o uso do serviço.
@@ -248,7 +266,7 @@
                         <!-- 2. Licença -->
                         <div class="term-section p-5 rounded-xl">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
-                                <i class="fas fa-id-card text-white/60 text-sm"></i> 2. Licença de Uso e Responsabilidade do Usuário
+                                <i class="fas fa-id-card text-amber-500 text-sm"></i> 2. Licença de Uso e Responsabilidade do Usuário
                             </h3>
                             <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
                                 <li><strong class="text-white">2.1.</strong> A licença concedida é individual, intransferível, temporária e limitada ao período pago.</li>
@@ -257,10 +275,10 @@
                             </ul>
                         </div>
 
-                        <!-- 3. Conteúdo Adulto - Destaque -->
-                        <div class="critical-box p-6 rounded-xl border border-white/15 bg-white/5">
-                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/15 pb-2">
-                                <i class="fas fa-exclamation-triangle text-white/70 text-sm"></i> 3. Comandos de Conteúdo Adulto (NSFW/Hot)
+                        <!-- 3. Conteúdo Adulto - Destaque (Vermelho sutil para indicar alerta crítico) -->
+                        <div class="critical-box p-6 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-red-400 font-bold text-lg mb-4 border-b border-red-500/20 pb-2">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-sm"></i> 3. Comandos de Conteúdo Adulto (NSFW/Hot)
                             </h3>
                             <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
                                 <li><strong class="text-white">3.1.</strong> O bot possui comandos que podem gerar conteúdo adulto ou NSFW.</li>
@@ -272,7 +290,7 @@
                         <!-- 4. Vigência -->
                         <div class="term-section p-5 rounded-xl">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
-                                <i class="fas fa-clock text-white/60 text-sm"></i> 4. Vigência do Plano
+                                <i class="fas fa-clock text-amber-500 text-sm"></i> 4. Vigência do Plano
                             </h3>
                             <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
                                 <li><strong class="text-white">4.1.</strong> O plano inicia imediatamente após a confirmação de pagamento e ativação do acesso.</li>
@@ -283,15 +301,15 @@
                         <!-- 5. Disponibilidade -->
                         <div class="term-section p-5 rounded-xl">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
-                                <i class="fas fa-server text-white/60 text-sm"></i> 5. Disponibilidade, Riscos e Limitações do Serviço
+                                <i class="fas fa-server text-amber-500 text-sm"></i> 5. Disponibilidade, Riscos e Limitações do Serviço
                             </h3>
                             <ul class="legal-list text-sm md:text-base text-gray-300 space-y-3">
                                 <li><strong class="text-white">5.1.</strong> O serviço depende integralmente da plataforma WhatsApp/Meta e pode sofrer interrupções, oscilações ou banimentos. A Udesaken Group não garante imunidade contra bloqueios ou banimentos.</li>
-                                <li class="p-4 bg-white/5 rounded-xl mt-2">
+                                <li class="p-4 bg-white/5 border border-white/5 rounded-xl mt-2">
                                     <strong class="text-white block mb-1">5.2. Banimento ou Bloqueio:</strong>
                                     Em caso de banimento do número do bot por motivos alheios à Udesaken, será realizada migração do plano com contagem de dias congelada, quando tecnicamente possível.
                                 </li>
-                                <li class="p-4 bg-white/5 rounded-xl">
+                                <li class="p-4 bg-white/5 border border-white/5 rounded-xl">
                                     <strong class="text-white block mb-1">5.3. Falha Técnica:</strong>
                                     Falhas exclusivas da Udesaken superiores a 24 (vinte e quatro) horas consecutivas poderão gerar reposição proporcional dos dias, a critério exclusivo da empresa.
                                 </li>
@@ -301,18 +319,18 @@
 
                         <!-- 6 e 7: Suporte e Reembolso - Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="term-section p-5 rounded-xl border border-white/5">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
                                 <h3 class="flex items-center gap-3 text-white font-bold text-base mb-3">
-                                    <i class="fas fa-headset text-white/60 text-sm"></i> 6. Suporte
+                                    <i class="fas fa-headset text-amber-500 text-sm"></i> 6. Suporte
                                 </h3>
                                 <ul class="legal-list text-sm text-gray-300">
                                     <li><strong class="text-white">6.1.</strong> Suporte apenas durante a vigência do plano.</li>
                                     <li><strong class="text-white">6.2.</strong> Prazo médio de resposta: até 24 horas úteis.</li>
                                 </ul>
                             </div>
-                            <div class="term-section p-5 rounded-xl border border-white/5">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
                                 <h3 class="flex items-center gap-3 text-white font-bold text-base mb-3">
-                                    <i class="fas fa-hand-holding-dollar text-white/60 text-sm"></i> 7. Reembolso
+                                    <i class="fas fa-hand-holding-dollar text-amber-500 text-sm"></i> 7. Reembolso
                                 </h3>
                                 <ul class="legal-list text-sm text-gray-300">
                                     <li><strong class="text-white">7.1.</strong> Prazo de arrependimento: 7 dias (CDC art. 49).</li>
@@ -323,20 +341,20 @@
                         </div>
 
                         <!-- 8. Uso Indevido -->
-                        <div class="critical-box p-6 rounded-xl border border-white/15">
-                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/15 pb-2">
-                                <i class="fas fa-ban text-white/70 text-sm"></i> 8. Uso Indevido, Proibições e Penalidades
+                        <div class="critical-box p-6 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-red-400 font-bold text-lg mb-4 border-b border-red-500/20 pb-2">
+                                <i class="fas fa-ban text-red-500 text-sm"></i> 8. Uso Indevido, Proibições e Penalidades
                             </h3>
                             <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
                                 <li><strong class="text-white">8.1.</strong> É terminantemente proibido: spam, travas, ataques, envio de mensagens em massa não solicitadas, discursos de ódio, conteúdo ilegal, exploração de bugs, violação das Políticas do WhatsApp/Meta ou qualquer prática que possa gerar risco de banimento.</li>
                                 <li><strong class="text-white">8.2.</strong> A Udesaken Group poderá suspender ou encerrar o acesso imediatamente e sem aviso prévio em caso de violação ou risco identificado.</li>
                             </ul>
-                            <div class="mt-4 p-4 bg-white/5 rounded-xl border border-white/10">
+                            <div class="mt-4 p-4 bg-red-500/10 rounded-xl border border-red-500/20">
                                 <div class="flex gap-3 items-start">
-                                    <i class="fas fa-gavel text-white/50 text-xl mt-0.5"></i>
+                                    <i class="fas fa-gavel text-red-500/80 text-xl mt-0.5"></i>
                                     <div>
                                         <strong class="text-white block uppercase text-xs tracking-wider">8.3. Penalidade por Violação Grave</strong>
-                                        <p class="text-xs md:text-sm text-gray-400 mt-1">Violações graves poderão resultar em banimento permanente do plano, sem direito a reembolso, e cobrança de multa compensatória de até R$ 30,00 por infração, além de indenização por eventuais danos causados.</p>
+                                        <p class="text-xs md:text-sm text-gray-300 mt-1">Violações graves poderão resultar em banimento permanente do plano, sem direito a reembolso, e cobrança de multa compensatória de até R$ 30,00 por infração, além de indenização por eventuais danos causados.</p>
                                     </div>
                                 </div>
                             </div>
@@ -344,32 +362,32 @@
 
                         <!-- 9 e 10 -->
                         <div class="grid grid-cols-1 gap-6">
-                            <div class="term-section p-5 rounded-xl border border-white/5">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
                                 <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
-                                    <i class="fas fa-user-shield text-white/60 text-sm"></i> 9. Indenização e Isenção
+                                    <i class="fas fa-user-shield text-amber-500 text-sm"></i> 9. Indenização e Isenção
                                 </h3>
                                 <p class="text-sm text-gray-300 leading-relaxed">O usuário obriga-se a indenizar e isentar integralmente a Udesaken Group de qualquer prejuízo, ação judicial, multa, dano ou reclamação decorrente de uso inadequado, violação das Políticas do WhatsApp, exposição de menores a conteúdo adulto, banimento de número pessoal ou conflitos internos nos grupos.</p>
                             </div>
-                            <div class="term-section p-5 rounded-xl border border-white/5">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
                                 <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
-                                    <i class="fas fa-shield-halved text-white/60 text-sm"></i> 10. Limitação de Responsabilidade
+                                    <i class="fas fa-shield-halved text-amber-500 text-sm"></i> 10. Limitação de Responsabilidade
                                 </h3>
                                 <p class="text-sm text-gray-300 leading-relaxed">Em nenhuma hipótese a Udesaken Group será responsável por danos indiretos, lucros cessantes, perda de dados, banimentos de contas do usuário ou qualquer prejuízo causado pela plataforma WhatsApp/Meta. A responsabilidade total fica limitada ao valor efetivamente pago pelo usuário nos últimos 12 meses.</p>
                             </div>
                         </div>
 
                         <!-- 11. Propriedade Intelectual -->
-                        <div class="term-section p-5 rounded-xl border border-white/5">
+                        <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
-                                <i class="fas fa-copyright text-white/60 text-sm"></i> 11. Propriedade Intelectual
+                                <i class="fas fa-copyright text-amber-500 text-sm"></i> 11. Propriedade Intelectual
                             </h3>
                             <p class="text-sm text-gray-300 leading-relaxed">Todo o software, comandos, figurinhas e funcionalidades são de propriedade exclusiva da Udesaken Group. É expressamente proibida qualquer forma de engenharia reversa, cópia, modificação, distribuição ou uso não autorizado.</p>
                         </div>
 
                         <!-- 12. Alterações e Foro -->
-                        <div class="critical-box p-6 rounded-xl border border-white/15 bg-white/5">
+                        <div class="term-section p-6 rounded-xl border border-amber-500/20 bg-amber-500/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
-                                <i class="fas fa-scale-balanced text-white/70 text-sm"></i> 12. Alterações nos Termos e Foro Competente
+                                <i class="fas fa-scale-balanced text-amber-500 text-sm"></i> 12. Alterações nos Termos e Foro Competente
                             </h3>
                             <ul class="legal-list text-sm text-gray-300 space-y-2">
                                 <li><strong class="text-white">12.1.</strong> A Udesaken Group poderá alterar estes Termos a qualquer momento. Alterações substanciais serão comunicadas com antecedência razoável através dos canais oficiais.</li>
@@ -378,18 +396,18 @@
                         </div>
 
                         <!-- Aceite Final -->
-                        <div class="mt-10 pt-6 border-t border-white/10 text-center">
+                        <div class="mt-10 pt-8 border-t border-white/10 text-center">
                             <p class="text-sm text-gray-400 mb-6">Ao continuar utilizando o serviço, você confirma que leu, compreendeu e concorda integralmente com todos os termos acima.</p>
                             
                             <a href="https://wa.me/447562847091?text=Ol%C3%A1%2C%20li%20e%20aceito%20integralmente%20os%20Termos%20de%20Uso%20do%20Udesaken%20Bot." target="_blank" 
                                class="btn-accept inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full w-full md:w-auto text-lg">
-                                <i class="fab fa-whatsapp text-xl"></i>
+                                <i class="fab fa-whatsapp text-2xl"></i>
                                 LI E ACEITO OS TERMOS
                             </a>
                         </div>
                         
                         <div class="text-center mt-6">
-                            <a href="../privacidade/" class="inline-flex items-center gap-2 text-white/50 hover:text-white transition font-medium text-sm">
+                            <a href="../privacidade/" class="inline-flex items-center gap-2 text-amber-500/60 hover:text-amber-500 transition font-medium text-sm">
                                 <i class="fas fa-user-shield"></i>
                                 Leia também nossa Política de Privacidade (LGPD)
                             </a>
@@ -463,8 +481,9 @@
                         ctx.beginPath();
                         ctx.moveTo(s.x, s.y);
                         ctx.lineTo(s2.x, s2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
-                        ctx.lineWidth = 0.4;
+                        // Adicionada uma coloração sutil ambarada nas conexões das estrelas
+                        ctx.strokeStyle = `rgba(255, 140, 0, ${0.03 - dist/4000})`;
+                        ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
                 }
@@ -483,13 +502,22 @@
             else navbar.classList.remove('glass-nav');
         });
 
-        // ==================== FADE-UP OBSERVER ====================
+        // ==================== FADE-UP OBSERVER (CORRIGIDO) ====================
         const fadeElements = document.querySelectorAll('.fade-up');
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
+                // Quando o elemento entrar na tela
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Para de observar depois que apareceu, evitando bugs se rolar a tela muito rápido
+                    obs.unobserve(entry.target); 
+                }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { 
+            threshold: 0.05, // Precisa aparecer apenas 5% para ativar (antes era 10% ou margem negativa)
+            rootMargin: '50px' // Margem positiva faz ele carregar 50px ANTES de entrar na tela, garantindo que não trave
+        });
+        
         fadeElements.forEach(el => observer.observe(el));
     </script>
 </body>
