@@ -721,6 +721,71 @@
             font-weight: 800;
         }
 
+        #cart-footer {
+            display: none;
+        }
+
+        .terms-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: border-color 0.25s;
+        }
+        .terms-row:hover {
+            border-color: rgba(255,255,255,0.18);
+        }
+        .terms-row input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 17px;
+            height: 17px;
+            min-width: 17px;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            margin-top: 1px;
+        }
+        .terms-row input[type="checkbox"]:checked {
+            background: #ff8c00;
+            border-color: #ff8c00;
+        }
+        .terms-row input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid #fff;
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+        .terms-row label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            cursor: pointer;
+            user-select: none;
+        }
+        .terms-row label a {
+            color: #ffb347;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .terms-row label a:hover {
+            color: #ff8c00;
+        }
+
         .btn-checkout {
             display: flex;
             align-items: center;
@@ -738,9 +803,15 @@
             transition: all 0.3s;
         }
 
-        .btn-checkout:hover {
+        .btn-checkout:hover:not(:disabled) {
             background: #1da851;
             transform: scale(1.02);
+        }
+
+        .btn-checkout:disabled {
+            background: #1a3d26;
+            color: rgba(255,255,255,0.3);
+            cursor: not-allowed;
         }
 
         .cart-empty {
@@ -1222,12 +1293,18 @@
         <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
     </div>
     <div id="cart-items"></div>
-    <div class="cart-footer">
+    <div class="cart-footer" id="cart-footer">
         <div class="cart-total-row">
             <span>Total</span>
             <strong id="cart-total">R$ 0,00</strong>
         </div>
-        <button class="btn-checkout" onclick="checkoutWhatsApp()">
+        <div class="terms-row" onclick="toggleTerms(event)">
+            <input type="checkbox" id="terms-check">
+            <label>
+                Li e aceito os <a href="https://udesaken.site/termos/" target="_blank" onclick="event.stopPropagation()">Termos de Uso</a> do Udesaken Group
+            </label>
+        </div>
+        <button class="btn-checkout" id="btn-checkout" onclick="checkoutWhatsApp()" disabled>
             <i class="fab fa-whatsapp"></i>
             Finalizar pelo WhatsApp
         </button>
@@ -1248,6 +1325,11 @@
 <script>
 const WHATSAPP_NUMBER = "447562847091";
 
+// Formata valor em Real Brasileiro (vírgula como separador decimal)
+function formatBRL(value) {
+    return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
 const PRODUCTS = [
     { id: 1, category: "vip", name: "VIP Semanal", price: 2.00, description: "Acesso VIP por 7 dias. Imune a Vote Ban, PV liberado.", features: ["Imune a Vote Ban", "PV Liberado", "Comandos VIP"], badge: "Teste Rápido", image: "../logousk1.png" },
     { id: 2, category: "vip", name: "VIP Quinzenal", price: 3.50, description: "15 dias de benefícios VIP: imunidade e comandos exclusivos.", features: ["Imune a Vote Ban", "PV Liberado", "Comandos VIP"], badge: "Popular", image: "../logousk1.png" },
@@ -1267,6 +1349,23 @@ function saveCart() {
     renderCart();
 }
 
+window.toggleTerms = function(e) {
+    if (e.target.tagName === 'A') return; // Permite abrir o link normalmente
+    const cb = document.getElementById('terms-check');
+    if (e.target !== cb) {
+        // Clique no row ou na label (sem for=): alterna manualmente
+        cb.checked = !cb.checked;
+    }
+    // Se clicou direto no input, o browser já alternou; só atualiza o botão
+    updateCheckoutBtn();
+};
+
+window.updateCheckoutBtn = function() {
+    const cb = document.getElementById('terms-check');
+    const btn = document.getElementById('btn-checkout');
+    if (btn) btn.disabled = !cb?.checked;
+};
+
 function renderCart() {
     const countEl = document.getElementById('cart-count');
     const floatCountEl = document.getElementById('float-cart-count');
@@ -1282,8 +1381,13 @@ function renderCart() {
     if (cart.length === 0) {
         itemsEl.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Seu carrinho está vazio</p></div>`;
         if (totalEl) totalEl.textContent = 'R$ 0,00';
+        const footerEl = document.getElementById('cart-footer');
+        if (footerEl) footerEl.style.display = 'none';
         return;
     }
+    const footerEl = document.getElementById('cart-footer');
+    if (footerEl) footerEl.style.display = 'block';
+    updateCheckoutBtn();
 
     let total = 0;
     itemsEl.innerHTML = cart.map(item => {
@@ -1294,7 +1398,7 @@ function renderCart() {
                 <img src="${item.image}" alt="${item.name}">
                 <div class="ci-info">
                     <h4>${item.name}</h4>
-                    <div class="price">R$ ${item.price.toFixed(2)}</div>
+                    <div class="price">R$ ${formatBRL(item.price)}</div>
                     <div class="ci-qty">
                         <button class="qty-btn" onclick="updateQty(${item.id},-1)">−</button>
                         <span class="qty-val">${item.quantity}</span>
@@ -1302,10 +1406,10 @@ function renderCart() {
                     </div>
                     <button class="ci-remove" onclick="removeItem(${item.id})">Remover</button>
                 </div>
-                <div class="ci-total">R$ ${sub.toFixed(2)}</div>
+                <div class="ci-total">R$ ${formatBRL(sub)}</div>
             </div>`;
     }).join('');
-    if (totalEl) totalEl.textContent = `R$ ${total.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `R$ ${formatBRL(total)}`;
 }
 
 window.addToCart = function(productId) {
@@ -1341,16 +1445,18 @@ window.toggleCart = function() {
 
 window.checkoutWhatsApp = function() {
     if (cart.length === 0) { showToast("Carrinho vazio!"); return; }
-    let msg = "Olá! Gostaria de comprar:%0A%0A";
+    let msg = "Olá! Gostaria de comprar:\n\n";
     let total = 0;
     cart.forEach(item => {
         const sub = item.price * item.quantity;
         total += sub;
-        msg += `📦 ${item.name} × ${item.quantity} = R$ ${sub.toFixed(2)}%0A`;
+        msg += `📦 ${item.name} × ${item.quantity} = R$ ${formatBRL(sub)}\n`;
     });
-    msg += `%0A💰 Total: R$ ${total.toFixed(2)}%0A%0APode me passar os detalhes do pagamento?`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+    msg += `\n💰 Total: R$ ${formatBRL(total)}\n\nPode me passar os detalhes do pagamento?`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
     cart = []; saveCart(); toggleCart();
+    const cb = document.getElementById('terms-check');
+    if (cb) { cb.checked = false; updateCheckoutBtn(); }
 };
 
 // FIX 1: Alterado para receber o ID ao invés do objeto stringificado. Evita quebra de aspas no HTML.
@@ -1366,7 +1472,7 @@ window.openModal = function(productId) {
         ${product.badge ? `<div class="modal-badge"><span>${product.badge}</span></div>` : ''}
         <p class="modal-desc">${product.description}</p>
         <ul class="modal-features">${product.features.map(f => `<li><i class="fas fa-check-circle"></i>${f}</li>`).join('')}</ul>
-        <div class="modal-price">R$ ${product.price.toFixed(2)}</div>
+        <div class="modal-price">R$ ${formatBRL(product.price)}</div>
         <button class="btn-primary" onclick="addToCart(${product.id}); closeModal();"><i class="fas fa-shopping-bag"></i> Adicionar ao carrinho</button>
     `;
     modal.classList.add('active');
@@ -1414,7 +1520,7 @@ function renderProducts() {
                 <h3>${p.name}</h3>
                 <p>${p.description.substring(0, 70)}…</p>
                 <div class="pc-footer">
-                    <span class="pc-price">R$ ${p.price.toFixed(2)}</span>
+                    <span class="pc-price">R$ ${formatBRL(p.price)}</span>
                     <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
@@ -1501,7 +1607,10 @@ function showToast(msg) {
         for(let i=0;i<particles.length;i++){const p=particles[i]; gravity(p); p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();}
         requestAnimationFrame(draw);
     }
-    resize(); window.addEventListener('resize',resize); draw();
+    resize(); 
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); });
+    draw();
 })();
 
 // Navbar scroll e menu
@@ -1511,7 +1620,12 @@ function showToast(msg) {
     const menu=document.getElementById('mobile-menu');
     window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>20));
     toggle.addEventListener('click',(e)=>{e.stopPropagation(); const open=menu.classList.toggle('open'); toggle.innerHTML=open?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
-    document.addEventListener('click',(e)=>{if(!navbar.contains(e.target))menu.classList.remove('open');});
+    document.addEventListener('click',(e)=>{
+        if(!navbar.contains(e.target) && menu.classList.contains('open')) {
+            menu.classList.remove('open');
+            toggle.innerHTML='<i class="fas fa-bars"></i>';
+        }
+    });
 })();
 
 // Glass shimmer
