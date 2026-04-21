@@ -57,7 +57,7 @@
             z-index: var(--z-canvas); pointer-events: none; background: #000;
         }
 
-        /* ── Glass ── */
+        /* Glass effects */
         .glass {
             position: relative;
             background: var(--glass-bg);
@@ -74,7 +74,6 @@
         }
         .glass > * { position: relative; z-index: 1; }
 
-        /* ── Gold Glass ── */
         .glass-gold {
             position: relative;
             background: var(--glass-bg-gold);
@@ -106,7 +105,7 @@
             }
         }
 
-        /* ── Navbar ── */
+        /* Navbar */
         #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; transition: padding 0.3s ease; }
         #navbar nav {
             max-width: 1200px; margin: 0 auto;
@@ -135,7 +134,7 @@
         .mob-link:active { background: rgba(255,255,255,0.05); color: #fff; }
         .mob-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 0 16px; }
 
-        /* ── Hero ── */
+        /* Hero */
         #store-hero { position: relative; z-index: var(--z-base); padding: 120px 20px 50px; text-align: center; }
         @media (max-width: 768px) { #store-hero { padding: 100px 20px 40px; } }
         .store-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; background: rgba(255,140,0,0.08); border: 1px solid rgba(255,140,0,0.2); margin-bottom: 24px; }
@@ -151,7 +150,7 @@
         .hero-stat .s-val.gold { color: var(--gold); }
         .hero-stat .s-lbl { font-size: 0.65rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
 
-        /* ── Store ── */
+        /* Store */
         #loja { position: relative; z-index: var(--z-base); padding: 20px 0 80px; }
         .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
@@ -159,21 +158,19 @@
         .section-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; white-space: nowrap; }
         .section-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(255,140,0,0.4), transparent); }
 
-        /* Featured scroll */
         .featured-scroll { 
             display: flex; gap: 14px; overflow-x: auto; padding-bottom: 12px; 
             scrollbar-width: none; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
         }
         .featured-scroll::-webkit-scrollbar { display: none; }
         .feat-card { flex-shrink: 0; width: 160px; border-radius: 18px; padding: 16px 14px; cursor: pointer; text-align: center; scroll-snap-align: start; }
-        .feat-card .fc-icon { font-size: 2rem; margin-bottom: 8px; display: block; }
+        .feat-card .fc-img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; margin: 0 auto 8px; display: block; }
         .feat-card .fc-name { font-size: 0.75rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
         .feat-card .fc-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--amber); }
         .feat-card.feat-gold .fc-price { color: var(--gold); }
         .feat-card .fc-badge { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 3px 8px; border-radius: 100px; margin-bottom: 8px; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); text-transform: uppercase; letter-spacing: 0.08em; }
         .feat-card.feat-gold .fc-badge { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.25); color: var(--gold); }
 
-        /* Store Controls */
         .store-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 30px; padding: 16px 20px; border-radius: 16px; background: rgba(10,10,10,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); }
         
         .category-filters { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -189,14 +186,13 @@
         #search-input:focus { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.06); }
         #search-input::placeholder { color: var(--text-dim); }
 
-        /* Grid */
         #products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 
-        /* Product Card */
         .product-card { padding: 22px; border-radius: 20px; cursor: pointer; transition: all 0.35s ease; display: flex; flex-direction: column; }
         @media (hover: hover) { .product-card:hover { transform: translateY(-4px); } }
         .pc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-        .pc-icon-wrap { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; border: 1px solid rgba(255,180,0,0.2); background: rgba(30,20,0,0.5); flex-shrink: 0; }
+        .pc-img-wrap { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,180,0,0.2); background: rgba(30,20,0,0.5); flex-shrink: 0; overflow: hidden; }
+        .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .pc-badges { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
         .pc-badge { font-size: 0.6rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); }
         .pc-badge.badge-gold { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--gold); }
@@ -216,7 +212,6 @@
         #no-results i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.3; display: block; }
         #no-results p { font-size: 0.9rem; }
 
-        /* Testimonials */
         #testimonials { position: relative; z-index: var(--z-base); padding: 20px 20px 60px; max-width: 1100px; margin: 0 auto; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
         .t-card { padding: 20px; border-radius: 18px; }
@@ -236,7 +231,8 @@
         .cart-close { background: rgba(255,255,255,0.06); border: none; color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
         #cart-items { flex: 1 1 auto; overflow-y: auto; padding: 16px; }
         .cart-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .ci-emoji-thumb { width: 54px; height: 54px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.15); }
+        .ci-img-thumb { width: 54px; height: 54px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.15); overflow: hidden; }
+        .ci-img-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .ci-info { flex: 1; }
         .ci-info h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
         .ci-info .price { font-size: 0.75rem; color: var(--text-muted); }
@@ -264,7 +260,6 @@
         .cart-empty i { font-size: 2.5rem; margin-bottom: 16px; opacity: 0.25; display: block; }
         .cart-empty p { font-size: 0.85rem; }
         
-        /* Floating buttons */
         .cart-float-btn { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; z-index: 1050; box-shadow: 0 4px 20px rgba(255,255,255,0.2); transition: all 0.3s ease; animation: float-pop 0.5s 1.5s both; }
         @media (hover: hover) { .cart-float-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(255,255,255,0.3); } }
         .cart-float-btn .float-count { position: absolute; top: -4px; right: -4px; background: #ff8c00; color: #fff; font-size: 0.7rem; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
@@ -275,17 +270,16 @@
         @keyframes float-pop { from { opacity:0; transform:scale(0.6); } to { opacity:1; transform:scale(1); } }
         @keyframes wa-pop { from { opacity:0; transform:scale(0.6); } to { opacity:1; transform:scale(1); } }
 
-        /* Modal */
         #product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: var(--z-modal); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; }
         #product-modal.active { opacity: 1; visibility: visible; transition: opacity 0.35s ease; }
         .modal-box { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; max-width: 450px; width: 100%; padding: 30px; position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s ease; max-height: 90vh; overflow-y: auto; }
         .modal-box::-webkit-scrollbar { width: 4px; }
         .modal-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
-
         .modal-box.gold-modal { background: #0e0a00; border-color: rgba(255,200,0,0.2); box-shadow: 0 0 60px rgba(180,120,0,0.2); }
         #product-modal.active .modal-box { transform: translateY(0) scale(1); }
         .modal-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.07); border: none; color: #fff; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
-        .modal-icon-wrap { width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.2); }
+        .modal-img-wrap { width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.2); overflow: hidden; }
+        .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
         #modal-content h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 10px; }
         .modal-badge-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
         .modal-badge { background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -321,10 +315,7 @@
             .store-controls { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px; }
             .search-wrap { width: 100%; }
             #search-input { width: 100%; }
-            .category-filters { 
-                flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; 
-                justify-content: flex-start; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-            }
+            .category-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; justify-content: flex-start; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
             .category-filters::-webkit-scrollbar { display: none; }
             .cat-btn { flex-shrink: 0; }
         }
@@ -343,10 +334,12 @@
 <!-- NAVBAR -->
 <div id="navbar">
     <nav>
-        <a href="#" class="nav-logo">
-            <div class="nav-logo-icon"><i class="fas fa-bolt"></i></div>
-            <span>Udesaken</span>
-        </a>
+        <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+        <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+    </div>
+    <span>Udesaken</span>
+</a>
         <div class="nav-links">
             <a href="#" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
             <a href="#" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
@@ -463,9 +456,14 @@
 <footer>
     <div class="footer-grid">
         <div class="footer-brand">
-            <a href="#" class="nav-logo"><div class="nav-logo-icon"><i class="fas fa-bolt"></i></div><span>Udesaken</span></a>
-            <p>O futuro da sua comunidade. Alta performance, ferramentas exclusivas e entrega instantânea.</p>
+    <a href="/" class="nav-logo">
+        <div class="nav-logo-icon">
+            <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
         </div>
+        <span>Udesaken</span>
+    </a>
+    <p>O futuro da sua comunidade. Alta performance, ferramentas exclusivas e entrega instantânea.</p>
+</div>
         <div class="footer-col">
             <h4>Navegação</h4>
             <div class="footer-links">
@@ -525,31 +523,32 @@
 
 <script>
 const WHATSAPP_NUMBER = "447562847091";
+const LOGO_IMAGE = "/logousk1.png"; // imagem da Udesaken
 
 function formatBRL(v) {
     return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// PRODUTOS - todas as descrições, XP e benefícios foram removidos
+// PRODUTOS - sem descrições, sem XP, sem níveis. Todos usam a logo da Udesaken como ícone.
 const PRODUCTS = [
     // VIP
-    { id:1, category:"vip", name:"VIP Semanal", price:2.00, icon:"👑", isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:null },
-    { id:2, category:"vip", name:"VIP Quinzenal", price:3.50, icon:"💎", isGold:false, badge:"Popular", badgeClass:"badge-green", image:null },
-    { id:3, category:"vip", name:"VIP Mensal", price:5.00, icon:"🌟", isGold:false, badge:"Recomendado", badgeClass:"", image:null },
+    { id:1, category:"vip", name:"VIP Semanal", price:2.00, isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:LOGO_IMAGE },
+    { id:2, category:"vip", name:"VIP Quinzenal", price:3.50, isGold:false, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE },
+    { id:3, category:"vip", name:"VIP Mensal", price:5.00, isGold:false, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE },
     // BOT PV
-    { id:4, category:"pv", name:"Bot PV (1 Dia)", price:1.50, icon:"💬", isGold:false, badge:"Experimental", badgeClass:"badge-blue", image:null },
-    { id:5, category:"pv", name:"Bot PV (Quinzenal)", price:2.50, icon:"🤖", isGold:false, badge:null, badgeClass:"", image:null },
-    { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, icon:"⭐", isGold:false, badge:"Mais Popular", badgeClass:"", image:null },
+    { id:4, category:"pv", name:"Bot PV (1 Dia)", price:1.50, isGold:false, badge:"Experimental", badgeClass:"badge-blue", image:LOGO_IMAGE },
+    { id:5, category:"pv", name:"Bot PV (Quinzenal)", price:2.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
+    { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, isGold:false, badge:"Mais Popular", badgeClass:"", image:LOGO_IMAGE },
     // BOT GRUPO
-    { id:7, category:"bot", name:"Bot Moderação (1 Dia)", price:1.50, icon:"🛡️", isGold:false, badge:null, badgeClass:"", image:null },
-    { id:8, category:"bot", name:"Bot Moderação (Quinzenal)", price:5.50, icon:"🎮", isGold:false, badge:null, badgeClass:"", image:null },
-    { id:9, category:"bot", name:"Bot Moderação (Mensal)", price:7.50, icon:"🏆", isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:null },
+    { id:7, category:"bot", name:"Bot Moderação (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
+    { id:8, category:"bot", name:"Bot Moderação (Quinzenal)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
+    { id:9, category:"bot", name:"Bot Moderação (Mensal)", price:7.50, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE },
     // GOLD / RPG
-    { id:10, category:"gold", name:"XP Iniciante", price:3.00, icon:"⚡", isGold:true, badge:"Novo", badgeClass:"badge-blue", image:null },
-    { id:11, category:"gold", name:"XP Avançado", price:7.00, icon:"💫", isGold:true, badge:"Recomendado", badgeClass:"", image:null },
-    { id:12, category:"gold", name:"XP Mestre", price:15.00, icon:"👑", isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:null },
-    { id:13, category:"gold", name:"XP Lendário", price:29.00, icon:"🐉", isGold:true, badge:"Mais Vendido", badgeClass:"", image:null },
-    { id:14, category:"gold", name:"XP Divino", price:55.00, icon:"🌌", isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:null }
+    { id:10, category:"gold", name:"XP Iniciante", price:3.00, isGold:true, badge:"Novo", badgeClass:"badge-blue", image:LOGO_IMAGE },
+    { id:11, category:"gold", name:"XP Avançado", price:7.00, isGold:true, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE },
+    { id:12, category:"gold", name:"XP Mestre", price:15.00, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE },
+    { id:13, category:"gold", name:"XP Lendário", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE },
+    { id:14, category:"gold", name:"XP Divino", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE }
 ];
 
 let cart = JSON.parse(localStorage.getItem('udesaken_cart')) || [];
@@ -593,9 +592,7 @@ function renderCart() {
     let sum = 0;
     itemsEl.innerHTML = cart.map(item => {
         const sub = item.price * item.quantity; sum += sub;
-        const thumb = item.image
-            ? `<img src="${item.image}" alt="${item.name}">`
-            : `<div class="ci-emoji-thumb">${item.icon||'⚡'}</div>`;
+        const thumb = `<div class="ci-img-thumb"><img src="${item.image || LOGO_IMAGE}" alt="${item.name}"></div>`;
         return `
             <div class="cart-item">
                 ${thumb}
@@ -656,11 +653,11 @@ window.openModal = function(pid) {
     const con   = document.getElementById('modal-content');
     box.className = p.isGold ? 'modal-box gold-modal' : 'modal-box';
     
-    const iconHtml  = p.image ? `<img src="${p.image}" class="modal-img" alt="${p.name}">` : `<div class="modal-icon-wrap">${p.icon||'⚡'}</div>`;
+    const imgHtml = `<div class="modal-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>`;
     const badgeHtml = p.badge ? `<span class="modal-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
     
     con.innerHTML = `
-        ${iconHtml}
+        ${imgHtml}
         <h2>${p.name}</h2>
         <div class="modal-badge-row">${badgeHtml}</div>
         <div class="modal-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</div>
@@ -707,13 +704,12 @@ function renderProducts() {
     if (grid) {
         grid.innerHTML = filtered.map(p => {
             const cc = p.isGold ? 'product-card glass-gold' : 'product-card glass';
-            const iconHtml = p.image ? `<img src="${p.image}" class="pc-img" alt="${p.name}">` : `<div class="pc-icon-wrap">${p.icon||'⚡'}</div>`;
             const badgeHtml = p.badge ? `<span class="pc-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
             
             return `
                 <div class="${cc}" onclick="openModal(${p.id})">
                     <div class="pc-top">
-                        ${iconHtml}
+                        <div class="pc-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>
                         <div class="pc-badges">${badgeHtml}</div>
                     </div>
                     <h3>${p.name}</h3>
@@ -745,13 +741,10 @@ function renderFeatured() {
         const p = PRODUCTS.find(x=>x.id===id); if (!p) return '';
         const cc = p.isGold ? 'feat-card glass-gold feat-gold' : 'feat-card glass';
         const bh = p.badge ? `<div class="fc-badge">${p.badge}</div>` : '';
-        const ih = p.image 
-            ? `<img src="${p.image}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;margin-bottom:8px;display:block;margin-left:auto;margin-right:auto;" alt="">` 
-            : `<span class="fc-icon">${p.icon}</span>`;
-            
+        const img = `<img src="${p.image || LOGO_IMAGE}" class="fc-img" alt="${p.name}">`;
         return `
             <div class="${cc}" onclick="openModal(${p.id})">
-                ${ih}${bh}
+                ${img}${bh}
                 <div class="fc-name">${p.name}</div>
                 <div class="fc-price">R$ ${formatBRL(p.price)}</div>
             </div>`;
@@ -778,7 +771,7 @@ function showToast(msg) {
     document.body.appendChild(t); setTimeout(()=>t.remove(),3000);
 }
 
-// Universe canvas (Otimizado)
+// Universe canvas
 (function(){
     const canvas=document.getElementById('universe-canvas'), ctx=canvas.getContext('2d');
     let W,H,particles;
@@ -826,7 +819,7 @@ function showToast(msg) {
     draw();
 })();
 
-// Navbar
+// Navbar scroll
 (function(){
     const nav=document.getElementById('navbar'),tog=document.getElementById('menu-toggle'),menu=document.getElementById('mobile-menu');
     window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
@@ -834,6 +827,7 @@ function showToast(msg) {
     document.addEventListener('click',e=>{if(!nav.contains(e.target)&&menu.classList.contains('open')){menu.classList.remove('open');tog.innerHTML='<i class="fas fa-bars"></i>';}});
 })();
 
+// Fade up observer
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.1});
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
