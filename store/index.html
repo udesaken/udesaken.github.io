@@ -38,13 +38,22 @@
             --z-canvas: 0; --z-base: 10; --z-nav: 999; --z-cart: 1100; --z-modal: 1200;
         }
 
-        html { scroll-behavior: smooth; font-size: 16px; }
+        /* Correção do Scroll Horizontal */
+        html { 
+            scroll-behavior: smooth; 
+            font-size: 16px; 
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
         @media (max-width: 768px) { html { font-size: 15px; } }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: var(--bg); color: var(--text);
             overflow-x: hidden; -webkit-font-smoothing: antialiased;
+            width: 100%;
+            max-width: 100vw;
         }
 
         ::-webkit-scrollbar { width: 6px; background: #000; }
@@ -53,7 +62,7 @@
 
         #universe-canvas {
             position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; height: 100%;
             z-index: var(--z-canvas); pointer-events: none; background: #000;
         }
 
@@ -272,7 +281,7 @@
 
         #product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: var(--z-modal); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; }
         #product-modal.active { opacity: 1; visibility: visible; transition: opacity 0.35s ease; }
-        .modal-box { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; max-width: 450px; width: 100%; padding: 30px; position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s ease; max-height: 90vh; overflow-y: auto; }
+        .modal-box { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; max-width: 500px; width: 100%; padding: 30px; position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s ease; max-height: 90vh; overflow-y: auto; }
         .modal-box::-webkit-scrollbar { width: 4px; }
         .modal-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
         .modal-box.gold-modal { background: #0e0a00; border-color: rgba(255,200,0,0.2); box-shadow: 0 0 60px rgba(180,120,0,0.2); }
@@ -286,6 +295,27 @@
         .modal-badge.badge-gold { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--gold); }
         .modal-price { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 20px; }
         .modal-price.gold-price { color: var(--gold); }
+        .modal-desc {
+            background: rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            text-align: left;
+        }
+        .modal-desc i {
+            width: 22px;
+            color: var(--amber);
+            margin-right: 8px;
+        }
+        .modal-desc p {
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
         .btn-primary { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 14px; background: #fff; color: #000; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.25s; }
         @media (hover: hover) { .btn-primary:hover { box-shadow: 0 0 25px rgba(255,255,255,0.3); transform: scale(1.02); } }
         .btn-primary:active { transform: scale(0.98); }
@@ -335,15 +365,15 @@
 <div id="navbar">
     <nav>
         <a href="/" class="nav-logo">
-    <div class="nav-logo-icon">
-        <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-    </div>
-    <span>Udesaken</span>
-</a>
+            <div class="nav-logo-icon">
+                <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </div>
+            <span>Udesaken</span>
+        </a>
         <div class="nav-links">
-            <a href="#" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
-            <a href="#" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
-            <a href="#" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
+            <a href="/comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
+            <a href="/equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
+            <a href="/parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
         </div>
         <div style="display:flex;align-items:center;gap:12px;">
             <button class="cart-btn" onclick="toggleCart()">
@@ -354,13 +384,13 @@
         </div>
     </nav>
     <div id="mobile-menu">
-        <a href="#" class="mob-link"><i class="fas fa-terminal"></i> Comandos</a>
+        <a href="/comandos/" class="mob-link"><i class="fas fa-terminal"></i> Comandos</a>
         <div class="mob-divider"></div>
-        <a href="#" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
+        <a href="/equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
         <div class="mob-divider"></div>
-        <a href="#" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
+        <a href="/parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
         <div class="mob-divider"></div>
-        <a href="#" class="mob-link"><i class="fas fa-home"></i> Início</a>
+        <a href="/" class="mob-link"><i class="fas fa-home"></i> Início</a>
     </div>
 </div>
 
@@ -501,7 +531,7 @@
         </div>
         <div class="terms-row" onclick="toggleTerms(event)">
             <input type="checkbox" id="terms-check">
-            <label>Li e aceito os <a href="#" target="_blank" onclick="event.stopPropagation()">Termos de Uso</a> do Udesaken Group.</label>
+            <label>Li e aceito os <a href="/termos/" target="_blank" onclick="event.stopPropagation()">Termos de Uso</a> do Udesaken Group.</label>
         </div>
         <button class="btn-checkout" id="btn-checkout" onclick="checkoutWhatsApp()" disabled>
             <i class="fab fa-whatsapp"></i> Finalizar pelo WhatsApp
@@ -523,32 +553,46 @@
 
 <script>
 const WHATSAPP_NUMBER = "447562847091";
-const LOGO_IMAGE = "/logousk1.png"; // imagem da Udesaken
+const LOGO_IMAGE = "/logousk1.png";
 
 function formatBRL(v) {
     return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// PRODUTOS - sem descrições, sem XP, sem níveis. Todos usam a logo da Udesaken como ícone.
+// PRODUTOS - com descrições detalhadas
 const PRODUCTS = [
     // VIP
-    { id:1, category:"vip", name:"VIP Semanal", price:2.00, isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:LOGO_IMAGE },
-    { id:2, category:"vip", name:"VIP Quinzenal", price:3.50, isGold:false, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE },
-    { id:3, category:"vip", name:"VIP Mensal", price:5.00, isGold:false, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE },
+    { id:1, category:"vip", name:"VIP Semanal", price:2.00, isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:LOGO_IMAGE,
+      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
+    { id:2, category:"vip", name:"VIP Quinzenal", price:3.50, isGold:false, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
+      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
+    { id:3, category:"vip", name:"VIP Mensal", price:5.00, isGold:false, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
     // BOT PV
-    { id:4, category:"pv", name:"Bot PV (1 Dia)", price:1.50, isGold:false, badge:"Experimental", badgeClass:"badge-blue", image:LOGO_IMAGE },
-    { id:5, category:"pv", name:"Bot PV (Quinzenal)", price:2.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
-    { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, isGold:false, badge:"Mais Popular", badgeClass:"", image:LOGO_IMAGE },
+    { id:4, category:"pv", name:"Bot PV (1 Dia)", price:1.50, isGold:false, badge:"Experimental", badgeClass:"badge-blue", image:LOGO_IMAGE,
+      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
+    { id:5, category:"pv", name:"Bot PV (Quinzenal)", price:2.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
+    { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, isGold:false, badge:"Mais Popular", badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
     // BOT GRUPO
-    { id:7, category:"bot", name:"Bot Moderação (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
-    { id:8, category:"bot", name:"Bot Moderação (Quinzenal)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE },
-    { id:9, category:"bot", name:"Bot Moderação (Mensal)", price:8.00, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE },
+    { id:7, category:"bot", name:"Bot Moderação (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
+    { id:8, category:"bot", name:"Bot Moderação (Quinzenal)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
+    { id:9, category:"bot", name:"Bot Moderação (Mensal)", price:8.00, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE,
+      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
     // GOLD / RPG
-    { id:10, category:"gold", name:"XP Iniciante - 15k", price:3.00, isGold:true, badge:"Novo", badgeClass:"badge-blue", image:LOGO_IMAGE },
-    { id:11, category:"gold", name:"XP Avançado - 80k", price:7.00, isGold:true, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE },
-    { id:12, category:"gold", name:"XP Mestre - 300k", price:15.00, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE },
-    { id:13, category:"gold", name:"XP Lendário - 1m", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE },
-    { id:14, category:"gold", name:"XP Divino - 3m ", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE }
+    { id:10, category:"gold", name:"XP Iniciante - 15k", price:3.00, isGold:true, badge:"Novo", badgeClass:"badge-blue", image:LOGO_IMAGE,
+      description: "✓ Adquira 15.000 de experiência para o modo Gold/RPG\n✓ Suba de nível rapidamente\n✓ Pacote compatível com todos os servidores parceiros" },
+    { id:11, category:"gold", name:"XP Avançado - 80k", price:7.00, isGold:true, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Adquira 80.000 de experiência para o modo Gold/RPG\n✓ Evolua seu personagem em poucos minutos\n✓ Ideal para ranks intermediários" },
+    { id:12, category:"gold", name:"XP Mestre - 300k", price:15.00, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE,
+      description: "✓ Adquira 300.000 de experiência para o modo Gold/RPG\n✓ Domine o jogo com um grande boost\n✓ Pacote mais custo-benefício" },
+    { id:13, category:"gold", name:"XP Lendário - 1m", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Adquira 1.000.000 de experiência para o modo Gold/RPG\n✓ Torne-se uma lenda instantaneamente\n✓ Salte dezenas de níveis" },
+    { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE,
+      description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('udesaken_cart')) || [];
@@ -646,6 +690,23 @@ window.checkoutWhatsApp = function() {
     const cb = document.getElementById('terms-check'); if (cb) { cb.checked = false; updateCheckoutBtn(); }
 };
 
+// Função auxiliar para formatar descrição com ícones e quebras de linha
+function formatDescription(desc) {
+    if (!desc) return '';
+    const lines = desc.split('\n').filter(l => l.trim().length > 0);
+    let html = '<div class="modal-desc">';
+    lines.forEach(line => {
+        // Se a linha começar com "✓", adiciona ícone de check
+        if (line.trim().startsWith('✓')) {
+            html += `<p><i class="fas fa-check-circle" style="color:var(--amber);"></i> ${line.substring(1).trim()}</p>`;
+        } else {
+            html += `<p>${line}</p>`;
+        }
+    });
+    html += '</div>';
+    return html;
+}
+
 window.openModal = function(pid) {
     const p = PRODUCTS.find(x => x.id === pid); if (!p) return;
     const modal = document.getElementById('product-modal');
@@ -655,12 +716,14 @@ window.openModal = function(pid) {
     
     const imgHtml = `<div class="modal-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>`;
     const badgeHtml = p.badge ? `<span class="modal-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
+    const descHtml = formatDescription(p.description);
     
     con.innerHTML = `
         ${imgHtml}
         <h2>${p.name}</h2>
         <div class="modal-badge-row">${badgeHtml}</div>
         <div class="modal-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</div>
+        ${descHtml}
         <button class="btn-primary${p.isGold?' btn-gold':''}" onclick="addToCart(${p.id}); closeModal();">
             <i class="fas fa-shopping-bag"></i> Adicionar ao carrinho
         </button>
