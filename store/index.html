@@ -180,7 +180,7 @@
         .feat-card .fc-badge { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 3px 8px; border-radius: 100px; margin-bottom: 8px; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); text-transform: uppercase; letter-spacing: 0.08em; }
         .feat-card.feat-gold .fc-badge { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.25); color: var(--gold); }
 
-        .store-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 30px; padding: 16px 20px; border-radius: 16px; background: rgba(10,10,10,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); }
+        .store-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 30px; padding: 16px 20px; border-radius: 16px; background: rgba(10,10,10,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); overflow: visible; }
         
         .category-filters { display: flex; gap: 8px; flex-wrap: wrap; }
         .cat-btn { padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-muted); font-size: 0.75rem; font-weight: 500; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.25s; white-space: nowrap; }
@@ -195,7 +195,7 @@
         #search-input:focus { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.06); }
         #search-input::placeholder { color: var(--text-dim); }
 
-        #products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        #products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
 
         .product-card { padding: 22px; border-radius: 20px; cursor: pointer; transition: all 0.35s ease; display: flex; flex-direction: column; }
         @media (hover: hover) { .product-card:hover { transform: translateY(-4px); } }
@@ -208,6 +208,25 @@
         .pc-badge.badge-green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.25); color: #4ade80; }
         .pc-badge.badge-blue { background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.25); color: #60a5fa; }
         .product-card h3 { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 6px; }
+        .pc-desc-preview {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin: 12px 0 8px;
+            line-height: 1.4;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 8px;
+        }
+        .pc-desc-preview span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .pc-desc-preview i {
+            font-size: 0.55rem;
+            color: var(--amber);
+            width: 16px;
+        }
         .pc-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
         .pc-price { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; }
         .pc-price.gold-price { color: var(--gold); }
@@ -342,12 +361,24 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             #menu-toggle { display: flex; align-items: center; }
-            .store-controls { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px; }
-            .search-wrap { width: 100%; }
+            .store-controls { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px 0 12px; overflow: hidden; border-radius: 16px; }
+            .search-wrap { width: 100%; padding: 0 12px; }
             #search-input { width: 100%; }
-            .category-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; justify-content: flex-start; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+            .category-filters { 
+                flex-wrap: nowrap; 
+                overflow-x: auto; 
+                overflow-y: hidden;
+                padding: 4px 12px 10px; 
+                justify-content: flex-start; 
+                scrollbar-width: none; 
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x proximity;
+                /* Garante que o scroll horizontal funciona */
+                width: 100%;
+                -ms-overflow-style: none;
+            }
             .category-filters::-webkit-scrollbar { display: none; }
-            .cat-btn { flex-shrink: 0; }
+            .cat-btn { flex-shrink: 0; scroll-snap-align: start; }
         }
         @media (max-width: 480px) { 
             #products-grid { grid-template-columns: 1fr; } 
@@ -417,7 +448,7 @@
             <div class="hero-stat glass"><span class="s-val">+1.2k</span><span class="s-lbl">Pedidos</span></div>
             <div class="hero-stat glass"><span class="s-val">4.9 ★</span><span class="s-lbl">Avaliação</span></div>
             <div class="hero-stat glass"><span class="s-val">~5min</span><span class="s-lbl">Entrega</span></div>
-            <div class="hero-stat glass"><span class="s-val gold" style="color:var(--gold);">5</span><span class="s-lbl">Pacotes Gold</span></div>
+            <div class="hero-stat glass"><span class="s-val gold" style="color:var(--gold);">10</span><span class="s-lbl">Pacotes Gold</span></div>
         </div>
     </div>
 </section>
@@ -440,7 +471,7 @@
                 <button class="cat-btn" data-cat="bot">🤖 Bot GRUPO</button>
                 <button class="cat-btn" data-cat="pv">💬 Bot PV</button>
                 <button class="cat-btn" data-cat="vip">👑 VIP</button>
-                <button class="cat-btn cat-gold" data-cat="gold">⚔️ Modo Gold / RPG</button>
+                <button class="cat-btn cat-gold" data-cat="gold">⚔️ Gold / RPG</button>
             </div>
             <div class="search-wrap">
                 <i class="fas fa-search"></i>
@@ -559,7 +590,7 @@ function formatBRL(v) {
     return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// PRODUTOS - com descrições detalhadas
+// PRODUTOS - descrições atualizadas (removido "Nome personalizado" dos bots)
 const PRODUCTS = [
     // VIP
     { id:1, category:"vip", name:"VIP Semanal", price:2.00, isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:LOGO_IMAGE,
@@ -576,13 +607,13 @@ const PRODUCTS = [
     { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, isGold:false, badge:"Mais Popular", badgeClass:"", image:LOGO_IMAGE,
       description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
     // BOT GRUPO
-    { id:7, category:"bot", name:"Bot Moderação (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    { id:8, category:"bot", name:"Bot Moderação (Quinzenal)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    { id:9, category:"bot", name:"Bot Moderação (Mensal)", price:8.00, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE,
-      description: "✓ Nome personalizado 'bot para grupos'\n✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    // GOLD / RPG
+    { id:7, category:"bot", name:"Bot para Grupo (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
+    { id:8, category:"bot", name:"Bot para Grupo (15 dias)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
+      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
+    { id:9, category:"bot", name:"Bot para Grupo (30 dias)", price:8.00, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE,
+      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
+    // GOLD / RPG — XP
     { id:10, category:"gold", name:"XP Iniciante - 15k", price:3.00, isGold:true, badge:"Novo", badgeClass:"badge-blue", image:LOGO_IMAGE,
       description: "✓ Adquira 15.000 de experiência para o modo Gold/RPG\n✓ Suba de nível rapidamente\n✓ Pacote compatível com todos os servidores parceiros" },
     { id:11, category:"gold", name:"XP Avançado - 80k", price:7.00, isGold:true, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE,
@@ -592,7 +623,18 @@ const PRODUCTS = [
     { id:13, category:"gold", name:"XP Lendário - 1m", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE,
       description: "✓ Adquira 1.000.000 de experiência para o modo Gold/RPG\n✓ Torne-se uma lenda instantaneamente\n✓ Salte dezenas de níveis" },
     { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE,
-      description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" }
+      description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" },
+    // GOLD — Moeda (coin)
+    { id:15, category:"gold", name:"💰 Pacote Iniciante - 1.000 Gold", price:4.00, isGold:true, badge:"Entrada", badgeClass:"badge-blue", image:LOGO_IMAGE,
+      description: "✓ 1.000 moedas Gold para usar no RPG\n✓ Ideal para começar no modo Gold\n✓ Entrega imediata via WhatsApp" },
+    { id:16, category:"gold", name:"💰 Pacote Aventureiro - 5.000 Gold", price:18.00, isGold:true, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
+      description: "✓ 5.000 moedas Gold para usar no RPG\n✓ Custo por Gold muito melhor que o Iniciante\n✓ Entrega imediata via WhatsApp" },
+    { id:17, category:"gold", name:"💰 Pacote Nobre - 10.000 Gold", price:30.00, isGold:true, badge:"Recomendado", badgeClass:"badge-gold", image:LOGO_IMAGE,
+      description: "✓ 10.000 moedas Gold para usar no RPG\n✓ Melhor custo-benefício da categoria\n✓ Entrega imediata via WhatsApp" },
+    { id:18, category:"gold", name:"👑 Pacote Reino - 25.000 Gold", price:60.00, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE,
+      description: "✓ 25.000 moedas Gold — domine o servidor\n✓ Preço por Gold equivalente a 40% off\n✓ Entrega imediata via WhatsApp" },
+    { id:19, category:"gold", name:"🐉 Pacote Lendário - 50.000 Gold", price:100.00, isGold:true, badge:"Elite", badgeClass:"badge-gold", image:LOGO_IMAGE,
+      description: "✓ 50.000 moedas Gold — o maior pacote\n✓ Máximo desconto por unidade de Gold\n✓ Entrega imediata via WhatsApp" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('udesaken_cart')) || [];
@@ -690,13 +732,12 @@ window.checkoutWhatsApp = function() {
     const cb = document.getElementById('terms-check'); if (cb) { cb.checked = false; updateCheckoutBtn(); }
 };
 
-// Função auxiliar para formatar descrição com ícones e quebras de linha
+// Função auxiliar para formatar descrição com ícones (para o modal)
 function formatDescription(desc) {
     if (!desc) return '';
     const lines = desc.split('\n').filter(l => l.trim().length > 0);
     let html = '<div class="modal-desc">';
     lines.forEach(line => {
-        // Se a linha começar com "✓", adiciona ícone de check
         if (line.trim().startsWith('✓')) {
             html += `<p><i class="fas fa-check-circle" style="color:var(--amber);"></i> ${line.substring(1).trim()}</p>`;
         } else {
@@ -705,6 +746,14 @@ function formatDescription(desc) {
     });
     html += '</div>';
     return html;
+}
+
+// Função para extrair até 3 itens da descrição para o preview no card
+function getPreviewItems(desc) {
+    if (!desc) return [];
+    const lines = desc.split('\n').filter(l => l.trim().startsWith('✓'));
+    // pega no máximo 3, remove o "✓" e espaços
+    return lines.slice(0, 3).map(l => l.replace(/✓\s*/, '').trim());
 }
 
 window.openModal = function(pid) {
@@ -768,6 +817,13 @@ function renderProducts() {
         grid.innerHTML = filtered.map(p => {
             const cc = p.isGold ? 'product-card glass-gold' : 'product-card glass';
             const badgeHtml = p.badge ? `<span class="pc-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
+            const previewItems = getPreviewItems(p.description);
+            let previewHtml = '';
+            if (previewItems.length) {
+                previewHtml = `<div class="pc-desc-preview">` +
+                    previewItems.map(item => `<span><i class="fas fa-check-circle"></i> ${item}</span>`).join('') +
+                    `</div>`;
+            }
             
             return `
                 <div class="${cc}" onclick="openModal(${p.id})">
@@ -776,6 +832,7 @@ function renderProducts() {
                         <div class="pc-badges">${badgeHtml}</div>
                     </div>
                     <h3>${p.name}</h3>
+                    ${previewHtml}
                     <div class="pc-footer">
                         <span class="pc-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</span>
                         <button class="btn-add${p.isGold?' btn-gold':''}" onclick="event.stopPropagation();addToCart(${p.id})">
@@ -800,7 +857,7 @@ function renderProducts() {
 
 function renderFeatured() {
     const scroll = document.getElementById('featured-scroll'); if (!scroll) return;
-    scroll.innerHTML = [3,6,9,12].map(id => {
+    scroll.innerHTML = [3,6,9,12,17,19].map(id => {
         const p = PRODUCTS.find(x=>x.id===id); if (!p) return '';
         const cc = p.isGold ? 'feat-card glass-gold feat-gold' : 'feat-card glass';
         const bh = p.badge ? `<div class="fc-badge">${p.badge}</div>` : '';
