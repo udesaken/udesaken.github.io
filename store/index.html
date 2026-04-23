@@ -115,7 +115,7 @@
         }
 
         /* Navbar */
-        #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; transition: padding 0.3s ease; }
+        #navbar { position: sticky; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; transition: padding 0.3s ease; }
         #navbar nav {
             max-width: 1200px; margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -144,8 +144,8 @@
         .mob-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 0 16px; }
 
         /* Hero */
-        #store-hero { position: relative; z-index: var(--z-base); padding: 120px 20px 50px; text-align: center; }
-        @media (max-width: 768px) { #store-hero { padding: 100px 20px 40px; } }
+        #store-hero { position: relative; z-index: var(--z-base); padding: 60px 20px 50px; text-align: center; }
+        @media (max-width: 768px) { #store-hero { padding: 40px 20px 40px; } }
         .store-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; background: rgba(255,140,0,0.08); border: 1px solid rgba(255,140,0,0.2); margin-bottom: 24px; }
         .store-badge i { font-size: 0.75rem; color: var(--amber); }
         .store-badge span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
@@ -385,12 +385,85 @@
             .cart-float-btn { bottom: 85px; width: 50px; height: 50px; font-size: 1.1rem; }
             #wa-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 20px; }
         }
+
+        /* PROMO BANNER */
+        #promo-banner {
+            position: relative; z-index: calc(var(--z-nav) - 1);
+            background: linear-gradient(90deg, #7b3a00 0%, #ff8c00 40%, #ffd700 60%, #ff8c00 80%, #7b3a00 100%);
+            background-size: 200% auto;
+            animation: promo-shine 4s linear infinite;
+            padding: 9px 16px;
+            text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+        }
+        @keyframes promo-shine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        #promo-banner .pb-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem; font-weight: 700;
+            color: #000; letter-spacing: 0.04em;
+        }
+        #promo-banner .pb-pill {
+            background: #000; color: #ffd700;
+            font-size: 0.72rem; font-weight: 900;
+            padding: 3px 10px; border-radius: 100px;
+            letter-spacing: 0.06em; white-space: nowrap;
+        }
+        #promo-banner .pb-timer {
+            font-size: 0.72rem; font-weight: 700; color: #000;
+            background: rgba(0,0,0,0.15); padding: 3px 10px; border-radius: 100px;
+            white-space: nowrap;
+        }
+        @media (max-width: 480px) {
+            #promo-banner { padding: 8px 12px; gap: 6px; }
+            #promo-banner .pb-text { font-size: 0.72rem; }
+        }
+
+        /* Price with discount */
+        .price-old {
+            font-size: 0.75rem; color: var(--text-dim);
+            text-decoration: line-through; margin-right: 4px;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+        }
+        .price-new-wrap { display: flex; align-items: baseline; gap: 4px; }
+        .price-discount-tag {
+            font-size: 0.6rem; font-weight: 800; color: #000;
+            background: #ffd700; padding: 2px 6px; border-radius: 6px;
+            white-space: nowrap;
+        }
+        .pc-footer .price-new-wrap { flex-wrap: wrap; }
+
+        /* Scroll hint for categories */
+        .cat-scroll-wrapper { position: relative; width: 100%; }
+        .cat-scroll-hint {
+            display: none;
+            position: absolute; right: 0; top: 0; bottom: 10px;
+            width: 48px;
+            background: linear-gradient(to right, transparent, rgba(10,10,10,0.95));
+            pointer-events: none; z-index: 2;
+            align-items: center; justify-content: flex-end; padding-right: 8px;
+        }
+        .cat-scroll-hint i { color: var(--amber); font-size: 0.75rem; animation: hint-pulse 1.5s ease-in-out infinite; }
+        @keyframes hint-pulse { 0%,100%{opacity:0.4;transform:translateX(0);} 50%{opacity:1;transform:translateX(3px);} }
+        @media (max-width: 768px) {
+            .cat-scroll-hint { display: flex; }
+            .cat-scroll-hint.hidden { display: none; }
+        }
     </style>
 </head>
 <body>
 
 <canvas id="universe-canvas"></canvas>
 <div id="cart-overlay" onclick="toggleCart()"></div>
+
+<!-- PROMO BANNER -->
+<div id="promo-banner">
+    <span class="pb-pill">🔥 -15% OFF</span>
+    <span class="pb-text">Promoção de Final de Abril — em todos os produtos!</span>
+    <span class="pb-timer" id="promo-countdown">⏳ Calculando...</span>
+</div>
 
 <!-- NAVBAR -->
 <div id="navbar">
@@ -466,12 +539,15 @@
         </div>
 
         <div class="store-controls fade-up">
-            <div class="category-filters">
-                <button class="cat-btn active" data-cat="all">Todos</button>
-                <button class="cat-btn" data-cat="bot">🤖 Bot GRUPO</button>
-                <button class="cat-btn" data-cat="pv">💬 Bot PV</button>
-                <button class="cat-btn" data-cat="vip">👑 VIP</button>
-                <button class="cat-btn cat-gold" data-cat="gold">⚔️ Gold / RPG</button>
+            <div class="cat-scroll-wrapper">
+                <div class="category-filters">
+                    <button class="cat-btn active" data-cat="all">Todos</button>
+                    <button class="cat-btn" data-cat="bot">🤖 Bot GRUPO</button>
+                    <button class="cat-btn" data-cat="pv">💬 Bot PV</button>
+                    <button class="cat-btn" data-cat="vip">👑 VIP</button>
+                    <button class="cat-btn cat-gold" data-cat="gold">⚔️ Gold / RPG</button>
+                </div>
+                <div class="cat-scroll-hint" id="cat-scroll-hint"><i class="fas fa-chevron-right"></i></div>
             </div>
             <div class="search-wrap">
                 <i class="fas fa-search"></i>
@@ -585,6 +661,33 @@
 <script>
 const WHATSAPP_NUMBER = "447562847091";
 const LOGO_IMAGE = "/logousk1.png";
+const PROMO_DISCOUNT = 0.15; // 15% off
+const PROMO_END = new Date('2025-05-01T00:00:00');
+
+function applyDiscount(price) {
+    const raw = price * (1 - PROMO_DISCOUNT);
+    const cents = Math.round((raw % 1) * 100); // centavos (0–99)
+    if (cents <= 30) return Math.floor(raw);        // ex: 4,10 → 4,00
+    return Math.floor(raw) + 0.50;                  // ex: 4,25 → 4,50
+}
+
+// Countdown timer
+(function() {
+    function updateCountdown() {
+        const el = document.getElementById('promo-countdown');
+        if (!el) return;
+        const now = new Date();
+        const diff = PROMO_END - now;
+        if (diff <= 0) { el.textContent = 'Promoção Ativa'; return; }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        el.textContent = `⏳ Termina em: ${d > 0 ? d+'d ' : ''}${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+})();
 
 function formatBRL(v) {
     return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -625,15 +728,15 @@ const PRODUCTS = [
     { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE,
       description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" },
     // GOLD — Moeda (coin)
-    { id:15, category:"gold", name:"💰 Pacote Iniciante - 1.000 Gold", price:4.00, isGold:true, badge:"Entrada", badgeClass:"badge-blue", image:LOGO_IMAGE,
+    { id:15, category:"gold", name:"💰 Pacote Iniciante - 1.000 Gold", price:4.99, isGold:true, badge:"Entrada", badgeClass:"badge-blue", image:LOGO_IMAGE,
       description: "✓ 1.000 moedas Gold para usar no RPG\n✓ Ideal para começar no modo Gold\n✓ Entrega imediata via WhatsApp" },
     { id:16, category:"gold", name:"💰 Pacote Aventureiro - 5.000 Gold", price:14.99, isGold:true, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
       description: "✓ 5.000 moedas Gold para usar no RPG\n✓ Custo por Gold muito melhor que o Iniciante\n✓ Entrega imediata via WhatsApp" },
-    { id:17, category:"gold", name:"💰 Pacote Nobre - 10.000 Gold", price:19.99, isGold:true, badge:"Recomendado", badgeClass:"badge-gold", image:LOGO_IMAGE,
+    { id:17, category:"gold", name:"💰 Pacote Nobre - 10.000 Gold", price:24.99, isGold:true, badge:"Recomendado", badgeClass:"badge-gold", image:LOGO_IMAGE,
       description: "✓ 10.000 moedas Gold para usar no RPG\n✓ Melhor custo-benefício da categoria\n✓ Entrega imediata via WhatsApp" },
     { id:18, category:"gold", name:"👑 Pacote Reino - 25.000 Gold", price:49.99, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE,
       description: "✓ 25.000 moedas Gold — domine o servidor\n✓ Preço por Gold equivalente a 40% off\n✓ Entrega imediata via WhatsApp" },
-    { id:19, category:"gold", name:"🐉 Pacote Lendário - 50.000 Gold", price:100.00, isGold:true, badge:"Elite", badgeClass:"badge-gold", image:LOGO_IMAGE,
+    { id:19, category:"gold", name:"🐉 Pacote Lendário - 50.000 Gold", price:79.99, isGold:true, badge:"Elite", badgeClass:"badge-gold", image:LOGO_IMAGE,
       description: "✓ 50.000 moedas Gold — o maior pacote\n✓ Máximo desconto por unidade de Gold\n✓ Entrega imediata via WhatsApp" }
 ];
 
@@ -701,7 +804,8 @@ function renderCart() {
 window.addToCart = function(pid) {
     const p = PRODUCTS.find(x => x.id === pid); if (!p) return;
     const ex = cart.find(i => i.id === pid);
-    if (ex) ex.quantity++; else cart.push({...p, quantity:1});
+    const discPrice = applyDiscount(p.price);
+    if (ex) ex.quantity++; else cart.push({...p, price: discPrice, quantity:1});
     saveCart(); 
     showToast(`<i class="fas fa-check-circle"></i> ${p.name} adicionado!`);
 };
@@ -767,11 +871,16 @@ window.openModal = function(pid) {
     const badgeHtml = p.badge ? `<span class="modal-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
     const descHtml = formatDescription(p.description);
     
+    const discPrice = applyDiscount(p.price);
     con.innerHTML = `
         ${imgHtml}
         <h2>${p.name}</h2>
         <div class="modal-badge-row">${badgeHtml}</div>
-        <div class="modal-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</div>
+        <div style="text-align:center;margin-bottom:4px;">
+            <span style="font-size:0.85rem;color:var(--text-dim);text-decoration:line-through;">R$ ${formatBRL(p.price)}</span>
+            <span style="font-size:0.7rem;font-weight:800;color:#000;background:#ffd700;padding:2px 8px;border-radius:6px;margin-left:8px;">-15% OFF</span>
+        </div>
+        <div class="modal-price${p.isGold?' gold-price':''}">R$ ${formatBRL(discPrice)}</div>
         ${descHtml}
         <button class="btn-primary${p.isGold?' btn-gold':''}" onclick="addToCart(${p.id}); closeModal();">
             <i class="fas fa-shopping-bag"></i> Adicionar ao carrinho
@@ -825,6 +934,7 @@ function renderProducts() {
                     `</div>`;
             }
             
+            const discPrice = applyDiscount(p.price);
             return `
                 <div class="${cc}" onclick="openModal(${p.id})">
                     <div class="pc-top">
@@ -834,7 +944,13 @@ function renderProducts() {
                     <h3>${p.name}</h3>
                     ${previewHtml}
                     <div class="pc-footer">
-                        <span class="pc-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</span>
+                        <div>
+                            <span class="price-old">R$ ${formatBRL(p.price)}</span>
+                            <div class="price-new-wrap">
+                                <span class="pc-price${p.isGold?' gold-price':''}">R$ ${formatBRL(discPrice)}</span>
+                                <span class="price-discount-tag">-15%</span>
+                            </div>
+                        </div>
                         <button class="btn-add${p.isGold?' btn-gold':''}" onclick="event.stopPropagation();addToCart(${p.id})">
                             <i class="fas fa-plus"></i>
                         </button>
@@ -866,7 +982,8 @@ function renderFeatured() {
             <div class="${cc}" onclick="openModal(${p.id})">
                 ${img}${bh}
                 <div class="fc-name">${p.name}</div>
-                <div class="fc-price">R$ ${formatBRL(p.price)}</div>
+                <div style="font-size:0.6rem;color:var(--text-dim);text-decoration:line-through;">R$ ${formatBRL(p.price)}</div>
+                <div class="fc-price">R$ ${formatBRL(applyDiscount(p.price))}</div>
             </div>`;
     }).join('');
 }
@@ -942,7 +1059,7 @@ function showToast(msg) {
 // Navbar scroll
 (function(){
     const nav=document.getElementById('navbar'),tog=document.getElementById('menu-toggle'),menu=document.getElementById('mobile-menu');
-    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>10),{ passive:true });
     tog.addEventListener('click',e=>{e.stopPropagation();const o=menu.classList.toggle('open');tog.innerHTML=o?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
     document.addEventListener('click',e=>{if(!nav.contains(e.target)&&menu.classList.contains('open')){menu.classList.remove('open');tog.innerHTML='<i class="fas fa-bars"></i>';}});
 })();
@@ -954,6 +1071,19 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 renderFeatured();
 renderProducts();
 renderCart();
+
+// Scroll hint for category filters
+(function() {
+    const filters = document.querySelector('.category-filters');
+    const hint = document.getElementById('cat-scroll-hint');
+    if (!filters || !hint) return;
+    function checkHint() {
+        const atEnd = filters.scrollLeft + filters.clientWidth >= filters.scrollWidth - 10;
+        hint.classList.toggle('hidden', atEnd);
+    }
+    filters.addEventListener('scroll', checkHint, { passive: true });
+    checkHint();
+})();
 </script>
 </body>
 </html>
