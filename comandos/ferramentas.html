@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Downloads | Udesaken Group</title>
-    <meta name="description" content="Baixe vídeos, músicas e conteúdos de redes sociais com o bot Udesaken. Suporte para YouTube, TikTok, Instagram e muito mais.">
+    <title>Ferramentas | Udesaken Group</title>
+    <meta name="description" content="Ferramentas úteis do bot Udesaken. Encurtador de links, lembretes e muito mais.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Downloads | Udesaken Group">
-    <meta property="og:description" content="Baixe vídeos, músicas e conteúdos de redes sociais.">
+    <meta property="og:title" content="Ferramentas | Udesaken Group">
+    <meta property="og:description" content="Ferramentas úteis do bot Udesaken.">
     <meta property="og:image" content="https://udesaken.site/logousk.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,9 +26,8 @@
             --amber: #ff8c00;
             --amber-light: #ffb347;
             --gold: #ffd700;
-            --blue: #3498db;
-            --red: #e74c3c;
-            --pink: #e4405f;
+            --teal: #00d4aa;
+            --teal-light: #2eccb1;
             --glass-bg: rgba(12,12,12,0.62);
             --glass-border: rgba(255,255,255,0.07);
             --glass-border-hover: rgba(255,255,255,0.22);
@@ -52,7 +51,7 @@
 
         ::-webkit-scrollbar { width: 5px; background: #000; }
         ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
-        ::selection { background: rgba(52,152,219,0.3); color: #fff; }
+        ::selection { background: rgba(0,212,170,0.3); color: #fff; }
 
         #universe-canvas {
             position: fixed;
@@ -72,8 +71,8 @@
             background-clip: text;
         }
 
-        .text-blue {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 60%, #1a6ba0 100%);
+        .text-teal {
+            background: linear-gradient(135deg, #00d4aa 0%, #00b894 60%, #009688 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -149,7 +148,7 @@
             backdrop-filter: blur(12px);
             margin-bottom: 24px;
         }
-        .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #3498db; box-shadow: 0 0 8px #3498db; animation: dot-pulse 2.5s ease-in-out infinite; }
+        .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #00d4aa; box-shadow: 0 0 8px #00d4aa; animation: dot-pulse 2.5s ease-in-out infinite; }
         @keyframes dot-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
         .hero-badge span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
         
@@ -202,7 +201,7 @@
             transition: all 0.3s;
         }
         #search-input:focus {
-            border-color: rgba(52,152,219,0.5);
+            border-color: rgba(0,212,170,0.5);
             background: rgba(255,255,255,0.08);
         }
         #search-input::placeholder {
@@ -215,7 +214,7 @@
             color: var(--text-dim);
         }
         .search-info i {
-            color: var(--blue);
+            color: var(--teal);
             margin-right: 4px;
         }
 
@@ -239,7 +238,7 @@
             font-family: 'Syne', sans-serif;
             font-size: 1.6rem;
             font-weight: 800;
-            color: var(--blue);
+            color: var(--teal);
         }
         .stat-label {
             font-size: 0.65rem;
@@ -259,7 +258,7 @@
         }
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 24px;
         }
         .category-card {
@@ -284,9 +283,7 @@
             justify-content: center;
             font-size: 1.4rem;
         }
-        .category-icon.search { background: rgba(52,152,219,0.15); color: #3498db; }
-        .category-icon.download { background: rgba(46,204,113,0.15); color: #2ecc71; }
-        .category-icon.media { background: rgba(228,64,95,0.15); color: #e4405f; }
+        .category-icon.tools { background: rgba(0,212,170,0.15); color: #00d4aa; }
         
         .category-header h3 {
             font-family: 'Syne', sans-serif;
@@ -317,22 +314,32 @@
             cursor: pointer;
         }
         .cmd-item:hover {
-            background: rgba(52,152,219,0.15);
-            border-color: rgba(52,152,219,0.3);
-            color: #3498db;
+            background: rgba(0,212,170,0.15);
+            border-color: rgba(0,212,170,0.3);
+            color: #00d4aa;
             transform: translateY(-2px);
         }
         .cmd-item.highlight {
-            background: #3498db;
-            border-color: #3498db;
+            background: #00d4aa;
+            border-color: #00d4aa;
             color: #000;
             transform: scale(1.02);
         }
 
-        /* Plataforma badges */
-        .cmd-item.yt { border-left: 3px solid #ff0000; }
-        .cmd-item.tt { border-left: 3px solid #000000; }
-        .cmd-item.ig { border-left: 3px solid #e4405f; }
+        .desc-text {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .desc-text span i {
+            margin-right: 4px;
+            color: var(--teal);
+        }
 
         /* Footer */
         footer {
@@ -453,66 +460,52 @@
     <div class="fade-up">
         <div class="hero-badge">
             <div class="hero-dot"></div>
-            <span>Downloads & Mídia</span>
+            <span>Utilitários</span>
         </div>
         <h1 class="hero-title">
-            Baixe Tudo em <span class="text-blue">Um Lugar</span>
+            Ferramentas <span class="text-teal">Úteis</span>
         </h1>
         <p class="hero-sub">
-            Vídeos, músicas, stories e muito mais. Downloads rápidos de todas as plataformas.
+            Encurte links, crie lembretes e muito mais. Tudo o que você precisa em um só lugar.
         </p>
     </div>
 </section>
 
 <div class="stats-row fade-up">
-    <div class="stat-card glass"><div class="stat-number">2</div><div class="stat-label">Categorias</div></div>
-    <div class="stat-card glass"><div class="stat-number">5</div><div class="stat-label">Plataformas</div></div>
-    <div class="stat-card glass"><div class="stat-number">⬇️</div><div class="stat-label">Alta Velocidade</div></div>
-    <div class="stat-card glass"><div class="stat-number">🎵</div><div class="stat-label">Áudio/Vídeo</div></div>
+    <div class="stat-card glass"><div class="stat-number">1</div><div class="stat-label">Categoria</div></div>
+    <div class="stat-card glass"><div class="stat-number">5</div><div class="stat-label">Comandos</div></div>
+    <div class="stat-card glass"><div class="stat-number">🔗</div><div class="stat-label">Links</div></div>
+    <div class="stat-card glass"><div class="stat-number">⏰</div><div class="stat-label">Lembretes</div></div>
 </div>
 
 <div class="search-section fade-up">
     <div class="search-wrapper">
         <i class="fas fa-search"></i>
-        <input type="text" id="search-input" placeholder="Pesquisar comando... (ex: play, tiktok, instagram)">
+        <input type="text" id="search-input" placeholder="Pesquisar comando... (ex: encurtar, lembrete)">
     </div>
     <div class="search-info">
-        <i class="fas fa-download"></i> Use os comandos com o prefixo <strong class="text-blue">7</strong> | Clique no comando para copiar
+        <i class="fas fa-tools"></i> Use os comandos com o prefixo <strong class="text-teal">7</strong> | Clique no comando para copiar
     </div>
 </div>
 
 <section id="categories">
     <div class="categories-grid">
-        <!-- Pesquisas -->
+        <!-- Ferramentas -->
         <div class="category-card glass fade-up">
             <div class="category-header">
-                <div class="category-icon search"><i class="fas fa-search"></i></div>
-                <div><h3>Pesquisas</h3><p>Encontre músicas e vídeos</p></div>
+                <div class="category-icon tools"><i class="fas fa-wrench"></i></div>
+                <div><h3>Ferramentas</h3><p>Utilitários para o dia a dia</p></div>
             </div>
             <div class="commands-list">
-                <span class="cmd-item yt" data-cmd="play">play &lt;música&gt;</span>
-                <span class="cmd-item yt" data-cmd="playvid">playvid &lt;pesquisa&gt;</span>
-                <span class="cmd-item yt" data-cmd="assistir">assistir &lt;link ou pesquisa&gt;</span>
+                <span class="cmd-item" data-cmd="encurtalink">encurtalink &lt;url&gt;</span>
+                <span class="cmd-item" data-cmd="lembrete">lembrete &lt;tempo&gt; &lt;mensagem&gt;</span>
+                <span class="cmd-item" data-cmd="meuslembretes">meuslembretes</span>
+                <span class="cmd-item" data-cmd="apagalembrete">apagalembrete &lt;id&gt;</span>
             </div>
-            <div style="margin-top: 16px; font-size: 0.65rem; color: var(--text-dim);">
-                <i class="fab fa-youtube" style="color:#ff0000; margin-right: 4px;"></i> Busca e reprodução do YouTube
-            </div>
-        </div>
-
-        <!-- Downloads -->
-        <div class="category-card glass fade-up">
-            <div class="category-header">
-                <div class="category-icon download"><i class="fas fa-download"></i></div>
-                <div><h3>Downloads</h3><p>Baixe de redes sociais</p></div>
-            </div>
-            <div class="commands-list">
-                <span class="cmd-item tt" data-cmd="tiktok">tiktok &lt;link&gt;</span>
-                <span class="cmd-item ig" data-cmd="instagram">instagram &lt;link&gt;</span>
-                <span class="cmd-item ig" data-cmd="igstory">igstory &lt;link&gt;</span>
-            </div>
-            <div style="margin-top: 16px; font-size: 0.65rem; color: var(--text-dim); display: flex; gap: 16px; flex-wrap: wrap;">
-                <span><i class="fab fa-tiktok"></i> TikTok - Vídeos sem marca d'água</span>
-                <span><i class="fab fa-instagram"></i> Instagram - Reels, Posts e Stories</span>
+            <div class="desc-text">
+                <span><i class="fas fa-link"></i> Encurte links longos</span>
+                <span><i class="fas fa-bell"></i> Crie lembretes personalizados</span>
+                <span><i class="fas fa-list"></i> Gerencie seus lembretes</span>
             </div>
         </div>
     </div>

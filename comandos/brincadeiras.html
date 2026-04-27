@@ -1,303 +1,1070 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Diversão | Udesaken Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Diversão | Udesaken Group</title>
+    <meta name="description" content="Comandos de diversão, jogos e interações do bot Udesaken. Brincadeiras, ranks e muito mais.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Diversão | Udesaken Group">
+    <meta property="og:description" content="Comandos de diversão, jogos e interações do bot Udesaken.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
     
-    <link rel="stylesheet" href="../style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' }
-                    }
-                }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --text-dim: #444444;
+            --amber: #ff8c00;
+            --amber-light: #ffb347;
+            --gold: #ffd700;
+            --pink: #ff69b4;
+            --purple: #bc13fe;
+            --red: #ff4757;
+            --green: #4ade80;
+            --blue: #60a5fa;
+            --glass-bg: rgba(12,12,12,0.62);
+            --glass-border: rgba(255,255,255,0.07);
+            --glass-border-hover: rgba(255,255,255,0.22);
+            --glass-blur: 28px;
+            --glass-shadow: 0 8px 40px rgba(0,0,0,0.85);
+            --z-canvas: 0;
+            --z-base: 10;
+            --z-nav: 999;
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        @media (max-width: 768px) { html { font-size: 14px; } }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 5px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
+        ::selection { background: rgba(255,140,0,0.2); color: #fff; }
+
+        #universe-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: var(--z-canvas);
+            pointer-events: none;
+            background: #000;
+        }
+
+        .text-gradient {
+            background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-amber {
+            background: linear-gradient(135deg, #ffd080 0%, #ff8c00 60%, #e05500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.055), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass:hover::before { opacity: 1; }
+        .glass:hover { transform: translateY(-3px); border-color: var(--glass-border-hover); }
+        .glass > * { position: relative; z-index: 1; }
+
+        /* Navbar */
+        #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; }
+        #navbar nav {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            background: rgba(8,8,8,0.75); backdrop-filter: blur(30px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+        #navbar.scrolled nav { background: rgba(0,0,0,0.92); border-color: rgba(255,255,255,0.13); }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-logo-img { width: 28px; height: 28px; border-radius: 8px; overflow: hidden; background: #000; }
+        .nav-logo-img img { width: 100%; height: 100%; object-fit: cover; }
+        .nav-logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-link { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: color 0.25s, background 0.25s; }
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,0.07); }
+        .badge-novo { display: inline-flex; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.3); color: var(--amber); padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; }
+        .nav-store-btn { display: flex; align-items: center; gap: 6px; padding: 6px 14px; background: #fff; color: #000; border-radius: 9px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: box-shadow 0.3s; }
+        #menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; padding: 6px; }
+        #mobile-menu { position: absolute; top: 68px; left: 20px; width: calc(100% - 40px); border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(4,4,4,0.97); backdrop-filter: blur(20px); z-index: var(--z-nav); transform: translateY(-12px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; }
+        #mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .mob-link { display: flex; align-items: center; gap: 10px; padding: 12px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; }
+        .mob-link:hover { color: #fff; }
+        .mob-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 0 16px; }
+
+        /* Hero */
+        #hero {
+            position: relative;
+            z-index: var(--z-base);
+            padding: 120px 20px 50px;
+            text-align: center;
+        }
+        @media (max-width: 768px) { #hero { padding: 100px 20px 40px; } }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(12px);
+            margin-bottom: 24px;
+        }
+        .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; animation: dot-pulse 2.5s ease-in-out infinite; }
+        @keyframes dot-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+        .hero-badge span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+        
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .hero-sub {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Search */
+        .search-section {
+            position: relative;
+            z-index: var(--z-base);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        .search-wrapper {
+            position: relative;
+        }
+        .search-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dim);
+            font-size: 1rem;
+            z-index: 2;
+        }
+        #search-input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 60px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.3s;
+        }
+        #search-input:focus {
+            border-color: rgba(255,140,0,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        #search-input::placeholder {
+            color: var(--text-dim);
+        }
+        .search-info {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+        .search-info i {
+            color: var(--amber);
+            margin-right: 4px;
+        }
+
+        /* Stats */
+        .stats-row {
+            position: relative;
+            z-index: var(--z-base);
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+        }
+        .stat-card {
+            padding: 16px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--amber);
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 5px;
+        }
+
+        /* Categories */
+        #categories {
+            position: relative;
+            z-index: var(--z-base);
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px 20px 60px;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+        .category-card {
+            padding: 24px;
+            border-radius: 24px;
+            transition: all 0.35s ease;
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .category-icon.games { background: rgba(188,19,254,0.15); color: #bc13fe; }
+        .category-icon.interactions { background: rgba(74,222,128,0.15); color: #4ade80; }
+        .category-icon.hot { background: rgba(255,69,95,0.15); color: #ff4757; }
+        .category-icon.male { background: rgba(96,165,250,0.15); color: #60a5fa; }
+        .category-icon.female { background: rgba(255,105,180,0.15); color: #ff69b4; }
+        .category-icon.ranks { background: rgba(255,215,0,0.15); color: #ffd700; }
+        
+        .category-header h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .category-header p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .commands-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .commands-list::-webkit-scrollbar {
+            width: 3px;
+        }
+        .cmd-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .cmd-item:hover {
+            background: rgba(255,140,0,0.15);
+            border-color: rgba(255,140,0,0.3);
+            color: var(--amber-light);
+            transform: translateY(-2px);
+        }
+        .cmd-item.highlight {
+            background: var(--amber);
+            border-color: var(--amber);
+            color: #000;
+            transform: scale(1.02);
+        }
+
+        .full-width-card {
+            grid-column: span 2;
+        }
+        @media (max-width: 768px) {
+            .full-width-card {
+                grid-column: span 1;
+            }
+            .categories-grid {
+                grid-template-columns: 1fr;
             }
         }
-    </script>
 
-    <style>
-        .search-input {
-            width: 100%; padding: 15px 50px; border-radius: 50px;
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            color: var(--text-main); font-size: 1rem; outline: none; transition: 0.3s;
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: var(--z-base);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.95) 70%);
             backdrop-filter: blur(10px);
+            padding: 48px 20px 32px;
         }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(198, 168, 124, 0.2); }
-        
-        .cmd-tag {
-            background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 8px;
-            font-size: 0.85rem; color: var(--text-muted); border: 1px solid var(--glass-border);
-            font-family: 'Courier New', monospace; cursor: default; transition: 0.2s; font-weight: 600;
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+            grid-template-columns: 1fr;
         }
-        .cmd-tag.highlight { background: var(--accent) !important; color: black !important; border-color: var(--accent) !important; transform: scale(1.05); }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+        .footer-brand p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; max-width: 260px; margin-top: 12px; }
+        .footer-col h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-dim); text-decoration: none; transition: color 0.25s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+        .footer-bottom p { font-size: 0.7rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-store-btn { display: none; }
+            #menu-toggle { display: flex; align-items: center; }
+        }
+
+        #wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25D366;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            animation: wa-pop 0.5s 1.5s both;
+        }
+        @keyframes wa-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+        @media (hover: hover) { #wa-float:hover { transform: scale(1.1); } }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: #0d0d0d;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            z-index: 9900;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: toast-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes toast-in { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body>
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
-    </div>
+<canvas id="universe-canvas"></canvas>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
-                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
-                </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase font-black">FUN</span>
-                </span>
+<div id="navbar">
+    <nav>
+        <a href="/" class="nav-logo">
+            <div class="nav-logo-img"><img src="/logousk1.png" alt="Logo Udesaken"></div>
+            <span>Udesaken</span>
+        </a>
+        <div class="nav-links">
+            <a href="/comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
+            <a href="/equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
+            <a href="/parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
+            <a href="/store/" class="nav-link"><i class="fas fa-store"></i> Loja</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="/comandos/" class="nav-store-btn" style="background:transparent; border:1px solid rgba(255,255,255,0.2);">
+                <i class="fas fa-arrow-left"></i>
+                <span>Voltar</span>
             </a>
-            
-            <div class="flex items-center gap-6">
-                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-                <a href="./" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Voltar ao Hub
-                </a>
-            </div>
+            <a href="/store/" class="nav-store-btn">
+                <i class="fas fa-store"></i>
+                <span>Loja</span>
+            </a>
+            <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
+    <div id="mobile-menu">
+        <a href="/" class="mob-link"><i class="fas fa-home"></i> Início</a>
+        <div class="mob-divider"></div>
+        <a href="/comandos/" class="mob-link"><i class="fas fa-arrow-left"></i> Voltar aos Comandos</a>
+        <div class="mob-divider"></div>
+        <a href="/equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
+        <div class="mob-divider"></div>
+        <a href="/parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
+        <div class="mob-divider"></div>
+        <a href="/store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
+    </div>
+</div>
 
-    <section class="pt-32 pb-12 text-center relative">
-        <div class="max-w-4xl mx-auto px-6 fade-up">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
-                <i class="fas fa-gamepad text-gold text-[10px]"></i>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase text-gold">Módulo Diversão</span>
+<section id="hero">
+    <div class="fade-up">
+        <div class="hero-badge">
+            <div class="hero-dot"></div>
+            <span>Diversão Garantida</span>
+        </div>
+        <h1 class="hero-title">
+            Brincadeiras & <span class="text-amber">Interações</span>
+        </h1>
+        <p class="hero-sub">
+            Jogos, interações, zueiras e ranks. Divirta-se com os comandos mais loucos do bot.
+        </p>
+    </div>
+</div>
+
+<div class="stats-row fade-up">
+    <div class="stat-card glass"><div class="stat-number">7</div><div class="stat-label">Categorias</div></div>
+    <div class="stat-card glass"><div class="stat-number">150+</div><div class="stat-label">Comandos</div></div>
+    <div class="stat-card glass"><div class="stat-number">🎮</div><div class="stat-label">Jogos</div></div>
+    <div class="stat-card glass"><div class="stat-number">😂</div><div class="stat-label">Zueira</div></div>
+</div>
+
+<div class="search-section fade-up">
+    <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Pesquisar comando... (ex: beijo, gartic, gay)">
+    </div>
+    <div class="search-info">
+        <i class="fas fa-terminal"></i> Use os comandos com o prefixo <strong class="text-amber">7</strong> | Clique no comando para copiar
+    </div>
+</div>
+
+<section id="categories">
+    <div class="categories-grid">
+        <!-- Jogos -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon games"><i class="fas fa-gamepad"></i></div>
+                <div><h3>Jogos</h3><p>Divirta-se com os minigames</p></div>
             </div>
-
-            <h1 class="text-4xl md:text-6xl font-black text-main mb-6 tracking-tighter leading-tight">
-                Menu <span class="text-gradient-gold uppercase">BRINCADEIRAS.</span>
-            </h1>
-            
-            <div class="relative max-w-xl mx-auto mt-10">
-                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-muted"></i>
-                <input type="text" id="cmdSearch" class="search-input" placeholder="Pesquisar (ex: gartic, beijo, corno)...">
-                <div class="mt-4 text-[11px] text-muted font-medium">
-                    <i class="fas fa-terminal text-gold mr-1"></i> Use os comandos com o prefixo <span class="text-main font-bold">7</span> ou o do seu grupo.
-                </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="gartic">gartic</span>
+                <span class="cmd-item" data-cmd="stopgartic">stopgartic</span>
+                <span class="cmd-item" data-cmd="jogodavelha">jogodavelha</span>
+                <span class="cmd-item" data-cmd="iniciarquiz">iniciarquiz</span>
+                <span class="cmd-item" data-cmd="pular">pular</span>
+                <span class="cmd-item" data-cmd="stopquiz">stopquiz</span>
+                <span class="cmd-item" data-cmd="forca">forca</span>
+                <span class="cmd-item" data-cmd="forca-fim">forca-fim</span>
+                <span class="cmd-item" data-cmd="eununca">eununca</span>
+                <span class="cmd-item" data-cmd="roletarussa">roletarussa</span>
+                <span class="cmd-item" data-cmd="vab">vab</span>
+                <span class="cmd-item" data-cmd="chance">chance</span>
+                <span class="cmd-item" data-cmd="quando">quando</span>
+                <span class="cmd-item" data-cmd="casal">casal</span>
+                <span class="cmd-item" data-cmd="shipo">shipo</span>
+                <span class="cmd-item" data-cmd="sn">sn</span>
+                <span class="cmd-item" data-cmd="ppt">ppt</span>
+                <span class="cmd-item" data-cmd="piada">piada</span>
+                <span class="cmd-item" data-cmd="conselho">conselho</span>
+                <span class="cmd-item" data-cmd="conselhobiblico">conselhobiblico</span>
+                <span class="cmd-item" data-cmd="elogio">elogio</span>
+                <span class="cmd-item" data-cmd="reflexao">reflexao</span>
+                <span class="cmd-item" data-cmd="fato">fato</span>
             </div>
         </div>
-    </section>
 
-    <section class="pb-32 relative z-10">
-        <div class="max-w-[1300px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-dice text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Jogos</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">gartic</span><span class="cmd-tag">stopgartic</span><span class="cmd-tag">jogodavelha</span>
-                    <span class="cmd-tag">iniciarquiz</span><span class="cmd-tag">pular</span><span class="cmd-tag">stopquiz</span>
-                    <span class="cmd-tag">forca</span><span class="cmd-tag">forca-fim</span><span class="cmd-tag">eununca</span>
-                    <span class="cmd-tag">roletarussa</span><span class="cmd-tag">vab</span><span class="cmd-tag">chance</span>
-                    <span class="cmd-tag">quando</span><span class="cmd-tag">casal</span><span class="cmd-tag">shipo</span>
-                    <span class="cmd-tag">sn</span><span class="cmd-tag">ppt</span><span class="cmd-tag">suicidio</span>
-                </div>
+        <!-- Interações -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon interactions"><i class="fas fa-hand-peace"></i></div>
+                <div><h3>Interações</h3><p>Ações com outros membros</p></div>
             </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-hand-sparkles text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Interações</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">dance</span><span class="cmd-tag">chorar</span><span class="cmd-tag">chute</span>
-                    <span class="cmd-tag">chutar</span><span class="cmd-tag">tapa</span><span class="cmd-tag">soco</span>
-                    <span class="cmd-tag">socar</span><span class="cmd-tag">explodir</span><span class="cmd-tag">abraco</span>
-                    <span class="cmd-tag">abracar</span><span class="cmd-tag">morder</span><span class="cmd-tag">mordida</span>
-                    <span class="cmd-tag">lamber</span><span class="cmd-tag">lambida</span><span class="cmd-tag">beijo</span>
-                    <span class="cmd-tag">beijar</span><span class="cmd-tag">mata</span><span class="cmd-tag">matar</span><span class="cmd-tag">cafune</span>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card" style="border-top: 3px solid #ff4500;">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-fire text-[#ff4500]"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Interações "Hot"</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">surubao</span><span class="cmd-tag">sexo</span><span class="cmd-tag">beijob</span>
-                    <span class="cmd-tag">beijarb</span><span class="cmd-tag">tapar</span><span class="cmd-tag">goza</span>
-                    <span class="cmd-tag">gozar</span><span class="cmd-tag">mamar</span><span class="cmd-tag">mamada</span>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-mars text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Zueira Masculina</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">gay</span><span class="cmd-tag">burro</span><span class="cmd-tag">inteligente</span>
-                    <span class="cmd-tag">otaku</span><span class="cmd-tag">fiel</span><span class="cmd-tag">infiel</span>
-                    <span class="cmd-tag">corno</span><span class="cmd-tag">gado</span><span class="cmd-tag">gostoso</span>
-                    <span class="cmd-tag">feio</span><span class="cmd-tag">rico</span><span class="cmd-tag">pobre</span>
-                    <span class="cmd-tag">pirocudo</span><span class="cmd-tag">nazista</span><span class="cmd-tag">ladrao</span>
-                    <span class="cmd-tag">safado</span><span class="cmd-tag">vesgo</span><span class="cmd-tag">bebado</span>
-                    <span class="cmd-tag">machista</span><span class="cmd-tag">homofobico</span><span class="cmd-tag">racista</span>
-                    <span class="cmd-tag">chato</span><span class="cmd-tag">sortudo</span><span class="cmd-tag">azarado</span>
-                    <span class="cmd-tag">forte</span><span class="cmd-tag">fraco</span><span class="cmd-tag">pegador</span>
-                    <span class="cmd-tag">otario</span><span class="cmd-tag">macho</span><span class="cmd-tag">bobo</span>
-                    <span class="cmd-tag">nerd</span><span class="cmd-tag">preguicoso</span><span class="cmd-tag">trabalhador</span>
-                    <span class="cmd-tag">brabo</span><span class="cmd-tag">lindo</span><span class="cmd-tag">malandro</span>
-                    <span class="cmd-tag">simpatico</span><span class="cmd-tag">engracado</span><span class="cmd-tag">charmoso</span>
-                    <span class="cmd-tag">misterioso</span><span class="cmd-tag">carinhoso</span><span class="cmd-tag">desumilde</span>
-                    <span class="cmd-tag">humilde</span><span class="cmd-tag">ciumento</span><span class="cmd-tag">corajoso</span>
-                    <span class="cmd-tag">covarde</span><span class="cmd-tag">esperto</span><span class="cmd-tag">talarico</span>
-                    <span class="cmd-tag">chorao</span><span class="cmd-tag">brincalhao</span><span class="cmd-tag">bolsonarista</span>
-                    <span class="cmd-tag">petista</span><span class="cmd-tag">comunista</span><span class="cmd-tag">lulista</span>
-                    <span class="cmd-tag">traidor</span><span class="cmd-tag">bandido</span><span class="cmd-tag">cachorro</span>
-                    <span class="cmd-tag">vagabundo</span><span class="cmd-tag">pilantra</span><span class="cmd-tag">mito</span>
-                    <span class="cmd-tag">padrao</span><span class="cmd-tag">comedia</span><span class="cmd-tag">psicopata</span>
-                    <span class="cmd-tag">fortao</span><span class="cmd-tag">magrelo</span><span class="cmd-tag">bombado</span>
-                    <span class="cmd-tag">chefe</span><span class="cmd-tag">presidente</span><span class="cmd-tag">rei</span>
-                    <span class="cmd-tag">patrao</span><span class="cmd-tag">playboy</span><span class="cmd-tag">zueiro</span>
-                    <span class="cmd-tag">gamer</span><span class="cmd-tag">programador</span><span class="cmd-tag">visionario</span>
-                    <span class="cmd-tag">billionario</span><span class="cmd-tag">poderoso</span><span class="cmd-tag">vencedor</span>
-                    <span class="cmd-tag">senhor</span>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-venus text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Zueira Feminina</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">lesbica</span><span class="cmd-tag">burra</span><span class="cmd-tag">inteligente</span>
-                    <span class="cmd-tag">otaku</span><span class="cmd-tag">fiel</span><span class="cmd-tag">infiel</span>
-                    <span class="cmd-tag">corna</span><span class="cmd-tag">gada</span><span class="cmd-tag">gostosa</span>
-                    <span class="cmd-tag">feia</span><span class="cmd-tag">rica</span><span class="cmd-tag">pobre</span>
-                    <span class="cmd-tag">bucetuda</span><span class="cmd-tag">nazista</span><span class="cmd-tag">ladra</span>
-                    <span class="cmd-tag">safada</span><span class="cmd-tag">vesga</span><span class="cmd-tag">bebada</span>
-                    <span class="cmd-tag">machista</span><span class="cmd-tag">homofobica</span><span class="cmd-tag">racista</span>
-                    <span class="cmd-tag">chata</span><span class="cmd-tag">sortuda</span><span class="cmd-tag">azarada</span>
-                    <span class="cmd-tag">forte</span><span class="cmd-tag">fraca</span><span class="cmd-tag">pegadora</span>
-                    <span class="cmd-tag">otaria</span><span class="cmd-tag">boba</span><span class="cmd-tag">nerd</span>
-                    <span class="cmd-tag">preguicosa</span><span class="cmd-tag">trabalhadora</span><span class="cmd-tag">braba</span>
-                    <span class="cmd-tag">linda</span><span class="cmd-tag">malandra</span><span class="cmd-tag">simpatica</span>
-                    <span class="cmd-tag">engracada</span><span class="cmd-tag">charmosa</span><span class="cmd-tag">misteriosa</span>
-                    <span class="cmd-tag">carinhosa</span><span class="cmd-tag">desumilde</span><span class="cmd-tag">humilde</span>
-                    <span class="cmd-tag">ciumenta</span><span class="cmd-tag">corajosa</span><span class="cmd-tag">covarde</span>
-                    <span class="cmd-tag">esperta</span><span class="cmd-tag">talarica</span><span class="cmd-tag">chorona</span>
-                    <span class="cmd-tag">brincalhona</span><span class="cmd-tag">bolsonarista</span><span class="cmd-tag">petista</span>
-                    <span class="cmd-tag">comunista</span><span class="cmd-tag">lulista</span><span class="cmd-tag">traidora</span>
-                    <span class="cmd-tag">bandida</span><span class="cmd-tag">cachorra</span><span class="cmd-tag">vagabunda</span>
-                    <span class="cmd-tag">pilantra</span><span class="cmd-tag">mito</span>
-                    <span class="cmd-tag">padrao</span><span class="cmd-tag">comedia</span><span class="cmd-tag">psicopata</span>
-                    <span class="cmd-tag">fortona</span><span class="cmd-tag">magrela</span><span class="cmd-tag">bombada</span>
-                    <span class="cmd-tag">chefe</span><span class="cmd-tag">presidenta</span><span class="cmd-tag">rainha</span>
-                    <span class="cmd-tag">patroa</span><span class="cmd-tag">playgirl</span><span class="cmd-tag">zueira</span>
-                    <span class="cmd-tag">gamer</span><span class="cmd-tag">programadora</span><span class="cmd-tag">visionaria</span>
-                    <span class="cmd-tag">bilionaria</span><span class="cmd-tag">poderosa</span>
-                    <span class="cmd-tag">vencedora</span><span class="cmd-tag">senhora</span>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-trophy text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Ranks Masculinos</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">rankgay</span><span class="cmd-tag">rankburro</span><span class="cmd-tag">rankinteligente</span>
-                    <span class="cmd-tag">rankotaku</span><span class="cmd-tag">rankfiel</span><span class="cmd-tag">rankinfiel</span>
-                    <span class="cmd-tag">rankcorno</span><span class="cmd-tag">rankgado</span><span class="cmd-tag">rankgostoso</span>
-                    <span class="cmd-tag">rankrico</span><span class="cmd-tag">rankpobre</span><span class="cmd-tag">rankforte</span>
-                    <span class="cmd-tag">rankpegador</span><span class="cmd-tag">rankmacho</span><span class="cmd-tag">ranknerd</span>
-                    <span class="cmd-tag">ranktrabalhador</span><span class="cmd-tag">rankbrabo</span><span class="cmd-tag">ranklindo</span>
-                    <span class="cmd-tag">rankmalandro</span><span class="cmd-tag">rankengracado</span><span class="cmd-tag">rankcharmoso</span>
-                    <span class="cmd-tag">rankvisionario</span><span class="cmd-tag">rankpoderoso</span><span class="cmd-tag">rankvencedor</span>
-                </div>
-            </div>
-
-            <div class="glass-panel p-8 rounded-[30px] fade-up cmd-card">
-                <div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
-                    <i class="fas fa-trophy text-gold"></i>
-                    <h3 class="text-lg font-bold text-main uppercase tracking-widest">Ranks Femininos</h3>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="cmd-tag">ranklesbica</span><span class="cmd-tag">rankburra</span><span class="cmd-tag">rankinteligente</span>
-                    <span class="cmd-tag">rankotaku</span><span class="cmd-tag">rankfiel</span><span class="cmd-tag">rankinfiel</span>
-                    <span class="cmd-tag">rankcorna</span><span class="cmd-tag">rankgada</span><span class="cmd-tag">rankgostosa</span>
-                    <span class="cmd-tag">rankrica</span><span class="cmd-tag">rankpobre</span><span class="cmd-tag">rankforte</span>
-                    <span class="cmd-tag">rankpegadora</span><span class="cmd-tag">ranknerd</span><span class="cmd-tag">ranktrabalhadora</span>
-                    <span class="cmd-tag">rankbraba</span><span class="cmd-tag">ranklinda</span><span class="cmd-tag">rankmalandra</span>
-                    <span class="cmd-tag">rankengracada</span><span class="cmd-tag">rankcharmosa</span><span class="cmd-tag">rankvisionaria</span>
-                    <span class="cmd-tag">rankpoderosa</span><span class="cmd-tag">rankvencedora</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
-        <div class="max-w-[1100px] mx-auto px-6 text-center">
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
-                <a href="../equipe/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-gold/50 transition-all duration-300">
-                    <i class="fas fa-users text-gold group-hover:scale-110 transition"></i>
-                    <span class="text-sm font-bold text-main">Conhecer Equipe</span>
-                </a>
-                <a href="../termos/" class="group flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300">
-                    <i class="fas fa-file-contract text-muted group-hover:text-white transition"></i>
-                    <span class="text-sm font-bold text-muted group-hover:text-white">Termos de Uso</span>
-                </a>
-            </div>
-            <div class="text-center">
-                <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
-                <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                    Udesaken Group &copy; 2026 • Todos os direitos reservados
-                </p>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="aura">aura</span>
+                <span class="cmd-item" data-cmd="farmaraura">farmaraura</span>
+                <span class="cmd-item" data-cmd="dance">dance</span>
+                <span class="cmd-item" data-cmd="chorar">chorar</span>
+                <span class="cmd-item" data-cmd="chute">chute</span>
+                <span class="cmd-item" data-cmd="chutar">chutar</span>
+                <span class="cmd-item" data-cmd="tapa">tapa</span>
+                <span class="cmd-item" data-cmd="soco">soco</span>
+                <span class="cmd-item" data-cmd="socar">socar</span>
+                <span class="cmd-item" data-cmd="explodir">explodir</span>
+                <span class="cmd-item" data-cmd="abraco">abraco</span>
+                <span class="cmd-item" data-cmd="abracar">abracar</span>
+                <span class="cmd-item" data-cmd="morder">morder</span>
+                <span class="cmd-item" data-cmd="mordida">mordida</span>
+                <span class="cmd-item" data-cmd="lamber">lamber</span>
+                <span class="cmd-item" data-cmd="lambida">lambida</span>
+                <span class="cmd-item" data-cmd="beijo">beijo</span>
+                <span class="cmd-item" data-cmd="beijar">beijar</span>
+                <span class="cmd-item" data-cmd="mata">mata</span>
+                <span class="cmd-item" data-cmd="matar">matar</span>
+                <span class="cmd-item" data-cmd="cafune">cafune</span>
             </div>
         </div>
-    </footer>
 
-    <script src="../script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('cmdSearch');
-            const tags = document.querySelectorAll('.cmd-tag');
-            const cards = document.querySelectorAll('.cmd-card');
+        <!-- Interações Hot -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon hot"><i class="fas fa-fire"></i></div>
+                <div><h3>Interações "Hot"</h3><p>+18 / Conteúdo adulto</p></div>
+            </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="surubao">surubao</span>
+                <span class="cmd-item" data-cmd="sexo">sexo</span>
+                <span class="cmd-item" data-cmd="beijob">beijob</span>
+                <span class="cmd-item" data-cmd="beijarb">beijarb</span>
+                <span class="cmd-item" data-cmd="tapar">tapar</span>
+                <span class="cmd-item" data-cmd="goza">goza</span>
+                <span class="cmd-item" data-cmd="gozar">gozar</span>
+                <span class="cmd-item" data-cmd="mamar">mamar</span>
+                <span class="cmd-item" data-cmd="mamada">mamada</span>
+            </div>
+        </div>
 
-            searchInput.addEventListener('input', (e) => {
-                const text = e.target.value.toLowerCase();
-                
-                cards.forEach(card => {
-                    let hasMatch = false;
-                    const cardTags = card.querySelectorAll('.cmd-tag');
-                    
-                    cardTags.forEach(tag => {
-                        const isMatch = tag.innerText.toLowerCase().includes(text);
-                        if(text !== "" && isMatch) {
-                            tag.classList.add('highlight');
-                            hasMatch = true;
-                        } else {
-                            tag.classList.remove('highlight');
-                            if(text === "") hasMatch = true;
-                        }
-                    });
-                    
-                    card.style.display = hasMatch ? 'block' : 'none';
-                });
+        <!-- Zueira Masculina -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon male"><i class="fas fa-mars"></i></div>
+                <div><h3>Zueira Masculina</h3><p>Brincadeiras para os homens</p></div>
+            </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="gay">gay</span>
+                <span class="cmd-item" data-cmd="burro">burro</span>
+                <span class="cmd-item" data-cmd="inteligente">inteligente</span>
+                <span class="cmd-item" data-cmd="otaku">otaku</span>
+                <span class="cmd-item" data-cmd="fiel">fiel</span>
+                <span class="cmd-item" data-cmd="infiel">infiel</span>
+                <span class="cmd-item" data-cmd="corno">corno</span>
+                <span class="cmd-item" data-cmd="gado">gado</span>
+                <span class="cmd-item" data-cmd="gostoso">gostoso</span>
+                <span class="cmd-item" data-cmd="feio">feio</span>
+                <span class="cmd-item" data-cmd="rico">rico</span>
+                <span class="cmd-item" data-cmd="pobre">pobre</span>
+                <span class="cmd-item" data-cmd="safado">safado</span>
+                <span class="cmd-item" data-cmd="vesgo">vesgo</span>
+                <span class="cmd-item" data-cmd="bebado">bebado</span>
+                <span class="cmd-item" data-cmd="chato">chato</span>
+                <span class="cmd-item" data-cmd="sortudo">sortudo</span>
+                <span class="cmd-item" data-cmd="azarado">azarado</span>
+                <span class="cmd-item" data-cmd="forte">forte</span>
+                <span class="cmd-item" data-cmd="fraco">fraco</span>
+                <span class="cmd-item" data-cmd="pegador">pegador</span>
+                <span class="cmd-item" data-cmd="otario">otario</span>
+                <span class="cmd-item" data-cmd="macho">macho</span>
+                <span class="cmd-item" data-cmd="bobo">bobo</span>
+                <span class="cmd-item" data-cmd="nerd">nerd</span>
+                <span class="cmd-item" data-cmd="preguicoso">preguicoso</span>
+                <span class="cmd-item" data-cmd="trabalhador">trabalhador</span>
+                <span class="cmd-item" data-cmd="brabo">brabo</span>
+                <span class="cmd-item" data-cmd="lindo">lindo</span>
+                <span class="cmd-item" data-cmd="malandro">malandro</span>
+                <span class="cmd-item" data-cmd="simpatico">simpatico</span>
+                <span class="cmd-item" data-cmd="engracado">engracado</span>
+                <span class="cmd-item" data-cmd="charmoso">charmoso</span>
+                <span class="cmd-item" data-cmd="misterioso">misterioso</span>
+                <span class="cmd-item" data-cmd="carinhoso">carinhoso</span>
+                <span class="cmd-item" data-cmd="humilde">humilde</span>
+                <span class="cmd-item" data-cmd="ciumento">ciumento</span>
+                <span class="cmd-item" data-cmd="corajoso">corajoso</span>
+                <span class="cmd-item" data-cmd="covarde">covarde</span>
+                <span class="cmd-item" data-cmd="esperto">esperto</span>
+                <span class="cmd-item" data-cmd="chorão">chorão</span>
+                <span class="cmd-item" data-cmd="mito">mito</span>
+                <span class="cmd-item" data-cmd="gamer">gamer</span>
+                <span class="cmd-item" data-cmd="programador">programador</span>
+                <span class="cmd-item" data-cmd="visionario">visionario</span>
+                <span class="cmd-item" data-cmd="poderoso">poderoso</span>
+                <span class="cmd-item" data-cmd="vencedor">vencedor</span>
+            </div>
+        </div>
+
+        <!-- Zueira Feminina -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon female"><i class="fas fa-venus"></i></div>
+                <div><h3>Zueira Feminina</h3><p>Brincadeiras para as mulheres</p></div>
+            </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="lesbica">lesbica</span>
+                <span class="cmd-item" data-cmd="burra">burra</span>
+                <span class="cmd-item" data-cmd="inteligente">inteligente</span>
+                <span class="cmd-item" data-cmd="otaku">otaku</span>
+                <span class="cmd-item" data-cmd="fiel">fiel</span>
+                <span class="cmd-item" data-cmd="infiel">infiel</span>
+                <span class="cmd-item" data-cmd="corna">corna</span>
+                <span class="cmd-item" data-cmd="gada">gada</span>
+                <span class="cmd-item" data-cmd="gostosa">gostosa</span>
+                <span class="cmd-item" data-cmd="feia">feia</span>
+                <span class="cmd-item" data-cmd="rica">rica</span>
+                <span class="cmd-item" data-cmd="pobre">pobre</span>
+                <span class="cmd-item" data-cmd="safada">safada</span>
+                <span class="cmd-item" data-cmd="vesga">vesga</span>
+                <span class="cmd-item" data-cmd="bebada">bebada</span>
+                <span class="cmd-item" data-cmd="chata">chata</span>
+                <span class="cmd-item" data-cmd="sortuda">sortuda</span>
+                <span class="cmd-item" data-cmd="azarada">azarada</span>
+                <span class="cmd-item" data-cmd="forte">forte</span>
+                <span class="cmd-item" data-cmd="fraca">fraca</span>
+                <span class="cmd-item" data-cmd="pegadora">pegadora</span>
+                <span class="cmd-item" data-cmd="otaria">otaria</span>
+                <span class="cmd-item" data-cmd="boba">boba</span>
+                <span class="cmd-item" data-cmd="nerd">nerd</span>
+                <span class="cmd-item" data-cmd="preguicosa">preguicosa</span>
+                <span class="cmd-item" data-cmd="trabalhadora">trabalhadora</span>
+                <span class="cmd-item" data-cmd="braba">braba</span>
+                <span class="cmd-item" data-cmd="linda">linda</span>
+                <span class="cmd-item" data-cmd="malandra">malandra</span>
+                <span class="cmd-item" data-cmd="simpatica">simpatica</span>
+                <span class="cmd-item" data-cmd="engracada">engracada</span>
+                <span class="cmd-item" data-cmd="charmosa">charmosa</span>
+                <span class="cmd-item" data-cmd="misteriosa">misteriosa</span>
+                <span class="cmd-item" data-cmd="carinhosa">carinhosa</span>
+                <span class="cmd-item" data-cmd="humilde">humilde</span>
+                <span class="cmd-item" data-cmd="ciumenta">ciumenta</span>
+                <span class="cmd-item" data-cmd="corajosa">corajosa</span>
+                <span class="cmd-item" data-cmd="covarde">covarde</span>
+                <span class="cmd-item" data-cmd="esperta">esperta</span>
+                <span class="cmd-item" data-cmd="chorona">chorona</span>
+                <span class="cmd-item" data-cmd="mito">mito</span>
+                <span class="cmd-item" data-cmd="gamer">gamer</span>
+                <span class="cmd-item" data-cmd="programadora">programadora</span>
+                <span class="cmd-item" data-cmd="visionaria">visionaria</span>
+                <span class="cmd-item" data-cmd="poderosa">poderosa</span>
+                <span class="cmd-item" data-cmd="vencedora">vencedora</span>
+            </div>
+        </div>
+
+        <!-- Ranks Masculinos -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon ranks"><i class="fas fa-trophy"></i></div>
+                <div><h3>Ranks Masculinos</h3><p>Rankings das zueiras</p></div>
+            </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="rankaura">rankaura</span>
+                <span class="cmd-item" data-cmd="rankgay">rankgay</span>
+                <span class="cmd-item" data-cmd="rankburro">rankburro</span>
+                <span class="cmd-item" data-cmd="rankinteligente">rankinteligente</span>
+                <span class="cmd-item" data-cmd="rankotaku">rankotaku</span>
+                <span class="cmd-item" data-cmd="rankfiel">rankfiel</span>
+                <span class="cmd-item" data-cmd="rankinfiel">rankinfiel</span>
+                <span class="cmd-item" data-cmd="rankcorno">rankcorno</span>
+                <span class="cmd-item" data-cmd="rankgado">rankgado</span>
+                <span class="cmd-item" data-cmd="rankgostoso">rankgostoso</span>
+                <span class="cmd-item" data-cmd="rankrico">rankrico</span>
+                <span class="cmd-item" data-cmd="rankpobre">rankpobre</span>
+                <span class="cmd-item" data-cmd="rankforte">rankforte</span>
+                <span class="cmd-item" data-cmd="rankpegador">rankpegador</span>
+                <span class="cmd-item" data-cmd="rankmacho">rankmacho</span>
+                <span class="cmd-item" data-cmd="ranknerd">ranknerd</span>
+                <span class="cmd-item" data-cmd="ranktrabalhador">ranktrabalhador</span>
+                <span class="cmd-item" data-cmd="rankbrabo">rankbrabo</span>
+                <span class="cmd-item" data-cmd="ranklindo">ranklindo</span>
+                <span class="cmd-item" data-cmd="rankmalandro">rankmalandro</span>
+                <span class="cmd-item" data-cmd="rankengracado">rankengracado</span>
+                <span class="cmd-item" data-cmd="rankcharmoso">rankcharmoso</span>
+                <span class="cmd-item" data-cmd="rankvisionario">rankvisionario</span>
+                <span class="cmd-item" data-cmd="rankpoderoso">rankpoderoso</span>
+                <span class="cmd-item" data-cmd="rankvencedor">rankvencedor</span>
+            </div>
+        </div>
+
+        <!-- Ranks Femininos -->
+        <div class="category-card glass fade-up">
+            <div class="category-header">
+                <div class="category-icon ranks"><i class="fas fa-trophy"></i></div>
+                <div><h3>Ranks Femininos</h3><p>Rankings das zueiras</p></div>
+            </div>
+            <div class="commands-list">
+                <span class="cmd-item" data-cmd="rankaura">rankaura</span>
+                <span class="cmd-item" data-cmd="ranklesbica">ranklesbica</span>
+                <span class="cmd-item" data-cmd="rankburra">rankburra</span>
+                <span class="cmd-item" data-cmd="rankinteligente">rankinteligente</span>
+                <span class="cmd-item" data-cmd="rankotaku">rankotaku</span>
+                <span class="cmd-item" data-cmd="rankfiel">rankfiel</span>
+                <span class="cmd-item" data-cmd="rankinfiel">rankinfiel</span>
+                <span class="cmd-item" data-cmd="rankcorna">rankcorna</span>
+                <span class="cmd-item" data-cmd="rankgada">rankgada</span>
+                <span class="cmd-item" data-cmd="rankgostosa">rankgostosa</span>
+                <span class="cmd-item" data-cmd="rankrica">rankrica</span>
+                <span class="cmd-item" data-cmd="rankpobre">rankpobre</span>
+                <span class="cmd-item" data-cmd="rankforte">rankforte</span>
+                <span class="cmd-item" data-cmd="rankpegadora">rankpegadora</span>
+                <span class="cmd-item" data-cmd="ranknerd">ranknerd</span>
+                <span class="cmd-item" data-cmd="ranktrabalhadora">ranktrabalhadora</span>
+                <span class="cmd-item" data-cmd="rankbraba">rankbraba</span>
+                <span class="cmd-item" data-cmd="ranklinda">ranklinda</span>
+                <span class="cmd-item" data-cmd="rankmalandra">rankmalandra</span>
+                <span class="cmd-item" data-cmd="rankengracada">rankengracada</span>
+                <span class="cmd-item" data-cmd="rankcharmosa">rankcharmosa</span>
+                <span class="cmd-item" data-cmd="rankvisionaria">rankvisionaria</span>
+                <span class="cmd-item" data-cmd="rankpoderosa">rankpoderosa</span>
+                <span class="cmd-item" data-cmd="rankvencedora">rankvencedora</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-img"><img src="/logousk1.png" alt="Logo"></div>
+                <span>Udesaken</span>
+            </a>
+            <p>O futuro da sua comunidade. Alta performance e ferramentas exclusivas.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navegação</h4>
+            <div class="footer-links">
+                <a href="/"><i class="fas fa-home"></i> Início</a>
+                <a href="/equipe/"><i class="fas fa-users"></i> Equipe</a>
+                <a href="/parcerias/"><i class="fas fa-handshake"></i> Parcerias</a>
+                <a href="/store/"><i class="fas fa-store"></i> Loja</a>
+                <a href="/termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Fale Conosco</h4>
+            <div class="footer-links">
+                <a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a>
+                <a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Udesaken Group &copy; 2026 &bull; Todos os direitos reservados</p>
+    </div>
+</footer>
+
+<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// Canvas Universe (mesmo código das outras páginas)
+(function() {
+    const canvas = document.getElementById('universe-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles;
+
+    const BH = {
+        get x() { return W * 0.5; },
+        get y() { return H * 0.82; },
+        get r() { return Math.min(W, H) * 0.10; },
+        diskInner: 1.5,
+        diskOuter: 3.8,
+        angle: 0
+    };
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        particles = [];
+        const n = Math.min(Math.floor(W / 20), 80);
+        for (let i = 0; i < n; i++) {
+            particles.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1 + 0.3
             });
+        }
+    }
+
+    function drawBackDisk(bx, by, R) {
+        const outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        const ag = ctx.createRadialGradient(0, -R * .18, R * BH.diskInner * .5, 0, 0, outer * .85);
+        ag.addColorStop(0, 'rgba(255,220,100,0.4)');
+        ag.addColorStop(0.4, 'rgba(255,140,20,0.2)');
+        ag.addColorStop(1, 'rgba(200,60,0,0)');
+        ctx.beginPath();
+        ctx.ellipse(0, -R * .22, outer * .88, R * .22, 0, Math.PI, 0);
+        ctx.fillStyle = ag;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawAccretionDisk(bx, by, R, angle) {
+        const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        ctx.rotate(angle);
+        ctx.scale(1, 0.28);
+        const g = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
+        g.addColorStop(0, 'rgba(255,140,0,0)');
+        g.addColorStop(0.2, 'rgba(255,200,80,0.4)');
+        g.addColorStop(0.5, 'rgba(255,255,220,0.7)');
+        g.addColorStop(0.8, 'rgba(200,60,0,0.3)');
+        g.addColorStop(1, 'rgba(100,20,0,0)');
+        ctx.beginPath();
+        ctx.arc(0, 0, outer, 0, Math.PI * 2);
+        ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawBlackHole(bx, by, R) {
+        const glow = ctx.createRadialGradient(bx, by, R * .6, bx, by, R * 2);
+        glow.addColorStop(0, 'rgba(255,120,0,0.12)');
+        glow.addColorStop(0.4, 'rgba(180,60,0,0.05)');
+        glow.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(bx, by, R * 2, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+        
+        const sh = ctx.createRadialGradient(bx, by * .999, R * .1, bx, by, R);
+        sh.addColorStop(0, '#000');
+        sh.addColorStop(0.85, '#000');
+        sh.addColorStop(1, 'rgba(0,0,0,0.85)');
+        ctx.beginPath();
+        ctx.arc(bx, by, R, 0, Math.PI * 2);
+        ctx.fillStyle = sh;
+        ctx.fill();
+    }
+
+    function gravity(p) {
+        const dx = BH.x - p.x, dy = BH.y - p.y, d = Math.hypot(dx, dy);
+        if (d < BH.r * 5 && d > BH.r * 1.2) {
+            const f = 0.0001 * (BH.r * 5 / d);
+            p.vx += (dx / d) * f;
+            p.vy += (dy / d) * f;
+        }
+        if (d < BH.r * 1.15) {
+            p.x = Math.random() * W;
+            p.y = Math.random() * H * .6;
+            p.vx = (Math.random() - .5) * .3;
+            p.vy = (Math.random() - .5) * .3;
+        }
+    }
+
+    let t = 0;
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        t += 16;
+        BH.angle = t * 0.00015;
+        drawBackDisk(BH.x, BH.y, BH.r);
+        drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
+        drawBlackHole(BH.x, BH.y, BH.r);
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            gravity(p);
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+})();
+
+// Navbar
+(function() {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = menu.classList.toggle('open');
+        toggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target)) menu.classList.remove('open');
+    });
+})();
+
+// Glass shimmer
+document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.glass, .category-card').forEach(el => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+});
+
+// Fade up observer
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Search functionality
+const searchInput = document.getElementById('search-input');
+const cmdItems = document.querySelectorAll('.cmd-item');
+const categoryCards = document.querySelectorAll('.category-card');
+
+function showToast(message) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="fas fa-copy"></i> ${message}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+}
+
+// Copy command to clipboard
+cmdItems.forEach(item => {
+    item.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        let cmd = item.getAttribute('data-cmd') || item.innerText;
+        cmd = cmd.split(' ')[0];
+        const fullCmd = `7${cmd}`;
+        try {
+            await navigator.clipboard.writeText(fullCmd);
+            const originalText = item.innerText;
+            item.innerText = '✓ Copiado!';
+            setTimeout(() => item.innerText = originalText, 1500);
+            showToast(`Comando ${fullCmd} copiado!`);
+        } catch (err) {
+            showToast('Use Ctrl+C para copiar');
+        }
+    });
+});
+
+// Search filter
+searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    
+    if (searchTerm === '') {
+        categoryCards.forEach(card => card.style.display = 'block');
+        cmdItems.forEach(item => item.classList.remove('highlight'));
+        return;
+    }
+    
+    let anyMatch = false;
+    
+    categoryCards.forEach(card => {
+        const commands = card.querySelectorAll('.cmd-item');
+        let cardHasMatch = false;
+        
+        commands.forEach(cmd => {
+            const cmdText = cmd.innerText.toLowerCase();
+            const isMatch = cmdText.includes(searchTerm);
+            if (isMatch) {
+                cmd.classList.add('highlight');
+                cardHasMatch = true;
+                anyMatch = true;
+            } else {
+                cmd.classList.remove('highlight');
+            }
         });
-    </script>
+        
+        card.style.display = cardHasMatch ? 'block' : 'none';
+    });
+    
+    if (!anyMatch && searchTerm !== '') {
+        let noResultsMsg = document.getElementById('no-results-msg');
+        if (!noResultsMsg) {
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'no-results-msg';
+            noResultsMsg.className = 'text-center py-8';
+            noResultsMsg.innerHTML = `<i class="fas fa-search" style="font-size:2rem;opacity:0.3;margin-bottom:10px;display:block;"></i><p style="color:var(--text-dim);">Nenhum comando encontrado para "${searchTerm}"</p>`;
+            document.getElementById('categories').appendChild(noResultsMsg);
+        } else {
+            noResultsMsg.style.display = 'block';
+            noResultsMsg.innerHTML = `<i class="fas fa-search" style="font-size:2rem;opacity:0.3;margin-bottom:10px;display:block;"></i><p style="color:var(--text-dim);">Nenhum comando encontrado para "${searchTerm}"</p>`;
+        }
+    } else {
+        const noResultsMsg = document.getElementById('no-results-msg');
+        if (noResultsMsg) noResultsMsg.style.display = 'none';
+    }
+});
+
+// Favicon
+(function() {
+    const l = document.createElement('link');
+    l.type = 'image/png';
+    l.rel = 'shortcut icon';
+    l.href = '/logousk.png';
+    document.head.appendChild(l);
+})();
+</script>
 </body>
 </html>

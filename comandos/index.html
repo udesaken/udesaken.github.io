@@ -1,155 +1,736 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="scroll-smooth">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Comandos | Udesaken Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Comandos | Udesaken Group</title>
+    <meta name="description" content="Lista completa de comandos do bot Udesaken. Moderação, Gold/RPG, utilidades e muito mais.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Comandos | Udesaken Group">
+    <meta property="og:description" content="Lista completa de comandos do bot Udesaken.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
     
-    <link rel="stylesheet" href="../style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { gold: '#C6A87C', dark: '#050505' }
-                    },
-                    letterSpacing: { tight: '-0.02em' }
-                }
-            }
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --text-dim: #444444;
+            --amber: #ff8c00;
+            --amber-light: #ffb347;
+            --gold: #ffd700;
+            --cyan: #00e5ff;
+            --teal: #00d4aa;
+            --glass-bg: rgba(12,12,12,0.62);
+            --glass-border: rgba(255,255,255,0.07);
+            --glass-border-hover: rgba(255,255,255,0.22);
+            --glass-blur: 28px;
+            --glass-shadow: 0 8px 40px rgba(0,0,0,0.85);
+            --z-canvas: 0;
+            --z-base: 10;
+            --z-nav: 999;
         }
-    </script>
+
+        html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+        @media (max-width: 768px) { html { font-size: 14px; } }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 5px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
+        ::selection { background: rgba(255,140,0,0.2); color: #fff; }
+
+        #universe-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: var(--z-canvas);
+            pointer-events: none;
+            background: #000;
+        }
+
+        .text-gradient {
+            background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-amber {
+            background: linear-gradient(135deg, #ffd080 0%, #ff8c00 60%, #e05500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease;
+        }
+
+        .glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.055), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass:hover::before { opacity: 1; }
+        .glass:hover { transform: translateY(-3px); border-color: var(--glass-border-hover); }
+        .glass > * { position: relative; z-index: 1; }
+
+        /* Navbar */
+        #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; }
+        #navbar nav {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            background: rgba(8,8,8,0.75); backdrop-filter: blur(30px) saturate(120%);
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+        #navbar.scrolled nav { background: rgba(0,0,0,0.92); border-color: rgba(255,255,255,0.13); }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .nav-logo-img { width: 28px; height: 28px; border-radius: 8px; overflow: hidden; background: #000; }
+        .nav-logo-img img { width: 100%; height: 100%; object-fit: cover; }
+        .nav-logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
+        .nav-links { display: flex; align-items: center; gap: 4px; }
+        .nav-link { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: color 0.25s, background 0.25s; }
+        .nav-link:hover { color: #fff; background: rgba(255,255,255,0.07); }
+        .badge-novo { display: inline-flex; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.3); color: var(--amber); padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; }
+        .nav-store-btn { display: flex; align-items: center; gap: 6px; padding: 6px 14px; background: #fff; color: #000; border-radius: 9px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: box-shadow 0.3s; }
+        #menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; padding: 6px; }
+        #mobile-menu { position: absolute; top: 68px; left: 20px; width: calc(100% - 40px); border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(4,4,4,0.97); backdrop-filter: blur(20px); z-index: var(--z-nav); transform: translateY(-12px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; }
+        #mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .mob-link { display: flex; align-items: center; gap: 10px; padding: 12px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; }
+        .mob-link:hover { color: #fff; }
+        .mob-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 0 16px; }
+
+        /* Hero */
+        #hero {
+            position: relative;
+            z-index: var(--z-base);
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+        @media (max-width: 768px) { #hero { padding: 100px 20px 40px; } }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(12px);
+            margin-bottom: 24px;
+        }
+        .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; animation: dot-pulse 2.5s ease-in-out infinite; }
+        @keyframes dot-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+        .hero-badge span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+        
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .hero-sub {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Categories Grid */
+        #categories {
+            position: relative;
+            z-index: var(--z-base);
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .category-card {
+            padding: 32px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .category-card:hover .category-icon {
+            transform: scale(1.08);
+        }
+        .category-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .category-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .category-stats {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .stat-badge {
+            font-size: 0.65rem;
+            background: rgba(255,255,255,0.08);
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: var(--text-muted);
+        }
+        
+        /* Icon colors per category */
+        .cat-gold .category-icon { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.08)); border: 1px solid rgba(255,215,0,0.3); color: var(--gold); }
+        .cat-mod .category-icon { background: linear-gradient(135deg, rgba(74,222,128,0.15), rgba(34,197,94,0.08)); border: 1px solid rgba(74,222,128,0.3); color: #4ade80; }
+        .cat-fun .category-icon { background: linear-gradient(135deg, rgba(192,132,252,0.15), rgba(168,85,247,0.08)); border: 1px solid rgba(192,132,252,0.3); color: #c084fc; }
+        .cat-members .category-icon { background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(59,130,246,0.08)); border: 1px solid rgba(96,165,250,0.3); color: #60a5fa; }
+        .cat-family .category-icon { background: linear-gradient(135deg, rgba(255,71,87,0.15), rgba(220,38,38,0.08)); border: 1px solid rgba(255,71,87,0.3); color: #ff4757; }
+        .cat-pets .category-icon { background: linear-gradient(135deg, rgba(230,126,34,0.15), rgba(249,115,22,0.08)); border: 1px solid rgba(230,126,34,0.3); color: #e67e22; }
+        .cat-download .category-icon { background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(41,128,185,0.08)); border: 1px solid rgba(52,152,219,0.3); color: #3498db; }
+        .cat-sticker .category-icon { background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(39,174,96,0.08)); border: 1px solid rgba(46,204,113,0.3); color: #2ecc71; }
+        .cat-ia .category-icon { background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,184,212,0.08)); border: 1px solid rgba(0,229,255,0.3); color: #00e5ff; }
+        .cat-alter .category-icon { background: linear-gradient(135deg, rgba(255,105,180,0.15), rgba(236,64,122,0.08)); border: 1px solid rgba(255,105,180,0.3); color: #ff69b4; }
+        .cat-tools .category-icon { background: linear-gradient(135deg, rgba(0,212,170,0.15), rgba(0,150,136,0.08)); border: 1px solid rgba(0,212,170,0.3); color: #00d4aa; }
+        .cat-owner .category-icon { background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,200,200,0.05)); border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+
+        /* Stats Row */
+        .stats-row {
+            position: relative;
+            z-index: var(--z-base);
+            max-width: 1100px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+        }
+        .stat-card {
+            padding: 16px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--amber);
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: var(--z-base);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.95) 70%);
+            backdrop-filter: blur(10px);
+            padding: 48px 20px 32px;
+        }
+        .footer-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            gap: 32px;
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+        .footer-brand p { font-size: 0.8rem; color: var(--text-dim); line-height: 1.6; max-width: 260px; margin-top: 12px; }
+        .footer-col h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-dim); text-decoration: none; transition: color 0.25s; }
+        .footer-links a:hover { color: #fff; }
+        .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+        .footer-bottom p { font-size: 0.7rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-store-btn { display: none; }
+            #menu-toggle { display: flex; align-items: center; }
+            .categories-grid { grid-template-columns: 1fr; gap: 16px; }
+        }
+
+        #wa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25D366;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            animation: wa-pop 0.5s 1.5s both;
+        }
+        @keyframes wa-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+        @media (hover: hover) { #wa-float:hover { transform: scale(1.1); } }
+
+        .badge-em-breve {
+            background: rgba(255,140,0,0.2);
+            border: 1px solid rgba(255,140,0,0.4);
+            color: var(--amber);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+        }
+    </style>
 </head>
-<body class="antialiased selection:bg-brand-gold/30 selection:text-white">
+<body>
 
-    <div class="liquid-container">
-        <div class="liquid-orb orb-1"></div>
-        <div class="liquid-orb orb-2"></div>
-        <div class="liquid-orb orb-3"></div>
-    </div>
+<canvas id="universe-canvas"></canvas>
 
-    <nav class="fixed w-full z-50 top-0 nav-liquid transition-all duration-300" id="navbar">
-        <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="../" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-lg overflow-hidden border border-white/10 bg-black">
-                     <img src="../uskcoroa.png" alt="Logo" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition">
-                </div>
-                <span class="text-lg font-bold tracking-tight text-main group-hover:text-gold transition">
-                    Udesaken <span class="text-[10px] text-gray-500 ml-1 uppercase font-black">HUB</span>
-                </span>
+<div id="navbar">
+    <nav>
+        <a href="/" class="nav-logo">
+            <div class="nav-logo-img"><img src="/logousk1.png" alt="Logo Udesaken"></div>
+            <span>Udesaken</span>
+        </a>
+        <div class="nav-links">
+            <a href="/equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
+            <a href="/parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
+            <a href="/store/" class="nav-link"><i class="fas fa-store"></i> Loja</a>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="/store/" class="nav-store-btn">
+                <i class="fas fa-store"></i>
+                <span>Loja</span>
             </a>
-            
-            <div class="flex items-center gap-6">
-                <button id="theme-btn" class="theme-toggle" aria-label="Mudar Tema" style="padding: 8px;">
-                    <i class="fas fa-moon text-sm"></i>
-                </button>
-                <a href="../" class="text-xs font-bold text-muted hover:text-main uppercase tracking-widest transition flex items-center gap-2">
-                    <i class="fas fa-arrow-left"></i> Voltar
-                </a>
-            </div>
+            <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
+    <div id="mobile-menu">
+        <a href="/" class="mob-link"><i class="fas fa-home"></i> Início</a>
+        <div class="mob-divider"></div>
+        <a href="/equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
+        <div class="mob-divider"></div>
+        <a href="/parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
+        <div class="mob-divider"></div>
+        <a href="/store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
+    </div>
+</div>
 
-    <section class="pt-32 pb-12 text-center relative">
-        <div class="max-w-4xl mx-auto px-6 fade-up">
-            <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass-panel">
-                <i class="fas fa-layer-group text-gold text-[10px]"></i>
-                <span class="text-[10px] font-bold text-main tracking-widest uppercase">Documentação Oficial</span>
-            </div>
-
-            <h1 class="text-4xl md:text-6xl font-black text-main mb-6 tracking-tighter leading-tight">
-                Central de <br>
-                <span class="text-gradient-gold">COMANDOS.</span>
-            </h1>
-            
-            <p class="text-lg text-muted max-w-xl mx-auto font-medium">
-                Explore as categorias e domine todas as funções do bot.
-            </p>
+<section id="hero">
+    <div class="fade-up">
+        <div class="hero-badge">
+            <div class="hero-dot"></div>
+            <span>Sistema Operante</span>
         </div>
-    </section>
+        <h1 class="hero-title">
+            Central de <span class="text-amber">Comandos</span>
+        </h1>
+        <p class="hero-sub">
+            Domine todas as funcionalidades do bot. Explore as categorias e descubra cada comando.
+        </p>
+    </div>
+</section>
 
-    <section class="pb-32 relative z-10">
-        <div class="max-w-[1200px] mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
-                <a href="brincadeiras.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #bc13fe;">
-                    <i class="fas fa-gamepad text-4xl mb-6 text-[#bc13fe] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Brincadeiras</h3>
-                    <p class="text-xs text-muted font-medium">Jogos, diversão e interatividade.</p>
-                </a>
+<div class="stats-row fade-up">
+    <div class="stat-card glass"><div class="stat-number">12</div><div class="stat-label">Categorias</div></div>
+    <div class="stat-card glass"><div class="stat-number">1000+</div><div class="stat-label">Comandos</div></div>
+    <div class="stat-card glass"><div class="stat-number">24/7</div><div class="stat-label">Disponível</div></div>
+    <div class="stat-card glass"><div class="stat-number">⚡</div><div class="stat-label">Alta Performance</div></div>
+</div>
 
-                <a href="admin.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #ff69b4;">
-                    <i class="fas fa-shield-alt text-4xl mb-6 text-[#ff69b4] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Administração</h3>
-                    <p class="text-xs text-muted font-medium">Gestão avançada de grupos.</p>
-                </a>
+<section id="categories">
+    <div class="categories-grid fade-up">
+        <!-- Gold / RPG -->
+        <a href="economia.html" class="category-card glass cat-gold">
+            <div class="category-icon"><i class="fas fa-crown"></i></div>
+            <h3>Gold / RPG</h3>
+            <p>Sistema de níveis, experiência, moedas, loja e batalhas.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-chart-line"></i> 50+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-gem"></i> Rpg</span>
+            </div>
+        </a>
 
-                <a href="economia.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #FFD700;">
-                    <i class="fas fa-coins text-4xl mb-6 text-[#FFD700] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Economia</h3>
-                    <p class="text-xs text-muted font-medium">Sistema de banco e ranking.</p>
-                </a>
+        <!-- Moderação -->
+        <a href="admin.html" class="category-card glass cat-mod">
+            <div class="category-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Moderação</h3>
+            <p>Administração avançada, warns, bans, mute e limpeza.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-gavel"></i> 80+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-robot"></i> Automático</span>
+            </div>
+        </a>
 
-                <a href="premium.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #fff;">
-                    <i class="fas fa-gem text-4xl mb-6 text-white group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Premium</h3>
-                    <p class="text-xs text-muted font-medium">Utilidades exclusivas VIP.</p>
-                </a>
+        <!-- Diversão / Brincadeiras -->
+        <a href="brincadeiras.html" class="category-card glass cat-fun">
+            <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+            <h3>Brincadeiras</h3>
+            <p>Jogos, interações, zueiras e ranks engraçados.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-dice"></i> 150+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-smile"></i> Entretenimento</span>
+            </div>
+        </a>
 
-                <a href="familia.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #ff4757;">
-                    <i class="fas fa-heart text-4xl mb-6 text-[#ff4757] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Família</h3>
-                    <p class="text-xs text-muted font-medium">Relacionamentos e árvore genealógica.</p>
-                </a>
+        <!-- Membros / Perfil -->
+        <a href="membros.html" class="category-card glass cat-members">
+            <div class="category-icon"><i class="fas fa-users"></i></div>
+            <h3>Membros</h3>
+            <p>Perfil, ranking, stats do bot e informações do servidor.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-chart-simple"></i> 30+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-eye"></i> Consultas</span>
+            </div>
+        </a>
 
-                <a href="membros.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #00e5ff;">
-                    <i class="fas fa-users text-4xl mb-6 text-[#00e5ff] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Membros</h3>
-                    <p class="text-xs text-muted font-medium">Perfil, status e ranks sociais.</p>
-                </a>
+        <!-- Família -->
+        <a href="familia.html" class="category-card glass cat-family">
+            <div class="category-icon"><i class="fas fa-heart"></i></div>
+            <h3>Família</h3>
+            <p>Namoro, casamento, família, amantes e trisal.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-ring"></i> 35+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-tree"></i> Social</span>
+            </div>
+        </a>
 
-                <a href="pets.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #e67e22;">
-                    <i class="fas fa-paw text-4xl mb-6 text-[#e67e22] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Pets</h3>
-                    <p class="text-xs text-muted font-medium">Adote e cuide do seu bichinho.</p>
-                </a>
+        <!-- Pets -->
+        <a href="pets.html" class="category-card glass cat-pets">
+            <div class="category-icon"><i class="fas fa-paw"></i></div>
+            <h3>Pets</h3>
+            <p>Adote, alimente, brinque e evolua seu pet virtual.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-dog"></i> 15+ cmds</span>
+                <span class="stat-badge"><i class="fas fa-heartbeat"></i> Cuide</span>
+            </div>
+        </a>
 
-                <a href="downloads.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #3498db;">
-                    <i class="fas fa-download text-4xl mb-6 text-[#3498db] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Downloads</h3>
-                    <p class="text-xs text-muted font-medium">Mídia, vídeos e pesquisas.</p>
-                </a>
+        <!-- Downloads / Mídia -->
+        <a href="downloads.html" class="category-card glass cat-download">
+            <div class="category-icon"><i class="fas fa-download"></i></div>
+            <h3>Downloads</h3>
+            <p>Baixe vídeos, músicas e conteúdos de redes sociais.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fab fa-youtube"></i> YouTube</span>
+                <span class="stat-badge"><i class="fab fa-instagram"></i> Instagram</span>
+            </div>
+        </a>
 
-                <a href="figurinhas.html" class="glass-panel p-8 rounded-[30px] flex flex-col items-center text-center group fade-up" style="border-bottom: 3px solid #2ecc71;">
-                    <i class="fas fa-sticky-note text-4xl mb-6 text-[#2ecc71] group-hover:scale-110 transition duration-500"></i>
-                    <h3 class="text-lg font-bold text-main mb-2">Figurinhas</h3>
-                    <p class="text-xs text-muted font-medium">Criação de stickers e memes.</p>
-                </a>
+        <!-- Figurinhas -->
+        <a href="figurinhas.html" class="category-card glass cat-sticker">
+            <div class="category-icon"><i class="fas fa-sticky-note"></i></div>
+            <h3>Figurinhas</h3>
+            <p>Crie figurinhas personalizadas a partir de imagens/vídeos.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-image"></i> Imagem</span>
+                <span class="stat-badge"><i class="fas fa-video"></i> Vídeo</span>
+            </div>
+        </a>
 
+        <!-- Alteradores -->
+        <a href="alteradores.html" class="category-card glass cat-alter" style="opacity:0.8;">
+            <div class="category-icon"><i class="fas fa-magic"></i></div>
+            <h3>Alteradores</h3>
+            <p>Efeitos em videos e audios.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-font"></i> Videos</span>
+                <span class="stat-badge"><i class="fas fa-palette"></i> Estilos</span>
+            </div>
+        </a>
+
+        <!-- Ferramentas -->
+        <a href="ferramentas.html" class="category-card glass cat-tools" style="opacity:0.8;">
+            <div class="category-icon"><i class="fas fa-toolbox"></i></div>
+            <h3>Ferramentas</h3>
+            <p>Utilidades diversas, conversores e geradores.</p>
+            <div class="category-stats">
+                <span class="stat-badge"><i class="fas fa-calculator"></i> Conversores</span>
+                <span class="stat-badge"><i class="fas fa-qrcode"></i> Geradores</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-img"><img src="/logousk1.png" alt="Logo"></div>
+                <span>Udesaken</span>
+            </a>
+            <p>O futuro da sua comunidade. Alta performance e ferramentas exclusivas.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navegação</h4>
+            <div class="footer-links">
+                <a href="/"><i class="fas fa-home"></i> Início</a>
+                <a href="/equipe/"><i class="fas fa-users"></i> Equipe</a>
+                <a href="/parcerias/"><i class="fas fa-handshake"></i> Parcerias</a>
+                <a href="/store/"><i class="fas fa-store"></i> Loja</a>
+                <a href="/termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
             </div>
         </div>
-    </section>
-
-    <footer class="py-16 border-t border-white/5 bg-black/20 relative z-10 glass-panel">
-        <div class="max-w-[1100px] mx-auto px-6 text-center">
-            <div class="flex flex-wrap justify-center gap-8 mb-12">
-                <a href="../equipe/" class="text-sm font-bold text-main hover:text-gold transition">Conhecer Equipe</a>
-                <a href="../termos/" class="text-sm font-bold text-muted hover:text-white transition">Termos de Uso</a>
+        <div class="footer-col">
+            <h4>Fale Conosco</h4>
+            <div class="footer-links">
+                <a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a>
+                <a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
             </div>
-            <div class="inline-block w-12 h-1 bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mb-6 opacity-30"></div>
-            <p class="text-[10px] text-muted font-black tracking-[0.2em] uppercase">
-                Udesaken Group &copy; 2026 • Todos os direitos reservados
-            </p>
         </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <p>Udesaken Group &copy; 2026 &bull; Todos os direitos reservados</p>
+    </div>
+</footer>
 
-    <script src="../script.js"></script>
+<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// Canvas Universe
+(function() {
+    const canvas = document.getElementById('universe-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, particles;
+
+    const BH = {
+        get x() { return W * 0.5; },
+        get y() { return H * 0.82; },
+        get r() { return Math.min(W, H) * 0.10; },
+        diskInner: 1.5,
+        diskOuter: 3.8,
+        angle: 0
+    };
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        particles = [];
+        const n = Math.min(Math.floor(W / 20), 80);
+        for (let i = 0; i < n; i++) {
+            particles.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                r: Math.random() * 1 + 0.3
+            });
+        }
+    }
+
+    function drawBackDisk(bx, by, R) {
+        const outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        const ag = ctx.createRadialGradient(0, -R * .18, R * BH.diskInner * .5, 0, 0, outer * .85);
+        ag.addColorStop(0, 'rgba(255,220,100,0.4)');
+        ag.addColorStop(0.4, 'rgba(255,140,20,0.2)');
+        ag.addColorStop(1, 'rgba(200,60,0,0)');
+        ctx.beginPath();
+        ctx.ellipse(0, -R * .22, outer * .88, R * .22, 0, Math.PI, 0);
+        ctx.fillStyle = ag;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawAccretionDisk(bx, by, R, angle) {
+        const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+        ctx.save();
+        ctx.translate(bx, by);
+        ctx.rotate(angle);
+        ctx.scale(1, 0.28);
+        const g = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
+        g.addColorStop(0, 'rgba(255,140,0,0)');
+        g.addColorStop(0.2, 'rgba(255,200,80,0.4)');
+        g.addColorStop(0.5, 'rgba(255,255,220,0.7)');
+        g.addColorStop(0.8, 'rgba(200,60,0,0.3)');
+        g.addColorStop(1, 'rgba(100,20,0,0)');
+        ctx.beginPath();
+        ctx.arc(0, 0, outer, 0, Math.PI * 2);
+        ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawBlackHole(bx, by, R) {
+        const glow = ctx.createRadialGradient(bx, by, R * .6, bx, by, R * 2);
+        glow.addColorStop(0, 'rgba(255,120,0,0.12)');
+        glow.addColorStop(0.4, 'rgba(180,60,0,0.05)');
+        glow.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(bx, by, R * 2, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+        
+        const sh = ctx.createRadialGradient(bx, by * .999, R * .1, bx, by, R);
+        sh.addColorStop(0, '#000');
+        sh.addColorStop(0.85, '#000');
+        sh.addColorStop(1, 'rgba(0,0,0,0.85)');
+        ctx.beginPath();
+        ctx.arc(bx, by, R, 0, Math.PI * 2);
+        ctx.fillStyle = sh;
+        ctx.fill();
+    }
+
+    function gravity(p) {
+        const dx = BH.x - p.x, dy = BH.y - p.y, d = Math.hypot(dx, dy);
+        if (d < BH.r * 5 && d > BH.r * 1.2) {
+            const f = 0.0001 * (BH.r * 5 / d);
+            p.vx += (dx / d) * f;
+            p.vy += (dy / d) * f;
+        }
+        if (d < BH.r * 1.15) {
+            p.x = Math.random() * W;
+            p.y = Math.random() * H * .6;
+            p.vx = (Math.random() - .5) * .3;
+            p.vy = (Math.random() - .5) * .3;
+        }
+    }
+
+    let t = 0;
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        t += 16;
+        BH.angle = t * 0.00015;
+        drawBackDisk(BH.x, BH.y, BH.r);
+        drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
+        drawBlackHole(BH.x, BH.y, BH.r);
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            gravity(p);
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > W) p.vx *= -1;
+            if (p.y < 0 || p.y > H) p.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+})();
+
+// Navbar
+(function() {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = menu.classList.toggle('open');
+        toggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target)) menu.classList.remove('open');
+    });
+})();
+
+// Glass shimmer effect
+document.addEventListener('mousemove', (e) => {
+    document.querySelectorAll('.glass, .category-card').forEach(el => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+});
+
+// Fade up observer
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Favicon
+(function() {
+    const l = document.createElement('link');
+    l.type = 'image/png';
+    l.rel = 'shortcut icon';
+    l.href = '/logousk.png';
+    document.head.appendChild(l);
+})();
+</script>
 </body>
 </html>
