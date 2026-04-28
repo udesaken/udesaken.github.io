@@ -387,12 +387,157 @@
             100% { top: 100vh; }
         }
 
+        /* ── NOTICE ── */
+        .notice-wrap {
+            width: 100%;
+            max-width: 680px;
+            margin-top: 100px;
+            opacity: 0;
+            animation: fadeIn 2s 3.6s forwards;
+        }
+
+        .notice-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .notice-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            letter-spacing: 0.4em;
+            color: rgba(255,255,255,0.18);
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 4px 10px;
+        }
+
+        .notice-date {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.1);
+        }
+
+        .notice-box {
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: 36px 40px;
+            position: relative;
+            background: rgba(255,255,255,0.015);
+        }
+
+        .notice-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 30px; height: 1px;
+            background: rgba(255,255,255,0.25);
+        }
+
+        .notice-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 30px; height: 1px;
+            background: rgba(255,255,255,0.25);
+        }
+
+        .notice-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            letter-spacing: 0.35em;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .notice-body {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(14px, 1.8vw, 16px);
+            color: rgba(255,255,255,0.38);
+            line-height: 1.9;
+        }
+
+        .notice-body p + p {
+            margin-top: 18px;
+        }
+
+        .notice-body strong {
+            color: rgba(255,255,255,0.65);
+            font-weight: normal;
+        }
+
+        .notice-body em {
+            font-style: italic;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .notice-redact {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            color: transparent;
+            user-select: none;
+            letter-spacing: 0.05em;
+            border-radius: 1px;
+            cursor: not-allowed;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .notice-redact:hover {
+            background: rgba(255,255,255,0.06);
+        }
+
+        .notice-footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .notice-sig-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .notice-sig-name {
+            font-family: 'IM Fell English', serif;
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .notice-sig-role {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            letter-spacing: 0.25em;
+            color: rgba(255,255,255,0.12);
+            text-transform: uppercase;
+        }
+
+        .notice-stamp {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.07);
+            text-align: right;
+            align-self: flex-end;
+        }
+
         /* responsive */
         @media (max-width: 600px) {
             .signal { padding: 16px 20px; }
             .foot { padding: 14px 20px; }
             .questions { margin-top: 60px; }
             .bottom-area { margin-top: 70px; }
+            .notice-wrap { margin-top: 60px; }
+            .notice-box { padding: 24px 22px; }
+            .notice-footer { flex-direction: column; gap: 14px; }
+            .notice-stamp { text-align: left; }
         }
     </style>
 </head>
@@ -459,6 +604,55 @@
             </div>
         </div>
 
+        <!-- NOTA OFICIAL -->
+        <div class="notice-wrap">
+            <div class="notice-header">
+                <span class="notice-tag">Comunicado Interno · Ref. USK/YZ-001</span>
+                <span class="notice-date" id="notice-date"></span>
+            </div>
+            <div class="notice-box">
+                <p class="notice-title">Encerramento de Operações — Nota Oficial</p>
+                <div class="notice-body">
+                    <p>
+                        Após deliberação interna do <strong>Conselho Udesaken</strong>, comunicamos formalmente que 
+                        as operações públicas da marca serão <strong>suspensas indefinidamente</strong> a partir desta data.
+                    </p>
+                    <p>
+                        A decisão não é de ordem técnica. Os servidores continuam ativos. 
+                        As estruturas, intactas. O que encerra é <em>outra coisa</em> — 
+                        algo que não cabe em comunicado.
+                    </p>
+                    <p>
+                        Motivos formais registrados: <span class="notice-redact">&nbsp;&nbsp;conflito de direção estratégica entre os fundadores&nbsp;&nbsp;</span>.
+                        Motivos reais: <span class="notice-redact">&nbsp;&nbsp;███████████ ████ ██ ████████ ████████&nbsp;&nbsp;</span>.
+                    </p>
+                    <p>
+                        Todos os projetos sob guarda da Udesaken — <strong>SSD, Toman, Dake Records</strong> e demais — 
+                        permanecem em estado de <em>espera</em>. Não encerrados. Não ativos. 
+                        Apenas... <strong>esperando</strong>.
+                    </p>
+                    <p>
+                        Agradecemos a cada pessoa que disse <em>"tá UsK, tá lindo"</em> e quis dizer isso de verdade. 
+                        Vocês sabem quem são. Nós também sabemos.
+                    </p>
+                    <p>
+                        O que acontece depois de Yz — <span class="notice-redact">&nbsp;&nbsp;não está autorizado a ser divulgado neste momento&nbsp;&nbsp;</span>.
+                    </p>
+                </div>
+                <div class="notice-footer">
+                    <div class="notice-sig-block">
+                        <span class="notice-sig-name">Y.X</span>
+                        <span class="notice-sig-role">Fundação Udesaken · Direção Geral</span>
+                    </div>
+                    <div class="notice-stamp">
+                        DOC #YZ-001<br>
+                        AUTENTICIDADE NÃO VERIFICÁVEL<br>
+                        𝐘.𝐗 — 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="bottom-area">
             <p class="sig-label">assinado</p>
             <p class="signature">𝐘.𝐗 &nbsp;—&nbsp; 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊 &nbsp;—&nbsp; 𝐘.𝐗</p>
@@ -472,6 +666,16 @@
     </div>
 
     <script>
+        // ── NOTICE DATE ──
+        const noticeDateEl = document.getElementById('notice-date');
+        if (noticeDateEl) {
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2,'0');
+            const mm = String(now.getMonth()+1).padStart(2,'0');
+            const yy = now.getFullYear();
+            noticeDateEl.textContent = `${dd}.${mm}.${yy}`;
+        }
+
         // ── TIMESTAMP ──
         const tsEl = document.getElementById('ts');
         function tick() {
