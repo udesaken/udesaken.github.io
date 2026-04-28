@@ -528,6 +528,83 @@
             align-self: flex-end;
         }
 
+        /* ── AURA NOTE ── */
+        .aura-wrap {
+            margin-top: 48px;
+        }
+
+        .aura-tag {
+            color: rgba(255,255,255,0.28) !important;
+            border-color: rgba(255,255,255,0.14) !important;
+            font-style: italic;
+        }
+
+        .aura-box {
+            border-color: rgba(255,255,255,0.1) !important;
+            background: transparent !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Soft glow that breathes */
+        .aura-orb {
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            top: -80px; right: -80px;
+            pointer-events: none;
+            animation: orbPulse 6s ease-in-out infinite;
+        }
+        @keyframes orbPulse {
+            0%,100% { transform: scale(1); opacity: 1; }
+            50%      { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .aura-title {
+            font-family: 'IM Fell English', serif !important;
+            font-style: italic !important;
+            font-size: 13px !important;
+            color: rgba(255,255,255,0.22) !important;
+            letter-spacing: 0.05em !important;
+            text-transform: none !important;
+            margin-bottom: 32px !important;
+        }
+
+        .aura-body {
+            font-size: clamp(15px, 2vw, 18px) !important;
+            color: rgba(255,255,255,0.5) !important;
+            line-height: 2 !important;
+        }
+
+        .aura-body strong {
+            color: rgba(255,255,255,0.85) !important;
+        }
+
+        .aura-body em {
+            color: rgba(255,255,255,0.4) !important;
+            font-style: italic;
+        }
+
+        .aura-closing {
+            margin-top: 28px !important;
+            color: rgba(255,255,255,0.3) !important;
+            font-size: clamp(14px, 1.8vw, 16px) !important;
+            line-height: 2.2 !important;
+        }
+
+        .aura-footer {
+            border-top-color: rgba(255,255,255,0.04) !important;
+        }
+
+        .aura-sig {
+            font-family: 'IM Fell English', serif !important;
+            font-style: italic;
+            font-size: 20px !important;
+            color: rgba(255,255,255,0.55) !important;
+            letter-spacing: 0.05em;
+        }
+
         /* responsive */
         @media (max-width: 600px) {
             .signal { padding: 16px 20px; }
@@ -538,6 +615,7 @@
             .notice-box { padding: 24px 22px; }
             .notice-footer { flex-direction: column; gap: 14px; }
             .notice-stamp { text-align: left; }
+            .aura-wrap { margin-top: 32px; }
         }
     </style>
 </head>
@@ -604,49 +682,57 @@
             </div>
         </div>
 
-        <!-- NOTA OFICIAL -->
-        <div class="notice-wrap">
+        <!-- NOTA 2 -->
+        <div class="notice-wrap" style="animation-delay: 4.2s;">
             <div class="notice-header">
-                <span class="notice-tag">Comunicado Interno · Ref. USK/YZ-001</span>
-                <span class="notice-date" id="notice-date"></span>
+                <span class="notice-tag">Adendo Não Solicitado · Ref. USK/YZ-002</span>
+                <span class="notice-date" id="notice-date-2"></span>
             </div>
-            <div class="notice-box">
-                <p class="notice-title">Encerramento de Operações — Nota Oficial</p>
-                <div class="notice-body">
+            <div class="notice-box" style="border-color: rgba(255,255,255,0.05); background: rgba(255,255,255,0.008);">
+                <p class="notice-title" style="color:rgba(255,255,255,0.18);">Sobre o Vazamento — Esclarecimento</p>
+                <div class="notice-body" style="color:rgba(255,255,255,0.28);">
                     <p>
-                        Após deliberação interna do <strong>Conselho Udesaken</strong>, comunicamos formalmente que 
-                        as operações públicas da marca serão <strong>suspensas indefinidamente</strong> a partir desta data.
+                        Esta nota não foi planejada. Alguém dentro falou o que não devia. 
+                        Isso chegou em lugares que não deveriam saber ainda. 
+                        Então agora todo mundo vai saber — do jeito certo.
                     </p>
                     <p>
-                        A decisão não é de ordem técnica. Os servidores continuam ativos. 
-                        As estruturas, intactas. O que encerra é <em>outra coisa</em> — 
-                        algo que não cabe em comunicado.
+                        Em <strong>março de 2026</strong>, um membro com acesso interno à estrutura da Udesaken 
+                        começou a distribuir arquivos privados. Não por malícia, dizem. 
+                        <em>Dizem.</em>
                     </p>
                     <p>
-                        Motivos formais registrados: <span class="notice-redact">&nbsp;&nbsp;conflito de direção estratégica entre os fundadores&nbsp;&nbsp;</span>.
-                        Motivos reais: <span class="notice-redact">&nbsp;&nbsp;███████████ ████ ██ ████████ ████████&nbsp;&nbsp;</span>.
+                        Os arquivos continham: registros de decisões internas, 
+                        rascunhos do que seria o <strong>Projeto Yz</strong>, 
+                        e uma conversa — <span class="notice-redact">&nbsp;&nbsp;datada de 14/02/2026, entre dois fundadores, sobre o fim&nbsp;&nbsp;</span>.
                     </p>
                     <p>
-                        Todos os projetos sob guarda da Udesaken — <strong>SSD, Toman, Dake Records</strong> e demais — 
-                        permanecem em estado de <em>espera</em>. Não encerrados. Não ativos. 
-                        Apenas... <strong>esperando</strong>.
+                        Não sabemos quantas pessoas leram. Não sabemos o que entenderam. 
+                        Sabemos que o que estava naqueles arquivos <strong>ainda não era pra existir</strong> — 
+                        não em forma de palavra, não em forma de data, não em forma de nome.
                     </p>
                     <p>
-                        Agradecemos a cada pessoa que disse <em>"tá UsK, tá lindo"</em> e quis dizer isso de verdade. 
-                        Vocês sabem quem são. Nós também sabemos.
+                        O membro em questão não foi expulso. Não foi punido. 
+                        Foi <em>esquecido</em> — que é pior.
                     </p>
                     <p>
-                        O que acontece depois de Yz — <span class="notice-redact">&nbsp;&nbsp;não está autorizado a ser divulgado neste momento&nbsp;&nbsp;</span>.
+                        Esta nota encerra qualquer especulação sobre a origem do Yz. 
+                        Ele não nasceu de uma crise. Não nasceu de uma briga. 
+                        Nasceu de uma <strong>decisão tomada em silêncio</strong>, 
+                        muito antes de qualquer um perceber que algo estava mudando.
+                    </p>
+                    <p style="color:rgba(255,255,255,0.14); font-style:italic;">
+                        Quem precisar entender, vai entender. Quem não entender — também faz parte.
                     </p>
                 </div>
                 <div class="notice-footer">
                     <div class="notice-sig-block">
-                        <span class="notice-sig-name">Y.X</span>
-                        <span class="notice-sig-role">Fundação Udesaken · Direção Geral</span>
+                        <span class="notice-sig-name" style="color:rgba(255,255,255,0.25);">— sem assinatura —</span>
+                        <span class="notice-sig-role">Origem: desconhecida · Autoria: não confirmada</span>
                     </div>
                     <div class="notice-stamp">
-                        DOC #YZ-001<br>
-                        AUTENTICIDADE NÃO VERIFICÁVEL<br>
+                        DOC #YZ-002<br>
+                        ADICIONADO SEM AUTORIZAÇÃO<br>
                         𝐘.𝐗 — 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊
                     </div>
                 </div>
@@ -668,12 +754,14 @@
     <script>
         // ── NOTICE DATE ──
         const noticeDateEl = document.getElementById('notice-date');
+        const noticeDateEl2 = document.getElementById('notice-date-2');
         if (noticeDateEl) {
             const now = new Date();
             const dd = String(now.getDate()).padStart(2,'0');
             const mm = String(now.getMonth()+1).padStart(2,'0');
             const yy = now.getFullYear();
             noticeDateEl.textContent = `${dd}.${mm}.${yy}`;
+            if (noticeDateEl2) noticeDateEl2.textContent = `${dd}.${mm}.${yy}`;
         }
 
         // ── TIMESTAMP ──
