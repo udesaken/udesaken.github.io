@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yz — Y.X">
+    <meta property="og:title" content="Yz">
+    <meta property="og:description" content="𝐘.𝐗 - 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊">
+    <title>Yz</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Syne:wght@400;700;800&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --void: #000000;
+            --ash: #0a0a0a;
+            --smoke: #111111;
+            --white: #ffffff;
+            --dim: rgba(255,255,255,0.06);
+            --faint: rgba(255,255,255,0.03);
+            --mid: rgba(255,255,255,0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            background: var(--void);
+            color: var(--white);
+            font-family: 'Syne', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: default;
+        }
+
+        ::-webkit-scrollbar { width: 2px; background: #000; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; }
+
+        /* ── NOISE GRAIN ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            animation: grain 0.4s steps(1) infinite;
+        }
+
+        @keyframes grain {
+            0%  { background-position: 0 0; }
+            10% { background-position: -5% -10%; }
+            20% { background-position: -15% 5%; }
+            30% { background-position: 7% -25%; }
+            40% { background-position: -5% 25%; }
+            50% { background-position: -15% 10%; }
+            60% { background-position: 15% 0%; }
+            70% { background-position: 0% 15%; }
+            80% { background-position: 3% 35%; }
+            90% { background-position: -10% 10%; }
+        }
+
+        /* ── CANVAS ── */
+        #c {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── MAIN WRAPPER ── */
+        .page {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+        }
+
+        /* ── HEADER SIGNAL ── */
+        .signal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 32px;
+            z-index: 100;
+        }
+
+        .signal-left {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .signal-right {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.15);
+            letter-spacing: 0.2em;
+        }
+
+        /* ── BLINKING CURSOR ── */
+        .blink {
+            display: inline-block;
+            width: 6px; height: 10px;
+            background: rgba(255,255,255,0.4);
+            animation: blink 1.2s step-start infinite;
+            vertical-align: middle;
+            margin-left: 3px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ── GLITCH LINE ── */
+        .glitch-line {
+            position: fixed;
+            left: 0; right: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.04);
+            animation: lineSlide 8s linear infinite;
+            z-index: 5;
+            pointer-events: none;
+        }
+        @keyframes lineSlide {
+            0%   { top: -2px; opacity: 0; }
+            5%   { opacity: 1; }
+            95%  { opacity: 0.3; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .eyebrow {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            letter-spacing: 0.5em;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeIn 2s 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .title-yz {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(120px, 22vw, 260px);
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.9);
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            animation: titleReveal 2.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            user-select: none;
+        }
+
+        @keyframes titleReveal {
+            0%   { opacity: 0; transform: translateY(40px) skewY(3deg); filter: blur(8px); }
+            100% { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
+        }
+
+        .title-yz::after {
+            content: 'Yz';
+            position: absolute;
+            inset: 0;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+            transform: translate(3px, 3px);
+            z-index: -1;
+        }
+
+        /* Glitch effect on hover */
+        .title-yz:hover {
+            animation: glitch 0.3s ease forwards;
+        }
+        @keyframes glitch {
+            0%  { text-shadow: 2px 0 rgba(255,0,80,0.5), -2px 0 rgba(0,200,255,0.5); transform: skewX(0deg); }
+            20% { text-shadow: -3px 0 rgba(255,0,80,0.5), 3px 0 rgba(0,200,255,0.5); transform: skewX(-2deg); }
+            40% { text-shadow: 3px 0 rgba(255,0,80,0.5), -3px 0 rgba(0,200,255,0.5); transform: skewX(1deg); }
+            60% { text-shadow: -2px 0 rgba(255,0,80,0.5), 2px 0 rgba(0,200,255,0.5); transform: skewX(-1deg); }
+            80% { text-shadow: 1px 0 rgba(255,0,80,0.2), -1px 0 rgba(0,200,255,0.2); transform: skewX(0.5deg); }
+            100%{ text-shadow: none; transform: skewX(0deg); }
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            margin: 48px auto;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+
+        .statement {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.35);
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 2s 2.2s forwards;
+        }
+
+        .statement em {
+            color: rgba(255,255,255,0.7);
+            font-style: normal;
+        }
+
+        /* ── QUESTION SECTION ── */
+        .questions {
+            margin-top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
+            max-width: 700px;
+            opacity: 0;
+            animation: fadeIn 2s 3s forwards;
+        }
+
+        .q-item {
+            display: flex;
+            align-items: center;
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            gap: 20px;
+            cursor: default;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .q-item:first-child { border-top: 1px solid rgba(255,255,255,0.04); }
+
+        .q-item:hover {
+            padding-left: 12px;
+        }
+
+        .q-item:hover .q-text {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .q-num {
+            font-family: 'Courier Prime', monospace;
+            font-size: 10px;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: 0.2em;
+            min-width: 30px;
+        }
+
+        .q-text {
+            font-family: 'IM Fell English', serif;
+            font-style: italic;
+            font-size: clamp(14px, 2vw, 18px);
+            color: rgba(255,255,255,0.22);
+            transition: color 0.4s ease;
+        }
+
+        .q-mark {
+            margin-left: auto;
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.06);
+            letter-spacing: 0.3em;
+        }
+
+        /* ── BOTTOM SIGNATURE ── */
+        .bottom-area {
+            margin-top: 120px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s 4s forwards;
+        }
+
+        .sig-label {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .signature {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(13px, 1.8vw, 16px);
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.15em;
+            transition: color 0.4s ease;
+        }
+
+        .signature:hover {
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ── FOOTER ── */
+        .foot {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .foot-left {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.08);
+            letter-spacing: 0.25em;
+        }
+
+        .foot-right {
+            font-family: 'Courier Prime', monospace;
+            font-size: 9px;
+            color: rgba(255,255,255,0.06);
+            letter-spacing: 0.2em;
+        }
+
+        /* ── RADIAL VIGNETTE ── */
+        .vignette {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+        }
+
+        /* ── CORNER MARKS ── */
+        .corner {
+            position: fixed;
+            width: 20px; height: 20px;
+            opacity: 0.08;
+            z-index: 20;
+        }
+        .corner-tl { top: 16px; left: 16px; border-top: 1px solid white; border-left: 1px solid white; }
+        .corner-tr { top: 16px; right: 16px; border-top: 1px solid white; border-right: 1px solid white; }
+        .corner-bl { bottom: 16px; left: 16px; border-bottom: 1px solid white; border-left: 1px solid white; }
+        .corner-br { bottom: 16px; right: 16px; border-bottom: 1px solid white; border-right: 1px solid white; }
+
+        /* ── RANDOM FLICKER ── */
+        @keyframes flicker {
+            0%, 95%, 100% { opacity: 1; }
+            96% { opacity: 0.2; }
+            97% { opacity: 1; }
+            98% { opacity: 0.5; }
+            99% { opacity: 1; }
+        }
+
+        .title-yz { animation: titleReveal 2.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 12s 4s infinite; }
+
+        /* Scan line */
+        .scan {
+            position: fixed;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.015), transparent);
+            z-index: 6;
+            pointer-events: none;
+            animation: scan 6s linear infinite;
+        }
+        @keyframes scan {
+            0%   { top: -2px; }
+            100% { top: 100vh; }
+        }
+
+        /* responsive */
+        @media (max-width: 600px) {
+            .signal { padding: 16px 20px; }
+            .foot { padding: 14px 20px; }
+            .questions { margin-top: 60px; }
+            .bottom-area { margin-top: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="c"></canvas>
+    <div class="vignette"></div>
+    <div class="glitch-line"></div>
+    <div class="scan"></div>
+
+    <!-- Cantos -->
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- Topo -->
+    <div class="signal">
+        <span class="signal-left">USK / YZ<span class="blink"></span></span>
+        <span class="signal-right" id="ts"></span>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="page">
+        <div class="hero">
+            <p class="eyebrow">Udesaken Group &nbsp;·&nbsp; Transmissão aberta</p>
+
+            <div class="title-yz">Yz</div>
+
+            <div class="divider"></div>
+
+            <p class="statement">
+                Algo <em>terminou</em>.<br>
+                Ou algo está <em>prestes a começar</em>.<br>
+                Ninguém sabe. Nem nós.
+            </p>
+        </div>
+
+        <div class="questions">
+            <div class="q-item">
+                <span class="q-num">01</span>
+                <span class="q-text">Isso é o fim da Udesaken?</span>
+                <span class="q-mark">???</span>
+            </div>
+            <div class="q-item">
+                <span class="q-num">02</span>
+                <span class="q-text">Yz é o que vem depois?</span>
+                <span class="q-mark">???</span>
+            </div>
+            <div class="q-item">
+                <span class="q-num">03</span>
+                <span class="q-text">Onde estão os que construíram isso?</span>
+                <span class="q-mark">???</span>
+            </div>
+            <div class="q-item">
+                <span class="q-num">04</span>
+                <span class="q-text">Essa página deveria existir?</span>
+                <span class="q-mark">???</span>
+            </div>
+            <div class="q-item">
+                <span class="q-num">05</span>
+                <span class="q-text">Você deveria ter achado isso?</span>
+                <span class="q-mark">???</span>
+            </div>
+        </div>
+
+        <div class="bottom-area">
+            <p class="sig-label">assinado</p>
+            <p class="signature">𝐘.𝐗 &nbsp;—&nbsp; 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊 &nbsp;—&nbsp; 𝐘.𝐗</p>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div class="foot">
+        <span class="foot-left">YZ · 2026</span>
+        <span class="foot-right" id="coords">— · —</span>
+    </div>
+
+    <script>
+        // ── TIMESTAMP ──
+        const tsEl = document.getElementById('ts');
+        function tick() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2,'0');
+            const m = String(now.getMinutes()).padStart(2,'0');
+            const s = String(now.getSeconds()).padStart(2,'0');
+            tsEl.textContent = `${h}:${m}:${s}`;
+        }
+        tick(); setInterval(tick, 1000);
+
+        // ── COORDS (mouse) ──
+        const coordEl = document.getElementById('coords');
+        document.addEventListener('mousemove', e => {
+            const x = (e.clientX / window.innerWidth * 100).toFixed(1);
+            const y = (e.clientY / window.innerHeight * 100).toFixed(1);
+            coordEl.textContent = `${x} · ${y}`;
+        });
+
+        // ── PARTICLE FIELD ──
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', () => { resize(); init(); });
+
+        function init() {
+            particles = [];
+            const count = Math.floor((W * H) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    r: Math.random() * 1.2 + 0.2,
+                    a: Math.random() * 0.4 + 0.05,
+                    flicker: Math.random() * Math.PI * 2
+                });
+            }
+        }
+        init();
+
+        let mouseX = W/2, mouseY = H/2;
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+        let t = 0;
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            t += 0.008;
+
+            particles.forEach(p => {
+                p.flicker += 0.02;
+                const alpha = p.a * (0.6 + 0.4 * Math.sin(p.flicker));
+
+                // subtle mouse repulsion
+                const dx = p.x - mouseX;
+                const dy = p.y - mouseY;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 120) {
+                    p.vx += (dx / dist) * 0.04;
+                    p.vy += (dy / dist) * 0.04;
+                }
+
+                // dampen
+                p.vx *= 0.99;
+                p.vy *= 0.99;
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0) p.x = W;
+                if (p.x > W) p.x = 0;
+                if (p.y < 0) p.y = H;
+                if (p.y > H) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+                ctx.fill();
+            });
+
+            // draw faint connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const a = particles[i], b = particles[j];
+                    const dx = a.x - b.x, dy = a.y - b.y;
+                    const d = Math.sqrt(dx*dx + dy*dy);
+                    if (d < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = `rgba(255,255,255,${0.03 * (1 - d/100)})`;
+                        ctx.lineWidth = 0.3;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // atmospheric glow pulse
+            const grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.4);
+            const pulse = 0.015 + 0.008 * Math.sin(t);
+            grd.addColorStop(0, `rgba(255,255,255,${pulse})`);
+            grd.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, W, H);
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // ── RANDOM TITLE GLITCH ──
+        const titleEl = document.querySelector('.title-yz');
+        setInterval(() => {
+            if (Math.random() > 0.85) {
+                titleEl.style.transform = `skewX(${(Math.random()-0.5)*4}deg) translateX(${(Math.random()-0.5)*6}px)`;
+                setTimeout(() => { titleEl.style.transform = ''; }, 80 + Math.random() * 120);
+            }
+        }, 2500);
+
+        // ── RANDOM PAGE FLICKER ──
+        setInterval(() => {
+            if (Math.random() > 0.92) {
+                document.body.style.opacity = (0.3 + Math.random() * 0.4).toString();
+                setTimeout(() => { document.body.style.opacity = '1'; }, 40);
+            }
+        }, 4000);
+
+        // ── KONAMI-STYLE EASTER EGG ──
+        // if someone types "yz" they get a brief reveal
+        let typed = '';
+        document.addEventListener('keypress', e => {
+            typed += e.key.toLowerCase();
+            if (typed.includes('yz')) {
+                typed = '';
+                document.querySelectorAll('.q-mark').forEach(el => {
+                    el.textContent = '...';
+                    el.style.color = 'rgba(255,255,255,0.3)';
+                    setTimeout(() => {
+                        el.textContent = '???';
+                        el.style.color = '';
+                    }, 2000);
+                });
+            }
+            if (typed.length > 10) typed = typed.slice(-5);
+        });
+    </script>
+</body>
+</html>
