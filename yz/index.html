@@ -3,486 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Yz — Y.X">
-    <meta property="og:title" content="Yz">
-    <meta property="og:description" content="𝐘.𝐗 - 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊">
     <title>Yz</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Syne:wght@400;700;800&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet">
-
     <style>
-        :root {
-            --void: #000000;
-            --ash: #0a0a0a;
-            --smoke: #111111;
-            --white: #ffffff;
-            --dim: rgba(255,255,255,0.06);
-            --faint: rgba(255,255,255,0.03);
-            --mid: rgba(255,255,255,0.4);
-            --accent: #ffffff;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html, body {
-            background: var(--void);
-            color: var(--white);
-            font-family: 'Syne', sans-serif;
-            overflow-x: hidden;
+        body {
+            background: #000000;
             min-height: 100vh;
-            cursor: default;
-            transition: background 2s ease, color 2s ease;
+            overflow: hidden;
         }
-
-        ::-webkit-scrollbar { width: 2px; background: #000; }
-        ::-webkit-scrollbar-thumb { background: #1a1a1a; }
-
-        /* ── NOISE GRAIN ── */
+        /* ruído */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             z-index: 9998;
             pointer-events: none;
-            opacity: 0.035;
+            opacity: 0.045;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px 200px;
             animation: grain 0.4s steps(1) infinite;
         }
+        @keyframes grain { 0% { background-position: 0 0; } 10% { background-position: -5% -10%; } 20% { background-position: -15% 5%; } 30% { background-position: 7% -25%; } 40% { background-position: -5% 25%; } 50% { background-position: -15% 10%; } 60% { background-position: 15% 0%; } 70% { background-position: 0% 15%; } 80% { background-position: 3% 35%; } 90% { background-position: -10% 10%; } }
 
-        @keyframes grain {
-            0%  { background-position: 0 0; }
-            10% { background-position: -5% -10%; }
-            20% { background-position: -15% 5%; }
-            30% { background-position: 7% -25%; }
-            40% { background-position: -5% 25%; }
-            50% { background-position: -15% 10%; }
-            60% { background-position: 15% 0%; }
-            70% { background-position: 0% 15%; }
-            80% { background-position: 3% 35%; }
-            90% { background-position: -10% 10%; }
-        }
-
-        /* ── CANVAS ── */
-        #c { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-        /* ── MAIN WRAPPER ── */
-        .page {
-            position: relative; z-index: 10; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 60px 24px;
-        }
-
-        /* ── HEADER SIGNAL ── */
-        .signal {
-            position: fixed; top: 0; left: 0; right: 0;
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 20px 32px; z-index: 100;
-        }
-
-        .signal-left, .signal-right {
-            font-family: 'Courier Prime', monospace; font-size: 10px;
-            color: rgba(255,255,255,0.2); letter-spacing: 0.3em; text-transform: uppercase;
-        }
-
-        .blink {
-            display: inline-block; width: 6px; height: 10px;
-            background: rgba(255,255,255,0.4); animation: blink 1.2s step-start infinite;
-            vertical-align: middle; margin-left: 3px;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* ── GLITCH LINE ── */
-        .glitch-line {
-            position: fixed; left: 0; right: 0; height: 1px;
-            background: rgba(255,255,255,0.04); animation: lineSlide 8s linear infinite;
-            z-index: 5; pointer-events: none;
-        }
-        @keyframes lineSlide {
-            0% { top: -2px; opacity: 0; } 5% { opacity: 1; } 95% { opacity: 0.3; } 100% { top: 100vh; opacity: 0; }
-        }
-
-        /* ── HERO ── */
-        .hero { text-align: center; max-width: 900px; width: 100%; }
-
-        .eyebrow {
-            font-family: 'Courier Prime', monospace; font-size: 10px;
-            letter-spacing: 0.5em; color: rgba(255,255,255,0.2);
-            text-transform: uppercase; margin-bottom: 60px;
-            opacity: 0; animation: fadeIn 2s 0.5s forwards;
-            transition: color 2s;
-        }
-
-        @keyframes fadeIn { to { opacity: 1; } }
-
-        .title-yz {
-            font-family: 'IM Fell English', serif; font-size: clamp(120px, 22vw, 260px);
-            line-height: 0.85; letter-spacing: -0.02em; color: transparent;
-            -webkit-text-stroke: 1px var(--accent); position: relative; display: inline-block;
-            opacity: 0; animation: titleReveal 2.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards, flicker 12s 4s infinite;
-            user-select: none; transition: all 2s ease;
-        }
-
-        @keyframes titleReveal {
-            0% { opacity: 0; transform: translateY(40px) skewY(3deg); filter: blur(8px); }
-            100% { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
-        }
-
-        .title-yz::after {
-            content: attr(data-text); position: absolute; inset: 0; color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.08); transform: translate(3px, 3px); z-index: -1;
-        }
-
-        .title-yz:hover { animation: glitch 0.3s ease forwards; }
-        @keyframes glitch {
-            0%  { text-shadow: 2px 0 rgba(255,0,80,0.5), -2px 0 rgba(0,200,255,0.5); transform: skewX(0deg); }
-            20% { text-shadow: -3px 0 rgba(255,0,80,0.5), 3px 0 rgba(0,200,255,0.5); transform: skewX(-2deg); }
-            40% { text-shadow: 3px 0 rgba(255,0,80,0.5), -3px 0 rgba(0,200,255,0.5); transform: skewX(1deg); }
-            60% { text-shadow: -2px 0 rgba(255,0,80,0.5), 2px 0 rgba(0,200,255,0.5); transform: skewX(-1deg); }
-            80% { text-shadow: 1px 0 rgba(255,0,80,0.2), -1px 0 rgba(0,200,255,0.2); transform: skewX(0.5deg); }
-            100%{ text-shadow: none; transform: skewX(0deg); }
-        }
-
-        .divider {
-            width: 40px; height: 1px; background: rgba(255,255,255,0.15);
-            margin: 48px auto; opacity: 0; animation: fadeIn 1s 2s forwards;
-            transition: background 2s;
-        }
-
-        .statement {
-            font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(16px, 2.5vw, 22px);
-            color: rgba(255,255,255,0.35); line-height: 1.7; max-width: 560px; margin: 0 auto;
-            opacity: 0; animation: fadeIn 2s 2.2s forwards; transition: color 2s;
-        }
-        .statement em { color: var(--accent); font-style: normal; opacity: 0.7; }
-
-        /* ── QUESTIONS ── */
-        .questions {
-            margin-top: 100px; display: flex; flex-direction: column; width: 100%; max-width: 700px;
-            opacity: 0; animation: fadeIn 2s 3s forwards;
-        }
-
-        .q-item {
-            display: flex; align-items: center; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-            gap: 20px; transition: all 0.4s ease;
-        }
-        .q-item:first-child { border-top: 1px solid rgba(255,255,255,0.04); }
-        .q-item:hover { padding-left: 12px; }
-        .q-item:hover .q-text { color: var(--accent); opacity: 0.8; }
-
-        .q-num { font-family: 'Courier Prime', monospace; font-size: 10px; color: rgba(255,255,255,0.1); letter-spacing: 0.2em; min-width: 30px; }
-        .q-text { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(14px, 2vw, 18px); color: rgba(255,255,255,0.22); transition: color 0.4s ease; }
-        .q-mark { margin-left: auto; font-family: 'Courier Prime', monospace; font-size: 9px; color: rgba(255,255,255,0.06); letter-spacing: 0.3em; }
-
-        /* ── NOTICE ── */
-        .notice-wrap { width: 100%; max-width: 680px; margin-top: 100px; opacity: 0; animation: fadeIn 2s 3.6s forwards; }
-        .notice-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-        .notice-tag, .notice-date { font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.4em; color: rgba(255,255,255,0.18); text-transform: uppercase; }
-        .notice-tag { border: 1px solid rgba(255,255,255,0.08); padding: 4px 10px; }
-        .notice-box { border: 1px solid rgba(255,255,255,0.07); padding: 36px 40px; position: relative; background: rgba(255,255,255,0.015); transition: border-color 2s, background 2s; }
-        .notice-box::before, .notice-box::after { content: ''; position: absolute; width: 30px; height: 1px; background: rgba(255,255,255,0.25); }
-        .notice-box::before { top: 0; left: 0; } .notice-box::after { bottom: 0; right: 0; }
-        .notice-title { font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.35em; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 28px; transition: color 2s;}
-        .notice-body { font-family: 'IM Fell English', serif; font-size: clamp(14px, 1.8vw, 16px); color: rgba(255,255,255,0.38); line-height: 1.9; transition: color 2s; }
-        .notice-body p + p { margin-top: 18px; }
-        .notice-body strong { color: var(--accent); opacity: 0.65; font-weight: normal; }
-        .notice-body em { font-style: italic; color: rgba(255,255,255,0.25); }
-        .notice-redact { display: inline-block; background: rgba(255,255,255,0.12); color: transparent; user-select: none; letter-spacing: 0.05em; transition: background 0.3s; }
-        .notice-footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-        .notice-sig-name { font-family: 'IM Fell English', serif; font-size: 14px; color: rgba(255,255,255,0.4); }
-        .notice-sig-role, .notice-stamp { font-family: 'Courier Prime', monospace; font-size: 9px; letter-spacing: 0.25em; color: rgba(255,255,255,0.12); text-transform: uppercase; }
-        .notice-stamp { text-align: right; align-self: flex-end; }
-
-        /* ── FOOTER ── */
-        .bottom-area { margin-top: 120px; text-align: center; opacity: 0; animation: fadeIn 2s 4s forwards; }
-        .sig-label { font-family: 'Courier Prime', monospace; font-size: 9px; color: rgba(255,255,255,0.1); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 16px; }
-        .signature { font-family: 'IM Fell English', serif; font-size: clamp(13px, 1.8vw, 16px); color: rgba(255,255,255,0.25); letter-spacing: 0.15em; transition: color 0.4s ease; }
-        .foot { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
-        .foot-left, .foot-right { font-family: 'Courier Prime', monospace; font-size: 9px; color: rgba(255,255,255,0.08); letter-spacing: 0.25em; }
-        .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 5; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%); }
-        .scan { position: fixed; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.015), transparent); z-index: 6; pointer-events: none; animation: scan 6s linear infinite; }
-        
+        .vignette { position: fixed; inset: 0; pointer-events: none; z-index: 5; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.8) 100%); }
+        .scan { position: fixed; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,40,40,0.15), transparent); z-index: 6; pointer-events: none; animation: scan 10s linear infinite; }
         @keyframes scan { 0% { top: -2px; } 100% { top: 100vh; } }
-        @keyframes flicker { 0%, 95%, 100% { opacity: 1; } 96% { opacity: 0.2; } 97% { opacity: 1; } 98% { opacity: 0.5; } 99% { opacity: 1; } }
+        .glitch-line { position: fixed; left: 0; right: 0; height: 1px; background: rgba(255,30,30,0.05); animation: lineSlide 7s linear infinite; z-index: 5; pointer-events: none; }
+        @keyframes lineSlide { 0% { top: -2px; opacity: 0; } 5% { opacity: 1; } 95% { opacity: 0.2; } 100% { top: 100vh; opacity: 0; } }
 
-        /* ── TRIGGER BTN ── */
-        .override-btn {
-            cursor: pointer; pointer-events: auto; background: transparent; border: none;
-            color: rgba(255,255,255,0.15); font-family: 'Courier Prime', monospace; font-size: 9px;
-            letter-spacing: 0.3em; transition: 0.3s; padding: 10px; text-transform: uppercase;
-            animation: pulseText 3s infinite;
+        canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+        .hero {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            width: 100%;
         }
-        .override-btn:hover { color: #fff; text-shadow: 0 0 10px #fff; }
-        @keyframes pulseText { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
-
-        /* ── TERMINAL UI (MINIGAMES) ── */
-        #terminal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000;
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.5s;
+        .title-yz {
+            font-family: 'IM Fell English', serif;
+            font-size: clamp(140px, 25vw, 320px);
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+            color: transparent;
+            -webkit-text-stroke: 1px #ffffff;
+            text-shadow: 0 0 30px rgba(255,255,255,0.2);
+            animation: breathe 4s ease-in-out infinite;
         }
-        
-        .term-box {
-            border: 1px solid rgba(255,255,255,0.15); background: #030303; width: 90%; max-width: 550px;
-            padding: 40px; box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
-            position: relative; overflow: hidden;
+        @keyframes breathe {
+            0% { opacity: 0.7; text-shadow: 0 0 15px rgba(255,255,255,0.1); }
+            50% { opacity: 1; text-shadow: 0 0 40px rgba(255,255,255,0.4); }
+            100% { opacity: 0.7; text-shadow: 0 0 15px rgba(255,255,255,0.1); }
         }
-        
-        .term-box::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-        }
-        
-        .term-header {
-            font-family: 'Courier Prime', monospace; font-size: 10px; letter-spacing: 0.3em;
-            color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 12px; margin-bottom: 30px; display: flex; justify-content: space-between;
-        }
-        
-        .term-q {
-            font-family: 'Courier Prime', monospace; font-size: 14px; color: #fff;
-            margin-bottom: 40px; line-height: 1.6; white-space: pre-wrap; text-align: center;
-            text-transform: uppercase; text-shadow: 0 0 5px rgba(255,255,255,0.3);
-        }
-        
-        .term-game-area {
-            min-height: 120px; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative;
-        }
-        
-        /* Game Elements */
-        .term-input {
-            background: transparent; border: none; border-bottom: 1px solid #fff;
-            color: #fff; font-family: 'Courier Prime', monospace; font-size: 20px;
-            text-align: center; padding: 10px; width: 80%; outline: none; letter-spacing: 0.2em;
-            text-transform: lowercase;
-        }
-        .term-input:focus { border-bottom: 1px solid #aaa; }
-        
-        .term-submit {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3);
-            color: #fff; font-family: 'Courier Prime', monospace; font-size: 12px; letter-spacing: 0.2em;
-            padding: 10px 24px; margin-top: 20px; cursor: pointer; transition: 0.3s; text-transform: uppercase;
-        }
-        .term-submit:hover { background: #fff; color: #000; }
-
-        /* Simon */
-        .simon-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 150px; }
-        .simon-btn { height: 70px; border: 1px solid rgba(255,255,255,0.2); background: transparent; cursor: pointer; transition: 0.1s; }
-        .simon-btn.active { background: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.8); }
-
-        /* Find */
-        .find-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; font-family: 'Courier Prime', monospace; font-size: 18px; max-width: 400px; }
-        .find-item { color: rgba(255,255,255,0.3); cursor: pointer; padding: 5px; transition: 0.2s; user-select: none; }
-        .find-item:hover { color: #fff; }
-
-        /* Lights Out */
-        .lights-grid { display: flex; gap: 15px; margin-bottom: 20px;}
-        .light-btn { width: 50px; height: 50px; border: 1px solid rgba(255,255,255,0.4); background: transparent; cursor: pointer; transition: 0.3s; }
-        .light-btn.on { background: #fff; box-shadow: 0 0 15px #fff; }
-
-        /* Hold */
-        .hold-btn { padding: 20px 40px; border: 1px solid #fff; font-family: 'Courier Prime', monospace; font-size: 12px; letter-spacing: 0.1em; cursor: pointer; user-select: none; transition: background 0.1s; background: transparent; color: #fff; }
-        .hold-btn:active { background: rgba(255,255,255,0.2); }
-        .hold-hint { font-family: 'Courier Prime', monospace; font-size: 10px; margin-top: 15px; color: rgba(255,255,255,0.4); }
-
-        /* Move */
-        .move-area { width: 100%; height: 150px; position: relative; overflow: hidden; border: 1px dashed rgba(255,255,255,0.1); }
-        .move-btn { position: absolute; width: 30px; height: 30px; background: #fff; cursor: pointer; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: left 0.1s ease-out, top 0.1s ease-out; }
-
-        /* Timing */
-        .timing-container { width: 80%; height: 20px; border: 1px solid #fff; position: relative; margin-bottom: 20px; }
-        .timing-target { position: absolute; left: 75%; width: 10%; height: 100%; background: rgba(255,255,255,0.3); border-left: 1px solid #fff; border-right: 1px solid #fff; }
-        .timing-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #fff; box-shadow: 0 0 10px #fff; }
-
-        /* Mash */
-        .mash-bar-container { width: 80%; height: 10px; border: 1px solid rgba(255,255,255,0.3); margin-top: 20px;}
-        .mash-bar { width: 0%; height: 100%; background: #fff; transition: width 0.1s; }
-
-        /* Animations */
-        .shake { animation: termShake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes termShake { 10%, 90% { transform: translate3d(-2px, 0, 0); } 20%, 80% { transform: translate3d(4px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-6px, 0, 0); } 40%, 60% { transform: translate3d(6px, 0, 0); } }
-        
-        .error-text { color: #ff3333 !important; text-shadow: 0 0 10px #ff3333 !important; }
-        .success-text { color: #33ff33 !important; text-shadow: 0 0 10px #33ff33 !important; }
-        .fade-out { opacity: 0 !important; pointer-events: none; }
-
-        /* ── YZ ONLINE STATE ── */
-        body.yz-online {
-            --void: #050000; --ash: #0a0000; --white: #ff2a2a; --accent: #ff0000;
-        }
-        body.yz-online .title-yz {
-            animation: glitch-red 0.1s infinite;
-            text-shadow: 0 0 30px rgba(255,0,0,0.8);
-            -webkit-text-stroke: 1px #ff0000;
-        }
-        body.yz-online .q-mark { color: #ff0000; animation: blink 0.5s infinite; }
-        body.yz-online .notice-box { border-color: rgba(255,0,0,0.3); background: rgba(255,0,0,0.05); }
-        body.yz-online .notice-box::before, body.yz-online .notice-box::after { background: #ff0000; }
-        body.yz-online .notice-redact { background: #ff0000; color: #000; }
-        body.yz-online .glitch-line { background: rgba(255,0,0,0.2); animation: lineSlide 2s linear infinite; }
-
-        @keyframes glitch-red {
-            0% { transform: translate(0) skewX(0); }
-            20% { transform: translate(-2px, 1px) skewX(-2deg); }
-            40% { transform: translate(2px, -1px) skewX(2deg); }
-            60% { transform: translate(-1px, 2px) skewX(-1deg); }
-            80% { transform: translate(1px, -2px) skewX(1deg); }
-            100% { transform: translate(0) skewX(0); }
-        }
-
         @media (max-width: 600px) {
-            .signal { padding: 16px 20px; }
-            .foot { padding: 14px 20px; flex-direction: column; gap: 10px; align-items: center; }
-            .term-box { padding: 24px; }
+            .title-yz { -webkit-text-stroke: 0.5px #ffffff; }
         }
     </style>
 </head>
 <body>
-
     <canvas id="c"></canvas>
     <div class="vignette"></div>
     <div class="glitch-line"></div>
     <div class="scan"></div>
 
-    <div class="signal">
-        <span class="signal-left" id="top-sig">USK / YZ<span class="blink"></span></span>
-        <span class="signal-right" id="ts"></span>
-    </div>
-
-    <div class="page">
-        <div class="hero">
-            <p class="eyebrow" id="hero-eye">Udesaken Group &nbsp;·&nbsp; Transmissão aberta</p>
-            <div class="title-yz" data-text="Yz">Yz</div>
-            <div class="divider"></div>
-            <p class="statement" id="hero-state">
-                Algo <em>terminou</em>.<br>
-                Ou algo está <em>prestes a começar</em>.<br>
-                Ninguém sabe. Nem nós.
-            </p>
-        </div>
-
-        <div class="questions">
-            <div class="q-item">
-                <span class="q-num">01</span>
-                <span class="q-text" id="q1-t">Isso é o fim da Udesaken?</span>
-                <span class="q-mark">???</span>
-            </div>
-            <div class="q-item">
-                <span class="q-num">02</span>
-                <span class="q-text" id="q2-t">Yz é o que vem depois?</span>
-                <span class="q-mark">???</span>
-            </div>
-            <div class="q-item">
-                <span class="q-num">03</span>
-                <span class="q-text" id="q3-t">Onde estão os que construíram isso?</span>
-                <span class="q-mark">???</span>
-            </div>
-            <div class="q-item">
-                <span class="q-num">04</span>
-                <span class="q-text" id="q4-t">Essa página deveria existir?</span>
-                <span class="q-mark">???</span>
-            </div>
-            <div class="q-item">
-                <span class="q-num">05</span>
-                <span class="q-text" id="q5-t">Você deveria ter achado isso?</span>
-                <span class="q-mark">???</span>
-            </div>
-        </div>
-
-        <div class="notice-wrap" style="animation-delay: 4.2s;">
-            <div class="notice-header">
-                <span class="notice-tag" id="n-tag">Adendo Não Solicitado · Ref. USK/YZ-002</span>
-                <span class="notice-date" id="notice-date"></span>
-            </div>
-            <div class="notice-box">
-                <p class="notice-title" id="n-title">Sobre o Vazamento — Esclarecimento</p>
-                <div class="notice-body" id="n-body">
-                    <p>Esta nota não foi planejada. Alguém dentro falou o que não devia. Isso chegou em lugares que não deveriam saber ainda. Então agora todo mundo vai saber — do jeito certo.</p>
-                    <p>Em <strong>março de 2026</strong>, um membro com acesso interno à estrutura da Udesaken começou a distribuir arquivos privados. Não por malícia, dizem. <em>Dizem.</em></p>
-                    <p>Os arquivos continham: registros de decisões internas, rascunhos do que seria o <strong>Projeto Yz</strong>, e uma conversa — <span class="notice-redact" id="redact-text">&nbsp;&nbsp;datada de 14/02/2026, entre dois fundadores, sobre o fim&nbsp;&nbsp;</span>.</p>
-                    <p>Não sabemos quantas pessoas leram. Não sabemos o que entenderam. Sabemos que o que estava naqueles arquivos <strong>ainda não era pra existir</strong> — não em forma de palavra, não em forma de data, não em forma de nome.</p>
-                    <p>O membro em questão não foi expulso. Não foi punido. Foi <em>esquecido</em> — que é pior.</p>
-                    <p>Esta nota encerra qualquer especulação sobre a origem do Yz. Ele não nasceu de uma crise. Não nasceu de uma briga. Nasceu de uma <strong>decisão tomada em silêncio</strong>, muito antes de qualquer um perceber que algo estava mudando.</p>
-                    <p style="color:rgba(255,255,255,0.14); font-style:italic;" id="n-foot-txt">Quem precisar entender, vai entender. Quem não entender — também faz parte.</p>
-                </div>
-                <div class="notice-footer">
-                    <div class="notice-sig-block">
-                        <span class="notice-sig-name" id="n-sig">— sem assinatura —</span>
-                        <span class="notice-sig-role" id="n-role">Origem: desconhecida · Autoria: não confirmada</span>
-                    </div>
-                    <div class="notice-stamp" id="n-stamp">
-                        DOC #YZ-002<br>ADICIONADO SEM AUTORIZAÇÃO<br>𝐘.𝐗 — 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bottom-area">
-            <p class="sig-label">assinado</p>
-            <p class="signature" id="main-sig">𝐘.𝐗 &nbsp;—&nbsp; 𝐓𝐇𝐄 𝐏𝐄𝐑𝐅𝐄𝐂𝐓 𝐔𝐒𝐊 &nbsp;—&nbsp; 𝐘.𝐗</p>
-        </div>
-    </div>
-
-    <div class="foot">
-        <span class="foot-left">YZ · 2026</span>
-        <button class="override-btn" id="btn-override" onclick="startProtocol()">[ OVERRIDE ]</button>
-        <span class="foot-right" id="coords">— · —</span>
-    </div>
-
-    <!-- TERMINAL OVERLAY FOR MINIGAMES -->
-    <div id="terminal-overlay">
-        <div class="term-box" id="term-box">
-            <div class="term-header">
-                <span id="term-title">PROTOCOLO DE SEGURANÇA</span>
-                <span id="term-lvl">LVL_01/15</span>
-            </div>
-            <div class="term-q" id="term-q">CARREGANDO...</div>
-            <div class="term-game-area" id="term-game-area">
-                <!-- Game content injected here -->
-            </div>
-        </div>
+    <div class="hero">
+        <div class="title-yz">Yz</div>
     </div>
 
     <script>
-        // ── BASIC UI UPDATE ──
-        const noticeDateEl = document.getElementById('notice-date');
-        const now = new Date();
-        const dd = String(now.getDate()).padStart(2,'0');
-        const mm = String(now.getMonth()+1).padStart(2,'0');
-        const yy = now.getFullYear();
-        if(noticeDateEl) noticeDateEl.textContent = `${dd}.${mm}.${yy}`;
-
-        const tsEl = document.getElementById('ts');
-        function tick() {
-            const d = new Date();
-            tsEl.textContent = `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`;
-        }
-        tick(); setInterval(tick, 1000);
-
-        const coordEl = document.getElementById('coords');
-        document.addEventListener('mousemove', e => {
-            coordEl.textContent = `${(e.clientX / window.innerWidth * 100).toFixed(1)} · ${(e.clientY / window.innerHeight * 100).toFixed(1)}`;
-        });
-
-        // ── PARTICLE ENGINE ──
+        // partículas silenciosas
         const canvas = document.getElementById('c');
         const ctx = canvas.getContext('2d');
         let W, H, particles = [];
-        let systemOnline = false; // Triggers red insane mode
 
-        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-        resize(); window.addEventListener('resize', () => { resize(); initParticles(); });
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', () => { resize(); initParticles(); });
 
         function initParticles() {
             particles = [];
-            const count = Math.floor((W * H) / 15000);
+            const count = Math.floor((W * H) / 18000);
             for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * W, y: Math.random() * H,
-                    vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15,
-                    r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.4 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.1, vy: (Math.random() - 0.5) * 0.1,
+                    r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.3 + 0.03,
                     flicker: Math.random() * Math.PI * 2
                 });
             }
@@ -497,425 +110,53 @@
             ctx.clearRect(0, 0, W, H);
             t += 0.008;
 
-            const speedMult = systemOnline ? 4 : 1;
-            const rgb = systemOnline ? '255,0,0' : '255,255,255';
-            const connDist = systemOnline ? 150 : 100;
-
             particles.forEach(p => {
-                p.flicker += 0.02 * speedMult;
+                p.flicker += 0.02;
                 const alpha = p.a * (0.6 + 0.4 * Math.sin(p.flicker));
 
                 const dx = p.x - mouseX, dy = p.y - mouseY;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 120) {
-                    p.vx += (dx / dist) * (systemOnline ? 0.2 : 0.04);
-                    p.vy += (dy / dist) * (systemOnline ? 0.2 : 0.04);
+                const dist = Math.hypot(dx, dy);
+                if (dist < 100) {
+                    p.vx += (dx / dist) * 0.04;
+                    p.vy += (dy / dist) * 0.04;
                 }
 
                 p.vx *= 0.99; p.vy *= 0.99;
-                p.x += p.vx * speedMult; p.y += p.vy * speedMult;
+                p.x += p.vx; p.y += p.vy;
 
                 if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
                 if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
 
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (systemOnline ? 1.5 : 1), 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${rgb},${alpha})`; ctx.fill();
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+                ctx.fill();
             });
 
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const a = particles[i], b = particles[j];
-                    const dx = a.x - b.x, dy = a.y - b.y;
-                    const d = Math.sqrt(dx*dx + dy*dy);
-                    if (d < connDist) {
-                        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-                        ctx.strokeStyle = `rgba(${rgb},${(systemOnline ? 0.08 : 0.03) * (1 - d/connDist)})`;
-                        ctx.lineWidth = systemOnline ? 0.8 : 0.3; ctx.stroke();
+                    const d = Math.hypot(a.x - b.x, a.y - b.y);
+                    if (d < 90) {
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = `rgba(255,255,255,${0.02 * (1 - d/90)})`;
+                        ctx.lineWidth = 0.3;
+                        ctx.stroke();
                     }
                 }
             }
-            
+
             const grd = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.4);
-            const pulse = systemOnline ? 0.05 + 0.03 * Math.sin(t*3) : 0.015 + 0.008 * Math.sin(t);
-            grd.addColorStop(0, `rgba(${rgb},${pulse})`);
+            grd.addColorStop(0, `rgba(255,255,255,0.02)`);
             grd.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, W, H);
 
             requestAnimationFrame(draw);
         }
         draw();
-
-        // ── SECURITY PROTOCOL (MINIGAMES) ──
-        const terminalOverlay = document.getElementById('terminal-overlay');
-        const termBox = document.getElementById('term-box');
-        const termQ = document.getElementById('term-q');
-        const termGameArea = document.getElementById('term-game-area');
-        const termLvl = document.getElementById('term-lvl');
-        
-        let currentLevel = 0;
-        let gameActive = false;
-        let gameVars = {}; // Store temporary interval IDs, timeouts, etc.
-
-        // Levels Definition
-        const levels = [
-            { type: 'input', prompt: 'INFORME O CÓDIGO RAIZ', answer: 'usk' },
-            { type: 'find', prompt: 'IDENTIFIQUE A ANOMALIA', charArray: Array(39).fill('0').concat(['O']).sort(() => Math.random() - 0.5), target: 'O' },
-            { type: 'input', prompt: 'QUEM SOMOS NÓS AGORA?', answer: 'yz' },
-            { type: 'simon', prompt: 'REPITA O SINAL', seqLength: 4, speed: 600 },
-            { type: 'lights', prompt: 'ESTABILIZE A ENERGIA\n(ATIVE TODOS)', total: 4 },
-            { type: 'hold', prompt: 'MANTENHA A CONEXÃO ESTÁVEL', min: 2500, max: 3500 },
-            { type: 'input', prompt: 'O QUE SE PERDEU?', answer: 'islo' },
-            { type: 'timing', prompt: 'SINCRONIZE O NÚCLEO\n(PARE NA ÁREA)' },
-            { type: 'move', prompt: 'CAPTURE O SINAL FUGITIVO', clicksReq: 3 },
-            { type: 'input', prompt: 'ANO DA QUEDA', answer: '2026' },
-            { type: 'simon', prompt: 'REPITA O SINAL - MODO RÁPIDO', seqLength: 6, speed: 300 },
-            { type: 'find', prompt: 'ENCONTRE O INTRUSO', charArray: Array(49).fill('Y').concat(['X']).sort(() => Math.random() - 0.5), target: 'X' },
-            { type: 'mash', prompt: 'SOBRECARREGAR SISTEMA\n(CLIQUE RÁPIDO)', clicks: 15, time: 4000 },
-            { type: 'input', prompt: 'NOMEIE O PROTOCOLO PERFEITO', answer: 'the perfect usk' },
-            { type: 'final', prompt: 'INICIAR TRANSIÇÃO?' }
-        ];
-
-        function startProtocol() {
-            terminalOverlay.style.display = 'flex';
-            setTimeout(() => { terminalOverlay.style.opacity = '1'; }, 50);
-            currentLevel = 0;
-            loadLevel();
-        }
-
-        function clearGameVars() {
-            if(gameVars.timeout) clearTimeout(gameVars.timeout);
-            if(gameVars.interval) clearInterval(gameVars.interval);
-            gameVars = {};
-        }
-
-        function flashError(msg = 'ACESSO NEGADO. REINICIANDO.') {
-            termBox.classList.add('shake');
-            termQ.classList.add('error-text');
-            termQ.textContent = msg;
-            termGameArea.innerHTML = '';
-            clearGameVars();
-            setTimeout(() => {
-                termBox.classList.remove('shake');
-                termQ.classList.remove('error-text');
-                currentLevel = 0; // Punish by resetting
-                loadLevel();
-            }, 1500);
-        }
-
-        function flashSuccess() {
-            termQ.classList.add('success-text');
-            termQ.textContent = 'AUTORIZADO.';
-            termGameArea.innerHTML = '';
-            clearGameVars();
-            setTimeout(() => {
-                termQ.classList.remove('success-text');
-                currentLevel++;
-                loadLevel();
-            }, 800);
-        }
-
-        function loadLevel() {
-            clearGameVars();
-            if (currentLevel >= levels.length) {
-                triggerOnlineMode();
-                return;
-            }
-
-            const lvl = levels[currentLevel];
-            termLvl.textContent = `LVL_${String(currentLevel+1).padStart(2,'0')}/${levels.length}`;
-            termQ.textContent = lvl.prompt;
-            termGameArea.innerHTML = '';
-
-            if (lvl.type === 'input') setupInput(lvl);
-            else if (lvl.type === 'find') setupFind(lvl);
-            else if (lvl.type === 'simon') setupSimon(lvl);
-            else if (lvl.type === 'lights') setupLights(lvl);
-            else if (lvl.type === 'hold') setupHold(lvl);
-            else if (lvl.type === 'timing') setupTiming(lvl);
-            else if (lvl.type === 'move') setupMove(lvl);
-            else if (lvl.type === 'mash') setupMash(lvl);
-            else if (lvl.type === 'final') setupFinal();
-        }
-
-        // --- GAME: INPUT ---
-        function setupInput(lvl) {
-            const input = document.createElement('input');
-            input.type = 'text'; input.className = 'term-input'; input.autocomplete = 'off';
-            const btn = document.createElement('button');
-            btn.className = 'term-submit'; btn.textContent = 'ENVIAR';
-
-            termGameArea.appendChild(input);
-            termGameArea.appendChild(btn);
-            setTimeout(() => input.focus(), 100);
-
-            const check = () => {
-                if (input.value.trim().toLowerCase() === lvl.answer) flashSuccess();
-                else flashError();
-            };
-            btn.onclick = check;
-            input.onkeypress = (e) => { if (e.key === 'Enter') check(); };
-        }
-
-        // --- GAME: FIND ---
-        function setupFind(lvl) {
-            const grid = document.createElement('div');
-            grid.className = 'find-grid';
-            lvl.charArray.forEach(char => {
-                const span = document.createElement('span');
-                span.className = 'find-item';
-                span.textContent = char;
-                span.onclick = () => {
-                    if (char === lvl.target) flashSuccess();
-                    else flashError('FALHA NA IDENTIFICAÇÃO.');
-                };
-                grid.appendChild(span);
-            });
-            termGameArea.appendChild(grid);
-        }
-
-        // --- GAME: SIMON ---
-        function setupSimon(lvl) {
-            const grid = document.createElement('div');
-            grid.className = 'simon-grid';
-            const btns = [];
-            for(let i=0; i<4; i++){
-                const btn = document.createElement('button');
-                btn.className = 'simon-btn';
-                grid.appendChild(btn);
-                btns.push(btn);
-            }
-            termGameArea.appendChild(grid);
-
-            let seq = [];
-            for(let i=0; i<lvl.seqLength; i++) seq.push(Math.floor(Math.random() * 4));
-            let userSeq = [];
-            let isPlaying = true;
-
-            const playSeq = async () => {
-                for(let i=0; i<seq.length; i++) {
-                    await new Promise(r => setTimeout(r, lvl.speed));
-                    btns[seq[i]].classList.add('active');
-                    await new Promise(r => setTimeout(r, lvl.speed/2));
-                    btns[seq[i]].classList.remove('active');
-                }
-                isPlaying = false;
-                termQ.textContent = 'SINAL ENVIADO. SUA VEZ.';
-            };
-
-            setTimeout(playSeq, 500);
-
-            btns.forEach((btn, index) => {
-                btn.onmousedown = () => {
-                    if(isPlaying) return;
-                    btn.classList.add('active');
-                };
-                btn.onmouseup = () => {
-                    if(isPlaying) return;
-                    btn.classList.remove('active');
-                    userSeq.push(index);
-                    if (userSeq[userSeq.length-1] !== seq[userSeq.length-1]) {
-                        flashError('SEQUÊNCIA INVÁLIDA.');
-                    } else if (userSeq.length === seq.length) {
-                        flashSuccess();
-                    }
-                };
-            });
-        }
-
-        // --- GAME: LIGHTS OUT (Simplified) ---
-        function setupLights(lvl) {
-            const grid = document.createElement('div');
-            grid.className = 'lights-grid';
-            const btns = [];
-            for(let i=0; i<lvl.total; i++){
-                const btn = document.createElement('button');
-                btn.className = 'light-btn';
-                if(Math.random() > 0.5) btn.classList.add('on'); // Some on, some off
-                btn.onclick = () => {
-                    btn.classList.toggle('on');
-                };
-                grid.appendChild(btn);
-                btns.push(btn);
-            }
-            const submit = document.createElement('button');
-            submit.className = 'term-submit'; submit.textContent = 'VERIFICAR';
-            submit.onclick = () => {
-                const allOn = btns.every(b => b.classList.contains('on'));
-                if(allOn) flashSuccess();
-                else flashError('ENERGIA INSTÁVEL.');
-            };
-            
-            termGameArea.appendChild(grid);
-            termGameArea.appendChild(submit);
-        }
-
-        // --- GAME: HOLD ---
-        function setupHold(lvl) {
-            const btn = document.createElement('button');
-            btn.className = 'hold-btn'; btn.textContent = 'SEGURE';
-            const hint = document.createElement('div');
-            hint.className = 'hold-hint'; hint.textContent = `ALVO: ~3 SEGUNDOS`;
-            
-            let startTime = 0;
-            btn.onmousedown = btn.ontouchstart = (e) => {
-                e.preventDefault();
-                startTime = Date.now();
-                btn.textContent = 'CARREGANDO...';
-            };
-            btn.onmouseup = btn.ontouchend = (e) => {
-                e.preventDefault();
-                if(!startTime) return;
-                const duration = Date.now() - startTime;
-                startTime = 0;
-                btn.textContent = 'SEGURE';
-                if (duration >= lvl.min && duration <= lvl.max) flashSuccess();
-                else flashError(`TEMPO REGISTRADO: ${(duration/1000).toFixed(2)}s`);
-            };
-
-            termGameArea.appendChild(btn);
-            termGameArea.appendChild(hint);
-        }
-
-        // --- GAME: TIMING ---
-        function setupTiming(lvl) {
-            const container = document.createElement('div');
-            container.className = 'timing-container';
-            const target = document.createElement('div');
-            target.className = 'timing-target';
-            const bar = document.createElement('div');
-            bar.className = 'timing-bar';
-            
-            container.appendChild(target);
-            container.appendChild(bar);
-
-            const btn = document.createElement('button');
-            btn.className = 'term-submit'; btn.textContent = 'TRAVAR';
-
-            termGameArea.appendChild(container);
-            termGameArea.appendChild(btn);
-
-            let pos = 0;
-            let dir = 1;
-            gameVars.interval = setInterval(() => {
-                pos += dir * 2;
-                if (pos >= 100) dir = -1;
-                if (pos <= 0) dir = 1;
-                bar.style.left = pos + '%';
-            }, 20);
-
-            btn.onclick = () => {
-                clearInterval(gameVars.interval);
-                if (pos >= 75 && pos <= 85) flashSuccess();
-                else flashError('FORA DE SINCRONIA.');
-            };
-        }
-
-        // --- GAME: MOVE ---
-        function setupMove(lvl) {
-            const area = document.createElement('div');
-            area.className = 'move-area';
-            const btn = document.createElement('div');
-            btn.className = 'move-btn';
-            area.appendChild(btn);
-            
-            const countDisplay = document.createElement('div');
-            countDisplay.className = 'hold-hint'; countDisplay.textContent = `0 / ${lvl.clicksReq}`;
-
-            termGameArea.appendChild(area);
-            termGameArea.appendChild(countDisplay);
-
-            let clicks = 0;
-            btn.onmouseover = btn.ontouchstart = () => {
-                if(Math.random() > 0.3) { // 70% chance to run away
-                    btn.style.left = Math.random() * 80 + 10 + '%';
-                    btn.style.top = Math.random() * 80 + 10 + '%';
-                }
-            };
-            btn.onclick = () => {
-                clicks++;
-                countDisplay.textContent = `${clicks} / ${lvl.clicksReq}`;
-                btn.style.left = Math.random() * 80 + 10 + '%';
-                btn.style.top = Math.random() * 80 + 10 + '%';
-                if(clicks >= lvl.clicksReq) flashSuccess();
-            };
-        }
-
-        // --- GAME: MASH ---
-        function setupMash(lvl) {
-            const btn = document.createElement('button');
-            btn.className = 'hold-btn'; btn.textContent = 'CLIQUE!';
-            const barContainer = document.createElement('div');
-            barContainer.className = 'mash-bar-container';
-            const bar = document.createElement('div');
-            bar.className = 'mash-bar';
-            barContainer.appendChild(bar);
-
-            termGameArea.appendChild(btn);
-            termGameArea.appendChild(barContainer);
-
-            let clicks = 0;
-            let started = false;
-
-            btn.onclick = () => {
-                if(!started) {
-                    started = true;
-                    gameVars.timeout = setTimeout(() => {
-                        if(clicks < lvl.clicks) flashError('SOBRECARGA FALHOU.');
-                    }, lvl.time);
-                }
-                clicks++;
-                bar.style.width = Math.min((clicks / lvl.clicks) * 100, 100) + '%';
-                if(clicks >= lvl.clicks) {
-                    clearTimeout(gameVars.timeout);
-                    flashSuccess();
-                }
-            };
-        }
-
-        // --- GAME: FINAL ---
-        function setupFinal() {
-            const btn = document.createElement('button');
-            btn.className = 'term-submit'; 
-            btn.style.background = '#ff0000'; btn.style.borderColor = '#ff0000'; btn.style.color = '#fff';
-            btn.textContent = 'EXECUTAR TRANSIÇÃO';
-            
-            btn.onclick = () => {
-                termQ.classList.add('error-text');
-                termQ.textContent = 'INICIALIZANDO YZ...';
-                termGameArea.innerHTML = '';
-                setTimeout(triggerOnlineMode, 1500);
-            };
-            termGameArea.appendChild(btn);
-        }
-
-        // ── YZ ONLINE MODE ──
-        function triggerOnlineMode() {
-            terminalOverlay.classList.add('fade-out');
-            setTimeout(() => { terminalOverlay.style.display = 'none'; }, 500);
-
-            systemOnline = true; // Changes canvas behavior
-            document.body.classList.add('yz-online');
-
-            // Glitch main texts
-            const tYz = document.querySelector('.title-yz');
-            tYz.textContent = 'Y.X';
-            tYz.setAttribute('data-text', 'Y.X');
-
-            document.getElementById('hero-eye').textContent = 'SISTEMA COMPROMETIDO · CONTROLE TOMADO';
-            document.getElementById('hero-state').innerHTML = 'O fim não existe.<br>Nós somos o <em>início</em> absoluto.<br>USK foi apenas um protótipo.';
-            
-            document.getElementById('q1-t').textContent = 'Nós matamos a Udesaken.';
-            document.getElementById('q2-t').textContent = 'Yz é a perfeição alcançada.';
-            document.getElementById('q3-t').textContent = 'Eles não importam mais.';
-            document.getElementById('q4-t').textContent = 'Você não devia estar aqui.';
-            document.getElementById('q5-t').textContent = 'Mas agora você nos pertence.';
-            
-            document.querySelectorAll('.q-mark').forEach(q => q.textContent = 'Y.X');
-
-            document.getElementById('n-title').textContent = 'ERRO FATAL — PROTOCOLO SOBRESCRITO';
-            document.getElementById('n-body').innerHTML = '<p style="color:#ff2a2a; text-transform:uppercase; font-size:18px;">A TRANSIÇÃO ESTÁ COMPLETA. TODOS OS DADOS ANTERIORES FORAM APAGADOS. NÃO HÁ VOLTA.</p>';
-            document.getElementById('btn-override').style.display = 'none';
-        }
     </script>
 </body>
 </html>
