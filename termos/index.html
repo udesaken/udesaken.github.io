@@ -1,936 +1,523 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja | Udesaken Group</title>
-    <meta name="description" content="Adquira VIP, bots no PV, moderação e pacotes Gold/RPG para sua comunidade.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Termos de Uso Oficiais do Udesaken Bot. Leia atentamente antes de contratar nossos serviços.">
+    <meta name="theme-color" content="#000000">
+    
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Loja | Udesaken Group">
-    <meta property="og:description" content="Adquira VIP, bots no PV, moderação e pacotes Gold/RPG para sua comunidade.">
+    <meta property="og:title" content="Termos de Uso | Udesaken Group">
+    <meta property="og:description" content="Termos de Uso Oficiais do Udesaken Bot. Leia atentamente antes de contratar nossos serviços.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
+    
+    <title>Termos de Uso | Udesaken Group</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --text-muted: #888888;
-            --text-dim: #444444;
-            --amber: #ff8c00;
-            --amber-light: #ffb347;
-            --gold: #ffd700;
-            --gold-dim: #a07800;
-            --glass-bg: rgba(12,12,12,0.62);
-            --glass-bg-gold: rgba(30,20,0,0.72);
-            --glass-border: rgba(255,255,255,0.07);
-            --glass-border-hover: rgba(255,255,255,0.22);
-            --glass-border-gold: rgba(255,180,0,0.18);
-            --glass-border-gold-hover: rgba(255,200,0,0.45);
-            --glass-blur: 28px;
-            --glass-shadow: 0 8px 40px rgba(0,0,0,0.85);
-            --glass-shadow-gold: 0 8px 40px rgba(180,120,0,0.25);
-            --z-canvas: 0; --z-base: 10; --z-nav: 999; --z-cart: 1100; --z-modal: 1200;
-        }
-
-        /* Correção do Scroll Horizontal */
-        html { 
-            scroll-behavior: smooth; 
-            font-size: 16px; 
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-        }
-        @media (max-width: 768px) { html { font-size: 15px; } }
-
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg); color: var(--text);
-            overflow-x: hidden; -webkit-font-smoothing: antialiased;
-            width: 100%;
-            max-width: 100vw;
-        }
-
-        ::-webkit-scrollbar { width: 6px; background: #000; }
-        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
-        ::selection { background: rgba(255,140,0,0.2); color: #fff; }
-
-        #universe-canvas {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: var(--z-canvas); pointer-events: none; background: #000;
-        }
-
-        /* Glass effects */
-        .glass {
-            position: relative;
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur)) saturate(130%);
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow); overflow: hidden;
-            transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease;
-        }
-        .glass::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(500px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.055), transparent 40%);
-            opacity: 0; transition: opacity 0.4s; pointer-events: none; z-index: 0;
-        }
-        .glass > * { position: relative; z-index: 1; }
-
-        .glass-gold {
-            position: relative;
-            background: var(--glass-bg-gold);
-            backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-            border: 1px solid var(--glass-border-gold);
-            box-shadow: var(--glass-shadow-gold); overflow: hidden;
-            transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease, box-shadow 0.35s ease;
-        }
-        .glass-gold::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(500px circle at var(--mx,50%) var(--my,50%), rgba(255,200,0,0.07), transparent 40%);
-            opacity: 0; transition: opacity 0.4s; pointer-events: none; z-index: 0;
-        }
-        .glass-gold::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,200,0,0.4), transparent);
-            pointer-events: none; z-index: 2;
-        }
-        .glass-gold > * { position: relative; z-index: 1; }
-
-        @media (hover: hover) {
-            .glass:hover::before, .glass-gold:hover::before { opacity: 1; }
-            .glass:hover { transform: translateY(-3px); border-color: var(--glass-border-hover); }
-            .glass-gold:hover {
-                transform: translateY(-4px);
-                border-color: var(--glass-border-gold-hover);
-                box-shadow: 0 12px 50px rgba(200,140,0,0.35);
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        amber: {
+                            500: '#ff8c00',
+                            600: '#e07b00',
+                        }
+                    }
+                }
             }
         }
+    </script>
+    
+    <style>
+        :root {
+            --bg-deep: #000000;
+            --bg-card: rgba(8, 8, 12, 0.85);
+            --border-glow: rgba(255, 255, 255, 0.06);
+            --border-glow-hover: rgba(255, 140, 0, 0.22);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b6b6b;
+            --amber: #ff8c00;
+        }
 
-        /* Navbar */
-        #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 12px 20px; transition: padding 0.3s ease; }
-        #navbar nav {
-            max-width: 1200px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between; gap: 16px;
-            background: rgba(8,8,8,0.75); backdrop-filter: blur(30px) saturate(120%);
-            -webkit-backdrop-filter: blur(30px) saturate(120%);
-            border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 8px 16px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: #000000; 
+            color: var(--text-primary); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Canvas Universo */
+        #universe-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
+        }
+
+        /* Glass Panel refinado com hover colorido */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-glow);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .glass-panel:hover {
+            border-color: var(--border-glow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 15px rgba(255,140,0,0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-amber {
+            background: linear-gradient(135deg, #ffd080 0%, #ff8c00 60%, #e05500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navbar refinada */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            padding: 16px 24px;
             transition: all 0.3s ease;
         }
-        #navbar.scrolled { padding: 8px 20px; }
-        #navbar.scrolled nav { background: rgba(0,0,0,0.92); border-color: rgba(255,255,255,0.13); }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-        .nav-logo-icon { width: 28px; height: 28px; border-radius: 8px; border: 1px solid rgba(255,140,0,0.3); background: linear-gradient(135deg, #111, #000); display: flex; align-items: center; justify-content: center; color: var(--amber); font-size: 0.9rem; }
-        .nav-logo span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: #fff; }
-        .nav-links { display: flex; align-items: center; gap: 4px; }
-        .nav-link { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 9px; text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: color 0.25s, background 0.25s; }
-        @media (hover: hover) { .nav-link:hover { color: #fff; background: rgba(255,255,255,0.07); } }
-        .badge-novo { display: inline-flex; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.3); color: var(--amber); padding: 2px 6px; border-radius: 4px; font-size: 0.55rem; font-weight: 700; text-transform: uppercase; }
-        .cart-btn { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 9px; color: #fff; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.25s; }
-        @media (hover: hover) { .cart-btn:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.3); } }
-        #cart-count { background: #fff; color: #000; font-size: 0.65rem; font-weight: 900; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
-        #menu-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; padding: 6px; }
-        #mobile-menu { position: absolute; top: 68px; left: 20px; width: calc(100% - 40px); border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(4,4,4,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: var(--z-nav); transform: translateY(-12px); opacity: 0; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease; overflow: hidden; }
-        #mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-        .mob-link { display: flex; align-items: center; gap: 10px; padding: 14px 20px; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: background 0.2s, color 0.2s; }
-        .mob-link:active { background: rgba(255,255,255,0.05); color: #fff; }
-        .mob-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 0 16px; }
-
-        /* Hero */
-        #store-hero { position: relative; z-index: var(--z-base); padding: 120px 20px 50px; text-align: center; }
-        @media (max-width: 768px) { #store-hero { padding: 100px 20px 40px; } }
-        .store-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 100px; background: rgba(255,140,0,0.08); border: 1px solid rgba(255,140,0,0.2); margin-bottom: 24px; }
-        .store-badge i { font-size: 0.75rem; color: var(--amber); }
-        .store-badge span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
-        .store-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
-        .text-amber { background: linear-gradient(135deg, #ffd080 0%, #ff8c00 60%, #e05500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .store-sub { font-size: 0.95rem; color: var(--text-muted); max-width: 540px; margin: 0 auto; line-height: 1.65; }
-
-        .hero-stats { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
-        .hero-stat { display: flex; flex-direction: column; align-items: center; padding: 16px 24px; border-radius: 16px; min-width: 110px; }
-        .hero-stat .s-val { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--amber); }
-        .hero-stat .s-val.gold { color: var(--gold); }
-        .hero-stat .s-lbl { font-size: 0.65rem; color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
-
-        /* Store */
-        #loja { position: relative; z-index: var(--z-base); padding: 20px 0 80px; }
-        .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .section-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; white-space: nowrap; }
-        .section-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(255,140,0,0.4), transparent); }
-
-        .featured-scroll { 
-            display: flex; gap: 14px; overflow-x: auto; padding-bottom: 12px; 
-            scrollbar-width: none; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        .nav-wrapper nav {
+            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            background: rgba(5, 5, 8, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 8px 20px;
         }
-        .featured-scroll::-webkit-scrollbar { display: none; }
-        .feat-card { flex-shrink: 0; width: 160px; border-radius: 18px; padding: 16px 14px; cursor: pointer; text-align: center; scroll-snap-align: start; }
-        .feat-card .fc-img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; margin: 0 auto 8px; display: block; }
-        .feat-card .fc-name { font-size: 0.75rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
-        .feat-card .fc-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--amber); }
-        .feat-card.feat-gold .fc-price { color: var(--gold); }
-        .feat-card .fc-badge { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 3px 8px; border-radius: 100px; margin-bottom: 8px; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); text-transform: uppercase; letter-spacing: 0.08em; }
-        .feat-card.feat-gold .fc-badge { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.25); color: var(--gold); }
-
-        .store-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 30px; padding: 16px 20px; border-radius: 16px; background: rgba(10,10,10,0.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); }
+        .nav-wrapper.glass-nav nav {
+            background: rgba(0, 0, 0, 0.95);
+            border-color: rgba(255,140,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
         
-        .category-filters { display: flex; gap: 8px; flex-wrap: wrap; }
-        .cat-btn { padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: var(--text-muted); font-size: 0.75rem; font-weight: 500; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.25s; white-space: nowrap; }
-        @media (hover: hover) { .cat-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); } }
-        .cat-btn.active { background: #fff; color: #000; border-color: #fff; font-weight: 700; }
-        @media (hover: hover) { .cat-btn.cat-gold:hover { color: var(--gold); border-color: rgba(255,215,0,0.5); } }
-        .cat-btn.cat-gold.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #1a0e00; border-color: #ffd700; font-weight: 700; box-shadow: 0 0 14px rgba(255,200,0,0.3); }
+        /* Animações */
+        .fade-up { 
+            opacity: 0; 
+            transform: translateY(35px); 
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+            will-change: opacity, transform;
+        }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
         
-        .search-wrap { position: relative; }
-        .search-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 0.8rem; pointer-events: none; }
-        #search-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 10px 16px 10px 36px; color: #fff; font-size: 0.8rem; width: 220px; outline: none; font-family: 'Space Grotesk', sans-serif; transition: border-color 0.25s; }
-        #search-input:focus { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.06); }
-        #search-input::placeholder { color: var(--text-dim); }
-
-        #products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-
-        .product-card { padding: 22px; border-radius: 20px; cursor: pointer; transition: all 0.35s ease; display: flex; flex-direction: column; }
-        @media (hover: hover) { .product-card:hover { transform: translateY(-4px); } }
-        .pc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-        .pc-img-wrap { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,180,0,0.2); background: rgba(30,20,0,0.5); flex-shrink: 0; overflow: hidden; }
-        .pc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        .pc-badges { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
-        .pc-badge { font-size: 0.6rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); }
-        .pc-badge.badge-gold { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--gold); }
-        .pc-badge.badge-green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.25); color: #4ade80; }
-        .pc-badge.badge-blue { background: rgba(96,165,250,0.1); border-color: rgba(96,165,250,0.25); color: #60a5fa; }
-        .product-card h3 { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 6px; }
-        .pc-desc-preview {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin: 12px 0 8px;
-            line-height: 1.4;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 8px;
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 10px; } 
+        ::-webkit-scrollbar-thumb:hover { background: #ff8c00; }
+        
+        /* Seções de Termos */
+        .term-section {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
         }
-        .pc-desc-preview span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 4px;
+        .term-section:hover {
+            background: rgba(255,140,0,0.02);
+            border-color: rgba(255,140,0,0.08);
         }
-        .pc-desc-preview i {
-            font-size: 0.55rem;
+        
+        /* Caixas de Aviso Coloridas */
+        .warning-box {
+            background: rgba(255, 140, 0, 0.05);
+            border-left: 3px solid var(--amber);
+        }
+        
+        .critical-box {
+            background: rgba(255, 60, 60, 0.04);
+            border: 1px solid rgba(255, 60, 60, 0.2);
+        }
+        
+        /* Botão Aceitar Colorido */
+        .btn-accept {
+            background: var(--amber);
+            color: #ffffff;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,140,0,0.2);
+            border-radius: 100px;
+        }
+        .btn-accept:hover {
+            background: #e07b00;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255,140,0,0.4);
+        }
+        
+        /* Footer links */
+        .footer-link {
+            color: #4a4a4a;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
             color: var(--amber);
-            width: 16px;
         }
-        .pc-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-        .pc-price { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; }
-        .pc-price.gold-price { color: var(--gold); }
-        .btn-add { width: 38px; height: 38px; border-radius: 50%; background: #fff; color: #000; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.25s; }
-        @media (hover: hover) { .btn-add:hover { transform: scale(1.08); box-shadow: 0 0 15px rgba(255,255,255,0.3); } }
-        .btn-add:active { transform: scale(0.95); }
-        .btn-add.btn-gold { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #1a0e00; }
-        @media (hover: hover) { .btn-add.btn-gold:hover { box-shadow: 0 0 18px rgba(255,200,0,0.45); } }
-
-        #no-results { display: none; text-align: center; padding: 60px 20px; color: var(--text-dim); }
-        #no-results i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.3; display: block; }
-        #no-results p { font-size: 0.9rem; }
-
-        #testimonials { position: relative; z-index: var(--z-base); padding: 20px 20px 60px; max-width: 1100px; margin: 0 auto; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
-        .t-card { padding: 20px; border-radius: 18px; }
-        .t-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .t-avatar { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; background: rgba(255,140,0,0.1); border: 1px solid rgba(255,140,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-        .t-meta .t-name { font-size: 0.85rem; font-weight: 700; color: #fff; }
-        .t-meta .t-stars { font-size: 0.7rem; color: var(--gold); letter-spacing: 2px; margin-top: 2px; }
-        .t-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; font-style: italic; }
-
-        /* Cart */
-        #cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: calc(var(--z-cart) - 1); opacity: 0; pointer-events: none; transition: opacity 0.4s; }
-        #cart-overlay.open { opacity: 1; pointer-events: auto; }
-        #cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; height: 100dvh; background: #080808; border-left: 1px solid rgba(255,255,255,0.08); z-index: var(--z-cart); display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(.16,1,.3,1); }
-        #cart-sidebar.open { right: 0; }
-        .cart-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .cart-header h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; }
-        .cart-close { background: rgba(255,255,255,0.06); border: none; color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
-        #cart-items { flex: 1 1 auto; overflow-y: auto; padding: 16px; }
-        .cart-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .ci-img-thumb { width: 54px; height: 54px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.15); overflow: hidden; }
-        .ci-img-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .ci-info { flex: 1; }
-        .ci-info h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
-        .ci-info .price { font-size: 0.75rem; color: var(--text-muted); }
-        .ci-qty { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-        .qty-btn { width: 28px; height: 28px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: none; color: #fff; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
-        .qty-val { font-size: 0.8rem; font-weight: 700; min-width: 20px; text-align: center; }
-        .ci-remove { font-size: 0.65rem; color: #f87171; background: none; border: none; cursor: pointer; display: block; margin-top: 8px; text-decoration: underline; }
-        .ci-total { font-size: 0.9rem; font-weight: 700; white-space: nowrap; align-self: center; }
-        .cart-footer { flex-shrink: 0; padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid rgba(255,255,255,0.07); background: #080808; }
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .cart-total-row span { font-size: 0.85rem; color: var(--text-muted); }
-        .cart-total-row strong { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; }
-        #cart-footer { display: none; }
-        .terms-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: border-color 0.25s; }
-        .terms-row input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; min-width: 18px; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 5px; background: transparent; cursor: pointer; position: relative; transition: all 0.2s; margin-top: 2px; }
-        .terms-row input[type="checkbox"]:checked { background: #ff8c00; border-color: #ff8c00; }
-        .terms-row input[type="checkbox"]:checked::after { content: ''; position: absolute; left: 5px; top: 2px; width: 5px; height: 9px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg); }
-        .terms-row label { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; cursor: pointer; user-select: none; }
-        .terms-row label a { color: var(--amber-light); text-decoration: underline; text-underline-offset: 2px; }
-        .btn-checkout { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border-radius: 12px; background: #25D366; color: #fff; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s; }
-        @media (hover: hover) { .btn-checkout:hover:not(:disabled) { background: #1da851; transform: scale(1.02); } }
-        .btn-checkout:active:not(:disabled) { transform: scale(0.98); }
-        .btn-checkout:disabled { background: #1a3d26; color: rgba(255,255,255,0.3); cursor: not-allowed; }
-        .cart-empty { text-align: center; padding: 60px 20px; color: var(--text-dim); }
-        .cart-empty i { font-size: 2.5rem; margin-bottom: 16px; opacity: 0.25; display: block; }
-        .cart-empty p { font-size: 0.85rem; }
         
-        .cart-float-btn { position: fixed; bottom: 85px; right: 20px; width: 56px; height: 56px; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; z-index: 1050; box-shadow: 0 4px 20px rgba(255,255,255,0.2); transition: all 0.3s ease; animation: float-pop 0.5s 1.5s both; }
-        @media (hover: hover) { .cart-float-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(255,255,255,0.3); } }
-        .cart-float-btn .float-count { position: absolute; top: -4px; right: -4px; background: #ff8c00; color: #fff; font-size: 0.7rem; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
-        
-        #wa-float { position: fixed; bottom: 20px; right: 20px; z-index: 1050; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s ease; animation: wa-pop 0.5s 1.5s both; }
-        @media (hover: hover) { #wa-float:hover { transform: scale(1.1); } }
-
-        @keyframes float-pop { from { opacity:0; transform:scale(0.6); } to { opacity:1; transform:scale(1); } }
-        @keyframes wa-pop { from { opacity:0; transform:scale(0.6); } to { opacity:1; transform:scale(1); } }
-
-        #product-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: var(--z-modal); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.35s ease, visibility 0s linear 0.35s; }
-        #product-modal.active { opacity: 1; visibility: visible; transition: opacity 0.35s ease; }
-        .modal-box { background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; max-width: 500px; width: 100%; padding: 30px; position: relative; transform: translateY(20px) scale(0.97); transition: transform 0.4s ease; max-height: 90vh; overflow-y: auto; }
-        .modal-box::-webkit-scrollbar { width: 4px; }
-        .modal-box::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
-        .modal-box.gold-modal { background: #0e0a00; border-color: rgba(255,200,0,0.2); box-shadow: 0 0 60px rgba(180,120,0,0.2); }
-        #product-modal.active .modal-box { transform: translateY(0) scale(1); }
-        .modal-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.07); border: none; color: #fff; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; }
-        .modal-img-wrap { width: 80px; height: 80px; border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: rgba(30,20,0,0.6); border: 1px solid rgba(255,180,0,0.2); overflow: hidden; }
-        .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-        #modal-content h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 10px; }
-        .modal-badge-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-        .modal-badge { background: rgba(255,140,0,0.12); border: 1px solid rgba(255,140,0,0.25); color: var(--amber-light); font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.08em; }
-        .modal-badge.badge-gold { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--gold); }
-        .modal-price { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 20px; }
-        .modal-price.gold-price { color: var(--gold); }
-        .modal-desc {
-            background: rgba(255,255,255,0.04);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin: 20px 0;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            text-align: left;
+        .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
+            height: 1px;
+            width: 100%;
         }
-        .modal-desc i {
-            width: 22px;
+        
+        /* List styling */
+        .legal-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .legal-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .legal-list li:before {
+            content: "▹";
+            position: absolute;
+            left: 0;
             color: var(--amber);
-            margin-right: 8px;
-        }
-        .modal-desc p {
-            margin: 8px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        .btn-primary { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 14px; background: #fff; color: #000; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; font-family: 'Space Grotesk', sans-serif; transition: all 0.25s; }
-        @media (hover: hover) { .btn-primary:hover { box-shadow: 0 0 25px rgba(255,255,255,0.3); transform: scale(1.02); } }
-        .btn-primary:active { transform: scale(0.98); }
-        .btn-primary.btn-gold { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #1a0e00; }
-        @media (hover: hover) { .btn-primary.btn-gold:hover { box-shadow: 0 0 28px rgba(255,200,0,0.45); } }
-
-        footer { position: relative; z-index: var(--z-base); border-top: 1px solid rgba(255,255,255,0.06); background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.95) 70%); backdrop-filter: blur(10px); padding: 60px 20px 40px; margin-top: 40px; }
-        .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; gap: 40px; grid-template-columns: 1fr; }
-        @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
-        .footer-brand p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; max-width: 280px; margin-top: 14px; }
-        .footer-col h4 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); margin-bottom: 18px; }
-        .footer-links { display: flex; flex-direction: column; gap: 12px; }
-        .footer-links a { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--text-dim); text-decoration: none; transition: color 0.25s; }
-        @media (hover: hover) { .footer-links a:hover { color: #fff; } }
-        .footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
-        .footer-bottom p { font-size: 0.7rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-
-        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-        .toast { position: fixed; bottom: 120px; right: 20px; background: #0d0d0d; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 12px 20px; font-size: 0.85rem; z-index: 9900; color: #fff; font-family: 'Space Grotesk', sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: toast-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        @keyframes toast-in { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            #menu-toggle { display: flex; align-items: center; }
-            .store-controls { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px; }
-            .search-wrap { width: 100%; }
-            #search-input { width: 100%; }
-            .category-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; justify-content: flex-start; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-            .category-filters::-webkit-scrollbar { display: none; }
-            .cat-btn { flex-shrink: 0; }
-        }
-        @media (max-width: 480px) { 
-            #products-grid { grid-template-columns: 1fr; } 
-            .cart-float-btn { bottom: 85px; width: 50px; height: 50px; font-size: 1.1rem; }
-            #wa-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 20px; }
+            font-size: 0.8rem;
         }
     </style>
+    <link rel="icon" type="image/png" href="../logousk.png">
 </head>
 <body>
 
-<canvas id="universe-canvas"></canvas>
-<div id="cart-overlay" onclick="toggleCart()"></div>
+    <canvas id="universe-canvas"></canvas>
 
-<!-- NAVBAR -->
-<div id="navbar">
-    <nav>
-        <a href="/" class="nav-logo">
-            <div class="nav-logo-icon">
-                <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-            </div>
-            <span>Udesaken</span>
-        </a>
-        <div class="nav-links">
-            <a href="/comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
-            <a href="/equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
-            <a href="/parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-            <button class="cart-btn" onclick="toggleCart()">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cart-count">0</span>
-            </button>
-            <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
-        </div>
-    </nav>
-    <div id="mobile-menu">
-        <a href="/comandos/" class="mob-link"><i class="fas fa-terminal"></i> Comandos</a>
-        <div class="mob-divider"></div>
-        <a href="/equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
-        <div class="mob-divider"></div>
-        <a href="/parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
-        <div class="mob-divider"></div>
-        <a href="/" class="mob-link"><i class="fas fa-home"></i> Início</a>
-    </div>
-</div>
-
-<div class="cart-float-btn" onclick="toggleCart()">
-    <i class="fas fa-shopping-bag"></i>
-    <span class="float-count" id="float-cart-count">0</span>
-</div>
-
-<!-- HERO -->
-<section id="store-hero">
-    <div class="fade-up">
-        <div class="store-badge">
-            <i class="fas fa-store"></i>
-            <span>Udesaken Store</span>
-        </div>
-        <h1 class="store-title">
-            Escolha seu<br>
-            <span class="text-amber">plano ideal.</span>
-        </h1>
-        <p class="store-sub">
-            VIP, bots no PV, moderação completa e pacotes <strong style="color:var(--gold);font-weight:700;">Gold / RPG ⚔️</strong> para sua comunidade. Entrega rápida via WhatsApp.
-        </p>
-        <div class="hero-stats">
-            <div class="hero-stat glass"><span class="s-val">+1.2k</span><span class="s-lbl">Pedidos</span></div>
-            <div class="hero-stat glass"><span class="s-val">4.9 ★</span><span class="s-lbl">Avaliação</span></div>
-            <div class="hero-stat glass"><span class="s-val">~5min</span><span class="s-lbl">Entrega</span></div>
-            <div class="hero-stat glass"><span class="s-val gold" style="color:var(--gold);">5</span><span class="s-lbl">Pacotes Gold</span></div>
-        </div>
-    </div>
-</section>
-
-<!-- LOJA -->
-<section id="loja">
-    <div class="section-wrap">
-
-        <div class="fade-up" style="margin-bottom:40px;">
-            <div class="section-header">
-                <span class="section-title text-amber">Mais Populares</span>
-                <div class="section-line"></div>
-            </div>
-            <div class="featured-scroll" id="featured-scroll"></div>
-        </div>
-
-        <div class="store-controls fade-up">
-            <div class="category-filters">
-                <button class="cat-btn active" data-cat="all">Todos</button>
-                <button class="cat-btn" data-cat="bot">🤖 Bot GRUPO</button>
-                <button class="cat-btn" data-cat="pv">💬 Bot PV</button>
-                <button class="cat-btn" data-cat="vip">👑 VIP</button>
-                <button class="cat-btn cat-gold" data-cat="gold">⚔️ Modo Gold / RPG</button>
-            </div>
-            <div class="search-wrap">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Buscar produto...">
-            </div>
-        </div>
-
-        <div id="products-grid" class="fade-up"></div>
-        <div id="no-results">
-            <i class="fas fa-search-minus"></i>
-            <p>Nenhum produto encontrado.</p>
-        </div>
-    </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<div id="testimonials" class="fade-up">
-    <div class="section-header">
-        <span class="section-title text-amber">O que dizem os clientes</span>
-        <div class="section-line"></div>
-    </div>
-    <div class="testimonials-grid">
-        <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">👾</div><div class="t-meta"><div class="t-name">dark_yuki</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"VIP Mensal chegou em menos de 3 minutos. Imunidade total e PV liberado, valeu demais. Melhor loja do grupo."</p>
-        </div>
-        <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">🌌</div><div class="t-meta"><div class="t-name">void_neko</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"Comprei XP Mestre e subi 38 levels de uma vez. Custo-benefício absurdo, recomendo pra qualquer um que queira rankar."</p>
-        </div>
-        <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">⚡</div><div class="t-meta"><div class="t-name">raio_br</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"Bot de moderação zerou o spam do meu grupo. Anti-link e boas-vindas funcionando perfeito desde o dia 1."</p>
-        </div>
-        <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">🪐</div><div class="t-meta"><div class="t-name">saturn_x</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"XP Lendário é surreal — 1 milhão de XP, subi quase 60 levels. Suporte no WhatsApp respondeu na hora."</p>
-        </div>
-    </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-    <div class="footer-grid">
-        <div class="footer-brand">
-    <a href="/" class="nav-logo">
-        <div class="nav-logo-icon">
-            <img src="/logousk1.png" alt="Udesaken" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-        </div>
-        <span>Udesaken</span>
-    </a>
-    <p>O futuro da sua comunidade. Alta performance, ferramentas exclusivas e entrega instantânea.</p>
-</div>
-        <div class="footer-col">
-            <h4>Navegação</h4>
-            <div class="footer-links">
-                <a href="/"><i class="fas fa-home"></i> Início</a>
-                <a href="/equipe/"><i class="fas fa-users"></i> Equipe</a>
-                <a href="/parcerias/"><i class="fas fa-handshake"></i> Parcerias</a>
-                <a href="/discord/"><i class="fab fa-discord"></i> Discord</a>
-                <a href="/termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h4>Fale Conosco</h4>
-            <div class="footer-links">
-                <a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a>
-                <a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
-            </div>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>Udesaken Group &copy; 2026 &bull; Todos os direitos reservados</p>
-    </div>
-</footer>
-
-<!-- CART SIDEBAR -->
-<div id="cart-sidebar">
-    <div class="cart-header">
-        <h3>Seu Carrinho</h3>
-        <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-    </div>
-    <div id="cart-items"></div>
-    <div class="cart-footer" id="cart-footer">
-        <div class="cart-total-row">
-            <span>Total da Compra</span>
-            <strong id="cart-total">R$ 0,00</strong>
-        </div>
-        <div class="terms-row" onclick="toggleTerms(event)">
-            <input type="checkbox" id="terms-check">
-            <label>Li e aceito os <a href="/termos/" target="_blank" onclick="event.stopPropagation()">Termos de Uso</a> do Udesaken Group.</label>
-        </div>
-        <button class="btn-checkout" id="btn-checkout" onclick="checkoutWhatsApp()" disabled>
-            <i class="fab fa-whatsapp"></i> Finalizar pelo WhatsApp
-        </button>
-    </div>
-</div>
-
-<!-- MODAL -->
-<div id="product-modal" onclick="handleModalOutside(event)">
-    <div class="modal-box" id="modal-box">
-        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-        <div id="modal-content"></div>
-    </div>
-</div>
-
-<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<script>
-const WHATSAPP_NUMBER = "447562847091";
-const LOGO_IMAGE = "/logousk1.png";
-
-function formatBRL(v) {
-    return v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-// PRODUTOS - descrições atualizadas (removido "Nome personalizado" dos bots)
-const PRODUCTS = [
-    // VIP
-    { id:1, category:"vip", name:"VIP Semanal", price:2.00, isGold:false, badge:"Teste Rápido", badgeClass:"badge-blue", image:LOGO_IMAGE,
-      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
-    { id:2, category:"vip", name:"VIP Quinzenal", price:3.50, isGold:false, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
-      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
-    { id:3, category:"vip", name:"VIP Mensal", price:5.00, isGold:false, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Imunidade a voteban\n✓ IA Udesaken\n✓ Máximo de 5 minutos mutado\n✓ Falar 10 vezes no modo só ADM a cada 30min\n✓ Bônus de XP: ganha 3x mais\n✓ Tolerância de anúncio (adv)\n✓ Prioridade no atendimento" },
-    // BOT PV
-    { id:4, category:"pv", name:"Bot PV (1 Dia)", price:1.50, isGold:false, badge:"Experimental", badgeClass:"badge-blue", image:LOGO_IMAGE,
-      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
-    { id:5, category:"pv", name:"Bot PV (Quinzenal)", price:2.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
-    { id:6, category:"pv", name:"Bot PV (Mensal)", price:3.50, isGold:false, badge:"Mais Popular", badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Use vários comandos no PV (exceto os que precisam de mais de uma pessoa)\n✓ Não é possível usar modo Gold\n✓ Faça figurinhas\n✓ Baixe músicas" },
-    // BOT GRUPO (descrições sem "Nome personalizado")
-    { id:7, category:"bot", name:"Bot para Grupo (1 Dia)", price:1.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    { id:8, category:"bot", name:"Bot para Grupo (15 dias)", price:5.50, isGold:false, badge:null, badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    { id:9, category:"bot", name:"Bot para Grupo(30 dias", price:8.00, isGold:false, badge:"Top Vendas", badgeClass:"badge-green", image:LOGO_IMAGE,
-      description: "✓ Anti-link\n✓ Comandos Gold/RPG\n✓ Vários comandos de administração" },
-    // GOLD / RPG
-    { id:10, category:"gold", name:"XP Iniciante - 15k", price:3.00, isGold:true, badge:"Novo", badgeClass:"badge-blue", image:LOGO_IMAGE,
-      description: "✓ Adquira 15.000 de experiência para o modo Gold/RPG\n✓ Suba de nível rapidamente\n✓ Pacote compatível com todos os servidores parceiros" },
-    { id:11, category:"gold", name:"XP Avançado - 80k", price:7.00, isGold:true, badge:"Recomendado", badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Adquira 80.000 de experiência para o modo Gold/RPG\n✓ Evolua seu personagem em poucos minutos\n✓ Ideal para ranks intermediários" },
-    { id:12, category:"gold", name:"XP Mestre - 300k", price:15.00, isGold:true, badge:"Melhor Valor", badgeClass:"badge-gold", image:LOGO_IMAGE,
-      description: "✓ Adquira 300.000 de experiência para o modo Gold/RPG\n✓ Domine o jogo com um grande boost\n✓ Pacote mais custo-benefício" },
-    { id:13, category:"gold", name:"XP Lendário - 1m", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE,
-      description: "✓ Adquira 1.000.000 de experiência para o modo Gold/RPG\n✓ Torne-se uma lenda instantaneamente\n✓ Salte dezenas de níveis" },
-    { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-gold", image:LOGO_IMAGE,
-      description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" }
-];
-
-let cart = JSON.parse(localStorage.getItem('udesaken_cart')) || [];
-
-function saveCart() { localStorage.setItem('udesaken_cart', JSON.stringify(cart)); renderCart(); }
-
-window.toggleTerms = function(e) {
-    if (e.target.tagName === 'A') return;
-    const cb = document.getElementById('terms-check');
-    if (e.target !== cb) cb.checked = !cb.checked;
-    updateCheckoutBtn();
-};
-
-window.updateCheckoutBtn = function() {
-    const cb = document.getElementById('terms-check');
-    const btn = document.getElementById('btn-checkout');
-    if (btn) btn.disabled = !cb?.checked;
-};
-
-function renderCart() {
-    const countEl = document.getElementById('cart-count');
-    const floatEl = document.getElementById('float-cart-count');
-    const itemsEl = document.getElementById('cart-items');
-    const totalEl = document.getElementById('cart-total');
-    const total   = cart.reduce((s,i) => s + i.quantity, 0);
-    
-    if (countEl) countEl.textContent = total;
-    if (floatEl) floatEl.textContent = total;
-    
-    if (!itemsEl) return;
-    if (cart.length === 0) {
-        itemsEl.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Seu carrinho está vazio</p></div>`;
-        if (totalEl) totalEl.textContent = 'R$ 0,00';
-        const fe = document.getElementById('cart-footer'); if (fe) fe.style.display = 'none';
-        return;
-    }
-    
-    const fe = document.getElementById('cart-footer'); if (fe) fe.style.display = 'block';
-    updateCheckoutBtn();
-    
-    let sum = 0;
-    itemsEl.innerHTML = cart.map(item => {
-        const sub = item.price * item.quantity; sum += sub;
-        const thumb = `<div class="ci-img-thumb"><img src="${item.image || LOGO_IMAGE}" alt="${item.name}"></div>`;
-        return `
-            <div class="cart-item">
-                ${thumb}
-                <div class="ci-info">
-                    <h4>${item.name}</h4>
-                    <div class="price">R$ ${formatBRL(item.price)}</div>
-                    <div class="ci-qty">
-                        <button class="qty-btn" onclick="updateQty(${item.id},-1)">−</button>
-                        <span class="qty-val">${item.quantity}</span>
-                        <button class="qty-btn" onclick="updateQty(${item.id},1)">+</button>
-                    </div>
-                    <button class="ci-remove" onclick="removeItem(${item.id})">Remover item</button>
+    <!-- Navbar -->
+    <div class="nav-wrapper transition-all duration-300" id="navbar">
+        <nav>
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <div class="ci-total">R$ ${formatBRL(sub)}</div>
-            </div>`;
-    }).join('');
-    if (totalEl) totalEl.textContent = `R$ ${formatBRL(sum)}`;
-}
+                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+            </a>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
+                <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
+            </div>
+            <div class="flex md:hidden gap-3">
+                <a href="/" class="px-4 py-2 bg-white/10 hover:bg-amber-500/20 text-white hover:text-amber-500 transition-colors rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
+            </div>
+        </nav>
+    </div>
 
-window.addToCart = function(pid) {
-    const p = PRODUCTS.find(x => x.id === pid); if (!p) return;
-    const ex = cart.find(i => i.id === pid);
-    if (ex) ex.quantity++; else cart.push({...p, quantity:1});
-    saveCart(); 
-    showToast(`<i class="fas fa-check-circle"></i> ${p.name} adicionado!`);
-};
+    <main class="relative z-10 pt-32 pb-20">
+        <section class="text-center relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-amber-500/90 tracking-[0.15em] uppercase">Documento Oficial</span>
+                </div>
+                <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-file-contract text-amber-500 text-2xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter leading-[1.1]">
+                    Termos de <span class="text-gradient-amber">Uso</span>
+                </h1>
+                <p class="text-sm text-white/40 uppercase tracking-[0.2em] font-bold">Udesaken Bot • Atualizado em: 31/03/2026</p>
+            </div>
+        </section>
 
-window.updateQty = function(id, d) {
-    const item = cart.find(i => i.id === id); if (!item) return;
-    item.quantity += d; if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
-    saveCart();
-};
-
-window.removeItem = function(id) { cart = cart.filter(i => i.id !== id); saveCart(); };
-
-window.toggleCart = function() {
-    const s = document.getElementById('cart-sidebar');
-    const o = document.getElementById('cart-overlay');
-    const open = s.classList.toggle('open');
-    o.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-};
-
-window.checkoutWhatsApp = function() {
-    if (!cart.length) { showToast("Carrinho vazio!"); return; }
-    let msg = "Olá! Gostaria de comprar:\n\n", total = 0;
-    cart.forEach(item => { const sub = item.price * item.quantity; total += sub; msg += `📦 ${item.name} × ${item.quantity} = R$ ${formatBRL(sub)}\n`; });
-    msg += `\n💰 Total: R$ ${formatBRL(total)}\n\nPode me passar os detalhes do pagamento?`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-    cart = []; saveCart(); toggleCart();
-    const cb = document.getElementById('terms-check'); if (cb) { cb.checked = false; updateCheckoutBtn(); }
-};
-
-// Função auxiliar para formatar descrição com ícones (para o modal)
-function formatDescription(desc) {
-    if (!desc) return '';
-    const lines = desc.split('\n').filter(l => l.trim().length > 0);
-    let html = '<div class="modal-desc">';
-    lines.forEach(line => {
-        if (line.trim().startsWith('✓')) {
-            html += `<p><i class="fas fa-check-circle" style="color:var(--amber);"></i> ${line.substring(1).trim()}</p>`;
-        } else {
-            html += `<p>${line}</p>`;
-        }
-    });
-    html += '</div>';
-    return html;
-}
-
-// Função para extrair até 3 itens da descrição para o preview no card
-function getPreviewItems(desc) {
-    if (!desc) return [];
-    const lines = desc.split('\n').filter(l => l.trim().startsWith('✓'));
-    // pega no máximo 3, remove o "✓" e espaços
-    return lines.slice(0, 3).map(l => l.replace(/✓\s*/, '').trim());
-}
-
-window.openModal = function(pid) {
-    const p = PRODUCTS.find(x => x.id === pid); if (!p) return;
-    const modal = document.getElementById('product-modal');
-    const box   = document.getElementById('modal-box');
-    const con   = document.getElementById('modal-content');
-    box.className = p.isGold ? 'modal-box gold-modal' : 'modal-box';
-    
-    const imgHtml = `<div class="modal-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>`;
-    const badgeHtml = p.badge ? `<span class="modal-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
-    const descHtml = formatDescription(p.description);
-    
-    con.innerHTML = `
-        ${imgHtml}
-        <h2>${p.name}</h2>
-        <div class="modal-badge-row">${badgeHtml}</div>
-        <div class="modal-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</div>
-        ${descHtml}
-        <button class="btn-primary${p.isGold?' btn-gold':''}" onclick="addToCart(${p.id}); closeModal();">
-            <i class="fas fa-shopping-bag"></i> Adicionar ao carrinho
-        </button>
-    `;
-    modal.classList.add('active'); document.body.style.overflow = 'hidden';
-};
-
-window.closeModal = function() { 
-    document.getElementById('product-modal')?.classList.remove('active'); 
-    document.body.style.overflow = ''; 
-};
-
-window.handleModalOutside = function(e) { 
-    if (e.target.id === 'product-modal') closeModal(); 
-};
-
-document.addEventListener('keydown', e => { 
-    if (e.key === 'Escape') { 
-        closeModal(); 
-        if (document.getElementById('cart-sidebar')?.classList.contains('open')) toggleCart(); 
-    } 
-});
-
-let currentCat = 'all', searchTerm = '';
-
-function renderProducts() {
-    let filtered = PRODUCTS;
-    if (currentCat !== 'all') filtered = filtered.filter(p => p.category === currentCat);
-    if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    const grid = document.getElementById('products-grid');
-    const noRes = document.getElementById('no-results');
-    
-    if (!filtered.length) { 
-        if (grid) grid.innerHTML = ''; 
-        if (noRes) noRes.style.display = 'block'; 
-        return; 
-    }
-    
-    if (noRes) noRes.style.display = 'none';
-    if (grid) {
-        grid.innerHTML = filtered.map(p => {
-            const cc = p.isGold ? 'product-card glass-gold' : 'product-card glass';
-            const badgeHtml = p.badge ? `<span class="pc-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
-            const previewItems = getPreviewItems(p.description);
-            let previewHtml = '';
-            if (previewItems.length) {
-                previewHtml = `<div class="pc-desc-preview">` +
-                    previewItems.map(item => `<span><i class="fas fa-check-circle"></i> ${item}</span>`).join('') +
-                    `</div>`;
-            }
-            
-            return `
-                <div class="${cc}" onclick="openModal(${p.id})">
-                    <div class="pc-top">
-                        <div class="pc-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>
-                        <div class="pc-badges">${badgeHtml}</div>
+        <section class="py-8 relative">
+            <div class="max-w-4xl mx-auto px-6 fade-up">
+                <div class="glass-panel rounded-3xl p-8 md:p-12">
+                    
+                    <!-- Citação de Aceitação -->
+                    <div class="warning-box p-6 rounded-r-xl mb-10 italic text-gray-300 text-sm md:text-base leading-relaxed">
+                        <i class="fas fa-quote-left text-amber-500/40 mr-2"></i>
+                        Ao contratar, adquirir ou utilizar qualquer plano, VIP ou serviço do Udesaken Bot, o utilizador declara que leu, compreendeu e concorda integralmente com os termos descritos abaixo.
                     </div>
-                    <h3>${p.name}</h3>
-                    ${previewHtml}
-                    <div class="pc-footer">
-                        <span class="pc-price${p.isGold?' gold-price':''}">R$ ${formatBRL(p.price)}</span>
-                        <button class="btn-add${p.isGold?' btn-gold':''}" onclick="event.stopPropagation();addToCart(${p.id})">
-                            <i class="fas fa-plus"></i>
-                        </button>
+
+                    <!-- Conteúdo dos Termos -->
+                    <div class="space-y-10">
+                        
+                        <!-- 1. Aceitação -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-check-circle text-amber-500 text-sm"></i> 1. Aceitação dos Termos
+                            </h3>
+                            <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+                                Ao realizar o pagamento, ativar o plano ou utilizar o Udesaken Bot, o utilizador declara ter lido, compreendido e aceitado integralmente estes Termos de Uso. Caso não concorde com qualquer disposição, deverá interromper imediatamente o uso do serviço.
+                            </p>
+                        </div>
+
+                        <!-- 2. Licença -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-id-card text-amber-500 text-sm"></i> 2. Licença de Uso e Responsabilidade do Utilizador
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">2.1.</strong> A licença concedida é individual, intransferível, temporária e limitada ao período pago.</li>
+                                <li><strong class="text-white">2.2.</strong> O utilizador é única e exclusivamente responsável por todas as atividades realizadas com o bot nos seus grupos, incluindo ações de terceiros (administradores ou membros).</li>
+                                <li><strong class="text-white">2.3.</strong> A Udesaken Group não se responsabiliza por conflitos internos nos grupos, decisões de outros administradores ou qualquer prejuízo decorrente do uso do serviço.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 3. Conteúdo Adulto -->
+                        <div class="critical-box p-6 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-red-400 font-bold text-lg mb-4 border-b border-red-500/20 pb-2">
+                                <i class="fas fa-exclamation-triangle text-red-500 text-sm"></i> 3. Comandos de Conteúdo Adulto (NSFW/Hot)
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">3.1.</strong> O bot possui comandos que podem gerar conteúdo adulto ou NSFW.</li>
+                                <li><strong class="text-white">3.2.</strong> O utilizador assume total e exclusiva responsabilidade pelo uso desses comandos, inclusive por eventual exposição a menores de idade ou outros utilizadores.</li>
+                                <li><strong class="text-white">3.3.</strong> A Udesaken Group não realiza verificação de idade e não possui qualquer responsabilidade civil, penal ou administrativa por violações relacionadas a conteúdo adulto.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 4. Vigência -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-clock text-amber-500 text-sm"></i> 4. Vigência do Plano
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">4.1.</strong> O plano inicia imediatamente após a confirmação de pagamento e ativação do acesso.</li>
+                                <li><strong class="text-white">4.2.</strong> A contagem é realizada em dias corridos, sem pausa ou suspensão por inatividade do utilizador.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 5. Disponibilidade -->
+                        <div class="term-section p-5 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-4 border-b border-white/10 pb-2">
+                                <i class="fas fa-server text-amber-500 text-sm"></i> 5. Disponibilidade, Riscos e Limitações do Serviço
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-3">
+                                <li><strong class="text-white">5.1.</strong> O serviço depende integralmente da plataforma WhatsApp/Meta e pode sofrer interrupções, oscilações ou banimentos. A Udesaken Group não garante imunidade contra bloqueios ou banimentos.</li>
+                                <li class="p-4 bg-white/5 border border-white/5 rounded-xl mt-2">
+                                    <strong class="text-white block mb-1">5.2. Banimento ou Bloqueio:</strong>
+                                    Em caso de banimento do número do bot por motivos alheios à Udesaken, será realizada migração do plano com contagem de dias congelada, quando tecnicamente possível.
+                                </li>
+                                <li class="p-4 bg-white/5 border border-white/5 rounded-xl">
+                                    <strong class="text-white block mb-1">5.3. Falha Técnica:</strong>
+                                    Falhas exclusivas da Udesaken superiores a 24 (vinte e quatro) horas consecutivas poderão gerar reposição proporcional dos dias, a critério exclusivo da empresa.
+                                </li>
+                                <li><strong class="text-white">5.4.</strong> O serviço é fornecido "no estado em que se encontra" ("AS IS"), sem qualquer garantia expressa ou implícita de disponibilidade, performance ou adequação a um propósito específico.</li>
+                            </ul>
+                        </div>
+
+                        <!-- 6 e 7: Suporte e Reembolso - Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-base mb-3">
+                                    <i class="fas fa-headset text-amber-500 text-sm"></i> 6. Suporte
+                                </h3>
+                                <ul class="legal-list text-sm text-gray-300">
+                                    <li><strong class="text-white">6.1.</strong> Suporte apenas durante a vigência do plano.</li>
+                                    <li><strong class="text-white">6.2.</strong> Prazo médio de resposta: até 24 horas úteis.</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Nova Seção 7: SEM DIREITO A REEMBOLSO -->
+                            <div class="critical-box p-5 rounded-xl border border-red-500/20 bg-red-500/5">
+                                <h3 class="flex items-center gap-3 text-red-400 font-bold text-base mb-3">
+                                    <i class="fas fa-ban text-red-500 text-sm"></i> 7. Política de Não Reembolso
+                                </h3>
+                                <ul class="legal-list text-sm text-gray-300">
+                                    <li><strong class="text-white">7.1.</strong> <span class="text-red-300 font-medium">Nenhum reembolso será emitido.</span> Por se tratar de um serviço digital de acesso e consumo imediatos, não existe qualquer direito a reembolso ou estorno.</li>
+                                    <li><strong class="text-white">7.2.</strong> <span class="text-red-300 font-medium">Renúncia:</span> Ao realizar o pagamento e utilizar o bot, o utilizador renuncia expressamente a qualquer direito de arrependimento.</li>
+                                    <li><strong class="text-white">7.3.</strong> Sem exceções em caso de banimento por violação de termos, insatisfação, ou por não utilização do período contratado.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 8. Uso Indevido -->
+                        <div class="critical-box p-6 rounded-xl">
+                            <h3 class="flex items-center gap-3 text-red-400 font-bold text-lg mb-4 border-b border-red-500/20 pb-2">
+                                <i class="fas fa-ban text-red-500 text-sm"></i> 8. Uso Indevido, Proibições e Penalidades
+                            </h3>
+                            <ul class="legal-list text-sm md:text-base text-gray-300 space-y-2">
+                                <li><strong class="text-white">8.1.</strong> É terminantemente proibido: spam, travas, ataques, envio de mensagens em massa não solicitadas, discursos de ódio, conteúdo ilegal, exploração de bugs, violação das Políticas do WhatsApp/Meta ou qualquer prática que possa gerar risco de banimento.</li>
+                                <li><strong class="text-white">8.2.</strong> A Udesaken Group poderá suspender ou encerrar o acesso imediatamente e sem aviso prévio em caso de violação ou risco identificado.</li>
+                            </ul>
+                            <div class="mt-4 p-4 bg-red-500/10 rounded-xl border border-red-500/20">
+                                <div class="flex gap-3 items-start">
+                                    <i class="fas fa-gavel text-red-500/80 text-xl mt-0.5"></i>
+                                    <div>
+                                        <strong class="text-white block uppercase text-xs tracking-wider">8.3. Penalidade por Violação Grave</strong>
+                                        <p class="text-xs md:text-sm text-gray-300 mt-1">Violações graves poderão resultar em banimento permanente do plano, sem qualquer direito a estorno ou compensação, e cobrança de multa compensatória de até R$ 30,00 por infração, além de indemnização por eventuais danos causados.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 9 e 10 -->
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                    <i class="fas fa-user-shield text-amber-500 text-sm"></i> 9. Indemnização e Isenção
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed">O utilizador obriga-se a indemnizar e isentar integralmente a Udesaken Group de qualquer prejuízo, ação judicial, multa, dano ou reclamação decorrente de uso inadequado, violação das Políticas do WhatsApp, exposição de menores a conteúdo adulto, banimento de número pessoal ou conflitos internos nos grupos.</p>
+                            </div>
+                            <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+                                <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                    <i class="fas fa-shield-halved text-amber-500 text-sm"></i> 10. Limitação de Responsabilidade
+                                </h3>
+                                <p class="text-sm text-gray-300 leading-relaxed">Em nenhuma hipótese a Udesaken Group será responsável por danos indiretos, lucros cessantes, perda de dados, banimentos de contas do utilizador ou qualquer prejuízo causado pela plataforma WhatsApp/Meta. A responsabilidade total fica limitada ao valor efetivamente pago pelo utilizador nos últimos 12 meses.</p>
+                            </div>
+                        </div>
+
+                        <!-- 11. Propriedade Intelectual -->
+                        <div class="term-section p-5 rounded-xl border border-white/5 bg-white/[0.02]">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                <i class="fas fa-copyright text-amber-500 text-sm"></i> 11. Propriedade Intelectual
+                            </h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">Todo o software, comandos, figurinhas e funcionalidades são de propriedade exclusiva da Udesaken Group. É expressamente proibida qualquer forma de engenharia reversa, cópia, modificação, distribuição ou uso não autorizado.</p>
+                        </div>
+
+                        <!-- 12. Alterações e Foro -->
+                        <div class="term-section p-6 rounded-xl border border-amber-500/20 bg-amber-500/5">
+                            <h3 class="flex items-center gap-3 text-white font-bold text-lg mb-3">
+                                <i class="fas fa-scale-balanced text-amber-500 text-sm"></i> 12. Alterações nos Termos e Foro Competente
+                            </h3>
+                            <ul class="legal-list text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-white">12.1.</strong> A Udesaken Group poderá alterar estes Termos a qualquer momento. Alterações substanciais serão comunicadas com antecedência razoável através dos canais oficiais.</li>
+                                <li><strong class="text-white">12.2.</strong> Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o foro da Comarca do Rio de Janeiro/RJ para dirimir quaisquer controvérsias, ressalvada a competência especial do consumidor prevista em lei.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Aceite Final -->
+                        <div class="mt-10 pt-8 border-t border-white/10 text-center">
+                            <p class="text-sm text-gray-400 mb-6">Ao continuar a utilizar o serviço, confirma que leu, compreendeu e concorda integralmente com todos os termos acima.</p>
+                            
+                            <a href="https://wa.me/447562847091?text=Ol%C3%A1%2C%20li%20e%20aceito%20integralmente%20os%20Termos%20de%20Uso%20do%20Udesaken%20Bot." target="_blank" 
+                               class="btn-accept inline-flex items-center justify-center gap-3 py-4 px-10 rounded-full w-full md:w-auto text-lg">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                                LI E ACEITO OS TERMOS
+                            </a>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <a href="../privacidade/" class="inline-flex items-center gap-2 text-amber-500/60 hover:text-amber-500 transition font-medium text-sm">
+                                <i class="fas fa-user-shield"></i>
+                                Leia também a nossa Política de Privacidade (LGPD)
+                            </a>
+                        </div>
+
                     </div>
                 </div>
-            `;
-        }).join('');
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-12 pb-8 border-t border-white/5 bg-black/30 relative z-10">
+        <div class="max-w-[1100px] mx-auto px-6 text-center">
+            <div class="flex justify-center gap-8 mb-6">
+                <a href="/" class="footer-link text-xs font-medium">Início</a>
+                <a href="../privacidade/" class="footer-link text-xs font-medium">Privacidade</a>
+                <a href="../equipe/" class="footer-link text-xs font-medium">Equipe</a>
+            </div>
+            <div class="section-divider my-6"></div>
+            <p class="text-[10px] text-gray-600 font-black tracking-[0.2em] uppercase">Udesaken Group &copy; 2026 • Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== CANVAS UNIVERSO ESTRELADO ====================
+        const canvas = document.getElementById('universe-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars;
         
-        if (window.matchMedia("(hover: hover)").matches) {
-            grid.querySelectorAll('.product-card').forEach(el => {
-                el.addEventListener('mousemove', e => { 
-                    const r=el.getBoundingClientRect(); 
-                    el.style.setProperty('--mx',`${e.clientX-r.left}px`); 
-                    el.style.setProperty('--my',`${e.clientY-r.top}px`); 
+        function initStars() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+            for(let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
+            }
+        }
+        
+        function drawStars() {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            
+            for(let i = 0; i < stars.length; i++) {
+                let s = stars[i];
+                s.x += s.vx;
+                s.y += s.vy;
+                
+                if(s.x < 0) s.x = width;
+                if(s.x > width) s.x = 0;
+                if(s.y < 0) s.y = height;
+                if(s.y > height) s.y = 0;
+                
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
+                ctx.fill();
+                
+                for(let j = i + 1; j < stars.length; j++) {
+                    let s2 = stars[j];
+                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
+                    if(dist < 130) {
+                        ctx.beginPath();
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(s2.x, s2.y);
+                        ctx.strokeStyle = `rgba(255, 140, 0, ${0.03 - dist/4000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { initStars(); });
+        initStars();
+        drawStars();
+
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            else navbar.classList.remove('glass-nav');
+        });
+
+        // ==================== FADE-UP OBSERVER ====================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target); 
+                }
             });
-        }
-    }
-}
-
-function renderFeatured() {
-    const scroll = document.getElementById('featured-scroll'); if (!scroll) return;
-    scroll.innerHTML = [3,6,9,12].map(id => {
-        const p = PRODUCTS.find(x=>x.id===id); if (!p) return '';
-        const cc = p.isGold ? 'feat-card glass-gold feat-gold' : 'feat-card glass';
-        const bh = p.badge ? `<div class="fc-badge">${p.badge}</div>` : '';
-        const img = `<img src="${p.image || LOGO_IMAGE}" class="fc-img" alt="${p.name}">`;
-        return `
-            <div class="${cc}" onclick="openModal(${p.id})">
-                ${img}${bh}
-                <div class="fc-name">${p.name}</div>
-                <div class="fc-price">R$ ${formatBRL(p.price)}</div>
-            </div>`;
-    }).join('');
-}
-
-document.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.addEventListener('click', () => { 
-        document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); 
-        btn.classList.add('active'); 
-        currentCat=btn.dataset.cat; 
-        renderProducts(); 
-    });
-});
-
-document.getElementById('search-input')?.addEventListener('input', e => { 
-    searchTerm=e.target.value; 
-    renderProducts(); 
-});
-
-function showToast(msg) {
-    document.querySelectorAll('.toast').forEach(t=>t.remove());
-    const t=document.createElement('div'); t.className='toast'; t.innerHTML=msg;
-    document.body.appendChild(t); setTimeout(()=>t.remove(),3000);
-}
-
-// Universe canvas
-(function(){
-    const canvas=document.getElementById('universe-canvas'), ctx=canvas.getContext('2d');
-    let W,H,particles;
-    const BH={get x(){return W*.5},get y(){return H*.82},get r(){return Math.min(W,H)*.10},diskInner:1.5,diskOuter:3.8,angle:0};
-    
-    function resize(){
-        W=canvas.width=window.innerWidth;
-        H=canvas.height=window.innerHeight;
-        particles=[];
-        const n=Math.min(Math.floor(W/(window.innerWidth < 768 ? 40 : 20)), 80);
-        for(let i=0;i<n;i++)particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1+.3});
-    }
-    
-    function drawBackDisk(bx,by,R){const o=R*BH.diskOuter;ctx.save();ctx.translate(bx,by);const ag=ctx.createRadialGradient(0,-R*.18,R*BH.diskInner*.5,0,0,o*.85);ag.addColorStop(0,'rgba(255,220,100,0.4)');ag.addColorStop(.4,'rgba(255,140,20,0.2)');ag.addColorStop(1,'rgba(200,60,0,0)');ctx.beginPath();ctx.ellipse(0,-R*.22,o*.88,R*.22,0,Math.PI,0);ctx.fillStyle=ag;ctx.fill();ctx.restore();}
-    function drawAccretionDisk(bx,by,R,angle){const i=R*BH.diskInner,o=R*BH.diskOuter;ctx.save();ctx.translate(bx,by);ctx.rotate(angle);ctx.scale(1,.28);const g=ctx.createRadialGradient(0,0,i,0,0,o);g.addColorStop(0,'rgba(255,140,0,0)');g.addColorStop(.2,'rgba(255,200,80,0.4)');g.addColorStop(.5,'rgba(255,255,220,0.7)');g.addColorStop(.8,'rgba(200,60,0,0.3)');g.addColorStop(1,'rgba(100,20,0,0)');ctx.beginPath();ctx.arc(0,0,o,0,Math.PI*2);ctx.arc(0,0,i,Math.PI*2,0,true);ctx.fillStyle=g;ctx.fill();ctx.restore();}
-    function drawBlackHole(bx,by,R){const gl=ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);gl.addColorStop(0,'rgba(255,120,0,0.12)');gl.addColorStop(.4,'rgba(180,60,0,0.05)');gl.addColorStop(1,'rgba(0,0,0,0)');ctx.beginPath();ctx.arc(bx,by,R*2,0,Math.PI*2);ctx.fillStyle=gl;ctx.fill();const sh=ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);sh.addColorStop(0,'#000');sh.addColorStop(.85,'#000');sh.addColorStop(1,'rgba(0,0,0,0.85)');ctx.beginPath();ctx.arc(bx,by,R,0,Math.PI*2);ctx.fillStyle=sh;ctx.fill();}
-    function gravity(p){const dx=BH.x-p.x,dy=BH.y-p.y,d=Math.hypot(dx,dy);if(d<BH.r*5&&d>BH.r*1.2){const f=.0001*(BH.r*5/d);p.vx+=(dx/d)*f;p.vy+=(dy/d)*f;}if(d<BH.r*1.15){p.x=Math.random()*W;p.y=Math.random()*H*.6;p.vx=(Math.random()-.5)*.3;p.vy=(Math.random()-.5)*.3;}}
-    
-    let t=0;
-    function draw(){
-        ctx.clearRect(0,0,W,H);
-        t+=16;BH.angle=t*.00015;
-        drawBackDisk(BH.x,BH.y,BH.r);drawAccretionDisk(BH.x,BH.y,BH.r,BH.angle);drawBlackHole(BH.x,BH.y,BH.r);
-        ctx.fillStyle='rgba(255,255,255,0.5)';
-        for(let i=0;i<particles.length;i++){
-            const p=particles[i];
-            gravity(p);p.x+=p.vx;p.y+=p.vy;
-            if(p.x<0||p.x>W)p.vx*=-1;
-            if(p.y<0||p.y>H)p.vy*=-1;
-            ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-        }
-        requestAnimationFrame(draw);
-    }
-    
-    resize(); 
-    let rt; 
-    let lastW = window.innerWidth;
-    window.addEventListener('resize',()=>{
-        if(window.innerWidth !== lastW) {
-            lastW = window.innerWidth;
-            clearTimeout(rt);
-            rt=setTimeout(resize,150);
-        }
-    }); 
-    draw();
-})();
-
-// Navbar scroll
-(function(){
-    const nav=document.getElementById('navbar'),tog=document.getElementById('menu-toggle'),menu=document.getElementById('mobile-menu');
-    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>20));
-    tog.addEventListener('click',e=>{e.stopPropagation();const o=menu.classList.toggle('open');tog.innerHTML=o?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
-    document.addEventListener('click',e=>{if(!nav.contains(e.target)&&menu.classList.contains('open')){menu.classList.remove('open');tog.innerHTML='<i class="fas fa-bars"></i>';}});
-})();
-
-// Fade up observer
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:.1});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-renderFeatured();
-renderProducts();
-renderCart();
-</script>
+        }, { 
+            threshold: 0.05, 
+            rootMargin: '50px' 
+        });
+        
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
