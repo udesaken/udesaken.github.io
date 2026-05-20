@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Udesaken Group | Hub Corporativo</title>
+    <meta name="description" content="O hub oficial da Udesaken Group. Ecossistema completo: divisões, projetos, canais oficiais e comunidades estratégicas. Sistema Operante.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Udesaken Group | Hub Corporativo">
+    <meta property="og:description" content="Explore o universo Udesaken: 777Network, Tædnet, Yz Division, Discord oficial e muito mais.">
+    <meta property="og:image" content="https://udesaken.site/logousk.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #000;
+            --white: #fff;
+            --primary: #666565;
+            --primary-dim: rgba(56, 56, 56, 0.18);
+            --primary-glow: rgba(10,132,255,0.06);
+            --surface: rgba(10,10,10,0.72);
+            --border: rgba(255,255,255,0.07);
+            --border-lit: rgba(255,255,255,0.16);
+            --text-sub: #888;
+            --text-dim: #444;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #000;
+            color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        /* ── CURSOR (refined blue) ── */
+        #cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: exclusion;
+        }
+        #cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(10,132,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.18s cubic-bezier(.2,.9,.4,1.1), width 0.3s, height 0.3s, opacity 0.3s;
+        }
+        body:hover #cursor { opacity: 1; }
+
+        /* ── CANVAS BLACK HOLE (blue tones) ── */
+        #universe-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── NOISE OVERLAY ── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.028;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ── NAVBAR ── */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            padding: 14px 24px;
+        }
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: 16px;
+            background: rgba(6,6,6,0.82);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px) saturate(160%);
+            padding: 10px 20px;
+            transition: border-color 0.3s;
+        }
+        #navbar.scrolled .nav-inner { border-color: var(--border-lit); }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .nav-logo-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            overflow: hidden;
+        }
+        .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .nav-wordmark {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.08em;
+            color: var(--white);
+        }
+        .nav-links {
+            display: flex;
+            gap: 4px;
+        }
+        .nav-link {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 5px 12px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+        }
+        .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+        .nav-cta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 8px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            border: 1px solid rgba(10,132,255,0.3);
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .nav-cta:hover { background: rgba(10,132,255,0.28); border-color: rgba(10,132,255,0.5); }
+
+        /* ── HERO ── */
+        #hero {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: var(--primary-dim);
+            border: 1px solid rgba(10,132,255,0.25);
+            border-radius: 4px;
+            padding: 5px 14px;
+            margin-bottom: 36px;
+            animation: fadeUp 0.8s both;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.92;
+            letter-spacing: 0.01em;
+            animation: fadeUp 0.9s 0.1s both;
+            position: relative;
+        }
+        .hero-title .line-amber {
+            -webkit-text-stroke: 1px var(--primary);
+            color: transparent;
+        }
+        .hero-sub {
+            margin-top: 28px;
+            max-width: 540px;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.65;
+            font-weight: 300;
+            animation: fadeUp 1s 0.2s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 56px;
+            animation: fadeUp 1s 0.35s both;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-top: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stat-sep {
+            width: 1px;
+            background: var(--border);
+            align-self: stretch;
+            margin: 4px 0;
+        }
+
+        .hero-scroll {
+            margin-top: 72px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fadeUp 1s 0.5s both;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            animation: scrollLine 2s infinite;
+        }
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            50.001% { transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── MAIN LAYOUT ── */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px 120px;
+        }
+
+        /* ── SECTION HEADER ── */
+        .sec-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .sec-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sec-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+        .sec-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.6rem;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+        .sec-meta {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .section-block { margin-bottom: 100px; }
+
+        /* ── CHANNEL CARDS (WhatsApp) ── */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2px;
+        }
+        .channel-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 22px;
+            background: rgba(8,8,8,0.6);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--white);
+            transition: background 0.25s, border-color 0.25s, transform 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .channel-card:first-child { border-radius: 16px 0 0 0; }
+        .channel-card:nth-child(2) { border-radius: 0 16px 0 0; }
+        .channel-card:nth-last-child(2) { border-radius: 0 0 0 16px; }
+        .channel-card:last-child { border-radius: 0 0 16px 0; }
+        .channel-card:hover {
+            background: rgba(10,132,255,0.06);
+            border-color: rgba(10,132,255,0.2);
+            z-index: 2;
+        }
+        .channel-card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+            transform: scaleY(0);
+            transition: transform 0.25s;
+        }
+        .channel-card:hover::after { transform: scaleY(1); }
+        .ch-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: background 0.25s, border-color 0.25s;
+        }
+        .channel-card:hover .ch-icon {
+            background: var(--primary-dim);
+            border-color: rgba(10,132,255,0.3);
+        }
+        .ch-info { flex: 1; min-width: 0; }
+        .ch-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .ch-desc {
+            font-size: 0.72rem;
+            color: var(--text-sub);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .ch-arrow {
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            transition: color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+        .channel-card:hover .ch-arrow { color: var(--primary); transform: translateX(3px); }
+
+        /* ── DISCORD CARDS (only two) ── */
+        .discord-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        .discord-card {
+            padding: 28px;
+            border-radius: 20px;
+            background: rgba(8,8,8,0.7);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--white);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            transition: background 0.25s, border-color 0.25s, transform 0.25s;
+            backdrop-filter: blur(16px);
+        }
+        .discord-card:hover {
+            border-color: var(--border-lit);
+            background: rgba(20,20,20,0.8);
+            transform: translateY(-3px);
+        }
+        .dc-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .dc-info { flex: 1; }
+        .dc-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .dc-desc {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            line-height: 1.5;
+            font-weight: 300;
+        }
+        .dc-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-top: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── PROJECT CARDS ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 16px;
+        }
+        .project-card {
+            padding: 28px 30px;
+            border-radius: 20px;
+            background: rgba(8,8,8,0.7);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            transition: border-color 0.3s, transform 0.3s, background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .project-card:hover {
+            border-color: rgba(10,132,255,0.2);
+            transform: translateY(-4px);
+            background: rgba(8,16,32,0.85);
+        }
+        .project-card:hover::before { opacity: 1; }
+        .proj-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .proj-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.03em;
+            line-height: 1;
+        }
+        .proj-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 4px;
+            letter-spacing: 0.08em;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: var(--text-sub);
+        }
+        .proj-badge.gold {
+            background: var(--primary-dim);
+            color: var(--primary);
+            border-color: rgba(10,132,255,0.25);
+        }
+        .proj-desc {
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .proj-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            flex-shrink: 0;
+        }
+        .dot.yellow { background: #facc15; box-shadow: 0 0 8px #facc15; }
+        .dot.gray { background: #555; box-shadow: none; }
+
+        /* ── DNA BLOCK ── */
+        .dna-block {
+            background: rgba(8,8,8,0.7);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 56px 48px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        .dna-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(600px circle at 50% 0%, rgba(10,132,255,0.05), transparent 60%);
+            pointer-events: none;
+        }
+        .dna-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        .dna-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 16px;
+        }
+        .dna-text {
+            color: var(--text-sub);
+            max-width: 680px;
+            margin: 0 auto;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        .dna-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .dna-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+        .dna-stat i { color: var(--primary); }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            z-index: 10;
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,0.92);
+            padding: 48px 24px 36px;
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr repeat(3, auto);
+            gap: 48px;
+            align-items: start;
+        }
+        .footer-brand .nav-wordmark { font-size: 1.6rem; margin-bottom: 8px; display: block; }
+        .footer-brand p {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .footer-col h5 {
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 14px;
+        }
+        .footer-col p {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            line-height: 1.8;
+        }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* ── FADE-UP ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s cubic-bezier(.2,.9,.4,1), transform 0.65s cubic-bezier(.2,.9,.4,1);
+        }
+        .fade-up.visible { opacity: 1; transform: none; }
+        .fade-up:nth-child(2) { transition-delay: 0.07s; }
+        .fade-up:nth-child(3) { transition-delay: 0.14s; }
+        .fade-up:nth-child(4) { transition-delay: 0.21s; }
+        .fade-up:nth-child(5) { transition-delay: 0.28s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta { display: none; }
+            .hero-title { font-size: clamp(3.5rem, 16vw, 5rem); }
+            .projects-grid { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+            .hero-stats { gap: 28px; }
+            .stat-sep { display: none; }
+            .channel-card:first-child,
+            .channel-card:nth-child(2),
+            .channel-card:nth-last-child(2),
+            .channel-card:last-child { border-radius: 0; }
+            .channels-grid { gap: 1px; }
+            .dna-block { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="universe-canvas"></canvas>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="./" class="nav-logo">
+            <div class="nav-logo-icon"><img src="logousk1.png" alt="USK"></div>
+            <span class="nav-wordmark">UDESAKEN</span>
+        </a>
+        <div class="nav-links">
+            <a href="./" class="nav-link">Início</a>
+            <a href="./store/" class="nav-link">Loja</a>
+            <a href="./discord/" class="nav-link">Comunidade</a>
+            <a href="./hub/" class="nav-link">Hub</a>
+        </div>
+        <a href="./discord/" class="nav-cta">Entrar</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-eyebrow">ECOSSISTEMA OPERANTE · DESDE 2022</div>
+    <h1 class="hero-title">
+        O UNIVERSO<br><span class="line-amber">UDESAKEN</span>
+    </h1>
+    <p class="hero-sub">
+        Tecnologia, exclusividade e poder em um só ecossistema.
+        Divisões, canais oficiais e comunidades estratégicas.
+    </p>
+    <div class="hero-stats">
+        <div class="stat-item">
+            <div class="stat-number">7M+</div>
+            <div class="stat-label">Visualizações</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Anos de história</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Ativos estratégicos</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+            <div class="stat-number">14.3k+</div>
+            <div class="stat-label">Membros WhatsApp</div>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        scroll
+    </div>
+</section>
+
+<!-- MAIN -->
+<main>
+
+    <!-- CANAIS WHATSAPP -->
+    <div class="section-block">
+        <div class="sec-header fade-up">
+            <div class="sec-title-group">
+                <span class="sec-label"><i class="fab fa-whatsapp"></i> &nbsp;Canais Oficiais</span>
+                <h2 class="sec-title">WhatsApp</h2>
+            </div>
+            <span class="sec-meta">Expansão digital · conteúdo exclusivo</span>
+        </div>
+        <div class="channels-grid">
+            <a href="https://whatsapp.com/channel/0029VbBkK4U5kg77KBDyLC0a" target="_blank" class="channel-card fade-up">
+                <div class="ch-icon"><i class="fas fa-sticky-note" style="color:#facc15;"></i></div>
+                <div class="ch-info">
+                    <div class="ch-name">Figurinhas & Memes</div>
+                    <div class="ch-desc">O maior Canal de stickers da internet</div>
+                </div>
+                <i class="fas fa-arrow-right ch-arrow"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb7kwT47YSd7f3oWmH08" target="_blank" class="channel-card fade-up">
+                <div class="ch-icon"><i class="fas fa-fire" style="color:#f97316;"></i></div>
+                <div class="ch-info">
+                    <div class="ch-name">Figurinhas Safadas</div>
+                    <div class="ch-desc">fig para fleters da UsK</div>
+                </div>
+                <i class="fas fa-arrow-right ch-arrow"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbCd9L2LtOjERWpI5U1K" target="_blank" class="channel-card fade-up">
+                <div class="ch-icon"><i class="fas fa-dragon" style="color:#a78bfa;"></i></div>
+                <div class="ch-info">
+                    <div class="ch-name">Animes & Otaku</div>
+                    <div class="ch-desc">Memes, Animes, Edits</div>
+                </div>
+                <i class="fas fa-arrow-right ch-arrow"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029VbAC0gq9xVJcG9MEN816" target="_blank" class="channel-card fade-up">
+                <div class="ch-icon"><i class="fas fa-robot" style="color:var(--primary);"></i></div>
+                <div class="ch-info">
+                    <div class="ch-name">Bot & Automação</div>
+                    <div class="ch-desc">Novidades sobre Udesaken Bot</div>
+                </div>
+                <i class="fas fa-arrow-right ch-arrow"></i>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb82YkH7YSdC2Lcx5Q0r" target="_blank" class="channel-card fade-up">
+                <div class="ch-icon"><i class="fas fa-newspaper" style="color:#38bdf8;"></i></div>
+                <div class="ch-info">
+                    <div class="ch-name">Isloch News</div>
+                    <div class="ch-desc">Melhores Noticias da Net</div>
+                </div>
+                <i class="fas fa-arrow-right ch-arrow"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- DISCORD COMMUNITIES (removed Chat & Vazados) -->
+    <div class="section-block">
+        <div class="sec-header fade-up">
+            <div class="sec-title-group">
+                <span class="sec-label"><i class="fab fa-discord"></i> &nbsp;Comunidades</span>
+                <h2 class="sec-title">Discord</h2>
+            </div>
+            <span class="sec-meta">Networking · suporte · inner circle</span>
+        </div>
+        <div class="discord-grid">
+            <a href="./discord/" class="discord-card fade-up" style="text-decoration:none;">
+                <div class="dc-icon" style="background:linear-gradient(135deg,#5865F2,#404EED);">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <div class="dc-info">
+                    <div class="dc-name">Udesaken Oficial</div>
+                    <div class="dc-desc">Servidor principal — suporte, anúncios, comunidade ativa e eventos exclusivos.</div>
+                    <div class="dc-tag" style="background:rgba(88,101,242,0.15);color:#818cf8;border:1px solid rgba(88,101,242,0.25);">
+                        <span>●</span> 2.3k+ membros
+                    </div>
+                </div>
+            </a>
+            <!-- Link Vazados only: removed Chat & Vazados -->
+            <a href="https://discord.gg/bRFHm6Szwd" class="discord-card fade-up" style="text-decoration:none;">
+                <div class="dc-icon" style="background:rgba(255,255,255,0.04);border:1px solid var(--border);">
+                    <i class="fas fa-link" style="color:var(--primary);"></i>
+                </div>
+                <div class="dc-info">
+                    <div class="dc-name">Link Vazados</div>
+                    <div class="dc-desc">Central de links Vazados.</div>
+                    <div class="dc-tag" style="background:var(--primary-dim);color:var(--primary);border:1px solid rgba(10,132,255,0.2);">
+                        Curadoria UsK · Arquivo
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- DIVISÕES & PROJETOS -->
+    <div class="section-block">
+        <div class="sec-header fade-up">
+            <div class="sec-title-group">
+                <span class="sec-label"><i class="fas fa-shield-alt"></i> &nbsp;Portfólio</span>
+                <h2 class="sec-title">Divisões & Projetos</h2>
+            </div>
+            <span class="sec-meta">Tecnologia · sigilo · domínio</span>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">777Network</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Programação de bots para Discord. Automação avançada, sistemas de economia e moderação.</p>
+                 <div class="proj-footer"><div class="dot gray"></div> FECHADO · INTEGRADO</div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">Tædnet</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Modificações e customizações avançadas de aplicativos WhatsApp. Mods e recursos exclusivos.</p>
+                <div class="proj-footer"><div class="dot yellow"></div> ADMINISTRADA · Dev TEAM</div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">60hz</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Divisão secreta, restrita. Operações silenciosas dentro do ecossistema UsK.</p>
+                <div class="proj-footer"><div class="dot yellow"></div> ADMINISTRADA · CORE TEAM</div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">TsF</span>
+                    <span class="proj-badge">50% UsK</span>
+                </div>
+                <p class="proj-desc">Grupo de elite sigiloso para interações internas e comunicações estratégicas.</p>
+                <div class="proj-footer"><div class="dot gray"></div> SOB CUIDADOS UsK</div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">SSD</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Cúpula de resenha exclusiva, chat privado de alta segurança e confiança.</p>
+                <div class="proj-footer"><div class="dot gray"></div> DESATIVADO </div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">Toman</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Team "trava zap" (2022). Projeto histórico preservado sob guarda da Udesaken.</p>
+                <div class="proj-footer"><div class="dot gray"></div> FECHADO · ARQUIVO UsK</div>
+            </div>
+            <div class="project-card fade-up">
+                <div class="proj-top">
+                    <span class="proj-name">Yz Division</span>
+                    <span class="proj-badge gold">100% UsK</span>
+                </div>
+                <p class="proj-desc">Divisão de elite da Udesaken. Alta performance, mentalidade além do padrão.</p>
+                <div class="proj-footer"><div class="dot"></div> ELITE · ATIVA</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DNA -->
+    <div class="dna-block fade-up">
+        <div class="dna-icon"><i class="fas fa-gem"></i></div>
+        <h3 class="dna-title">DNA Udesaken Group</h3>
+        <p class="dna-text">Cada marca, projeto ou divisão administrada pela Udesaken Group carrega o DNA dela. Pode ser um bot, um texto, um comentário ou até mesmo um membro sempre vai existir algo da Udesaken em tudo.
+
+Udesaken Top One.</p>
+        <div class="dna-stats">
+            <div class="dna-stat"><i class="fas fa-check-circle"></i> 10+ ativos estratégicos</div>
+            <div class="dna-stat"><i class="fas fa-users"></i> Milhares na base</div>
+            <div class="dna-stat"><i class="fas fa-chart-line"></i> Ecossistema em expansão</div>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER (updated: removed Chat Vazados) -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="nav-wordmark">UDESAKEN Group</span>
+            <p>Sistema Operante · Desde 09/06/2022</p>
+        </div>
+
+    <div class="footer-bottom">
+        <span>Udesaken Group © 2026 — Todos os direitos reservados.</span>
+        <span>"tá UsK, tá lindo!"</span>
+    </div>
+</footer>
+
+<script>
+// ── CURSOR (blue accent) ──
+(function(){
+    const dot = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function tick() {
+        rx += (mx - rx) * 0.15;
+        ry += (my - ry) * 0.15;
+        dot.style.left = mx + 'px';
+        dot.style.top = my + 'px';
+        ring.style.left = rx + 'px';
+        ring.style.top = ry + 'px';
+        requestAnimationFrame(tick);
+    }
+    tick();
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            ring.style.width = '54px';
+            ring.style.height = '54px';
+            ring.style.opacity = '0.6';
+        });
+        el.addEventListener('mouseleave', () => {
+            ring.style.width = '36px';
+            ring.style.height = '36px';
+            ring.style.opacity = '1';
+        });
+    });
+})();
+
+// ── CANVAS BURACO NEGRO (blue-toned accretion) ──
+(function(){
+    const canvas = document.getElementById('universe-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, stars = [], t = 0;
+
+    const BH = {
+        get x() { return W * 0.5; },
+        get y() { return H * 0.82; },
+        get r() { return Math.min(W, H) * 0.075; }
+    };
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+        stars = [];
+        for (let i = 0; i < Math.min(Math.floor(W / 14), 130); i++) {
+            stars.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2,
+                r: Math.random() * 1.1 + 0.15,
+                a: Math.random()
+            });
+        }
+    }
+
+    function drawDisk(bx, by, R, angle) {
+        ctx.save();
+        ctx.translate(bx, by);
+        ctx.rotate(angle);
+        ctx.scale(1, 0.22);
+        const i = R * 1.35, o = R * 3.4;
+        const g = ctx.createRadialGradient(0,0,i,0,0,o);
+        g.addColorStop(0, 'rgba(10,132,255,0)');
+        g.addColorStop(0.25, 'rgba(30,144,255,0.32)');
+        g.addColorStop(0.55, 'rgba(100,200,255,0.55)');
+        g.addColorStop(0.8, 'rgba(0,80,180,0.2)');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(0,0,o,0,Math.PI*2);
+        ctx.arc(0,0,i,Math.PI*2,0,true);
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawHole(bx, by, R) {
+        const g = ctx.createRadialGradient(bx,by,R*0.5,bx,by,R*2.2);
+        g.addColorStop(0,'rgba(0,100,200,0.08)');
+        g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(bx,by,R*2.2,0,Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(bx,by,R,0,Math.PI*2);
+        ctx.fillStyle = '#000';
+        ctx.fill();
+    }
+
+    function frame() {
+        ctx.clearRect(0,0,W,H);
+        t += 0.016;
+        drawDisk(BH.x, BH.y, BH.r, t * 0.18);
+        drawHole(BH.x, BH.y, BH.r);
+
+        for (let s of stars) {
+            const dx = BH.x - s.x, dy = BH.y - s.y, d = Math.hypot(dx, dy);
+            if (d < BH.r * 5 && d > BH.r * 1.4) {
+                const f = 0.00014 * (BH.r * 5 / d);
+                s.vx += (dx/d) * f;
+                s.vy += (dy/d) * f;
+            }
+            if (d < BH.r * 1.3) {
+                s.x = Math.random() * W;
+                s.y = Math.random() * H * 0.6;
+                s.vx = (Math.random() - 0.5) * 0.25;
+                s.vy = (Math.random() - 0.5) * 0.25;
+            }
+            s.x += s.vx;
+            s.y += s.vy;
+            if (s.x < 0 || s.x > W) s.vx *= -1;
+            if (s.y < 0 || s.y > H) s.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(200,230,255,${s.a * 0.65})`;
+            ctx.fill();
+        }
+        requestAnimationFrame(frame);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    frame();
+})();
+
+// ── SCROLL EFFECTS ──
+window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// ── FADE-UP OBSERVER ──
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── GLASS SHIMMER (preserved) ──
+document.addEventListener('mousemove', e => {
+    document.querySelectorAll('.project-card, .discord-card').forEach(el => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+});
+</script>
+</body>
+</html>
