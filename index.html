@@ -236,6 +236,27 @@
             text-decoration: none;
             transition: box-shadow 0.3s;
         }
+        
+        .nav-hub-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(255,140,0,0.12);
+            border: 1px solid rgba(255,140,0,0.3);
+            color: var(--amber);
+            border-radius: 9px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+        
+        .nav-hub-btn:hover {
+            background: rgba(255,140,0,0.25);
+            border-color: rgba(255,140,0,0.6);
+            color: #ffaa33;
+        }
 
         #menu-toggle {
             display: none;
@@ -856,7 +877,7 @@
 
         /* Responsivo */
         @media (max-width: 768px) {
-            .nav-links, .nav-store-btn {
+            .nav-links, .nav-store-btn, .nav-hub-btn {
                 display: none;
             }
             #menu-toggle {
@@ -897,9 +918,15 @@
             <a href="./comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
             <a href="./equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
             <a href="./parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
+            <!-- BOTÃO HUB ADICIONADO AQUI -->
+            <a href="./hub/" class="nav-link"><i class="fas fa-cube"></i> Hub</a>
         </div>
 
         <div style="display:flex; align-items:center; gap:10px;">
+            <a href="./hub/" class="nav-hub-btn">
+                <i class="fas fa-cube"></i>
+                <span>Hub</span>
+            </a>
             <a href="./store/" class="nav-store-btn">
                 <i class="fas fa-store"></i>
                 <span>Loja</span>
@@ -914,6 +941,9 @@
         <a href="./equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
         <div class="mob-divider"></div>
         <a href="./parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
+        <div class="mob-divider"></div>
+        <!-- HUB no menu mobile -->
+        <a href="./hub/" class="mob-link"><i class="fas fa-cube"></i> Hub Corporativo</a>
         <div class="mob-divider"></div>
         <a href="./store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
     </div>
@@ -1020,6 +1050,7 @@
                 <a href="./parcerias/"><i class="fas fa-handshake"></i> Nossas Parcerias</a>
                 <a href="./solicitar-parceria/"><i class="fas fa-paper-plane"></i> Solicitar Parceria</a>
                 <a href="./store/"><i class="fas fa-store"></i> Loja</a>
+                <a href="./hub/"><i class="fas fa-cube"></i> Hub Corporativo</a>
                 <a href="./termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
             </div>
         </div>
