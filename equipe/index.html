@@ -8,7 +8,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Equipe Oficial | Udesaken Group">
     <meta property="og:description" content="Conheça a equipe oficial da Udesaken Group. Os administradores que fazem o ecossistema funcionar.">
-    <meta property="og:image" content="https://udesaken.site/logousk.png">
+    <meta property="og:image" content="/ift/logousk.png">
     <title>Equipe Oficial | Udesaken Group</title>
     
     <!-- Fontes da Marca Udesaken -->
@@ -28,7 +28,7 @@
                     },
                     colors: {
                         brand: {
-                            accent: '#ff8c00', // Laranja Udesaken
+                            accent: '#ff8c00',
                             card: 'rgba(12, 12, 12, 0.62)',
                         }
                     }
@@ -66,7 +66,7 @@
             background: #000;
         }
 
-        /* Navbar Glass (Estilo Home) */
+        /* Navbar Glass */
         .nav-wrapper {
             position: fixed; top: 0; left: 0; right: 0; z-index: 999;
             padding: 12px 20px;
@@ -85,7 +85,6 @@
             border-color: rgba(255,255,255,0.13);
         }
         
-        /* Textos e Animações */
         .text-gradient {
             background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
             -webkit-background-clip: text;
@@ -99,7 +98,7 @@
         }
         .fade-up.active { opacity: 1; transform: translateY(0); }
 
-        /* ================= CARDS DA EQUIPE (Glass + Print Style) ================= */
+        /* Cards da equipe */
         .dev-card {
             background: var(--brand-card);
             backdrop-filter: blur(28px) saturate(130%);
@@ -183,6 +182,17 @@
             border-radius: 6px;
             font-weight: 600;
         }
+        
+        .role-pill {
+            background: rgba(255, 140, 0, 0.12);
+            border: 1px solid rgba(255, 140, 0, 0.25);
+            color: #ffaa44;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 500;
+            display: inline-block;
+        }
 
         .icon-box {
             display: flex;
@@ -204,13 +214,31 @@
             border-color: rgba(255, 140, 0, 0.3);
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; background: #000; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
         ::selection { background: rgba(255,140,0,0.2); color: #fff; }
+        
+        .multiple-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ff8c00;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border-left: 3px solid #ff8c00;
+            padding-left: 10px;
+        }
     </style>
-    <link rel="icon" type="image/png" href="../logousk.png">
+    <link rel="icon" type="image/png" href="/ift/logousk.png">
 </head>
 <body>
 
@@ -220,7 +248,7 @@
         <nav>
             <a href="/" class="flex items-center gap-3 group text-white no-underline">
                 <div class="w-7 h-7 rounded-lg border border-white/10 overflow-hidden bg-black flex items-center justify-center">
-                    <img src="../logousk1.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/36x36'">
+                    <img src="/ift/logousk1.png" alt="Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/36x36'">
                 </div>
                 <span class="font-syne font-extrabold tracking-tight text-base">Udesaken</span>
             </a>
@@ -244,7 +272,7 @@
                     Quem Faz <span class="text-gradient">Acontecer</span>
                 </h1>
                 <p class="text-[0.95rem] text-gray-400 max-w-xl mx-auto font-medium leading-relaxed">
-                    As mentes por trás do ecossistema Udesaken. Focados em entregar segurança blindada e alta performance.
+                    Liderança, gestão e criatividade — conheça a equipe completa que sustenta o ecossistema Udesaken.
                 </p>
             </div>
         </section>
@@ -252,7 +280,7 @@
         <section class="py-16 relative">
             <div class="max-w-[1400px] mx-auto px-6 fade-up">
                 <div id="team-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center items-stretch">
-                    <!-- Os cards são injetados aqui -->
+                    <!-- Cards serão injetados via JavaScript conforme nova hierarquia -->
                 </div>
             </div>
         </section>
@@ -384,7 +412,7 @@
             else navbar.classList.remove('glass-nav');
         });
 
-        // ==================== EFEITO GLASS MOUSEMOVE ====================
+        // Efeito mousemove nos cards
         document.addEventListener('mousemove', (e) => {
             document.querySelectorAll('.dev-card').forEach(el => {
                 const r = el.getBoundingClientRect();
@@ -393,124 +421,183 @@
             });
         });
 
-        // ==================== DADOS DA EQUIPE ====================
-        const profilesData = {
-            isloch: {
-                id: "isloch",
+        // ==================== EQUIPE REESTRUTURADA (Conforme hierarquia fornecida) ====================
+        // Pessoas com múltiplos cargos: Dn (Admin Geral + Representante Vendas), Isloch (CEO + Content Creator)
+        // Bruno (Admin Channel + Admin Grupo), Thiago, Nicole, Athena, Pedim (Admin Grupo)
+        
+        // Ordem hierárquica correta: CEO → Head Manager → Admin Geral → Managers → Admin Channel → Admin Grupo → Rep Vendas → Editor → Content Creators
+        
+        const teamMembers = [
+            {
                 name: "Isloch",
-                role: "Founder, CEO & Dev",
-                fullDescription: "Criador e desenvolvedor focado em JavaScript e Python. Supervisiona todo o ecossistema da Udesaken.",
-                image: "../islo.jpg",
-                skills: ["Gestão", "JavaScript", "Python", "Node.js"],
+                mainRole: "CEO & Founder",
+                additionalRoles: ["Content Creator"],
+                description: "Criador e líder máximo do ecossistema Udesaken. Desenvolvedor full-stack, visionário e também responsável por criar conteúdos estratégicos para a marca.",
+                image: "/ift/islo.jpg",
+                skills: ["JavaScript", "Python", "Node.js", "Gestão", "Criação de Conteúdo"],
                 socials: [
                     { name: 'instagram', url: 'https://instagram.com/isloch_' },
                     { name: 'tiktok', url: 'https://tiktok.com/@isloch_' }
                 ]
             },
-            hyuuzaki: {
-                id: "hyuuzaki",
+            {
                 name: "Hyuuzaki",
-                role: "Head Manager",
-                fullDescription: "Cuida da nossa staff e é responsável por criar as figurinhas exclusivas para o canal.",
-                image: "../hyuuzaki.jpg",
-                skills: ["Gestão", "Design", "Estratégia", "Stickers"],
+                mainRole: "Head Manager",
+                additionalRoles: [],
+                description: "Gerencia toda a equipe de staff, coordena estratégias internas e é responsável pela criação das figurinhas exclusivas do canal.",
+                image: "/ift/hyuuzaki.jpg",
+                skills: ["Gestão de Pessoas", "Design", "Estratégia", "Stickers"],
                 socials: []
             },
-            mz: {
-                id: "mz",
-                name: "Mz",
-                role: "Administradora Channel",
-                fullDescription: "Foca na criação de figurinhas em parceria com a gestão e mantém nossos canais ativos.",
-                image: "../mz.jpg",
-                skills: ["Stickers", "Mídia", "Comunicação"],
+            {
+                name: "Dn",
+                mainRole: "Administrador Geral",
+                additionalRoles: ["Representante de Vendas"],
+                description: "Administrador geral do grupo, supervisiona todas as operações e também atua como representante de vendas, conectando clientes às melhores soluções.",
+                image: "/ift/dn.jpg",
+                skills: ["Gestão Geral", "Estratégia", "Vendas", "Planejamento", "Liderança"],
                 socials: []
             },
-            kamys: {
-                id: "kamys",
-                name: "Kamys",
-                role: "Administradora",
-                fullDescription: "Sempre atenta para auxiliar em tudo que a comunidade precisa para crescer de forma organizada.",
-                image: "../kamys.jpg",
-                skills: ["Suporte", "Moderação", "Empatia"],
+            {
+                name: "Psax",
+                mainRole: "Administrador",
+                additionalRoles: [],
+                description: "Administrador dedicado à manutenção da ordem e suporte avançado, garantindo que as diretrizes sejam seguidas e a experiência dos membros seja positiva.",
+                image: "/ift/pisa.jpg",
+                skills: ["Moderação", "Suporte Avançado", "Logística", "Tomada de Decisão"],
                 socials: []
             },
-            pedim: {
-                id: "pedim",
+            {
+                name: "Bruno",
+                mainRole: "Admin Channel & Admin Grupo",
+                additionalRoles: [],
+                description: "Atua na gestão do canal oficial e também como administrador do grupo, assegurando a harmonia e o bom funcionamento das comunidades Udesaken.",
+                image: "/ift/bruno.jpg",
+                skills: ["Gestão de Canal", "Moderação", "Comunicação", "Organização"],
+                socials: []
+            },
+            {
+                name: "Thiago",
+                mainRole: "Admin Grupo",
+                additionalRoles: [],
+                description: "Administrador focado na moderação e organização do grupo, garantindo um ambiente seguro e produtivo para todos os membros.",
+                image: "/ift/thiago.jpg",
+                skills: ["Moderação", "Gestão de Conflitos", "Aplicação de Regras", "Suporte"],
+                socials: []
+            },
+            {
+                name: "Nicole",
+                mainRole: "Admin Grupo",
+                additionalRoles: [],
+                description: "Responsável pela ordem e bom andamento das discussões no grupo, sempre atenta às necessidades da comunidade e à aplicação das diretrizes.",
+                image: "/ift/nicole.jpg",
+                skills: ["Moderação", "Empatia", "Comunicação", "Resolução de Problemas"],
+                socials: []
+            },
+            {
+                name: "Athena",
+                mainRole: "Admin Grupo",
+                additionalRoles: [],
+                description: "Administra o grupo com dedicação, promovendo um ambiente colaborativo e garantindo que as regras sejam cumpridas com justiça.",
+                image: "/ift/athena.jpg",
+                skills: ["Moderação", "Organização", "Liderança", "Mediação"],
+                socials: []
+            },
+            {
                 name: "Pedim",
-                role: "Administrador",
-                fullDescription: "Garante que tudo flua perfeitamente no dia a dia, mantendo a ordem no grupo.",
-                image: "../pedim.jpg",
-                skills: ["Regras", "Moderação", "Segurança"],
+                mainRole: "Admin Grupo",
+                additionalRoles: [],
+                description: "Atua na administração do grupo, mantendo a ordem e auxiliando os membros com rapidez e eficiência.",
+                image: "/ift/pedim.jpg",
+                skills: ["Moderação", "Segurança", "Disciplina", "Suporte Rápido"],
                 socials: []
             },
-            piazza: {
-                id: "piazza",
+            {
                 name: "Piazza",
-                role: "Representante de Vendas",
-                fullDescription: "Responsável por conectar clientes aos nossos serviços, garantindo o melhor atendimento e soluções.",
-                image: "../piazza.jpg",
-                skills: ["Vendas", "Atendimento", "Comunicação"],
+                mainRole: "Representante de Vendas",
+                additionalRoles: [],
+                description: "Especialista em vendas e atendimento ao cliente, responsável por conectar clientes aos serviços Udesaken com excelência e soluções personalizadas.",
+                image: "/ift/piazza.jpg",
+                skills: ["Vendas", "Atendimento", "Comunicação", "Negociação"],
                 socials: []
             },
-            near: {
-                id: "Near",
-                name: "Near",
-                role: "Representante de Vendas",
-                fullDescription: "O coração da equipe nas negociações, focado em fechar ótimos negócios com nossos clientes.",
-                image: "../dn.png",
-                skills: ["Vendas", "Atendimento", "Comunicação"],
+            {
+                name: "Ferraresi",
+                mainRole: "Editor",
+                additionalRoles: [],
+                description: "Editor responsável pela edição de materiais do grupo, garantindo qualidade estética e profissionalismo em todas as peças.",
+                image: "/ift/ferraresi.jpg",
+                skills: ["Edição de Vídeo"],
+                socials: []
+            },
+             {
+                name: "Davi",
+                mainRole: "Jovem Aprendiz",
+                additionalRoles: [],
+                description: "Davi está em desenvolvimento constante, aprendendo sobre moderação, suporte e gestão. Traz energia nova e dedicação para crescer junto com a equipe.",
+                image: "/ift/davi.jpg",
+                skills: ["Aprendizado", "Mascote UsK", "Suporte Básico", "Vendas"],
                 socials: []
             }
-        };
+        ];
 
-        // ==================== GERAR CARDS NA TELA ====================
-        const gridContainer = document.getElementById('team-grid');
         const iconMap = {
-            'github': 'fab fa-github', 
             'instagram': 'fab fa-instagram',
-            'envelope': 'far fa-envelope', 
-            'discord': 'fab fa-discord', 
-            'twitter': 'fab fa-twitter',
-            'tiktok': 'fab fa-tiktok'
+            'tiktok': 'fab fa-tiktok',
+            'github': 'fab fa-github',
+            'discord': 'fab fa-discord',
+            'twitter': 'fab fa-twitter'
         };
 
-        Object.values(profilesData).forEach(profile => {
-            const skillsHtml = profile.skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('');
+        const gridContainer = document.getElementById('team-grid');
+        if (gridContainer) {
+            gridContainer.innerHTML = '';
             
-            // Renderiza seção de redes sociais apenas se existirem
-            const socialsHtml = profile.socials && profile.socials.length > 0 ? `
-                <div class="mt-auto pt-4 border-t border-white/5">
-                    <div class="flex gap-2">
-                        ${profile.socials.map(social => `<a href="${social.url}" target="_blank" class="icon-box"><i class="${iconMap[social.name] || 'fas fa-link'}"></i></a>`).join('')}
-                    </div>
-                </div>
-            ` : '<div class="mt-auto"></div>';
-
-            const cardHtml = `
-                <div class="dev-card">
-                    <div class="dev-img-wrapper">
-                        <img src="${profile.image}" alt="${profile.name}" onerror="this.src='https://placehold.co/400x400/121212/ffffff?text=${profile.name}'">
-                        <div class="dev-img-overlay"></div>
-                    </div>
-                    <div class="dev-content">
-                        <h2 class="font-syne text-xl font-extrabold text-white tracking-tight">${profile.name}</h2>
-                        <div class="text-brand-accent text-sm font-semibold mt-1 mb-4">${profile.role}</div>
-                        
-                        <!-- Texto descritivo completo -->
-                        <p class="text-gray-300 text-[0.85rem] leading-relaxed mb-6">
-                            ${profile.fullDescription}
-                        </p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            ${skillsHtml}
+            teamMembers.forEach(member => {
+                // Constrói badges de cargos adicionais
+                let additionalRolesHtml = '';
+                if (member.additionalRoles && member.additionalRoles.length > 0) {
+                    additionalRolesHtml = `<div class="multiple-roles">${member.additionalRoles.map(role => `<span class="role-pill">${role}</span>`).join('')}</div>`;
+                }
+                
+                const skillsHtml = member.skills.map(skill => `<span class="skill-pill">${skill}</span>`).join('');
+                
+                const socialsHtml = member.socials && member.socials.length > 0 ? `
+                    <div class="mt-auto pt-4 border-t border-white/5">
+                        <div class="flex gap-2">
+                            ${member.socials.map(social => `<a href="${social.url}" target="_blank" class="icon-box"><i class="${iconMap[social.name] || 'fas fa-link'}"></i></a>`).join('')}
                         </div>
-
-                        ${socialsHtml}
                     </div>
-                </div>
-            `;
-            gridContainer.insertAdjacentHTML('beforeend', cardHtml);
-        });
+                ` : '<div class="mt-auto"></div>';
+                
+                const imgFallback = `this.src='https://placehold.co/400x400/121212/ffffff?text=${encodeURIComponent(member.name)}'`;
+                
+                const cardHtml = `
+                    <div class="dev-card">
+                        <div class="dev-img-wrapper">
+                            <img src="${member.image}" alt="${member.name}" onerror="${imgFallback}">
+                            <div class="dev-img-overlay"></div>
+                        </div>
+                        <div class="dev-content">
+                            <h2 class="font-syne text-xl font-extrabold text-white tracking-tight">${member.name}</h2>
+                            <div class="text-brand-accent text-sm font-semibold mt-1">${member.mainRole}</div>
+                            ${additionalRolesHtml}
+                            
+                            <p class="text-gray-300 text-[0.85rem] leading-relaxed my-5">
+                                ${member.description}
+                            </p>
+    
+                            <div class="flex flex-wrap gap-2 mb-5">
+                                ${skillsHtml}
+                            </div>
+    
+                            ${socialsHtml}
+                        </div>
+                    </div>
+                `;
+                gridContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
 
         // ==================== ANIMAÇÃO FADE-UP ====================
         const fadeElements = document.querySelectorAll('.fade-up');
@@ -520,7 +607,8 @@
             });
         }, { threshold: 0.1 });
         fadeElements.forEach(el => observer.observe(el));
-
+        
+        window.dispatchEvent(new Event('resize'));
     </script>
 </body>
 </html>
