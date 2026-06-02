@@ -28,7 +28,8 @@
                     },
                     colors: {
                         brand: {
-                            accent: '#ff8c00',
+                            accent: '#a855f7',      // roxo principal
+                            'accent-glow': '#c084fc',
                             card: 'rgba(12, 12, 12, 0.62)',
                         }
                     }
@@ -41,9 +42,10 @@
         :root {
             --bg-deep: #000000;
             --border-glow: rgba(255, 255, 255, 0.07);
-            --border-glow-hover: rgba(255, 140, 0, 0.3);
+            --border-glow-hover: rgba(168, 85, 247, 0.35);
             --text-primary: #ffffff;
-            --accent: #ff8c00;
+            --accent: #a855f7;
+            --accent-glow: #c084fc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,7 +58,7 @@
             min-height: 100vh;
         }
         
-        /* Canvas Buraco Negro */
+        /* Canvas Buraco Negro (roxo) */
         #universe-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -82,11 +84,11 @@
         }
         .nav-wrapper.glass-nav nav {
             background: rgba(0, 0, 0, 0.92);
-            border-color: rgba(255,255,255,0.13);
+            border-color: rgba(168, 85, 247, 0.2);
         }
         
         .text-gradient {
-            background: linear-gradient(160deg, #ffffff 0%, #777777 100%);
+            background: linear-gradient(160deg, #ffffff 0%, #c084fc 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -119,7 +121,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.055), transparent 40%);
+            background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(168,85,247,0.12), transparent 40%);
             opacity: 0;
             transition: opacity 0.4s ease;
             pointer-events: none;
@@ -184,9 +186,9 @@
         }
         
         .role-pill {
-            background: rgba(255, 140, 0, 0.12);
-            border: 1px solid rgba(255, 140, 0, 0.25);
-            color: #ffaa44;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
             font-size: 0.7rem;
             padding: 2px 8px;
             border-radius: 20px;
@@ -209,15 +211,15 @@
         }
 
         .dev-card:hover .icon-box:hover {
-            color: var(--accent);
-            background: rgba(255, 140, 0, 0.1);
-            border-color: rgba(255, 140, 0, 0.3);
+            color: var(--accent-glow);
+            background: rgba(168, 85, 247, 0.1);
+            border-color: rgba(168, 85, 247, 0.4);
         }
 
         ::-webkit-scrollbar { width: 5px; background: #000; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #2a1a00; border-radius: 3px; }
-        ::selection { background: rgba(255,140,0,0.2); color: #fff; }
+        ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 3px; }
+        ::selection { background: rgba(168,85,247,0.3); color: #fff; }
         
         .multiple-roles {
             display: flex;
@@ -231,10 +233,10 @@
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #ff8c00;
+            color: var(--accent-glow);
             font-weight: 700;
             margin-bottom: 12px;
-            border-left: 3px solid #ff8c00;
+            border-left: 3px solid var(--accent-glow);
             padding-left: 10px;
         }
     </style>
@@ -265,7 +267,7 @@
         <section class="text-center relative">
             <div class="max-w-4xl mx-auto px-6 fade-up">
                 <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent shadow-[0_0_8px_#ff8c00] animate-pulse"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent shadow-[0_0_8px_#c084fc] animate-pulse"></span>
                     <span class="text-[10px] font-bold text-white/70 tracking-[0.15em] uppercase">Staff Oficial</span>
                 </div>
                 <h1 class="font-syne text-5xl md:text-7xl font-extrabold text-white mb-5 tracking-tighter leading-[1.1]">
@@ -299,7 +301,7 @@
     </footer>
 
     <script>
-        // ==================== CANVAS BURACO NEGRO ====================
+        // ==================== CANVAS BURACO NEGRO (ROXO) ====================
         (function() {
             const canvas = document.getElementById('universe-canvas');
             const ctx = canvas.getContext('2d');
@@ -333,9 +335,9 @@
                 ctx.save();
                 ctx.translate(bx, by);
                 const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
-                ag.addColorStop(0, 'rgba(255,220,100,0.4)');
-                ag.addColorStop(0.4, 'rgba(255,140,20,0.2)');
-                ag.addColorStop(1, 'rgba(200,60,0,0)');
+                ag.addColorStop(0, 'rgba(168,85,247,0.45)');
+                ag.addColorStop(0.4, 'rgba(140,80,240,0.25)');
+                ag.addColorStop(1, 'rgba(80,30,180,0)');
                 ctx.beginPath();
                 ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
                 ctx.fillStyle = ag;
@@ -348,11 +350,11 @@
                 ctx.save();
                 ctx.translate(bx, by); ctx.rotate(angle); ctx.scale(1, 0.28);
                 const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
-                g.addColorStop(0, 'rgba(255,140,0,0)');
-                g.addColorStop(0.2, 'rgba(255,200,80,0.4)');
-                g.addColorStop(0.5, 'rgba(255,255,220,0.7)');
-                g.addColorStop(0.8, 'rgba(200,60,0,0.3)');
-                g.addColorStop(1, 'rgba(100,20,0,0)');
+                g.addColorStop(0, 'rgba(139,92,246,0)');
+                g.addColorStop(0.2, 'rgba(168,85,247,0.5)');
+                g.addColorStop(0.5, 'rgba(216,180,254,0.8)');
+                g.addColorStop(0.8, 'rgba(126,34,206,0.35)');
+                g.addColorStop(1, 'rgba(60,20,100,0)');
                 ctx.beginPath();
                 ctx.arc(0,0,outer,0,Math.PI*2);
                 ctx.arc(0,0,inner,Math.PI*2,0,true);
@@ -363,8 +365,8 @@
 
             function drawBlackHole(bx, by, R) {
                 const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
-                glow.addColorStop(0,'rgba(255,120,0,0.12)');
-                glow.addColorStop(0.4,'rgba(180,60,0,0.05)');
+                glow.addColorStop(0,'rgba(168,85,247,0.15)');
+                glow.addColorStop(0.4,'rgba(100,50,200,0.08)');
                 glow.addColorStop(1,'rgba(0,0,0,0)');
                 ctx.beginPath(); ctx.arc(bx,by,R*2,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
                 
@@ -392,7 +394,7 @@
                 drawBackDisk(BH.x,BH.y,BH.r);
                 drawAccretionDisk(BH.x,BH.y,BH.r,BH.angle);
                 drawBlackHole(BH.x,BH.y,BH.r);
-                ctx.fillStyle='rgba(255,255,255,0.5)';
+                ctx.fillStyle='rgba(230,210,255,0.6)';
                 for (let i=0; i<particles.length; i++) {
                     const p=particles[i];
                     gravity(p); p.x+=p.vx; p.y+=p.vy;
@@ -421,12 +423,7 @@
             });
         });
 
-        // ==================== EQUIPE REESTRUTURADA (Conforme hierarquia fornecida) ====================
-        // Pessoas com múltiplos cargos: Dn (Admin Geral + Representante Vendas), Isloch (CEO + Content Creator)
-        // Bruno (Admin Channel + Admin Grupo), Thiago, Nicole, Athena, Pedim (Admin Grupo)
-        
-        // Ordem hierárquica correta: CEO → Head Manager → Admin Geral → Managers → Admin Channel → Admin Grupo → Rep Vendas → Editor → Content Creators
-        
+        // ==================== EQUIPE (mesmos dados, apenas tema roxo) ====================
         const teamMembers = [
             {
                 name: "Isloch",
@@ -486,7 +483,7 @@
                 socials: []
             },
             {
-                name: "Nicole",
+                name: "Baiana",
                 mainRole: "Admin Grupo",
                 additionalRoles: [],
                 description: "Responsável pela ordem e bom andamento das discussões no grupo, sempre atenta às necessidades da comunidade e à aplicação das diretrizes.",
@@ -530,7 +527,7 @@
                 skills: ["Edição de Vídeo"],
                 socials: []
             },
-             {
+            {
                 name: "Wyze",
                 mainRole: "Jovem Aprendiz",
                 additionalRoles: [],
@@ -554,7 +551,6 @@
             gridContainer.innerHTML = '';
             
             teamMembers.forEach(member => {
-                // Constrói badges de cargos adicionais
                 let additionalRolesHtml = '';
                 if (member.additionalRoles && member.additionalRoles.length > 0) {
                     additionalRolesHtml = `<div class="multiple-roles">${member.additionalRoles.map(role => `<span class="role-pill">${role}</span>`).join('')}</div>`;
