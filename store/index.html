@@ -491,6 +491,10 @@
             <i class="fas fa-store"></i>
             <span>Udesaken Store</span>
         </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:100px;background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.4);margin-bottom:20px;">
+            <i class="fas fa-tag" style="font-size:0.75rem;color:#fbbf24;"></i>
+            <span style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fbbf24;">🎉 Promoção: 20% OFF em tudo!</span>
+        </div>
         <h1 class="store-title">
             Planos e recursos para operar sua comunidade com mais controle.
         </h1>
@@ -642,7 +646,7 @@
 const WHATSAPP_NUMBER = "5585997923438";
 const LOGO_IMAGE = "/ift/logousk1.png";
 function applyDiscount(price) {
-    return price;
+    return price * 0.80;
 }
 
 function formatBRL(v) {
@@ -787,16 +791,17 @@ function openModalWithQty(pid) {
                     <span id="modal-quantity">1</span>
                     <button onclick="event.stopPropagation(); changeModalQty(1)">+</button>
                 </div>
-                <div style="font-size:0.7rem; margin-top:8px; color:var(--text-muted);">Valor por período: R$ ${formatBRL(p.price)}</div>
+                <div style="font-size:0.7rem; margin-top:8px; color:var(--text-muted);">Valor por período: R$ ${formatBRL(applyDiscount(p.price))}</div>
             </div>
         `;
     }
     
-    const discPrice = p.price;
+    const discPrice = applyDiscount(p.price);
     con.innerHTML = `
         ${imgHtml}
         <h2>${p.name}</h2>
         <div class="modal-badge-row">${badgeHtml}</div>
+        <div style="font-size:0.8rem;color:var(--text-dim);text-decoration:line-through;margin-bottom:2px;">R$ ${formatBRL(p.price)}</div>
         <div class="modal-price${p.isGold?' purple-price':''}">R$ ${formatBRL(discPrice)} <span id="modal-total-hint" style="font-size:0.9rem; display:${p.category === 'vip' ? 'inline-block' : 'none'};">(total: R$ ${formatBRL(discPrice)})</span></div>
         ${qtyHtml}
         ${descHtml}
@@ -811,7 +816,7 @@ function openModalWithQty(pid) {
         if (hintSpan) {
             window.updateModalHint = function() {
                 const qty = currentModalQuantity;
-                hintSpan.textContent = `(total: R$ ${formatBRL(p.price * qty)})`;
+                hintSpan.textContent = `(total: R$ ${formatBRL(applyDiscount(p.price) * qty)})`;
                 if (qtySpan) qtySpan.textContent = qty;
             };
             updateModalHint();
@@ -832,7 +837,7 @@ window.changeModalQty = function(delta) {
     const hintSpan = document.getElementById('modal-total-hint');
     if (qtySpan) qtySpan.textContent = currentModalQuantity;
     if (hintSpan && currentModalProduct) {
-        hintSpan.textContent = `(total: R$ ${formatBRL(currentModalProduct.price * currentModalQuantity)})`;
+        hintSpan.textContent = `(total: R$ ${formatBRL(applyDiscount(currentModalProduct.price) * currentModalQuantity)})`;
     }
 };
 
@@ -843,7 +848,7 @@ window.addToCartWithQuantity = function() {
     if (ex) {
         ex.quantity += qty;
     } else {
-        cart.push({...currentModalProduct, price: currentModalProduct.price, quantity: qty});
+        cart.push({...currentModalProduct, price: applyDiscount(currentModalProduct.price), quantity: qty});
     }
     saveCart();
     showToast(`<i class="fas fa-check-circle"></i> ${currentModalProduct.name} (x${qty}) adicionado!`);
@@ -865,11 +870,12 @@ window.openModal = function(pid) {
         const imgHtml = `<div class="modal-img-wrap"><img src="${p.image || LOGO_IMAGE}" alt="${p.name}"></div>`;
         const badgeHtml = p.badge ? `<span class="modal-badge ${p.badgeClass||''}">${p.badge}</span>` : '';
         const descHtml = formatDescription(p.description);
-        const discPrice = p.price;
+        const discPrice = applyDiscount(p.price);
         con.innerHTML = `
             ${imgHtml}
             <h2>${p.name}</h2>
             <div class="modal-badge-row">${badgeHtml}</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);text-decoration:line-through;margin-bottom:2px;">R$ ${formatBRL(p.price)}</div>
             <div class="modal-price${p.isGold?' purple-price':''}">R$ ${formatBRL(discPrice)}</div>
             ${descHtml}
             <button class="btn-primary" onclick="addToCart(${p.id}); closeModal();">
@@ -884,7 +890,7 @@ window.openModal = function(pid) {
 window.addToCart = function(pid) {
     const p = PRODUCTS.find(x => x.id === pid); if (!p) return;
     const ex = cart.find(i => i.id === pid);
-    if (ex) ex.quantity++; else cart.push({...p, price: p.price, quantity:1});
+    if (ex) ex.quantity++; else cart.push({...p, price: applyDiscount(p.price), quantity:1});
     saveCart(); 
     showToast(`<i class="fas fa-check-circle"></i> ${p.name} adicionado!`);
 };
@@ -983,7 +989,7 @@ function renderProducts() {
                     `</div>`;
             }
             
-            const discPrice = p.price;
+            const discPrice = applyDiscount(p.price);
             return `
                 <div class="${cc}" onclick="openModal(${p.id})">
                     <div class="pc-top">
@@ -994,6 +1000,7 @@ function renderProducts() {
                     ${previewHtml}
                     <div class="pc-footer">
                         <div>
+                            <div style="font-size:0.7rem;color:var(--text-dim);text-decoration:line-through;margin-bottom:2px;">R$ ${formatBRL(p.price)}</div>
                             <span class="pc-price${p.isGold?' purple-price':''}">R$ ${formatBRL(discPrice)}</span>
                         </div>
                         <button class="btn-add${p.isGold?' btn-purple':''}" onclick="event.stopPropagation();addToCart(${p.id})">
@@ -1027,7 +1034,7 @@ function renderFeatured() {
             <div class="${cc}" onclick="openModal(${p.id})">
                 ${img}${bh}
                 <div class="fc-name">${p.name}</div>
-                <div class="fc-price">R$ ${formatBRL(p.price)}</div>
+                <div class="fc-price">R$ ${formatBRL(applyDiscount(p.price))}</div>
             </div>`;
     }).join('');
 }
