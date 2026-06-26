@@ -440,6 +440,380 @@
             .cat-scroll-hint.hidden { display: none; }
         }
     </style>
+    <link rel="stylesheet" href="/style.css?v=6.0">
+    <style>
+        /* Store Meridian: camada propria para evitar conflitos com o tema global. */
+        :root {
+            --store-bg: #f4f2ed;
+            --store-ink: #101413;
+            --store-muted: #66716e;
+            --store-soft: #8a9692;
+            --store-line: rgba(16, 20, 19, 0.11);
+            --store-card: rgba(255, 255, 255, 0.82);
+            --store-card-strong: rgba(255, 255, 255, 0.96);
+            --store-accent: #2f7f75;
+            --store-accent-2: #4fb8a8;
+            --store-accent-soft: rgba(47, 127, 117, 0.1);
+            --store-shadow: 0 18px 54px rgba(33, 43, 40, 0.12);
+            --store-radius: 18px;
+        }
+
+        html,
+        body {
+            background:
+                radial-gradient(760px circle at 12% -10%, rgba(79, 184, 168, 0.16), transparent 45%),
+                radial-gradient(760px circle at 92% 2%, rgba(16, 20, 19, 0.08), transparent 42%),
+                linear-gradient(180deg, #fbfaf6 0%, var(--store-bg) 48%, #ece9e1 100%) !important;
+            color: var(--store-ink) !important;
+        }
+
+        body::before {
+            background-image:
+                linear-gradient(rgba(16,20,19,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16,20,19,0.028) 1px, transparent 1px) !important;
+            opacity: 0.75;
+        }
+
+        #navbar nav {
+            background: rgba(255, 255, 255, 0.74) !important;
+            border: 1px solid rgba(16, 20, 19, 0.1) !important;
+            box-shadow: 0 12px 34px rgba(33, 43, 40, 0.08) !important;
+        }
+
+        #navbar.scrolled nav {
+            background: rgba(255, 255, 255, 0.92) !important;
+            border-color: rgba(47, 127, 117, 0.24) !important;
+        }
+
+        .nav-logo span,
+        .product-card h3,
+        .t-meta .t-name,
+        .footer-col h4,
+        #modal-content h2,
+        .ci-info h4 {
+            color: var(--store-ink) !important;
+        }
+
+        .nav-link,
+        .mob-link,
+        .store-sub,
+        .pc-desc-preview,
+        .t-text,
+        .footer-brand p,
+        .footer-links a,
+        .ci-info .price,
+        .terms-row label,
+        .modal-desc,
+        .modal-qty-label {
+            color: var(--store-muted) !important;
+        }
+
+        .nav-link:hover,
+        .footer-links a:hover,
+        .terms-row label a {
+            color: var(--store-accent) !important;
+        }
+
+        #mobile-menu {
+            background: rgba(255, 255, 255, 0.96) !important;
+            border-color: var(--store-line) !important;
+            box-shadow: var(--store-shadow) !important;
+        }
+
+        .nav-logo-icon,
+        .pc-img-wrap,
+        .modal-img-wrap,
+        .ci-img-thumb {
+            background: linear-gradient(145deg, #ffffff, #e8eee9) !important;
+            border-color: rgba(47, 127, 117, 0.16) !important;
+        }
+
+        #store-hero {
+            padding: 72px 20px 48px !important;
+        }
+
+        .store-badge,
+        .badge-novo,
+        .pc-badge,
+        .feat-card .fc-badge,
+        .modal-badge {
+            background: rgba(47, 127, 117, 0.08) !important;
+            border: 1px solid rgba(47, 127, 117, 0.18) !important;
+            color: var(--store-accent) !important;
+            box-shadow: none !important;
+        }
+
+        .store-badge span {
+            color: var(--store-accent) !important;
+        }
+
+        .store-badge i,
+        .search-wrap i,
+        .pc-desc-preview i,
+        .modal-desc i,
+        .cat-scroll-hint i {
+            color: var(--store-accent) !important;
+        }
+
+        .store-title {
+            color: var(--store-ink) !important;
+            letter-spacing: -0.01em !important;
+            max-width: 820px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .text-purple,
+        .section-title.text-purple,
+        .hero-stat .s-val,
+        .hero-stat .s-val.gold,
+        .pc-price,
+        .pc-price.purple-price,
+        .modal-price,
+        .modal-price.purple-price,
+        .cart-total-row strong,
+        .ci-total,
+        #modal-quantity,
+        .feat-card .fc-price,
+        .feat-card.feat-purple .fc-price {
+            background: none !important;
+            -webkit-text-fill-color: currentColor !important;
+            color: var(--store-accent) !important;
+        }
+
+        .hero-stats {
+            margin-top: 34px !important;
+        }
+
+        .glass,
+        .glass-purple,
+        .product-card,
+        .feat-card,
+        .hero-stat,
+        .t-card,
+        .store-controls,
+        .modal-box {
+            background: var(--store-card) !important;
+            border: 1px solid var(--store-line) !important;
+            border-radius: var(--store-radius) !important;
+            box-shadow: var(--store-shadow) !important;
+            backdrop-filter: blur(20px) saturate(135%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(135%) !important;
+        }
+
+        .glass::before,
+        .glass-purple::before,
+        .glass-purple::after {
+            display: none !important;
+        }
+
+        .product-card {
+            min-height: 260px;
+            padding: 20px !important;
+        }
+
+        .product-card:hover,
+        .feat-card:hover,
+        .t-card:hover {
+            transform: translateY(-3px) !important;
+            border-color: rgba(47, 127, 117, 0.24) !important;
+            box-shadow: 0 22px 64px rgba(33, 43, 40, 0.16) !important;
+        }
+
+        #products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)) !important;
+            gap: 18px !important;
+        }
+
+        .store-controls {
+            background: rgba(255, 255, 255, 0.72) !important;
+            padding: 14px !important;
+            overflow: visible !important;
+        }
+
+        .cat-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 38px;
+            background: rgba(255, 255, 255, 0.66) !important;
+            border: 1px solid var(--store-line) !important;
+            color: var(--store-muted) !important;
+            box-shadow: none !important;
+        }
+
+        .cat-btn:hover,
+        .cat-btn.active {
+            background: var(--store-ink) !important;
+            border-color: var(--store-ink) !important;
+            color: #ffffff !important;
+        }
+
+        #search-input {
+            min-height: 42px;
+            background: rgba(255, 255, 255, 0.78) !important;
+            border: 1px solid var(--store-line) !important;
+            color: var(--store-ink) !important;
+        }
+
+        #search-input:focus {
+            border-color: rgba(47, 127, 117, 0.38) !important;
+            box-shadow: 0 0 0 4px rgba(47, 127, 117, 0.09) !important;
+        }
+
+        .btn-add,
+        .btn-add.btn-purple {
+            width: 40px !important;
+            height: 40px !important;
+            background: var(--store-ink) !important;
+            color: #ffffff !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+        }
+
+        .btn-add:hover,
+        .btn-add.btn-purple:hover {
+            background: var(--store-accent) !important;
+            box-shadow: 0 12px 24px rgba(47, 127, 117, 0.22) !important;
+        }
+
+        .cart-btn,
+        #menu-toggle,
+        .cart-close,
+        .qty-btn,
+        .qty-selector button,
+        .modal-close {
+            background: rgba(16, 20, 19, 0.06) !important;
+            border: 1px solid rgba(16, 20, 19, 0.1) !important;
+            color: var(--store-ink) !important;
+            box-shadow: none !important;
+        }
+
+        #cart-count,
+        .cart-float-btn .float-count {
+            background: var(--store-ink) !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+
+        .cart-float-btn {
+            background: var(--store-ink) !important;
+            color: #ffffff !important;
+            box-shadow: 0 12px 34px rgba(16, 20, 19, 0.2) !important;
+        }
+
+        #cart-overlay {
+            background: rgba(16, 20, 19, 0.35) !important;
+        }
+
+        #cart-sidebar,
+        .cart-footer {
+            background: #fbfaf6 !important;
+            border-color: var(--store-line) !important;
+        }
+
+        .cart-header,
+        .cart-item,
+        .cart-footer,
+        .footer-bottom {
+            border-color: var(--store-line) !important;
+        }
+
+        .terms-row,
+        .modal-qty,
+        .modal-desc {
+            background: rgba(47, 127, 117, 0.06) !important;
+            border: 1px solid rgba(47, 127, 117, 0.14) !important;
+        }
+
+        .terms-row input[type="checkbox"] {
+            border-color: rgba(47, 127, 117, 0.45) !important;
+            box-shadow: none !important;
+        }
+
+        .terms-row input[type="checkbox"]:checked {
+            background: var(--store-accent) !important;
+            border-color: var(--store-accent) !important;
+        }
+
+        .btn-checkout {
+            background: #1f9d5f !important;
+            color: #ffffff !important;
+            border: 0 !important;
+            box-shadow: 0 12px 26px rgba(31, 157, 95, 0.18) !important;
+        }
+
+        .btn-checkout:disabled {
+            background: #d8ded9 !important;
+            color: rgba(16, 20, 19, 0.38) !important;
+            box-shadow: none !important;
+            cursor: not-allowed !important;
+        }
+
+        #product-modal {
+            background: rgba(16, 20, 19, 0.42) !important;
+        }
+
+        .modal-box,
+        .modal-box.purple-modal {
+            background: var(--store-card-strong) !important;
+            border-color: rgba(16, 20, 19, 0.12) !important;
+            color: var(--store-ink) !important;
+            box-shadow: 0 30px 90px rgba(16, 20, 19, 0.24) !important;
+        }
+
+        .btn-primary {
+            background: var(--store-ink) !important;
+            color: #ffffff !important;
+            border: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .btn-primary:hover {
+            background: var(--store-accent) !important;
+            box-shadow: 0 14px 28px rgba(47, 127, 117, 0.2) !important;
+        }
+
+        .t-avatar {
+            background: #ffffff !important;
+            border-color: var(--store-line) !important;
+            color: var(--store-accent) !important;
+            font-weight: 800;
+        }
+
+        .t-stars {
+            color: #b88a2a !important;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, rgba(244,242,237,0), rgba(236,233,225,0.9) 40%, #e8e4da 100%) !important;
+            border-color: var(--store-line) !important;
+        }
+
+        #wa-float {
+            box-shadow: 0 12px 34px rgba(37, 211, 102, 0.22) !important;
+        }
+
+        .toast {
+            background: var(--store-ink) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            color: #ffffff !important;
+        }
+
+        @media (max-width: 768px) {
+            #store-hero {
+                padding: 44px 18px 34px !important;
+            }
+
+            .store-controls {
+                padding: 12px 0 !important;
+            }
+
+            .cat-scroll-hint {
+                background: linear-gradient(to right, transparent, rgba(251,250,246,0.98)) !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -492,11 +866,10 @@
             <span>Udesaken Store</span>
         </div>
         <h1 class="store-title">
-            Escolha seu<br>
-            <span class="text-purple">plano ideal.</span>
+            Planos e recursos para operar sua comunidade com mais controle.
         </h1>
         <p class="store-sub">
-            VIP, bots no PV, moderação completa e pacotes <strong style="color:var(--purple-glow);font-weight:700;">Gold / RPG ⚔️</strong> para sua comunidade. Entrega rápida via WhatsApp.
+            VIP, bots no PV, moderação completa e pacotes <strong style="color:var(--store-accent);font-weight:700;">Gold / RPG</strong> com compra simples e atendimento direto via WhatsApp.
         </p>
         <div class="hero-stats">
             <div class="hero-stat glass"><span class="s-val">+1.2k</span><span class="s-lbl">Pedidos</span></div>
@@ -523,10 +896,10 @@
             <div class="cat-scroll-wrapper">
                 <div class="category-filters">
                     <button class="cat-btn active" data-cat="all">Todos</button>
-                    <button class="cat-btn" data-cat="bot">🤖 Bot GRUPO</button>
-                    <button class="cat-btn" data-cat="pv">💬 Bot PV</button>
-                    <button class="cat-btn" data-cat="vip">👑 VIP</button>
-                    <button class="cat-btn" data-cat="gold">⚔️ Gold / RPG</button>
+                    <button class="cat-btn" data-cat="bot"><i class="fas fa-robot"></i> Bot Grupo</button>
+                    <button class="cat-btn" data-cat="pv"><i class="fas fa-comment-dots"></i> Bot PV</button>
+                    <button class="cat-btn" data-cat="vip"><i class="fas fa-id-badge"></i> VIP</button>
+                    <button class="cat-btn" data-cat="gold"><i class="fas fa-layer-group"></i> Gold / RPG</button>
                 </div>
                 <div class="cat-scroll-hint" id="cat-scroll-hint"><i class="fas fa-chevron-right"></i></div>
             </div>
@@ -552,20 +925,20 @@
     </div>
     <div class="testimonials-grid">
         <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">👾</div><div class="t-meta"><div class="t-name">leon</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"VIP Mensal chegou em menos de 3 minutos. Imunidade total e PV liberado, valeu demais. Melhor loja do grupo."</p>
+            <div class="t-top"><div class="t-avatar">L</div><div class="t-meta"><div class="t-name">Leon</div><div class="t-stars">★★★★★</div></div></div>
+            <p class="t-text">"VIP Mensal liberado rapidamente. A ativação foi simples e o suporte respondeu com clareza."</p>
         </div>
         <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">🌌</div><div class="t-meta"><div class="t-name">Isadora</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"Comprei XP Mestre e subi 38 levels de uma vez. Custo-benefício absurdo, recomendo pra qualquer um que queira rankar."</p>
+            <div class="t-top"><div class="t-avatar">I</div><div class="t-meta"><div class="t-name">Isadora</div><div class="t-stars">★★★★★</div></div></div>
+            <p class="t-text">"Comprei XP Mestre e recebi tudo sem demora. O processo foi organizado do início ao fim."</p>
         </div>
         <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">⚡</div><div class="t-meta"><div class="t-name">Karen</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"Bot de moderação zerou o spam do meu grupo. Anti-link e boas-vindas funcionando perfeito desde o dia 1."</p>
+            <div class="t-top"><div class="t-avatar">K</div><div class="t-meta"><div class="t-name">Karen</div><div class="t-stars">★★★★★</div></div></div>
+            <p class="t-text">"O bot de moderação deixou o grupo mais estável. Anti-link e boas-vindas funcionando desde o primeiro dia."</p>
         </div>
         <div class="t-card glass">
-            <div class="t-top"><div class="t-avatar">🪐</div><div class="t-meta"><div class="t-name">Caique</div><div class="t-stars">★★★★★</div></div></div>
-            <p class="t-text">"XP Lendário é surreal — 1 milhão de XP, subi quase 60 levels. Suporte no What    sApp respondeu na hora."</p>
+            <div class="t-top"><div class="t-avatar">C</div><div class="t-meta"><div class="t-name">Caique</div><div class="t-stars">★★★★★</div></div></div>
+            <p class="t-text">"O pacote XP Lendário foi entregue certinho. O atendimento no WhatsApp foi rápido e objetivo."</p>
         </div>
     </div>
 </div>
@@ -580,7 +953,7 @@
                 </div>
                 <span>Udesaken</span>
             </a>
-            <p>O futuro da sua comunidade. Alta performance, ferramentas exclusivas e entrega instantânea.</p>
+            <p>Recursos digitais para comunidades que precisam de automação, suporte rápido e operação confiável.</p>
         </div>
         <div class="footer-col">
             <h4>Navegação</h4>
@@ -596,7 +969,7 @@
             <h4>Fale Conosco</h4>
             <div class="footer-links">
                 <a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a>
-                <a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
+                <a href="https://wa.me/5585997923438" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a>
             </div>
         </div>
     </div>
@@ -635,12 +1008,12 @@
     </div>
 </div>
 
-<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
+<a id="wa-float" href="https://wa.me/5585997923438" target="_blank" rel="noopener" aria-label="Suporte WhatsApp">
     <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-const WHATSAPP_NUMBER = "447562847091";
+const WHATSAPP_NUMBER = "5585997923438";
 const LOGO_IMAGE = "/ift/logousk1.png";
 function applyDiscount(price) {
     return price;
@@ -682,18 +1055,18 @@ const PRODUCTS = [
       description: "✓ Adquira 300.000 de experiência para o modo Gold/RPG\n✓ Domine o jogo com um grande boost\n✓ Pacote mais custo-benefício" },
     { id:13, category:"gold", name:"XP Lendário - 1m", price:29.00, isGold:true, badge:"Mais Vendido", badgeClass:"", image:LOGO_IMAGE,
       description: "✓ Adquira 1.000.000 de experiência para o modo Gold/RPG\n✓ Torne-se uma lenda instantaneamente\n✓ Salte dezenas de níveis" },
-    { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Tier Alto / Whales", badgeClass:"badge-purple", image:LOGO_IMAGE,
+    { id:14, category:"gold", name:"XP Divino - 3m", price:55.00, isGold:true, badge:"Alta categoria", badgeClass:"badge-purple", image:LOGO_IMAGE,
       description: "✓ Adquira 3.000.000 de experiência para o modo Gold/RPG\n✓ Poder divino, máximo rank\n✓ Para jogadores que buscam o topo" },
     // GOLD — Moeda (coin)
-    { id:15, category:"gold", name:"💰 Pacote Iniciante - 1.000 Gold", price:4.99, isGold:true, badge:"Entrada", badgeClass:"badge-blue", image:LOGO_IMAGE,
+    { id:15, category:"gold", name:"Pacote Iniciante - 1.000 Gold", price:4.99, isGold:true, badge:"Entrada", badgeClass:"badge-blue", image:LOGO_IMAGE,
       description: "✓ 1.000 moedas Gold para usar no RPG\n✓ Ideal para começar no modo Gold\n✓ Entrega imediata via WhatsApp" },
-    { id:16, category:"gold", name:"💰 Pacote Aventureiro - 5.000 Gold", price:14.99, isGold:true, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
+    { id:16, category:"gold", name:"Pacote Aventureiro - 5.000 Gold", price:14.99, isGold:true, badge:"Popular", badgeClass:"badge-green", image:LOGO_IMAGE,
       description: "✓ 5.000 moedas Gold para usar no RPG\n✓ Custo por Gold muito melhor que o Iniciante\n✓ Entrega imediata via WhatsApp" },
-    { id:17, category:"gold", name:"💰 Pacote Nobre - 10.000 Gold", price:24.99, isGold:true, badge:"Recomendado", badgeClass:"badge-purple", image:LOGO_IMAGE,
+    { id:17, category:"gold", name:"Pacote Nobre - 10.000 Gold", price:24.99, isGold:true, badge:"Recomendado", badgeClass:"badge-purple", image:LOGO_IMAGE,
       description: "✓ 10.000 moedas Gold para usar no RPG\n✓ Melhor custo-benefício da categoria\n✓ Entrega imediata via WhatsApp" },
-    { id:18, category:"gold", name:"👑 Pacote Reino - 25.000 Gold", price:49.99, isGold:true, badge:"Melhor Valor", badgeClass:"badge-purple", image:LOGO_IMAGE,
+    { id:18, category:"gold", name:"Pacote Reino - 25.000 Gold", price:49.99, isGold:true, badge:"Melhor Valor", badgeClass:"badge-purple", image:LOGO_IMAGE,
       description: "✓ 25.000 moedas Gold — domine o servidor\n✓ Preço por Gold equivalente a 40% off\n✓ Entrega imediata via WhatsApp" },
-    { id:19, category:"gold", name:"🐉 Pacote Lendário - 50.000 Gold", price:79.99, isGold:true, badge:"Elite", badgeClass:"badge-purple", image:LOGO_IMAGE,
+    { id:19, category:"gold", name:"Pacote Lendário - 50.000 Gold", price:79.99, isGold:true, badge:"Elite", badgeClass:"badge-purple", image:LOGO_IMAGE,
       description: "✓ 50.000 moedas Gold — o maior pacote\n✓ Máximo desconto por unidade de Gold\n✓ Entrega imediata via WhatsApp" }
 ];
 
