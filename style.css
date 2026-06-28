@@ -1,6 +1,6 @@
 /* =========================================
-   UDESAKEN - AURA / GROK THEME
-   Design Premium Monocromático Absoluto
+   UDESAKEN - ATLAS IDENTITY
+   Sistema visual premium, profissional e duradouro
    ========================================= */
 
 :root {
@@ -560,3 +560,486 @@ body > *:not(#universe-canvas):not(canvas):not(#audio-player-container):not(#loa
 .nav-wrapper { z-index: 999 !important; }
 section { z-index: 10 !important; }
 footer { z-index: 10 !important; }
+/* =========================================
+   ESTILOS EXCLUSIVOS PARA A LOJA (STORE)
+   ========================================= */
+
+/* Botão do carrinho */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: white;
+    color: black;
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Produtos grid - para a loja */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+/* Product Card */
+.product-card {
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(25, 25, 25, 0.9);
+}
+
+/* Barra de busca */
+.search-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 12px 20px;
+    color: white;
+    width: 100%;
+    max-width: 300px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Filtros de categoria */
+.category-filter {
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-filter:hover,
+.category-filter.active {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+/* Sidebar do carrinho */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    background: #0a0a0a;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botão finalizar */
+.btn-whatsapp {
+    background: #25D366;
+    color: white;
+    width: 100%;
+    padding: 14px;
+    border-radius: 40px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+}
+
+.btn-whatsapp:hover {
+    background: #128C7E;
+    transform: scale(1.02);
+}
+
+/* Modal de produto */
+.product-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.product-modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.product-modal-content {
+    background: #0f0f0f;
+    border-radius: 32px;
+    max-width: 500px;
+    width: 90%;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .products-grid {
+        gap: 16px;
+    }
+    .cart-sidebar {
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   ATLAS DESIGN SYSTEM OVERRIDES
+   Camada global para unificar paginas antigas e novas.
+   ========================================= */
+
+:root {
+    --bg-color: #070909;
+    --bg-elevated: rgba(14, 18, 18, 0.78);
+    --bg-elevated-strong: rgba(17, 22, 22, 0.92);
+    --text-main: #f6f7f4;
+    --text-muted: #9aa6a3;
+    --text-soft: #c9d2cf;
+    --text-dim: #66716e;
+    --accent: #4fb8a8;
+    --accent-strong: #8fd8cb;
+    --accent-deep: #2f7f75;
+    --accent-dim: rgba(79, 184, 168, 0.14);
+    --accent-glow: rgba(143, 216, 203, 0.22);
+    --platinum: #d7dee2;
+    --graphite: #101414;
+    --line: rgba(215, 222, 226, 0.12);
+    --line-strong: rgba(143, 216, 203, 0.34);
+    --shadow-premium: 0 18px 60px rgba(0, 0, 0, 0.42);
+    --glass-bg: rgba(15, 19, 19, 0.66);
+    --glass-border: rgba(215, 222, 226, 0.12);
+    --glass-border-hover: rgba(143, 216, 203, 0.36);
+    --glass-shadow: var(--shadow-premium);
+    --purple: var(--accent);
+    --purple-deep: var(--accent-deep);
+    --purple-glow: var(--accent-strong);
+    --purple-dark: #1c4f49;
+    --gold: var(--platinum);
+    --amber: var(--accent);
+    --amber-light: var(--accent-strong);
+    --primary: var(--accent);
+    --primary-dim: var(--accent-dim);
+    --primary-glow: rgba(79, 184, 168, 0.08);
+    --border-lit: var(--line-strong);
+    --border-glow: rgba(215, 222, 226, 0.12);
+    --border-glow-hover: var(--line-strong);
+    --accent-glow: var(--accent-strong);
+}
+
+html {
+    background: #070909 !important;
+}
+
+body {
+    background:
+        radial-gradient(900px circle at 12% -10%, rgba(79, 184, 168, 0.13), transparent 46%),
+        radial-gradient(680px circle at 92% 8%, rgba(215, 222, 226, 0.08), transparent 42%),
+        linear-gradient(180deg, #0b0e0e 0%, #070909 48%, #050606 100%) !important;
+    color: var(--text-main) !important;
+    letter-spacing: 0 !important;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.46), transparent 72%);
+}
+
+#universe,
+#universe-canvas,
+canvas#universe-canvas {
+    display: none !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px !important;
+    background: #070909 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #263433, #4f6f69) !important;
+    border-radius: 999px !important;
+}
+
+::selection {
+    background: rgba(79, 184, 168, 0.28) !important;
+    color: #ffffff !important;
+}
+
+.glass,
+.glass-panel,
+.glass-purple,
+.product-card,
+.category-card,
+.command-category,
+.modal-box,
+.store-controls,
+.hero-stat,
+.timeline-card,
+.project-card,
+.partner-card,
+.card {
+    background: var(--glass-bg) !important;
+    border-color: var(--glass-border) !important;
+    box-shadow: var(--shadow-premium) !important;
+    backdrop-filter: blur(22px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+}
+
+.glass::before,
+.glass-panel::before,
+.glass-purple::before {
+    background: radial-gradient(520px circle at var(--mx, var(--mouse-x, 50%)) var(--my, var(--mouse-y, 50%)), rgba(143, 216, 203, 0.1), transparent 42%) !important;
+}
+
+.glass:hover,
+.glass-panel:hover,
+.glass-purple:hover,
+.product-card:hover,
+.category-card:hover,
+.command-category:hover,
+.project-card:hover,
+.partner-card:hover {
+    border-color: var(--glass-border-hover) !important;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(143, 216, 203, 0.08) !important;
+}
+
+#navbar nav,
+.nav-wrapper nav,
+.nav-inner {
+    background: rgba(9, 12, 12, 0.78) !important;
+    border-color: rgba(215, 222, 226, 0.13) !important;
+    box-shadow: 0 14px 42px rgba(0, 0, 0, 0.36) !important;
+    backdrop-filter: blur(24px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+}
+
+#navbar.scrolled nav,
+.nav-wrapper.glass-nav nav,
+#navbar.scrolled .nav-inner {
+    background: rgba(7, 9, 9, 0.94) !important;
+    border-color: rgba(143, 216, 203, 0.28) !important;
+}
+
+.nav-link:hover,
+.mob-link:hover,
+.footer-links a:hover,
+.footer-link:hover {
+    color: var(--accent-strong) !important;
+}
+
+.nav-store-btn,
+.hero-cta,
+.btn-add,
+.nav-cta,
+.btn-purple,
+.cat-btn.active,
+button[type="submit"],
+.primary-btn {
+    background: linear-gradient(135deg, #f7faf8 0%, #d7dee2 100%) !important;
+    color: #07100f !important;
+    border-color: rgba(255,255,255,0.45) !important;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+.nav-hub-btn,
+.btn-outline,
+.cat-btn,
+.badge-novo,
+.modal-badge,
+.pc-badge,
+.fc-badge,
+.store-badge,
+.hero-eyebrow,
+.badge-purple,
+.proj-badge,
+.proj-badge.gold {
+    background: rgba(79, 184, 168, 0.1) !important;
+    color: var(--accent-strong) !important;
+    border-color: rgba(143, 216, 203, 0.28) !important;
+    box-shadow: none !important;
+}
+
+.text-gradient,
+.text-gradient-mono,
+.text-purple,
+.text-amber,
+.text-gold,
+.text-brand-gold,
+.purple-price,
+.hero-stat .s-val,
+.hero-stat .s-val.gold,
+.fc-price,
+.pc-price,
+.modal-price,
+.cart-total-row strong,
+.cart-header h3,
+.section-title.text-purple {
+    background: linear-gradient(135deg, #ffffff 0%, #d7dee2 42%, #8fd8cb 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: var(--accent-strong) !important;
+}
+
+.text-purple-300,
+.text-purple-400,
+.text-purple-500,
+.text-brand-gold,
+.text-gold,
+.group-hover\:text-gold:hover,
+.group-hover\:text-brand-gold:hover,
+.marker\:text-brand-gold ::marker {
+    color: var(--accent-strong) !important;
+}
+
+.bg-purple-500\/5,
+.bg-purple-500\/10,
+.bg-purple-500\/20,
+.bg-brand-gold\/5,
+.bg-brand-gold\/10,
+.bg-brand-gold\/20 {
+    background-color: rgba(79, 184, 168, 0.1) !important;
+}
+
+.border-purple-500\/20,
+.border-purple-500\/30,
+.border-purple-500\/40,
+.border-brand-gold\/20,
+.border-brand-gold,
+.border-purple-light {
+    border-color: rgba(143, 216, 203, 0.28) !important;
+}
+
+.bg-purple-400,
+.bg-purple-500,
+.bg-brand-gold {
+    background-color: var(--accent) !important;
+}
+
+input,
+textarea,
+select,
+#search-input,
+.search-input {
+    background: rgba(255, 255, 255, 0.045) !important;
+    border-color: rgba(215, 222, 226, 0.13) !important;
+    color: var(--text-main) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+#search-input:focus,
+.search-input:focus {
+    border-color: rgba(143, 216, 203, 0.42) !important;
+    box-shadow: 0 0 0 3px rgba(79, 184, 168, 0.1) !important;
+    outline: none !important;
+}
+
+.section-line,
+.section-divider,
+footer::before {
+    background: linear-gradient(90deg, transparent, rgba(143, 216, 203, 0.32), transparent) !important;
+}
+
+footer {
+    background: linear-gradient(to bottom, rgba(7,9,9,0), rgba(7,9,9,0.72) 28%, rgba(5,6,6,0.96) 100%) !important;
+    border-top-color: rgba(215, 222, 226, 0.1) !important;
+}
+
+#cursor {
+    background: var(--accent) !important;
+}
+
+#cursor-ring {
+    border-color: rgba(143, 216, 203, 0.58) !important;
+}
+
+.hero-dot,
+.hero-eyebrow::before {
+    background: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(143, 216, 203, 0.38) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
