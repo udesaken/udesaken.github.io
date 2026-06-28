@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Conheça a história da Udesaken Group, desde 2022 até hoje. Nossa trajetória, projetos e ecossistema.">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#070909">
     
     <meta property="og:type" content="website">
     <meta property="og:title" content="Udesaken Group | Sobre Nós">
@@ -15,14 +15,20 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                    fontFamily: { 
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif']
+                    },
+                    colors: {
+                        brand: { purple: '#a855f7', 'purple-glow': '#c084fc' }
+                    }
                 }
             }
         }
@@ -31,14 +37,15 @@
     <style>
         :root {
             --bg-deep: #000000;
-            --bg-card: rgba(8, 8, 12, 0.85);
-            --border-glow: rgba(255, 255, 255, 0.06);
-            --border-glow-hover: rgba(255, 255, 255, 0.2);
+            --bg-card: rgba(12, 12, 18, 0.75);
+            --border-glow: rgba(168, 85, 247, 0.15);
+            --border-glow-hover: rgba(168, 85, 247, 0.35);
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
             --text-muted: #6b6b6b;
-            --accent-white: #ffffff;
-            --accent-dim: rgba(255, 255, 255, 0.1);
+            --accent: #a855f7;
+            --accent-glow: #c084fc;
+            --accent-dim: rgba(168, 85, 247, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,37 +53,36 @@
         body { 
             background: #000000; 
             color: var(--text-primary); 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Space Grotesk', sans-serif; 
             overflow-x: hidden;
             min-height: 100vh;
         }
         
-        /* Canvas Universo */
+        /* Canvas Buraco Negro Roxo */
         #universe-canvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: -2;
             pointer-events: none;
-            background: radial-gradient(circle at 30% 20%, #0a0a0f 0%, #000000 100%);
         }
 
         /* Glass Panel refinado */
         .glass-panel {
             background: var(--bg-card);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
             border: 1px solid var(--border-glow);
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
         .glass-panel:hover {
             border-color: var(--border-glow-hover);
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(168,85,247,0.1);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #ffffff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #c084fc 50%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -90,15 +96,15 @@
         }
         .nav-wrapper nav {
             max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
-            background: rgba(5, 5, 8, 0.7);
+            background: rgba(5, 5, 10, 0.7);
             backdrop-filter: blur(24px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(168,85,247,0.2);
             border-radius: 100px;
             padding: 8px 20px;
         }
         .nav-wrapper.glass-nav nav {
             background: rgba(0, 0, 0, 0.95);
-            border-color: rgba(255,255,255,0.12);
+            border-color: rgba(168,85,247,0.35);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         
@@ -114,11 +120,11 @@
         .timeline-card {
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
-            background: rgba(255,255,255,0.02);
+            background: rgba(168,85,247,0.03);
         }
         .timeline-card:hover {
-            border-left-color: #ffffff;
-            background: rgba(255,255,255,0.05);
+            border-left-color: var(--accent-glow);
+            background: rgba(168,85,247,0.08);
             transform: translateX(8px);
         }
         
@@ -128,19 +134,18 @@
         }
         .project-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(255,255,255,0.3) !important;
-            background: rgba(255,255,255,0.08) !important;
+            border-color: rgba(168,85,247,0.5) !important;
+            background: rgba(168,85,247,0.12) !important;
         }
         
         /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
         
         /* Status Icon Glow */
         .status-icon-glow {
-            filter: drop-shadow(0 0 3px currentColor);
+            filter: drop-shadow(0 0 3px var(--accent-glow));
         }
         
         /* Footer links */
@@ -149,16 +154,29 @@
             transition: color 0.3s;
         }
         .footer-link:hover {
-            color: white;
+            color: var(--accent-glow);
         }
         
         .section-divider {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent);
             height: 1px;
             width: 100%;
         }
+
+        /* Badge roxo */
+        .badge-purple {
+            background: rgba(168,85,247,0.12);
+            border: 1px solid rgba(168,85,247,0.3);
+            color: var(--accent-glow);
+        }
+        
+        /* Inputs etc */
+        .border-purple-light {
+            border-color: rgba(168,85,247,0.3);
+        }
     </style>
     <link rel="icon" type="image/png" href="../logousk.png">
+    <link rel="stylesheet" href="/style.css?v=6.0">
 </head>
 <body>
 
@@ -171,11 +189,10 @@
                 <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
                     <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
                 </div>
-                <span class="font-bold text-white tracking-tight text-lg">Udesaken</span>
+                <span class="font-syne font-extrabold text-white tracking-tight text-lg">Udesaken</span>
             </a>
             <div class="hidden md:flex items-center gap-4">
                 <a href="/" class="text-gray-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fas fa-arrow-left text-xs"></i> Início</a>
-                <button id="theme-btn" class="theme-toggle hidden" aria-label="Alternar tema"><i class="fas fa-moon"></i></button>
             </div>
             <div class="flex md:hidden gap-3">
                 <a href="/" class="px-4 py-2 bg-white/10 text-white rounded-full text-xs font-bold border border-white/20"><i class="fas fa-arrow-left"></i></a>
@@ -187,17 +204,17 @@
         <!-- Hero Section -->
         <section class="text-center relative">
             <div class="max-w-4xl mx-auto px-6 fade-up">
-                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                    <span class="text-[10px] font-bold text-white/80 tracking-[0.15em] uppercase">Nossa Trajetória</span>
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                    <span class="text-[10px] font-bold text-purple-300 tracking-[0.15em] uppercase">Nossa Trajetória</span>
                 </div>
-                <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-rocket text-white/70 text-2xl"></i>
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-rocket text-purple-400 text-2xl"></i>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
+                <h1 class="font-syne text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
                     A Nossa <span class="text-gradient">História</span>
                 </h1>
-                <p class="text-sm text-white/50 uppercase tracking-[0.2em] font-bold">Inovação, Segurança e Comunidade desde 2022</p>
+                <p class="text-sm text-purple-300/70 uppercase tracking-[0.2em] font-bold">Inovação, Segurança e Comunidade • Desde 2022</p>
             </div>
         </section>
 
@@ -207,34 +224,34 @@
                 <div class="glass-panel rounded-3xl p-8 md:p-12">
                     
                     <!-- Citação -->
-                    <div class="border-l-3 border-white/30 bg-white/5 p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm md:text-base leading-relaxed">
-                        <i class="fas fa-quote-left text-white/20 mr-2"></i>
-                        Em 2026, a Udesaken Group celebra 4 anos de existência. O que começou como um simples ponto de encontro para amigos evoluiu para um dos ecossistemas de automação mais acessíveis e poderosos do mercado.
+                    <div class="border-l-3 border-purple-500/40 bg-purple-500/5 p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm md:text-base leading-relaxed">
+                        <i class="fas fa-quote-left text-purple-500/30 mr-2"></i>
+                    A Udesaken Group evoluiu de um ponto de encontro entre comunidades para um ecossistema de automação acessível, robusto e preparado para operação diária.
                     </div>
 
                     <div class="space-y-6">
                         <!-- Timeline: Junho 2022 -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-seedling text-white/60 text-lg"></i> Junho de 2022: As Raízes
+                                <i class="fas fa-seedling text-purple-400 text-lg"></i> Junho de 2022: As Raízes
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed">
-                                Nossa fundação oficial ocorreu em <strong class="text-white">09/06/2022</strong>. No início, a Udesaken não era uma empresa de tecnologia, mas sim um chat, um grupo focado em amizade e resenha. Foi ali que a semente da nossa comunidade foi plantada.
+                                Nossa fundação oficial ocorreu em <strong class="text-purple-300">09/06/2022</strong>. No início, a Udesaken não era uma empresa de tecnologia, mas sim um chat, um grupo focado em amizade e resenha. Foi ali que a semente da nossa comunidade foi plantada.
                             </p>
                         </div>
 
                         <!-- Timeline: Setembro 2022 -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-robot text-white/60 text-lg"></i> Setembro de 2022: O Primeiro Grande Salto
+                                <i class="fas fa-robot text-purple-400 text-lg"></i> Setembro de 2022: O Primeiro Grande Salto
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
-                                Em 10/09/2022, lançamos nosso primeiro bot para WhatsApp, batizado em homenagem ao nosso fundador: <strong class="text-white">"Isloch Bot"</strong>.
+                                Em 10/09/2022, lançamos nosso primeiro bot para WhatsApp, batizado em homenagem ao nosso fundador: <strong class="text-purple-300">"Isloch Bot"</strong>.
                             </p>
                             <ul class="space-y-2 text-sm text-gray-400 list-disc pl-5">
                                 <li>O projeto era 100% gratuito.</li>
-                                <li>Atingimos mais de <strong class="text-white">300 grupos</strong> simultaneamente.</li>
-                                <li>Ultrapassamos a marca de <strong class="text-white">10.000 usuários</strong> operando nossa automação.</li>
+                                <li>Atingimos mais de <strong class="text-purple-300">300 grupos</strong> simultaneamente.</li>
+                                <li>Ultrapassamos a marca de <strong class="text-purple-300">10.000 usuários</strong> operando nossa automação.</li>
                             </ul>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed mt-4">
                                 Nessa mesma época, nos tornamos especialistas em segurança no WhatsApp, desenvolvendo painéis exclusivos para gestão de restrições e banimentos de números. O Isloch Bot cumpriu sua missão e foi desativado com honras em novembro daquele ano.
@@ -244,7 +261,7 @@
                         <!-- Timeline: 2023-2024 -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-user-secret text-white/60 text-lg"></i> 2023 a 2024: A Era do Aperfeiçoamento
+                                <i class="fas fa-user-secret text-purple-400 text-lg"></i> 2023 a 2024: A Era do Aperfeiçoamento
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed">
                                 No final de 2022, a Udesaken fechou suas portas para o público geral, tornando-se "privada" e exclusiva apenas para a alta cúpula. Durante os anos seguintes, mergulhamos nos bastidores. Focamos nosso aprendizado e desenvolvimento no ecossistema do Discord, criando projetos próprios e aprimorando nossa arquitetura de software longe dos holofotes.
@@ -254,19 +271,19 @@
                         <!-- Timeline: 2025 -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-fire text-white/60 text-lg"></i> 2025: O Renascimento e a Explosão Viral
+                                <i class="fas fa-fire text-purple-400 text-lg"></i> 2025: O Renascimento e a Explosão Viral
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
-                                No nosso aniversário de 3 anos, a Udesaken decidiu reabrir. Desta vez, apenas o nosso fundador estava na equipe. Recomeçamos do zero, lançando um bot básico e gratuito no WhatsApp, mas com uma nova estratégia: o <strong class="text-white">conteúdo digital</strong>.
+                                No nosso aniversário de 3 anos, a Udesaken decidiu reabrir. Desta vez, apenas o nosso fundador estava na equipe. Recomeçamos do zero, lançando um bot básico e gratuito no WhatsApp, mas com uma nova estratégia: o <strong class="text-purple-300">conteúdo digital</strong>.
                             </p>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                <div class="bg-white/5 p-4 rounded-lg text-center border border-white/10">
-                                    <i class="fab fa-instagram text-2xl text-white/60 mb-2"></i>
+                                <div class="bg-purple-500/5 p-4 rounded-lg text-center border border-purple-500/20">
+                                    <i class="fab fa-instagram text-2xl text-purple-400 mb-2"></i>
                                     <h4 class="text-white font-bold text-lg">7 Milhões+</h4>
                                     <p class="text-xs text-gray-500">Visualizações em 7 meses (Média de 1M/mês)</p>
                                 </div>
-                                <div class="bg-white/5 p-4 rounded-lg text-center border border-white/10">
-                                    <i class="fab fa-whatsapp text-2xl text-white/60 mb-2"></i>
+                                <div class="bg-purple-500/5 p-4 rounded-lg text-center border border-purple-500/20">
+                                    <i class="fab fa-whatsapp text-2xl text-purple-400 mb-2"></i>
                                     <h4 class="text-white font-bold text-lg">12k+</h4>
                                     <p class="text-xs text-gray-500">Seguidores no Canal de Figurinhas</p>
                                 </div>
@@ -276,27 +293,27 @@
                         <!-- Timeline: 2026 -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-crown text-white/60 text-lg"></i> 2026: A Udesaken Hoje
+                                <i class="fas fa-crown text-purple-400 text-lg"></i> 2026: A Udesaken Hoje
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
-                                Chegamos à nossa poderosa <strong class="text-white">Versão 6.0</strong>. Operamos ativamente no WhatsApp e Discord, entregando alta tecnologia para diversos clientes satisfeitos.
+                                Chegamos à nossa poderosa <strong class="text-purple-300">Versão 6.0</strong>. Operamos ativamente no WhatsApp e Discord, entregando alta tecnologia para diversos clientes satisfeitos.
                             </p>
-                            <div class="p-4 bg-white/5 border border-white/15 rounded-xl text-center">
-                                <p class="text-white/80 font-medium">Somos um dos únicos projetos do mercado a entregar mais de <strong class="text-white">1.000 comandos premium</strong> por um valor de investimento abaixo de 10 reais.</p>
+                            <div class="p-4 bg-purple-500/5 border border-purple-500/30 rounded-xl text-center">
+                                <p class="text-white/80 font-medium">Somos um dos únicos projetos do mercado a entregar mais de <strong class="text-purple-300">1.000 comandos premium</strong> por um valor de investimento abaixo de 10 reais.</p>
                             </div>
                         </div>
 
                         <!-- Legado e Projetos -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5 mt-8">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-4">
-                                <i class="fas fa-copyright text-white/60 text-lg"></i> Legado, Direitos e Equipes
+                                <i class="fas fa-copyright text-purple-400 text-lg"></i> Legado, Direitos e Equipes
                             </h3>
                             
-                            <div class="bg-white/5 border-l-2 border-white/30 p-4 rounded-r-lg mb-6">
+                            <div class="bg-purple-500/5 border-l-2 border-purple-500/40 p-4 rounded-r-lg mb-6">
                                 <p class="text-gray-400 text-sm leading-relaxed">
-                                    Ao longo da nossa jornada, nosso fundador, <strong class="text-white">Isloch</strong>, criou e co-fundou diversas <i>teams</i> e projetos paralelos. É importante ressaltar que os direitos intelectuais e de propriedade de todos esses projetos pertencem oficialmente e exclusivamente a ele. <br><br>
-                                    A <strong class="text-white">Udesaken Group</strong> atua como a entidade corporativa que gerencia e tutela essas divisões em seu nome, possuindo total autoridade e autonomia delegada para reabrir, administrar, fechar ou encerrar definitivamente qualquer um desses projetos a qualquer momento. <br><br>
-                                    <span class="text-white font-semibold">Aviso Legal:</span> Qualquer team, grupo ou divisão listada abaixo opera sob a guarda da Udesaken e de seus respectivos fundadores. <strong class="text-white">O uso, apropriação ou cópia destes nomes não é permitido sem a autorização oficial direta.</strong>
+                                    Ao longo da nossa jornada, nosso fundador, <strong class="text-purple-300">Isloch</strong>, criou e co-fundou diversas <i>teams</i> e projetos paralelos. É importante ressaltar que os direitos intelectuais e de propriedade de todos esses projetos pertencem oficialmente e exclusivamente a ele. <br><br>
+                                    A <strong class="text-purple-300">Udesaken Group</strong> atua como a entidade corporativa que gerencia e tutela essas divisões em seu nome, possuindo total autoridade e autonomia delegada para reabrir, administrar, fechar ou encerrar definitivamente qualquer um desses projetos a qualquer momento. <br><br>
+                                    <span class="text-purple-300 font-semibold">Aviso Legal:</span> Qualquer team, grupo ou divisão listada abaixo opera sob a guarda da Udesaken e de seus respectivos fundadores. <strong class="text-purple-300">O uso, apropriação ou cópia destes nomes não é permitido sem a autorização oficial direta.</strong>
                                 </p>
                             </div>
                             
@@ -305,17 +322,17 @@
                                 <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <i class="fab fa-discord text-white/60"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                                <i class="fab fa-discord text-purple-400"></i>
                                             </div>
                                             <h4 class="text-white font-bold">777Network</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">100% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Divisão dedicada inteiramente à criação e programação de bots focados na plataforma do Discord.</p>
                                     <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-check-double text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-check-double text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Projeto Ativo e Integrado</span>
                                         </div>
                                     </div>
@@ -325,17 +342,17 @@
                                 <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <i class="fab fa-whatsapp text-white/60"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                                <i class="fab fa-whatsapp text-purple-400"></i>
                                             </div>
                                             <h4 class="text-white font-bold">Tædnet</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">100% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Equipe especializada em modificações (mods) e customizações avançadas de aplicativos do WhatsApp.</p>
                                     <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-shield-alt text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-shield-alt text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Mantida sob a tutela da UsK</span>
                                         </div>
                                     </div>
@@ -345,17 +362,17 @@
                                 <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <i class="fas fa-user-secret text-white/60"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                                <i class="fas fa-user-secret text-purple-400"></i>
                                             </div>
                                             <h4 class="text-white font-bold">60hz</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">100% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Operava de forma silenciosa como uma divisão secreta e restrita dentro do ecossistema.</p>
                                     <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-crown text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-crown text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Administrada pela Udesaken</span>
                                         </div>
                                     </div>
@@ -365,17 +382,17 @@
                                 <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <i class="fas fa-lock text-white/60"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                                <i class="fas fa-lock text-purple-400"></i>
                                             </div>
                                             <h4 class="text-white font-bold">TsF</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">50% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">50% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Um seleto grupo de chat privado e fechado, utilizado para interações sigilosas e internas.</p>
                                     <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-handshake text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-handshake text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Sob cuidados da Udesaken</span>
                                         </div>
                                     </div>
@@ -385,17 +402,17 @@
                                 <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <i class="fas fa-comment-dots text-white/60"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                                <i class="fas fa-comment-dots text-purple-400"></i>
                                             </div>
                                             <h4 class="text-white font-bold">SSD</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">100% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Mais um projeto focado em chat privado, servindo como uma cúpula de resenha exclusiva e segura.</p>
                                     <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-medal text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-medal text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Totalmente administrado pela Udesaken</span>
                                         </div>
                                     </div>
@@ -410,12 +427,12 @@
                                             </div>
                                             <h4 class="text-white font-bold">Toman</h4>
                                         </div>
-                                        <span class="bg-white/10 text-white/70 text-[10px] font-black px-2 py-1 rounded border border-white/20">100% UsK</span>
+                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
                                     </div>
                                     <p class="text-xs text-gray-500 leading-relaxed mb-4">Antiga team de "trava zap" (2022). Fundadora oficial desistiu e deu para Isloch cuidar; team fechada, administrada pela UsK.</p>
                                     <div class="pt-3 border-t border-white/5 mb-2.5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-white/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-folder-minus text-white/60 status-icon-glow"></i>
+                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
+                                            <i class="fas fa-folder-minus text-purple-400 status-icon-glow"></i>
                                             <span class="text-white/80 font-medium">STATUS: Projeto Fechado. Sob a guarda da Udesaken.</span>
                                         </div>
                                     </div>
@@ -431,13 +448,13 @@
 
                         <!-- Mensagem Final -->
                         <div class="mt-10 pt-8 border-t border-white/10 text-center">
-                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-4">
-                                <i class="fas fa-heart text-white/60 status-icon-glow"></i>
+                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
+                                <i class="fas fa-heart text-purple-400 status-icon-glow"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-white mb-4">Muito mais que uma empresa</h3>
                             <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed md:text-lg">
-                                A Udesaken Group é, acima de tudo, uma <strong class="text-white">família</strong>. Continuamos aprendendo, melhorando e inovando todos os dias. Nosso mais profundo agradecimento a cada usuário, administrador e parceiro que ajudou a construir essa história ao nosso lado. E claro...
-                                <span class="text-white font-bold italic tracking-wide">"tá UsK, tá lindo!"</span>
+                                A Udesaken Group é, acima de tudo, uma <strong class="text-purple-300">família</strong>. Continuamos aprendendo, melhorando e inovando todos os dias. Nosso mais profundo agradecimento a cada usuário, administrador e parceiro que ajudou a construir essa história ao nosso lado. E claro...
+                                <span class="text-purple-300 font-bold italic tracking-wide">"tá UsK, tá lindo!"</span>
                             </p>
                         </div>
                     </div>
@@ -460,66 +477,107 @@
     </footer>
 
     <script>
-        // ==================== CANVAS UNIVERSO ESTRELADO ====================
-        const canvas = document.getElementById('universe-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, stars;
-        
-        function initStars() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            stars = [];
-            const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
-            for(let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.25,
-                    vy: (Math.random() - 0.5) * 0.25,
-                    radius: Math.random() * 1.5 + 0.3,
-                    alpha: Math.random() * 0.5 + 0.3
-                });
-            }
-        }
-        
-        function drawStars() {
-            if(!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            
-            for(let i = 0; i < stars.length; i++) {
-                let s = stars[i];
-                s.x += s.vx;
-                s.y += s.vy;
-                
-                if(s.x < 0) s.x = width;
-                if(s.x > width) s.x = 0;
-                if(s.y < 0) s.y = height;
-                if(s.y > height) s.y = 0;
-                
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.7})`;
-                ctx.fill();
-                
-                for(let j = i + 1; j < stars.length; j++) {
-                    let s2 = stars[j];
-                    let dist = Math.hypot(s.x - s2.x, s.y - s2.y);
-                    if(dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(s.x, s.y);
-                        ctx.lineTo(s2.x, s2.y);
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 - dist/2000})`;
-                        ctx.lineWidth = 0.4;
-                        ctx.stroke();
-                    }
+        // ==================== CANVAS BURACO NEGRO ROXO ====================
+        (function() {
+            const canvas = document.getElementById('universe-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles;
+
+            const BH = {
+                get x() { return W * 0.5; },
+                get y() { return H * 0.82; },
+                get r() { return Math.min(W, H) * 0.10; },
+                diskInner: 1.5,
+                diskOuter: 3.8,
+                angle: 0
+            };
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+                particles = [];
+                const n = Math.min(Math.floor(W / 20), 80);
+                for (let i = 0; i < n; i++) {
+                    particles.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+                        r: Math.random() * 1 + 0.3
+                    });
                 }
             }
-            requestAnimationFrame(drawStars);
-        }
-        
-        window.addEventListener('resize', () => { initStars(); });
-        initStars();
-        drawStars();
+
+            function drawBackDisk(bx, by, R) {
+                const outer = R * BH.diskOuter;
+                ctx.save(); ctx.translate(bx, by);
+                const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
+                ag.addColorStop(0, 'rgba(168,85,247,0.45)');
+                ag.addColorStop(0.4, 'rgba(140,80,240,0.25)');
+                ag.addColorStop(1, 'rgba(80,30,180,0)');
+                ctx.beginPath(); ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
+                ctx.fillStyle = ag; ctx.fill(); ctx.restore();
+            }
+
+            function drawAccretionDisk(bx, by, R, angle) {
+                const inner = R * BH.diskInner, outer = R * BH.diskOuter;
+                ctx.save(); ctx.translate(bx, by); ctx.rotate(angle); ctx.scale(1, 0.28);
+                const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
+                g.addColorStop(0, 'rgba(139,92,246,0)');
+                g.addColorStop(0.2, 'rgba(168,85,247,0.5)');
+                g.addColorStop(0.5, 'rgba(216,180,254,0.8)');
+                g.addColorStop(0.8, 'rgba(126,34,206,0.35)');
+                g.addColorStop(1, 'rgba(60,20,100,0)');
+                ctx.beginPath(); ctx.arc(0,0,outer,0,Math.PI*2); ctx.arc(0,0,inner,Math.PI*2,0,true);
+                ctx.fillStyle = g; ctx.fill(); ctx.restore();
+            }
+
+            function drawBlackHole(bx, by, R) {
+                const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
+                glow.addColorStop(0,'rgba(168,85,247,0.15)');
+                glow.addColorStop(0.4,'rgba(100,50,200,0.08)');
+                glow.addColorStop(1,'rgba(0,0,0,0)');
+                ctx.beginPath(); ctx.arc(bx,by,R*2,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
+                const sh = ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);
+                sh.addColorStop(0,'#000'); sh.addColorStop(0.85,'#000'); sh.addColorStop(1,'rgba(0,0,0,0.85)');
+                ctx.beginPath(); ctx.arc(bx,by,R,0,Math.PI*2); ctx.fillStyle=sh; ctx.fill();
+            }
+
+            function gravity(p) {
+                const dx = BH.x - p.x, dy = BH.y - p.y, d = Math.hypot(dx, dy);
+                if (d < BH.r * 5 && d > BH.r * 1.2) {
+                    const f = 0.0001 * (BH.r * 5 / d);
+                    p.vx += (dx / d) * f;
+                    p.vy += (dy / d) * f;
+                }
+                if (d < BH.r * 1.15) {
+                    p.x = Math.random() * W;
+                    p.y = Math.random() * H * 0.6;
+                    p.vx = (Math.random() - 0.5) * 0.3;
+                    p.vy = (Math.random() - 0.5) * 0.3;
+                }
+            }
+
+            let t = 0;
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                t += 16; BH.angle = t * 0.00015;
+                drawBackDisk(BH.x, BH.y, BH.r);
+                drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
+                drawBlackHole(BH.x, BH.y, BH.r);
+                ctx.fillStyle = 'rgba(230,210,255,0.6)';
+                for (let p of particles) {
+                    gravity(p);
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > W) p.vx *= -1;
+                    if (p.y < 0 || p.y > H) p.vy *= -1;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+                }
+                requestAnimationFrame(draw);
+            }
+
+            resize();
+            window.addEventListener('resize', resize);
+            draw();
+        })();
 
         // ==================== NAVBAR SCROLL ====================
         const navbar = document.getElementById('navbar');
