@@ -778,3 +778,229 @@ function initSpaceDust() {
     }
     */ 
 })();
+// ==========================================
+// LOJA - CARRINHO E FUNCIONALIDADES
+// ==========================================
+
+// Só executa se estiver na página da loja (detecta elementos da loja)
+function initStore() {
+    const productsGrid = document.getElementById('products-grid');
+    if (!productsGrid) return; // Não está na página da loja
+    
+    // ========== PRODUTOS ==========
+    const storeProducts = [
+        { id: 1, name: "VIP Semanal (Grupo)", category: "vip", price: 2.00, description: "Acesso VIP por 7 dias no grupo oficial. Imune a Vote Ban, PV liberado, comandos VIP e bônus de XP.", features: ["Imune a Vote Ban", "PV Liberado", "Comandos VIP", "Bônus de XP"], badge: "Teste Rápido", image: "https://udesaken.site/logousk1.png" },
+        { id: 2, name: "VIP Quinzenal (Grupo)", category: "vip", price: 3.50, description: "15 dias de benefícios VIP: imunidade, prioridade média e comandos exclusivos.", features: ["Imune a Vote Ban", "PV Liberado", "Comandos VIP", "Prioridade Média"], badge: "Popular", image: "https://udesaken.site/logousk1.png" },
+        { id: 3, name: "VIP Mensal (Grupo)", category: "vip", price: 5.00, description: "30 dias com todos os privilégios: mute reduzido (5m), burlar modo 'Só ADM', imunidade total, limite maior de ADV.", features: ["Imunidade Total", "Mute Reduzido (5m)", "Burlar Modo Só ADM", "PV Liberado", "Limite maior ADV"], badge: "Recomendado", image: "https://udesaken.site/logousk1.png" },
+        { id: 4, name: "Bot no PV (1 Dia)", category: "pv", price: 1.50, description: "Teste rápido do bot no seu privado. Acesso total por 24h.", features: ["Acesso Total PV", "Sem limites", "Comandos liberados"], image: "https://udesaken.site/logousk1.png" },
+        { id: 5, name: "Bot no PV (Quinzenal)", category: "pv", price: 2.50, description: "15 dias de uso pessoal do bot, com alta performance e privacidade.", features: ["15 dias", "Privacidade Total", "Respostas rápidas"], image: "https://udesaken.site/logousk1.png" },
+        { id: 6, name: "Bot no PV (Mensal)", category: "pv", price: 3.50, description: "Mensalidade com vantagens máximas: melhor custo-benefício, respostas exclusivas e nenhuma restrição de anti-spam.", features: ["Alta Performance", "Respostas Exclusivas", "Privacidade Total", "Sem restrição de uso"], badge: "Mais Popular", image: "https://udesaken.site/logousk1.png" },
+        { id: 7, name: "Bot Moderação (Grupo - 1 dia)", category: "bot", price: 1.50, description: "Sistema anti-link, boas-vindas e proteção anti-trava para seu grupo.", features: ["Anti-Link automático", "Mensagem de boas-vindas", "Proteção Anti-Trava"], image: "https://udesaken.site/logousk1.png" },
+        { id: 8, name: "Bot Moderação (Grupo - Quinzenal)", category: "bot", price: 5.50, description: "15 dias de moderação completa + jogos e auto-resposta.", features: ["Moderação total", "Jogos interativos", "Auto-resposta configurável"], image: "https://udesaken.site/logousk1.png" },
+        { id: 9, name: "Bot Moderação (Grupo - Mensal)", category: "bot", price: 7.50, description: "Plano completo para grupos: ferramentas de moderação e engajamento por 30 dias.", features: ["Moderação avançada", "Sistema de níveis", "Comandos personalizados", "Proteção total"], badge: "Top Vendas", image: "https://udesaken.site/logousk1.png" }
+    ];
+    
+    // ========== CARRINHO ==========
+    let cart = JSON.parse(localStorage.getItem('udesaken_cart')) || [];
+    
+    function saveCart() {
+        localStorage.setItem('udesaken_cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+    
+    function updateCartUI() {
+        const cartCount = document.getElementById('cart-count');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        
+        if (cartCount) {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.innerText = totalItems;
+        }
+        
+        if (cartItems && cartTotal) {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="text-center text-gray-500 py-10">Seu carrinho está vazio</div>';
+                cartTotal.innerText = 'R$ 0,00';
+                return;
+            }
+            
+            let total = 0;
+            cartItems.innerHTML = cart.map(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                return `
+                    <div class="flex gap-3 border-b border-white/10 pb-4 mb-4">
+                        <img src="${item.image}" class="w-14 h-14 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h4 class="font-bold">${item.name}</h4>
+                            <p class="text-sm text-gray-400">R$ ${item.price.toFixed(2)}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="w-7 h-7 rounded-full border border-white/20">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="w-7 h-7 rounded-full border border-white/20">+</button>
+                                <button onclick="removeFromCart(${item.id})" class="text-red-400 text-sm ml-auto">Remover</button>
+                            </div>
+                        </div>
+                        <div class="font-bold">R$ ${subtotal.toFixed(2)}</div>
+                    </div>
+                `;
+            }).join('');
+            cartTotal.innerText = `R$ ${total.toFixed(2)}`;
+        }
+    }
+    
+    window.addToCart = function(productId) {
+        const product = storeProducts.find(p => p.id === productId);
+        if (!product) return;
+        const existing = cart.find(item => item.id === productId);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        saveCart();
+        
+        // Notificação
+        const notif = document.createElement('div');
+        notif.className = 'fixed bottom-24 right-4 bg-white text-black text-sm font-bold px-4 py-2 rounded-full shadow-lg z-50';
+        notif.innerText = '✅ Adicionado ao carrinho!';
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 2000);
+    };
+    
+    window.updateQuantity = function(productId, delta) {
+        const item = cart.find(i => i.id === productId);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            saveCart();
+        }
+    };
+    
+    window.removeFromCart = function(productId) {
+        cart = cart.filter(i => i.id !== productId);
+        saveCart();
+    };
+    
+    window.toggleCart = function() {
+        document.getElementById('cart-sidebar')?.classList.toggle('open');
+    };
+    
+    window.checkoutWhatsApp = function() {
+        if (cart.length === 0) {
+            alert("Seu carrinho está vazio!");
+            return;
+        }
+        
+        let message = "Olá! Gostaria de comprar:%0A%0A";
+        let total = 0;
+        cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+            message += `📦 ${item.name} × ${item.quantity} = R$ ${subtotal.toFixed(2)}%0A`;
+        });
+        message += `%0A💰 Total: R$ ${total.toFixed(2)}%0A%0A`;
+        message += `Pode me passar os detalhes do pagamento?`;
+        
+        // TROQUE O NÚMERO ABAIXO PELO SEU WHATSAPP
+        const whatsappNumber = "5511999999999";
+        window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        
+        // Zera o carrinho
+        cart = [];
+        saveCart();
+        toggleCart();
+    };
+    
+    window.openProductModal = function(product) {
+        const modal = document.getElementById('product-modal');
+        const content = document.getElementById('modal-product-content');
+        if (!modal || !content) return;
+        
+        content.innerHTML = `
+            <img src="${product.image}" class="w-24 h-24 rounded-2xl mx-auto mb-4">
+            <h2 class="text-2xl font-bold text-center">${product.name}</h2>
+            ${product.badge ? `<div class="text-center mt-2"><span class="bg-white/10 px-3 py-1 rounded-full text-xs">${product.badge}</span></div>` : ''}
+            <p class="text-gray-400 text-center mt-4">${product.description}</p>
+            <ul class="mt-5 space-y-2">
+                ${product.features.map(f => `<li class="flex items-center gap-2 text-sm"><i class="fas fa-check text-white"></i> ${f}</li>`).join('')}
+            </ul>
+            <div class="text-3xl font-bold text-center mt-6">R$ ${product.price.toFixed(2)}</div>
+            <button onclick="addToCart(${product.id}); closeProductModal();" class="w-full mt-6 btn-primary">Adicionar ao carrinho</button>
+        `;
+        modal.classList.add('active');
+    };
+    
+    window.closeProductModal = function() {
+        document.getElementById('product-modal')?.classList.remove('active');
+    };
+    
+    // ========== RENDERIZAR PRODUTOS ==========
+    let currentCategory = 'all';
+    let searchTerm = '';
+    
+    function renderProducts() {
+        let filtered = storeProducts;
+        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
+        if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        
+        const grid = document.getElementById('products-grid');
+        const noResults = document.getElementById('no-results');
+        
+        if (filtered.length === 0) {
+            if (grid) grid.innerHTML = '';
+            if (noResults) noResults.classList.remove('hidden');
+            return;
+        }
+        
+        if (noResults) noResults.classList.add('hidden');
+        if (grid) {
+            grid.innerHTML = filtered.map(prod => `
+                <div class="product-card" onclick='openProductModal(${JSON.stringify(prod).replace(/'/g, "&#39;")})'>
+                    <div class="flex justify-between">
+                        <img src="${prod.image}" class="w-14 h-14 rounded-xl object-cover">
+                        ${prod.badge ? `<span class="text-xs bg-white/10 px-2 py-1 rounded-full">${prod.badge}</span>` : ''}
+                    </div>
+                    <h3 class="font-bold text-lg mt-4">${prod.name}</h3>
+                    <p class="text-gray-400 text-sm mt-1">${prod.description.substring(0, 70)}...</p>
+                    <div class="flex justify-between items-center mt-5">
+                        <span class="text-2xl font-bold">R$ ${prod.price.toFixed(2)}</span>
+                        <button onclick="event.stopPropagation(); addToCart(${prod.id})" class="bg-white text-black rounded-full w-9 h-9 flex items-center justify-center hover:scale-105 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+    
+    // Eventos de filtro
+    document.querySelectorAll('.category-filter').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.cat;
+            renderProducts();
+        });
+    });
+    
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchTerm = e.target.value;
+            renderProducts();
+        });
+    }
+    
+    // Inicializar
+    renderProducts();
+    updateCartUI();
+}
+
+// Inicializar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    initStore();
+});
