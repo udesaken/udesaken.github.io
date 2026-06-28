@@ -241,6 +241,7 @@
         }
     </style>
     <link rel="icon" type="image/png" href="/ift/logousk.png">
+    <link rel="stylesheet" href="/style.css?v=6.0">
 </head>
 <body>
 
@@ -425,112 +426,120 @@
 
         // ==================== EQUIPE (mesmos dados, apenas tema roxo) ====================
         const teamMembers = [
-            {
-                name: "Isloch",
-                mainRole: "CEO & Founder",
-                additionalRoles: ["Content Creator"],
-                description: "Criador e líder máximo do ecossistema Udesaken. Desenvolvedor full-stack, visionário e também responsável por criar conteúdos estratégicos para a marca.",
-                image: "/ift/isloch.jpg",
-                skills: ["JavaScript", "Python", "Node.js", "Gestão", "Criação de Conteúdo"],
-                socials: [
-                    { name: 'instagram', url: 'https://instagram.com/isloch_' },
-                    { name: 'tiktok', url: 'https://tiktok.com/@isloch_' }
-                ]
-            },
-            {
-                name: "Hyuuzaki",
-                mainRole: "Head Manager",
-                additionalRoles: [],
-                description: "Gerencia toda a equipe de staff, coordena estratégias internas e é responsável pela criação das figurinhas exclusivas do canal.",
-                image: "/ift/hyuuzaki.jpg",
-                skills: ["Gestão de Pessoas", "Design", "Estratégia", "Stickers"],
-                socials: []
-            },
-            {
-                name: "Near",
-                mainRole: "Administrador Geral",
-                additionalRoles: ["Representante de Vendas"],
-                description: "Administrador geral do grupo, supervisiona todas as operações e também atua como representante de vendas, conectando clientes às melhores soluções.",
-                image: "/ift/dn.jpg",
-                skills: ["Gestão Geral", "Estratégia", "Vendas", "Planejamento", "Liderança"],
-                socials: [
-
-                    { name: 'tiktok', url: 'https://tiktok.com/@santzxs19' }
-                ]
-            },
-            {
-                name: "Psax",
-                mainRole: "Administrador",
-                additionalRoles: [],
-                description: "Administrador dedicado à manutenção da ordem e suporte avançado, garantindo que as diretrizes sejam seguidas e a experiência dos membros seja positiva.",
-                image: "/ift/pisa.jpg",
-                skills: ["Moderação", "Suporte Avançado", "Logística", "Tomada de Decisão"],
-                socials: []
-            },
-            {
-                name: "Bruno",
-                mainRole: "Admin Channel & Admin Grupo",
-                additionalRoles: [],
-                description: "Atua na gestão do canal oficial e também como administrador do grupo, assegurando a harmonia e o bom funcionamento das comunidades Udesaken.",
-                image: "/ift/bruno.jpg",
-                skills: ["Gestão de Canal", "Moderação", "Comunicação", "Organização"],
-                socials: []
-            },
-            {
-                name: "Thiago",
-                mainRole: "Admin Grupo",
-                additionalRoles: [],
-                description: "Administrador focado na moderação e organização do grupo, garantindo um ambiente seguro e produtivo para todos os membros.",
-                image: "/ift/thiago.jpg",
-                skills: ["Moderação", "Gestão de Conflitos", "Aplicação de Regras", "Suporte"],
-                socials: []
-            },
-            {
-                name: "Baiana",
-                mainRole: "Admin Grupo",
-                additionalRoles: [],
-                description: "Responsável pela ordem e bom andamento das discussões no grupo, sempre atenta às necessidades da comunidade e à aplicação das diretrizes.",
-                image: "/ift/nicole.jpg",
-                skills: ["Moderação", "Empatia", "Comunicação", "Resolução de Problemas"],
-                socials: []
-            },
-            {
-                name: "Atena",
-                mainRole: "Admin Grupo",
-                additionalRoles: [],
-                description: "Administra o grupo com dedicação, promovendo um ambiente colaborativo e garantindo que as regras sejam cumpridas com justiça.",
-                image: "/ift/atena.jpg",
-                skills: ["Moderação", "Organização", "Liderança", "Mediação"],
-                socials: []
-            },
-            {
-                name: "Pedim",
-                mainRole: "Admin Grupo",
-                additionalRoles: [],
-                description: "Atua na administração do grupo, mantendo a ordem e auxiliando os membros com rapidez e eficiência.",
-                image: "/ift/pedim.jpg",
-                skills: ["Moderação", "Segurança", "Disciplina", "Suporte Rápido"],
-                socials: []
-            },
-            {
-                name: "Ferraresi",
-                mainRole: "Editor",
-                additionalRoles: [],
-                description: "Editor responsável pela edição de materiais do grupo, garantindo qualidade estética e profissionalismo em todas as peças.",
-                image: "/ift/ferraresi.jpg",
-                skills: ["Edição de Vídeo"],
-                socials: []
-            },
-            {
-                name: "Wyze",
-                mainRole: "Jovem Aprendiz",
-                additionalRoles: [],
-                description: "Wyze está em desenvolvimento constante, aprendendo sobre moderação, suporte e gestão. Traz energia nova e dedicação para crescer junto com a equipe.",
-                image: "/ift/davi.jpg",
-                skills: ["Aprendizado", "Mascote UsK", "Suporte Básico", "Vendas"],
-                socials: []
-            }
-        ];
+    {
+        name: "Isloch",
+        mainRole: "CEO & Founder",
+        additionalRoles: ["Designer", "Editor", "Content Creator"],
+        description: "Criador e líder máximo do ecossistema Udesaken. Desenvolvedor full-stack, visionário e também responsável por criar conteúdos estratégicos para a marca.",
+        image: "/ift/isloch.jpg",
+        skills: ["JavaScript", "Python", "Node.js", "Gestão", "Criação de Conteúdo"],
+        socials: [
+            { name: 'instagram', url: 'https://instagram.com/isloch_' },
+            { name: 'tiktok', url: 'https://tiktok.com/@isloch_' }
+        ]
+    },
+    {
+        name: "Hyuuzaki",
+        mainRole: "Head Manager",
+        additionalRoles: ["Designer", "Content Creator"],
+        description: "Gerencia toda a equipe de staff, coordena estratégias internas e é responsável pela criação das figurinhas exclusivas do canal.",
+        image: "/ift/hyuuzaki.jpg",
+        skills: ["Gestão de Pessoas", "Design", "Estratégia", "Stickers"],
+        socials: []
+    },
+    {
+        name: "Near",
+        mainRole: "Administrador Geral",
+        additionalRoles: [" Responsável de Vendas"],
+        description: "Administrador geral do grupo, supervisiona todas as operações e também atua como representante de vendas, conectando clientes às melhores soluções.",
+        image: "/ift/dn.jpg",
+        skills: ["Gestão Geral", "Estratégia", "Vendas", "Planejamento", "Liderança"],
+        socials: [
+            { name: 'tiktok', url: 'https://tiktok.com/@santzxs19' }
+        ]
+    },
+    {
+        name: "PsaX",
+        mainRole: "Administrador",
+        additionalRoles: [],
+        description: "Administrador dedicado à manutenção da ordem e suporte avançado, garantindo que as diretrizes sejam seguidas e a experiência dos membros seja positiva.",
+        image: "/ift/pisa.jpg",
+        skills: ["Moderação", "Suporte Avançado", "Logística", "Tomada de Decisão"],
+        socials: []
+    },
+    {
+        name: "Kim",
+        mainRole: "Responsável Grupo",
+        additionalRoles: ["Admin Grupo"],
+        description: "Responsável pela organização e boa convivência no grupo, além de atuar como administrador ativo nas comunidades.",
+        image: "/ift/kim.jpg",
+        skills: ["Moderação", "Organização", "Liderança", "Comunicação"],
+        socials: []
+    },
+    {
+        name: "Bruno",
+        mainRole: "Admin Channel",
+        additionalRoles: ["Admin Grupo"],
+        description: "Atua na gestão do canal oficial e também como administrador do grupo, assegurando a harmonia e o bom funcionamento das comunidades Udesaken.",
+        image: "/ift/bruno.jpg",
+        skills: ["Gestão de Canal", "Moderação", "Comunicação", "Organização"],
+        socials: []
+    },
+    {
+        name: "Thiago",
+        mainRole: "Admin Grupo",
+        additionalRoles: [],
+        description: "Administrador focado na moderação e organização do grupo, garantindo um ambiente seguro e produtivo para todos os membros.",
+        image: "/ift/thiago.jpg",
+        skills: ["Moderação", "Gestão de Conflitos", "Aplicação de Regras", "Suporte"],
+        socials: []
+    },
+    {
+        name: "Baiana",
+        mainRole: "Admin Grupo",
+        additionalRoles: [],
+        description: "Responsável pela ordem e bom andamento das discussões no grupo, sempre atenta às necessidades da comunidade e à aplicação das diretrizes.",
+        image: "/ift/nicole.jpg",
+        skills: ["Moderação", "Empatia", "Comunicação", "Resolução de Problemas"],
+        socials: []
+    },
+    {
+        name: "Ferraresi",
+        mainRole: "Admin Grupo",
+        additionalRoles: [],
+        description: "Atua na administração do grupo com foco em manter a ordem e apoiar os membros de forma ágil e profissional.",
+        image: "/ift/ferraresi.jpg",
+        skills: ["Moderação", "Segurança", "Disciplina", "Suporte Rápido"],
+        socials: []
+    },
+    {
+        name: "Wyze",
+        mainRole: "Admin Grupo",
+        additionalRoles: [],
+        description: "Wyze está em desenvolvimento constante, aprendendo sobre moderação, suporte e gestão. Traz energia nova e dedicação para crescer junto com a equipe.",
+        image: "/ift/davi.jpg",
+        skills: ["Aprendizado", "Mascote UsK", "Suporte Básico", "Vendas"],
+        socials: []
+    },
+    {
+        name: "Tokyo",
+        mainRole: "Admin Grupo",
+        additionalRoles: ["Designer"],
+        description: "Administra o grupo com dedicação e também contribui com design, trazendo criatividade e identidade visual para a comunidade.",
+        image: "/ift/tokyo.jpg",
+        skills: ["Moderação", "Design", "Criatividade", "Organização"],
+        socials: []
+    },
+    {
+        name: "Nora",
+        mainRole: "Admin Grupo",
+        additionalRoles: [],
+        description: "Administradora atuante no grupo, garantindo que as regras sejam cumpridas e promovendo um ambiente colaborativo.",
+        image: "/ift/nora.jpg",
+        skills: ["Moderação", "Empatia", "Comunicação", "Mediação"],
+        socials: []
+    }
+];
 
         const iconMap = {
             'instagram': 'fab fa-instagram',
