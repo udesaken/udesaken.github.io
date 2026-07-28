@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Loja | Udesaken Group</title>
-    <meta name="description" content="Adquira VIP, bots, moderação e pacotes Gold/RPG para sua comunidade com ativação instantânea.">
+    <meta name="description" content="Adquira VIP, bots para grupo, moderação e pacotes Gold/RPG para sua comunidade com ativação instantânea.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Loja | Udesaken Group">
-    <meta property="og:description" content="Adquira VIP, bots, moderação e pacotes Gold/RPG para sua comunidade com ativação instantânea.">
+    <meta property="og:description" content="Adquira VIP, bots para grupo, moderação e pacotes Gold/RPG para sua comunidade com ativação instantânea.">
     <meta property="og:image" content="https://udesaken.site/ift/logousk.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -214,28 +214,6 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             line-height: 1.4;
-        }
-
-        .nav-hub-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.25s;
-        }
-        .nav-hub-btn i {
-            font-size: 0.85rem;
-            color: var(--primary-glow);
-        }
-        .nav-hub-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
         }
 
         .nav-store-btn {
@@ -655,74 +633,6 @@
             color: var(--primary-glow);
             margin: 8px 0 20px;
         }
-        .detail-box .db-extra {
-            margin: 20px 0;
-        }
-        .detail-box .db-extra label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-        .detail-box .db-extra input {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 0.9rem;
-            outline: none;
-            font-family: var(--font-base);
-            transition: border-color 0.3s;
-        }
-        .detail-box .db-extra input:focus {
-            border-color: var(--primary-glow);
-        }
-        .detail-box .db-extra .ddd-suggest-label {
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            margin-top: 12px;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .ddd-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .ddd-btn {
-            padding: 6px 14px;
-            border-radius: 100px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: var(--font-base);
-        }
-        .ddd-btn:hover {
-            background: var(--primary-dim);
-            border-color: var(--primary-glow);
-            color: #fff;
-        }
-        .ddd-btn.active {
-            background: var(--primary-dim);
-            border-color: var(--primary);
-            color: var(--primary-glow);
-        }
-        .ddd-error {
-            color: #f87171;
-            font-size: 0.75rem;
-            margin-top: 6px;
-            display: none;
-        }
-        .ddd-error.show {
-            display: block;
-        }
-
         .detail-box .db-actions {
             display: flex;
             gap: 12px;
@@ -1267,11 +1177,9 @@
             #menu-toggle {
                 display: block;
             }
-            .nav-hub-btn span,
             .nav-store-btn span {
                 display: none;
             }
-            .nav-hub-btn,
             .nav-store-btn {
                 padding: 8px 12px;
             }
@@ -1342,15 +1250,13 @@
             <div class="nav-links">
                 <a href="/comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
                 <a href="/equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
-                <a href="/parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
-                <a href="/hub/" class="nav-link"><i class="fas fa-cube"></i> Hub</a>
+                <a href="https://uniaousk.xyz/" class="nav-link" target="_blank">Parcerias <span class="badge-novo">Novo</span></a>
             </div>
             <div style="display:flex; align-items:center; gap:12px;">
                 <button class="cart-btn" onclick="toggleCart()">
                     <i class="fas fa-shopping-bag" style="font-size:1.1rem; color:var(--primary-glow);"></i>
                     <span id="cart-count">0</span>
                 </button>
-                <a href="/hub/" class="nav-hub-btn"><i class="fas fa-cube"></i><span>Hub</span></a>
                 <a href="/store/" class="nav-store-btn"><i class="fas fa-store"></i><span>Loja</span></a>
                 <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
             </div>
@@ -1360,9 +1266,7 @@
             <div class="mob-divider"></div>
             <a href="/equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a>
             <div class="mob-divider"></div>
-            <a href="/parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
-            <div class="mob-divider"></div>
-            <a href="/hub/" class="mob-link"><i class="fas fa-cube"></i> Hub Corporativo</a>
+            <a href="https://uniaousk.xyz/" class="mob-link" target="_blank"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a>
             <div class="mob-divider"></div>
             <a href="/store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
         </div>
@@ -1372,7 +1276,7 @@
     <section id="store-hero">
         <div class="fade-up">
             <h1 class="store-title">Loja <span class="text-gradient">Udesaken</span></h1>
-            <p class="store-sub">Soluções automatizadas, bots inteligentes, planos de moderação e recursos premium para potencializar o seu ecossistema digital.</p>
+            <p class="store-sub">Soluções automatizadas, bots para grupos, moderação e pacotes Gold/RPG para potencializar o seu ecossistema digital.</p>
             <div class="hero-stats">
                 <div class="hero-stat"><span class="s-val">+1.2k</span><span class="s-lbl">Pedidos</span></div>
                 <div class="hero-stat"><span class="s-val">4.9 ★</span><span class="s-lbl">Avaliação</span></div>
@@ -1434,7 +1338,7 @@
                         <div class="t-stars">★★★★★</div>
                     </div>
                 </div>
-                <p class="t-text">"A ativação do VIP Mensal foi instantânea. O bot responde super rápido e o comando de IA integrado facilita muito a nossa rotina. Suporte nota 10."</p>
+                <p class="t-text">"A ativação do VIP Mensal foi instantânea. O bot do grupo responde super rápido e a moderação é impecável. Suporte nota 10."</p>
             </div>
             <div class="t-card">
                 <div class="t-top">
@@ -1464,7 +1368,7 @@
                         <div class="t-stars">★★★★★</div>
                     </div>
                 </div>
-                <p class="t-text">"Comprei o número com DDD personalizado e recebi todos os dados para configuração rapidamente. Processo extremamente profissional."</p>
+                <p class="t-text">"Comprei o Gold Nobre e recebi os recursos rapidamente. Processo extremamente profissional, recomendo a todos."</p>
             </div>
         </div>
     </div>
@@ -1481,7 +1385,7 @@
                 <div class="footer-links">
                     <a href="/"><i class="fas fa-home"></i> Início</a>
                     <a href="/equipe/"><i class="fas fa-users"></i> Equipe</a>
-                    <a href="/parcerias/"><i class="fas fa-handshake"></i> Parcerias</a>
+                    <a href="https://uniaousk.xyz/" target="_blank"><i class="fas fa-handshake"></i> União UsK</a>
                     <a href="/discord/"><i class="fab fa-discord"></i> Discord</a>
                     <a href="/termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a>
                 </div>
@@ -1528,7 +1432,7 @@
     </div>
 
     <!-- ===== WHATSAPP FLOAT ===== -->
-    <a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+    <a id="wa-float" href="https://wa.me/5585997923438" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
 
     <!-- ============================================================
     SCRIPT PRINCIPAL
@@ -1554,103 +1458,62 @@
         }
 
         // ============================================================
-        //  DDDs VÁLIDOS DO BRASIL (11 a 99 com alguns buracos)
-        // ============================================================
-        const VALID_DDDS = new Set([
-            11, 12, 13, 14, 15, 16, 17, 18, 19,
-            21, 22, 24, 27, 28,
-            31, 32, 33, 34, 35, 37, 38,
-            41, 42, 43, 44, 45, 46, 47, 48, 49,
-            51, 53, 54, 55,
-            61, 62, 63, 64, 65, 66, 67, 68, 69,
-            71, 73, 74, 75, 77, 79,
-            81, 82, 83, 84, 85, 86, 87, 88, 89,
-            91, 92, 93, 94, 95, 96, 97, 98, 99
-        ]);
-
-        function isValidDDD(ddd) {
-            const num = parseInt(ddd, 10);
-            return !isNaN(num) && ddd.length === 2 && VALID_DDDS.has(num);
-        }
-
-        const DDD_SUGGESTIONS = ['11', '21', '31', '41', '47', '61', '67', '71', '77', '85', '99'];
-
-        // ============================================================
-        //  CATEGORIAS E PRODUTOS (ESTRUTURA SEM EMOJIS GENÉRICOS)
+        //  CATEGORIAS E PRODUTOS (SEM NÚMEROS, SEM BOT PV, VIP SEM PV)
         // ============================================================
         const CATEGORIES = [
             { id: 'vip', label: 'Club VIP', icon: 'fa-crown', desc: 'Planos exclusivos com boosts e vantagens únicas.' },
-            { id: 'bot_pv', label: 'Bot Privado', icon: 'fa-robot', desc: 'Ativação pessoal para assistente individual inteligente.' },
-            { id: 'bot_grupo', label: 'Bot Grupo', icon: 'fa-users-cog', desc: 'Gerenciamento avançado e ferramentas de moderação.' },
+            { id: 'bot_grupo', label: 'Bot para Grupo', icon: 'fa-users-cog', desc: 'Gerenciamento avançado e ferramentas de moderação.' },
             { id: 'gold_xp', label: 'XP & Níveis', icon: 'fa-chart-line', desc: 'Multiplicadores e bônus de experiência no RPG.' },
             { id: 'gold_moeda', label: 'Moedas Gold', icon: 'fa-coins', desc: 'Pacotes de recursos para transações e comércio.' },
-            { id: 'extras', label: 'Serviços Extras', icon: 'fa-tools', desc: 'Migrações, transferências e suporte especializado.' },
-            { id: 'web', label: 'Números para whatsapp', icon: 'fa-globe', desc: 'Conexões rápidas e verificação automatizada.' }
+            { id: 'extras', label: 'Serviços Extras', icon: 'fa-tools', desc: 'Migrações, transferências e suporte especializado.' }
         ];
 
         const PRODUCTS = [
-            // ----- VIP -----
+            // ----- VIP (sem menção a bot no PV, nem IA, nem comandos VIP, nem acesso irrestrito) -----
             { id: 1, category: 'vip', name: 'VIP Semanal', price: 2.50, badge: 'Teste Rápido', icon: 'fa-crown',
-                description: "✓ Imunidade completa a voteban\n✓ IA Udesaken integrada no chat\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte\n✓ Acesso irrestrito ao bot em modo privado\n✓ Lista exclusiva de comandos VIP" },
+                description: "✓ Imunidade completa a voteban\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte" },
             { id: 2, category: 'vip', name: 'VIP Quinzenal', price: 4.50, badge: 'Popular', icon: 'fa-crown',
-                description: "✓ Imunidade completa a voteban\n✓ IA Udesaken integrada no chat\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte\n✓ Acesso irrestrito ao bot em modo privado\n✓ Lista exclusiva de comandos VIP" },
+                description: "✓ Imunidade completa a voteban\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte" },
             { id: 3, category: 'vip', name: 'VIP Mensal', price: 6.50, badge: 'Recomendado', icon: 'fa-crown',
-                description: "✓ Imunidade completa a voteban\n✓ IA Udesaken integrada no chat\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte\n✓ Acesso irrestrito ao bot em modo privado\n✓ Lista exclusiva de comandos VIP" },
+                description: "✓ Imunidade completa a voteban\n✓ Tempo máximo de mute reduzido para 5min\n✓ Permissão para falar 10 vezes no modo apenas administradores a cada 30min\n✓ Multiplicador de XP: receba 3x mais experiência\n✓ Tolerância adicional para advertências\n✓ Prioridade máxima no atendimento e suporte" },
 
-            // ----- BOT PV -----
-            { id: 4, category: 'bot_pv', name: 'Bot PV (1 Dia)', price: 1.50, badge: 'Experimental', icon: 'fa-robot',
-                description: "✓ Utilização de comandos avançados no privado (exceto dinâmicas de grupo)\n✓ Execução rápida de figurinhas e stickers instantâneos\n✓ Download automatizado de mídias e músicas\n• Nota: Modo RPG/Gold não é aplicável em chats individuais" },
-            { id: 5, category: 'bot_pv', name: 'Bot PV (Quinzenal)', price: 2.50, badge: null, icon: 'fa-robot',
-                description: "✓ Utilização de comandos avançados no privado (exceto dinâmicas de grupo)\n✓ Execução rápida de figurinhas e stickers instantâneos\n✓ Download automatizado de mídias e músicas\n• Nota: Modo RPG/Gold não é aplicável em chats individuais" },
-            { id: 6, category: 'bot_pv', name: 'Bot PV (Mensal)', price: 3.50, badge: 'Mais Popular', icon: 'fa-robot',
-                description: "✓ Utilização de comandos avançados no privado (exceto dinâmicas de grupo)\n✓ Execução rápida de figurinhas e stickers instantâneos\n✓ Download automatizado de mídias e músicas\n• Nota: Modo RPG/Gold não é aplicável em chats individuais" },
-
-            // ----- BOT GRUPO -----
-            { id: 7, category: 'bot_grupo', name: 'Bot Grupo (1 Dia)', price: 1.50, badge: null, icon: 'fa-users-cog',
+            // ----- BOT GRUPO (mantido) -----
+            { id: 4, category: 'bot_grupo', name: 'Bot Grupo (1 Dia)', price: 1.50, badge: null, icon: 'fa-users-cog',
                 description: "✓ Sistema automático de proteção contra links nocivos\n✓ Ativação de jogos e mecânicas do Modo Gold/RPG\n✓ Console administrativo completo para o gerenciamento de membros" },
-            { id: 8, category: 'bot_grupo', name: 'Bot Grupo (15 dias)', price: 5.50, badge: null, icon: 'fa-users-cog',
+            { id: 5, category: 'bot_grupo', name: 'Bot Grupo (15 dias)', price: 5.50, badge: null, icon: 'fa-users-cog',
                 description: "✓ Sistema automático de proteção contra links nocivos\n✓ Ativação de jogos e mecânicas do Modo Gold/RPG\n✓ Console administrativo completo para o gerenciamento de membros" },
-            { id: 9, category: 'bot_grupo', name: 'Bot Grupo (30 dias)', price: 8.00, badge: 'Top Vendas', icon: 'fa-users-cog',
+            { id: 6, category: 'bot_grupo', name: 'Bot Grupo (30 dias)', price: 8.00, badge: 'Top Vendas', icon: 'fa-users-cog',
                 description: "✓ Sistema automático de proteção contra links nocivos\n✓ Ativação de jogos e mecânicas do Modo Gold/RPG\n✓ Console administrativo completo para o gerenciamento de membros" },
 
-            // ----- GOLD XP / LEVEL -----
-            { id: 10, category: 'gold_xp', name: 'XP Iniciante - 15k', price: 3.00, badge: 'Novo', icon: 'fa-chart-line',
+            // ----- GOLD XP (mantido) -----
+            { id: 7, category: 'gold_xp', name: 'XP Iniciante - 15k', price: 3.00, badge: 'Novo', icon: 'fa-chart-line',
                 description: "✓ Injeção de 15.000 pontos de experiência no Modo Gold/RPG\n✓ Avanço veloz de patamares iniciais\n✓ Compatibilidade universal com todos os servidores autorizados" },
-            { id: 11, category: 'gold_xp', name: 'XP Avançado - 80k', price: 7.00, badge: 'Recomendado', icon: 'fa-chart-line',
+            { id: 8, category: 'gold_xp', name: 'XP Avançado - 80k', price: 7.00, badge: 'Recomendado', icon: 'fa-chart-line',
                 description: "✓ Injeção de 80.000 pontos de experiência no Modo Gold/RPG\n✓ Progressão instantânea para níveis intermediários\n✓ Excelente escolha para desbloquear novos recursos" },
-            { id: 12, category: 'gold_xp', name: 'XP Mestre - 300k', price: 15.00, badge: 'Melhor Valor', icon: 'fa-chart-line',
+            { id: 9, category: 'gold_xp', name: 'XP Mestre - 300k', price: 15.00, badge: 'Melhor Valor', icon: 'fa-chart-line',
                 description: "✓ Injeção de 300.000 pontos de experiência no Modo Gold/RPG\n✓ Boost massivo de nível para consolidar seu perfil no ranking\n✓ Ótimo retorno de investimento por nível adquirido" },
-            { id: 13, category: 'gold_xp', name: 'XP Lendário - 1M', price: 29.00, badge: 'Mais Vendido', icon: 'fa-chart-line',
+            { id: 10, category: 'gold_xp', name: 'XP Lendário - 1M', price: 29.00, badge: 'Mais Vendido', icon: 'fa-chart-line',
                 description: "✓ Injeção de 1.000.000 pontos de experiência no Modo Gold/RPG\n✓ Conquiste o status de lenda no servidor de forma instantânea\n✓ Avance dezenas de patamares em segundos" },
-            { id: 14, category: 'gold_xp', name: 'XP Divino - 3M', price: 55.00, badge: 'Alta categoria', icon: 'fa-chart-line',
+            { id: 11, category: 'gold_xp', name: 'XP Divino - 3M', price: 55.00, badge: 'Alta categoria', icon: 'fa-chart-line',
                 description: "✓ Injeção de 3.000.000 pontos de experiência no Modo Gold/RPG\n✓ Poder absoluto e escalada imediata ao topo absoluto do ranking\n✓ Ideal para jogadores que não aceitam menos do que o primeiro lugar" },
 
-            // ----- GOLD MOEDA -----
-            { id: 15, category: 'gold_moeda', name: 'Gold Iniciante - 1.000', price: 4.99, badge: 'Entrada', icon: 'fa-coins',
+            // ----- GOLD MOEDA (mantido) -----
+            { id: 12, category: 'gold_moeda', name: 'Gold Iniciante - 1.000', price: 4.99, badge: 'Entrada', icon: 'fa-coins',
                 description: "✓ 1.000 moedas de ouro para transações internas e compras no RPG\n✓ Perfeito para iniciar suas atividades comerciais no jogo\n✓ Envio automatizado e entrega ágil" },
-            { id: 16, category: 'gold_moeda', name: 'Gold Aventureiro - 5.000', price: 14.99, badge: 'Popular', icon: 'fa-coins',
+            { id: 13, category: 'gold_moeda', name: 'Gold Aventureiro - 5.000', price: 14.99, badge: 'Popular', icon: 'fa-coins',
                 description: "✓ 5.000 moedas de ouro para fortalecer sua economia no RPG\n✓ Melhor relação de preço unitário em comparação ao pacote inicial\n✓ Envio automatizado e entrega ágil" },
-            { id: 17, category: 'gold_moeda', name: 'Gold Nobre - 10.000', price: 24.99, badge: 'Recomendado', icon: 'fa-coins',
+            { id: 14, category: 'gold_moeda', name: 'Gold Nobre - 10.000', price: 24.99, badge: 'Recomendado', icon: 'fa-coins',
                 description: "✓ 10.000 moedas de ouro para expandir drasticamente seus recursos\n✓ O preferido entre os jogadores intermediários ativos\n✓ Envio automatizado e entrega ágil" },
-            { id: 18, category: 'gold_moeda', name: 'Gold Reino - 25.000', price: 49.99, badge: 'Melhor Valor', icon: 'fa-coins',
+            { id: 15, category: 'gold_moeda', name: 'Gold Reino - 25.000', price: 49.99, badge: 'Melhor Valor', icon: 'fa-coins',
                 description: "✓ 25.000 moedas de ouro para estabelecer domínio comercial absoluto\n✓ Desconto equivalente a cerca de 40% em relação ao pacote base\n✓ Envio automatizado e entrega ágil" },
-            { id: 19, category: 'gold_moeda', name: 'Gold Lendário - 50.000', price: 79.99, badge: 'Elite', icon: 'fa-coins',
+            { id: 16, category: 'gold_moeda', name: 'Gold Lendário - 50.000', price: 79.99, badge: 'Elite', icon: 'fa-coins',
                 description: "✓ 50.000 moedas de ouro para se tornar o magnata definitivo do ecossistema\n✓ Custo por moeda extremamente reduzido no maior pacote disponível\n✓ Envio automatizado e entrega ágil" },
 
-            // ----- EXTRAS -----
-            { id: 20, category: 'extras', name: 'Alterar grupo do bot', price: 2.00, badge: null, icon: 'fa-tools',
+            // ----- EXTRAS (mantido) -----
+            { id: 17, category: 'extras', name: 'Alterar grupo do bot', price: 2.00, badge: null, icon: 'fa-tools',
                 description: "✓ Migre a instância do seu bot contratado para outro grupo sem perder as estatísticas atuais." },
-            { id: 21, category: 'extras', name: 'Transferir VIP', price: 2.00, badge: null, icon: 'fa-tools',
-                description: "✓ Realize a transferência completa das permissões e benefícios do seu plano VIP para um número diferente." },
-
-            // ----- NÚMEROS / WEB -----
-            { id: 22, category: 'web', name: 'Número WhatsApp (DDD aleatório)', price: 15.00, badge: null, icon: 'fa-globe',
-                description: "📱 Número exclusivo pronto para a criação e validação do seu perfil no WhatsApp.\n• Configuração com dados pré-estabelecidos de forma privada\n• Código DDD gerado de modo automático e aleatório\n• Ótima opção para quem precisa de conectividade imediata\n• Processo de entrega e instruções fornecido via WhatsApp" },
-            { id: 23, category: 'web', name: 'Número com DDD personalizado', price: 17.00, badge: null, icon: 'fa-globe',
-                description: "📱 Número exclusivo com código DDD de sua escolha pessoal.\n• Selecione o código de DDD brasileiro de sua conveniência\n• Registro sob medida para otimizar conexões regionais\n• Perfeito para operações focadas em praças de atuação específicas\n• Processo de entrega e instruções fornecido via WhatsApp",
-                extra: 'ddd' },
-            { id: 24, category: 'web', name: 'Solicitar novo código SMS', price: 2.50, badge: null, icon: 'fa-comment-alt',
-                description: "📱 Reenvio assistido de código de verificação para ativação pendente.\n• Ideal para instâncias onde o código anterior expirou ou não foi coletado a tempo\n• Despacho prioritário para ativação célere\n• Serviço exclusivo aplicável apenas a números gerados e fornecidos originalmente pelo Udesaken Group" }
+            { id: 18, category: 'extras', name: 'Transferir VIP', price: 2.00, badge: null, icon: 'fa-tools',
+                description: "✓ Realize a transferência completa das permissões e benefícios do seu plano VIP para um número diferente." }
         ];
 
         // ============================================================
@@ -1659,7 +1522,6 @@
         let currentView = 'categories';
         let currentCategory = null;
         let currentProduct = null;
-        let dddValue = '';
 
         // ============================================================
         //  CARRINHO
@@ -1702,13 +1564,12 @@
             itemsEl.innerHTML = cart.map(item => {
                 const sub = item.price * item.quantity;
                 sum += sub;
-                const meta = item.ddd ? ` • DDD ${item.ddd}` : '';
                 return `
                         <div class="cart-item">
                             <div class="ci-img"><i class="fas ${item.icon || 'fa-cube'}"></i></div>
                             <div class="ci-info">
                                 <h4>${item.name}</h4>
-                                <div class="ci-meta">${item.desc || ''}${meta}</div>
+                                <div class="ci-meta">${item.desc || ''}</div>
                                 <div class="ci-qty">
                                     <button class="qty-btn" onclick="updateQty('${item.id}')">−</button>
                                     <span class="qty-val">${item.quantity}</span>
@@ -1767,8 +1628,7 @@
             cart.forEach(item => {
                 const sub = item.price * item.quantity;
                 total += sub;
-                const meta = item.ddd ? ` (DDD ${item.ddd})` : '';
-                msg += `📦 ${item.name}${meta} × ${item.quantity} = R$ ${formatBRL(sub)}\n`;
+                msg += `📦 ${item.name} × ${item.quantity} = R$ ${formatBRL(sub)}\n`;
             });
             msg += `\n💰 Total: R$ ${formatBRL(total)}\n\nPode me passar os detalhes do pagamento?`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -1792,7 +1652,6 @@
         function goToCategories() {
             currentCategory = null;
             currentProduct = null;
-            dddValue = '';
             showView('view-categories');
             renderCategories();
         }
@@ -1806,13 +1665,12 @@
         function goToDetail(productId) {
             currentProduct = PRODUCTS.find(p => p.id === productId);
             if (!currentProduct) return;
-            dddValue = '';
             showView('view-detail');
             renderDetail();
         }
 
         // ============================================================
-        //  RENDERIZAÇÃO: CATEGORIAS (MUDADO PARA USAR ÍCONES)
+        //  RENDERIZAÇÃO: CATEGORIAS
         // ============================================================
         function renderCategories() {
             const grid = document.getElementById('categories-grid');
@@ -1872,7 +1730,7 @@
         }
 
         // ============================================================
-        //  RENDERIZAÇÃO: DETALHE DO PRODUTO (REMOVIDO EMOJIS DOS ITENS)
+        //  RENDERIZAÇÃO: DETALHE DO PRODUTO (sem DDD)
         // ============================================================
         function renderDetail() {
             const box = document.getElementById('detail-box');
@@ -1883,15 +1741,13 @@
             const p = currentProduct;
             const badgeHtml = p.badge ? `<span>${p.badge}</span>` : '';
 
-            // Formata a descrição com ícones FontAwesome em vez de emojis genéricos
+            // Formata a descrição com ícones FontAwesome
             const descLines = p.description.split('\n').filter(l => l.trim());
             let descHtml = '<div class="db-desc">';
             descLines.forEach(line => {
                 const trimmed = line.trim();
                 if (trimmed.startsWith('✓')) {
                     descHtml += `<div><i class="fas fa-check-circle"></i> ${trimmed.substring(1).trim()}</div>`;
-                } else if (trimmed.startsWith('📱')) {
-                    descHtml += `<div><i class="fas fa-mobile-alt"></i> ${trimmed.substring(2).trim()}</div>`;
                 } else if (trimmed.startsWith('•')) {
                     descHtml += `<div><i class="fas fa-arrow-right" style="font-size:0.6rem; align-self:center;"></i> ${trimmed.substring(1).trim()}</div>`;
                 } else {
@@ -1900,87 +1756,19 @@
             });
             descHtml += '</div>';
 
-            // Campo extra para DDD
-            let extraHtml = '';
-            if (p.extra === 'ddd') {
-                extraHtml = `
-                        <div class="db-extra">
-                            <label>Digite o DDD desejado <span style="color:var(--text-dim);font-weight:400;">(2 dígitos)</span></label>
-                            <input type="text" id="ddd-input" placeholder="Ex: 11" maxlength="2" value="${dddValue}">
-                            <div id="ddd-error" class="ddd-error"><i class="fas fa-times-circle"></i> DDD inválido. Escolha um DDD válido do Brasil.</div>
-                            <span class="ddd-suggest-label">DDDs recomendados:</span>
-                            <div class="ddd-grid">
-                                ${DDD_SUGGESTIONS.map(d => `
-                                    <button class="ddd-btn ${dddValue === d ? 'active' : ''}" onclick="setDDD('${d}')">${d}</button>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-            }
-
             box.innerHTML = `
                     <span class="db-icon"><i class="fas ${p.icon || 'fa-cube'}"></i></span>
                     <h3>${p.name}</h3>
                     <div class="db-badge">${badgeHtml}</div>
                     ${descHtml}
-                    ${extraHtml}
                     <div class="db-price">R$ ${formatBRL(p.price)}</div>
                     <div class="db-actions">
-                        <button class="btn-primary" id="add-to-cart-btn" onclick="addToCartFromDetail()">
+                        <button class="btn-primary" onclick="addToCartFromDetail()">
                             <i class="fas fa-shopping-bag"></i> Adicionar ao carrinho
                         </button>
                     </div>
                 `;
-
-            // Sincroniza o input DDD e valida
-            if (p.extra === 'ddd') {
-                const input = document.getElementById('ddd-input');
-                const errorEl = document.getElementById('ddd-error');
-                if (input) {
-                    input.addEventListener('input', function(e) {
-                        const raw = this.value.replace(/\D/g, '').slice(0, 2);
-                        this.value = raw;
-                        dddValue = raw;
-                        document.querySelectorAll('.ddd-btn').forEach(b =>
-                            b.classList.toggle('active', b.textContent === dddValue)
-                        );
-                        validateDDD();
-                    });
-                    // Validação inicial
-                    if (dddValue) validateDDD();
-                }
-
-                function validateDDD() {
-                    const errorEl = document.getElementById('ddd-error');
-                    const btn = document.getElementById('add-to-cart-btn');
-                    if (!errorEl || !btn) return;
-                    if (!dddValue || dddValue.length < 2) {
-                        errorEl.classList.remove('show');
-                        btn.disabled = false;
-                        return;
-                    }
-                    if (isValidDDD(dddValue)) {
-                        errorEl.classList.remove('show');
-                        btn.disabled = false;
-                    } else {
-                        errorEl.classList.add('show');
-                        btn.disabled = true;
-                    }
-                }
-                // Expor validação para o setDDD
-                window._validateDDD = validateDDD;
-            }
         }
-
-        window.setDDD = function(d) {
-            dddValue = d;
-            const input = document.getElementById('ddd-input');
-            if (input) input.value = d;
-            document.querySelectorAll('.ddd-btn').forEach(b =>
-                b.classList.toggle('active', b.textContent === d)
-            );
-            if (typeof window._validateDDD === 'function') window._validateDDD();
-        };
 
         // ============================================================
         //  ADICIONAR AO CARRINHO A PARTIR DO DETALHE
@@ -1988,26 +1776,14 @@
         window.addToCartFromDetail = function() {
             if (!currentProduct) return;
             const p = currentProduct;
-            let price = p.price;
-            let ddd = '';
-
-            // Valida DDD se necessário
-            if (p.extra === 'ddd') {
-                ddd = dddValue.trim();
-                if (!ddd || ddd.length < 2 || !isValidDDD(ddd)) {
-                    showToast('<i class="fas fa-exclamation-triangle" style="color:var(--primary-glow);"></i> Por favor, informe um DDD válido do Brasil.');
-                    return;
-                }
-            }
 
             const cartItem = {
-                id: p.id + (ddd ? '-' + ddd : ''),
+                id: p.id,
                 name: p.name,
                 desc: p.description.split('\n')[0],
                 icon: p.icon || 'fa-cube',
-                price: price,
-                quantity: 1,
-                ddd: ddd || undefined
+                price: p.price,
+                quantity: 1
             };
 
             const existing = cart.find(i => i.id === cartItem.id);
