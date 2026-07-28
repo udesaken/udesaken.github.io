@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Conheça a história da Udesaken Group, desde 2022 até hoje. Nossa trajetória, projetos e ecossistema.">
-    <meta name="theme-color" content="#070909">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Udesaken Group | Sobre Nós">
-    <meta property="og:description" content="Conheça a história da Udesaken Group, desde 2022 até hoje. Nossa trajetória, projetos e ecossistema.">
-    <meta property="og:image" content="https://udesaken.site/logousk.png">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Conheça a história da Udesaken Group, a União UsK e nossa trajetória até 2026." />
+    <meta name="theme-color" content="#070909" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Udesaken Group | Sobre Nós" />
+    <meta property="og:description" content="Conheça a história da Udesaken Group, a União UsK e nossa trajetória até 2026." />
+    <meta property="og:image" content="https://udesaken.site/logousk.png" />
+
     <title>Sobre Nós | Udesaken Group</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 
-                        sans: ['Space Grotesk', 'sans-serif'],
-                        syne: ['Syne', 'sans-serif']
-                    },
-                    colors: {
-                        brand: { purple: '#a855f7', 'purple-glow': '#c084fc' }
-                    }
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'], syne: ['Syne', 'sans-serif'] },
+                    colors: { brand: { purple: '#a855f7', 'purple-glow': '#c084fc' } }
                 }
             }
         }
     </script>
-    
+
     <style>
         :root {
             --bg-deep: #000000;
@@ -48,26 +43,30 @@
             --accent-dim: rgba(168, 85, 247, 0.12);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: #000000; 
-            color: var(--text-primary); 
-            font-family: 'Space Grotesk', sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
         }
-        
-        /* Canvas Buraco Negro Roxo */
+
         #universe-canvas {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -2;
             pointer-events: none;
         }
 
-        /* Glass Panel refinado */
         .glass-panel {
             background: var(--bg-card);
             backdrop-filter: blur(28px) saturate(180%);
@@ -78,7 +77,7 @@
         .glass-panel:hover {
             border-color: var(--border-glow-hover);
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(168,85,247,0.1);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(168, 85, 247, 0.1);
         }
 
         .text-gradient {
@@ -88,67 +87,79 @@
             background-clip: text;
         }
 
-        /* Navbar refinada */
         .nav-wrapper {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
             padding: 16px 24px;
             transition: all 0.3s ease;
         }
         .nav-wrapper nav {
-            max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: rgba(5, 5, 10, 0.7);
             backdrop-filter: blur(24px);
-            border: 1px solid rgba(168,85,247,0.2);
+            border: 1px solid rgba(168, 85, 247, 0.2);
             border-radius: 100px;
             padding: 8px 20px;
         }
         .nav-wrapper.glass-nav nav {
             background: rgba(0, 0, 0, 0.95);
-            border-color: rgba(168,85,247,0.35);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-color: rgba(168, 85, 247, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
-        
-        /* Animações */
-        .fade-up { 
-            opacity: 0; 
-            transform: translateY(35px); 
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); 
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        .fade-up.active { opacity: 1; transform: translateY(0); }
-        
-        /* Timeline Cards */
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .timeline-card {
             transition: all 0.3s ease;
             border-left: 3px solid transparent;
-            background: rgba(168,85,247,0.03);
+            background: rgba(168, 85, 247, 0.03);
         }
         .timeline-card:hover {
             border-left-color: var(--accent-glow);
-            background: rgba(168,85,247,0.08);
+            background: rgba(168, 85, 247, 0.08);
             transform: translateX(8px);
         }
-        
-        /* Project Cards */
+
         .project-card {
             transition: all 0.3s ease;
         }
         .project-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(168,85,247,0.5) !important;
-            background: rgba(168,85,247,0.12) !important;
+            border-color: rgba(168, 85, 247, 0.5) !important;
+            background: rgba(168, 85, 247, 0.12) !important;
         }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; background: #0a0a0a; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #a855f7; border-radius: 10px; }
-        
-        /* Status Icon Glow */
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a855f7;
+            border-radius: 10px;
+        }
+
         .status-icon-glow {
             filter: drop-shadow(0 0 3px var(--accent-glow));
         }
-        
-        /* Footer links */
+
         .footer-link {
             color: #4a4a4a;
             transition: color 0.3s;
@@ -156,27 +167,36 @@
         .footer-link:hover {
             color: var(--accent-glow);
         }
-        
+
         .section-divider {
-            background: linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.3), transparent);
             height: 1px;
             width: 100%;
         }
 
-        /* Badge roxo */
         .badge-purple {
-            background: rgba(168,85,247,0.12);
-            border: 1px solid rgba(168,85,247,0.3);
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
             color: var(--accent-glow);
         }
-        
-        /* Inputs etc */
+
         .border-purple-light {
-            border-color: rgba(168,85,247,0.3);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+        }
+
+        .btn-glow {
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
         }
     </style>
-    <link rel="icon" type="image/png" href="../logousk.png">
-    <link rel="stylesheet" href="/style.css?v=6.0">
+    <link rel="icon" type="image/png" href="../logousk.png" />
+    <link rel="stylesheet" href="/style.css?v=6.0" />
 </head>
 <body>
 
@@ -187,7 +207,7 @@
         <nav>
             <a href="/" class="flex items-center gap-3 group">
                 <div class="w-9 h-9 rounded-full border border-white/15 overflow-hidden bg-black/50 flex items-center justify-center">
-                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition">
+                    <img src="../logousk1.png" alt="Logo" class="w-7 h-7 object-cover opacity-90 group-hover:opacity-100 transition" />
                 </div>
                 <span class="font-syne font-extrabold text-white tracking-tight text-lg">Udesaken</span>
             </a>
@@ -214,7 +234,7 @@
                 <h1 class="font-syne text-5xl md:text-7xl font-black text-white mb-5 tracking-tighter leading-[1.1]">
                     A Nossa <span class="text-gradient">História</span>
                 </h1>
-                <p class="text-sm text-purple-300/70 uppercase tracking-[0.2em] font-bold">Inovação, Segurança e Comunidade • Desde 2022</p>
+                <p class="text-sm text-purple-300/70 uppercase tracking-[0.2em] font-bold">Inovação, União e Comunidade • Desde 2022</p>
             </div>
         </section>
 
@@ -222,11 +242,11 @@
         <section class="pb-16 relative">
             <div class="max-w-4xl mx-auto px-6 fade-up">
                 <div class="glass-panel rounded-3xl p-8 md:p-12">
-                    
+
                     <!-- Citação -->
                     <div class="border-l-3 border-purple-500/40 bg-purple-500/5 p-6 rounded-r-xl mb-12 italic text-gray-300 text-sm md:text-base leading-relaxed">
                         <i class="fas fa-quote-left text-purple-500/30 mr-2"></i>
-                    A Udesaken Group evoluiu de um ponto de encontro entre comunidades para um ecossistema de automação acessível, robusto e preparado para operação diária.
+                        A Udesaken Group evoluiu de um ponto de encontro entre comunidades para um ecossistema de automação acessível, robusto e preparado para operação diária. Hoje, estamos unindo todas as nossas frentes na <strong class="text-purple-300">União UsK</strong> – um novo capítulo que está apenas começando.
                     </div>
 
                     <div class="space-y-6">
@@ -290,172 +310,187 @@
                             </div>
                         </div>
 
-                        <!-- Timeline: 2026 -->
-                        <div class="timeline-card p-6 rounded-xl border border-white/5">
+                        <!-- Timeline: 2026 – Canais de Figurinhas e União UsK -->
+                        <div class="timeline-card p-6 rounded-xl border border-purple-500/30 bg-purple-500/5">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-3">
-                                <i class="fas fa-crown text-purple-400 text-lg"></i> 2026: A Udesaken Hoje
+                                <i class="fas fa-crown text-purple-400 text-lg"></i> 2026: Canais de Figurinhas em Alta e a União UsK
                             </h3>
                             <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-4">
-                                Chegamos à nossa poderosa <strong class="text-purple-300">Versão 6.0</strong>. Operamos ativamente no WhatsApp e Discord, entregando alta tecnologia para diversos clientes satisfeitos.
+                                Nossos <strong class="text-purple-300">canais de figurinhas no WhatsApp</strong> explodiram em 2026, alcançando números impressionantes. Paralelamente, demos início à <strong class="text-purple-300">União UsK</strong> – um movimento para integrar todas as nossas comunidades (grupos, canais e Discord) em um só lugar. A União ainda está no começo, mas já representa o futuro da nossa família.
                             </p>
-                            <div class="p-4 bg-purple-500/5 border border-purple-500/30 rounded-xl text-center">
-                                <p class="text-white/80 font-medium">Somos um dos únicos projetos do mercado a entregar mais de <strong class="text-purple-300">1.000 comandos premium</strong> por um valor de investimento abaixo de 10 reais.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="bg-purple-500/10 p-4 rounded-lg text-center border border-purple-500/30">
+                                    <i class="fas fa-eye text-2xl text-purple-400 mb-2"></i>
+                                    <h4 class="text-white font-bold text-xl">17M+</h4>
+                                    <p class="text-xs text-gray-400">Visualizações totais</p>
+                                </div>
+                                <div class="bg-purple-500/10 p-4 rounded-lg text-center border border-purple-500/30">
+                                    <i class="fas fa-sticky-note text-2xl text-purple-400 mb-2"></i>
+                                    <h4 class="text-white font-bold text-xl">14k+</h4>
+                                    <p class="text-xs text-gray-400">Canal principal de figurinhas</p>
+                                </div>
+                                <div class="bg-purple-500/10 p-4 rounded-lg text-center border border-purple-500/30">
+                                    <i class="fas fa-sticky-note text-2xl text-purple-400 mb-2"></i>
+                                    <h4 class="text-white font-bold text-xl">2,8k+</h4>
+                                    <p class="text-xs text-gray-400">Canal secundário de figurinhas</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center text-gray-400 text-sm">
+                                <i class="fas fa-plus-circle text-purple-400 mr-1"></i>
+                                Outros canais com 200+ seguidores cada – nossa presença só cresce!
+                            </div>
+                            <div class="mt-4 p-3 bg-purple-500/20 border border-purple-500/40 rounded-xl text-center">
+                                <p class="text-white/90 font-semibold">
+                                    <i class="fas fa-users text-purple-300 mr-2"></i>
+                                    A <strong class="text-purple-300">União UsK</strong> é o nosso novo grande passo – unindo grupos, canais e Discord. <span class="text-purple-300">Em construção, mas com muito potencial!</span>
+                                </p>
                             </div>
                         </div>
 
-                        <!-- Legado e Projetos -->
+                        <!-- Legado e Projetos (atualizado) -->
                         <div class="timeline-card p-6 rounded-xl border border-white/5 mt-8">
                             <h3 class="flex items-center gap-3 text-white font-bold text-xl mb-4">
-                                <i class="fas fa-copyright text-purple-400 text-lg"></i> Legado, Direitos e Equipes
+                                <i class="fas fa-copyright text-purple-400 text-lg"></i> Legado, Direitos e Projetos
                             </h3>
-                            
+
                             <div class="bg-purple-500/5 border-l-2 border-purple-500/40 p-4 rounded-r-lg mb-6">
                                 <p class="text-gray-400 text-sm leading-relaxed">
-                                    Ao longo da nossa jornada, nosso fundador, <strong class="text-purple-300">Isloch</strong>, criou e co-fundou diversas <i>teams</i> e projetos paralelos. É importante ressaltar que os direitos intelectuais e de propriedade de todos esses projetos pertencem oficialmente e exclusivamente a ele. <br><br>
-                                    A <strong class="text-purple-300">Udesaken Group</strong> atua como a entidade corporativa que gerencia e tutela essas divisões em seu nome, possuindo total autoridade e autonomia delegada para reabrir, administrar, fechar ou encerrar definitivamente qualquer um desses projetos a qualquer momento. <br><br>
+                                    Ao longo da nossa jornada, nosso fundador, <strong class="text-purple-300">Isloch</strong>, criou e co-fundou diversas <i>teams</i> e projetos paralelos. É importante ressaltar que os direitos intelectuais e de propriedade de todos esses projetos pertencem oficialmente e exclusivamente a ele. <br /><br />
+                                    A <strong class="text-purple-300">Udesaken Group</strong> atua como a entidade corporativa que gerencia e tutela essas divisões em seu nome, possuindo total autoridade e autonomia delegada para reabrir, administrar, fechar ou encerrar definitivamente qualquer um desses projetos a qualquer momento. <br /><br />
                                     <span class="text-purple-300 font-semibold">Aviso Legal:</span> Qualquer team, grupo ou divisão listada abaixo opera sob a guarda da Udesaken e de seus respectivos fundadores. <strong class="text-purple-300">O uso, apropriação ou cópia destes nomes não é permitido sem a autorização oficial direta.</strong>
                                 </p>
                             </div>
-                            
+
+                            <!-- Cards de projetos – apenas União UsK em início, os demais off -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                <!-- 777Network -->
-                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
+
+                                <!-- União UsK – DESTAQUE (em início) -->
+                                <div class="project-card col-span-1 md:col-span-2 bg-purple-500/10 border-2 border-purple-500/50 rounded-xl p-6 shadow-lg shadow-purple-500/10">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                                <i class="fab fa-discord text-purple-400"></i>
+                                            <div class="w-10 h-10 rounded-xl bg-purple-500/30 flex items-center justify-center">
+                                                <i class="fas fa-hand-holding-heart text-purple-300 text-xl"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">777Network</h4>
+                                            <h4 class="text-white font-bold text-xl">União UsK</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
+                                        <span class="bg-yellow-500/30 text-yellow-200 text-[10px] font-black px-3 py-1.5 rounded-full border border-yellow-500/50 uppercase tracking-wider">✦ Em início ✦</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Divisão dedicada inteiramente à criação e programação de bots focados na plataforma do Discord.</p>
-                                    <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-check-double text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Projeto Ativo e Integrado</span>
-                                        </div>
+                                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                                        A <strong class="text-purple-300">União UsK</strong> é o nosso mais novo projeto: um movimento para integrar todos os grupos, canais de WhatsApp e o servidor do Discord em uma única comunidade coesa. Ainda estamos nos primeiros passos, mas acreditamos que será o coração da Udesaken no futuro.
+                                    </p>
+                                    <div class="grid grid-cols-3 gap-2 text-center text-[10px] text-gray-400 border-t border-purple-500/20 pt-4">
+                                        <div><span class="text-purple-300 font-bold block text-base">Em construção</span>Comunidade unificada</div>
+                                        <div><span class="text-purple-300 font-bold block text-base">Grupos</span>Canais + Discord</div>
+                                        <div><span class="text-purple-300 font-bold block text-base">Futuro</span>Integração total</div>
+                                    </div>
+                                    <div class="mt-3 flex flex-wrap gap-2 justify-center">
+                                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-[10px] font-bold border border-purple-500/30"><i class="fab fa-whatsapp mr-1"></i> WhatsApp</span>
+                                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-[10px] font-bold border border-purple-500/30"><i class="fab fa-discord mr-1"></i> Discord</span>
+                                        <span class="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-[10px] font-bold border border-purple-500/30"><i class="fas fa-users mr-1"></i> Comunidade</span>
                                     </div>
                                 </div>
 
-                                <!-- Tædnet -->
-                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
+                                <!-- 777Network – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                                <i class="fab fa-whatsapp text-purple-400"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fab fa-discord text-gray-500"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">Tædnet</h4>
+                                            <h4 class="text-gray-400 font-bold">777Network</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Equipe especializada em modificações (mods) e customizações avançadas de aplicativos do WhatsApp.</p>
-                                    <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-shield-alt text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Mantida sob a tutela da UsK</span>
-                                        </div>
-                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Divisão de bots para Discord – atualmente desativada.</p>
                                 </div>
 
-                                <!-- 60hz -->
-                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
+                                <!-- Tædnet – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                                <i class="fas fa-user-secret text-purple-400"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fab fa-whatsapp text-gray-500"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">60hz</h4>
+                                            <h4 class="text-gray-400 font-bold">Tædnet</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Operava de forma silenciosa como uma divisão secreta e restrita dentro do ecossistema.</p>
-                                    <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-crown text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Administrada pela Udesaken</span>
-                                        </div>
-                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Equipe de mods para WhatsApp – atualmente desativada.</p>
                                 </div>
 
-                                <!-- TsF -->
-                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
+                                <!-- 60hz – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                                <i class="fas fa-lock text-purple-400"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fas fa-user-secret text-gray-500"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">TsF</h4>
+                                            <h4 class="text-gray-400 font-bold">60hz</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">50% UsK</span>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Um seleto grupo de chat privado e fechado, utilizado para interações sigilosas e internas.</p>
-                                    <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-handshake text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Sob cuidados da Udesaken</span>
-                                        </div>
-                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Divisão secreta – atualmente desativada.</p>
                                 </div>
 
-                                <!-- SSD -->
-                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5">
+                                <!-- TsF – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                                <i class="fas fa-comment-dots text-purple-400"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fas fa-lock text-gray-500"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">SSD</h4>
+                                            <h4 class="text-gray-400 font-bold">TsF</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Mais um projeto focado em chat privado, servindo como uma cúpula de resenha exclusiva e segura.</p>
-                                    <div class="pt-3 border-t border-white/5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-medal text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Totalmente administrado pela Udesaken</span>
-                                        </div>
-                                    </div>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Chat privado – atualmente desativado.</p>
                                 </div>
 
-                                <!-- Toman -->
-                                <div class="project-card bg-red-500/5 border border-red-500/20 rounded-xl p-5">
+                                <!-- SSD – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center">
-                                                <i class="fas fa-biohazard text-red-400/70"></i>
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fas fa-comment-dots text-gray-500"></i>
                                             </div>
-                                            <h4 class="text-white font-bold">Toman</h4>
+                                            <h4 class="text-gray-400 font-bold">SSD</h4>
                                         </div>
-                                        <span class="bg-purple-500/10 text-purple-300 text-[10px] font-black px-2 py-1 rounded border border-purple-500/30">100% UsK</span>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Antiga team de "trava zap" (2022). Fundadora oficial desistiu e deu para Isloch cuidar; team fechada, administrada pela UsK.</p>
-                                    <div class="pt-3 border-t border-white/5 mb-2.5">
-                                        <div class="flex items-center gap-2 text-[10px] bg-purple-500/5 p-2.5 rounded-lg">
-                                            <i class="fas fa-folder-minus text-purple-400 status-icon-glow"></i>
-                                            <span class="text-white/80 font-medium">STATUS: Projeto Fechado. Sob a guarda da Udesaken.</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed">Chat privado – atualmente desativado.</p>
+                                </div>
+
+                                <!-- Toman – OFF -->
+                                <div class="project-card bg-white/5 border border-white/10 rounded-xl p-5 opacity-60">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-gray-700/30 flex items-center justify-center">
+                                                <i class="fas fa-biohazard text-gray-500"></i>
+                                            </div>
+                                            <h4 class="text-gray-400 font-bold">Toman</h4>
                                         </div>
+                                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2 py-1 rounded border border-red-500/30">OFF</span>
                                     </div>
-                                    <div class="bg-red-500/10 border border-red-500/20 rounded-md p-2.5">
-                                        <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                                            <i class="fas fa-exclamation-triangle status-icon-glow"></i> Posicionamento Oficial:
+                                    <p class="text-xs text-gray-600 leading-relaxed">Antiga team de "trava zap" – fechada e sob guarda da UsK.</p>
+                                    <div class="mt-2 bg-red-500/5 border border-red-500/20 rounded-md p-2">
+                                        <p class="text-[9px] text-red-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                                            <i class="fas fa-exclamation-triangle"></i> Posicionamento: A Udesaken repudia ataques no WhatsApp.
                                         </p>
-                                        <p class="text-[11px] text-red-300/80 mt-1.5 leading-relaxed">A Udesaken repudia essas ações. Não praticamos e não somos a favor de ataques no WhatsApp.</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Mensagem Final -->
-                        <div class="mt-10 pt-8 border-t border-white/10 text-center">
-                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
-                                <i class="fas fa-heart text-purple-400 status-icon-glow"></i>
+                            <!-- Mensagem final com os números atualizados -->
+                            <div class="mt-10 pt-8 border-t border-white/10 text-center">
+                                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/30 mb-4">
+                                    <i class="fas fa-heart text-purple-400 status-icon-glow"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Muito mais que uma empresa – uma <span class="text-gradient">família</span></h3>
+                                <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed md:text-lg">
+                                    A Udesaken Group é, acima de tudo, uma <strong class="text-purple-300">família</strong>. Nossos canais de figurinhas atingiram <strong class="text-purple-300">17M+ de visualizações</strong> e contam com <strong class="text-purple-300">14k+</strong> e <strong class="text-purple-300">2,8k+</strong> seguidores nos canais principal e secundário, respectivamente. E agora, com a <strong class="text-purple-300">União UsK</strong>, estamos dando os primeiros passos para unir todas as nossas comunidades em um só lugar. Continuamos aprendendo, melhorando e inovando. Nosso mais profundo agradecimento a cada usuário, administrador e parceiro que ajudou a construir essa história ao nosso lado. E claro...
+                                    <span class="text-purple-300 font-bold italic tracking-wide block mt-2 text-xl glow-text">"tá UsK, tá lindo!"</span>
+                                </p>
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">Muito mais que uma empresa</h3>
-                            <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed md:text-lg">
-                                A Udesaken Group é, acima de tudo, uma <strong class="text-purple-300">família</strong>. Continuamos aprendendo, melhorando e inovando todos os dias. Nosso mais profundo agradecimento a cada usuário, administrador e parceiro que ajudou a construir essa história ao nosso lado. E claro...
-                                <span class="text-purple-300 font-bold italic tracking-wide">"tá UsK, tá lindo!"</span>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -499,8 +534,10 @@
                 const n = Math.min(Math.floor(W / 20), 80);
                 for (let i = 0; i < n; i++) {
                     particles.push({
-                        x: Math.random() * W, y: Math.random() * H,
-                        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+                        x: Math.random() * W,
+                        y: Math.random() * H,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
                         r: Math.random() * 1 + 0.3
                     });
                 }
@@ -508,41 +545,63 @@
 
             function drawBackDisk(bx, by, R) {
                 const outer = R * BH.diskOuter;
-                ctx.save(); ctx.translate(bx, by);
-                const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
+                ctx.save();
+                ctx.translate(bx, by);
+                const ag = ctx.createRadialGradient(0, -R * .18, R * BH.diskInner * .5, 0, 0, outer * .85);
                 ag.addColorStop(0, 'rgba(168,85,247,0.45)');
                 ag.addColorStop(0.4, 'rgba(140,80,240,0.25)');
                 ag.addColorStop(1, 'rgba(80,30,180,0)');
-                ctx.beginPath(); ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
-                ctx.fillStyle = ag; ctx.fill(); ctx.restore();
+                ctx.beginPath();
+                ctx.ellipse(0, -R * .22, outer * .88, R * .22, 0, Math.PI, 0);
+                ctx.fillStyle = ag;
+                ctx.fill();
+                ctx.restore();
             }
 
             function drawAccretionDisk(bx, by, R, angle) {
-                const inner = R * BH.diskInner, outer = R * BH.diskOuter;
-                ctx.save(); ctx.translate(bx, by); ctx.rotate(angle); ctx.scale(1, 0.28);
-                const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
+                const inner = R * BH.diskInner,
+                    outer = R * BH.diskOuter;
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(angle);
+                ctx.scale(1, 0.28);
+                const g = ctx.createRadialGradient(0, 0, inner, 0, 0, outer);
                 g.addColorStop(0, 'rgba(139,92,246,0)');
                 g.addColorStop(0.2, 'rgba(168,85,247,0.5)');
                 g.addColorStop(0.5, 'rgba(216,180,254,0.8)');
                 g.addColorStop(0.8, 'rgba(126,34,206,0.35)');
                 g.addColorStop(1, 'rgba(60,20,100,0)');
-                ctx.beginPath(); ctx.arc(0,0,outer,0,Math.PI*2); ctx.arc(0,0,inner,Math.PI*2,0,true);
-                ctx.fillStyle = g; ctx.fill(); ctx.restore();
+                ctx.beginPath();
+                ctx.arc(0, 0, outer, 0, Math.PI * 2);
+                ctx.arc(0, 0, inner, Math.PI * 2, 0, true);
+                ctx.fillStyle = g;
+                ctx.fill();
+                ctx.restore();
             }
 
             function drawBlackHole(bx, by, R) {
-                const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
-                glow.addColorStop(0,'rgba(168,85,247,0.15)');
-                glow.addColorStop(0.4,'rgba(100,50,200,0.08)');
-                glow.addColorStop(1,'rgba(0,0,0,0)');
-                ctx.beginPath(); ctx.arc(bx,by,R*2,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
-                const sh = ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);
-                sh.addColorStop(0,'#000'); sh.addColorStop(0.85,'#000'); sh.addColorStop(1,'rgba(0,0,0,0.85)');
-                ctx.beginPath(); ctx.arc(bx,by,R,0,Math.PI*2); ctx.fillStyle=sh; ctx.fill();
+                const glow = ctx.createRadialGradient(bx, by, R * .6, bx, by, R * 2);
+                glow.addColorStop(0, 'rgba(168,85,247,0.15)');
+                glow.addColorStop(0.4, 'rgba(100,50,200,0.08)');
+                glow.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.beginPath();
+                ctx.arc(bx, by, R * 2, 0, Math.PI * 2);
+                ctx.fillStyle = glow;
+                ctx.fill();
+                const sh = ctx.createRadialGradient(bx, by * .999, R * .1, bx, by, R);
+                sh.addColorStop(0, '#000');
+                sh.addColorStop(0.85, '#000');
+                sh.addColorStop(1, 'rgba(0,0,0,0.85)');
+                ctx.beginPath();
+                ctx.arc(bx, by, R, 0, Math.PI * 2);
+                ctx.fillStyle = sh;
+                ctx.fill();
             }
 
             function gravity(p) {
-                const dx = BH.x - p.x, dy = BH.y - p.y, d = Math.hypot(dx, dy);
+                const dx = BH.x - p.x,
+                    dy = BH.y - p.y,
+                    d = Math.hypot(dx, dy);
                 if (d < BH.r * 5 && d > BH.r * 1.2) {
                     const f = 0.0001 * (BH.r * 5 / d);
                     p.vx += (dx / d) * f;
@@ -557,19 +616,24 @@
             }
 
             let t = 0;
+
             function draw() {
                 ctx.clearRect(0, 0, W, H);
-                t += 16; BH.angle = t * 0.00015;
+                t += 16;
+                BH.angle = t * 0.00015;
                 drawBackDisk(BH.x, BH.y, BH.r);
                 drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
                 drawBlackHole(BH.x, BH.y, BH.r);
                 ctx.fillStyle = 'rgba(230,210,255,0.6)';
                 for (let p of particles) {
                     gravity(p);
-                    p.x += p.vx; p.y += p.vy;
+                    p.x += p.vx;
+                    p.y += p.vy;
                     if (p.x < 0 || p.x > W) p.vx *= -1;
                     if (p.y < 0 || p.y > H) p.vy *= -1;
-                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 requestAnimationFrame(draw);
             }
@@ -582,7 +646,7 @@
         // ==================== NAVBAR SCROLL ====================
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if(window.scrollY > 20) navbar.classList.add('glass-nav');
+            if (window.scrollY > 20) navbar.classList.add('glass-nav');
             else navbar.classList.remove('glass-nav');
         });
 
@@ -590,7 +654,7 @@
         const fadeElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         fadeElements.forEach(el => observer.observe(el));
