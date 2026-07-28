@@ -34,7 +34,6 @@
             --glass-border-hover: rgba(168,85,247,0.35);
             --glass-blur: 28px;
             --glass-shadow: 0 8px 40px rgba(0,0,0,0.85);
-            --z-canvas: 0;
             --z-base: 10;
             --z-nav: 999;
             --z-player: 1000;
@@ -45,7 +44,6 @@
         ::-webkit-scrollbar { width: 5px; background: #000; }
         ::-webkit-scrollbar-thumb { background: #3b0764; border-radius: 3px; }
         ::selection { background: rgba(168,85,247,0.3); color: #fff; }
-        #universe-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: var(--z-canvas); pointer-events: none; background: #000; }
         .text-gradient { background: linear-gradient(160deg, #ffffff 0%, #c084fc 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .glass { position: relative; background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)) saturate(130%); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); overflow: hidden; transition: transform 0.35s cubic-bezier(.16,1,.3,1), border-color 0.35s ease; }
         .glass::before { content: ''; position: absolute; inset: 0; background: radial-gradient(500px circle at var(--mx, 50%) var(--my, 50%), rgba(168,85,247,0.12), transparent 40%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 0; }
@@ -128,36 +126,16 @@
         .footer-links a:hover { color: var(--purple-glow); }
         .footer-bottom { max-width: 1100px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
         .footer-bottom p { font-size: 0.7rem; color: var(--text-dim); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-        #player-wrap { position: fixed; bottom: 20px; left: 20px; z-index: var(--z-player); opacity: 0; pointer-events: none; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
-        #player-wrap.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        #player-wrap.hide { opacity: 0; pointer-events: none; transform: translateY(16px); }
-        .player-pill { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; background: rgba(10,10,10,0.85); backdrop-filter: blur(28px) saturate(150%); border: 1px solid rgba(168,85,247,0.3); border-radius: 100px; box-shadow: 0 8px 32px rgba(0,0,0,0.8); }
-        .player-thumb { position: relative; width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-        .player-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .player-viz { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; gap: 2px; opacity: 0; transition: opacity 0.3s; }
-        .player-viz.on { opacity: 1; }
-        .vbar { width: 2px; border-radius: 1px; background: #c084fc; animation: vbar 0.8s ease-in-out infinite alternate; }
-        .vbar:nth-child(1) { height: 6px; animation-delay: 0s; }
-        .vbar:nth-child(2) { height: 10px; animation-delay: 0.2s; }
-        .vbar:nth-child(3) { height: 7px; animation-delay: 0.4s; }
-        @keyframes vbar { from { transform: scaleY(0.5); opacity: 0.5; } to { transform: scaleY(1); opacity: 1; } }
-        .player-info { display: flex; flex-direction: column; min-width: 85px; max-width: 120px; }
-        .player-track { font-size: 0.7rem; font-weight: 700; color: #fff; text-transform: uppercase; }
-        .player-artist { font-size: 0.6rem; color: rgba(255,255,255,0.4); font-weight: 600; }
-        #play-btn { width: 28px; height: 28px; border-radius: 50%; background: rgba(168,85,247,0.2); border: none; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transition: all 0.25s; }
-        #play-btn:hover { background: rgba(168,85,247,0.6); transform: scale(1.05); }
         #wa-float { position: fixed; bottom: 20px; right: 20px; z-index: var(--z-player); width: 48px; height: 48px; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s ease; animation: wa-pop 0.5s 1.5s both; }
         @keyframes wa-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
         .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
         @media (max-width: 768px) { .nav-links, .nav-store-btn, .nav-hub-btn { display: none; } #menu-toggle { display: flex; align-items: center; } .eco-grid { grid-template-columns: 1fr 1fr; gap: 12px; } .anniversary-seal { margin-bottom: 20px; } }
-        @media (max-width: 480px) { .eco-grid { grid-template-columns: 1fr; } .player-info { display: none; } .player-pill { padding: 6px; } }
+        @media (max-width: 480px) { .eco-grid { grid-template-columns: 1fr; } }
     </style>
     <link rel="stylesheet" href="/style.css?v=6.0">
 </head>
 <body>
-
-<canvas id="universe-canvas"></canvas>
 
 <div id="navbar">
     <nav>
@@ -165,11 +143,9 @@
         <div class="nav-links">
             <a href="./comandos/" class="nav-link"><i class="fas fa-terminal"></i> Comandos</a>
             <a href="./equipe/" class="nav-link"><i class="fas fa-users"></i> Equipe</a>
-            <a href="./parcerias/" class="nav-link">Parcerias <span class="badge-novo">Novo</span></a>
-            <a href="./hub/" class="nav-link"><i class="fas fa-cube"></i> Hub</a>
+            <a href="https://uniaousk.xyz/" class="nav-link" target="_blank">Parcerias <span class="badge-novo">Novo</span></a>
         </div>
         <div style="display:flex; align-items:center; gap:10px;">
-            <a href="./hub/" class="nav-hub-btn"><i class="fas fa-cube"></i><span>Hub</span></a>
             <a href="./store/" class="nav-store-btn"><i class="fas fa-store"></i><span>Loja</span></a>
             <button id="menu-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
         </div>
@@ -177,8 +153,7 @@
     <div id="mobile-menu">
         <a href="./comandos/" class="mob-link"><i class="fas fa-terminal"></i> Comandos</a><div class="mob-divider"></div>
         <a href="./equipe/" class="mob-link"><i class="fas fa-users"></i> Equipe</a><div class="mob-divider"></div>
-        <a href="./parcerias/" class="mob-link"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a><div class="mob-divider"></div>
-        <a href="./hub/" class="mob-link"><i class="fas fa-cube"></i> Hub Corporativo</a><div class="mob-divider"></div>
+        <a href="https://uniaousk.xyz/" class="mob-link" target="_blank"><i class="fas fa-handshake"></i> Parcerias <span class="badge-novo" style="margin-left:8px;">Novo</span></a><div class="mob-divider"></div>
         <a href="./store/" class="mob-link"><i class="fas fa-store"></i> Loja</a>
     </div>
 </div>
@@ -188,7 +163,10 @@
         <div class="hero-badge"><div class="hero-dot"></div><span>Sistema Operante</span></div>
         <h1 class="hero-title">O futuro da<br><span class="text-gradient">sua comunidade.</span></h1>
         <p class="hero-sub">Alta performance, automação inteligente e ferramentas exclusivas para comunidades que precisam de tecnologia confiável.</p>
-        <div class="hero-cta-group"><a href="./store/" class="hero-cta"><i class="fas fa-store"></i> ACESSAR LOJA</a><a href="./yz/" class="hero-cta-yz"><span class="yz-label">Yz</span> Division&nbsp;→</a></div>
+        <div class="hero-cta-group">
+            <a href="./store/" class="hero-cta"><i class="fas fa-store"></i> ACESSAR LOJA</a>
+            <a href="https://uniaousk.xyz/" class="hero-cta-yz" target="_blank"><span class="yz-label">União UsK</span> &nbsp;→</a>
+        </div>
         <img src="/ift/uskcoroa.png" alt="Emblema Udesaken" class="hero-emblem">
     </div>
 </section>
@@ -207,297 +185,15 @@
 
 <footer>
     <div class="footer-grid"><div class="footer-brand"><a href="#" class="nav-logo"><div class="nav-logo-img"><img src="/ift/logousk1.png" alt="Logo"></div><span>Udesaken</span></a><p>Tecnologia premium para comunidades digitais, automação e experiências conectadas.</p></div>
-    <div class="footer-col"><h4>Navegação</h4><div class="footer-links"><a href="./sobre/"><i class="fas fa-rocket"></i> Sobre Nós</a><a href="./equipe/"><i class="fas fa-users"></i> Conhecer Equipe</a><a href="./parcerias/"><i class="fas fa-handshake"></i> Nossas Parcerias</a><a href="./solicitar-parceria/"><i class="fas fa-paper-plane"></i> Solicitar Parceria</a><a href="./store/"><i class="fas fa-store"></i> Loja</a><a href="./hub/"><i class="fas fa-cube"></i> Hub Corporativo</a><a href="./termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a></div></div>
-    <div class="footer-col"><h4>Fale Conosco</h4><div class="footer-links"><a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a><a href="https://wa.me/447562847091" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a></div></div></div>
+    <div class="footer-col"><h4>Navegação</h4><div class="footer-links"><a href="./sobre/"><i class="fas fa-rocket"></i> Sobre Nós</a><a href="./equipe/"><i class="fas fa-users"></i> Conhecer Equipe</a><a href="https://uniaousk.xyz/" target="_blank"><i class="fas fa-handshake"></i> União UsK</a><a href="./store/"><i class="fas fa-store"></i> Loja</a><a href="./termos/"><i class="fas fa-file-contract"></i> Termos de Uso</a></div></div>
+    <div class="footer-col"><h4>Fale Conosco</h4><div class="footer-links"><a href="mailto:contato@udesaken.site"><i class="fas fa-envelope"></i> contato@udesaken.site</a><a href="https://wa.me/5585997923438" target="_blank"><i class="fab fa-whatsapp"></i> Suporte Direto</a></div></div></div>
     <div class="footer-bottom"><p>Udesaken Group © 2026 • Tecnologia, comunidade e automação • Todos os direitos reservados</p></div>
 </footer>
 
-<div id="player-wrap"><audio id="main-audio" preload="auto" loop></audio><div class="player-pill"><div class="player-thumb"><img src="/ift/logousk1.png" alt="Capa"><div class="player-viz" id="player-viz"><div class="vbar"></div><div class="vbar"></div><div class="vbar"></div></div></div><div class="player-info"><div class="player-track" id="track-name">Interestelar</div><div class="player-artist" id="track-artist">UdesakenMusic</div></div><button id="play-btn" aria-label="Play/Pause"><i id="play-icon" class="fas fa-play"></i></button></div></div>
-<a id="wa-float" href="https://wa.me/447562847091" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+<a id="wa-float" href="https://wa.me/5585997923438" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-const AUDIO_TRACK = { src: "/interestelar.mp3", name: "Interestelar", artist: "UdesakenMusic" };
-
-// ========== SISTEMA DE FOGOS + BURACO NEGRO RESPONSIVO ==========
-(function() {
-    const canvas = document.getElementById('universe-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    
-    let shells = [];
-    let particles = [];
-    let trails = [];
-    
-    let BH = {
-        x: 0, y: 0, r: 0,
-        diskInner: 1.5,
-        diskOuter: 3.8,
-        angle: 0
-    };
-    
-    function updateBHCoords() {
-        BH.x = W * 0.5;
-        // Posição vertical mais flexível: 75% em telas grandes, 70% em mobile
-        BH.y = H * (W < 768 ? 0.72 : 0.78);
-        BH.r = Math.min(W, H) * (W < 768 ? 0.09 : 0.10);
-        // Limite máximo para não ficar enorme
-        if (BH.r > 80) BH.r = 80;
-        if (BH.r < 25) BH.r = 25;
-    }
-    
-    function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-        updateBHCoords();
-        shells = [];
-        particles = [];
-        trails = [];
-        // Ajusta quantidade de fogos iniciais de acordo com a tela (menos no mobile)
-        const initialCount = W < 768 ? 2 : 3;
-        for(let i = 0; i < initialCount; i++) setTimeout(() => launchFirework(), i * 400);
-    }
-    
-    function launchFirework() {
-        if (!W || !H) return;
-        const x = 60 + Math.random() * (W - 120);
-        const targetY = 80 + Math.random() * (H * 0.55);
-        const vy = - (Math.abs(targetY - (H - 20)) * 0.009 + 3.2);
-        shells.push({
-            x: x, y: H - 10,
-            vx: (Math.random() - 0.5) * 0.7,
-            vy: vy,
-            targetY: targetY,
-            exploded: false,
-            colorHue: 260 + Math.random() * 40,
-            size: 3.5
-        });
-    }
-    
-    function explode(shell) {
-        const baseHue = shell.colorHue;
-        const cx = shell.x, cy = shell.y;
-        
-        particles.push({
-            x: cx, y: cy, vx: 0, vy: 0, size: 18, life: 0.25, alpha: 0.9,
-            color: `rgba(255, 230, 150, 1)`, isFlash: true
-        });
-        
-        const mainCount = (W < 768 ? 50 : 75) + Math.floor(Math.random() * 40);
-        for (let i = 0; i < mainCount; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const speed = 1.5 + Math.random() * 3.8;
-            const vx = Math.cos(angle) * speed * (0.8 + Math.random() * 0.6);
-            const vy = Math.sin(angle) * speed * (0.8 + Math.random() * 0.6) - 0.8;
-            let hue = baseHue + (Math.random() - 0.5) * 45;
-            let sat = 70 + Math.random() * 25;
-            let light = 60 + Math.random() * 35;
-            if (Math.random() < 0.25) {
-                hue = 40 + Math.random() * 30;
-                sat = 85;
-                light = 65;
-            } else if (Math.random() < 0.15) {
-                hue = 0; sat = 0; light = 90;
-            }
-            particles.push({
-                x: cx, y: cy, vx: vx, vy: vy,
-                size: 2 + Math.random() * 4,
-                life: 0.9 + Math.random() * 0.7,
-                alpha: 0.9,
-                color: `hsl(${hue}, ${sat}%, ${light}%)`,
-                isFlash: false
-            });
-        }
-        
-        const secCount = (W < 768 ? 30 : 40) + Math.floor(Math.random() * 35);
-        for (let i = 0; i < secCount; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const speed = 2.2 + Math.random() * 4.2;
-            const vx = Math.cos(angle) * speed;
-            const vy = Math.sin(angle) * speed * 0.9;
-            particles.push({
-                x: cx, y: cy, vx: vx, vy: vy,
-                size: 1.2 + Math.random() * 2.5,
-                life: 0.6 + Math.random() * 0.6,
-                alpha: 0.8,
-                color: `hsl(${baseHue + (Math.random()-0.5)*35}, 80%, 70%)`,
-                isFlash: false
-            });
-        }
-    }
-    
-    function updateShells() {
-        for (let i = 0; i < shells.length; i++) {
-            const s = shells[i];
-            if (s.exploded) { shells.splice(i,1); i--; continue; }
-            if (Math.random() < 0.35) {
-                trails.push({ x: s.x, y: s.y, size: 1.5 + Math.random() * 2, life: 0.3, color: `hsl(${s.colorHue}, 85%, 65%)` });
-            }
-            s.x += s.vx;
-            s.y += s.vy;
-            s.vy += 0.18;
-            if (s.y <= s.targetY || s.vy >= 0) {
-                explode(s);
-                s.exploded = true;
-                shells.splice(i,1); i--;
-            } else if (s.x < -80 || s.x > W+80 || s.y > H+150) {
-                shells.splice(i,1); i--;
-            }
-        }
-    }
-    
-    function updateTrails() {
-        for (let i=0; i<trails.length; i++) {
-            trails[i].life -= 0.025;
-            trails[i].size *= 0.96;
-            if (trails[i].life <= 0) { trails.splice(i,1); i--; }
-        }
-    }
-    
-    function updateParticles() {
-        for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
-            if (p.isFlash) {
-                p.size *= 0.92;
-                p.life -= 0.02;
-                p.alpha = p.life * 1.2;
-                if (p.life <= 0.05) { particles.splice(i,1); i--; }
-                continue;
-            }
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vx *= 0.99;
-            p.vy += 0.08;
-            p.life -= 0.01;
-            p.alpha = p.life * 0.9;
-            if (p.life <= 0.05 || p.y > H + 120 || p.x < -120 || p.x > W+120) {
-                particles.splice(i,1); i--;
-            }
-        }
-    }
-    
-    function drawShells() {
-        for (const s of shells) {
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
-            ctx.fillStyle = `hsl(${s.colorHue}, 85%, 65%)`;
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.size*0.55, 0, Math.PI*2);
-            ctx.fillStyle = `rgba(255,240,180,0.8)`;
-            ctx.fill();
-        }
-    }
-    
-    function drawTrails() {
-        for (const t of trails) {
-            ctx.save();
-            ctx.globalAlpha = t.life * 0.7;
-            ctx.beginPath();
-            ctx.arc(t.x, t.y, t.size, 0, Math.PI*2);
-            ctx.fillStyle = t.color;
-            ctx.fill();
-            ctx.restore();
-        }
-    }
-    
-    function drawParticles() {
-        for (const p of particles) {
-            ctx.save();
-            ctx.globalAlpha = p.alpha;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size * (0.6 + p.life * 0.5), 0, Math.PI*2);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-            if (!p.isFlash && p.size > 2) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * 0.35, 0, Math.PI*2);
-                ctx.fillStyle = `rgba(255,245,200,0.6)`;
-                ctx.fill();
-            }
-            ctx.restore();
-        }
-    }
-    
-    function drawBackDisk(bx, by, R) {
-        const outer = R * BH.diskOuter;
-        ctx.save(); ctx.translate(bx, by);
-        const ag = ctx.createRadialGradient(0, -R*.18, R*BH.diskInner*.5, 0, 0, outer*.85);
-        ag.addColorStop(0, 'rgba(180,120,255,0.45)');
-        ag.addColorStop(0.4, 'rgba(140,80,240,0.25)');
-        ag.addColorStop(1, 'rgba(80,30,180,0)');
-        ctx.beginPath(); ctx.ellipse(0, -R*.22, outer*.88, R*.22, 0, Math.PI, 0);
-        ctx.fillStyle = ag; ctx.fill(); ctx.restore();
-    }
-    
-    function drawAccretionDisk(bx, by, R, angle) {
-        const inner = R * BH.diskInner, outer = R * BH.diskOuter;
-        ctx.save(); ctx.translate(bx, by); ctx.rotate(angle); ctx.scale(1, 0.28);
-        const g = ctx.createRadialGradient(0,0,inner,0,0,outer);
-        g.addColorStop(0, 'rgba(139,92,246,0)');
-        g.addColorStop(0.2, 'rgba(168,85,247,0.5)');
-        g.addColorStop(0.5, 'rgba(216,180,254,0.8)');
-        g.addColorStop(0.8, 'rgba(126,34,206,0.35)');
-        g.addColorStop(1, 'rgba(60,20,100,0)');
-        ctx.beginPath(); ctx.arc(0,0,outer,0,Math.PI*2); ctx.arc(0,0,inner,Math.PI*2,0,true);
-        ctx.fillStyle = g; ctx.fill(); ctx.restore();
-    }
-    
-    function drawBlackHole(bx, by, R) {
-        const glow = ctx.createRadialGradient(bx,by,R*.6,bx,by,R*2);
-        glow.addColorStop(0,'rgba(168,85,247,0.15)');
-        glow.addColorStop(0.4,'rgba(100,50,200,0.08)');
-        glow.addColorStop(1,'rgba(0,0,0,0)');
-        ctx.beginPath(); ctx.arc(bx,by,R*2,0,Math.PI*2);
-        ctx.fillStyle=glow; ctx.fill();
-        const sh = ctx.createRadialGradient(bx,by*.999,R*.1,bx,by,R);
-        sh.addColorStop(0,'#000'); sh.addColorStop(0.85,'#000'); sh.addColorStop(1,'rgba(0,0,0,0.85)');
-        ctx.beginPath(); ctx.arc(bx,by,R,0,Math.PI*2);
-        ctx.fillStyle=sh; ctx.fill();
-    }
-    
-    let lastLaunch = 0;
-    let angleT = 0;
-    
-    function animate(timestamp) {
-        if (!lastLaunch) lastLaunch = timestamp;
-        const interval = W < 768 ? 1200 : 900;
-        if (timestamp - lastLaunch > interval + Math.random() * 500) {
-            launchFirework();
-            lastLaunch = timestamp;
-        }
-        
-        updateShells();
-        updateTrails();
-        updateParticles();
-        
-        ctx.clearRect(0, 0, W, H);
-        drawBackDisk(BH.x, BH.y, BH.r);
-        drawAccretionDisk(BH.x, BH.y, BH.r, BH.angle);
-        drawBlackHole(BH.x, BH.y, BH.r);
-        drawTrails();
-        drawShells();
-        drawParticles();
-        
-        requestAnimationFrame(animate);
-    }
-    
-    function rotateDisk() {
-        angleT += 0.005;
-        BH.angle = angleT;
-        requestAnimationFrame(rotateDisk);
-    }
-    
-    window.addEventListener('resize', () => {
-        resize();
-        updateBHCoords();
-    });
-    resize();
-    updateBHCoords();
-    rotateDisk();
-    requestAnimationFrame(animate);
-})();
-
-// ========== NAVBAR, GLASS, FADEUP, AUDIO (sem alterações) ==========
+// ========== NAVBAR, GLASS, FADEUP ==========
 (function() {
     const navbar = document.getElementById('navbar'), toggle = document.getElementById('menu-toggle'), menu = document.getElementById('mobile-menu');
     window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
@@ -512,20 +208,6 @@ document.querySelectorAll('.fade-up').forEach(el => {
         entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 }).observe(el);
 });
-
-(function() {
-    const audio = document.getElementById('main-audio'), btn = document.getElementById('play-btn'), icon = document.getElementById('play-icon'), viz = document.getElementById('player-viz'), wrap = document.getElementById('player-wrap');
-    document.getElementById('track-name').textContent = AUDIO_TRACK.name; document.getElementById('track-artist').textContent = AUDIO_TRACK.artist;
-    audio.src = AUDIO_TRACK.src; const savedTime = parseFloat(localStorage.getItem('usk_audio_time')) || 0, wasPlaying = localStorage.getItem('usk_is_playing') === 'true';
-    audio.addEventListener('loadedmetadata', () => { audio.currentTime = savedTime; if (wasPlaying) audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false)); });
-    function setPlaying(state) { icon.className = state ? 'fas fa-pause' : 'fas fa-play'; viz.classList.toggle('on', state); localStorage.setItem('usk_is_playing', state); }
-    function fadeIn() { let vol = 0; audio.volume = 0; const iv = setInterval(() => { vol = Math.min(vol + 0.002, 0.05); audio.volume = vol; if (vol >= 0.05) clearInterval(iv); }, 50); }
-    btn.addEventListener('click', () => { if (audio.paused) { audio.play().then(() => { setPlaying(true); fadeIn(); }); } else { audio.pause(); setPlaying(false); } });
-    audio.addEventListener('timeupdate', () => localStorage.setItem('usk_audio_time', audio.currentTime));
-    document.addEventListener('visibilitychange', () => { if (document.hidden && !audio.paused) { audio.pause(); setPlaying(false); } });
-    setTimeout(() => wrap.classList.add('visible'), 800);
-    let lastY = 0; window.addEventListener('scroll', () => { const y = window.scrollY; if (y > lastY + 5 && y > 120) { wrap.classList.add('hide'); wrap.classList.remove('visible'); } else if (y < lastY - 5 || y <= 120) { wrap.classList.remove('hide'); wrap.classList.add('visible'); } lastY = y; });
-})();
 
 (function() { const l = document.createElement('link'); l.type = 'image/png'; l.rel = 'shortcut icon'; l.href = '/logousk.png'; document.head.appendChild(l); })();
 </script>
